@@ -1,0 +1,460 @@
+You are a world-class full-stack web developer and UI/UX designer. Build a complete, production-ready marketing website for SYSmoAI — a Bangladeshi AI systems company founded by Emon Hossain. This is not a template. Build it from scratch, pixel-perfect, with full animations, visuals, and storytelling.
+
+---
+
+## BRAND IDENTITY
+
+- Company: SYSmoAI (sysmoai.com)
+- Founder: Emon Hossain — AI Systems Architect, Notion OS Builder, Prompt Engineer
+- Tagline: "We Build AI Systems That Work For You"
+- Sub-tagline: "Bangladesh's premier AI workflow consultancy — from solo founders to corporates"
+- Brand color palette:
+  - Primary: #0A0A0A (deep black)
+  - Accent 1: #6C63FF (electric violet)
+  - Accent 2: #00D4FF (cyan-blue)
+  - Accent 3: #FF6B35 (warm orange — urgency/CTA)
+  - Background sections: alternating #0D0D1A and #111827
+  - Text: #F0F0F0 primary, #A0AEC0 secondary
+- Typography:
+  - Headlines: Space Grotesk or Syne (Google Fonts)
+  - Body: Inter
+  - Accent/labels: JetBrains Mono (for tech feel)
+- Logo: Text-based — "SYSmo**AI**" where AI is in accent violet, with a small geometric circuit/brain icon
+
+---
+
+## TECH STACK
+
+- HTML5 + CSS3 + Vanilla JavaScript (no frameworks — keep it fast and Replit-deployable)
+- Use GSAP (GreenSock) for scroll animations and timelines
+- Use AOS (Animate On Scroll) for section reveals
+- Use Swiper.js for sliders/carousels
+- Use CountUp.js for animated counters
+- Use Lottie (lottiefiles.com CDN) for animated illustrations where video is not available
+- Use Particles.js or tsParticles for hero background particle effect
+- Use Intersection Observer for lazy-loading and trigger effects
+- All assets: use free Unsplash/Pexels images via direct URL (no downloads needed), Lottie JSON animations from lottiefiles CDN, and YouTube embed for video section
+- Fully responsive: mobile-first, tested at 320px, 768px, 1024px, 1440px
+- Smooth scroll behavior throughout
+- Dark mode ONLY (no light mode toggle needed)
+
+---
+
+## FULL PAGE STRUCTURE — BUILD ALL SECTIONS IN THIS EXACT ORDER
+
+---
+
+### SECTION 0: PRELOADER
+- Full-screen black preloader
+- Animated SYSmoAI logo drawing/reveal (SVG stroke animation)
+- Loading bar at bottom
+- Fades out after 2 seconds, reveals main site
+
+---
+
+### SECTION 1: NAVBAR (sticky)
+- Logo left: "SYSmo**AI**" with icon
+- Nav links: Home | Who We Help | Services | About | Results | Contact
+- CTA button right: "Book Free Call" (orange, glowing hover)
+- Mobile: hamburger menu with slide-in overlay
+- On scroll: navbar background darkens, border-bottom appears
+- Active link underline animation
+
+---
+
+### SECTION 2: HERO — THE BIG PROBLEM STATEMENT
+
+Design: Full-viewport dark section with animated particle background (purple/cyan particles floating). Large dramatic headline with typewriter effect cycling through pain points.
+
+Headline (cycling typewriter):
+"Is your business still running on manual chaos?"
+"Are AI tools leaving you more confused than before?"
+"Is your team drowning in WhatsApp messages and missed follow-ups?"
+"Is your income dropping while AI takes over entry-level work?"
+
+Sub-headline (static below): 
+"SYSmoAI builds AI-powered operating systems for ambitious Bangladeshis — and clients worldwide."
+
+CTA buttons (two):
+- Primary: "See How We Help →" (violet, large, glow pulse animation)
+- Secondary: "Watch 60-Second Intro ▶" (outlined, opens modal with YouTube video)
+
+Below CTAs — animated trust stats row (CountUp.js):
+- "500+ Projects Delivered"
+- "8 Client Categories Served"
+- "Top 5% Prompt Engineers Globally"
+- "৳0 to ৳280K/mo Revenue Target — Live Journey"
+
+Hero image/visual: Split screen — left side: chaotic desk (messy WhatsApp, spreadsheets, stress) → right side: clean SYSmoAI dashboard (Notion OS, AI agents, calm organized system). Arrow animation between them.
+
+---
+
+### SECTION 3: "THE STORY" — ANIMATED NARRATIVE SECTION
+
+Title: "Why SYSmoAI Exists"
+
+Design: Horizontal scroll timeline (on desktop) OR vertical scroll (on mobile) with illustrated story cards + icons. Each card reveals on scroll with GSAP.
+
+Story beats (6 cards, each with icon/illustration + short text):
+1. 🧠 "Emon was a solo founder doing everything manually — orders, follow-ups, content, clients."
+2. 😤 "He tried every productivity tool. They all failed alone."
+3. ⚡ "Then he spent 3 years mastering AI — ChatGPT, Claude, Notion, n8n, automation stacks."
+4. 🏗️ "He built a complete AI Operating System for his own business."
+5. 🚀 "Revenue grew. Time freed up. Clients noticed. They asked — 'Can you build this for us?'"
+6. 🌍 "SYSmoAI was born — to give every founder, freelancer, and team the same unfair advantage."
+
+Lottie animation plays in background of this section (circuit board or brain network).
+
+---
+
+### SECTION 4: WHO WE HELP — SEGMENTED AUDIENCE SECTION
+
+Title: "We Solve Real Problems For Real People"
+Sub: "8 types of clients. 40+ specific problems. One solution engine: SYSmoAI."
+
+Design: Interactive tabbed grid. 8 large icon-cards across the top (tabs). Clicking/hovering each tab reveals the problem list below with animated checklist reveal.
+
+Build all 8 tabs with their exact problems:
+
+TAB 1 — 🎓 STUDENTS
+Problems revealed as animated list:
+- Don't know how to use AI tools
+- Study system is scattered
+- Weak CV / no portfolio
+- Can't find jobs (no AI skills)
+- Thesis / research is slow
+- Want to start freelancing with AI
+CTA below list: "We'll give you the AI toolkit + skills to get hired or freelance in 30 days →"
+
+TAB 2 — 💼 JOB SEEKERS
+- Getting rejected (no AI skills on CV)
+- Don't know which AI skills to learn
+- No portfolio or proof of skills
+- Career switching — no roadmap
+- LinkedIn / personal brand is weak
+CTA: "We'll build your AI-powered CV, portfolio, and LinkedIn presence →"
+
+TAB 3 — 💻 FREELANCERS
+- Income dropping (AI taking entry-level work)
+- Stuck at low-ticket projects
+- No AI skills to upgrade
+- No portfolio or case studies
+- Client management is chaotic
+- Can't write winning proposals
+CTA: "We'll upgrade your skills, rates, and client systems to 3x your income →"
+
+TAB 4 — 🔬 RESEARCHERS & ACADEMICS
+- Literature review takes weeks
+- Notes are scattered everywhere
+- Writing papers is slow
+- Can't publish fast enough
+CTA: "We'll build your AI-powered research OS — 10x faster output →"
+
+TAB 5 — 🏪 BUSINESSES (sub-tabs inside: SME Founders | F-Commerce | Digital Agencies | Corporates & NGOs)
+
+SME FOUNDERS:
+- WhatsApp inbox overwhelmed
+- Follow-ups forgotten — leads lost
+- All tools disconnected
+- No reports or business visibility
+- No staff — doing everything alone
+- Don't know where to start with AI
+
+F-COMMERCE SELLERS:
+- 500+ Facebook DMs manually
+- Order tracking chaos
+- Payment confirmation is slow
+- No repeat customers (no follow-up)
+- No product content or copy
+
+DIGITAL AGENCIES & TEAMS:
+- Clients want AI — agency can't deliver
+- Content production is slow
+- Project delivery is chaotic
+- Proposals take 3–5 hours each
+- Team has no AI skills
+- Losing retainer clients
+
+CORPORATES & NGOs:
+- Team not using AI properly
+- Reports take days to produce
+- No AI strategy — budget wasted
+- Customer support costs too high
+
+CTA: "We'll build your complete AI business operating system →"
+
+TAB 6 — 👔 CONSULTANTS & COACHES
+- Client onboarding is slow
+- No content (LinkedIn / newsletter)
+- Proposals rebuilt every time
+- Knowledge stuck in their head — no SOP
+- No follow-up system — leads go cold
+CTA: "We'll productize your knowledge and automate your client journey →"
+
+TAB 7 — 📱 CONTENT CREATORS
+- Ideas but no system to execute
+- Content creation takes too long
+- Can't repurpose content across platforms
+- Posting inconsistently — no schedule
+- Growth stalled — no AI-powered strategy
+CTA: "We'll build your AI content engine — post 5x more with half the effort →"
+
+TAB 8 — 🌍 INTERNATIONAL CLIENTS
+- US/EU AI consultants too expensive
+- Need Notion OS builder
+- Need AI agent developer
+- Need n8n automation specialist
+CTA: "Top 0.1% AI expertise at Bangladesh rates. Let's talk →"
+
+---
+
+### SECTION 5: SERVICES — WHAT WE BUILD
+
+Title: "Our AI Solutions"
+Sub: "From 3-day quick wins to full AI operating systems"
+
+Design: 3-column card grid on desktop, single column on mobile. Cards have hover-flip animation (front: service name + icon, back: description + price range + CTA).
+
+Cards (build all):
+
+1. ⚡ AI Quick Win — "Your #1 workflow problem solved in 3 days" — ৳3,750–৳7,500 — CTA: Book Now
+2. 🏃 AI Implementation Sprint — "Full AI stack deployed in 14 days" — ৳25,000–৳50,000
+3. 🔄 AI Operations Retainer — "Ongoing AI system management" — ৳20,000/month
+4. 🧑‍🏫 1:1 AI Coaching — "Personal AI skill sessions" — ৳2,500/session
+5. 🎓 Group AI Workshop — "Team AI training" — ৳500/person (min 10 people)
+6. 🗂️ Notion OS Build (BD) — "Custom Notion operating system" — ৳15,000–৳50,000
+7. 🌐 Notion OS Build (International) — "$800–$5,000"
+8. 🤖 AI Agent Development — "Custom AI agents for your business" — ৳50,000–৳2,00,000 / $2,500–$15,000
+9. ⚙️ n8n Automation — "Connect all your tools, automate everything" — ৳2,000–৳10,000/workflow
+10. 🏢 Corporate AI Training — "Full-day team workshop" — ৳50,000–৳2,00,000
+
+Above cards: Two filter buttons — "🇧🇩 Bangladesh Pricing" | "🌍 International Pricing" — toggles visible pricing with animation.
+
+---
+
+### SECTION 6: HOW IT WORKS — 4-STEP PROCESS
+
+Title: "From Chaos to AI-Powered in 4 Steps"
+
+Design: Animated horizontal step flow with connecting animated dotted line. Each step reveals with GSAP on scroll.
+
+Steps:
+1. 🔍 DIAGNOSE — "Free 30-min call. We map your biggest workflow problem."
+2. 🏗️ DESIGN — "We design your custom AI system — tools, automations, agents."
+3. ⚡ BUILD — "We build and deploy it — you don't write a single line of code."
+4. 🚀 SCALE — "We train your team and optimize for 3 months."
+
+Below steps: "Most clients see results in the first 72 hours. Guaranteed."
+
+---
+
+### SECTION 7: SOCIAL PROOF / RESULTS SECTION
+
+Title: "Real Results. Real People."
+
+Design: Full-width dark section with:
+- Left: Large animated counter stats
+  - "500+ Workflows Built"
+  - "৳1Cr+ Revenue Generated for Clients"  
+  - "40+ Problems Solved"
+  - "3 Days Average Delivery Time"
+- Right: Testimonial carousel (Swiper.js, autoplay, with avatars — use placeholder initials/gradient avatars)
+
+Testimonials (3 placeholder cards — mark as "Early client feedback" style):
+1. "Emon built our entire AIPS operations system in one week. We went from chaos to clarity." — Rumi, E-commerce Founder
+2. "The AI Quick Win saved us 15 hours/week immediately. ROI in 3 days." — Digital Agency Owner, Dhaka
+3. "Finally someone who understands Bangladesh's market AND global AI standards." — Freelancer, Chittagong
+
+Below: Video embed section — "Watch Emon explain the SYSmoAI system in 3 minutes" — YouTube embed placeholder (iframe with play button overlay, blur thumbnail, click to load).
+
+---
+
+### SECTION 8: ABOUT — FOUNDER STORY
+
+Title: "Meet Your AI Architect"
+
+Design: Two-column. Left: Professional photo placeholder (large, rounded, with glowing border animation). Right: Story text.
+
+Content:
+**Emon Hossain**
+Founder & CEO, SYSmoAI Private Limited
+AI Systems Architect · Notion OS Builder · Top 5% Prompt Engineer
+
+"I built SYSmoAI because I was you 3 years ago — overwhelmed, tool-hopping, and losing income while AI was changing everything around me.
+
+I spent 3 years learning every AI tool, building real systems, and delivering 500+ projects. Then I realized: most people don't need another tool. They need someone to build the system FOR them.
+
+SYSmoAI is that builder. We're Bangladesh-based, globally-rated, and obsessed with one thing: making AI actually work for your business."
+
+Below text: Skill badges (animated pill tags appearing one by one):
+AI Systems Architecture · Prompt Engineering · Notion OS · n8n Automation · AI Agent Design · SEO (500+ projects) · WordPress · AI Coaching
+
+Social links: LinkedIn | WhatsApp: +880 1711-638693 (SYSmoAI) | Email: emon@sysmoai.com
+
+---
+
+### SECTION 9: PRICING TRANSPARENCY
+
+Title: "Honest Pricing. No Surprises."
+
+Design: 3-tier pricing cards with animated border highlight on hover. Middle card = "Most Popular" with glow effect.
+
+Tier 1 — QUICK WIN (৳3,750 pilot / ৳7,500 full)
+- 1 workflow automated
+- 3-day delivery
+- Video walkthrough included
+- 1 revision
+- CTA: "Start Today →"
+
+Tier 2 — SPRINT (৳25,000–৳50,000) — MOST POPULAR
+- Full AI system built
+- 14-day delivery
+- Team training included
+- 3 months support
+- CTA: "Book Discovery Call →"
+
+Tier 3 — RETAINER (৳20,000/month)
+- Ongoing AI management
+- Monthly system improvements
+- Priority WhatsApp support
+- Monthly performance report
+- CTA: "Apply for Retainer →"
+
+Below cards: "🌍 International client? See USD pricing →" (toggle/link)
+
+---
+
+### SECTION 10: FAQ
+
+Title: "Questions We Get Every Day"
+
+Design: Accordion FAQ, smooth open/close animation. 8 questions:
+
+1. Do I need to know anything about AI? → No. We handle everything technical. You just need to show up for the onboarding call.
+2. How fast do I see results? → Most Quick Win clients see results within 72 hours of delivery.
+3. Do you only work with businesses in Bangladesh? → No. We work with clients worldwide. International payments via Wise/Payoneer.
+4. What if I don't like the output? → We offer one free revision on all projects. Quick Wins are fully redone if the goal isn't met.
+5. Is this just consulting or do you actually build? → We build. You get a working system, not a slide deck.
+6. Do you offer installment payment? → Quick Win: 100% advance. Sprint: 50% upfront, 50% on delivery. No credit.
+7. What tools will you use? → Notion, ChatGPT, Claude, n8n, Zapier, WhatsApp automation, and custom AI agents — based on your specific needs.
+8. How do I start? → Book a free 30-minute discovery call. No commitment required.
+
+---
+
+### SECTION 11: CONTACT / CTA SECTION
+
+Title: "Your AI Transformation Starts With One Conversation"
+
+Design: Full-width dark gradient section (purple to black). Large centered CTA.
+
+Content:
+"Stop losing time to manual work. Stop missing leads. Stop watching competitors use AI while you figure it out alone."
+
+"Book your FREE 30-minute AI Audit call. We'll identify your #1 bottleneck and show you exactly how to fix it — even if you don't hire us."
+
+CTA Button: "Book Free AI Audit →" (large, orange, pulsing glow)
+
+Below button: Contact options row:
+- 📱 WhatsApp: +880 1711-638693 (clickable wa.me link)
+- 📧 Email: emon@sysmoai.com
+- 🌐 Website: sysmoai.com
+- 💼 LinkedIn: linkedin.com/in/emonhossain
+
+Simple contact form (Name, Email/WhatsApp, "What's your biggest problem?", Submit button). On submit: show success animation + "We'll reply within 2 hours (working days)."
+
+---
+
+### SECTION 12: FOOTER
+
+Design: Dark footer, 4 columns:
+- Col 1: Logo + tagline + "Built in Bangladesh. Used worldwide."
+- Col 2: Services quick links
+- Col 3: Who We Help quick links (all 8 segments)
+- Col 4: Contact info + social icons
+
+Bottom bar: "© 2026 SYSmoAI Private Limited. All rights reserved. | Dhaka, Bangladesh"
+
+Subtle animated gradient line at top of footer.
+
+---
+
+## ANIMATION REQUIREMENTS — IMPLEMENT ALL
+
+1. **Preloader** — SVG stroke-draw logo animation
+2. **Hero** — tsParticles background (violet + cyan, slow drift), typewriter effect (Typed.js or vanilla JS)
+3. **Story section** — GSAP ScrollTrigger horizontal scroll on desktop
+4. **Stats counters** — CountUp.js triggered on scroll into view
+5. **Section reveals** — AOS library, fade-up on all cards and headings
+6. **Tab switching** — smooth fade + slide animation between tabs (Section 4)
+7. **Service cards** — CSS 3D flip on hover
+8. **Process steps** — GSAP animated dotted line drawing between steps on scroll
+9. **Pricing cards** — hover lift + border glow (CSS + JS)
+10. **FAQ accordion** — smooth max-height CSS transition
+11. **Testimonial carousel** — Swiper.js autoplay with fade transition
+12. **CTA button** — pulsing box-shadow animation (keyframes)
+13. **Navbar** — background blur + darken on scroll (IntersectionObserver)
+14. **Scroll progress bar** — thin violet line at top of viewport showing scroll progress
+15. **Cursor** — custom cursor (glowing violet dot) on desktop
+16. **Page transitions** — subtle fade-in on initial load
+
+---
+
+## IMAGE REQUIREMENTS
+
+Use real images from Unsplash via direct embed URL (no API key needed):
+
+- Hero chaos side: https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800 (overwhelmed person at desk)
+- Hero clean side: https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800 (clean organized workspace)
+- Founder photo placeholder: use a styled gradient avatar with "EH" initials, violet gradient background, glowing border
+- Section backgrounds: subtle dark grid/circuit pattern (CSS generated — no image needed)
+- Client segment icons: use emoji directly rendered large (2.5rem+) in cards
+- Story section: Lottie animation from CDN: https://assets1.lottiefiles.com/packages/lf20_fcfjwiyb.json (brain/AI animation)
+- Services section background: subtle animated gradient mesh (CSS)
+
+---
+
+## PERFORMANCE REQUIREMENTS
+
+- All external libraries loaded from CDN (GSAP, AOS, Swiper, CountUp, Typed.js, Lottie, Particles.js)
+- Images use loading="lazy"
+- No external fonts requiring API keys — Google Fonts only
+- CSS variables for all colors (easy to customize)
+- Minify nothing (keep readable for Replit editing)
+- Single HTML file with embedded CSS and JS is acceptable, OR organized as:
+  - index.html
+  - style.css
+  - script.js
+  - (no build step required)
+
+---
+
+## CONTENT RULES
+
+- All prices in BDT (৳) with international USD equivalent where noted
+- Bangla script NOT required on the website — English only for international reach
+- No placeholder "Lorem ipsum" — every section must have real SYSmoAI-specific content as described above
+- Phone numbers, emails, and CTAs must be real and clickable
+- Do NOT add sections not listed above
+- Do NOT use Bootstrap — custom CSS only
+- Do NOT use React/Vue/Angular — vanilla JS only
+
+---
+
+## FINAL QUALITY CHECK — BEFORE DECLARING DONE
+
+Verify all of the following:
+✅ Preloader works and fades out
+✅ All 12 sections built in correct order
+✅ All 8 audience tabs functional with correct problem lists
+✅ Animations load without errors in console
+✅ Mobile menu works on 320px
+✅ All CTAs are clickable (WhatsApp, email, scroll)
+✅ CountUp animates on scroll
+✅ No broken image links (all Unsplash URLs load)
+✅ No JS errors in browser console
+✅ Page loads in under 3 seconds (CDN assets only)
+✅ Dark theme consistent throughout
+
+---
+
+START BUILDING NOW. Do not ask for clarification. If any asset is unavailable, use a fallback (placeholder gradient, emoji, or inline SVG). Build all sections completely. When done, output: "✅ SYSmoAI website build complete" and list what was created.
