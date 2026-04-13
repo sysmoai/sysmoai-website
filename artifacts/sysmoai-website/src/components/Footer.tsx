@@ -3,6 +3,8 @@ import { Link } from 'wouter';
 import { SYSmoAILogo } from './SYSmoAILogo';
 import { SYSmoAIWordmark } from './SYSmoAIWordmark';
 
+const WA_LINK = "https://wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%27m%20interested%20in%20your%20AI%20services.";
+
 export function Footer() {
   const currentYear = new Date().getFullYear(); // Typically dynamic, but task asks for © 2026, let's use 2026 per spec
   
@@ -36,7 +38,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://wa.me/8801711638693" target="_blank" rel="noopener noreferrer" className="hover:text-[#25D366] transition-colors" data-testid="link-footer-whatsapp">
+                <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="hover:text-[#25D366] transition-colors" data-testid="link-footer-whatsapp">
                   WhatsApp: +880 1711-638693
                 </a>
               </li>

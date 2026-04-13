@@ -1,0 +1,146 @@
+You are doing a comprehensive QA pass and professional polish on the SYSmoAI website (sysmoai.com). The basic 5-page site is already built. Your job is to make it LAUNCH-READY — professional, polished, performant, and fully functional. Do ALL of the following in this single session.
+
+=== SECTION 1: VISUAL POLISH & ANIMATIONS ===
+
+1. Add smooth scroll behavior to the entire site (html { scroll-behavior: smooth })
+2. Add fade-in-up animations on scroll for all sections (use CSS @keyframes + IntersectionObserver, NOT Framer Motion — keep bundle small)
+3. Add hover effects on ALL interactive elements:
+   - Buttons: scale(1.02) + shadow increase on hover
+   - Service tier cards: subtle lift (translateY(-4px)) + shadow on hover
+   - Nav links: underline slide-in animation on hover
+   - FAQ accordion items: background highlight on hover
+   - Blog cards: lift + shadow on hover
+   - WhatsApp floating CTA: pulse animation (subtle, every 5 seconds)
+4. Add smooth transitions to all state changes (transition: all 0.3s ease)
+5. Ensure the hero section has a subtle gradient overlay or animated background glow effect (dark blue radial gradient, very subtle)
+6. Add a typing effect or text reveal animation to the hero headline "AI Systems That Work For You" (optional but premium feel)
+
+=== SECTION 2: NAVIGATION & UX ===
+
+7. Make the header STICKY on scroll with a background blur effect (backdrop-filter: blur(12px)) and slight transparency
+8. Add active page indicator in nav (highlight current page link)
+9. Ensure mobile hamburger menu works perfectly:
+   - Smooth slide-in animation
+   - Close button visible
+   - Links close the menu on click
+   - Body scroll locked when menu is open
+10. Add a "Back to Top" button that appears after scrolling 500px (smooth scroll, bottom-right, above WhatsApp CTA)
+11. Add smooth page transitions between routes (fade effect)
+12. Ensure all internal links use Next.js <Link> component (not <a>) for client-side navigation
+
+=== SECTION 3: HOMEPAGE IMPROVEMENTS ===
+
+13. "Who We Help" section — ensure 4 cards are visible (SMEs, Freelancers, Startups, Agencies). If only 3, add the 4th "Agencies" card:
+   - Icon: briefcase or building
+   - Title: "Agencies"
+   - Description: "White-label AI systems for your clients. Scale your agency with AI-powered delivery."
+14. Service tier preview cards — make sure the 3rd card (Premium Brand Build ৳1L–1.5L) is fully visible. Add horizontal scroll or responsive grid.
+15. Social proof section — make the trust badges more prominent with icons:
+   - Since 2022: calendar icon
+   - 7+ Websites: globe icon
+   - WhatsApp-First: message icon
+   - Replit-Powered: code icon
+16. FAQ section — ensure accordion expand/collapse works with smooth animation (max-height transition). Add a + / – icon that rotates on open.
+
+=== SECTION 4: SERVICES PAGE IMPROVEMENTS ===
+
+17. Update add-on pricing to match the official offer (from Notion OS):
+   - Copywriting: ৳3,000–5,000/page
+   - SEO Setup: ৳5,000–10,000
+   - Analytics Setup: ৳3,000–5,000
+   - WhatsApp Business Flows: ৳5,000–10,000
+   - Notion CMS Integration: ৳10,000–20,000
+   - Monthly Retainer: ৳5,000–15,000/month
+   - Replit Agent Training: ৳3,000–5,000
+   - App Transfer (Handoff): ৳5,000
+18. Add a comparison table below the 3 tiers showing what's included in each tier (like the Notion OS table)
+19. Add a "Payment Methods" section: bKash, Nagad, Rocket, Bank Transfer, Binance
+20. Add payment milestone info: 50% deposit → 30% on delivery → 20% on launch
+
+=== SECTION 5: ABOUT PAGE IMPROVEMENTS ===
+
+21. Make the "EH" founder photo placeholder more professional:
+   - Larger circle (250px)
+   - Gradient background: linear-gradient(135deg, #2563EB, #3B82F6)
+   - White initials "EH" centered, font-size 80px, font-weight 700
+   - Subtle border: 3px solid rgba(255,255,255,0.2)
+22. Add a timeline/journey section showing the career progression visually:
+   - 2015-2020: WordPress (500+ projects)
+   - 2020-2022: Marketing & Systems
+   - 2022-2024: AI Premium Shop (10,000+ customers)
+   - 2024-present: SYSmoAI (AI Systems Consultancy)
+23. Add company values section: 3 values with icons:
+   - "Provider, not Planner" — We build, not just advise
+   - "Systems over Hustle" — Automation over manual work
+   - "Action over Perfection" — Ship, iterate, improve
+
+=== SECTION 6: CONTACT PAGE IMPROVEMENTS ===
+
+24. Style the contact form professionally:
+   - Floating labels or clean placeholder text
+   - Input focus states with brand blue border (#2563EB)
+   - Send button: brand blue background, white text, hover effect
+   - Form validation (required fields: name, email, message)
+25. Add a map placeholder or visual location card (no actual Google Maps embed — just a styled card with "Dhaka, Bangladesh" and a map pin icon)
+26. Add "Service Hours" card: 10 AM – Midnight BST, 7 days a week
+
+=== SECTION 7: BLOG PAGE IMPROVEMENTS ===
+
+27. Make blog cards more visual:
+   - Add gradient placeholder images (different color for each: blue, purple, green)
+   - Add estimated read time: "5 min read"
+   - Add date: "Coming Soon — April 2026"
+   - Better card layout with image on top, content below
+28. Add a "Subscribe for Updates" section below the blog cards with WhatsApp CTA ("Get notified via WhatsApp when we publish")
+
+=== SECTION 8: SEO & META ===
+
+29. Ensure EVERY page has unique meta tags:
+   - Home: "SYSmoAI — AI Systems That Work For You | Bangladesh"
+   - Services: "AI Consulting Services | SYSmoAI Bangladesh"
+   - About: "About SYSmoAI — Md. Emon Hossain | AI Systems Architect"
+   - Contact: "Contact SYSmoAI — WhatsApp | Dhaka, Bangladesh"
+   - Blog: "SYSmoAI Blog — AI Insights for Bangladesh Businesses"
+30. Add OG meta tags (og:title, og:description, og:image, og:url) to every page
+31. Create /public/robots.txt:
+   User-agent: *
+   Allow: /
+   Sitemap: https://sysmoai.com/sitemap.xml
+32. Create /public/sitemap.xml listing all 5 pages with lastmod date 2026-04-14
+33. Add canonical URLs to each page
+34. Add structured data (JSON-LD) for Organization schema:
+   - name: SYSmoAI Pvt Ltd
+   - url: https://sysmoai.com
+   - email: support@sysmoai.com
+   - telephone: +8801711638693
+   - address: Dhaka, Bangladesh
+
+=== SECTION 9: PERFORMANCE & TECHNICAL ===
+
+35. Ensure static export works: verify next.config has output: 'export'
+36. Optimize all images (if any) with next/image or manual optimization
+37. Ensure zero TypeScript errors: run `npx tsc --noEmit`
+38. Ensure zero console errors on all 5 pages
+39. Add proper 404 page (not-found.tsx) with SYSmoAI branding + "Go Home" button
+40. Add favicon.ico using the SYSmoAI hexagonal logo mark
+41. Ensure all external links open in new tab (target="_blank" rel="noopener noreferrer")
+42. Ensure WhatsApp links have proper pre-filled message:
+    wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%27m%20interested%20in%20your%20AI%20services.
+
+=== SECTION 10: FINAL VERIFICATION ===
+
+After ALL changes, run these checks:
+1. Visit all 5 pages + 404 page — all render without errors
+2. Check mobile view at 375px on all pages
+3. Verify WhatsApp floating CTA appears on ALL pages
+4. Verify all WhatsApp links go to wa.me/8801711638693
+5. Verify support@sysmoai.com appears in footer and contact page
+6. Verify NO "01865" or "385348" (AIPS number) appears anywhere
+7. Verify NO "lorem ipsum", "[insert]", or "example.com" appears anywhere
+8. grep -rn 'next/font/google' — must return 0
+9. Verify robots.txt loads at /robots.txt
+10. Verify sitemap.xml loads at /sitemap.xml
+11. Verify build exits with code 0
+12. Take screenshots of: homepage, services, about, contact
+
+Report ALL changes made with file list.

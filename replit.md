@@ -34,6 +34,10 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
   - `WhatsAppFAB` — floating WhatsApp CTA (bottom-right)
 - **Routing**: wouter
 - **Animations**: framer-motion
+- **SEO**: JSON-LD structured data, OG tags, sitemap.xml, robots.txt
+- **CSS**: `animate-wa-pulse` keyframe defined in `index.css`; smooth scroll on `html`
+- **Contact form**: Formspree (user must replace placeholder ID in Contact.tsx)
+- **Status**: Complete ✓
 
 ## Key Commands
 

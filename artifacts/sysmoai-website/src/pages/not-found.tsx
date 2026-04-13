@@ -1,21 +1,27 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { Link } from 'wouter';
+import { SYSmoAILogo } from '@/components/SYSmoAILogo';
+import { SYSmoAIWordmark } from '@/components/SYSmoAIWordmark';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
-          </div>
-
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
-          </p>
-        </CardContent>
-      </Card>
+    <div className="min-h-[60vh] w-full flex flex-col items-center justify-center bg-[#0A0B0F] px-4 text-center">
+      <div className="mb-8">
+        <SYSmoAILogo size={64} />
+      </div>
+      <div className="flex items-center gap-3 mb-2">
+        <SYSmoAIWordmark darkMode={true} />
+      </div>
+      <h1 className="text-8xl font-bold text-white mb-4 mt-8">404</h1>
+      <p className="text-xl text-gray-400 mb-8 max-w-md">
+        This page doesn't exist. Let's get you back on track.
+      </p>
+      <Link
+        href="/"
+        className="inline-flex items-center gap-2 bg-[#2563EB] hover:bg-[#1d4ed8] text-white px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-[1.02]"
+        data-testid="link-404-home"
+      >
+        Go Home
+      </Link>
     </div>
   );
 }
