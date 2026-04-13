@@ -16,6 +16,25 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - **API codegen**: Orval (from OpenAPI spec)
 - **Build**: esbuild (CJS bundle)
 
+## Artifacts
+
+### SYSmoAI Website (`artifacts/sysmoai-website`)
+- **Type**: React + Vite (frontend-only, no backend)
+- **Preview path**: `/`
+- **Purpose**: Complete 5-page B2B marketing website for SYSmoAI Pvt Ltd
+- **Pages**: Home, Services, About, Contact, Blog
+- **Brand**: SYSmoAI Pvt Ltd — AI systems consultancy, Dhaka, Bangladesh
+- **Founder**: Md. Emon Hossain
+- **Contact**: support@sysmoai.com | WhatsApp: +880 1711-638693
+- **Key components**:
+  - `SYSmoAILogo` — 3-layer hexagonal SVG mark
+  - `SYSmoAIWordmark` — SYS(bold)+mo(regular,65%)+AI(bold)
+  - `Header` — sticky dark nav with mobile hamburger
+  - `Footer` — dark footer with company info
+  - `WhatsAppFAB` — floating WhatsApp CTA (bottom-right)
+- **Routing**: wouter
+- **Animations**: framer-motion
+
 ## Key Commands
 
 - `pnpm run typecheck` — full typecheck across all packages

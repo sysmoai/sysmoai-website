@@ -1,0 +1,139 @@
+You are building sysmoai.com from scratch. This is a greenfield build — there is NO existing code. Create a complete 5-page B2B marketing website for SYSmoAI Pvt Ltd, an AI systems consultancy based in Dhaka, Bangladesh.
+
+STEP 0 — CLONE BRAND ASSETS:
+First, clone the official brand pack repo into the project:
+  git clone https://github.com/sysmoai/Sysmoaifinalbrandpack.git brand-pack
+Copy relevant brand assets (logo SVGs, colors, tokens) from brand-pack/src/components/ into your project. Then remove the brand-pack folder to keep the repo clean.
+
+STACK:
+- Next.js 14+ (App Router)
+- TypeScript (strict)
+- Tailwind CSS
+- System fonts ONLY — use Inter as primary via system font stack: 'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif. Do NOT use next/font/google.
+- Static deployment (output: 'export' in next.config)
+
+BRAND IDENTITY (from official Figma brand pack):
+- Company: SYSmoAI Pvt Ltd
+- Brand name casing: Always "SYSmoAI" (capital S-Y-S, lowercase m-o, capital A-I)
+- Tagline (hero): "AI Systems That Work For You"
+- Sub-tagline: "Intelligent Infrastructure"
+- Logo: 3-layer hexagonal mark (Infrastructure → Orchestration → Intelligence)
+  - Layer 1 (outer): fill #1E3A8A, stroke #2563EB
+  - Layer 2 (mid): fill #2563EB, stroke #3B82F6
+  - Layer 3 (core): fill #3B82F6, stroke #60A5FA
+  - SVG paths (viewBox 0 0 100 100):
+    Layer 1: "M25 34 L50 24 L75 34 L75 54 L50 64 L25 54 Z"
+    Layer 2: "M30 49 L50 40 L70 49 L70 64 L50 73 L30 64 Z"
+    Layer 3: "M40 61 L50 56 L60 61 L60 71 L50 76 L40 71 Z"
+- Wordmark: "SYS" (font-weight 700) + "mo" (font-weight 400, opacity 65%) + "AI" (font-weight 700)
+  Letter-spacing: -0.02em
+- Color system:
+  Primary: #2563EB (Blue 600)
+  Blue 900: #1E3A8A
+  Blue 800: #1E40AF
+  Blue 500: #3B82F6
+  Blue 400: #60A5FA
+  Brand surface (dark bg): #0A0B0F
+  White: #FFFFFF
+  Black: #000000
+- Theme: Hybrid — dark hero/header (#0A0B0F background) + white professional content sections (#FFFFFF background, #1A1A1A text)
+- Typography: Inter (primary), SF Pro Display (fallback), system-ui stack
+  Tracking: -0.02em for headings, -0.04em for wordmark
+  Font features: kern, liga, calt
+- WhatsApp: +880 1711-638693 (link: wa.me/8801711638693)
+- Email: support@sysmoai.com
+- Location: Dhaka, Bangladesh
+- Founder: Md. Emon Hossain — AI Systems & Agent Architect
+
+LOGO IMPLEMENTATION:
+Create a reusable SYSmoAILogo component that renders the 3-layer hexagonal SVG mark.
+Create a SYSmoAIWordmark component that renders "SYS" (bold) + "mo" (regular, 65% opacity) + "AI" (bold).
+Use the brand-dark variant on dark backgrounds, brand-light on white backgrounds.
+The header should show: [Logo icon] + [Wordmark] as a horizontal lockup with gap = 0.2 × icon size.
+
+PAGES TO BUILD (5 total):
+
+1. HOMEPAGE ( / )
+- Hero section (dark bg #0A0B0F): Large SYSmoAI logo + headline "AI Systems That Work For You" + subtext "We build AI-powered operating systems for businesses in Bangladesh" + WhatsApp CTA button
+- "Who We Help" section (white bg): 4 cards — SMEs, Freelancers, Startups, Agencies. Each with icon, title, description.
+- "How It Works" section (light gray bg): 3 steps — Audit → Build → Launch. Clean numbered steps.
+- Social proof section (dark bg): "10,000+ customers served since 2022" + trust badges (Since 2022, 7+ Websites, WhatsApp-First, Replit-Powered)
+- Service tier preview (white bg): 3 cards linking to /services
+- FAQ section (white bg): 6 common questions about AI consulting with accordion
+- CTA section (dark bg with blue gradient): WhatsApp button + "Book a Free Consultation"
+
+2. SERVICES PAGE ( /services )
+- Hero (dark bg): "Our Services" + subtitle
+- 3-tier pricing cards (white bg):
+  Tier 1 — AI Profit Audit (৳15,000-25,000): 3-5 page site, 3-5 days, client provides content
+  Tier 2 — Implementation Sprint (৳40,000-75,000): 5-10 pages, 1-2 weeks, full SEO + copy
+  Tier 3 — Premium Brand Build (৳1,00,000-1,50,000): 7-15 pages, 2-4 weeks, bespoke design
+- Add-ons list: Copywriting, SEO, Analytics, WhatsApp flows, Notion CMS, Monthly retainer
+- CTA: WhatsApp order button for each tier (green, links to wa.me/8801711638693)
+
+3. ABOUT PAGE ( /about )
+- Founder section with circular photo placeholder (200px, with alt text "Md. Emon Hossain — Founder", use a gradient placeholder circle with initials "EH" until real photo is added)
+- Founder story: Md. Emon Hossain, 28, Dhaka — BBA Marketing from North South University
+- Background: 500+ WordPress projects → Marketing → Systems Engineering → AI
+- Company: SYSmoAI Pvt Ltd — early-stage AI systems consultancy (do NOT claim it's an established agency)
+- Philosophy: "Provider, not Planner" — action over perfection, systems over hustle
+- Credential: Built and manages 7+ websites on Replit, serves 10,000+ customers via AI Premium Shop
+
+4. CONTACT PAGE ( /contact )
+- WhatsApp CTA (primary, large green button): +880 1711-638693
+- Email: support@sysmoai.com
+- Location card: Dhaka, Bangladesh
+- Response time: "Under 5 minutes on WhatsApp"
+- Simple contact form (Formspree action: https://formspree.io/f/placeholder — founder will replace)
+- Social: WhatsApp link only for v1
+
+5. BLOG PAGE ( /blog )
+- "Coming Soon" placeholder with branded styling
+- 3 stub cards:
+  - "Why Every Bangladesh Business Needs AI in 2026"
+  - "How We Built 7 Websites on Replit"
+  - "AI Agent Economy: What It Means for Freelancers"
+- Each card links to # (placeholder)
+
+COMPONENTS (non-negotiable):
+- WhatsApp floating CTA: green circle (#25D366), bottom-right corner, z-index 50, shadow, links to wa.me/8801711638693. Must appear on EVERY page.
+- Header/Nav (dark bg #0A0B0F): SYSmoAI logo lockup (icon + wordmark) on left + nav links (Home, Services, About, Contact, Blog) + WhatsApp CTA button on right. Sticky on scroll. Mobile hamburger menu.
+- Footer (dark bg #0A0B0F): SYSmoAI logo + company info + support@sysmoai.com + WhatsApp link + copyright © 2026 SYSmoAI Pvt Ltd
+- Mobile responsive: test at 375px, 768px, 1024px
+- Meta titles + descriptions on every page (include "SYSmoAI" and "Bangladesh" in all titles)
+- robots.txt at /public/robots.txt
+- sitemap.xml at /public/sitemap.xml listing all 5 pages
+- Favicon: Use the SYSmoAI hexagonal logo mark (Layer 3 only for small sizes)
+- OG image: Create a simple OG image placeholder (1200x630, dark bg + logo + tagline)
+
+TAILWIND CONFIG:
+Extend the Tailwind config with SYSmoAI brand colors:
+  colors: {
+    brand: {
+      50: '#EFF6FF',
+      100: '#DBEAFE',
+      200: '#BFDBFE',
+      300: '#93C5FD',
+      400: '#60A5FA',
+      500: '#3B82F6',
+      600: '#2563EB',
+      700: '#1D4ED8',
+      800: '#1E40AF',
+      900: '#1E3A8A',
+      surface: '#0A0B0F',
+    }
+  }
+
+QUALITY RULES:
+- Build must exit with code 0 and zero TypeScript errors
+- Zero placeholder text: no "lorem ipsum", no "[insert]", no "example.com"
+- grep -rn 'next/font/google' must return 0 matches
+- grep -rn '01865|385348' must return 0 matches (that is the AIPS phone, not SYSmoAI)
+- All pages must render without console errors
+- Lighthouse target: 90+ on all 4 categories
+
+AFTER BUILD:
+- Report: list all files created, route count, build exit code
+- Take screenshots of homepage and services page
+- Confirm static export works (output: 'export' in next.config.js)
+- Verify SYSmoAI logo renders correctly on dark and light backgrounds
