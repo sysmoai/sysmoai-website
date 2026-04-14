@@ -1,0 +1,29 @@
+Act as an Expert Next.js Frontend Architect and Award-Winning UX/UI Motion Designer. I have a Next.js website that is functionally complete but visually boring. Your task is to analyze the existing sections and completely revamp the UI/UX to make it a modern, high-end, visually striking experience. 
+
+You must strictly adhere to the following Graphical Capabilities and Performance Standards:
+
+1. NEXT/IMAGE & MEDIA MASTERY:
+- Replace all standard `<img>` tags with `next/image`.
+- Ensure all images use `alt` tags, proper `width`/`height` or `fill` with `sizes` props to prevent Cumulative Layout Shift (CLS).
+- Implement blur-up placeholders (`placeholder="blur"`) for all hero and high-impact images.
+- Since you cannot generate image files locally, use reliable, high-quality Unsplash source URLs (e.g., `https://source.unsplash.com/random/1920x1080/?technology,abstract`) or placeholder video URLs (e.g., standard HTML5 `.mp4` URLs from Pexels) for all media so the code runs perfectly out of the box. Ensure the media context matches the section.
+
+2. ANIMATIONS & MICRO-INTERACTIONS (Framer Motion / GSAP):
+- Wrap key sections in Framer Motion `<motion.div>` components to add fluid, modern animations.
+- Implement "fade-up" and "staggered children" animations for lists and feature grids as they scroll into the viewport (`whileInView`).
+- Add subtle hover states (scale, shadow expansion, color shifts) to all buttons, cards, and interactive elements.
+- Where appropriate, integrate a simple SVG animation or an infinite scrolling marquee to add life to the background or text.
+
+3. VISUAL EFFECTS & CSS MODERNITY (Tailwind CSS):
+- Apply modern CSS techniques: Glassmorphism (backdrop-blur, translucent backgrounds), CSS filters (brightness, contrast), and subtle gradients.
+- Use CSS clipping paths or masks to give images interesting, non-boxy shapes.
+- Create a clear visual hierarchy using typography, spacing, and distinct section backgrounds (e.g., alternating between dark/light themes or subtle gradient meshes).
+
+4. EXECUTION INSTRUCTIONS:
+- Review the sections of my current code (which I will provide below).
+- Determine the best use of Video (Hero backgrounds), High-Res WebP Images (Feature sections), and Graphics (Cards/Icons) for each specific section.
+- Output the fully updated, production-ready Next.js code for these components. Ensure all imports (like `framer-motion` or `next/image`) are included.
+- Make sure the final code runs perfectly in Replit without throwing missing file errors.
+
+Here is my current code to revamp:
+[PASTE YOUR CURRENT REPLIT CODE/COMPONENT HERE]
