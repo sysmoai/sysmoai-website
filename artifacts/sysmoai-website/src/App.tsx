@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { lazy, Suspense } from "react";
 
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFAB } from "@/components/WhatsAppFAB";
@@ -20,7 +21,6 @@ const Pricing = lazy(() => import("@/pages/Pricing"));
 const Proof = lazy(() => import("@/pages/Proof"));
 const FAQ = lazy(() => import("@/pages/FAQ"));
 
-// Service pages
 const ServiceAIQuickWin = lazy(() => import("@/pages/services/AIQuickWin"));
 const ServiceAISprint = lazy(() => import("@/pages/services/AISprint"));
 const ServiceAIRetainer = lazy(() => import("@/pages/services/AIRetainer"));
@@ -32,7 +32,6 @@ const ServiceN8nAutomation = lazy(() => import("@/pages/services/N8nAutomation")
 const ServiceCorporateTraining = lazy(() => import("@/pages/services/CorporateTraining"));
 const ServiceInternational = lazy(() => import("@/pages/services/International"));
 
-// Audience pages
 const ForStudents = lazy(() => import("@/pages/for/Students"));
 const ForJobSeekers = lazy(() => import("@/pages/for/JobSeekers"));
 const ForFreelancers = lazy(() => import("@/pages/for/Freelancers"));
@@ -44,7 +43,6 @@ const ForConsultants = lazy(() => import("@/pages/for/Consultants"));
 const ForCreators = lazy(() => import("@/pages/for/Creators"));
 const ForCorporates = lazy(() => import("@/pages/for/Corporates"));
 
-// Legal pages
 const PrivacyPolicy = lazy(() => import("@/pages/legal/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("@/pages/legal/TermsOfService"));
 const RefundPolicy = lazy(() => import("@/pages/legal/RefundPolicy"));
@@ -110,10 +108,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <Router />
-        </WouterRouter>
-        <Toaster />
+        <ThemeProvider>
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <Router />
+          </WouterRouter>
+          <Toaster />
+        </ThemeProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );
