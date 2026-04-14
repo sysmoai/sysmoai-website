@@ -47,9 +47,9 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 3 — For You + Resources */}
+          {/* Column 3 — Who We Help + Resources */}
           <div className="space-y-4">
-            <h3 className="text-white font-semibold text-sm uppercase tracking-wider">For You</h3>
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wider">Who We Help</h3>
             <ul className="space-y-2 text-sm">
               {[
                 { href: '/for/students', label: 'Students' },
