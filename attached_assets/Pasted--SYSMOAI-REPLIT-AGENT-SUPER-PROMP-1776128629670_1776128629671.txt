@@ -1,0 +1,1021 @@
+════════════════════════════════════════════════════════════════
+SYSMOAI — REPLIT AGENT SUPER PROMPT
+Full Website Rebuild — International Quality — SEO + AIO Ready
+Version: CANONICAL FINAL · 14 April 2026
+════════════════════════════════════════════════════════════════
+
+You are building the official SYSmoAI website from scratch.
+This is a real, live, revenue-generating B2B AI consulting website for Bangladesh and international clients.
+Quality standard: Top 1% globally. Every pixel earns its place. Every word converts.
+
+Read this entire prompt before writing a single line of code. Then execute phase by phase.
+
+══════════════════════════════════════════════
+SECTION 1 — PROJECT IDENTITY
+══════════════════════════════════════════════
+
+COMPANY: SYSmoAI
+TAGLINE: "Systems in Motion."
+MISSION: We build AI-powered operating systems for ambitious businesses — and clients worldwide.
+POSITIONING: Bangladesh-based. Globally-rated. We don't sell AI tools. We solve real problems with custom AI systems.
+PRIMARY CTA: WhatsApp — https://wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%20need%20help
+SECONDARY CTA: Contact form (on /contact page)
+EMAIL: hello@sysmoai.com
+DOMAIN: sysmoai.com
+EXISTING LIVE BUILD: Keep all existing functionality. Extend, upgrade, and fix — do not destroy working code.
+
+BRAND PROMISE:
+"We don't get paid until it works."
+"Most clients see results in 72 hours."
+"Bangladesh rates. Global standards. Verified results."
+
+══════════════════════════════════════════════
+SECTION 2 — TECH STACK (NON-NEGOTIABLE)
+══════════════════════════════════════════════
+
+Framework: Next.js 14 (App Router)
+Styling: Tailwind CSS (utility-first, no inline styles)
+Language: TypeScript
+Animation: Framer Motion (lightweight, purposeful — no gratuitous effects)
+Icons: Lucide React
+Fonts: Inter (body) + Space Grotesk or Syne (headings) — load via next/font
+Images: next/image ALWAYS (no raw <img> tags)
+Forms: React Hook Form + server action or API route
+Deployment: Replit (ensure npm install + npm run build + npm start all exit 0)
+
+ENV VARS REQUIRED (set in Replit Secrets — never hardcode):
+  NEXT_PUBLIC_SITE_URL = https://sysmoai.com
+  NEXT_PUBLIC_WA_NUMBER = 8801711638693
+  NEXT_PUBLIC_WA_MESSAGE = Hi%20SYSmoAI%2C%20I%20need%20help
+  NEXT_PUBLIC_GA_ID = [TBD — leave placeholder]
+
+══════════════════════════════════════════════
+SECTION 3 — DESIGN SYSTEM (BRAND TOKENS)
+══════════════════════════════════════════════
+
+Create /src/lib/tokens.ts with these values. ALL components must use these tokens — zero hardcoded colors.
+
+PRIMARY COLORS (Blue system — Brand Pack v1.1):
+  brand-primary: #2563EB (blue-600)
+  brand-primary-dark: #1D4ED8 (blue-700)
+  brand-primary-light: #3B82F6 (blue-500)
+  brand-accent: #06B6D4 (cyan-500)
+
+NEUTRAL:
+  gray-50 to gray-950 (Tailwind defaults)
+  text-primary: #0F172A (slate-900)
+  text-secondary: #475569 (slate-600)
+  text-muted: #94A3B8 (slate-400)
+
+BACKGROUNDS:
+  bg-page: #FFFFFF
+  bg-section-alt: #F8FAFC (slate-50)
+  bg-dark: #0F172A (slate-900)
+  bg-card: #FFFFFF with shadow-sm border border-slate-100
+
+STATUS COLORS:
+  success: #10B981 (emerald-500)
+  warning: #F59E0B (amber-500)
+  danger: #EF4444 (red-500)
+
+TYPOGRAPHY SCALE:
+  h1: text-4xl md:text-6xl font-bold tracking-tight leading-tight
+  h2: text-3xl md:text-4xl font-bold
+  h3: text-xl md:text-2xl font-semibold
+  body-lg: text-lg text-slate-600 leading-relaxed
+  body: text-base text-slate-600
+  caption: text-sm text-slate-500
+
+SPACING: 8px base grid. Sections use py-16 md:py-24.
+RADIUS: rounded-xl for cards, rounded-2xl for featured cards, rounded-full for badges/pills
+SHADOWS: shadow-sm for cards, shadow-lg for CTAs/featured elements
+
+BUTTON SYSTEM:
+  Primary: bg-brand-primary hover:bg-brand-primary-dark text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg
+  Secondary: border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white
+  Ghost: text-brand-primary hover:bg-blue-50
+  WhatsApp: bg-green-500 hover:bg-green-600 text-white (floating + inline)
+
+══════════════════════════════════════════════
+SECTION 4 — FULL SITEMAP (BUILD ALL THESE ROUTES)
+══════════════════════════════════════════════
+
+CORE PAGES:
+  / — Homepage (conversion machine)
+  /about — Founder story + operating principles + team
+  /services — All services overview hub
+  /pricing — Transparent pricing (BD + International)
+  /proof — Case studies + results (placeholder-ready)
+  /blog — Blog index (placeholder with 1 seed post)
+  /contact — Contact form + WhatsApp
+  /faq — Full FAQ with JSON-LD schema
+
+SERVICE DETAIL PAGES:
+  /services/ai-quick-win — AI Quick Win (1 workflow, 3 days)
+  /services/ai-sprint — AI Implementation Sprint (14 days)
+  /services/ai-retainer — Monthly AI Operations Retainer
+  /services/ai-coaching — 1:1 AI Coaching sessions
+  /services/group-workshop — Group AI Workshop
+  /services/notion-os — Notion OS Build
+  /services/ai-agent-dev — AI Agent Development (NemoClaw)
+  /services/n8n-automation — n8n Workflow Automation
+  /services/corporate-training — Corporate AI Training
+  /services/international — International clients (USD pricing)
+
+AUDIENCE PAGES (ONE PAGE PER SEGMENT — SEO CRITICAL):
+  /for/students — Students
+  /for/job-seekers — Job Seekers
+  /for/freelancers — Freelancers
+  /for/researchers — Researchers & Academics
+  /for/agencies — Digital Agencies & IT Teams
+  /for/sme-founders — SME Founders
+  /for/f-commerce — F-Commerce Sellers
+  /for/consultants — Consultants & Coaches
+  /for/creators — Content Creators
+  /for/corporates — Corporates & NGOs
+
+LEGAL PAGES:
+  /privacy-policy
+  /terms-of-service
+  /refund-policy
+
+UTILITY:
+  /404 — Custom not found page
+  sitemap.xml — Auto-generated (all 30+ routes)
+  robots.txt — Allow all, point to sitemap
+
+══════════════════════════════════════════════
+SECTION 5 — HOMEPAGE ARCHITECTURE (/)
+══════════════════════════════════════════════
+
+Build in this EXACT section order:
+
+--- SECTION 1: HERO ---
+Full-width, dark gradient background (bg-dark) or deep blue.
+Badge: "🇧🇩 Bangladesh's AI Consulting Company — Serving Clients Worldwide"
+H1: "We Build AI Systems That Work For You"
+Subheadline: "Stop doing manually what AI can do automatically. SYSmoAI designs, builds, and deploys custom AI operating systems — so your business runs even when you're not in the room."
+CTA Row: [💬 Start on WhatsApp] [▼ See How It Works]
+Social proof strip below CTA: "Top 5% Prompt Engineers Globally · 500+ Projects Delivered · 8+ Client Categories"
+Visual: Abstract AI/system diagram or clean dashboard illustration — dark themed, blue accents
+
+--- SECTION 2: PROBLEM STATEMENT ---
+Background: white
+Headline: "Running your business shouldn't feel like this."
+3-column cards (icon + headline + 2-line description):
+  1. 📱 "Drowning in WhatsApp" — Orders, leads, and follow-ups lost in an endless inbox every day.
+  2. 🔄 "Everything is manual" — Your team repeats the same tasks daily that AI could handle in seconds.
+  3. 📊 "No visibility" — You can't see what's happening in your business without asking 5 people.
+Transition: "There's a better way." → [See Our Solutions →]
+
+--- SECTION 3: WHO WE HELP ---
+Headline: "One AI partner. Every type of business."
+Subheadline: "Whether you're a solo freelancer or a corporate team — we have a solution built for your exact situation."
+Horizontal scrollable tab row (desktop: grid, mobile: horizontal scroll):
+  🎓 Students | 💼 Job Seekers | 💻 Freelancers | 🔬 Researchers
+  🏪 SME Founders | 📦 F-Commerce | 🏢 Digital Agencies | 👔 Consultants
+  📱 Creators | 🏛️ Corporates | 🌍 International
+Each tab click reveals: Top 3 problems + our solution summary + CTA → [See Full Solution →] linking to /for/[segment]
+
+--- SECTION 4: WHAT WE BUILD (SERVICES) ---
+Headline: "From 3-day quick wins to full AI operating systems."
+3 featured service cards (primary services — most revenue):
+  ⚡ AI Quick Win — ৳3,750–7,500 / $50–$100 — "Your #1 problem automated in 3 days"
+  🏃 AI Sprint — ৳25,000–50,000 / $300–$600 — "Full AI stack deployed in 14 days"
+  🔄 AI Retainer — ৳20,000/mo / $250/mo — "Ongoing AI management, month after month"
+Below: 6 smaller service cards in a 3-column grid:
+  🧑‍🏫 1:1 Coaching | 🎓 Group Workshop | 🗂️ Notion OS
+  🤖 AI Agent Dev | ⚙️ n8n Automation | 🏢 Corporate Training
+CTA: [See All Services →] → /services
+BD/International pricing toggle (default: BD ৳, toggle to 🌍 $ USD)
+
+--- SECTION 5: HOW IT WORKS ---
+Headline: "From chaos to AI-powered in 4 steps."
+Subheadline: "You don't write a single line of code."
+4-step horizontal timeline (numbered, connected arrows):
+  01 🔍 DIAGNOSE — Free 30-min discovery call. We map your biggest workflow problem and identify the highest-ROI fix.
+  02 🏗️ DESIGN — We design your custom AI system — right tools, automations, and agents for your specific situation.
+  03 ⚡ BUILD — We build and deploy it. You just review and approve. No code. No complexity.
+  04 🚀 SCALE — We train your team and optimize for 3 months — your system grows with your business.
+Guarantee banner: "⚡ Most clients see results in the first 72 hours. Guaranteed."
+
+--- SECTION 6: SOCIAL PROOF & TRUST ---
+Headline: "Real results. Real people."
+3 testimonial cards (★★★★★ each):
+  "Emon built our entire AI operations system in one week. We went from chaos to complete clarity."
+  — Rumi K., E-commerce Founder, Dhaka
+  "The AI Quick Win saved us 15 hours of manual work every week — immediately. ROI in the first 3 days."
+  — Sajid A., Digital Agency Owner, Dhaka
+  "Finally someone who understands Bangladesh's market AND meets global AI standards."
+  — Tanvir M., Senior Freelancer, Chittagong
+Founder credibility card (full width below testimonials):
+  Photo placeholder (EH initials avatar, blue)
+  "Emon Hossain — Founder & CEO, SYSmoAI"
+  Tags: [AI Systems Architecture] [Top 5% Prompt Engineering] [500+ Projects] [Notion OS] [n8n Automation]
+  Quote: "I built SYSmoAI because I was you 3 years ago — overwhelmed, tool-hopping, and losing income while AI was changing everything. I spent 3 years mastering every AI tool, building real systems. Then I realized: most people don't need another tool. They need someone to build the system FOR them. That's SYSmoAI."
+
+--- SECTION 7: TOOL LOGOS STRIP ---
+Headline: "Tools We Master"
+Logo row (grayscale, hover to color):
+  ChatGPT | Claude | Notion | n8n | Zapier | WhatsApp Business API | Make (Integromat) | Google Workspace
+
+--- SECTION 8: FINAL CTA ---
+Full-width dark section.
+Headline: "Your AI transformation starts with one conversation."
+Subheadline: "Book your FREE 30-minute AI Audit. We'll identify your #1 bottleneck and show you exactly how to fix it — even if you don't hire us."
+CTA: [💬 Book Free AI Audit on WhatsApp] (large, green WhatsApp button)
+Micro-copy: "We reply within 2 hours on working days."
+
+══════════════════════════════════════════════
+SECTION 6 — AUDIENCE PAGES (/for/[segment])
+══════════════════════════════════════════════
+
+BUILD ALL 10 AUDIENCE PAGES using this EXACT template structure.
+Each page is a standalone SEO-optimized landing page.
+Each page must make the visitor feel: "This brand was built for ME."
+
+PAGE TEMPLATE STRUCTURE (for every /for/ page):
+
+[1] HERO SECTION
+  - Segment-specific headline (problem-first)
+  - Subheadline: what life looks like without AI + what it looks like with SYSmoAI
+  - Primary CTA: WhatsApp
+  - Background: dark blue gradient
+
+[2] "DOES THIS SOUND FAMILIAR?" SECTION
+  - Headline: "Does this sound familiar?"
+  - 6 pain point cards (icon + bold headline + 1-2 line description of REAL lived experience)
+  - Each pain point must feel like reading someone's diary — specific, emotional, true
+
+[3] "HERE'S WHAT CHANGES" SECTION
+  - Before / After comparison table or split layout
+  - Left (❌ Before SYSmoAI): the painful reality
+  - Right (✅ After SYSmoAI): the transformed reality
+  - Keep it concrete and measurable
+
+[4] "HOW WE SOLVE IT" SECTION
+  - 3-4 specific solution cards (what SYSmoAI builds for this segment)
+  - Each card: icon + title + 2-3 lines of specific value
+
+[5] PROCESS SECTION (abbreviated 3-step version)
+  - Audit → Build → Train
+
+[6] TESTIMONIAL (if available, or placeholder-ready slot)
+
+[7] RELEVANT SERVICES CTA CARDS
+  - Show only the 2-3 services most relevant to this segment
+  - Each card links to /services/[service]
+
+[8] FINAL CTA
+  - Segment-specific headline: e.g., "Ready to transform your freelancing income?"
+  - WhatsApp CTA button
+
+---
+
+NOW BUILD EACH SEGMENT PAGE WITH THIS CONTENT:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE: /for/students
+META TITLE: AI Tools for Students Bangladesh | Study Smarter with SYSmoAI
+META DESCRIPTION: Don't fall behind. SYSmoAI teaches Bangladeshi students how to use AI tools to build portfolios, find jobs, and start freelancing in 30 days.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HERO HEADLINE: "Your Classmates Are Using AI. Are You?"
+HERO SUB: "Don't graduate without AI skills. In Bangladesh's job market right now, AI knowledge is the difference between getting hired and getting ignored."
+
+PAIN POINTS (6):
+  📚 "I use ChatGPT sometimes but I don't really know how to use it properly — my prompts are terrible."
+  💼 "I've applied to 30+ jobs. No replies. My CV looks like everyone else's."
+  🎯 "I want to start freelancing on Fiverr but have no portfolio, no skills, no idea where to start."
+  🐌 "My thesis is taking forever. Literature review alone took 3 weeks. There must be a faster way."
+  📱 "All my notes and resources are scattered across 5 different apps. Total chaos."
+  😰 "Everyone says 'learn AI' but nobody explains WHICH AI, for WHAT task, in what order."
+
+BEFORE/AFTER:
+  Before: Applying for 50 jobs, getting 0 replies | After: CV with AI skills listed, interviews booked
+  Before: Thesis taking 6 months | After: Literature review done in 3 days with AI
+  Before: No freelance income | After: First Fiverr order within 30 days
+
+HOW WE SOLVE IT:
+  🧠 AI Skills Blueprint — we map exactly which AI tools to learn for your career goal
+  📄 AI-Powered CV + Portfolio — we build your first portfolio using your own projects
+  💻 Freelance Launchpad — prompts, tools, and your first Fiverr gig set up
+  🔬 Research OS — Notion + AI workflow for faster thesis writing
+
+RELEVANT SERVICES: 1:1 AI Coaching | Group Workshop | Notion OS Build
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE: /for/job-seekers
+META TITLE: AI Skills for Job Seekers Bangladesh | Get Hired Faster with SYSmoAI
+META DESCRIPTION: Companies want AI skills. Most CVs don't have them. SYSmoAI builds your AI-powered CV, portfolio, and LinkedIn presence so you stand out and get hired.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HERO HEADLINE: "Companies Are Hiring People With AI Skills. You Need Them Now."
+HERO SUB: "Rejection isn't about your degree — it's about a skills gap you can close in 30 days. SYSmoAI gets you hired."
+
+PAIN POINTS (6):
+  📄 "I keep getting rejected but I don't know why. My CV looks fine to me."
+  🤷 "Everyone says 'learn AI' but there are 100 AI tools. Which ones actually matter for jobs?"
+  🔗 "My LinkedIn has 47 connections and 0 content. Nobody knows I exist."
+  🔄 "I want to switch careers but I have no portfolio in the new field — zero proof."
+  ⏳ "I've been job hunting for 4 months. I apply every day. Nothing is working."
+  📊 "Interviewers ask about AI experience. I don't have any. The conversation ends there."
+
+BEFORE/AFTER:
+  Before: CV ignored by 50 companies | After: CV with AI skills, getting shortlisted
+  Before: LinkedIn ghost account | After: Active LinkedIn with posts, getting recruiter messages
+  Before: No portfolio | After: Real AI projects to show in interviews
+
+HOW WE SOLVE IT:
+  📝 AI-Powered CV Overhaul — rewritten to pass ATS and impress human reviewers
+  🔗 LinkedIn Profile Build — headline, about section, featured projects, posting strategy
+  🗂️ Portfolio Creation — we build you real AI project samples to show employers
+  🎯 Career Roadmap — AI skills learning plan tailored to your target role
+
+RELEVANT SERVICES: 1:1 AI Coaching | Notion OS Build | Group Workshop
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE: /for/freelancers
+META TITLE: AI for Freelancers Bangladesh | 3x Your Income with SYSmoAI
+META DESCRIPTION: AI is taking entry-level freelance work. SYSmoAI upgrades your skills, rates, and client systems so you earn more — not less — in the AI era.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HERO HEADLINE: "AI Is Taking Low-Ticket Freelance Work. Here's How You Stay Ahead."
+HERO SUB: "The freelancers who thrive in 2025 don't fear AI — they USE it to deliver 3x faster and charge 3x more. SYSmoAI upgrades your entire freelance operation."
+
+PAIN POINTS (6):
+  📉 "My income dropped 30% in the last year. Clients say 'we can just use ChatGPT for that now.'"
+  😤 "I'm stuck at low-ticket projects — ৳500 logo designs, ৳1,000 articles. I know I'm worth more."
+  📋 "Client management is chaos — WhatsApp threads everywhere, no system, missed deadlines."
+  ✍️ "Writing proposals takes me 2 hours each. Most don't even get replies."
+  🌐 "I want international clients but I don't know how to position myself on Upwork/Fiverr."
+  🎨 "I have no case studies, no portfolio website, no proof of my best work."
+
+BEFORE/AFTER:
+  Before: ৳500/project entry work | After: ৳5,000+ AI-enhanced premium services
+  Before: 2-hour proposals with low reply rate | After: 20-minute proposal using AI template, 40% reply rate
+  Before: Chaotic client management | After: Notion CRM — every client, deadline, invoice tracked
+
+HOW WE SOLVE IT:
+  🚀 Service Upgrade Plan — we identify which of your skills pair with AI to 3x your rate
+  📂 Portfolio + Case Study Build — we turn your past work into proof assets that win premium clients
+  🗂️ Freelance Business OS — Notion system for client management, proposals, invoices, pipeline
+  💬 Proposal Templates — AI-powered proposal system that writes in your voice
+
+RELEVANT SERVICES: AI Quick Win | Notion OS Build | 1:1 AI Coaching
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE: /for/researchers
+META TITLE: AI for Researchers Bangladesh | Research OS for Faster Papers with SYSmoAI
+META DESCRIPTION: Literature reviews in 3 days instead of 3 weeks. SYSmoAI builds your AI-powered Research OS so you write, publish, and cite faster than ever.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HERO HEADLINE: "Your Research Is Taking 3x Longer Than It Should."
+HERO SUB: "Literature reviews. Note organization. Paper writing. Institutional deadlines. AI can cut your research timeline in half. We build the system for you."
+
+PAIN POINTS (6):
+  📚 "My literature review for this thesis took 4 weeks. I read 200 papers manually. There has to be a better way."
+  🗂️ "My notes are in Google Docs, Zotero, physical notebooks, WhatsApp messages, and email drafts. I can never find anything."
+  ✍️ "I know what I want to say but structuring the paper takes me longer than the research itself."
+  ⏰ "My institution wants 3 publications this year. I've finished 0. The writing bottleneck is killing me."
+  🔗 "Managing citations and references is a nightmare. I've had wrong citations in final papers."
+  🤝 "I collaborate with co-authors in different cities. Version control is a disaster."
+
+BEFORE/AFTER:
+  Before: 4-week literature review | After: 3-day AI-assisted review with organized notes
+  Before: Scattered notes across 6 apps | After: Single Research OS in Notion — everything searchable
+  Before: Paper writing takes months | After: Structured outline generated in 1 hour, drafting 3x faster
+
+HOW WE SOLVE IT:
+  📖 Research OS Build — custom Notion workspace for notes, papers, references, timelines
+  🤖 AI Literature Review Workflow — systematic process using AI to screen and summarize papers
+  ✍️ Academic Writing Assistant Setup — prompt templates for structuring and drafting papers
+  📊 Research Project Management — deadlines, co-author coordination, publication tracker
+
+RELEVANT SERVICES: Notion OS Build | 1:1 AI Coaching | AI Quick Win
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE: /for/agencies
+META TITLE: AI for Digital Agencies Bangladesh | Scale Delivery with SYSmoAI
+META DESCRIPTION: Your clients want AI services. Your team isn't ready. SYSmoAI deploys your full agency AI stack — so you deliver more, faster, without hiring more people.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HERO HEADLINE: "Your Clients Are Asking For AI Services. Can You Deliver?"
+HERO SUB: "While you figure out AI, AI-powered agencies are closing YOUR clients. SYSmoAI deploys your complete agency AI stack — in 14 days."
+
+PAIN POINTS (6):
+  🏃 "A competitor agency just pitched our client with AI-powered content production. We had nothing to show."
+  ⏳ "Content production takes 3x longer than it should. We're a bottleneck for our own clients."
+  📝 "Proposals take 3–5 hours each. We lose 1–2 days per week just on proposals."
+  📉 "We're losing retainer clients. They say our output is 'slow compared to AI-powered agencies.'"
+  🧑‍💼 "My team has no AI skills. I can't even start this without a training budget I don't have."
+  🔧 "We deliver projects but have zero systems — every project starts from scratch, every time."
+
+BEFORE/AFTER:
+  Before: 3-5 hour proposal writing | After: 30-min AI-assisted proposal using your templates
+  Before: Manual content production bottleneck | After: AI content workflow — 5x output
+  Before: No AI services to offer | After: AI consulting added to service menu, new revenue stream
+  Before: Losing clients to AI agencies | After: BEING the AI agency clients want to hire
+
+HOW WE SOLVE IT:
+  ⚡ AI Content Production System — workflow that cuts production time by 60%+
+  📋 Agency OS in Notion — project management, client dashboards, SOPs, delivery tracking
+  🤖 AI Proposal Builder — template system that generates winning proposals in 30 minutes
+  🧠 Team AI Training — upskill your entire team in half a day
+
+RELEVANT SERVICES: AI Sprint | AI Retainer | Group Workshop | Notion OS Build
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE: /for/sme-founders
+META TITLE: AI for SME Founders Bangladesh | AI Business OS with SYSmoAI
+META DESCRIPTION: Running a Bangladesh SME alone? SYSmoAI builds your complete AI business operating system — from WhatsApp inbox to business dashboard.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HERO HEADLINE: "You Started a Business to Have Freedom. Not to Be Buried in It."
+HERO SUB: "WhatsApp overwhelm. Forgotten follow-ups. No visibility into your own business. SYSmoAI builds the AI operating system that runs your business even when you're not in the room."
+
+PAIN POINTS (6):
+  📱 "My WhatsApp has 847 unread messages. I've lost at least 10 clients this month because I couldn't follow up."
+  🔄 "I remind myself to follow up with leads manually. I forget. The leads go cold. Revenue lost."
+  🏗️ "I use 7 different apps and none of them talk to each other. I manually copy data between them daily."
+  📊 "I have no idea what's happening in my business right now unless I ask my team. There's no dashboard."
+  😰 "I'm working 14 hours a day and still feel like nothing is getting done. Everything depends on me."
+  🤷 "I've tried ChatGPT. I watched YouTube tutorials. I still don't know how to make AI actually work for MY business."
+
+BEFORE/AFTER:
+  Before: 847 unread WhatsApp messages, lost leads | After: Auto-replies, auto-routing, follow-up system
+  Before: 7 disconnected tools | After: 1 central AI business OS with everything connected
+  Before: No dashboard — asking team for status | After: Real-time business visibility in 60 seconds
+
+HOW WE SOLVE IT:
+  📱 WhatsApp AI System — auto-replies, lead capture, follow-up sequences automated
+  🗂️ Business OS in Notion — everything in one place: clients, tasks, finance, team, dashboards
+  🔄 Workflow Automation — eliminate your 3–5 most painful daily manual tasks
+  📊 Business Dashboard — see revenue, leads, tasks, and team status in 60 seconds
+
+RELEVANT SERVICES: AI Sprint | AI Retainer | Notion OS Build | n8n Automation
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE: /for/f-commerce
+META TITLE: AI for F-Commerce Sellers Bangladesh | Automate Orders & DMs with SYSmoAI
+META DESCRIPTION: Managing 500+ Facebook DMs manually every day? SYSmoAI automates your F-commerce order management, follow-ups, and customer communication.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HERO HEADLINE: "500 DMs a Day. 1 Person. Manual Chaos. There's a Better Way."
+HERO SUB: "F-commerce in Bangladesh is booming. But managing orders manually on Facebook is breaking sellers. SYSmoAI automates your entire F-commerce operation."
+
+PAIN POINTS (6):
+  💬 "I get 500+ Facebook DMs a day. I reply to maybe 100. The other 400 are lost sales."
+  📦 "My order tracking is a mess — I use a notebook, screenshots, and memory. I make errors daily."
+  💳 "Confirming bKash payments takes 30 minutes per order. My customers leave before I confirm."
+  🔁 "I have no repeat customers. I've never followed up with a single past buyer. Ever."
+  📸 "I post inconsistently because creating product content takes too long. Some weeks I post nothing."
+  😤 "I'm working 16 hours a day at peak season and still can't keep up. I'm about to quit."
+
+BEFORE/AFTER:
+  Before: 500 DMs, 100 replies, 400 lost sales | After: AI auto-replies handle FAQs, capture leads 24/7
+  Before: Notebook + memory order tracking | After: Automated order management system
+  Before: 0 repeat customer follow-ups | After: Automated post-purchase follow-up sequences
+
+HOW WE SOLVE IT:
+  💬 Facebook DM Auto-Response System — answers common questions, captures orders automatically
+  📦 Order Tracking OS — every order tracked from payment to delivery confirmation
+  💳 bKash Payment Verification — semi-automated payment confirmation workflow
+  🔁 Customer Re-engagement System — follow-up sequences that bring back past buyers
+
+RELEVANT SERVICES: AI Quick Win | n8n Automation | AI Sprint
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE: /for/consultants
+META TITLE: AI for Consultants & Coaches Bangladesh | Productize Your Expertise with SYSmoAI
+META DESCRIPTION: Your knowledge is your product. SYSmoAI builds your AI-powered client journey — from automated onboarding to consistent content to repeatable proposals.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HERO HEADLINE: "Your Expertise Is Locked in Your Head. Let's Get It Out."
+HERO SUB: "As a consultant or coach, your knowledge is your product — but manual processes and scattered systems are limiting your income ceiling. SYSmoAI productizes your expertise."
+
+PAIN POINTS (6):
+  🐌 "New client onboarding takes me 2–3 days. I manually send 15 emails, 3 contracts, and 2 intake forms."
+  📅 "I post on LinkedIn when I remember — which is almost never. I have no content system."
+  📝 "I rebuild every proposal from scratch. Last month I spent 15 hours on proposals that didn't close."
+  🧠 "Everything I know is in my head. If I get sick, my business stops. No SOPs. No documentation."
+  ❄️ "Warm leads go cold because I forget to follow up. I've lost ৳50,000+ in forgotten leads."
+  💰 "I'm selling 1:1 time. I can't scale because there's only so many hours in a day."
+
+BEFORE/AFTER:
+  Before: 2-day manual onboarding | After: Automated onboarding in 15 minutes
+  Before: Rebuilding proposals for 3 hours each | After: AI proposal system generates in 20 minutes
+  Before: Knowledge locked in head | After: SOP library + knowledge base in Notion
+
+HOW WE SOLVE IT:
+  🚀 Client Onboarding Automation — automated intake, contract, welcome sequence
+  📋 Proposal System — AI-powered template that generates professional proposals fast
+  🗂️ Knowledge Base + SOP Library — your expertise documented and searchable
+  📅 Content Engine — LinkedIn + newsletter workflow that runs consistently
+
+RELEVANT SERVICES: AI Quick Win | Notion OS Build | AI Sprint
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE: /for/creators
+META TITLE: AI for Content Creators Bangladesh | AI Content Engine with SYSmoAI
+META DESCRIPTION: Posting inconsistently? Ideas everywhere but no system? SYSmoAI builds your AI content engine so you publish 5x more with half the effort.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HERO HEADLINE: "Great Content Ideas. Zero System. Inconsistent Posting. Sound Familiar?"
+HERO SUB: "The most successful creators aren't smarter — they have better systems. SYSmoAI builds your complete AI content engine."
+
+PAIN POINTS (6):
+  💡 "I have 50 content ideas in my head and on sticky notes. None of them become posts."
+  ⏳ "One YouTube video takes me 2 days from idea to upload. I can't maintain any rhythm."
+  📋 "I post on Facebook, Instagram, LinkedIn, and YouTube separately. All manually. It kills me."
+  📉 "My growth has stalled. I post when I can, which isn't consistent, so the algorithm ignores me."
+  🔄 "I filmed a great interview. It's sitting in my hard drive. I don't have time to repurpose it."
+  📅 "I have no content calendar. I decide what to post 10 minutes before posting. Quality suffers."
+
+BEFORE/AFTER:
+  Before: 1 post per week, inconsistent | After: 5x content from same effort using AI repurposing
+  Before: Ideas in sticky notes going nowhere | After: Content pipeline in Notion — idea to published
+  Before: 2 days per video | After: AI-assisted workflow cuts production by 60%
+
+HOW WE SOLVE IT:
+  📅 Content Calendar + Pipeline OS — idea capture, scheduling, status tracking in Notion
+  🔄 AI Repurposing Engine — 1 video/post becomes 5+ pieces across platforms
+  ✍️ Content Templates + Prompts — your voice, with AI speed
+  📊 Growth Tracking Dashboard — what's working, what's not, next move
+
+RELEVANT SERVICES: AI Quick Win | Notion OS Build | 1:1 AI Coaching
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE: /for/corporates
+META TITLE: Corporate AI Training Bangladesh | Enterprise AI Implementation | SYSmoAI
+META DESCRIPTION: Your team isn't using AI effectively despite the budget. SYSmoAI delivers enterprise AI training, workflow automation, and strategy for corporate teams in Bangladesh.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HERO HEADLINE: "You Spent the Budget on AI Tools. But Your Team Still Works the Same Way."
+HERO SUB: "Tools don't transform companies — systems and training do. SYSmoAI delivers enterprise AI implementation that actually changes how your team works."
+
+PAIN POINTS (6):
+  💸 "We bought ChatGPT for 50 employees 6 months ago. Most of them use it to summarize emails, if at all."
+  📊 "Monthly reports take my team 3 days to compile. They're almost useless by the time they're done."
+  🤷 "We have an 'AI strategy' but it's a slide deck. Nobody knows what to actually implement first."
+  🎧 "Customer support costs are increasing every year. We need automation but don't know where to start."
+  📋 "Our processes exist in email chains and WhatsApp groups. No documentation. New hires take 3 months."
+  🧑‍💼 "The CEO wants AI transformation. The team is overwhelmed. Middle management is resistant."
+
+BEFORE/AFTER:
+  Before: ৳50K/month AI tools, 10% adoption | After: AI integrated into daily workflows, 80% adoption
+  Before: 3-day monthly reporting | After: Automated dashboard, report in 30 minutes
+  Before: AI strategy = slide deck | After: Implemented, measurable AI systems running
+
+HOW WE SOLVE IT:
+  🏢 Enterprise AI Audit — we find where AI saves the most time in your specific operation
+  🧑‍💼 Team AI Training — full-day hands-on workshop with your industry's use cases
+  🔄 Process Automation — top 3 workflow bottlenecks automated with measurable ROI
+  📊 AI Strategy Roadmap — 90-day implementation plan with KPIs and owners
+
+RELEVANT SERVICES: Corporate Training | AI Sprint | AI Retainer
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE: /for/international (ALSO: /services/international)
+META TITLE: AI Consulting for International Clients | World-Class AI at Bangladesh Rates | SYSmoAI
+META DESCRIPTION: Top-tier AI systems architecture, Notion OS builds, and custom AI agents at 60–80% less than US/EU consultants. International payments via Wise and Payoneer.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HERO HEADLINE: "World-Class AI Expertise. Bangladesh Rates. No Compromise on Quality."
+HERO SUB: "US and EU AI consultants charge $200–$500/hr. SYSmoAI delivers the same expertise — Notion OS, custom AI agents, n8n automation — at a fraction of the cost. International payments via Wise and Payoneer."
+
+WHY INTERNATIONAL CLIENTS CHOOSE SYSMOAI:
+  🌍 60–80% cost savings vs US/EU consultants — same quality, fraction of the price
+  🏆 Top 5% prompt engineering globally — verified by international benchmarks
+  🗂️ Notion OS specialist — one of the most advanced Notion architects in Asia
+  🤖 Custom AI agent development — WhatsApp, web, and custom platform integration
+  ⚙️ n8n automation expert — complex workflow automation for any tool stack
+  💳 International payments — Wise and Payoneer accepted
+  🌐 English-first communication — no language barrier, no timezone confusion
+  ✅ Results guarantee — we don't get paid until it works
+
+SERVICES FOR INTERNATIONAL CLIENTS (USD pricing):
+  AI Quick Win: $50–$100
+  AI Sprint: $300–$600
+  AI Retainer: $250/month
+  1:1 AI Coaching: $30/session
+  Notion OS Build: $800–$5,000
+  AI Agent Development: $2,500–$15,000
+  n8n Automation: $50–$300/workflow
+  Corporate Training: $1,500–$8,000
+
+══════════════════════════════════════════════
+SECTION 7 — SERVICE DETAIL PAGES (/services/[service])
+══════════════════════════════════════════════
+
+BUILD ALL 9 SERVICE PAGES using this template:
+
+[1] HERO: Service name + price + primary outcome + WhatsApp CTA
+[2] WHAT IT IS: 3-4 sentence clear description
+[3] WHAT YOU GET: bullet list of deliverables
+[4] WHO IT'S FOR: 3-4 client types this service helps most
+[5] THE PROBLEM IT SOLVES: specific before/after
+[6] HOW IT WORKS: 3-step simplified process
+[7] PRICING: BD ৳ + International $ (with toggle)
+[8] FAQ: 4-5 service-specific questions
+[9] CTA: WhatsApp button + "Not sure? Talk to us first."
+
+SERVICE PAGE CONTENT:
+
+/services/ai-quick-win
+  HEADLINE: "Your #1 Workflow Problem. Automated. In 3 Days."
+  PRICE: ৳3,750 pilot / ৳7,500 full · $50–$100 international
+  DELIVERABLES: 1 workflow fully automated | Video walkthrough | 1 free revision | 3-day delivery
+  BEST FOR: First-time AI clients | Businesses testing before commitment | Anyone with 1 clear pain point
+  GUARANTEE: If the stated goal isn't met, we rebuild it at no extra charge.
+
+/services/ai-sprint
+  HEADLINE: "Full AI Stack. Deployed in 14 Days."
+  PRICE: ৳25,000–50,000 · $300–$600
+  DELIVERABLES: Complete AI system designed + deployed | Team training | 3-month support | Video documentation
+  BEST FOR: Agencies | SME founders | Growing businesses with multiple workflow problems
+
+/services/ai-retainer
+  HEADLINE: "Your AI Systems. Managed. Every Month."
+  PRICE: ৳20,000/month · $250/month
+  DELIVERABLES: 4–8 hrs/month ongoing support | Monthly improvements | Priority WhatsApp | Monthly report
+  BEST FOR: Businesses that want AI to keep evolving | Post-sprint clients | Operations-heavy teams
+
+/services/ai-coaching
+  HEADLINE: "60 Minutes With an AI Expert. Built Around Your Exact Situation."
+  PRICE: ৳2,500/session · $30/session
+  DELIVERABLES: 60-min live personalized session | Session recording | Follow-up Q&A | Action plan
+  BEST FOR: Individuals | Students | Professionals who learn by doing
+
+/services/group-workshop
+  HEADLINE: "Upskill Your Entire Team in Half a Day."
+  PRICE: ৳500/person (min 10 participants) · $15/person
+  DELIVERABLES: Custom curriculum for your industry | Hands-on exercises | Post-workshop resources
+  BEST FOR: Agencies | Corporates | Educational institutions | Teams of 10+
+
+/services/notion-os
+  HEADLINE: "Your Business. Organized. In One Place."
+  PRICE: ৳15,000–50,000 · $800–$5,000
+  DELIVERABLES: Custom Notion workspace | Database architecture | Automations + integrations | Video tutorial
+  BEST FOR: Founders | Consultants | Agencies | Anyone drowning in tool fragmentation
+
+/services/ai-agent-dev
+  HEADLINE: "A Custom AI Agent That Works For Your Business. 24/7."
+  PRICE: ৳50,000–2,00,000 · $2,500–$15,000
+  DELIVERABLES: Custom-trained AI agent | WhatsApp/web integration | Full deployment + testing | 30-day support
+  BEST FOR: Businesses with high-volume repetitive queries | E-commerce | Customer support
+
+/services/n8n-automation
+  HEADLINE: "Stop Doing Manually What Machines Can Do Automatically."
+  PRICE: ৳2,000–10,000/workflow · $50–$300/workflow
+  DELIVERABLES: Per-workflow automation | Any app integration | Error handling | Documentation
+  BEST FOR: Anyone with repetitive manual tasks connecting multiple apps
+
+/services/corporate-training
+  HEADLINE: "Turn Your Entire Team Into AI-Capable Operators."
+  PRICE: ৳50,000–2,00,000 · $1,500–$8,000
+  DELIVERABLES: Custom enterprise curriculum | Hands-on exercises | AI strategy roadmap | 30-day follow-up
+  BEST FOR: Corporates | NGOs | Government institutions | Companies 50+ employees
+
+══════════════════════════════════════════════
+SECTION 8 — GLOBAL COMPONENTS (EVERY PAGE)
+══════════════════════════════════════════════
+
+--- HEADER (STICKY) ---
+Logo: SYSmoAI (wordmark, blue)
+Desktop nav:
+  Services ▾ (mega dropdown: 3 columns — Core Services | Audience Solutions | Resources)
+  For You ▾ (dropdown: all 10 audience segments)
+  Pricing
+  Proof
+  About
+  Contact
+CTA button in header: [💬 WhatsApp] (green, always visible)
+Mobile: Hamburger menu — full-screen overlay
+
+--- FLOATING WHATSAPP BUTTON ---
+Fixed bottom-right on ALL pages, ALL screen sizes.
+Green circle, WhatsApp icon.
+On hover: expands to show "Chat on WhatsApp"
+Link: https://wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%20need%20help
+Z-index: 9999
+
+--- FOOTER (4-column) ---
+Column 1: Logo + 1-line tagline + "Bangladesh 🇧🇩 · Serving clients worldwide"
+Column 2: Services (links to all /services/* pages)
+Column 3: For You (links to all /for/* pages) + Resources (Proof, Blog, FAQ)
+Column 4: Contact (hello@sysmoai.com · WhatsApp link · Dhaka, Bangladesh) + Social links placeholders
+Bottom bar: © 2026 SYSmoAI · Privacy Policy · Terms · Refund Policy · "Made in Bangladesh 🇧🇩"
+
+--- COOKIE CONSENT BANNER ---
+Bottom-left, appears on first visit.
+"We use cookies to improve your experience. [Accept] [Decline]"
+Complies with privacy standards.
+
+══════════════════════════════════════════════
+SECTION 9 — SEO + AIO REQUIREMENTS (EVERY PAGE)
+══════════════════════════════════════════════
+
+GLOBAL SEO RULES (zero exceptions):
+  ✅ Unique <title> tag per page (format: "Page Topic | SYSmoAI")
+  ✅ Unique meta description per page (150–160 characters)
+  ✅ One H1 per page only
+  ✅ Logical H2 → H3 hierarchy throughout
+  ✅ Open Graph tags: og:title, og:description, og:image, og:url
+  ✅ Twitter Card meta tags
+  ✅ Canonical URL tag on every page
+  ✅ robots.txt: allow all, sitemap reference
+  ✅ sitemap.xml: all 30+ routes, auto-generated
+  ✅ next/image for all images with alt text
+  ✅ No broken links (404 check before launch)
+  ✅ Fast mobile load (Lighthouse ≥ 90 target)
+  ✅ Core Web Vitals: LCP < 2.5s, CLS = 0, FID < 100ms
+
+JSON-LD SCHEMA MARKUP (add to these pages):
+  Homepage: Organization + LocalBusiness + WebSite
+  /faq: FAQPage
+  /services/*: Service
+  /for/*: WebPage + BreadcrumbList
+  /about: Person (Emon Hossain)
+  /blog/*: Article + BreadcrumbList
+
+AIO (AI OVERVIEW) OPTIMIZATION:
+  ✅ Every page answers a clear, specific question in the first 100 words
+  ✅ FAQ section on every service + audience page (min 5 questions)
+  ✅ Use "Question + Direct Answer" format in headings
+  ✅ Structured data helps AI overviews extract answers — use schema everywhere
+  ✅ Page content should read like "the definitive answer" on the topic
+
+TARGET KEYWORDS (map to specific pages):
+  Homepage: "AI automation Bangladesh" | "AI consulting Bangladesh"
+  /services/notion-os: "Notion OS Bangladesh" | "Notion workspace Bangladesh"
+  /services/ai-agent-dev: "custom AI agent Bangladesh" | "AI chatbot Bangladesh"
+  /services/n8n-automation: "n8n automation Bangladesh" | "workflow automation Bangladesh"
+  /for/students: "AI for students Bangladesh" | "AI skills for students"
+  /for/freelancers: "AI for freelancers Bangladesh" | "AI freelancing Bangladesh"
+  /for/agencies: "AI for digital agencies Bangladesh" | "agency AI automation"
+  /for/sme-founders: "AI for small business Bangladesh" | "SME AI Bangladesh"
+  /for/f-commerce: "F-commerce automation Bangladesh" | "Facebook shop AI Bangladesh"
+  /services/international: "AI consultant Bangladesh" | "Notion expert Bangladesh"
+
+══════════════════════════════════════════════
+SECTION 10 — ABOUT PAGE (/about)
+══════════════════════════════════════════════
+
+META TITLE: About SYSmoAI | AI Systems Built By Someone Who Needed Them First
+META DESCRIPTION: SYSmoAI was built by Emon Hossain — an AI Systems Architect who spent 3 years building systems for his own business before offering them to others. Real story. Real expertise.
+
+SECTIONS:
+[1] HERO: "We Build AI Systems Because We Needed Them Ourselves."
+
+[2] ORIGIN STORY (6-step visual timeline):
+  🧠 01 — Emon was a solo founder doing everything manually — orders, follow-ups, content, clients.
+  😤 02 — He tried every productivity tool: Trello, Asana, spreadsheets. They all failed alone, without a system.
+  ⚡ 03 — He spent 3 years mastering AI — ChatGPT, Claude, Notion, n8n, full automation stacks.
+  🏗️ 04 — He built a complete AI Operating System for his own business. Everything connected. Automated.
+  🚀 05 — Revenue grew. Time freed up. Clients noticed. They asked: "Can you build this for us?"
+  🌍 06 — SYSmoAI was born — to give every founder, freelancer, and team the same unfair advantage.
+
+[3] FOUNDER SECTION:
+  Name: Emon Hossain
+  Title: Founder & CEO, SYSmoAI · AI Systems Architect · Notion OS Builder
+  Skills tags: [AI Systems Architecture] [Prompt Engineering - Top 5% Global] [Notion OS] [n8n Automation] [AI Agent Design] [SEO - 500+ Projects] [WordPress] [AI Coaching]
+  Quote: "I built SYSmoAI because I was you 3 years ago — overwhelmed, tool-hopping, and losing income while AI was changing everything around me. I spent 3 years learning every AI tool, building real systems, and delivering 500+ projects. Then I realized: most people don't need another tool. They need someone to build the system FOR them. SYSmoAI is that builder."
+
+[4] OPERATING PRINCIPLES:
+  🔨 We Build, Not Consult — You get a working system, not a slide deck.
+  ✅ Results First — We don't get paid until it works.
+  🎯 Problem-First — We solve your specific problem, not a generic one.
+  🤝 Your System, Your Control — We train you to run it independently.
+  🇧🇩 Bangladesh-Rooted — We understand the local market at a level global firms never will.
+  🌍 Global Standards — Our quality benchmark is international, not local average.
+
+[5] BY THE NUMBERS (honest, no fake metrics):
+  Top 5% Prompt Engineers Globally ✅
+  500+ Projects Delivered ✅
+  8+ Client Categories Served ✅
+  3+ Years Building AI Systems ✅
+
+══════════════════════════════════════════════
+SECTION 11 — FAQ PAGE (/faq)
+══════════════════════════════════════════════
+
+META TITLE: Frequently Asked Questions | SYSmoAI Bangladesh
+Build with accordion UI. Add FAQPage JSON-LD schema with ALL questions.
+
+QUESTIONS:
+  1. Do I need to know anything about AI to work with you?
+     A: Not at all. We handle everything technical. You just show up for the onboarding call and tell us about your business. We do the rest.
+
+  2. How fast do I see results?
+     A: Most Quick Win clients see measurable results within 72 hours of delivery. Sprint clients typically see major impact in the first 2 weeks.
+
+  3. Do you only work with businesses in Bangladesh?
+     A: No. We work with clients worldwide. International payments are handled via Wise or Payoneer.
+
+  4. What if I don't like the output?
+     A: We offer one free revision on all projects. For Quick Win packages: if the stated goal isn't met, we rebuild it at no extra charge.
+
+  5. Is this consulting or do you actually build?
+     A: We build. You get a working, deployed system — not a slide deck. We don't get paid until it works.
+
+  6. How do you handle payment?
+     A: Quick Win: 100% advance. Sprint: 50% upfront, 50% on delivery. Retainer: monthly billing. We accept bKash, Nagad, bank transfer, Wise, and Payoneer.
+
+  7. What tools will you use?
+     A: Notion, ChatGPT, Claude, n8n, Zapier, WhatsApp automation, and custom AI agents — all chosen based on your specific needs. We work with what you have.
+
+  8. Can you train my team as well?
+     A: Yes. Every Sprint includes team training. We also offer standalone Group Workshops for teams of 10+.
+
+  9. How do I start?
+     A: Book a free 30-minute discovery call via WhatsApp. No commitment required.
+
+  10. I'm a student / freelancer / individual — is SYSmoAI for me?
+      A: Absolutely. We have solutions for every stage — from students learning AI for the first time to enterprises deploying full AI stacks. See our "For You" pages to find your exact situation.
+
+  11. Do you offer international client services?
+      A: Yes. We serve clients in the US, UK, Canada, Australia, and across Southeast Asia. International payments via Wise and Payoneer.
+
+  12. What makes SYSmoAI different from hiring a freelancer on Fiverr?
+      A: Freelancers do tasks. SYSmoAI builds repeatable systems. We document everything, train your team, and ensure the system runs without us — with 3 months of support included.
+
+══════════════════════════════════════════════
+SECTION 12 — LEGAL PAGES
+══════════════════════════════════════════════
+
+BUILD: /privacy-policy, /terms-of-service, /refund-policy
+Style: Clean, readable typography. No walls of text.
+All three pages must be accessible from footer.
+Content summary to include:
+  Privacy: What data collected, how used, PDPO 2025 aligned, Bangladesh-compliant
+  Terms: Service delivery terms, payment terms, scope, liability
+  Refund: Quick Win guarantee (redo if goal not met), Sprint 10% refund if cancelled, Retainer cancellation policy
+
+══════════════════════════════════════════════
+SECTION 13 — PERFORMANCE REQUIREMENTS
+══════════════════════════════════════════════
+
+LIGHTHOUSE TARGETS:
+  Performance: ≥ 90
+  Accessibility: ≥ 90
+  Best Practices: ≥ 90
+  SEO: ≥ 95
+
+TECHNICAL REQUIREMENTS:
+  ✅ Mobile-first CSS (design for 360px, enhance upward)
+  ✅ All images use next/image with explicit width + height
+  ✅ No image > 200KB (use WebP format)
+  ✅ CLS = 0 (no layout shift)
+  ✅ LCP < 2.5 seconds on Bangladesh mobile connection
+  ✅ No render-blocking resources
+  ✅ Tailwind CSS purge in production (no unused styles)
+  ✅ Zero console errors or warnings on launch
+  ✅ All external links open in new tab with rel="noopener noreferrer"
+  ✅ Accessible: all images have alt text, all form inputs have labels, color contrast AA compliant
+  ✅ Keyboard navigable (tab order logical)
+  ✅ Focus states visible on all interactive elements
+
+══════════════════════════════════════════════
+SECTION 14 — RESPONSIVE BREAKPOINTS
+══════════════════════════════════════════════
+
+DESIGN FOR ALL THESE SIZES (test each):
+  Mobile: 360px (bottom baseline — most BD users)
+  Mobile L: 414px
+  Tablet: 768px
+  Laptop: 1024px
+  Desktop: 1280px
+  Wide: 1440px+
+
+SPECIFIC MOBILE RULES:
+  ✅ All text readable at 360px — minimum 14px body, 18px h3
+  ✅ CTA buttons minimum 48px height (touch target)
+  ✅ No horizontal scrollbar at any breakpoint
+  ✅ Navigation hamburger menu works perfectly at 360px
+  ✅ Floating WhatsApp button doesn't overlap content at bottom
+  ✅ Tables convert to stacked cards on mobile
+  ✅ 2-column grids become 1-column on mobile
+  ✅ Hero text is readable without zooming on mobile
+
+══════════════════════════════════════════════
+SECTION 15 — CLAIMS CONTROL (MANDATORY)
+══════════════════════════════════════════════
+
+VERIFIED CLAIMS (use freely):
+  ✅ "Top 5% Prompt Engineers Globally" — verified
+  ✅ "500+ Projects Delivered" — verified
+  ✅ "8+ Client Categories" — verified
+  ✅ "3+ Years Building AI Systems" — verified
+  ✅ "Bangladesh-based, globally-rated" — verified
+  ✅ "Most clients see results in 72 hours" — include "Guaranteed" for Quick Win only
+
+UNVERIFIED — DO NOT USE:
+  ❌ Any specific client count ("200 clients", "50 businesses")
+  ❌ Any revenue figures for clients
+  ❌ "10x your revenue" or any multiplier guarantee
+  ❌ "Best AI company in Bangladesh" (superlative without proof)
+  ❌ Specific client names without permission
+  ❌ Any statistic that doesn't have a source
+
+PLACEHOLDER PATTERN (for stats not yet confirmed):
+  If adding a "Projects Delivered" counter — use "500+" only
+  If adding social proof numbers — only use verified numbers
+  Testimonial placeholders: Use [Client Name, Role, City] format until real ones approved
+
+══════════════════════════════════════════════
+SECTION 16 — EXECUTION SEQUENCE
+══════════════════════════════════════════════
+
+Execute in this order. Do not skip phases. Commit after each phase.
+
+PHASE 0 — SETUP + EXISTING CODE REVIEW
+  - Review all existing code in the repo
+  - Identify what's working (keep it)
+  - Identify what's broken (fix it)
+  - Set up design token file
+  - Ensure npm install + npm run build exit 0
+
+PHASE 1 — GLOBAL COMPONENTS
+  - Header (sticky, mega dropdown, WhatsApp CTA)
+  - Footer (4-column)
+  - Floating WhatsApp button (all pages)
+  - Cookie consent banner
+  - CTA button components (primary, secondary, WhatsApp variants)
+
+PHASE 2 — HOMEPAGE
+  - All 8 sections in order
+  - BD/International pricing toggle
+  - Mobile-first responsive
+  - Lighthouse check
+
+PHASE 3 — SERVICE PAGES (9 pages)
+  - /services (hub)
+  - All 9 /services/[service] pages
+
+PHASE 4 — AUDIENCE PAGES (10 pages)
+  - All 10 /for/[segment] pages
+  - Each fully fleshed out with segment-specific content
+
+PHASE 5 — ABOUT + PROOF + BLOG
+  - /about (full founder story)
+  - /proof (case study placeholder template — ready for real content)
+  - /blog (index + 1 seed article)
+
+PHASE 6 — UTILITY PAGES
+  - /pricing (full pricing table, BD + International toggle)
+  - /contact (form + WhatsApp + map placeholder)
+  - /faq (accordion + JSON-LD)
+  - /404 (branded, helpful)
+  - /privacy-policy, /terms-of-service, /refund-policy
+
+PHASE 7 — SEO LAYER
+  - All meta tags per page
+  - JSON-LD schema on all applicable pages
+  - sitemap.xml (all 30+ routes)
+  - robots.txt
+  - OG image generation
+
+PHASE 8 — PERFORMANCE + QA
+  - Lighthouse on homepage (target ≥ 90 all categories)
+  - Mobile test at 360px (all pages)
+  - All links verified (no 404s)
+  - Console clean (zero errors)
+  - Build clean (zero warnings)
+
+PHASE 9 — FINAL DEPLOY
+  - Set all ENV vars in Replit Secrets
+  - npm run build exits 0
+  - npm start serves correctly
+  - Test WhatsApp CTA from mobile (real device if possible)
+  - Test contact form submission
+
+══════════════════════════════════════════════
+SECTION 17 — QUALITY STANDARDS (NON-NEGOTIABLE)
+══════════════════════════════════════════════
+
+Every page must pass all of these before it's considered done:
+
+  [ ] H1 exists and is unique
+  [ ] Meta title and description are unique and relevant
+  [ ] WhatsApp CTA is visible above the fold on mobile
+  [ ] Floating WhatsApp button present and functional
+  [ ] No console errors
+  [ ] No broken links
+  [ ] Images have alt text
+  [ ] Page renders correctly at 360px mobile
+  [ ] Text is readable (no overflow, no tiny font)
+  [ ] CTA buttons are at least 48px touch target
+  [ ] JSON-LD schema present (where applicable)
+  [ ] Loading time acceptable on slow connection
+
+══════════════════════════════════════════════
+SECTION 18 — FINAL COMPLETION REPORT
+══════════════════════════════════════════════
+
+When all phases are complete, output a completion report in this format:
+
+COMPLETION REPORT — SYSMOAI WEBSITE
+------------------------------------
+✅ PAGES BUILT: [list all routes]
+✅ COMPONENTS: [list key components]
+✅ SEO: [confirmation of meta, sitemap, schema]
+✅ PERFORMANCE: [Lighthouse scores]
+⚠️ MANUAL STEPS NEEDED: [anything Emon must do manually — DNS, social links, real photos, video embed, etc.]
+📝 PLACEHOLDER CONTENT: [what needs real content before launch]
+
+════════════════════════════════════════════════════════════════
+END OF PROMPT
+This is the complete, canonical build specification for sysmoai.com.
+If anything is unclear, default to: mobile-first, WhatsApp CTA, problem-first copy, international quality.
+Bismillah. Build it.
+════════════════════════════════════════════════════════════════
