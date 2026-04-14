@@ -1,326 +1,148 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, MessageCircle, Check, X } from 'lucide-react';
-
-const WA_LINK = "https://wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%27m%20interested%20in%20your%20AI%20services.";
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.1 } }
-};
+import { Link } from 'wouter';
+import { MessageCircle, Zap, Timer, RefreshCw, Users, BookOpen, Layout, Bot, Settings, Building, Globe, ArrowRight } from 'lucide-react';
+import { WA_LINK } from '@/lib/config';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } }
 };
+const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.09 } } };
+
+const featured = [
+  { icon: Zap, title: 'AI Quick Win', subtitle: 'Your #1 problem automated in 3 days', bd: '৳3,750–7,500', usd: '$50–$100', href: '/services/ai-quick-win', tag: 'Best starting point' },
+  { icon: Timer, title: 'AI Implementation Sprint', subtitle: 'Full AI stack deployed in 14 days', bd: '৳25,000–50,000', usd: '$300–$600', href: '/services/ai-sprint', tag: 'Most popular' },
+  { icon: RefreshCw, title: 'AI Operations Retainer', subtitle: 'Ongoing AI management, every month', bd: '৳20,000/mo', usd: '$250/mo', href: '/services/ai-retainer', tag: 'Cancel anytime' },
+];
+
+const other = [
+  { icon: Users, title: '1:1 AI Coaching', desc: '60-min personalized session', bd: '৳2,500/session', href: '/services/ai-coaching' },
+  { icon: BookOpen, title: 'Group AI Workshop', desc: 'Team upskilling, half-day', bd: '৳500/person', href: '/services/group-workshop' },
+  { icon: Layout, title: 'Notion OS Build', desc: 'Your business in one place', bd: '৳15,000–50,000', href: '/services/notion-os' },
+  { icon: Bot, title: 'AI Agent Development', desc: 'Custom AI agents, 24/7', bd: '৳50,000–2,00,000', href: '/services/ai-agent-dev' },
+  { icon: Settings, title: 'n8n Automation', desc: 'Per-workflow automation', bd: '৳2,000–10,000', href: '/services/n8n-automation' },
+  { icon: Building, title: 'Corporate Training', desc: 'Enterprise AI adoption', bd: '৳50,000–2,00,000', href: '/services/corporate-training' },
+  { icon: Globe, title: 'International Clients', desc: 'USD pricing, global delivery', bd: 'View USD Pricing', href: '/services/international' },
+];
 
 export default function Services() {
-  return (
-    <div className="flex flex-col w-full">
+  React.useEffect(() => { document.title = 'AI Services Bangladesh | SYSmoAI'; }, []);
 
-      {/* Hero */}
-      <section className="bg-[#0A0B0F] py-24 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#1E3A8A] opacity-20 blur-[100px] rounded-full pointer-events-none" />
+  return (
+    <div className="flex flex-col w-full overflow-hidden">
+      <section className="relative bg-[#0A0B0F] py-20 md:py-28">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600 opacity-[0.1] blur-[120px] rounded-full" />
+        </div>
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="text-4xl md:text-6xl font-bold text-white tracking-[-0.02em] mb-6"
-          >
-            Our Services
+          <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+            className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight mb-6">
+            From 3-day quick wins to full AI operating systems.
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-xl text-gray-300"
-          >
-            AI solutions designed for Bangladesh businesses
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+            className="text-lg text-slate-400 max-w-2xl mx-auto">
+            Every service is built around one goal: real, measurable results. We don't get paid until it works.
           </motion.p>
         </div>
       </section>
 
-      {/* Pricing Tiers */}
-      <section className="py-24 bg-white">
+      <section className="py-20 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} variants={staggerContainer}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start"
-          >
-            {/* Tier 1 */}
-            <motion.div
-              variants={fadeUp}
-              className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full"
-              data-testid="card-pricing-tier-1"
-            >
-              <h3 className="text-2xl font-bold text-[#1A1A1A] mb-2">AI Profit Audit</h3>
-              <div className="text-3xl font-bold text-[#2563EB] mb-2">৳15,000 – ৳25,000</div>
-              <p className="text-sm text-gray-500 mb-8 font-medium">Delivery: 3-5 days</p>
-
-              <ul className="space-y-4 mb-8 flex-1">
-                {[
-                  "Business process audit",
-                  "AI opportunity mapping",
-                  "10-page strategy report",
-                  "1 automation prototype",
-                  "Client provides content",
-                ].map((f, i) => (
-                  <li key={i} className="flex items-start gap-3 text-gray-700">
-                    <CheckCircle2 className="text-[#2563EB] shrink-0 mt-0.5" size={20} />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <a
-                href={WA_LINK} target="_blank" rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-6 py-3 rounded-xl font-semibold transition-all hover:scale-[1.02]"
-                data-testid="link-order-tier-1"
-              >
-                <MessageCircle size={18} />
-                Order via WhatsApp
-              </a>
-            </motion.div>
-
-            {/* Tier 2 — Most Popular */}
-            <motion.div
-              variants={fadeUp}
-              className="bg-white border-2 border-[#2563EB] rounded-3xl p-8 shadow-2xl hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col h-full relative lg:scale-[1.03] z-10"
-              data-testid="card-pricing-tier-2"
-            >
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#2563EB] text-white px-5 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase">
-                Most Popular
-              </div>
-              <h3 className="text-2xl font-bold text-[#1A1A1A] mb-2">Implementation Sprint</h3>
-              <div className="text-3xl font-bold text-[#2563EB] mb-2">৳40,000 – ৳75,000</div>
-              <p className="text-sm text-gray-500 mb-8 font-medium">Delivery: 1-2 weeks</p>
-
-              <ul className="space-y-4 mb-8 flex-1">
-                <li className="font-semibold text-[#1A1A1A] text-sm uppercase tracking-wide">Everything in Tier 1, plus:</li>
-                {[
-                  "5-10 page AI system build",
-                  "Full SEO integration",
-                  "Professional copywriting",
-                  "Custom automation flows",
-                  "30-day support",
-                ].map((f, i) => (
-                  <li key={i} className="flex items-start gap-3 text-gray-700">
-                    <CheckCircle2 className="text-[#2563EB] shrink-0 mt-0.5" size={20} />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <a
-                href={WA_LINK} target="_blank" rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-6 py-4 rounded-xl font-semibold text-lg transition-all hover:scale-[1.02]"
-                data-testid="link-order-tier-2"
-              >
-                <MessageCircle size={20} />
-                Order via WhatsApp
-              </a>
-            </motion.div>
-
-            {/* Tier 3 */}
-            <motion.div
-              variants={fadeUp}
-              className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full"
-              data-testid="card-pricing-tier-3"
-            >
-              <h3 className="text-2xl font-bold text-[#1A1A1A] mb-2">Premium Brand Build</h3>
-              <div className="text-3xl font-bold text-[#2563EB] mb-2">৳1,00,000 – ৳1,50,000</div>
-              <p className="text-sm text-gray-500 mb-8 font-medium">Delivery: 2-4 weeks</p>
-
-              <ul className="space-y-4 mb-8 flex-1">
-                <li className="font-semibold text-[#1A1A1A] text-sm uppercase tracking-wide">Everything in Tier 2, plus:</li>
-                {[
-                  "Bespoke 7-15 page system",
-                  "Custom design",
-                  "Advanced AI agents",
-                  "Priority support",
-                  "Monthly optimization",
-                ].map((f, i) => (
-                  <li key={i} className="flex items-start gap-3 text-gray-700">
-                    <CheckCircle2 className="text-[#2563EB] shrink-0 mt-0.5" size={20} />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <a
-                href={WA_LINK} target="_blank" rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-6 py-3 rounded-xl font-semibold transition-all hover:scale-[1.02]"
-                data-testid="link-order-tier-3"
-              >
-                <MessageCircle size={18} />
-                Order via WhatsApp
-              </a>
-            </motion.div>
+          <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="text-2xl font-bold text-slate-900 mb-10">Core services</motion.h2>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {featured.map((s, i) => (
+              <motion.div key={i} variants={fadeUp}
+                className="bg-white border-2 border-slate-200 hover:border-blue-400 hover:shadow-xl p-8 rounded-2xl transition-all group flex flex-col">
+                <div className="flex items-start justify-between mb-5">
+                  <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+                    <s.icon size={22} className="text-blue-600" />
+                  </div>
+                  <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">{s.tag}</span>
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">{s.title}</h3>
+                <p className="text-slate-500 text-sm mb-5 flex-1">{s.subtitle}</p>
+                <div className="mb-5">
+                  <span className="text-2xl font-bold text-blue-600">{s.bd}</span>
+                  <span className="text-slate-400 text-sm ml-2">· {s.usd} intl</span>
+                </div>
+                <Link href={s.href}
+                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold text-sm transition-all min-h-[44px]">
+                  Learn More <ArrowRight size={15} />
+                </Link>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Comparison Table */}
-      <section className="py-20 bg-[#F8F9FA]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold text-[#1A1A1A]">Plan Comparison</h2>
-          </motion.div>
-
-          <motion.div
-            initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="overflow-x-auto rounded-2xl shadow-sm border border-gray-200 bg-white"
-          >
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-gray-100 bg-gray-50">
-                  <th className="text-left py-4 px-6 font-semibold text-[#1A1A1A]">Feature</th>
-                  <th className="py-4 px-4 text-center font-semibold text-gray-600">AI Profit Audit</th>
-                  <th className="py-4 px-4 text-center font-semibold text-[#2563EB] bg-blue-50/50">Implementation Sprint</th>
-                  <th className="py-4 px-4 text-center font-semibold text-gray-600">Premium Build</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  ["Business Process Audit", true, true, true],
-                  ["AI Opportunity Map", true, true, true],
-                  ["Strategy Report", true, true, true],
-                  ["AI System Build", false, true, true],
-                  ["SEO Integration", false, true, true],
-                  ["Professional Copywriting", false, true, true],
-                  ["Custom Automation Flows", false, true, true],
-                  ["Bespoke Design (7-15 pages)", false, false, true],
-                  ["Advanced AI Agents", false, false, true],
-                  ["Priority Support", false, false, true],
-                  ["Monthly Optimization", false, false, true],
-                ].map(([feature, t1, t2, t3], i) => (
-                  <tr key={i} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
-                    <td className="py-3.5 px-6 text-gray-700 font-medium">{feature as string}</td>
-                    {[t1, t2, t3].map((val, j) => (
-                      <td key={j} className={`py-3.5 px-4 text-center ${j === 1 ? 'bg-blue-50/30' : ''}`}>
-                        {val
-                          ? <Check className="text-[#2563EB] mx-auto" size={18} />
-                          : <X className="text-gray-300 mx-auto" size={18} />}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="text-2xl font-bold text-slate-900 mb-10">All services</motion.h2>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {other.map((s, i) => (
+              <motion.div key={i} variants={fadeUp}
+                className="bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md p-6 rounded-2xl transition-all group">
+                <s.icon size={22} className="text-blue-600 mb-4" />
+                <h3 className="font-bold text-slate-900 mb-1 group-hover:text-blue-600 transition-colors">{s.title}</h3>
+                <p className="text-slate-500 text-sm mb-3">{s.desc}</p>
+                <p className="text-blue-600 font-semibold text-sm mb-4">{s.bd}</p>
+                <Link href={s.href} className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-blue-600 font-medium transition-colors">
+                  Details <ArrowRight size={13} />
+                </Link>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Add-Ons */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white border-t border-slate-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="mb-12 text-center"
-          >
-            <h2 className="text-3xl font-bold text-[#1A1A1A]">Available Add-Ons</h2>
-            <p className="mt-3 text-gray-500">Enhance any tier with these optional services</p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden" whileInView="show" viewport={{ once: true }} variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 gap-4"
-          >
+          <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="text-2xl font-bold text-slate-900 text-center mb-12">Not sure which service is right for you?</motion.h2>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { name: "Copywriting", price: "৳3,000–5,000/page" },
-              { name: "SEO Setup", price: "৳5,000–10,000" },
-              { name: "Analytics Setup", price: "৳3,000–5,000" },
-              { name: "WhatsApp Business Flows", price: "৳5,000–10,000" },
-              { name: "Notion CMS Integration", price: "৳10,000–20,000" },
-              { name: "Monthly Retainer", price: "৳5,000–15,000/month" },
-              { name: "Replit Agent Training", price: "৳3,000–5,000" },
-              { name: "App Transfer (Handoff)", price: "৳5,000" },
-            ].map((addon, i) => (
-              <motion.div
-                key={i} variants={fadeUp}
-                className="bg-[#F8F9FA] p-5 rounded-2xl border border-gray-100 flex items-center justify-between hover:border-[#2563EB]/30 hover:shadow-sm transition-all"
-              >
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="text-[#60A5FA]" size={20} />
-                  <span className="font-medium text-[#1A1A1A]">{addon.name}</span>
-                </div>
-                <span className="font-bold text-[#2563EB] text-sm whitespace-nowrap ml-4">{addon.price}</span>
+              { label: 'I have one specific problem', rec: 'Start with AI Quick Win', href: '/services/ai-quick-win' },
+              { label: 'I want a complete AI transformation', rec: 'Go with AI Sprint', href: '/services/ai-sprint' },
+              { label: "I don't know where to start", rec: 'Book a free discovery call', href: WA_LINK, external: true },
+            ].map((item, i) => (
+              <motion.div key={i} variants={fadeUp} className="bg-slate-50 border border-slate-200 p-6 rounded-2xl text-center">
+                <p className="text-slate-600 text-sm mb-3">{item.label}</p>
+                <p className="font-bold text-slate-900 mb-4">→ {item.rec}</p>
+                {item.external ? (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-all">
+                    <MessageCircle size={15} /> WhatsApp Us
+                  </a>
+                ) : (
+                  <Link href={item.href} className="inline-flex items-center gap-1.5 text-sm text-blue-600 font-semibold hover:text-blue-700">
+                    Learn More <ArrowRight size={14} />
+                  </Link>
+                )}
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Payment Info */}
-      <section className="py-20 bg-[#F8F9FA]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold text-[#1A1A1A]">Payment Methods</h2>
-            <p className="mt-3 text-gray-500">Flexible payment options for your convenience</p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden" whileInView="show" viewport={{ once: true }} variants={staggerContainer}
-            className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12"
-          >
-            {["bKash", "Nagad", "Rocket", "Bank Transfer", "Binance"].map((method, i) => (
-              <motion.div
-                key={i} variants={fadeUp}
-                className="bg-white border border-gray-200 rounded-xl p-4 text-center font-semibold text-gray-700 hover:border-[#2563EB] hover:text-[#2563EB] transition-all"
-              >
-                {method}
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="bg-white rounded-2xl border border-gray-200 p-8"
-          >
-            <h3 className="text-xl font-bold text-[#1A1A1A] mb-6">Payment Milestones</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                { pct: "50%", label: "Deposit", desc: "Paid before work begins to kick off the project" },
-                { pct: "30%", label: "On Delivery", desc: "Paid when the build is complete and handed over" },
-                { pct: "20%", label: "On Launch", desc: "Final payment after your AI system goes live" },
-              ].map((m, i) => (
-                <div key={i} className="text-center p-4 bg-[#F8F9FA] rounded-xl">
-                  <div className="text-4xl font-bold text-[#2563EB] mb-2">{m.pct}</div>
-                  <div className="font-semibold text-[#1A1A1A] mb-1">{m.label}</div>
-                  <div className="text-sm text-gray-500">{m.desc}</div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Bottom CTA */}
-      <section className="py-24 bg-[#0A0B0F] text-center">
-        <div className="max-w-3xl mx-auto px-4">
-          <motion.h2
-            initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-3xl md:text-4xl font-bold text-white mb-4"
-          >
-            Not Sure Which Plan Is Right for You?
+      <section className="py-20 bg-[#0A0B0F]">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+            Ready to get started?
           </motion.h2>
-          <motion.p
-            initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-gray-400 text-xl mb-10"
-          >
-            Message us and we will help you choose the best fit.
+          <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-slate-400 mb-8">
+            Book a free 30-minute AI Audit on WhatsApp — no commitment required.
           </motion.p>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
-            <a
-              href={WA_LINK} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-[1.03]"
-              data-testid="link-cta-consultation"
-            >
-              <MessageCircle size={24} />
-              Book a Free Consultation
+            <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-10 py-4 rounded-xl font-bold text-lg transition-all hover:shadow-[0_0_24px_rgba(37,211,102,0.3)] min-h-[56px]">
+              <MessageCircle size={22} /> Book Free AI Audit
             </a>
           </motion.div>
         </div>
