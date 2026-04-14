@@ -1,25 +1,51 @@
 /* ==========================================
-   SYSmoAI — Complete Stylesheet
+   SYSmoAI® OFFICIAL BRAND SYSTEM
+   Brand Pack: github.com/sysmoai/Sysmoaifinalbrandpack
    ========================================== */
 
-/* CSS Variables */
+/* CSS Variables — Official SYSmoAI Brand Palette */
 :root {
-  --black: #0A0A0A;
-  --violet: #6C63FF;
-  --cyan: #00D4FF;
+  /* Core backgrounds */
+  --black: #080B12;
+  --dark1: #0A0E1A;
+  --dark2: #0F1623;
+
+  /* SYSmoAI Brand Blue System */
+  --blue-deep:   #1E3A8A;   /* Infrastructure layer */
+  --blue:        #2563EB;   /* Primary brand blue */
+  --blue-mid:    #3B82F6;   /* System layer */
+  --blue-sky:    #60A5FA;   /* AI core glow */
+  --blue-ghost:  rgba(37, 99, 235, 0.12);
+
+  /* Accent — CTA orange retained from brief */
   --orange: #FF6B35;
-  --dark1: #0D0D1A;
-  --dark2: #111827;
-  --text-primary: #F0F0F0;
-  --text-secondary: #A0AEC0;
-  --border: rgba(108, 99, 255, 0.2);
-  --card-bg: rgba(13, 13, 26, 0.8);
-  --font-head: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Text */
+  --text-primary:   #F0F4FF;
+  --text-secondary: #94A3B8;  /* Official tagline/sub-text color from brand pack */
+  --text-muted:     #64748B;
+
+  /* Borders & surfaces */
+  --border:   rgba(37, 99, 235, 0.18);
+  --card-bg:  rgba(10, 14, 26, 0.85);
+  --glass:    rgba(30, 58, 138, 0.08);
+
+  /* Typography — Official brand fonts */
+  --font-head: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', 'SF Pro Display', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Menlo', monospace;
+  --font-tagline: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+
+  /* Sizing */
   --nav-h: 72px;
-  --radius: 16px;
-  --transition: 0.3s ease;
+  --radius: 14px;
+  --transition: 0.28s ease;
+}
+
+/* Legacy aliases (used throughout) */
+:root {
+  --violet: var(--blue);
+  --cyan:   var(--blue-mid);
 }
 
 /* ========== RESET ========== */
@@ -1403,7 +1429,287 @@ a:hover ~ #cursor, button:hover ~ #cursor { transform: translate(-50%, -50%) sca
 
 /* ========== UTILITY ========== */
 .bg-grid {
-  background-image: linear-gradient(rgba(108, 99, 255, 0.05) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(108, 99, 255, 0.05) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
   background-size: 48px 48px;
 }
+
+/* ==========================================
+   SYSmoAI® OFFICIAL BRAND SYSTEM ADDITIONS
+   ========================================== */
+
+/* ── Official Wordmark ── */
+.brand-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  font-family: 'Inter', 'SF Pro Display', -apple-system, system-ui, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  letter-spacing: -0.5px;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--text-primary);
+}
+.brand-wordmark .wm-sys {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.brand-wordmark .wm-mo {
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  opacity: 0.65;
+}
+.brand-wordmark .wm-ai {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--blue);
+}
+
+/* ── Official Tagline ── */
+.brand-tagline {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-weight: 300;
+  color: #94A3B8;
+  letter-spacing: 0.04em;
+  font-size: 0.875rem;
+}
+
+/* ── Hex Motif Background ── */
+.hex-motif {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 1;
+}
+.hex-motif svg {
+  position: absolute;
+}
+
+/* ── Brand Glow Effects ── */
+.blue-glow {
+  box-shadow: 0 0 40px rgba(37, 99, 235, 0.25), 0 0 80px rgba(30, 58, 138, 0.15);
+}
+.blue-text-glow {
+  text-shadow: 0 0 32px rgba(96, 165, 250, 0.6);
+}
+
+/* ── Official Section Tag ── */
+.section-tag {
+  color: var(--blue-sky) !important;
+  background: rgba(37, 99, 235, 0.07) !important;
+  border-color: rgba(37, 99, 235, 0.2) !important;
+}
+
+/* ── Service card blue accents ── */
+.service-back {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(10, 14, 26, 0.97)) !important;
+  border-color: var(--blue) !important;
+}
+
+/* ── Step icon official blue ── */
+.step-icon {
+  background: rgba(37, 99, 235, 0.1) !important;
+  border-color: var(--blue) !important;
+}
+
+/* ── Official process connector ── */
+.process-connector {
+  background: linear-gradient(90deg, var(--blue), var(--blue-mid)) !important;
+}
+.process-connector::before {
+  background: var(--blue-mid) !important;
+}
+
+/* ── Popular badge blue ── */
+.popular-badge {
+  background: var(--blue) !important;
+}
+.pricing-card.popular {
+  border-color: var(--blue) !important;
+  box-shadow: 0 0 40px rgba(37, 99, 235, 0.22) !important;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), var(--card-bg)) !important;
+}
+
+/* ── FAQ official blue ── */
+.faq-item.open { border-color: var(--blue) !important; }
+.faq-icon { color: var(--blue) !important; }
+
+/* ── Pulse animations ── */
+.pulse-glow {
+  animation: blue-pulse 2.5s ease-in-out infinite !important;
+}
+@keyframes blue-pulse {
+  0%, 100% { box-shadow: 0 0 16px rgba(37, 99, 235, 0.4); }
+  50% { box-shadow: 0 0 40px rgba(37, 99, 235, 0.8), 0 0 60px rgba(59, 130, 246, 0.3); }
+}
+
+@keyframes cta-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(255,107,53,0.4); }
+  50% { box-shadow: 0 0 50px rgba(255,107,53,0.8), 0 0 80px rgba(255,107,53,0.4); }
+}
+
+/* ── Founder glow rotate (blue) ── */
+.founder-glow {
+  background: conic-gradient(from 0deg, var(--blue), transparent, var(--blue-mid), transparent, var(--blue)) !important;
+}
+
+/* ── Scroll progress bar ── */
+#scroll-progress {
+  background: linear-gradient(90deg, var(--blue-deep), var(--blue), var(--blue-mid)) !important;
+}
+
+/* ── Counter numbers ── */
+.counter-number, .counter-plus, .counter-prefix, .counter-suffix, .stat-number, .stat-plus {
+  color: var(--blue) !important;
+}
+
+/* ── Badge ── */
+.badge {
+  background: rgba(37, 99, 235, 0.1) !important;
+  border-color: rgba(37, 99, 235, 0.3) !important;
+}
+
+/* ── Social links hover ── */
+.social-link:hover {
+  background: rgba(37, 99, 235, 0.1) !important;
+  border-color: var(--blue) !important;
+}
+
+/* ── Contact option hover ── */
+.contact-option:hover {
+  border-color: var(--blue) !important;
+  background: rgba(37, 99, 235, 0.08) !important;
+}
+
+/* ── Form focus ── */
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--blue) !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
+/* ── Nav active ── */
+.nav-link::after { background: var(--blue) !important; }
+.tab-btn:hover, .tab-btn.active {
+  background: rgba(37, 99, 235, 0.15) !important;
+  border-color: var(--blue) !important;
+}
+.sub-tab-btn.active, .sub-tab-btn:hover {
+  background: rgba(37, 99, 235, 0.2) !important;
+  border-color: var(--blue) !important;
+}
+.price-toggle-btn.active {
+  background: rgba(37, 99, 235, 0.2) !important;
+  border-color: var(--blue) !important;
+}
+
+/* ── Hero badge (tagline variant) ── */
+.hero-badge {
+  color: #94A3B8 !important;
+  background: rgba(30, 58, 138, 0.12) !important;
+  border-color: rgba(37, 99, 235, 0.2) !important;
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* ── Live badge ── */
+.live-badge { color: #3B82F6 !important; }
+
+/* ── Visual label good ── */
+.visual-label.good {
+  background: rgba(37, 99, 235, 0.2) !important;
+  color: var(--blue-mid) !important;
+  border-color: rgba(37, 99, 235, 0.3) !important;
+}
+.visual-label.bad {
+  background: rgba(255, 107, 53, 0.2) !important;
+  color: #FF6B35 !important;
+  border-color: rgba(255,107,53,0.3) !important;
+}
+
+/* ── Story step number ── */
+.story-step { color: var(--blue-sky) !important; }
+
+/* ── Problem list border top ── */
+.tab-cta-block { border-top-color: rgba(37, 99, 235, 0.15) !important; }
+
+/* ── Pricing tier ── */
+.pricing-tier { color: var(--blue-sky) !important; }
+.price-main { color: var(--blue) !important; }
+.service-price { color: var(--blue-sky) !important; }
+
+/* ── WhatsApp FAB stays green ── */
+.whatsapp-fab { background: #25D366 !important; }
+
+/* ── Footer gradient line ── */
+.footer-gradient-line {
+  background: linear-gradient(90deg, transparent, var(--blue-deep), var(--blue), var(--blue-mid), transparent) !important;
+}
+
+/* ── Intl pricing note ── */
+.intl-pricing-note a { color: var(--blue) !important; }
+
+/* ── Author avatar uses blue gradient ── */
+.testimonial-stars { color: #60A5FA !important; }
+
+/* ── Hero section cta button blue ── */
+.btn-primary {
+  background: var(--blue) !important;
+  border-color: var(--blue) !important;
+}
+.btn-primary:hover {
+  background: transparent !important;
+  color: var(--blue) !important;
+  box-shadow: 0 0 24px rgba(37, 99, 235, 0.4) !important;
+}
+.btn-book { background: var(--orange) !important; }
+.btn-book:hover { background: #ff8155 !important; }
+
+/* ── Cursor official blue ── */
+#cursor {
+  background: var(--blue) !important;
+  box-shadow: 0 0 12px var(--blue) !important;
+}
+#cursor-follower { border-color: var(--blue) !important; }
+
+/* ── Story card hover ── */
+.story-card:hover { border-color: var(--blue) !important; }
+
+/* ── Video play btn ── */
+.play-icon { background: rgba(37, 99, 235, 0.9) !important; box-shadow: 0 0 40px rgba(37, 99, 235, 0.6) !important; }
+
+/* ── Problem icon ── */
+.problem-list h3 { color: var(--blue-sky) !important; }
+
+/* ── Process guarantee ── */
+.process-guarantee {
+  background: rgba(37, 99, 235, 0.08) !important;
+  border-color: rgba(37, 99, 235, 0.15) !important;
+  color: var(--blue-sky) !important;
+}
+
+/* ── CTA section gradient ── */
+.section-cta {
+  background: linear-gradient(135deg, var(--dark1) 0%, #0a1628 50%, var(--dark1) 100%) !important;
+}
+
+/* ── Footer brand mono text ── */
+#footer .mono[style*="color:#6C63FF"] { color: var(--blue) !important; }
+
+/* ── Pricing card hover ── */
+.pricing-card:hover {
+  border-color: var(--blue) !important;
+  box-shadow: 0 20px 60px rgba(37, 99, 235, 0.15) !important;
+}
+
+/* ── Service card wrapper hover ── */
+.service-card-wrapper:hover .service-front,
+.service-front:hover {
+  border-color: rgba(37, 99, 235, 0.3) !important;
+}
+
+/* ── Footer bg ── */
+#footer { background: #04060F !important; }
+
+/* ── Glow rotate on founder ── */
+@keyframes glow-rotate { to { transform: rotate(360deg); } }

@@ -154,20 +154,21 @@ document.addEventListener('DOMContentLoaded', () => {
       fpsLimit: 60,
       particles: {
         number: { value: 60, density: { enable: true, value_area: 800 } },
-        color: { value: ["#6C63FF", "#00D4FF", "#FF6B35"] },
+        /* Official SYSmoAI® brand blue particle system */
+        color: { value: ["#2563EB", "#3B82F6", "#60A5FA", "#1E3A8A"] },
         shape: { type: "circle" },
         opacity: {
-          value: 0.4,
+          value: 0.35,
           random: true,
-          animation: { enable: true, speed: 1, minimumValue: 0.1, sync: false }
+          animation: { enable: true, speed: 0.8, minimumValue: 0.05, sync: false }
         },
         size: {
-          value: { min: 1, max: 3 },
+          value: { min: 1, max: 2.5 },
           random: true
         },
         move: {
           enable: true,
-          speed: 0.6,
+          speed: 0.5,
           direction: "none",
           random: true,
           straight: false,
@@ -175,9 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         links: {
           enable: true,
-          distance: 140,
-          color: "#6C63FF",
-          opacity: 0.15,
+          distance: 150,
+          color: "#2563EB",
+          opacity: 0.12,
           width: 1
         }
       },
