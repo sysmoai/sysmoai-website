@@ -19,24 +19,32 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 ## Artifacts
 
 ### SYSmoAI Website (`artifacts/sysmoai-website`)
-- **Type**: React + Vite (frontend-only, no backend)
+- **Type**: Vanilla HTML5 + CSS3 + JavaScript (served via Vite static)
 - **Preview path**: `/`
-- **Purpose**: Complete 5-page B2B marketing website for SYSmoAI Pvt Ltd
-- **Pages**: Home, Services, About, Contact, Blog
-- **Brand**: SYSmoAI Pvt Ltd — AI systems consultancy, Dhaka, Bangladesh
-- **Founder**: Md. Emon Hossain
-- **Contact**: support@sysmoai.com | WhatsApp: +880 1711-638693
-- **Key components**:
-  - `SYSmoAILogo` — 3-layer hexagonal SVG mark
-  - `SYSmoAIWordmark` — SYS(bold)+mo(regular,65%)+AI(bold)
-  - `Header` — sticky dark nav with mobile hamburger
-  - `Footer` — dark footer with company info
-  - `WhatsAppFAB` — floating WhatsApp CTA (bottom-right)
-- **Routing**: wouter
-- **Animations**: framer-motion
-- **SEO**: JSON-LD structured data, OG tags, sitemap.xml, robots.txt
-- **CSS**: `animate-wa-pulse` keyframe defined in `index.css`; smooth scroll on `html`
-- **Contact form**: Formspree (user must replace placeholder ID in Contact.tsx)
+- **Purpose**: Full production marketing website for SYSmoAI — Bangladesh's premier AI consultancy
+- **Tech**: Pure HTML/CSS/JS — no React/framework. All libraries via CDN.
+- **Brand**: SYSmoAI — AI Systems That Work For You
+- **Founder**: Emon Hossain | emon@sysmoai.com | WhatsApp: +880 1711-638693
+- **Files**:
+  - `index.html` — Full page structure (12 sections)
+  - `public/style.css` — Complete styles + responsive + animations
+  - `public/script.js` — All interactivity (tabs, FAQ, particles, typewriter, counters)
+- **Sections built**:
+  0. Preloader (SVG stroke animation)
+  1. Navbar (sticky, scroll-aware, hamburger)
+  2. Hero (particles, typewriter, stats, split visual)
+  3. Story (6 narrative cards)
+  4. Who We Help (8 tabs, business sub-tabs)
+  5. Services (9 flip cards, BD/international pricing toggle)
+  6. How It Works (4-step process)
+  7. Results (counters, Swiper testimonials, video)
+  8. About (founder, skill badges)
+  9. Pricing (3 tiers)
+  10. FAQ (accordion)
+  11. Contact (CTA + form)
+  12. Footer (4 columns)
+- **CDN Libraries**: GSAP + ScrollTrigger, AOS, Swiper.js, tsParticles, Lottie Player
+- **Features**: Custom cursor, scroll progress bar, WhatsApp FAB, video modal
 - **Status**: Complete ✓
 
 ## Key Commands
