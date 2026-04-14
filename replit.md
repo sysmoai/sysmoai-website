@@ -30,21 +30,24 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
   - `public/style.css` — Complete styles + responsive + animations
   - `public/script.js` — All interactivity (tabs, FAQ, particles, typewriter, counters)
 - **Sections built**:
-  0. Preloader (SVG stroke animation)
-  1. Navbar (sticky, scroll-aware, hamburger)
-  2. Hero (particles, typewriter, stats, split visual)
-  3. Story (6 narrative cards)
-  4. Who We Help (8 tabs, business sub-tabs)
-  5. Services (9 flip cards, BD/international pricing toggle)
-  6. How It Works (4-step process)
-  7. Results (counters, Swiper testimonials, video)
-  8. About (founder, skill badges)
-  9. Pricing (3 tiers)
-  10. FAQ (accordion)
-  11. Contact (CTA + form)
-  12. Footer (4 columns)
+  0. Preloader (SVG stroke animation, brand hex mark)
+  1. Navbar (sticky, scroll-aware, hamburger + **MEGA-MENU** with Solutions dropdown)
+  2. Hero (particles, typewriter, trust bar, before/after visual)
+  3. Tool Stack Bar (scrolling tech pill labels)
+  4. Story (6 narrative cards with titles)
+  5. Who We Help (8 tabs, problem+solution 2-col grid, business sub-tabs)
+  6. Services (9 flip cards, BD/international pricing toggle)
+  7. How It Works (4-step process)
+  8. Results (fixed stats row, Swiper testimonials x4, video)
+  9. About (founder, skill badges)
+  10. Pricing (3 tiers with 5 features each)
+  11. FAQ (accordion)
+  12. Contact (CTA + enhanced form with category dropdown)
+  13. Footer (4 columns: Brand, Solutions, Services, Company)
 - **CDN Libraries**: GSAP + ScrollTrigger, AOS, Swiper.js, tsParticles, Lottie Player
-- **Features**: Custom cursor, scroll progress bar, WhatsApp FAB, video modal
+- **Mega-menu**: Solutions column with 3 groups (Individuals, Business, Expert Services), each expandable, future-proof for new subcategories
+- **Future-proof nav**: Adding new target groups = add new tab-btn + tab-panel + mega-link (no JS changes needed)
+- **Features**: Custom cursor, scroll progress bar, WhatsApp FAB, video modal, mobile accordion nav
 - **Status**: Complete ✓
 
 ## Key Commands

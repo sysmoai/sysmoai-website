@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ========== COUNTUP ON SCROLL ========== */
   function initCounters() {
-    const counters = document.querySelectorAll('.counter-number, .stat-number');
+    const counters = document.querySelectorAll('.counter-number, .stat-number, .rstat-number');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && !entry.target.dataset.counted) {
@@ -293,17 +293,14 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Hero visual
-    gsap.from('.hero-visual', {
-      scrollTrigger: {
-        trigger: '.hero-visual',
-        start: "top 90%"
-      },
-      y: 40,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power2.out"
-    });
+    // Hero before/after visual
+    const bfaEl = document.querySelector('.hero-before-after');
+    if (bfaEl) {
+      gsap.from('.hero-before-after', {
+        scrollTrigger: { trigger: '.hero-before-after', start: "top 90%" },
+        y: 40, opacity: 0, duration: 0.8, ease: "power2.out"
+      });
+    }
   }
 
   /* ========== AUDIENCE TABS ========== */
@@ -451,7 +448,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Send via WhatsApp
-      const msg = `Hi Emon! I filled out the SYSmoAI contact form.\n\nName: ${name}\nContact: ${contact}\n\nBiggest Problem: ${problem}`;
+      const typeEl = document.getElementById('cf-type');
+      const type = typeEl ? typeEl.value : '';
+      const msg = `Hi Emon! I filled out the SYSmoAI contact form.\n\nName: ${name}\nContact: ${contact}\nI am a: ${type || 'Not specified'}\n\nBiggest Problem: ${problem}`;
       window.open(`https://wa.me/8801711638693?text=${encodeURIComponent(msg)}`, '_blank');
 
       contactForm.classList.add('hidden');
@@ -485,6 +484,60 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  /* ========== MEGA-MENU / FOOTER TAB LINKS ========== */
+  function openTabAndScroll(tabIndex, subIndex) {
+    const panel = document.getElementById('who-we-help');
+    if (!panel) return;
+
+    // Activate main tab
+    const tabBtns2 = document.querySelectorAll('.tab-btn');
+    const tabPanels2 = document.querySelectorAll('.tab-panel');
+    tabBtns2.forEach(b => b.classList.remove('active'));
+    tabPanels2.forEach(p => p.classList.remove('active'));
+    const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabIndex}"]`);
+    const targetPanel = document.querySelector(`.tab-panel[data-tab-panel="${tabIndex}"]`);
+    if (targetBtn) targetBtn.classList.add('active');
+    if (targetPanel) targetPanel.classList.add('active');
+
+    // Activate sub-tab if provided
+    if (subIndex !== undefined && subIndex !== null) {
+      const subBtns2 = document.querySelectorAll('.sub-tab-btn');
+      const subPanels2 = document.querySelectorAll('.sub-tab-panel');
+      subBtns2.forEach(b => b.classList.remove('active'));
+      subPanels2.forEach(p => p.classList.remove('active'));
+      const targetSubBtn = document.querySelector(`.sub-tab-btn[data-sub="${subIndex}"]`);
+      const targetSubPanel = document.querySelector(`.sub-tab-panel[data-sub-panel="${subIndex}"]`);
+      if (targetSubBtn) targetSubBtn.classList.add('active');
+      if (targetSubPanel) targetSubPanel.classList.add('active');
+    }
+
+    setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
+
+  document.querySelectorAll('[data-open-tab]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      const tabIdx = el.dataset.openTab;
+      const subIdx = el.dataset.openSub;
+      const href = el.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        closeMobileMenu();
+        openTabAndScroll(tabIdx, subIdx !== undefined ? subIdx : null);
+      }
+    });
+  });
+
+  /* ========== MOBILE ACCORDION (SOLUTIONS) ========== */
+  const mobileAccBtn = document.getElementById('mobile-solutions-btn');
+  const mobileAccPanel = document.getElementById('mobile-solutions-panel');
+  if (mobileAccBtn && mobileAccPanel) {
+    mobileAccBtn.addEventListener('click', () => {
+      const isOpen = mobileAccPanel.classList.contains('open');
+      mobileAccPanel.classList.toggle('open', !isOpen);
+      mobileAccBtn.classList.toggle('open', !isOpen);
+    });
+  }
 
   /* ========== SERVICE CARD MOBILE FALLBACK ========== */
   // On mobile, show service back content in a toggle
