@@ -336,12 +336,12 @@ export function Header() {
           {/* Desktop Right — Theme toggle + CTA */}
           <div className="hidden md:flex items-center gap-3">
             <ThemeToggle />
-            <a href={WA_URLS.audit} target="_blank" rel="noopener noreferrer"
+            <Link href="/free-ai-audit"
               data-testid="link-header-whatsapp"
-              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ead57] text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-150 hover:shadow-[0_0_20px_rgba(37,211,102,0.3)] whitespace-nowrap">
+              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-150 hover:shadow-[0_0_20px_rgba(37,99,235,0.3)] whitespace-nowrap">
               <MessageCircle size={15} />
               Free AI Audit
-            </a>
+            </Link>
           </div>
 
           {/* Mobile buttons */}
@@ -450,12 +450,12 @@ export function Header() {
               ))}
 
               <div className="pt-4">
-                <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
+                <Link href="/free-ai-audit"
                   data-testid="link-mobile-header-whatsapp"
-                  className="flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#1ead57] text-white px-4 py-4 rounded-xl font-bold w-full text-base transition-colors">
+                  className="flex items-center justify-center gap-2.5 bg-blue-600 hover:bg-blue-700 text-white px-4 py-4 rounded-xl font-bold w-full text-base transition-colors">
                   <MessageCircle size={20} />
                   Book Free AI Audit
-                </a>
+                </Link>
               </div>
             </div>
           </motion.div>

@@ -10,11 +10,13 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const fadeUp = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const fadeUp: any = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } }
 };
-const stagger = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const stagger: any = {
   hidden: { opacity: 0 },
   show: { opacity: 1, transition: { staggerChildren: 0.09 } }
 };

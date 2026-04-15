@@ -1153,7 +1153,7 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
-                <motion.a href={WA_URLS.audit} target="_blank" rel="noopener noreferrer"
+                <motion.a href="/free-ai-audit"
                   whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
                   className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-white transition-all duration-200"
                   style={{ background: '#2563EB', boxShadow: '0 0 24px rgba(37,99,235,0.35)' }}>
@@ -1278,6 +1278,64 @@ export default function Home() {
               style={{ color: '#3B82F6' }}>
               See all 9 AI services we build <ArrowRight size={16} />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          INTERNATIONAL CLIENTS SECTION
+      ══════════════════════════════════════ */}
+      <section className="py-16" style={{ background: 'linear-gradient(to right, #1E293B, #0F172A)' }}>
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-500/20 text-blue-300 text-sm font-semibold rounded-full border border-blue-500/30 mb-6">
+                🌍 International Clients
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                World-Class AI Expertise.<br />Not World-Class Prices.
+              </h2>
+              <p className="text-slate-300 text-lg mb-6 leading-relaxed">
+                US and EU AI consultants charge $200–$500/hr. SYSmoAI delivers the same quality — Notion OS, custom AI agents, n8n automation — at a fraction of the cost.
+              </p>
+              <div className="space-y-3 mb-8">
+                {[
+                  '60–80% cost savings vs US/EU consultants',
+                  'Top 5% prompt engineering globally',
+                  'International payments via Wise & Payoneer',
+                  'English-first communication, no language barrier',
+                  'Results guarantee — we don\'t get paid until it works',
+                ].map(item => (
+                  <div key={item} className="flex items-center gap-3 text-slate-300">
+                    <span className="w-5 h-5 rounded-full bg-blue-500/30 text-blue-400 flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>
+                    {item}
+                  </div>
+                ))}
+              </div>
+              <Link href="/services/international"
+                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200">
+                See International Pricing (USD) <ArrowRight size={16} />
+              </Link>
+            </motion.div>
+
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+              className="grid grid-cols-2 gap-4">
+              {[
+                { service: 'AI Quick Win',    bd: '৳3,750–৳7,500',    usd: '$50–$100'     },
+                { service: 'AI Sprint',       bd: '৳25,000–৳50,000',  usd: '$300–$600'    },
+                { service: 'AI Retainer',     bd: '৳20,000/mo',        usd: '$250/mo'      },
+                { service: 'Notion OS Build', bd: '৳15,000–৳50,000',  usd: '$800–$5,000'  },
+                { service: 'AI Agent Dev',    bd: '৳50,000+',          usd: '$2,500+'      },
+                { service: '1:1 Coaching',    bd: '৳2,500/session',    usd: '$30/session'  },
+              ].map(item => (
+                <div key={item.service}
+                  className="bg-white/5 border border-white/10 rounded-xl p-4 hover:bg-white/10 transition-colors duration-200">
+                  <div className="text-slate-400 text-xs font-medium mb-2">{item.service}</div>
+                  <div className="text-white font-semibold text-sm">{item.usd}</div>
+                  <div className="text-slate-500 text-xs mt-0.5">{item.bd} BD</div>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>

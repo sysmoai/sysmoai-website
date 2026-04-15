@@ -1,0 +1,493 @@
+```
+════════════════════════════════════════════════════════
+SYSMOAI — HOMEPAGE GAP FIXES (Final 3)
+Complete these to reach 95+/100 homepage score.
+════════════════════════════════════════════════════════
+
+DO NOT touch any previously completed fixes.
+Execute these 3 items only.
+
+══════════════════════════════════
+GAP 1 — /free-ai-audit LANDING PAGE (High Priority)
+All "Free AI Audit" CTAs currently go directly to WhatsApp.
+This loses conversions from desktop users and international clients.
+══════════════════════════════════
+
+CREATE: src/pages/FreeAudit.tsx
+
+This is a dedicated conversion page that explains exactly
+what the free audit includes before sending them to WhatsApp.
+
+```
+
+// src/pages/FreeAudit.tsx
+
+import { WA_URLS } from '../lib/whatsapp'
+
+export default function FreeAudit() {
+
+return (
+
+<div className="min-h-screen bg-white">
+
+{/ *Hero* /}
+
+<section className="py-20 bg-gradient-to-br from-slate-900 to-blue-900">
+
+<div className="max-w-3xl mx-auto px-6 text-center">
+
+<span className="inline-block px-4 py-1.5 bg-blue-500/20 text-blue-300 
+
+text-sm font-semibold rounded-full border border-blue-500/30 mb-6">
+
+100% Free · No Commitment · No Sales Pitch
+
+</span>
+
+<h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+
+Book Your Free 30-Minute AI Audit
+
+</h1>
+
+<p className="text-xl text-blue-100 mb-4 leading-relaxed">
+
+Emon Hossain personally reviews your business workflow, 
+
+identifies your biggest AI automation opportunity, 
+
+and gives you a clear action plan — free.
+
+</p>
+
+<p className="text-blue-300 text-sm">
+
+Available for businesses in Bangladesh and worldwide.
+
+</p>
+
+</div>
+
+</section>
+
+{/ *What You Get* /}
+
+<section className="py-16 bg-white">
+
+<div className="max-w-3xl mx-auto px-6">
+
+<h2 className="text-3xl font-bold text-slate-900 text-center mb-12">
+
+What Happens in Your Free AI Audit
+
+</h2>
+
+<div className="space-y-6">
+
+{[
+
+{
+
+time: "First 10 minutes",
+
+icon: "🔍",
+
+title: "We understand your business",
+
+desc: "Emon asks targeted questions about your current workflow — what tools you use, where your time goes, what's breaking most often. No generic questions. All specific to your situation."
+
+},
+
+{
+
+time: "Next 15 minutes",
+
+icon: "🗺️",
+
+title: "We map your #1 automation opportunity",
+
+desc: "Based on your answers, Emon identifies the single workflow that will save the most time and money when automated. He explains exactly what to build, which tools to use, and what the result will look like."
+
+},
+
+{
+
+time: "Final 5 minutes",
+
+icon: "📋",
+
+title: "You leave with a clear action plan",
+
+desc: "Emon gives you a written action plan: the exact problem, the exact solution, the tools needed, the timeline, and the cost. You can implement this yourself or hire SYSmoAI to build it for you."
+
+}
+
+].map((step, i) => (
+
+<div key={i} className="flex gap-5 p-6 rounded-2xl bg-slate-50 
+
+border border-slate-100 hover:border-blue-100 
+
+hover:bg-blue-50/30 transition-all duration-200">
+
+<div className="text-4xl flex-shrink-0">{step.icon}</div>
+
+<div>
+
+<div className="text-xs font-semibold text-blue-600 uppercase 
+
+tracking-wider mb-1">{step.time}</div>
+
+<h3 className="font-bold text-slate-900 text-lg mb-2">{step.title}</h3>
+
+<p className="text-slate-600 leading-relaxed">{step.desc}</p>
+
+</div>
+
+</div>
+
+))}
+
+</div>
+
+</div>
+
+</section>
+
+{/ *Who It's For* /}
+
+<section className="py-16 bg-slate-50">
+
+<div className="max-w-3xl mx-auto px-6">
+
+<h2 className="text-2xl font-bold text-slate-900 text-center mb-8">
+
+The Audit Is For You If...
+
+</h2>
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+{[
+
+"You're spending too much time on manual, repetitive tasks",
+
+"Your team is overwhelmed and you don't know where AI fits",
+
+"You've tried AI tools before but they didn't stick",
+
+"You want to automate but don't know where to start",
+
+"You're a Bangladesh SME, agency, or freelancer",
+
+"You're an international client looking for world-class AI at better rates"
+
+].map((item, i) => (
+
+<div key={i} className="flex items-start gap-3 p-4 bg-white 
+
+rounded-xl border border-slate-100">
+
+<span className="w-5 h-5 rounded-full bg-green-100 text-green-600 
+
+flex items-center justify-center text-xs font-bold 
+
+flex-shrink-0 mt-0.5">✓</span>
+
+{item}
+
+</div>
+
+))}
+
+</div>
+
+</div>
+
+</section>
+
+{/ *CTA* /}
+
+<section className="py-16 bg-white">
+
+<div className="max-w-xl mx-auto px-6 text-center">
+
+<h2 className="text-3xl font-bold text-slate-900 mb-4">
+
+Ready to Book Your Free Audit?
+
+</h2>
+
+<p className="text-slate-600 mb-8">
+
+Send Emon a WhatsApp message. He'll confirm a time that works 
+
+for you — usually within 2 hours on working days.
+
+</p>
+
+<a
+
+href={WA_URLS.audit}
+
+target="_blank"
+
+rel="noopener noreferrer"
+
+className="inline-flex items-center gap-3 bg-green-600 hover:bg-green-700 
+
+text-white font-bold px-10 py-4 rounded-2xl text-lg 
+
+transition-all duration-200 shadow-lg hover:shadow-xl 
+
+hover:-translate-y-0.5"
+
+> 
+> 
+> 
+> <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+> 
+> <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+> 
+> </svg>
+> 
+> Book Free AI Audit on WhatsApp
+> 
+
+</a>
+
+<div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 
+
+mt-6 text-sm text-slate-400">
+
+✓ 100% free
+
+✓ No obligation
+
+✓ Reply within 2 hours
+
+✓ Bangladesh & worldwide
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+)
+
+}
+
+```
+
+REGISTER the route. Find the router file (src/App.tsx or src/router.tsx).
+ADD this route:
+  path: "/free-ai-audit"
+  component: FreeAudit (import it)
+
+UPDATE all "Free AI Audit" header buttons to link to "/free-ai-audit" (internal link)
+instead of the WhatsApp URL directly. The WhatsApp link is now on the /free-ai-audit page itself.
+
+Specifically find:
+  - Header "Free AI Audit" CTA button
+  - The final CTA section's "Book Free AI Audit" button  
+  - Any button with text containing "audit" or "Audit"
+  
+Change these to: href="/free-ai-audit" (internal route, NOT WhatsApp direct)
+Keep all other WhatsApp buttons (consultation, sprint, retainer, etc.) as they are.
+
+══════════════════════════════════
+GAP 2 — INTERNATIONAL CLIENTS SECTION
+Currently missing from homepage. International visitors have no clear signal.
+══════════════════════════════════
+
+Find the homepage (src/pages/Home.tsx).
+ADD this section AFTER the Founder section and BEFORE the final CTA section:
+
+```
+
+{/ *International Clients Section* /}
+
+<section className="py-16 bg-gradient-to-r from-slate-800 to-slate-900">
+
+<div className="max-w-5xl mx-auto px-6">
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+<div>
+
+<span className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-500/20 
+
+text-blue-300 text-sm font-semibold rounded-full border 
+
+border-blue-500/30 mb-6">
+
+🌍 International Clients
+
+</span>
+
+<h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+
+World-Class AI Expertise.
+
+Not World-Class Prices.
+
+</h2>
+
+<p className="text-slate-300 text-lg mb-6 leading-relaxed">
+
+US and EU AI consultants charge $200–$500/hr. SYSmoAI delivers the 
+
+same quality — Notion OS, custom AI agents, n8n automation — at a 
+
+fraction of the cost.
+
+</p>
+
+<div className="space-y-3 mb-8">
+
+{[
+
+"60–80% cost savings vs US/EU consultants",
+
+"Top 5% prompt engineering globally",
+
+"International payments via Wise & Payoneer",
+
+"English-first communication, no language barrier",
+
+"Results guarantee — we don't get paid until it works"
+
+].map(item => (
+
+<div key={item} className="flex items-center gap-3 text-slate-300">
+
+<span className="w-5 h-5 rounded-full bg-blue-500/30 text-blue-400 
+
+flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>
+
+{item}
+
+</div>
+
+))}
+
+</div>
+
+<a href="/services/international"
+
+className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 
+
+text-white font-semibold px-6 py-3 rounded-xl 
+
+transition-all duration-200">
+
+See International Pricing (USD) →
+
+</a>
+
+</div>
+
+<div className="grid grid-cols-2 gap-4">
+
+{[
+
+{ service: "AI Quick Win", bd: "৳3,750–৳7,500", usd: "$50–$100" },
+
+{ service: "AI Sprint", bd: "৳25,000–৳50,000", usd: "$300–$600" },
+
+{ service: "AI Retainer", bd: "৳20,000/mo", usd: "$250/mo" },
+
+{ service: "Notion OS Build", bd: "৳15,000–৳50,000", usd: "$800–$5,000" },
+
+{ service: "AI Agent Dev", bd: "৳50,000+", usd: "$2,500+" },
+
+{ service: "1:1 Coaching", bd: "৳2,500/session", usd: "$30/session" },
+
+].map(item => (
+
+<div key={item.service} 
+
+className="bg-white/5 border border-white/10 rounded-xl p-4 
+
+hover:bg-white/10 transition-colors duration-200">
+
+<div className="text-slate-400 text-xs font-medium mb-2">{item.service}</div>
+
+<div className="text-white font-semibold text-sm">{item.usd}</div>
+
+<div className="text-slate-500 text-xs mt-0.5">{[item.bd](http://item.bd)} BD</div>
+
+</div>
+
+))}
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+```
+
+══════════════════════════════════
+GAP 3 — FIX PRE-EXISTING TYPESCRIPT ERRORS
+AudiencePageTemplate.tsx has Framer Motion type errors.
+These prevent a clean production build.
+══════════════════════════════════
+
+Open: src/components/AudiencePageTemplate.tsx
+
+Find all Framer Motion `motion.*` components that have TypeScript errors.
+The errors are likely: "Type 'X' is not assignable to type 'Y'" on motion component props.
+
+Common fix pattern for Framer Motion TS errors:
+```
+
+// If you see errors on transition or animate props, add explicit typing:
+
+// Change: <motion.div animate= opacity: 1 >
+
+// To: <motion.div animate={{ opacity: 1 } as any}>
+
+// OR install correct types: the error usually means mismatched framer-motion version
+
+// Check package.json — if framer-motion version is < 10, update:
+
+// In package.json, change "framer-motion": "^X.X.X" to "^11.0.0"
+
+// Then run: npm install
+
+```
+
+IF the errors are only type warnings and the app still runs:
+  Add // @ts-ignore above each erroring line as a temporary fix.
+  This unblocks the production build without changing functionality.
+
+After fixing:
+  Run: npx tsc --noEmit
+  Confirm: zero TypeScript errors
+
+══════════════════════════════════
+FINAL VERIFICATION
+══════════════════════════════════
+
+1. Visit /free-ai-audit route — page renders correctly
+2. Click "Free AI Audit" in header — goes to /free-ai-audit (not direct WhatsApp)
+3. On /free-ai-audit, click "Book Free AI Audit on WhatsApp" — opens correct WA link
+4. International section visible on homepage
+5. npx tsc --noEmit → zero errors
+6. npm run build → exit 0
+
+REPORT:
+  ✅ Gap 1: /free-ai-audit page [route registered, header button updated]
+  ✅ Gap 2: International section [location on page, USD pricing confirmed]
+  ✅ Gap 3: TypeScript errors [count before → count after]
+  FINAL BUILD: exit [0/error]
+  FINAL HOMEPAGE SCORE ESTIMATE: [X/100]
+════════════════════════════════════════════════════════
+```

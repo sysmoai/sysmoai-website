@@ -43,6 +43,8 @@ const ForConsultants = lazy(() => import("@/pages/for/Consultants"));
 const ForCreators = lazy(() => import("@/pages/for/Creators"));
 const ForCorporates = lazy(() => import("@/pages/for/Corporates"));
 
+const FreeAudit = lazy(() => import("@/pages/FreeAudit"));
+
 const PrivacyPolicy = lazy(() => import("@/pages/legal/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("@/pages/legal/TermsOfService"));
 const RefundPolicy = lazy(() => import("@/pages/legal/RefundPolicy"));
@@ -90,6 +92,7 @@ function Router() {
             <Route path="/faq" component={FAQ} />
             <Route path="/blog" component={Blog} />
             <Route path="/contact" component={Contact} />
+            <Route path="/free-ai-audit" component={FreeAudit} />
             <Route path="/privacy-policy" component={PrivacyPolicy} />
             <Route path="/terms-of-service" component={TermsOfService} />
             <Route path="/refund-policy" component={RefundPolicy} />
