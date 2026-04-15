@@ -1,0 +1,254 @@
+This is the P1 CLEANUP prompt for sysmoai.com.
+All P0 issues are already fixed. This handles the final 7 improvements.
+You have direct filesystem access and shell. Do everything in order.
+Report after each phase.
+
+CONTEXT:
+- Stack: Next.js 14 + Tailwind CSS, Replit-hosted
+- Brand: #0057FF, WhatsApp: wa.me/8801711638693
+- All P0 issues are DONE: fake testimonials removed, stats fixed, /results created, WA links fixed
+- This prompt fixes: sitemap mismatch, skill tags, about page links, structured data, OG images
+
+════════════════════════════════════════
+PHASE 1 — FIX SITEMAP (3 issues)
+════════════════════════════════════════
+
+The sitemap has 3 problems:
+- Lists /proof (page doesn't exist) — should be /results
+- Missing /results (page exists)
+- Missing /free-ai-audit (page exists)
+
+1. Find the sitemap file:
+   find app -name "sitemap*" -type f | head -5
+
+2. Open it and make these changes:
+   - Replace any reference to "/proof" with "/results"
+   - Add /results if not present
+   - Add /free-ai-audit if not present
+
+3. Verify by visiting /sitemap.xml in the preview.
+   It should include:
+   - https://sysmoai.com/results
+   - https://sysmoai.com/free-ai-audit
+   - NO reference to /proof
+
+Report: changes made, URLs added.
+
+════════════════════════════════════════
+PHASE 2 — MAKE SKILL TAGS CLICKABLE ON /about
+════════════════════════════════════════
+
+On the /about page, the founder section has skill tags:
+"AI Systems Architecture", "Prompt Engineering", "Notion OS",
+"n8n Automation", "AI Agent Design", "500+ Projects",
+"SEO Expert", "AI Coaching"
+
+These are currently <span> elements (plain text). Make them <a> links.
+
+1. Find the about page or founder component:
+   grep -rn "AI Systems Architecture\|Prompt Engineering\|Notion OS" app/ components/ --include="*.tsx" | head -10
+
+2. Create a mapping and replace each tag:
+
+const skillTagLinks: Record<string, string> = {
+  "AI Systems Architecture": "/services",
+  "Prompt Engineering": "/free-ai-audit",
+  "Top 5% Prompt Engineering": "/free-ai-audit",
+  "Notion OS": "/services/notion-os",
+  "n8n Automation": "/services/n8n-automation",
+  "AI Agent Design": "/services/ai-agent-dev",
+  "500+ Projects": "/results",
+  "500+ Projects Delivered": "/results",
+  "SEO Expert": "/services",
+  "AI Coaching": "/services/ai-coaching",
+}
+
+3. For each tag, change from <span> to <a>:
+
+BEFORE:
+<span className="...some-classes...">Notion OS</span>
+
+AFTER:
+<a href="/services/notion-os"
+   className="...same-classes... hover:bg-blue-100 hover:border-blue-300 transition-all cursor-pointer no-underline">
+  Notion OS
+</a>
+
+4. Verify: view /about and confirm each tag is clickable.
+
+Report: how many tags converted.
+
+════════════════════════════════════════
+PHASE 3 — FIX /about "See case studies" AND "See example" LINKS
+════════════════════════════════════════
+
+1. Find the links:
+   grep -rn "See case studies\|See example" app/ --include="*.tsx" | head -20
+
+2. "See case studies →" links (in the "Proven Results" section):
+   These should ALL point to /results.
+   Find and update any that point elsewhere:
+   - If they link to /proof → change to /results
+   - If they have no href → add href="/results"
+
+3. "See example →" links (in the "How We Operate" section):
+   These currently all point to /services.
+   Update each to point to a more specific page:
+   - "We Build, Not Consult" → /services/ai-quick-win
+   - "Results First" → /results
+   - "Your System, Your Control" → /services/ai-sprint
+   - "Bangladesh-Rooted" → /services
+   - "Global Standards" → /pricing
+
+4. Verify: view /about, click every "See case studies →" and "See example →" link.
+
+Report: links updated.
+
+════════════════════════════════════════
+PHASE 4 — ADD STRUCTURED DATA (JSON-LD)
+════════════════════════════════════════
+
+No structured data exists on any page. Add it.
+
+1. Find the root layout:
+   find app -name "layout.tsx" -maxdepth 3 | head -5
+
+2. Add Organization schema to the root layout (renders on all pages):
+
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "SYSmoAI",
+  "url": "https://sysmoai.com",
+  "logo": "https://sysmoai.com/logo.png",
+  "description": "AI Systems Consultancy — Dhaka, Bangladesh. Serving clients worldwide.",
+  "founder": {
+    "@type": "Person",
+    "name": "Emon Hossain",
+    "jobTitle": "AI Systems Architect & Founder",
+    "url": "https://sysmoai.com/about"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Dhaka",
+    "addressCountry": "BD"
+  },
+  "telephone": "+8801711638693",
+  "email": "hello@sysmoai.com",
+  "sameAs": [
+    "https://www.facebook.com/sysmoai",
+    "https://www.linkedin.com/company/sysmoai",
+    "https://www.youtube.com/@sysmoai"
+  ]
+})}} />
+
+3. Add FAQPage schema to /services page (inside the page component):
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does each package take?",
+      "acceptedAnswer": { "@type": "Answer", "text": "AI Quick Win: 3 days. AI Sprint: 3 weeks. AI Retainer: ongoing monthly." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you work with international clients?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. We accept USD via Wise, Payoneer, and Stripe. We communicate in English and coordinate across timezones." }
+    },
+    {
+      "@type": "Question",
+      "name": "What if the system doesn't deliver results?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We offer a results-first guarantee. If we can't improve your workflow within the agreed timeline, you get a full refund." }
+    }
+  ]
+}
+
+<script type="application/ld+json" dangerouslySetInnerHTML= __html: JSON.stringify(faqSchema)  />
+
+4. Add the same pattern to /pricing with pricing FAQ data.
+
+Report: schemas added to which pages.
+
+════════════════════════════════════════
+PHASE 5 — ADD OG IMAGES FOR SOCIAL SHARING
+════════════════════════════════════════
+
+1. Create a placeholder OG image:
+   Generate a simple 1200x630 image at /public/og-image.png
+   Use the site's brand colors (#0057FF background, white text):
+   - "SYSmoAI" logo text
+   - "AI Systems That Work For You"
+   - "sysmoai.com"
+
+   If you can generate an image, do so. If not, create a simple
+   colored rectangle with text using a canvas library or SVG.
+
+2. Add Open Graph + Twitter Card metadata to the root layout:
+
+   Find the root layout metadata export and add:
+
+   openGraph: {
+     title: 'SYSmoAI — AI Systems That Work For You',
+     description: 'AI automation, Notion OS, custom AI agents for businesses in Bangladesh and worldwide.',
+     url: 'https://sysmoai.com',
+     siteName: 'SYSmoAI',
+     type: 'website',
+     images: [{
+       url: 'https://sysmoai.com/og-image.png',
+       width: 1200,
+       height: 630,
+       alt: 'SYSmoAI — AI Systems That Work For You'
+     }],
+   },
+   twitter: {
+     card: 'summary_large_image',
+     title: 'SYSmoAI — AI Systems That Work For You',
+     description: 'AI automation for businesses in Bangladesh and worldwide.',
+     images: ['https://sysmoai.com/og-image.png'],
+   },
+
+3. Verify: check view-source for og:image and twitter:image meta tags.
+
+Report: OG image created, metadata added.
+
+════════════════════════════════════════
+PHASE 6 — BUILD + VERIFY + COMMIT
+════════════════════════════════════════
+
+1. Build:
+   npm run build
+
+2. Quality checks:
+   grep -rn "whatsapp://send" app/ components/ | grep -v node_modules
+   grep -rn "Rumi K\|Sajid A" app/ components/ | grep -v node_modules
+   (both must return 0)
+
+3. Verify all fixes:
+   - /sitemap.xml includes /results and /free-ai-audit, NOT /proof ✅
+   - /about skill tags are clickable links ✅
+   - /about "See case studies →" links go to /results ✅
+   - /about "See example →" links go to specific pages ✅
+   - View source shows JSON-LD schema on homepage ✅
+   - View source shows og:image meta tag ✅
+
+4. Commit:
+   git add -A
+   git commit -m "fix: P1 cleanup — sitemap, skill tags, about links, JSON-LD schema, OG images"
+   git push origin main
+
+Report:
+PHASE 1 - Sitemap: /proof→/results, added /results + /free-ai-audit
+PHASE 2 - Skill tags: [N] converted to links
+PHASE 3 - About links: case studies→/results, examples→specific pages
+PHASE 4 - Structured data: Organization + FAQPage schemas added
+PHASE 5 - OG image: created + metadata added
+PHASE 6 - Build: exit 0, quality: all clean ✅
+
+AFTER THIS, CEO SHOULD:
+- Publish the deployment in Replit
+- Test all pages on sysmoai.com after publish
+- Submit sitemap to Google Search Console
+- Share a page on Facebook/LinkedIn to verify OG image appears
