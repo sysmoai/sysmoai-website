@@ -1071,21 +1071,35 @@ export default function Home() {
               </blockquote>
               <div className="flex flex-wrap gap-2">
                 {[
-                  'AI Systems Architecture', 'Top 5% Prompt Engineering', 'Notion OS',
-                  'n8n Automation', 'AI Agent Design', '500+ Projects Delivered',
-                  'SEO Expert', 'AI Coaching',
+                  { label: 'AI Systems Architecture',    href: '/services/ai-sprint'     },
+                  { label: 'Top 5% Prompt Engineering',  href: '/proof'                  },
+                  { label: 'Notion OS',                  href: '/services/notion-os'     },
+                  { label: 'n8n Automation',             href: '/services/n8n-automation'},
+                  { label: 'AI Agent Design',            href: '/services/ai-agent-dev'  },
+                  { label: '500+ Projects Delivered',    href: '/proof'                  },
+                  { label: 'SEO Expert',                 href: '/services'               },
+                  { label: 'AI Coaching',                href: '/services/ai-coaching'   },
                 ].map(tag => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 text-sm font-medium rounded-full border"
+                  <a
+                    key={tag.label}
+                    href={tag.href}
+                    className="px-3 py-1 text-sm font-medium rounded-full border cursor-pointer no-underline transition-all duration-150"
                     style={{
                       background: isDark ? 'rgba(37,99,235,0.1)' : '#EFF6FF',
                       color: '#3B82F6',
                       borderColor: isDark ? 'rgba(59,130,246,0.2)' : '#BFDBFE',
                     }}
+                    onMouseEnter={e => {
+                      (e.currentTarget as HTMLAnchorElement).style.background = isDark ? 'rgba(37,99,235,0.2)' : '#DBEAFE';
+                      (e.currentTarget as HTMLAnchorElement).style.borderColor = '#93C5FD';
+                    }}
+                    onMouseLeave={e => {
+                      (e.currentTarget as HTMLAnchorElement).style.background = isDark ? 'rgba(37,99,235,0.1)' : '#EFF6FF';
+                      (e.currentTarget as HTMLAnchorElement).style.borderColor = isDark ? 'rgba(59,130,246,0.2)' : '#BFDBFE';
+                    }}
                   >
-                    {tag}
-                  </span>
+                    {tag.label}
+                  </a>
                 ))}
               </div>
             </div>
