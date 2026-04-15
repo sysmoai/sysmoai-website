@@ -1,0 +1,339 @@
+This is the POST-AUDIT FIX prompt for sysmoai.com.
+Based on the ChatGPT 7-role brutal audit (15 April 2026).
+You have direct filesystem access and shell. Do everything in order.
+Report after each phase.
+
+CONTEXT:
+- Stack: Next.js 14 + Tailwind CSS, Replit-hosted
+- Brand: #0057FF, WhatsApp: wa.me/8801711638693
+- Audit scores: Homepage 73, About 85, Services 78, Pricing 83, Contact 86, Free AI Audit 80
+- 12 P0 issues, 17 P1 issues identified
+
+════════════════════════════════════════
+PHASE 0 — INVENTORY
+════════════════════════════════════════
+
+1. Find all remaining whatsapp://send links:
+   grep -rn "whatsapp://send" app/ components/ --include="*.tsx" --include="*.ts" | grep -v node_modules
+
+2. Check if /results page exists:
+   find app -path "*results*" -name "page.tsx" | head -5
+
+3. Check sitemap:
+   cat app/sitemap.ts 2>/dev/null || echo "NO SITEMAP FILE"
+
+4. Find testimonial component:
+   grep -rn "Rumi K\|Sajid A\|Tanvir M\|Farida H\|Khalid R\|Priya C" app/ components/ --include="*.tsx" | head -10
+
+5. Find counter/stats component:
+   grep -rn "0+\|CountUp\|useCountUp\|animate.*number" app/ components/ --include="*.tsx" | head -10
+
+Report findings, then proceed.
+
+════════════════════════════════════════
+PHASE 1 — FIX ALL REMAINING WHATSAPP LINKS (P0)
+════════════════════════════════════════
+
+The audit found whatsapp://send STILL exists on:
+- /about hero "Chat on WhatsApp" button
+- /about CTA "Start on WhatsApp" button  
+- /contact success state "Continue on WhatsApp"
+- /pricing bottom CTA
+- /services guided choices "WhatsApp Us"
+
+1. Global find and replace:
+   grep -rn "whatsapp://send" app/ components/ --include="*.tsx" --include="*.ts" | grep -v node_modules
+
+   For EVERY match, replace with:
+   https://wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%20need%20help
+
+2. Verify zero remain:
+   grep -rn "whatsapp://send" app/ components/ | grep -v node_modules
+   (MUST return 0 matches)
+
+Report: files changed, count fixed.
+
+════════════════════════════════════════
+PHASE 2 — FIX BROKEN NAV + CREATE /results PAGE (P0)
+════════════════════════════════════════
+
+1. Create a /results page (placeholder with real structure).
+   Create the file at the correct route (e.g., app/(storefront)/[countryCode]/(main)/results/page.tsx
+   or wherever other pages like /about live).
+
+   Content for the results page:
+
+   import { Metadata } from 'next'
+   export const metadata: Metadata = {
+     title: 'Client Results & Case Studies — SYSmoAI',
+     description: 'Real results from real clients. See how SYSmoAI has helped businesses in Bangladesh and worldwide save time, grow revenue, and automate operations.',
+   }
+
+   export default function ResultsPage() {
+     return (
+       <main className="min-h-screen bg-sysmoai-dark text-sysmoai-text">
+         <section className="px-6 py-24 max-w-4xl mx-auto text-center">
+           <h1 className="text-4xl font-bold text-white mb-6">Client Results</h1>
+           <p className="text-sysmoai-muted text-lg mb-12">
+             We're currently documenting detailed case studies from our clients.
+             In the meantime, here's what we've delivered.
+           </p>
+
+           <div className="grid md:grid-cols-3 gap-6 mb-16">
+             <div className="bg-sysmoai-surface border border-sysmoai-border rounded-xl p-6">
+               <div className="text-3xl font-bold text-sysmoai-primary mb-2">500+</div>
+               <div className="text-sysmoai-muted text-sm">Projects Delivered</div>
+             </div>
+             <div className="bg-sysmoai-surface border border-sysmoai-border rounded-xl p-6">
+               <div className="text-3xl font-bold text-sysmoai-primary mb-2">8+</div>
+               <div className="text-sysmoai-muted text-sm">Client Categories</div>
+             </div>
+             <div className="bg-sysmoai-surface border border-sysmoai-border rounded-xl p-6">
+               <div className="text-3xl font-bold text-sysmoai-primary mb-2">15–20 hrs</div>
+               <div className="text-sysmoai-muted text-sm">Saved Per Week (avg)</div>
+             </div>
+           </div>
+
+           <div className="bg-sysmoai-surface border border-sysmoai-border rounded-2xl p-8 text-left mb-12">
+             <h2 className="text-xl font-bold text-white mb-4">Detailed case studies coming soon</h2>
+             <p className="text-sysmoai-muted mb-4">
+               We're working with our clients to publish full case studies with
+               verified metrics, screenshots, and testimonials. Check back soon.
+             </p>
+             <p className="text-sysmoai-muted">
+               Want to be our next success story?
+             </p>
+           </div>
+
+           <a href="https://wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%20want%20to%20book%20a%20free%20AI%20audit"
+              target="_blank" rel="noopener noreferrer"
+              className="inline-block bg-sysmoai-primary hover:bg-sysmoai-primary-dark text-white font-semibold px-8 py-4 rounded-xl transition-colors">
+             Book Free AI Audit
+           </a>
+         </section>
+       </main>
+     )
+   }
+
+2. Verify the page renders:
+   Visit /results in the preview and confirm it loads without errors.
+
+3. Also fix "See all case studies" link on homepage to point to /results.
+
+Report: file created, nav verified.
+
+════════════════════════════════════════
+PHASE 3 — FIX STAT COUNTERS FOR BOTS (P0)
+════════════════════════════════════════
+
+The animated counters on the homepage render as "0+" in the initial HTML.
+Bots, screen readers, and AI Overviews see zeros.
+
+1. Find the counter component:
+   grep -rn "CountUp\|useCountUp\|counter\|animate" app/ components/ --include="*.tsx" -l | head -5
+
+2. Fix the counter to render the FINAL value in the initial HTML.
+   The DOM should contain the real number (e.g., "500+") from the start.
+   JS animation can still run on top, but the static HTML must show the real number.
+
+   BEFORE (what bots see):
+   <span>0</span>+
+
+   AFTER (what bots should see):
+   <span data-target="500">500</span>+
+
+   If using a counter library, set the initial value to the target value
+   and only animate on client-side viewport entry.
+
+   If the counter uses useState(0), change to useState(targetValue)
+   and only animate the visual transition.
+
+3. Also add a <noscript> fallback:
+   <noscript>500+ Projects Delivered</noscript>
+
+4. Verify by viewing page source (not DevTools) and confirming
+   "500+", "8+", "3+", "Top 5%" appear in the raw HTML.
+
+Report: which component was fixed, what values now render.
+
+════════════════════════════════════════
+PHASE 4 — REPLACE FAKE TESTIMONIALS (P0)
+════════════════════════════════════════
+
+The 6 current testimonials are fabricated. Remove them entirely
+and replace with a transparent "coming soon" section.
+
+1. Find the testimonials component:
+   grep -rn "Rumi K\|Sajid A\|testimonial" app/ components/ --include="*.tsx" -l | head -5
+
+2. Replace the entire testimonials section with:
+
+<section className="px-6 py-20 max-w-4xl mx-auto text-center">
+  <h2 className="text-2xl font-bold text-white mb-4">Client Results</h2>
+  <p className="text-sysmoai-muted mb-8">
+    We're documenting verified case studies from our clients.
+    Real names, real numbers, real proof — coming soon.
+  </p>
+  <div className="grid md:grid-cols-3 gap-6">
+    <div className="bg-sysmoai-surface border border-sysmoai-border rounded-xl p-6">
+      <div className="text-2xl font-bold text-sysmoai-primary">500+</div>
+      <div className="text-sm text-sysmoai-muted">Projects Delivered</div>
+    </div>
+    <div className="bg-sysmoai-surface border border-sysmoai-border rounded-xl p-6">
+      <div className="text-2xl font-bold text-sysmoai-primary">15–20 hrs</div>
+      <div className="text-sm text-sysmoai-muted">Saved Per Week (avg)</div>
+    </div>
+    <div className="bg-sysmoai-surface border border-sysmoai-border rounded-xl p-6">
+      <div className="text-2xl font-bold text-sysmoai-primary">3+ Years</div>
+      <div className="text-sm text-sysmoai-muted">Building AI Systems</div>
+    </div>
+  </div>
+  <a href="/results" className="mt-8 inline-block text-sysmoai-primary hover:underline text-sm">
+    See our results page →
+  </a>
+</section>
+
+3. Remove all duplicate testimonial HTML from the DOM.
+   The current carousel duplicates testimonials 4×. Remove ALL copies.
+
+4. Verify: grep for "Rumi K" and "Sajid A" should return 0 matches.
+
+Report: component updated, fake names removed.
+
+════════════════════════════════════════
+PHASE 5 — FIX NAV/SITEMAP MISMATCH (P0)
+════════════════════════════════════════
+
+The sitemap.xml is now working (31 URLs) but there’s a mismatch:
+- Sitemap lists /proof
+- Nav bar links to /results (which is 404)
+- Neither /proof nor /results has a working page
+
+1. Check which route exists:
+   find app -path "*proof*" -name "page.tsx" | head -5
+   find app -path "*results*" -name "page.tsx" | head -5
+
+2. Decision: Use /results as the canonical URL.
+   - Create the /results page (from Phase 2 above)
+   - Update the sitemap to reference /results instead of /proof
+   - OR create a redirect from /proof to /results
+
+3. Update sitemap.ts: change "/proof" to "/results"
+
+4. Verify: /results loads, sitemap references /results, nav links to /results.
+
+Report: mismatch resolved.
+
+════════════════════════════════════════
+PHASE 6 — SKILL TAGS + STRUCTURED DATA + OG IMAGES (P1)
+════════════════════════════════════════
+
+1. SKILL TAGS on /about:
+   Find the skill tags in the about page component.
+   Convert any remaining <span> tags to <a> links:
+
+   const skillTagLinks: Record<string, string> = {
+     "AI Systems Architecture": "/services",
+     "Prompt Engineering": "/free-ai-audit",
+     "Notion OS": "/services/notion-os",
+     "n8n Automation": "/services/n8n-automation",
+     "AI Agent Design": "/services/ai-agent-dev",
+     "500+ Projects": "/results",
+     "SEO Expert": "/services",
+     "AI Coaching": "/services/ai-coaching",
+   }
+
+2. STRUCTURED DATA:
+   Add JSON-LD to the homepage layout or page:
+
+   <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+     "@context": "https://schema.org",
+     "@type": "Organization",
+     "name": "SYSmoAI",
+     "url": "https://sysmoai.com",
+     "description": "AI Systems Consultancy in Bangladesh",
+     "founder": {
+       "@type": "Person",
+       "name": "Emon Hossain",
+       "jobTitle": "AI Systems Architect"
+     },
+     "address": {
+       "@type": "PostalAddress",
+       "addressLocality": "Dhaka",
+       "addressCountry": "BD"
+     },
+     "telephone": "+8801711638693",
+     "email": "hello@sysmoai.com",
+     "sameAs": [
+       "https://www.facebook.com/sysmoai",
+       "https://www.linkedin.com/company/sysmoai",
+       "https://www.youtube.com/@sysmoai"
+     ]
+   })}} />
+
+3. OG IMAGES:
+   In the root layout or per-page metadata, add:
+
+   openGraph: {
+     title: 'SYSmoAI — AI Systems That Work For You',
+     description: 'AI automation, Notion OS, custom AI agents for businesses in Bangladesh and worldwide.',
+     url: 'https://sysmoai.com',
+     siteName: 'SYSmoAI',
+     type: 'website',
+     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+   },
+   twitter: {
+     card: 'summary_large_image',
+     title: 'SYSmoAI — AI Systems That Work For You',
+     description: 'AI automation for businesses in Bangladesh and worldwide.',
+     images: ['/og-image.png'],
+   },
+
+   Create a simple /public/og-image.png (1200x630) with the SYSmoAI logo,
+   tagline, and brand colors. Use a placeholder if no design tool is available.
+
+Report: tags linked, schema added, OG set up.
+
+════════════════════════════════════════
+PHASE 7 — BUILD + QUALITY GATES + DEPLOY
+════════════════════════════════════════
+
+1. Build:
+   npm run build
+
+2. Quality gates (ALL must return 0):
+   grep -rn "whatsapp://send" app/ components/ | grep -v node_modules
+   grep -rn "Rumi K\|Sajid A\|Tanvir M\|Farida H\|Khalid R\|Priya C" app/ components/ | grep -v node_modules
+   grep -rn "01865|385348" app/ components/ | grep -v node_modules
+
+3. Verify pages render:
+   - / loads with real stat numbers in view-source ✅
+   - /results loads (not 404) ✅
+   - /about skill tags are clickable ✅
+   - /sitemap.xml returns valid XML ✅
+   - No fake testimonial names remain ✅
+   - All WhatsApp links use wa.me ✅
+
+4. Commit:
+   git add -A
+   git commit -m "fix: audit P0 fixes — remove fake testimonials, fix whatsapp links, create results page, fix sitemap, fix counters, add structured data + OG images"
+   git push origin main
+
+5. Redeploy.
+
+Report:
+PHASE 1 - WhatsApp links: [N] fixed
+PHASE 2 - Results page: CREATED
+PHASE 3 - Counters: fixed, values in HTML
+PHASE 4 - Testimonials: REMOVED (replaced with metrics)
+PHASE 5 - Nav/sitemap mismatch: RESOLVED
+PHASE 6 - Skill tags + Schema + OG: DONE
+PHASE 7 - Build: exit [N] · quality: all 0 ✅
+
+STILL NEEDS CEO:
+- ✅ sysmoai.com domain is connected (DONE)
+- ✅ sitemap.xml is working (31 URLs)
+- Get real testimonials from clients (with permission)
+- Create OG image design (or use placeholder)
+- Submit sitemap to Google Search Console
+- Consider Replit "Always On" to prevent cold-start timeouts for crawlers

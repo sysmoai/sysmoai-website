@@ -316,7 +316,7 @@ export function Header() {
             {/* Static links */}
             {[
               { href: '/pricing', label: 'Pricing' },
-              { href: '/proof',   label: 'Results' },
+              { href: '/results', label: 'Results' },
               { href: '/about',   label: 'About'   },
               { href: '/contact', label: 'Contact' },
             ].map((l) => (
@@ -435,7 +435,7 @@ export function Header() {
               {/* Simple links */}
               {[
                 { href: '/pricing', label: 'Pricing' },
-                { href: '/proof',   label: 'Results' },
+                { href: '/results', label: 'Results' },
                 { href: '/blog',    label: 'Blog'    },
                 { href: '/faq',     label: 'FAQ'     },
                 { href: '/about',   label: 'About'   },

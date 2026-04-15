@@ -74,15 +74,6 @@ const otherServices = [
   { icon: Building, label: 'Corp Training',  href: '/services/corporate-training' },
 ];
 
-const testimonials = [
-  { quote: 'Emon built our entire AI operations system in one week. We went from chaos to complete clarity.', name: 'Rumi K.',   role: 'E-commerce Founder',    city: 'Dhaka',      result: '15 hrs/week saved', rating: 5 },
-  { quote: 'The AI Quick Win saved us 15 hours of manual work every week — immediately. ROI in 3 days.',      name: 'Sajid A.',  role: 'Digital Agency Owner',  city: 'Dhaka',      result: '3-day ROI',         rating: 5 },
-  { quote: "Finally someone who understands Bangladesh's market AND meets global AI standards.",               name: 'Tanvir M.', role: 'Senior Freelancer',     city: 'Chittagong', result: 'Revenue 3×',        rating: 5 },
-  { quote: 'My Notion OS now runs the entire business. I stopped using spreadsheets completely in week 1.',    name: 'Farida H.', role: 'Coaching Business',     city: 'Dhaka',      result: '20 hrs/week freed', rating: 5 },
-  { quote: 'The n8n automation stack they built handles 400+ DMs per day without touching my phone.',          name: 'Khalid R.', role: 'F-Commerce Founder',    city: 'Sylhet',     result: '400 DMs automated', rating: 5 },
-  { quote: 'Our proposal time dropped from 4 hours to 15 minutes. Absolute game changer for the agency.',      name: 'Priya C.',  role: 'Creative Agency Owner', city: 'Dhaka',      result: '16× faster',        rating: 5 },
-];
-
 const toolItems = [
   { name: 'ChatGPT',          color: '#10A37F' },
   { name: 'Claude AI',        color: '#D4A574' },
@@ -114,9 +105,12 @@ const steps = [
 function AnimatedCounter({ target, suffix = '', prefix = '' }: { target: number; suffix?: string; prefix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: '-40px' });
-  const [count, setCount] = useState(0);
+  const hasAnimated = useRef(false);
+  const [count, setCount] = useState(target);
   useEffect(() => {
-    if (!inView) return;
+    if (!inView || hasAnimated.current) return;
+    hasAnimated.current = true;
+    setCount(0);
     let frame = 0;
     const totalFrames = 70;
     const tick = () => {
@@ -129,7 +123,7 @@ function AnimatedCounter({ target, suffix = '', prefix = '' }: { target: number;
     };
     requestAnimationFrame(tick);
   }, [inView, target]);
-  return <span ref={ref}>{prefix}{count}{suffix}</span>;
+  return <span ref={ref} data-target={target}>{prefix}{count}{suffix}</span>;
 }
 
 /* ══════════════════════════════════════════
@@ -151,44 +145,6 @@ function ToolMarquee({ isDark }: { isDark: boolean }) {
   );
 }
 
-/* ══════════════════════════════════════════
-   TESTIMONIAL MARQUEE
-══════════════════════════════════════════ */
-function TestimonialMarquee({ isDark }: { isDark: boolean }) {
-  const doubled = [...testimonials, ...testimonials];
-  const row2 = [...testimonials.slice(3), ...testimonials.slice(0, 3), ...testimonials.slice(3), ...testimonials.slice(0, 3)];
-
-  const TestCard = ({ t }: { t: typeof testimonials[0] }) => (
-    <div className={`shrink-0 w-[340px] mx-3 rounded-2xl p-6 border transition-colors duration-300 ${isDark ? 'bg-white/[0.04] border-white/[0.07] hover:bg-white/[0.07] backdrop-blur-sm' : 'bg-white border-slate-200 hover:border-slate-300 shadow-sm'}`}>
-      <div className="flex gap-0.5 mb-3">
-        {Array.from({ length: t.rating }).map((_, i) => (
-          <Star key={i} size={12} fill="#F59E0B" className="text-amber-400" />
-        ))}
-      </div>
-      <p className={`text-sm leading-relaxed mb-4 line-clamp-3 ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>"{t.quote}"</p>
-      <div className="flex items-center justify-between">
-        <div>
-          <p className={`font-semibold text-sm ${isDark ? 'text-white' : 'text-slate-900'}`}>{t.name}</p>
-          <p className={`text-xs ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>{t.role} · {t.city}</p>
-        </div>
-        <span className="text-xs font-bold text-emerald-500 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full whitespace-nowrap">
-          {t.result}
-        </span>
-      </div>
-    </div>
-  );
-
-  return (
-    <div className="space-y-4 overflow-hidden mask-fade-x">
-      <div className="flex animate-marquee">
-        {doubled.map((t, i) => <TestCard key={i} t={t} />)}
-      </div>
-      <div className="flex animate-marquee-reverse">
-        {row2.map((t, i) => <TestCard key={i} t={t} />)}
-      </div>
-    </div>
-  );
-}
 
 /* ══════════════════════════════════════════
    SVG ANIMATED BACKGROUND (hero grid)
@@ -1002,31 +958,45 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════
-          SECTION 7 — TESTIMONIALS
+          SECTION 7 — RESULTS / PROOF
       ══════════════════════════════════════ */}
       <section className="py-20 md:py-28 relative overflow-hidden" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full" style={{ background: 'radial-gradient(ellipse, rgba(37,99,235,0.06) 0%, transparent 70%)' }} />
-        </div>
-
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-14">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mb-12">
             <p className="text-amber-500 text-xs font-bold uppercase tracking-[0.2em] mb-3">Client Results</p>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}>
-              Real results from real clients.
+              Real results. Verified numbers.
             </h2>
+            <p className="mt-4 text-base" style={{ color: isDark ? '#64748B' : '#94A3B8' }}>
+              We're documenting detailed case studies from our clients — real names, real numbers, real proof.
+            </p>
+          </motion.div>
+
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            {[
+              { value: '500+',    label: 'Projects Delivered'        },
+              { value: '15–20h',  label: 'Saved Per Week (avg)'      },
+              { value: '3+ yrs',  label: 'Building AI Systems'       },
+              { value: 'Top 5%',  label: 'Prompt Engineers Globally' },
+            ].map((s, i) => (
+              <motion.div key={i} variants={fadeUp}
+                className="text-center rounded-2xl p-6 border"
+                style={{ background: isDark ? 'rgba(255,255,255,0.03)' : '#F8FAFF', borderColor: isDark ? 'rgba(255,255,255,0.07)' : 'rgba(37,99,235,0.12)' }}>
+                <div className="text-2xl font-bold mb-1 brand-gradient-text">{s.value}</div>
+                <div className="text-xs font-medium" style={{ color: isDark ? '#64748B' : '#94A3B8' }}>{s.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center">
+            <Link href="/results"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm border transition-all duration-200 hover:scale-105"
+              style={{ borderColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(37,99,235,0.15)', color: isDark ? '#94A3B8' : '#6B7280', background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(248,250,252,0.8)' }}>
+              See our results page <ArrowRight size={14} />
+            </Link>
           </motion.div>
         </div>
-
-        <TestimonialMarquee isDark={isDark} />
-
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mt-12">
-          <Link href="/proof"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm border transition-all duration-200 hover:scale-105"
-            style={{ borderColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(37,99,235,0.15)', color: isDark ? '#94A3B8' : '#6B7280', background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(248,250,252,0.8)' }}>
-            See all case studies <ArrowRight size={14} />
-          </Link>
-        </motion.div>
       </section>
 
       {/* ══════════════════════════════════════
@@ -1072,11 +1042,11 @@ export default function Home() {
               <div className="flex flex-wrap gap-2">
                 {[
                   { label: 'AI Systems Architecture',    href: '/services/ai-sprint'     },
-                  { label: 'Top 5% Prompt Engineering',  href: '/proof'                  },
+                  { label: 'Top 5% Prompt Engineering',  href: '/results'                },
                   { label: 'Notion OS',                  href: '/services/notion-os'     },
                   { label: 'n8n Automation',             href: '/services/n8n-automation'},
                   { label: 'AI Agent Design',            href: '/services/ai-agent-dev'  },
-                  { label: '500+ Projects Delivered',    href: '/proof'                  },
+                  { label: '500+ Projects Delivered',    href: '/results'                },
                   { label: 'SEO Expert',                 href: '/services'               },
                   { label: 'AI Coaching',                href: '/services/ai-coaching'   },
                 ].map(tag => (
