@@ -1,0 +1,170 @@
+=== SYSMOAI.COM — COMPLETE 50 BLOG DEPLOYMENT ===
+
+The site already has some blog articles but they are INCOMPLETE. I need ALL 50 articles deployed with full content. Some articles may already exist with partial content — REPLACE them with the complete versions. Some articles are completely missing — ADD them.
+
+I am uploading a Notion export ZIP (Markdown & CSV format) containing all 50 articles with:
+- CSV file: all properties (Slug, Article Title, Target Group, Article Type, Target Keywords, Publish Date, Word Count, SEO Score, Primary CTA Service, Website Page Link, Facebook Post, LinkedIn Post, WhatsApp Status, Image Concept)
+- 50 .md files: each contains full 2500-word HTML article body inside ```html code blocks, plus 5 FAQs, plus 5 internal links
+
+=== WHAT ALREADY EXISTS ON THE SITE ===
+- Blog listing page at /blog (keep the page, update to show all 50)
+- Blog detail page at /blog/:slug (keep the page, enhance it)
+- Some articles already in blogPosts.ts data file (REPLACE ALL with complete 50)
+- Header with Blog navigation (keep it)
+- All other pages: /, /services, /about, /contact, etc. (DO NOT TOUCH THESE)
+
+=== TASK 1: PARSE THE ZIP FILE ===
+Read the CSV file. For each row:
+- Slug = "Slug" column
+- Title = "Article Title" column → CLEAN IT: split by " — " and take the LAST part only
+  Example: "Students — Wake-Up Call — You're Using ChatGPT Like Google" → "You're Using ChatGPT Like Google"
+  If title has NO " — " separator, use it as-is
+- targetGroup = "Target Group" column → convert to lowercase hyphenated:
+  "Students" → "students"
+  "Job Seekers" → "job-seekers"
+  "Freelancers" → "freelancers"
+  "Researchers" → "researchers"
+  "Content Creators" → "creators"
+  "Digital Agencies" → "agencies"
+  "SME Founders" → "sme-founders"
+  "F-Commerce" → "f-commerce"
+  "Consultants" → "consultants"
+  "Corporates" → "corporates"
+- articleType = "Article Type" column → convert to lowercase hyphenated:
+  "Wake-Up Call" → "wake-up-call"
+  "System Reveal" → "system-reveal"
+  "Transformation" → "transformation"
+  "Free Value" → "free-value"
+  "Future Shock" → "future-shock"
+- keywords = "Target Keywords" column → split by comma into array
+- publishDate = "Publish Date" column (YYYY-MM-DD format)
+- wordCount = "Word Count" column
+- readTime = Math.ceil(wordCount / 200) + " min read"
+- ctaService = "Primary CTA Service" column
+- seoScore = "SEO Score" column
+
+Read each .md file:
+- Find the ```html code block → extract everything between ```html and ``` → this is the article "content"
+- Find the FAQ section → extract Q&A pairs into array: [{question: "...", answer: "..."}]
+- Find the Internal Links section → extract links into array: [{text: "...", href: "..."}]
+- metaDescription = strip all HTML tags from content, take first 155 characters
+
+=== TASK 2: REPLACE blogPosts.ts WITH ALL 50 ARTICLES ===
+File: src/data/blogPosts.ts (find the exact path in the existing codebase)
+
+DELETE the entire existing blogPosts array and REPLACE with all 50 articles.
+Each article object must have:
+{
+  slug: string,
+  title: string,              // cleaned title (last part after " — ")
+  headline: string,           // first sentence of content (stripped of HTML)
+  targetGroup: string,        // lowercase hyphenated
+  articleType: string,        // lowercase hyphenated
+  metaDescription: string,    // first 155 chars, no HTML
+  metaKeywords: string[],     // from Target Keywords, split by comma
+  author: "Emon Hossain",
+  publishDate: string,        // YYYY-MM-DD
+  readTime: string,           // "13 min read"
+  heroImageAlt: string,       // same as title
+  content: string,            // FULL HTML from ```html block — ALL 2500 words
+  faq: [{question: string, answer: string}],  // 5 FAQs per article
+  ctaService: string,
+  ctaPrice: string,           // extract price from ctaService (e.g. "৳3,750" or "$45")
+  ctaLink: string,            // map: Quick Win→"/services/ai-quick-win", Sprint→"/services/ai-sprint", Retainer→"/services/ai-retainer", Coaching→"/services/ai-coaching", Workshop→"/services/custom-ai-system", Custom→"/services/custom-ai-system"
+  internalLinks: [{text: string, href: string}]
+}
+
+IMPORTANT: Every article content is approximately 2500 words of HTML. Do NOT truncate. Do NOT summarize. Include the COMPLETE HTML content for every single article. There must be exactly 50 articles in the array.
+
+=== TASK 3: UPDATE BLOG LISTING PAGE ===
+File: Blog.tsx (or wherever the /blog page component is)
+
+- Must display ALL 50 articles as cards
+- Filter tabs for 10 target groups: All, Students, Job Seekers, Freelancers, Researchers, Content Creators, Digital Agencies, SME Founders, F-Commerce, Consultants, Corporates
+- Filter tabs for 5 article types: All, Wake-Up Call, System Reveal, Transformation, Free Value, Future Shock
+- Each card shows: title, target group badge, article type badge, read time, publish date, first line of content
+- Cards link to /blog/{slug}
+- SEO: page title "Blog | SYSmoAI", meta description "AI systems guides for students, freelancers, agencies, and businesses."
+
+=== TASK 4: UPDATE BLOG ARTICLE PAGE ===
+File: BlogPost.tsx (or wherever /blog/:slug renders)
+
+- Render full HTML content using dangerouslySetInnerHTML=__html: post.content
+- MUST render the COMPLETE 2500-word article, not a truncated version
+- Add author bio at top: "Emon Hossain · Founder, SYSmoAI · {readTime} · {publishDate}"
+- Add FAQ section below article (render all 5 Q&As with accordion expand/collapse)
+- Add "Related Articles" section: show 3 other articles from same targetGroup
+- Add share buttons: Twitter, LinkedIn, WhatsApp, Copy Link
+- Add JSON-LD structured data in useEffect:
+
+  Article schema:
+  {"@context":"https://schema.org","@type":"Article","headline":title,"author":{"@type":"Person","name":"Emon Hossain"},"publisher":{"@type":"Organization","name":"SYSmoAI"},"datePublished":publishDate,"description":metaDescription}
+
+  FAQ schema:
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}}]}
+
+- Set document.title to "{title} | SYSmoAI Blog"
+- Set meta description tag
+
+=== TASK 5: UPDATE SITEMAP ===
+File: public/sitemap.xml (or wherever it is)
+
+Add ALL 50 blog URLs:
+<url><loc>https://sysmoai.com/blog/{slug}</loc><lastmod>2026-04-16</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+Also add the blog index:
+<url><loc>https://sysmoai.com/blog</loc><lastmod>2026-04-16</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
+
+=== TASK 6: UPDATE ROBOTS.TXT ===
+File: public/robots.txt
+
+User-agent: *
+Allow: /
+Sitemap: https://sysmoai.com/sitemap.xml
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+=== TASK 7: BUILD AND TEST ===
+1. Install dependencies if needed
+2. Run the build command (check package.json for exact command)
+3. Fix any TypeScript or build errors
+4. Test locally:
+   - /blog loads with 50 article cards ← MUST be 50, not 10
+   - Click any article → full 2500-word content renders
+   - Filter by "Students" → shows 5 articles
+   - Filter by "Consultants" → shows 5 articles
+   - Filter by "Wake-Up Call" → shows 10 articles
+   - FAQ accordion works
+   - Share buttons work
+   - No console errors
+5. Deploy
+
+=== CRITICAL RULES ===
+1. DO NOT modify any page except blog-related files (blogPosts.ts, Blog.tsx, BlogPost.tsx, sitemap.xml, robots.txt)
+2. DO NOT change the router, framework, or package manager
+3. There must be EXACTLY 50 articles after deployment — not 10, not 40, ALL 50
+4. Every article must have FULL 2500-word HTML content — no truncation
+5. Every article must have 5 FAQs
+6. Use empty string "" for any missing optional field, NEVER undefined
+7. All 50 slugs are unique — do not skip any
+
+=== VERIFICATION ===
+After deploy, confirm:
+□ /blog shows 50 articles
+□ All 10 target group filters work
+□ All 5 article type filters work  
+□ Each article renders complete 2500-word HTML content
+□ FAQ sections display on each article
+□ JSON-LD schema present in page source
+□ sitemap.xml has 50 blog URLs + blog index URL
+□ robots.txt is correct
+□ Zero console errors
+□ Mobile responsive
+□ No existing pages broken (/, /services, /about, /contact still work)
