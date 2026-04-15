@@ -1,0 +1,46 @@
+FIX 3 SPECIFIC THINGS ON THE /about PAGE. Nothing else.
+
+1. FIND the about page file:
+   grep -rn "From Overworked Founder" app/ --include="*.tsx" -l
+
+2. FIND the skill tags in that file:
+   grep -n "AI Systems Architecture\|Prompt Engineering\|Notion OS\|n8n Automation\|AI Agent Design\|500+ Projects\|SEO Expert\|AI Coaching" [FILENAME]
+
+3. FOR EACH SKILL TAG, change <span> to <a> with these hrefs:
+   "AI Systems Architecture" → href="/services"
+   "Prompt Engineering" OR "Top 5% Prompt Engineering" → href="/free-ai-audit"
+   "Notion OS" → href="/services/notion-os"
+   "n8n Automation" → href="/services/n8n-automation"
+   "AI Agent Design" → href="/services/ai-agent-dev"
+   "500+ Projects" OR "500+ Projects Delivered" → href="/results"
+   "SEO Expert" → href="/services"
+   "AI Coaching" → href="/services/ai-coaching"
+
+   Keep the SAME className. Just change the element from span to a and add the href.
+   Add these hover classes: hover:bg-blue-100 hover:border-blue-300 transition-all cursor-pointer
+
+4. FIND all "See case studies" links in the same file:
+   grep -n "See case studies" [FILENAME]
+   
+   Change every href to "/results"
+
+5. FIND all "See example" links in the same file:
+   grep -n "See example" [FILENAME]
+   
+   Change them to these specific hrefs (in order of appearance):
+   1st "See example →" (We Build, Not Consult) → href="/services/ai-quick-win"
+   2nd "See example →" (Results First) → href="/results"
+   3rd "See example →" (Your System, Your Control) → href="/services/ai-sprint"
+   4th "See example →" (Bangladesh-Rooted) → href="/services"
+   5th "See example →" (Global Standards) → href="/pricing"
+
+6. VERIFY:
+   grep -n "href=" [FILENAME] | grep -i "skill\|tag\|case.stud\|example"
+   (should show the new hrefs)
+
+7. npm run build
+   (must exit 0)
+
+8. git add -A && git commit -m "fix: about page skill tags + case study links + example links" && git push origin main
+
+Report: how many tags converted, how many links updated.

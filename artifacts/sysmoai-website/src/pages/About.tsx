@@ -76,7 +76,7 @@ const principles = [
     icon: '🇧🇩',
     title: 'Bangladesh-Rooted',
     desc: <>We understand bKash, Nagad, <InlineLink href="/for/f-commerce">F-commerce</InlineLink>, WhatsApp-first business culture, and local market realities that global firms never will.</>,
-    link: '/for/sme-founders'
+    link: '/services'
   },
   {
     icon: '🌍',
@@ -94,7 +94,7 @@ const stats = [
 ];
 
 const skillTags = [
-  { label: 'AI Systems Architecture', href: '/services/ai-sprint' },
+  { label: 'AI Systems Architecture', href: '/services' },
   { label: 'Prompt Engineering', href: '/free-ai-audit' },
   { label: 'Notion OS', href: '/services/notion-os' },
   { label: 'n8n Automation', href: '/services/n8n-automation' },
