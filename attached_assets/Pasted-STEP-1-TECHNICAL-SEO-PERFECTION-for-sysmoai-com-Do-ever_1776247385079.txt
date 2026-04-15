@@ -1,0 +1,212 @@
+STEP 1: TECHNICAL SEO PERFECTION for sysmoai.com
+Do everything in order. Report after each phase.
+
+The source code is at: ~/workspace/artifacts/sysmoai-website/
+All page files are in: ~/workspace/artifacts/sysmoai-website/src/pages/
+
+════════════════════════════════════════
+PHASE 1 — VERIFY & ADD JSON-LD STRUCTURED DATA
+════════════════════════════════════════
+
+1. Check if JSON-LD already exists:
+   grep -rn "application/ld+json" ~/workspace/artifacts/sysmoai-website/src/ | head -20
+
+2. If Organization schema is NOT in the root layout or Home page, add it.
+   Find the main layout or App component:
+   find ~/workspace/artifacts/sysmoai-website/src -name "App.*" -o -name "Layout.*" -o -name "main.*" | head -5
+
+3. In the root layout/App component, add this inside the component (renders on all pages):
+
+   useEffect(() => {
+     const existingSchema = document.querySelector('script[data-schema="organization"]');
+     if (!existingSchema) {
+       const script = document.createElement('script');
+       script.type = 'application/ld+json';
+       script.setAttribute('data-schema', 'organization');
+       script.textContent = JSON.stringify({
+         "@context": "https://schema.org",
+         "@type": "Organization",
+         "name": "SYSmoAI",
+         "url": "https://sysmoai.com",
+         "description": "AI Systems Consultancy — Dhaka, Bangladesh. Custom AI automation, Notion OS, AI agents for businesses worldwide.",
+         "founder": {
+           "@type": "Person",
+           "name": "Emon Hossain",
+           "jobTitle": "AI Systems Architect & Founder",
+           "url": "https://sysmoai.com/about"
+         },
+         "address": {
+           "@type": "PostalAddress",
+           "addressLocality": "Dhaka",
+           "addressCountry": "BD"
+         },
+         "telephone": "+8801711638693",
+         "email": "hello@sysmoai.com",
+         "sameAs": [
+           "https://www.facebook.com/sysmoai",
+           "https://www.linkedin.com/company/sysmoai",
+           "https://www.youtube.com/@sysmoai"
+         ]
+       });
+       document.head.appendChild(script);
+     }
+   }, []);
+
+4. Verify the /services page has FAQPage schema:
+   grep -n "FAQPage" ~/workspace/artifacts/sysmoai-website/src/pages/Services.tsx
+
+   If not present, add FAQPage schema in the Services page useEffect:
+
+   const faqSchema = {
+     "@context": "https://schema.org",
+     "@type": "FAQPage",
+     "mainEntity": [
+       { "@type": "Question", "name": "How long does each package take?", "acceptedAnswer": { "@type": "Answer", "text": "AI Quick Win: 3 days. AI Sprint: 3 weeks. AI Retainer: ongoing monthly." }},
+       { "@type": "Question", "name": "Do you work with international clients?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We accept USD via Wise, Payoneer, and Stripe. English-first communication." }},
+       { "@type": "Question", "name": "What's your revision policy?", "acceptedAnswer": { "@type": "Answer", "text": "Quick Win includes 1 free revision. Sprint includes unlimited revisions during the 3-week build." }}
+     ]
+   };
+
+5. Do the same for /pricing with its FAQ data.
+
+Report: which schemas exist, which were added.
+
+════════════════════════════════════════
+PHASE 2 — VERIFY & ADD OG IMAGES + META
+════════════════════════════════════════
+
+1. Check if OG meta tags exist:
+   grep -rn "og:image\|openGraph\|twitter:image" ~/workspace/artifacts/sysmoai-website/src/ | head -10
+
+2. If not present, find the root index.html or head management:
+   find ~/workspace/artifacts/sysmoai-website -name "index.html" -o -name "head*" | head -5
+   grep -rn "<head" ~/workspace/artifacts/sysmoai-website/src/ | head -5
+
+3. Add these meta tags to <head> (either via index.html or via React Helmet/useEffect):
+
+   <meta property="og:title" content="SYSmoAI — AI Systems That Work For You" />
+   <meta property="og:description" content="AI automation, Notion OS, custom AI agents for businesses in Bangladesh and worldwide. 500+ projects delivered." />
+   <meta property="og:image" content="https://sysmoai.com/og-image.png" />
+   <meta property="og:url" content="https://sysmoai.com" />
+   <meta property="og:type" content="website" />
+   <meta property="og:site_name" content="SYSmoAI" />
+   <meta name="twitter:card" content="summary_large_image" />
+   <meta name="twitter:title" content="SYSmoAI — AI Systems That Work For You" />
+   <meta name="twitter:description" content="AI automation for businesses in Bangladesh and worldwide." />
+   <meta name="twitter:image" content="https://sysmoai.com/og-image.png" />
+
+4. Create OG image placeholder:
+   Create a simple SVG-based OG image at ~/workspace/artifacts/sysmoai-website/public/og-image.png
+   
+   If you can generate images, create a 1200x630 image with:
+   - Background: #0057FF (brand primary)
+   - White text: "SYSmoAI" (large)
+   - Subtitle: "AI Systems That Work For You"
+   - Bottom: "sysmoai.com"
+   
+   If you cannot generate images, create an HTML file that renders as OG:
+   Create ~/workspace/artifacts/sysmoai-website/public/og-image.html with the brand colors
+   and take a screenshot, OR use a solid color placeholder.
+
+Report: OG tags added? Image created?
+
+════════════════════════════════════════
+PHASE 3 — FIX TOOL MARQUEE DOM DUPLICATION
+════════════════════════════════════════
+
+The homepage tool marquee (ChatGPT, Claude, Notion, n8n...) 
+repeats the same list 4× in the DOM. This bloats page size.
+
+1. Find the marquee component:
+   grep -rn "ChatGPT.*Claude.*Notion.*n8n" ~/workspace/artifacts/sysmoai-website/src/ --include="*.tsx" -l | head -5
+
+2. Current structure likely has the tool list duplicated 4 times in JSX.
+   Change to render the list ONCE in a container and use CSS animation:
+
+   .marquee-track {
+     display: flex;
+     animation: marquee 30s linear infinite;
+     width: max-content;
+   }
+   @keyframes marquee {
+     0% { transform: translateX(0); }
+     100% { transform: translateX(-50%); }
+   }
+
+   Render the list only TWICE (for seamless loop), not 4 times:
+   <div className="marquee-track">
+     {tools.map(t => <span key={t}>{t}</span>)}
+     {tools.map(t => <span key={`dup-${t}`}>{t}</span>)}
+   </div>
+
+Report: marquee optimized? DOM reduced?
+
+════════════════════════════════════════
+PHASE 4 — CANONICAL URLs + LANG + ALT TEXT + ARIA
+════════════════════════════════════════
+
+1. Add lang="en" to HTML tag:
+   Find index.html:
+   cat ~/workspace/artifacts/sysmoai-website/index.html | head -5
+   
+   Change <html> to <html lang="en">
+
+2. Add canonical URL to each page.
+   In each page component's useEffect, add:
+   
+   const link = document.querySelector('link[rel="canonical"]') || document.createElement('link');
+   link.rel = 'canonical';
+   link.href = 'https://sysmoai.com' + window.location.pathname;
+   if (!document.querySelector('link[rel="canonical"]')) document.head.appendChild(link);
+
+3. Audit all images for alt text:
+   grep -rn "<img" ~/workspace/artifacts/sysmoai-website/src/ --include="*.tsx" | grep -v "alt=" | head -20
+   
+   Add descriptive alt text to every <img> missing it.
+
+4. Add aria-label to all icon-only buttons/links:
+   grep -rn "aria-label" ~/workspace/artifacts/sysmoai-website/src/ --include="*.tsx" | wc -l
+   
+   Find icon buttons without aria-label:
+   grep -rn "<a.*href.*>" ~/workspace/artifacts/sysmoai-website/src/ --include="*.tsx" | grep -v "aria-label" | grep -v ">[^<]" | head -10
+   
+   Add aria-label to social icons, WhatsApp float, and any icon-only buttons.
+
+5. Add <noscript> fallback for counter stats on homepage:
+   Find the counter section in Home.tsx and add after it:
+   <noscript>
+     <div>500+ Projects Delivered · 8+ Client Categories · 3+ Years Building AI · Top 5% Prompt Engineers</div>
+   </noscript>
+
+Report: lang added? canonical added to how many pages? alt text fixed? aria-labels added?
+
+════════════════════════════════════════
+PHASE 5 — BUILD + VERIFY + COMMIT
+════════════════════════════════════════
+
+1. Build:
+   cd ~/workspace/artifacts/sysmoai-website && npm run build
+
+2. Quality checks:
+   grep -rn "whatsapp://send" src/ | grep -v node_modules
+   grep -rn "Rumi K\|Sajid A" src/ | grep -v node_modules
+   (both must return 0)
+
+3. Verify new additions:
+   grep -rn "application/ld+json" src/ | wc -l    (should be 3+: Organization, FAQPage services, FAQPage pricing)
+   grep -rn "og:image" src/ | wc -l               (should be 1+)
+   grep -rn "lang=\"en\"" index.html               (should be 1)
+   grep -rn "canonical" src/ | wc -l               (should be 1+)
+   grep -rn "noscript" src/ | wc -l                (should be 1+)
+
+4. Commit:
+   git add -A
+   git commit -m "feat: Step 1 — Technical SEO perfection — JSON-LD schemas, OG images, canonical URLs, lang, alt text, aria-labels, noscript fallbacks, marquee optimization"
+   git push origin main
+
+REPORT:
+PHASE 1 - JSON-LD: [N] schemas (Organization, FAQPage×2, etc.)
+PHASE 2 - OG: tags added, image created/placeholder
+PHASE 3 - Marquee: DOM reduced from 4× to 2×
+PHASE 4 - Canonical: [N] pages, lang="en" added, [N] alt text fixed, [N] aria-labels added
+PHASE 5 - Build: exit 0, quality checks clean ✅
