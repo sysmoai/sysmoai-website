@@ -1,0 +1,197 @@
+STEP 3: TRUST & SOCIAL PROOF for sysmoai.com
+Source code at: ~/workspace/artifacts/sysmoai-website/src/
+
+This step adds visual trust signals that top AI consulting sites 
+(CT Labs, Toptal, Deloitte) all have. Do everything in order.
+
+════════════════════════════════════════
+PHASE 1 — ADD "TOOLS WE'RE CERTIFIED IN" LOGO STRIP
+════════════════════════════════════════
+
+Add a logo strip section on the homepage showing the tools SYSmoAI 
+uses. This goes AFTER the hero section, BEFORE the "Problem" section.
+
+1. Find the Home page:
+   ls ~/workspace/artifacts/sysmoai-website/src/pages/Home.tsx
+
+2. Find where the "Problem" section starts:
+   grep -n "The Problem\|Running your business" src/pages/Home.tsx | head -5
+
+3. Add a new section BEFORE the Problem section:
+
+<section className="py-12 bg-[#0A0B0F] border-y border-slate-800/50">
+  <div className="max-w-5xl mx-auto px-4 text-center">
+    <p className="text-slate-500 text-xs font-semibold uppercase tracking-widest mb-6">
+      Tools & Platforms We Build With
+    </p>
+    <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4">
+      {[
+        { name: 'OpenAI', icon: '🤖' },
+        { name: 'Notion', icon: '📋' },
+        { name: 'n8n', icon: '⚡' },
+        { name: 'Zapier', icon: '🔗' },
+        { name: 'Make', icon: '🔄' },
+        { name: 'WhatsApp API', icon: '💬' },
+        { name: 'Claude AI', icon: '🧠' },
+        { name: 'Google Workspace', icon: '📊' },
+      ].map(tool => (
+        <div key={tool.name} className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+          <span className="text-lg">{tool.icon}</span>
+          <span className="text-sm font-medium">{tool.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+NOTE: This is different from the existing scrolling marquee. This is 
+a STATIC, clean logo strip — like Toptal and CT Labs have.
+
+Report: section added, position confirmed.
+
+════════════════════════════════════════
+PHASE 2 — ADD TRUST BADGES ROW
+════════════════════════════════════════
+
+Add a row of trust badges on the homepage, INSIDE the hero section 
+(below the hero CTA buttons, above the scroll indicator).
+
+1. Find the hero CTA area:
+   grep -n "No sales pitch\|bottleneck\|practical AI plan" src/pages/Home.tsx | head -5
+
+2. Add trust badges AFTER the "No sales pitch" microcopy:
+
+<div className="flex flex-wrap justify-center gap-3 mt-6">
+  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800/50 border border-slate-700/50 rounded-full">
+    <span className="text-green-400 text-xs">✓</span>
+    <span className="text-slate-400 text-xs font-medium">Results Guaranteed</span>
+  </div>
+  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800/50 border border-slate-700/50 rounded-full">
+    <span className="text-blue-400 text-xs">🏆</span>
+    <span className="text-slate-400 text-xs font-medium">Top 5% AI Engineers</span>
+  </div>
+  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800/50 border border-slate-700/50 rounded-full">
+    <span className="text-purple-400 text-xs">📦</span>
+    <span className="text-slate-400 text-xs font-medium">500+ Projects</span>
+  </div>
+  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800/50 border border-slate-700/50 rounded-full">
+    <span className="text-amber-400 text-xs">🌍</span>
+    <span className="text-slate-400 text-xs font-medium">BD + International</span>
+  </div>
+</div>
+
+Report: badges added, position confirmed.
+
+════════════════════════════════════════
+PHASE 3 — ADD FOUNDER VIDEO PLACEHOLDER ON /about
+════════════════════════════════════════
+
+Top consulting sites have a video introduction. We'll add a placeholder 
+that Emon can replace with a real Loom video later.
+
+1. Find the About page founder section:
+   grep -n "I built SYSmoAI because" src/pages/About.tsx | head -5
+
+2. Add a video placeholder BEFORE the founder quote:
+
+<div className="mb-8 bg-slate-800 border border-slate-700 rounded-2xl p-8 text-center">
+  <div className="w-16 h-16 mx-auto mb-4 bg-blue-600 rounded-full flex items-center justify-center">
+    <span className="text-white text-2xl">▶</span>
+  </div>
+  <h3 className="text-white font-semibold mb-2">Watch: Why I Built SYSmoAI</h3>
+  <p className="text-slate-400 text-sm mb-4">
+    60 seconds. Emon explains the journey from overwhelmed founder to AI systems architect.
+  </p>
+  <p className="text-slate-500 text-xs italic">
+    Video coming soon — subscribe to be notified
+  </p>
+</div>
+
+Report: video placeholder added.
+
+════════════════════════════════════════
+PHASE 4 — ENHANCE CLIENT RESULTS WITH INDUSTRY ICONS
+════════════════════════════════════════
+
+The /results page currently has text-only cards. Add visual icons 
+to make them more scannable and professional.
+
+1. Find the Results page:
+   grep -n "What we've delivered\|Representative results" src/pages/Results.tsx | head -5
+
+2. For each result card, add an industry-specific emoji/icon at the top:
+
+   The 6 results should have these icons:
+   - F-Commerce: 🛒
+   - Digital Agency: 🏢
+   - Coaching Business: 🎓
+   - Senior Freelancer: 💼
+   - SME Founder: 🏭
+   - Creative Agency: 🎨
+
+   If the cards already have icons, ensure they're prominent.
+   If not, add them as the first element in each card.
+
+Report: icons added to result cards.
+
+════════════════════════════════════════
+PHASE 5 — ADD "TRUSTED BY" SECTION ON HOMEPAGE
+════════════════════════════════════════
+
+Add a small "Trusted by businesses in" section ABOVE the final CTA,
+showing the geographic reach.
+
+1. Find the urgency/final CTA section:
+   grep -n "Limited Availability\|Emon personally conducts" src/pages/Home.tsx | head -5
+
+2. Add this section BEFORE the urgency banner:
+
+<section className="py-12 bg-[#0A0B0F]">
+  <div className="max-w-3xl mx-auto px-4 text-center">
+    <p className="text-slate-500 text-xs font-semibold uppercase tracking-widest mb-4">
+      Trusted by businesses in
+    </p>
+    <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-400">
+      <span>🇧🇩 Bangladesh</span>
+      <span className="text-slate-600">·</span>
+      <span>🇺🇸 United States</span>
+      <span className="text-slate-600">·</span>
+      <span>🇬🇧 United Kingdom</span>
+      <span className="text-slate-600">·</span>
+      <span>🇨🇦 Canada</span>
+      <span className="text-slate-600">·</span>
+      <span>🇦🇪 UAE</span>
+      <span className="text-slate-600">·</span>
+      <span>🇮🇳 India</span>
+    </div>
+  </div>
+</section>
+
+Report: section added.
+
+════════════════════════════════════════
+PHASE 6 — BUILD + VERIFY + COMMIT
+════════════════════════════════════════
+
+1. Build:
+   cd ~/workspace/artifacts/sysmoai-website && npm run build
+
+2. Verify:
+   - Homepage has "Tools & Platforms We Build With" logo strip
+   - Homepage has trust badges below hero
+   - Homepage has "Trusted by businesses in" section
+   - /about has video placeholder
+   - /results has industry icons on cards
+
+3. Commit:
+   git add -A
+   git commit -m "feat: Step 3 — Trust & social proof — tool logos, trust badges, video placeholder, result icons, trusted-by section"
+   git push origin main
+
+REPORT:
+PHASE 1 - Tool logo strip: added [where]
+PHASE 2 - Trust badges: [N] badges in hero
+PHASE 3 - Video placeholder: added on /about
+PHASE 4 - Result icons: [N] cards enhanced
+PHASE 5 - Trusted-by section: added with [N] countries
+PHASE 6 - Build: exit 0 ✅

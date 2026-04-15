@@ -250,6 +250,20 @@ export default function About() {
                   ))}
                 </div>
 
+                {/* Founder video placeholder */}
+                <div className="mb-6 bg-slate-800 border border-slate-700 rounded-2xl p-8 text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-blue-600 rounded-full flex items-center justify-center shadow-lg shadow-blue-600/30">
+                    <span className="text-white text-2xl leading-none">▶</span>
+                  </div>
+                  <h3 className="text-white font-semibold mb-2">Watch: Why I Built SYSmoAI</h3>
+                  <p className="text-slate-400 text-sm mb-4">
+                    60 seconds. Emon explains the journey from overwhelmed founder to AI systems architect.
+                  </p>
+                  <p className="text-slate-500 text-xs italic">
+                    Video coming soon — subscribe to be notified
+                  </p>
+                </div>
+
                 <blockquote className="text-slate-700 text-lg leading-relaxed italic border-l-4 border-blue-500 pl-5 my-5">
                   "I built SYSmoAI because I was you 3 years ago — overwhelmed, tool-hopping, and losing income while AI changed everything around me. I spent 3 years mastering every AI tool. Then I realized: most people don't need another tool. They need someone to build the system FOR them."
                   <footer className="mt-3 text-sm font-semibold text-slate-600 not-italic">

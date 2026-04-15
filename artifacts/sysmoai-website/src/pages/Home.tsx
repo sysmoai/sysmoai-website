@@ -453,6 +453,27 @@ export default function Home() {
               </span>
             ))}
           </motion.div>
+
+          {/* Trust badge pills */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.75 }}
+            className="flex flex-wrap justify-center gap-3 mt-6"
+          >
+            {[
+              { emoji: '✓', color: '#4ade80', label: 'Results Guaranteed' },
+              { emoji: '🏆', color: '#60a5fa', label: 'Top 5% AI Engineers' },
+              { emoji: '📦', color: '#c084fc', label: '500+ Projects' },
+              { emoji: '🌍', color: '#fbbf24', label: 'BD + International' },
+            ].map(({ emoji, color, label }) => (
+              <div key={label} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+                style={{ background: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(37,99,235,0.06)', border: `1px solid ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(37,99,235,0.12)'}` }}>
+                <span className="text-xs" style={{ color }}>{emoji}</span>
+                <span className="text-xs font-medium" style={{ color: isDark ? '#94A3B8' : '#64748B' }}>{label}</span>
+              </div>
+            ))}
+          </motion.div>
         </motion.div>
 
         {/* Scroll cue */}
@@ -476,6 +497,36 @@ export default function Home() {
           TOOL MARQUEE STRIP
       ══════════════════════════════════════ */}
       <ToolMarquee isDark={isDark} />
+
+      {/* ══════════════════════════════════════
+          TOOLS & PLATFORMS LOGO STRIP
+      ══════════════════════════════════════ */}
+      <section className="py-12 border-y" style={{ background: isDark ? '#0A0B0F' : '#F8FAFF', borderColor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(37,99,235,0.08)' }}>
+        <div className="max-w-5xl mx-auto px-4 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest mb-8" style={{ color: isDark ? '#475569' : '#94A3B8' }}>
+            Tools &amp; Platforms We Build With
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-x-10 gap-y-5">
+            {[
+              { name: 'OpenAI',           icon: '🤖' },
+              { name: 'Notion',           icon: '📋' },
+              { name: 'n8n',              icon: '⚡' },
+              { name: 'Zapier',           icon: '🔗' },
+              { name: 'Make',             icon: '🔄' },
+              { name: 'WhatsApp API',     icon: '💬' },
+              { name: 'Claude AI',        icon: '🧠' },
+              { name: 'Google Workspace', icon: '📊' },
+            ].map(tool => (
+              <div key={tool.name} className="flex items-center gap-2 transition-colors" style={{ color: isDark ? '#64748B' : '#94A3B8' }}
+                onMouseEnter={e => (e.currentTarget.style.color = isDark ? '#F1F5F9' : '#0A0B0F')}
+                onMouseLeave={e => (e.currentTarget.style.color = isDark ? '#64748B' : '#94A3B8')}>
+                <span className="text-lg">{tool.icon}</span>
+                <span className="text-sm font-medium">{tool.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ══════════════════════════════════════
           SECTION 2 — PROBLEM (Chaos Side)
@@ -1330,8 +1381,29 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════
-          BOTTOM BRAND STRIP
+          TRUSTED BY — GEOGRAPHIC REACH
       ══════════════════════════════════════ */}
+      <section className="py-12" style={{ background: isDark ? '#0A0B0F' : '#F8FAFF' }}>
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: isDark ? '#475569' : '#94A3B8' }}>
+            Trusted by businesses in
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 text-sm" style={{ color: isDark ? '#64748B' : '#94A3B8' }}>
+            <span>🇧🇩 Bangladesh</span>
+            <span style={{ color: isDark ? '#334155' : '#CBD5E1' }}>·</span>
+            <span>🇺🇸 United States</span>
+            <span style={{ color: isDark ? '#334155' : '#CBD5E1' }}>·</span>
+            <span>🇬🇧 United Kingdom</span>
+            <span style={{ color: isDark ? '#334155' : '#CBD5E1' }}>·</span>
+            <span>🇨🇦 Canada</span>
+            <span style={{ color: isDark ? '#334155' : '#CBD5E1' }}>·</span>
+            <span>🇦🇪 UAE</span>
+            <span style={{ color: isDark ? '#334155' : '#CBD5E1' }}>·</span>
+            <span>🇮🇳 India</span>
+          </div>
+        </div>
+      </section>
+
       <section className="py-16 relative overflow-hidden" style={{ background: isDark ? '#060810' : '#F8FAFF', borderTop: `1px solid ${isDark ? 'rgba(255,255,255,0.04)' : 'rgba(37,99,235,0.08)'}` }}>
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
           className="max-w-4xl mx-auto px-4 text-center">

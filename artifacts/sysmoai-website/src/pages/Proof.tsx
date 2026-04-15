@@ -18,12 +18,12 @@ const stats = [
 ];
 
 const resultCards = [
-  { category: 'F-Commerce',      result: '400+ DMs/day automated',         detail: 'Facebook DM auto-reply system + order management'         },
-  { category: 'Digital Agency',  result: '15 hrs/week saved',              detail: 'AI Quick Win — automated reporting + client updates'       },
-  { category: 'Coaching Business', result: '20 hrs/week freed',            detail: 'Notion OS + client onboarding automation'                 },
-  { category: 'Senior Freelancer', result: 'Revenue tripled',              detail: 'Skill upgrade + premium AI service package launch'        },
-  { category: 'SME Founder',     result: 'WhatsApp chaos eliminated',      detail: 'WhatsApp auto-reply + CRM + real-time dashboard'          },
-  { category: 'Creative Agency', result: 'Proposals: 4 hrs → 15 mins',    detail: 'AI Sprint — automated proposal builder + client templates' },
+  { icon: '🛒', category: 'F-Commerce',      result: '400+ DMs/day automated',         detail: 'Facebook DM auto-reply system + order management'         },
+  { icon: '🏢', category: 'Digital Agency',  result: '15 hrs/week saved',              detail: 'AI Quick Win — automated reporting + client updates'       },
+  { icon: '🎓', category: 'Coaching Business', result: '20 hrs/week freed',            detail: 'Notion OS + client onboarding automation'                 },
+  { icon: '💼', category: 'Senior Freelancer', result: 'Revenue tripled',              detail: 'Skill upgrade + premium AI service package launch'        },
+  { icon: '🏭', category: 'SME Founder',     result: 'WhatsApp chaos eliminated',      detail: 'WhatsApp auto-reply + CRM + real-time dashboard'          },
+  { icon: '🎨', category: 'Creative Agency', result: 'Proposals: 4 hrs → 15 mins',    detail: 'AI Sprint — automated proposal builder + client templates' },
 ];
 
 export default function Proof() {
@@ -82,6 +82,7 @@ export default function Proof() {
             {resultCards.map((r, i) => (
               <motion.div key={i} variants={fadeUp}
                 className="bg-white border border-slate-100 p-7 rounded-2xl shadow-sm flex flex-col">
+                <span className="text-3xl mb-3">{r.icon}</span>
                 <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full self-start mb-4">{r.category}</span>
                 <p className="text-xl font-bold text-slate-900 mb-2">{r.result}</p>
                 <p className="text-slate-500 text-sm flex-1">{r.detail}</p>
