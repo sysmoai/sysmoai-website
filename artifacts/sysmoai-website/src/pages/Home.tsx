@@ -1418,6 +1418,10 @@ export default function Home() {
               <p className="text-amber-700 text-sm mt-0.5">
                 Emon personally conducts every discovery call. We keep slots limited to ensure quality. Book yours before this week fills up.
               </p>
+              <div className="flex items-center gap-2 mt-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse shrink-0" />
+                <span className="text-green-700 text-xs font-medium">3 audit slots remaining this week</span>
+              </div>
             </div>
           </div>
 

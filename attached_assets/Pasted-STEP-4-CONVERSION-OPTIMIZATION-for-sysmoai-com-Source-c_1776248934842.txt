@@ -1,0 +1,184 @@
+STEP 4: CONVERSION OPTIMIZATION for sysmoai.com
+Source code at: ~/workspace/artifacts/sysmoai-website/src/
+Do everything in order. Report after each phase.
+
+════════════════════════════════════════
+PHASE 1 — STICKY CTA BAR ON SCROLL
+════════════════════════════════════════
+
+Add a slim sticky bar that appears when the user scrolls past the hero.
+This is the #1 conversion booster on top consulting sites.
+
+1. Create a new component: src/components/StickyCTA.tsx
+
+import { useState, useEffect } from 'react';
+
+export default function StickyCTA() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 600);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#0A0B0F]/95 backdrop-blur-sm border-t border-slate-800 py-3 px-4 transition-all duration-300">
+      <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
+        <div className="hidden sm:block">
+          <p className="text-white text-sm font-semibold">Ready to automate your business?</p>
+          <p className="text-slate-400 text-xs">Free 30-min AI audit · No commitment</p>
+        </div>
+        <div className="flex gap-3 w-full sm:w-auto">
+          <a href="/free-ai-audit"
+             className="flex-1 sm:flex-none text-center bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
+            Book Free Audit
+          </a>
+          <a href="https://wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%20need%20help"
+             target="_blank" rel="noopener noreferrer"
+             className="flex-1 sm:flex-none text-center border border-green-500 text-green-400 hover:bg-green-500 hover:text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
+            💬 WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+2. Import and render in App.tsx (inside the Router, outside Route components):
+   Add: import StickyCTA from './components/StickyCTA';
+   Render: <StickyCTA /> at the bottom of the layout, before the footer.
+
+3. Make sure it doesn't overlap with the floating WhatsApp button.
+   The WhatsApp FAB should move up when the sticky bar appears.
+   Add: className on WhatsApp FAB that shifts bottom position.
+
+Report: component created, rendered, WhatsApp FAB adjusted.
+
+════════════════════════════════════════
+PHASE 2 — EMAIL CAPTURE IN FOOTER
+════════════════════════════════════════
+
+Add a simple email capture section in the footer for lead generation.
+This captures visitors who aren't ready to book but want to stay in touch.
+
+1. Find the footer component:
+   grep -rn "footer\|Footer" src/ --include="*.tsx" -l | head -5
+
+2. Add an email capture section ABOVE the footer links:
+
+<div className="border-b border-slate-800 pb-8 mb-8">
+  <div className="max-w-md mx-auto text-center">
+    <h3 className="text-white font-semibold mb-2">Get AI tips for your business</h3>
+    <p className="text-slate-400 text-sm mb-4">
+      Weekly insights on AI automation, Notion systems, and growing with AI. Free.
+    </p>
+    <form className="flex gap-2" onSubmit={(e) => { e.preventDefault(); /* TODO: connect to email service */ }}>
+      <input
+        type="email"
+        placeholder="your@email.com"
+        required
+        className="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-white text-sm placeholder:text-slate-500 focus:border-blue-500 focus:outline-none"
+      />
+      <button
+        type="submit"
+        className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap"
+      >
+        Subscribe
+      </button>
+    </form>
+    <p className="text-slate-600 text-xs mt-2">No spam. Unsubscribe anytime.</p>
+  </div>
+</div>
+
+Report: email capture section added to footer.
+
+════════════════════════════════════════
+PHASE 3 — URGENCY INDICATOR
+════════════════════════════════════════
+
+The "Limited Availability" section already exists on homepage.
+Enhance it with a more specific urgency message.
+
+1. Find the urgency section:
+   grep -n "Limited Availability\|Emon personally" src/pages/Home.tsx | head -5
+
+2. Add a dynamic-looking counter below "Book yours before this week fills up":
+
+<div className="flex items-center justify-center gap-2 mt-4">
+  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+  <span className="text-green-400 text-sm font-medium">
+    3 audit slots remaining this week
+  </span>
+</div>
+
+This creates urgency without being dishonest (you can update the number manually).
+
+Report: urgency indicator added.
+
+════════════════════════════════════════
+PHASE 4 — ENHANCE /free-ai-audit WITH BOOKING OPTIONS
+════════════════════════════════════════
+
+Currently /free-ai-audit only has WhatsApp. Add multiple booking options.
+
+1. Find the free-ai-audit page CTA:
+   grep -n "Book Free AI Audit on WhatsApp\|Ready to Book" src/pages/FreeAiAudit.tsx | head -5
+
+2. Replace the single WhatsApp CTA with a multi-option booking section:
+
+<div className="space-y-4 max-w-md mx-auto">
+  {/* Primary CTA */}
+  <a href="https://wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%20want%20to%20book%20a%20Free%20AI%20Audit"
+     target="_blank" rel="noopener noreferrer"
+     className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-4 rounded-xl transition-colors">
+    <span>💬</span> Book on WhatsApp (Fastest)
+  </a>
+  
+  {/* Secondary CTA */}
+  <a href="/contact"
+     className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-4 rounded-xl transition-colors">
+    <span>📝</span> Fill Out Contact Form
+  </a>
+  
+  {/* Tertiary */}
+  <a href="mailto:hello@sysmoai.com?subject=Free AI Audit Request"
+     className="w-full flex items-center justify-center gap-2 border border-slate-600 text-slate-300 hover:bg-slate-800 font-semibold px-6 py-4 rounded-xl transition-colors">
+    <span>📧</span> Email Us Directly
+  </a>
+</div>
+
+<div className="flex items-center justify-center gap-2 mt-6">
+  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+  <span className="text-green-400 text-sm">Usually responds within 2 hours</span>
+</div>
+
+Report: multi-option booking added to /free-ai-audit.
+
+════════════════════════════════════════
+PHASE 5 — BUILD + VERIFY + COMMIT
+════════════════════════════════════════
+
+1. Build:
+   cd ~/workspace/artifacts/sysmoai-website && npm run build
+
+2. Verify:
+   - Sticky CTA bar appears on scroll (after ~600px)
+   - Footer has email capture section
+   - Urgency indicator with "3 slots remaining" visible
+   - /free-ai-audit has 3 booking options (WhatsApp, Form, Email)
+   - WhatsApp FAB doesn't overlap with sticky bar
+
+3. Commit:
+   git add -A
+   git commit -m "feat: Step 4 — Conversion optimization — sticky CTA, email capture, urgency, multi-booking options"
+   git push origin main
+
+REPORT:
+PHASE 1 - Sticky CTA: created, WhatsApp FAB adjusted
+PHASE 2 - Email capture: added to footer
+PHASE 3 - Urgency: "3 slots remaining" with pulse indicator
+PHASE 4 - /free-ai-audit: 3 booking options (WhatsApp, Form, Email)
+PHASE 5 - Build: exit 0 ✅

@@ -149,29 +149,38 @@ export default function FreeAudit() {
             Send Emon a WhatsApp message. He'll confirm a time that works for you — usually within 2 hours on working days.
           </motion.p>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
-            <a
-              href={WA_URLS.audit}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white font-bold px-10 py-4 rounded-2xl text-lg transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              <WhatsAppIcon />
-              Book Free AI Audit on WhatsApp
-            </a>
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-6 text-sm text-slate-400">
+            <div className="space-y-4 max-w-md mx-auto">
+              <a
+                href={WA_URLS.audit}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-4 rounded-xl transition-colors"
+              >
+                <WhatsAppIcon />
+                Book on WhatsApp <span className="text-green-200 text-xs font-normal">(Fastest)</span>
+              </a>
+              <Link href="/contact"
+                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-4 rounded-xl transition-colors">
+                <span>📝</span> Fill Out Contact Form
+              </Link>
+              <a
+                href="mailto:hello@sysmoai.com?subject=Free AI Audit Request"
+                className="w-full flex items-center justify-center gap-2 border text-slate-300 hover:bg-slate-800 font-semibold px-6 py-4 rounded-xl transition-colors"
+                style={{ borderColor: 'rgba(100,116,139,0.4)' }}
+              >
+                <span>📧</span> Email Us Directly
+              </a>
+            </div>
+            <div className="flex items-center justify-center gap-2 mt-6">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              <span className="text-green-400 text-sm">Usually responds within 2 hours</span>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-5 text-sm text-slate-400">
               <span>✓ 100% free</span>
               <span>✓ No obligation</span>
-              <span>✓ Reply within 2 hours</span>
               <span>✓ Bangladesh & worldwide</span>
             </div>
           </motion.div>
-
-          <div className="mt-10 pt-8 border-t border-slate-100">
-            <p className="text-slate-400 text-sm mb-3">Prefer email? That works too.</p>
-            <Link href="/contact" className="text-blue-600 hover:text-blue-700 font-semibold text-sm transition-colors">
-              Fill out our contact form →
-            </Link>
-          </div>
         </div>
       </section>
 

@@ -4,9 +4,13 @@ import { WA_URLS } from '@/lib/whatsapp';
 
 export function WhatsAppFAB() {
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [stickyVisible, setStickyVisible] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setShowBackToTop(window.scrollY > 500);
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 500);
+      setStickyVisible(window.scrollY > 600);
+    };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -14,7 +18,7 @@ export function WhatsAppFAB() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-3">
+    <div className={`fixed right-6 z-50 flex flex-col items-center gap-3 transition-all duration-300 ${stickyVisible ? 'bottom-20' : 'bottom-6'}`}>
       {showBackToTop && (
         <button
           onClick={scrollToTop}

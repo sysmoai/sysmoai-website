@@ -2,13 +2,14 @@ import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFAB } from "@/components/WhatsAppFAB";
 import { CookieConsent } from "@/components/CookieConsent";
+import StickyCTA from "@/components/StickyCTA";
 
 import Home from "@/pages/Home";
 import NotFound from "@/pages/not-found";
@@ -155,6 +156,7 @@ function Router() {
       </main>
       <Footer />
       <WhatsAppFAB />
+      <StickyCTA />
       <CookieConsent />
     </div>
   );
