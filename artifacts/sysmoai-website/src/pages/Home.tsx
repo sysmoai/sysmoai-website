@@ -12,6 +12,7 @@ import {
   TrendingUp, Clock, BarChart3, Sparkles, Play,
 } from 'lucide-react';
 import { WA_LINK } from '@/lib/config';
+import { WA_URLS } from '@/lib/whatsapp';
 import { useTheme } from '@/contexts/ThemeContext';
 import { SYSmoAILogo } from '@/components/SYSmoAILogo';
 import { LazyImage } from '@/components/LazyImage';
@@ -101,10 +102,10 @@ const toolItems = [
 ];
 
 const steps = [
-  { num: '01', icon: Search,  title: 'DIAGNOSE', desc: 'Free 30-min discovery call. We map your biggest workflow problem and identify the highest-ROI fix.', color: '#3B82F6' },
-  { num: '02', icon: PenTool, title: 'DESIGN',   desc: 'We design your custom AI system — right tools, automations, and agents for your specific situation.', color: '#8B5CF6' },
-  { num: '03', icon: Zap,     title: 'BUILD',    desc: 'We build and deploy it. You just review and approve. No code. No complexity.', color: '#10B981' },
-  { num: '04', icon: Rocket,  title: 'SCALE',    desc: 'We train your team and optimise for 3 months — your system grows with your business.', color: '#F59E0B' },
+  { num: '01', icon: Search,  title: 'DIAGNOSE', dayLabel: '(Day 1)',    desc: 'Free 30-min discovery call. We map your biggest workflow problem and identify the highest-ROI fix.', color: '#3B82F6' },
+  { num: '02', icon: PenTool, title: 'DESIGN',   dayLabel: '(Day 2)',    desc: 'We design your custom AI system — right tools, automations, and agents for your specific situation.', color: '#8B5CF6' },
+  { num: '03', icon: Zap,     title: 'BUILD',    dayLabel: '(Day 3)',    desc: 'We build and deploy it. You just review and approve. No code. No complexity.', color: '#10B981' },
+  { num: '04', icon: Rocket,  title: 'SCALE',    dayLabel: '(Day 4–90)', desc: 'We train your team and optimise for 3 months — your system grows with your business.', color: '#F59E0B' },
 ];
 
 /* ══════════════════════════════════════════
@@ -415,8 +416,8 @@ export default function Home() {
             className="text-5xl sm:text-6xl lg:text-[5rem] font-bold tracking-[-0.032em] leading-[1.04] mb-6"
             style={{ fontFamily: "'Space Grotesk', sans-serif", color: isDark ? '#F1F5F9' : '#0A0B0F' }}
           >
-            We Build AI Systems<br />
-            <span className="brand-gradient-text">That Work For You</span>
+            Build Your AI-Powered<br />
+            <span className="brand-gradient-text">Business in 72 Hours</span>
           </motion.h1>
 
           {/* Sub */}
@@ -427,8 +428,9 @@ export default function Home() {
             className="text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed"
             style={{ color: isDark ? '#94A3B8' : '#64748B' }}
           >
-            Stop doing manually what AI can do automatically. SYSmoAI designs, builds, and deploys
-            custom AI operating systems — so your business runs even when you're not in the room.
+            SYSmoAI designs, builds and deploys custom AI operating systems for founders,
+            agencies and freelancers in Bangladesh — and clients worldwide. Automate
+            workflows, free up 20+ hours/week, and unlock new revenue streams.
           </motion.p>
 
           {/* CTAs */}
@@ -436,10 +438,10 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.42 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4"
           >
             <motion.a
-              href={WA_LINK}
+              href={WA_URLS.consultation}
               target="_blank"
               rel="noopener noreferrer"
               data-testid="link-hero-whatsapp"
@@ -448,7 +450,7 @@ export default function Home() {
               className="inline-flex items-center gap-2.5 bg-[#25D366] hover:bg-[#1ead57] text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 min-w-[220px] justify-center shadow-lg"
             >
               <MessageCircle size={21} />
-              Start on WhatsApp
+              Book Free 30-Min Consultation
             </motion.a>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Link href="/services"
@@ -465,6 +467,17 @@ export default function Home() {
               </Link>
             </motion.div>
           </motion.div>
+
+          {/* Micro-copy */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.52 }}
+            className="text-sm mb-10"
+            style={{ color: isDark ? '#475569' : '#94A3B8' }}
+          >
+            No sales pitch. We map your biggest bottleneck and outline a practical AI plan.
+          </motion.p>
 
           {/* Trust signals */}
           <motion.div
@@ -676,14 +689,14 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { target: 500, suffix: '+', label: 'Projects Delivered' },
-              { target: 3,   suffix: '+', label: 'Years of Experience' },
-              { target: 8,   suffix: '+', label: 'Client Categories'  },
-              { target: 95,  suffix: '%', label: 'Client Retention'   },
+              { target: 500, suffix: '+',  prefix: '',     label: 'Projects Delivered'        },
+              { target: 8,   suffix: '+',  prefix: '',     label: 'Client Categories Served'  },
+              { target: 3,   suffix: '+',  prefix: '',     label: 'Years Building AI Systems' },
+              { target: 5,   suffix: '%',  prefix: 'Top ', label: 'Prompt Engineers Globally' },
             ].map((stat, i) => (
               <div key={i} className="gsap-reveal">
                 <div className="text-4xl md:text-5xl font-bold tracking-tight mb-1 brand-gradient-text">
-                  <AnimatedCounter target={stat.target} suffix={stat.suffix} />
+                  <AnimatedCounter target={stat.target} suffix={stat.suffix} prefix={stat.prefix} />
                 </div>
                 <div className="text-sm font-medium" style={{ color: isDark ? '#64748B' : '#94A3B8' }}>{stat.label}</div>
               </div>
@@ -914,9 +927,10 @@ export default function Home() {
                   style={{ background: `${step.color}15`, border: `1px solid ${step.color}25` }}>
                   <step.icon size={21} style={{ color: step.color }} />
                 </div>
-                <h3 className="text-sm font-black tracking-[0.08em] mb-2" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}>
+                <h3 className="text-sm font-black tracking-[0.08em] mb-0.5" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}>
                   {step.title}
                 </h3>
+                <p className="text-xs font-semibold mb-2" style={{ color: step.color }}>{step.dayLabel}</p>
                 <p className="text-sm leading-relaxed" style={{ color: isDark ? '#64748B' : '#6B7280' }}>{step.desc}</p>
 
                 {/* Connector arrow (not last) */}
@@ -931,7 +945,7 @@ export default function Home() {
           </div>
 
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mt-12">
-            <motion.a href={WA_LINK} target="_blank" rel="noopener noreferrer"
+            <motion.a href={WA_URLS.consultation} target="_blank" rel="noopener noreferrer"
               whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
               className="inline-flex items-center gap-2.5 bg-[#25D366] hover:bg-[#1ead57] text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 shadow-lg"
               style={{ boxShadow: '0 0 0 0 rgba(37,211,102,0)' }}
@@ -972,6 +986,70 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════
+          SECTION — FOUNDER
+      ══════════════════════════════════════ */}
+      <section className="py-20 md:py-24 relative overflow-hidden" style={{ background: isDark ? '#060810' : '#F8FAFF' }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }} variants={fadeUp}
+            className="flex flex-col md:flex-row gap-10 items-center"
+          >
+            {/* Founder Avatar */}
+            <div className="flex-shrink-0">
+              <div
+                className="w-40 h-40 rounded-2xl flex items-center justify-center text-white text-5xl font-bold shadow-xl"
+                style={{ background: 'linear-gradient(135deg, #2563EB 0%, #1E40AF 100%)' }}
+              >
+                EH
+              </div>
+            </div>
+
+            {/* Founder Info */}
+            <div>
+              <div className="text-sm font-semibold text-blue-500 uppercase tracking-wider mb-2">
+                Meet Your AI Architect
+              </div>
+              <h2 className="text-3xl font-bold mb-1" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}>
+                Emon Hossain
+              </h2>
+              <p className="mb-4 text-sm" style={{ color: isDark ? '#64748B' : '#94A3B8' }}>
+                Founder & CEO, SYSmoAI · AI Systems Architect · Notion OS Builder
+              </p>
+              <blockquote
+                className="text-lg leading-relaxed italic border-l-4 border-blue-500 pl-4 mb-6"
+                style={{ color: isDark ? '#CBD5E1' : '#475569' }}
+              >
+                "I built SYSmoAI because I was you 3 years ago — overwhelmed, tool-hopping,
+                and losing income while AI was changing everything. I spent 3 years mastering
+                every AI tool, building real systems, and delivering 500+ projects.
+                Most people don't need another tool. They need someone to build the system
+                FOR them. That's SYSmoAI."
+              </blockquote>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  'AI Systems Architecture', 'Top 5% Prompt Engineering', 'Notion OS',
+                  'n8n Automation', 'AI Agent Design', '500+ Projects Delivered',
+                  'SEO Expert', 'AI Coaching',
+                ].map(tag => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 text-sm font-medium rounded-full border"
+                    style={{
+                      background: isDark ? 'rgba(37,99,235,0.1)' : '#EFF6FF',
+                      color: '#3B82F6',
+                      borderColor: isDark ? 'rgba(59,130,246,0.2)' : '#BFDBFE',
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
           SECTION 8 — SPLIT CTA
       ══════════════════════════════════════ */}
       <section className="py-20 md:py-28 relative overflow-hidden" style={{ background: isDark ? '#060810' : '#F8FAFF' }}>
@@ -994,7 +1072,7 @@ export default function Home() {
                   Tell us your biggest problem. We'll tell you how AI solves it — for free.
                   No calls, no demos. Just WhatsApp.
                 </p>
-                <motion.a href={WA_LINK} target="_blank" rel="noopener noreferrer"
+                <motion.a href={WA_URLS.general} target="_blank" rel="noopener noreferrer"
                   whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
                   className="inline-flex items-center gap-2.5 bg-[#25D366] hover:bg-[#1ead57] text-white px-7 py-3.5 rounded-xl font-bold transition-all duration-200 shadow-lg">
                   <MessageCircle size={18} />
@@ -1031,7 +1109,7 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
-                <motion.a href={WA_LINK} target="_blank" rel="noopener noreferrer"
+                <motion.a href={WA_URLS.audit} target="_blank" rel="noopener noreferrer"
                   whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
                   className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-white transition-all duration-200"
                   style={{ background: '#2563EB', boxShadow: '0 0 24px rgba(37,99,235,0.35)' }}>

@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { SYSmoAILogo } from './SYSmoAILogo';
 import { WA_LINK } from '@/lib/config';
+import { WA_URLS } from '@/lib/whatsapp';
 import { useTheme } from '@/contexts/ThemeContext';
 
 /* ─── DATA ─── */
@@ -335,7 +336,7 @@ export function Header() {
           {/* Desktop Right — Theme toggle + CTA */}
           <div className="hidden md:flex items-center gap-3">
             <ThemeToggle />
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
+            <a href={WA_URLS.audit} target="_blank" rel="noopener noreferrer"
               data-testid="link-header-whatsapp"
               className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ead57] text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-150 hover:shadow-[0_0_20px_rgba(37,211,102,0.3)] whitespace-nowrap">
               <MessageCircle size={15} />

@@ -21,13 +21,13 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - **Type**: React + Vite + Tailwind CSS + wouter + Framer Motion
 - **Preview path**: `/`
 - **Purpose**: Full production marketing website for SYSmoAI — Bangladesh's premier AI consultancy
-- **Brand**: SYSmoAI — "AI Systems That Work For You"
+- **Brand**: SYSmoAI — "Build Your AI-Powered Business in 72 Hours"
 - **Founder**: Emon Hossain | hello@sysmoai.com | WhatsApp: +880 1711-638693
-- **WhatsApp link**: `https://wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%20need%20help`
+- **WhatsApp link helper**: `src/lib/whatsapp.ts` — exports `getWhatsAppUrl()` + `WA_URLS` (general, audit, quickwin, sprint, retainer, consultation)
 
 ### Architecture
 - **Routing**: wouter (30+ routes, lazy-loaded via React.lazy/Suspense)
-- **Constants**: `src/lib/config.ts` (WA_LINK, EMAIL, BRAND)
+- **Constants**: `src/lib/config.ts` (WA_LINK, EMAIL, BRAND) + `src/lib/whatsapp.ts` (WA_URLS)
 - **Global components**: Header (mega-dropdown), Footer (4-column), WhatsAppFAB, CookieConsent
 
 ### Pages Built (32 total)
