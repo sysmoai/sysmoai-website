@@ -13,9 +13,8 @@ const fadeUp = {
 
 const schema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Please enter a valid email address'),
-  business: z.string().optional(),
-  message: z.string().min(10, 'Please tell us a bit more — at least 10 characters'),
+  contact: z.string().min(5, 'Please enter your email or WhatsApp number'),
+  message: z.string().min(10, 'Please describe your situation — at least 10 characters'),
   service: z.string().optional(),
 });
 
@@ -27,7 +26,7 @@ export default function Contact() {
 
   React.useEffect(() => { document.title = 'Contact SYSmoAI | Get Your Free AI Audit'; }, []);
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (_data: FormData) => {
     await new Promise(r => setTimeout(r, 800));
     setSubmitted(true);
   };
@@ -103,10 +102,29 @@ export default function Contact() {
             {/* Right: Form */}
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
               {submitted ? (
-                <div className="bg-green-50 border border-green-100 rounded-2xl p-10 text-center">
-                  <CheckCircle2 size={48} className="text-green-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">Message received!</h3>
-                  <p className="text-slate-600">We'll respond within 2 hours on working days. For fastest response, WhatsApp us directly.</p>
+                <div className="text-center py-10 px-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border border-green-200">
+                  <div className="text-6xl mb-5">✅</div>
+                  <h3 className="text-2xl font-bold text-green-800 mb-3">
+                    Message Received!
+                  </h3>
+                  <p className="text-green-700 mb-2 max-w-md mx-auto">
+                    Emon will personally review your message and reply within{' '}
+                    <strong>2 hours</strong> on working days.
+                  </p>
+                  <p className="text-green-600 text-sm mb-6">
+                    For the fastest response, continue directly on WhatsApp:
+                  </p>
+                  <a
+                    href="https://wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%20just%20submitted%20your%20contact%20form"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-3.5 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg"
+                  >
+                    💬 Continue on WhatsApp
+                  </a>
+                  <p className="text-slate-400 text-xs mt-6">
+                    We reply Monday–Saturday, 9 AM – 7 PM (Bangladesh Time)
+                  </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -116,59 +134,48 @@ export default function Contact() {
                       id="name"
                       {...register('name')}
                       className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-slate-900 placeholder:text-slate-400"
-                      placeholder="Emon Hossain"
+                      placeholder="Your name"
                     />
                     {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-1.5">Email Address *</label>
+                    <label htmlFor="contact" className="block text-sm font-semibold text-slate-700 mb-1.5">Email or WhatsApp *</label>
                     <input
-                      id="email"
-                      type="email"
-                      {...register('email')}
+                      id="contact"
+                      {...register('contact')}
                       className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-slate-900 placeholder:text-slate-400"
-                      placeholder="you@company.com"
+                      placeholder="email@example.com or +880..."
                     />
-                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+                    {errors.contact && <p className="text-red-500 text-sm mt-1">{errors.contact.message}</p>}
                   </div>
                   <div>
-                    <label htmlFor="business" className="block text-sm font-semibold text-slate-700 mb-1.5">Business / Organization</label>
-                    <input
-                      id="business"
-                      {...register('business')}
-                      className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-slate-900 placeholder:text-slate-400"
-                      placeholder="Your company name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="service" className="block text-sm font-semibold text-slate-700 mb-1.5">What are you interested in?</label>
-                    <select
-                      id="service"
-                      {...register('service')}
-                      className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-slate-900 bg-white"
-                    >
-                      <option value="">Select a service (optional)</option>
-                      <option value="ai-quick-win">AI Quick Win</option>
-                      <option value="ai-sprint">AI Sprint</option>
-                      <option value="ai-retainer">AI Retainer</option>
-                      <option value="notion-os">Notion OS Build</option>
-                      <option value="ai-agent-dev">AI Agent Development</option>
-                      <option value="n8n-automation">n8n Automation</option>
-                      <option value="corporate-training">Corporate Training</option>
-                      <option value="coaching">1:1 Coaching</option>
-                      <option value="not-sure">Not sure yet</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-semibold text-slate-700 mb-1.5">Tell us about your situation *</label>
+                    <label htmlFor="message" className="block text-sm font-semibold text-slate-700 mb-1.5">Your Biggest Workflow Problem *</label>
                     <textarea
                       id="message"
                       {...register('message')}
                       rows={5}
                       className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-slate-900 placeholder:text-slate-400 resize-none"
-                      placeholder="What's your biggest workflow problem? What do you want AI to help with?"
+                      placeholder="Describe your biggest workflow pain point..."
                     />
                     {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
+                  </div>
+                  <div>
+                    <label htmlFor="service" className="block text-sm font-semibold text-slate-700 mb-1.5">Service Interest <span className="font-normal text-slate-400">(optional)</span></label>
+                    <select
+                      id="service"
+                      {...register('service')}
+                      className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-slate-900 bg-white"
+                    >
+                      <option value="">Not sure yet</option>
+                      <option value="ai-quick-win">AI Quick Win</option>
+                      <option value="ai-sprint">AI Sprint</option>
+                      <option value="ai-retainer">AI Retainer</option>
+                      <option value="ai-coaching">AI Coaching</option>
+                      <option value="notion-os">Notion OS Build</option>
+                      <option value="ai-agent-dev">AI Agent Dev</option>
+                      <option value="n8n-automation">n8n Automation</option>
+                      <option value="corporate-training">Corporate Training</option>
+                    </select>
                   </div>
                   <button
                     type="submit"

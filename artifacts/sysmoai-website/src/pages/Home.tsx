@@ -60,9 +60,9 @@ const audiences = [
 ];
 
 const featuredServices = [
-  { icon: Zap,       title: 'AI Quick Win', subtitle: 'Your #1 problem automated in 3 days',  bdPrice: '৳3,750–7,500',    usdPrice: '$50–$100',    href: '/services/ai-quick-win', featured: false, tag: 'Best entry point'  },
-  { icon: Timer,     title: 'AI Sprint',    subtitle: 'Full AI stack deployed in 14 days',     bdPrice: '৳25,000–50,000', usdPrice: '$300–$600',   href: '/services/ai-sprint',    featured: true,  tag: 'Most popular'     },
-  { icon: RefreshCw, title: 'AI Retainer',  subtitle: 'Ongoing AI management every month',     bdPrice: '৳20,000/mo',     usdPrice: '$250/mo',     href: '/services/ai-retainer',  featured: false, tag: 'Cancel anytime'   },
+  { icon: Zap,       title: 'AI Quick Win', subtitle: 'Your #1 problem automated in 3 days',  description: '', bdPrice: '৳3,750–7,500',    usdPrice: '$50–$100',    href: '/services/ai-quick-win', featured: false, tag: 'Best entry point'  },
+  { icon: Timer,     title: 'AI Sprint',    subtitle: 'Full AI stack deployed in 14 days',     description: '', bdPrice: '৳25,000–50,000', usdPrice: '$300–$600',   href: '/services/ai-sprint',    featured: true,  tag: 'Most popular'     },
+  { icon: RefreshCw, title: 'AI Retainer',  subtitle: 'Ongoing AI management every month',     description: 'We manage and evolve your AI systems every month. Monthly improvements, priority WhatsApp support, and a full performance report — so your AI keeps working as your business grows.', bdPrice: '৳20,000/mo', usdPrice: '$250/mo', href: '/services/ai-retainer', featured: false, tag: 'Cancel anytime', features: ['Ongoing AI system management', 'Monthly improvements & optimizations', 'Priority WhatsApp support', 'Monthly performance report'] },
 ];
 
 const otherServices = [
@@ -840,9 +840,23 @@ export default function Home() {
                 <h3 className="text-xl font-bold mb-1.5" style={{ color: s.featured ? '#FFFFFF' : isDark ? '#F1F5F9' : '#0A0B0F' }}>
                   {s.title}
                 </h3>
-                <p className="text-sm mb-5 flex-1" style={{ color: s.featured ? 'rgba(255,255,255,0.65)' : isDark ? '#64748B' : '#6B7280' }}>
+                <p className="text-sm mb-3" style={{ color: s.featured ? 'rgba(255,255,255,0.65)' : isDark ? '#64748B' : '#6B7280' }}>
                   {s.subtitle}
                 </p>
+                {(s as any).description && (
+                  <p className="text-sm leading-relaxed mb-3 flex-1" style={{ color: s.featured ? 'rgba(255,255,255,0.55)' : isDark ? '#94A3B8' : '#6B7280' }}>
+                    {(s as any).description}
+                  </p>
+                )}
+                {(s as any).features && (
+                  <ul className="space-y-1 mb-4">
+                    {((s as any).features as string[]).map((f: string) => (
+                      <li key={f} className="flex items-center gap-2 text-xs" style={{ color: s.featured ? 'rgba(255,255,255,0.65)' : isDark ? '#64748B' : '#6B7280' }}>
+                        <span className="text-green-400 font-bold">✅</span> {f}
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 <div className="flex items-baseline gap-2 mb-6">
                   <span className="text-2xl font-bold" style={{ color: s.featured ? '#FFFFFF' : isDark ? '#F1F5F9' : '#0A0B0F' }}>
                     {showUSD ? s.usdPrice : s.bdPrice}
@@ -954,6 +968,36 @@ export default function Home() {
               Book Free Discovery Call
             </motion.a>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          TOOLS TRUST STRIP
+      ══════════════════════════════════════ */}
+      <section className="py-12 border-y" style={{ background: isDark ? '#0A0B0F' : '#F8FAFF', borderColor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(37,99,235,0.08)' }}>
+        <div className="max-w-5xl mx-auto px-6">
+          <p className="text-center text-xs font-semibold uppercase tracking-widest mb-8" style={{ color: isDark ? '#475569' : '#94A3B8' }}>
+            Tools We Master
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+            {[
+              { name: 'ChatGPT', emoji: '🤖' },
+              { name: 'Claude', emoji: '🧠' },
+              { name: 'Notion', emoji: '📋' },
+              { name: 'n8n', emoji: '⚡' },
+              { name: 'Zapier', emoji: '🔗' },
+              { name: 'WhatsApp API', emoji: '💬' },
+              { name: 'Make', emoji: '🔄' },
+              { name: 'Google Workspace', emoji: '📊' },
+            ].map((tool) => (
+              <div key={tool.name}
+                className="flex items-center gap-2 transition-colors duration-200 group cursor-default"
+                style={{ color: isDark ? '#64748B' : '#6B7280' }}>
+                <span className="text-xl group-hover:scale-110 transition-transform duration-200">{tool.emoji}</span>
+                <span className="text-sm font-medium group-hover:opacity-100 transition-opacity" style={{ opacity: 0.75 }}>{tool.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -1122,37 +1166,118 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════
-          SECTION 9 — LIVE IMAGES ROW (AI Life)
+          SECTION 9 — WHAT WE ACTUALLY BUILD
       ══════════════════════════════════════ */}
-      <section className="py-16 relative overflow-hidden" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mb-10">
-            <p className="text-base font-semibold mb-1" style={{ color: isDark ? '#94A3B8' : '#64748B' }}>
-              What AI-powered life actually looks like
+      <section className="py-20" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mb-12">
+            <span className="inline-block px-4 py-1.5 text-sm font-semibold rounded-full border mb-4"
+              style={{ background: isDark ? 'rgba(37,99,235,0.1)' : '#EFF6FF', color: '#3B82F6', borderColor: isDark ? 'rgba(37,99,235,0.25)' : '#DBEAFE' }}>
+              Real Systems. Real Results.
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}>
+              What We Actually Build For You
+            </h2>
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: isDark ? '#64748B' : '#6B7280' }}>
+              Not advice. Not templates. Custom AI systems deployed into your business — working on your data, from day one.
             </p>
           </motion.div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=70&auto=format', alt: 'Team celebrating success', filter: 'brand-photo-success', h: 260 },
-              { src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=70&auto=format', alt: 'Entrepreneur enjoying free time', filter: 'brand-photo-success', h: 200 },
-              { src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=70&auto=format', alt: 'Person relaxed with laptop', filter: 'brand-photo-success', h: 200 },
-              { src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=70&auto=format', alt: 'Modern team collaboration', filter: 'brand-photo', h: 260 },
-            ].map((img, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="rounded-2xl overflow-hidden relative group"
-                style={{ height: img.h }}
-                whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
-              >
-                <LazyImage src={img.src} alt={img.alt} className={`w-full h-full ${img.filter}`} objectFit="cover" />
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: 'linear-gradient(to top, rgba(37,99,235,0.35) 0%, transparent 60%)' }} />
-              </motion.div>
-            ))}
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Card 1 — Notion AI OS */}
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+              className="rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
+              style={{ border: `1px solid ${isDark ? 'rgba(255,255,255,0.07)' : '#E2E8F0'}` }}>
+              <div className="h-52 flex items-center justify-center p-8 relative overflow-hidden"
+                style={{ background: 'linear-gradient(135deg, #2563EB 0%, #1E40AF 100%)' }}>
+                <div className="absolute inset-0 opacity-10"
+                  style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, white 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+                <div className="text-white text-center relative z-10">
+                  <div className="text-6xl mb-3 group-hover:scale-110 transition-transform duration-300">🗂️</div>
+                  <div className="font-bold text-xl">Notion AI OS</div>
+                  <div className="text-blue-200 text-sm mt-1">Business Command Center</div>
+                </div>
+              </div>
+              <div className="p-6" style={{ background: isDark ? '#111827' : '#FFFFFF' }}>
+                <h3 className="font-bold text-lg mb-2" style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}>Complete Business Operating System</h3>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: isDark ? '#94A3B8' : '#6B7280' }}>
+                  Every project, client, task, invoice, and KPI — connected in one AI-powered Notion workspace. Your business runs even when you're offline.
+                </p>
+                <ul className="space-y-1">
+                  {['CRM & pipeline tracking', 'Automated task management', 'Real-time dashboards', 'Team SOPs & knowledge base'].map(item => (
+                    <li key={item} className="flex items-center gap-2 text-sm" style={{ color: isDark ? '#64748B' : '#6B7280' }}>
+                      <span className="text-green-500 font-bold">✓</span> {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+
+            {/* Card 2 — n8n Automation */}
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+              className="rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
+              style={{ border: `1px solid ${isDark ? 'rgba(255,255,255,0.07)' : '#E2E8F0'}` }}>
+              <div className="h-52 flex items-center justify-center p-8 relative overflow-hidden"
+                style={{ background: 'linear-gradient(135deg, #059669 0%, #0D9488 100%)' }}>
+                <div className="absolute inset-0 opacity-10"
+                  style={{ backgroundImage: 'radial-gradient(circle at 80% 50%, white 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+                <div className="text-white text-center relative z-10">
+                  <div className="text-6xl mb-3 group-hover:scale-110 transition-transform duration-300">⚡</div>
+                  <div className="font-bold text-xl">n8n Automation</div>
+                  <div className="text-emerald-200 text-sm mt-1">Workflows That Never Sleep</div>
+                </div>
+              </div>
+              <div className="p-6" style={{ background: isDark ? '#111827' : '#FFFFFF' }}>
+                <h3 className="font-bold text-lg mb-2" style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}>End-to-End Workflow Automation</h3>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: isDark ? '#94A3B8' : '#6B7280' }}>
+                  WhatsApp → CRM → Invoice → Follow-up sequence. Fully automated pipelines connecting all your tools — zero manual steps.
+                </p>
+                <ul className="space-y-1">
+                  {['WhatsApp auto-replies 24/7', 'Lead capture & qualification', 'Auto invoice generation', 'Follow-up sequences'].map(item => (
+                    <li key={item} className="flex items-center gap-2 text-sm" style={{ color: isDark ? '#64748B' : '#6B7280' }}>
+                      <span className="text-green-500 font-bold">✓</span> {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+
+            {/* Card 3 — Custom AI Agents */}
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+              className="rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
+              style={{ border: `1px solid ${isDark ? 'rgba(255,255,255,0.07)' : '#E2E8F0'}` }}>
+              <div className="h-52 flex items-center justify-center p-8 relative overflow-hidden"
+                style={{ background: 'linear-gradient(135deg, #7C3AED 0%, #4338CA 100%)' }}>
+                <div className="absolute inset-0 opacity-10"
+                  style={{ backgroundImage: 'radial-gradient(circle at 50% 80%, white 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+                <div className="text-white text-center relative z-10">
+                  <div className="text-6xl mb-3 group-hover:scale-110 transition-transform duration-300">🤖</div>
+                  <div className="font-bold text-xl">Custom AI Agents</div>
+                  <div className="text-purple-200 text-sm mt-1">Working 24/7 For You</div>
+                </div>
+              </div>
+              <div className="p-6" style={{ background: isDark ? '#111827' : '#FFFFFF' }}>
+                <h3 className="font-bold text-lg mb-2" style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}>AI Agents That Work While You Sleep</h3>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: isDark ? '#94A3B8' : '#6B7280' }}>
+                  Custom-trained AI agents for WhatsApp, web, and your platforms. Handle queries, qualify leads, and generate reports autonomously.
+                </p>
+                <ul className="space-y-1">
+                  {['Customer support automation', 'Lead qualification & scoring', 'Automated report generation', 'Multi-platform deployment'].map(item => (
+                    <li key={item} className="flex items-center gap-2 text-sm" style={{ color: isDark ? '#64748B' : '#6B7280' }}>
+                      <span className="text-green-500 font-bold">✓</span> {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="text-center mt-10">
+            <Link href="/services"
+              className="inline-flex items-center gap-2 font-semibold transition-colors"
+              style={{ color: '#3B82F6' }}>
+              See all 9 AI services we build <ArrowRight size={16} />
+            </Link>
           </div>
         </div>
       </section>
@@ -1160,9 +1285,23 @@ export default function Home() {
       {/* ══════════════════════════════════════
           BOTTOM BRAND STRIP
       ══════════════════════════════════════ */}
-      <section className="py-12 relative overflow-hidden" style={{ background: isDark ? '#060810' : '#F8FAFF', borderTop: `1px solid ${isDark ? 'rgba(255,255,255,0.04)' : 'rgba(37,99,235,0.08)'}` }}>
+      <section className="py-16 relative overflow-hidden" style={{ background: isDark ? '#060810' : '#F8FAFF', borderTop: `1px solid ${isDark ? 'rgba(255,255,255,0.04)' : 'rgba(37,99,235,0.08)'}` }}>
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
           className="max-w-4xl mx-auto px-4 text-center">
+
+          {/* Urgency Banner */}
+          <div className="bg-amber-50 border border-amber-200 rounded-2xl px-6 py-4 mb-10 flex items-start md:items-center gap-4 max-w-2xl mx-auto text-left">
+            <span className="text-2xl shrink-0">⏰</span>
+            <div>
+              <p className="font-bold text-amber-900 text-sm md:text-base">
+                Free AI Audit — Limited Availability
+              </p>
+              <p className="text-amber-700 text-sm mt-0.5">
+                Emon personally conducts every discovery call. We keep slots limited to ensure quality. Book yours before this week fills up.
+              </p>
+            </div>
+          </div>
+
           <div className="flex items-center justify-center gap-3 mb-4">
             <SYSmoAILogo size={32} variant={isDark ? 'brand-dark' : 'brand-light'} animated />
             <span className="text-xl font-bold tracking-[-0.02em]" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F', fontFamily: "'Space Grotesk', sans-serif" }}>
@@ -1175,9 +1314,17 @@ export default function Home() {
             Systems in Motion.
           </p>
           <Link href="/contact"
-            className="inline-flex items-center gap-2 text-blue-500 hover:text-blue-400 font-semibold text-sm transition-colors group">
+            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm px-6 py-3 rounded-xl transition-colors group">
             Get in touch today <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
           </Link>
+
+          {/* Trust Micro-copy */}
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-6 text-sm" style={{ color: isDark ? '#475569' : '#94A3B8' }}>
+            <span>✓ No commitment required</span>
+            <span>✓ Reply within 2 hours</span>
+            <span>✓ 100% free, no sales pitch</span>
+            <span>✓ Serving Bangladesh & worldwide</span>
+          </div>
         </motion.div>
       </section>
 

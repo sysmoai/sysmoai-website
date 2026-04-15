@@ -1,0 +1,808 @@
+```
+════════════════════════════════════════════════════════════════
+SYSMOAI — HOMEPAGE REMAINING FIXES (Part 2 of 2)
+Fixes 8–13 from Audit · Complete these to reach 90+/100
+════════════════════════════════════════════════════════════════
+
+Previous session completed: Stats, Blog, WhatsApp, Hero, Founder, Social Icons, Segment Links.
+This session completes: Gallery, JSON-LD Schema, FAQ expansion, Urgency, Retainer card, Contact form.
+
+DO NOT touch anything from the previous session. Only add/fix what is listed below.
+
+══════════════════════════════════
+FIX 8 — GALLERY SECTION (Score was 4/10)
+Replace generic stock photos with branded AI feature cards.
+══════════════════════════════════
+
+Find the gallery section on the homepage. It is likely titled something like:
+"What AI-powered life looks like" or contains a grid of stock photos.
+
+REPLACE the entire gallery section content with this:
+
+```
+
+{/ *Section 8B — What We Actually Build* /}
+
+<section className="py-20 bg-white">
+
+<div className="max-w-6xl mx-auto px-6">
+
+<div className="text-center mb-12">
+
+<span className="inline-block px-4 py-1.5 bg-blue-50 text-blue-700 text-sm 
+
+font-semibold rounded-full border border-blue-100 mb-4">
+
+Real Systems. Real Results.
+
+</span>
+
+<h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+
+What We Actually Build For You
+
+</h2>
+
+<p className="text-lg text-slate-600 max-w-2xl mx-auto">
+
+Not advice. Not templates. Custom AI systems deployed into your 
+
+business — working on your data, from day one.
+
+</p>
+
+</div>
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+{/ *Card 1* /}
+
+<div className="rounded-2xl border border-slate-200 overflow-hidden shadow-sm 
+
+hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+
+<div className="bg-gradient-to-br from-blue-600 to-blue-800 h-52 flex items-center 
+
+justify-center p-8 relative overflow-hidden">
+
+<div className="absolute inset-0 opacity-10"
+
+style=backgroundImage: 'radial-gradient(circle at 20% 50%, white 1px, transparent 1px)', backgroundSize: '30px 30px' />
+
+<div className="text-white text-center relative z-10">
+
+<div className="text-6xl mb-3 group-hover:scale-110 transition-transform duration-300">🗂️</div>
+
+<div className="font-bold text-xl">Notion AI OS</div>
+
+<div className="text-blue-200 text-sm mt-1">Business Command Center</div>
+
+</div>
+
+</div>
+
+<div className="p-6 bg-white">
+
+<h3 className="font-bold text-slate-900 text-lg mb-2">Complete Business Operating System</h3>
+
+<p className="text-slate-600 text-sm leading-relaxed mb-4">
+
+Every project, client, task, invoice, and KPI — connected in one 
+
+AI-powered Notion workspace. Your business runs even when you're offline.
+
+</p>
+
+<ul className="space-y-1">
+
+{["CRM & pipeline tracking","Automated task management","Real-time dashboards","Team SOPs & knowledge base"].map(item => (
+
+<li key={item} className="flex items-center gap-2 text-sm text-slate-600">
+
+✓
+
+{item}
+
+</li>
+
+))}
+
+</ul>
+
+</div>
+
+</div>
+
+{/ *Card 2* /}
+
+<div className="rounded-2xl border border-slate-200 overflow-hidden shadow-sm 
+
+hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+
+<div className="bg-gradient-to-br from-emerald-600 to-teal-700 h-52 flex items-center 
+
+justify-center p-8 relative overflow-hidden">
+
+<div className="absolute inset-0 opacity-10"
+
+style=backgroundImage: 'radial-gradient(circle at 80% 50%, white 1px, transparent 1px)', backgroundSize: '30px 30px' />
+
+<div className="text-white text-center relative z-10">
+
+<div className="text-6xl mb-3 group-hover:scale-110 transition-transform duration-300">⚡</div>
+
+<div className="font-bold text-xl">n8n Automation</div>
+
+<div className="text-emerald-200 text-sm mt-1">Workflows That Never Sleep</div>
+
+</div>
+
+</div>
+
+<div className="p-6 bg-white">
+
+<h3 className="font-bold text-slate-900 text-lg mb-2">End-to-End Workflow Automation</h3>
+
+<p className="text-slate-600 text-sm leading-relaxed mb-4">
+
+WhatsApp → CRM → Invoice → Follow-up sequence. Fully automated 
+
+pipelines connecting all your tools — zero manual steps.
+
+</p>
+
+<ul className="space-y-1">
+
+{["WhatsApp auto-replies 24/7","Lead capture & qualification","Auto invoice generation","Follow-up sequences"].map(item => (
+
+<li key={item} className="flex items-center gap-2 text-sm text-slate-600">
+
+✓
+
+{item}
+
+</li>
+
+))}
+
+</ul>
+
+</div>
+
+</div>
+
+{/ *Card 3* /}
+
+<div className="rounded-2xl border border-slate-200 overflow-hidden shadow-sm 
+
+hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+
+<div className="bg-gradient-to-br from-purple-600 to-indigo-700 h-52 flex items-center 
+
+justify-center p-8 relative overflow-hidden">
+
+<div className="absolute inset-0 opacity-10"
+
+style=backgroundImage: 'radial-gradient(circle at 50% 80%, white 1px, transparent 1px)', backgroundSize: '30px 30px' />
+
+<div className="text-white text-center relative z-10">
+
+<div className="text-6xl mb-3 group-hover:scale-110 transition-transform duration-300">🤖</div>
+
+<div className="font-bold text-xl">Custom AI Agents</div>
+
+<div className="text-purple-200 text-sm mt-1">Working 24/7 For You</div>
+
+</div>
+
+</div>
+
+<div className="p-6 bg-white">
+
+<h3 className="font-bold text-slate-900 text-lg mb-2">AI Agents That Work While You Sleep</h3>
+
+<p className="text-slate-600 text-sm leading-relaxed mb-4">
+
+Custom-trained AI agents for WhatsApp, web, and your platforms. 
+
+Handle queries, qualify leads, and generate reports autonomously.
+
+</p>
+
+<ul className="space-y-1">
+
+{["Customer support automation","Lead qualification & scoring","Automated report generation","Multi-platform deployment"].map(item => (
+
+<li key={item} className="flex items-center gap-2 text-sm text-slate-600">
+
+✓
+
+{item}
+
+</li>
+
+))}
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+{/ *Bottom CTA* /}
+
+<div className="text-center mt-10">
+
+<a href="/services"
+
+className="inline-flex items-center gap-2 text-blue-600 font-semibold 
+
+hover:text-blue-800 transition-colors">
+
+See all 9 AI services we build →
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+```
+
+══════════════════════════════════
+FIX 9 — JSON-LD SCHEMA MARKUP (SEO Critical)
+No schema detected. Required for Google ranking + AIO.
+══════════════════════════════════
+
+Find the root layout file. It is likely one of:
+  - src/App.tsx
+  - src/main.tsx
+  - index.html
+  - src/components/Layout.tsx
+
+Find where the <head> content is managed (likely via react-helmet, vite-plugin-html, or index.html directly).
+
+ADD this JSON-LD script. If using react-helmet or @vite-plugin/html, add it there.
+If using index.html directly, add inside <head>:
+
+```
+
+<script type="application/ld+json">
+
+{
+
+"@context": "https://schema.org",
+
+"@type": ["Organization", "LocalBusiness"],
+
+"name": "SYSmoAI",
+
+"alternateName": "SYSmoAI Private Limited",
+
+"url": "https://sysmoai.com",
+
+"logo": "https://sysmoai.com/logo.png",
+
+"description": "Bangladesh's AI consulting company. We build custom AI operating systems, workflow automation, and AI agents for businesses in Bangladesh and worldwide.",
+
+"email": "[hello@sysmoai.com](mailto:hello@sysmoai.com)",
+
+"telephone": "+8801711638693",
+
+"address": {
+
+"@type": "PostalAddress",
+
+"streetAddress": "Pallabi",
+
+"addressLocality": "Dhaka",
+
+"addressCountry": "BD"
+
+},
+
+"founder": {
+
+"@type": "Person",
+
+"name": "Emon Hossain",
+
+"jobTitle": "Founder & CEO",
+
+"description": "AI Systems Architect, Top 5% Prompt Engineer globally, 500+ projects delivered"
+
+},
+
+"serviceArea": [
+
+{"@type": "Country", "name": "Bangladesh"},
+
+{"@type": "AdministrativeArea", "name": "Worldwide"}
+
+],
+
+"hasOfferCatalog": {
+
+"@type": "OfferCatalog",
+
+"name": "AI Consulting Services",
+
+"itemListElement": [
+
+{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "AI Quick Win", "description": "One workflow automated in 3 days. ৳3,750–৳7,500."}},
+
+{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "AI Implementation Sprint", "description": "Full AI stack deployed in 14 days. ৳25,000–৳50,000."}},
+
+{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "AI Operations Retainer", "description": "Ongoing monthly AI management. ৳20,000/month."}},
+
+{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "1:1 AI Coaching", "description": "Personalized 60-min AI session. ৳2,500/session."}},
+
+{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Notion OS Build", "description": "Custom Notion business operating system. ৳15,000–৳50,000."}},
+
+{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "AI Agent Development", "description": "Custom AI agents for business automation. ৳50,000–৳2,00,000."}},
+
+{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "n8n Automation", "description": "Workflow automation per-workflow. ৳2,000–৳10,000."}},
+
+{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Corporate AI Training", "description": "Full-day enterprise AI workshop. ৳50,000–৳2,00,000."}}
+
+]
+
+},
+
+"sameAs": [
+
+"https://www.facebook.com/sysmoai",
+
+"https://www.linkedin.com/company/sysmoai",
+
+"https://www.youtube.com/@sysmoai"
+
+]
+
+}
+
+</script>
+
+```
+
+ALSO: Find the FAQ page file (src/pages/FAQ.tsx or similar).
+At the top of the FAQ component, add this meta/schema inside the page:
+
+```
+
+// Add near the top of the FAQ component return, inside a helmet or directly as script tag
+
+const faqSchema = {
+
+"@context": "https://schema.org",
+
+"@type": "FAQPage",
+
+"mainEntity": [
+
+{
+
+"@type": "Question",
+
+"name": "Do I need to know anything about AI to work with SYSmoAI?",
+
+"acceptedAnswer": {"@type": "Answer", "text": "Not at all. We handle everything technical. You just show up for the onboarding call and tell us about your business. We do the rest."}
+
+},
+
+{
+
+"@type": "Question", 
+
+"name": "How fast do I see results from AI automation?",
+
+"acceptedAnswer": {"@type": "Answer", "text": "Most Quick Win clients see measurable results within 72 hours of delivery. Sprint clients typically see major impact in the first 2 weeks."}
+
+},
+
+{
+
+"@type": "Question",
+
+"name": "How much does AI automation cost in Bangladesh?",
+
+"acceptedAnswer": {"@type": "Answer", "text": "Our AI Quick Win starts at ৳3,750 for a pilot. The AI Sprint is ৳25,000–50,000 for a full system in 14 days. Monthly retainer is ৳20,000/month. International pricing in USD also available."}
+
+},
+
+{
+
+"@type": "Question",
+
+"name": "Do you work with international clients?",
+
+"acceptedAnswer": {"@type": "Answer", "text": "Yes. We work with clients in the US, UK, Canada, and across Southeast Asia. International payments via Wise and Payoneer."}
+
+},
+
+{
+
+"@type": "Question",
+
+"name": "Is this just consulting or do you actually build?",
+
+"acceptedAnswer": {"@type": "Answer", "text": "We build. You get a working, deployed system — not a slide deck. We don't get paid until it works."}
+
+}
+
+]
+
+}
+
+// Add this inside the component JSX:
+
+<script type="application/ld+json" dangerouslySetInnerHTML= __html: JSON.stringify(faqSchema)  />
+
+```
+
+══════════════════════════════════
+FIX 10 — FAQ EXPANSION (5 → 12 questions)
+Currently only 5 questions. Missing pricing, security, timeline, team training.
+══════════════════════════════════
+
+Find the FAQ page (src/pages/FAQ.tsx or /faq route).
+Find the FAQ data array (usually an array of {question, answer} objects).
+
+ADD these 7 additional questions to the existing 5:
+
+```
+
+{
+
+question: "What happens during the free 30-minute AI audit?",
+
+answer: "We spend the first 10 minutes understanding your business and current workflow. The next 15 minutes we identify your biggest automation opportunity and map the exact solution. The final 5 minutes we give you a clear action plan with tools, costs, and timeline. You leave knowing exactly what to build — whether you hire us or not."
+
+},
+
+{
+
+question: "What AI tools will you use for my business?",
+
+answer: "We select tools based on your specific needs. Notion for your business OS and database management, ChatGPT and Claude for AI intelligence and content, n8n or Zapier for workflow automation, and custom AI agents for high-volume repetitive tasks. We always work with your existing tools where possible — no ripping and replacing."
+
+},
+
+{
+
+question: "How does payment work? Do you accept bKash?",
+
+answer: "Yes. AI Quick Win: 100% advance. AI Sprint: 50% upfront, 50% on delivery. Monthly Retainer: advance monthly billing. We accept bKash, Nagad, Rocket, and bank transfer for Bangladesh. International clients use Wise or Payoneer. No credit extended — we maintain 100% advance on Quick Win to keep delivery fast and committed."
+
+},
+
+{
+
+question: "Is my business data safe with SYSmoAI?",
+
+answer: "Absolutely. We sign a confidentiality agreement before every project begins. We never store your business data beyond the project duration. All AI systems are built within your own accounts — your data stays under your control at all times. We follow the Bangladesh Personal Data Protection Ordinance 2025 guidelines."
+
+},
+
+{
+
+question: "What if I already tried AI tools and they didn't work?",
+
+answer: "This is the most common situation we encounter. Tools alone rarely work — the implementation is everything. Most people try ChatGPT or Notion on their own, use it for basic tasks, and give up. We build the complete system FOR you, on YOUR specific data and workflows. It's a completely different experience from DIY."
+
+},
+
+{
+
+question: "Can you train my team to use the AI system after it's built?",
+
+answer: "Yes — team training is included in every Sprint and Retainer. We make sure your team can run the system independently before we close the project. We also offer standalone Group Workshops for teams of 10+ at ৳500/person if you want broader AI upskilling beyond the delivered system."
+
+},
+
+{
+
+question: "How is SYSmoAI different from a freelancer on Fiverr or Upwork?",
+
+answer: "Freelancers complete tasks. SYSmoAI builds operating systems. A freelancer delivers an output — a workflow, a template, a one-off automation. SYSmoAI delivers a complete, documented, trained, 3-month-supported AI system that runs your business. We don't disappear after delivery. The difference is the same as hiring someone to fix your car versus teaching you to maintain it yourself."
+
+}
+
+```
+
+══════════════════════════════════
+FIX 11 — URGENCY ELEMENT
+No urgency anywhere on the page. Visitors have no reason to act now.
+══════════════════════════════════
+
+Find the final CTA section (the closing section before the footer).
+ADD this urgency banner ABOVE the main CTA headline:
+
+```
+
+{/ *Urgency Banner* /}
+
+<div className="bg-amber-50 border border-amber-200 rounded-2xl px-6 py-4 mb-10 
+
+flex items-start md:items-center gap-4 max-w-2xl mx-auto text-left md:text-center">
+
+⏰
+
+<div>
+
+<p className="font-bold text-amber-900 text-sm md:text-base">
+
+Free AI Audit — Limited Availability
+
+</p>
+
+<p className="text-amber-700 text-sm mt-0.5">
+
+Emon personally conducts every discovery call. 
+
+We keep slots limited to ensure quality. Book yours before this week fills up.
+
+</p>
+
+</div>
+
+</div>
+
+```
+
+Also ADD a trust strip just BELOW the main CTA button in the closing section:
+
+```
+
+{/ *Trust Micro-copy* /}
+
+<div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-6 
+
+text-sm text-slate-400">
+
+✓ No commitment required
+
+</span>
+
+✓ Reply within 2 hours
+
+</span>
+
+✓ 100% free, no sales pitch
+
+</span>
+
+✓ Serving Bangladesh & worldwide
+
+</span>
+
+</div>
+
+```
+
+══════════════════════════════════
+FIX 12 — AI RETAINER PRICING CARD (Missing description)
+The AI Retainer card has a "Get Started" button but no body description.
+══════════════════════════════════
+
+Find the pricing section in Home.tsx.
+Find the AI Retainer card (it is one of the 3 main pricing cards).
+ADD description text to the card body if it is empty or missing:
+
+```
+
+// In the AI Retainer card, add this description paragraph:
+
+<p className="text-slate-600 text-sm leading-relaxed mb-4">
+
+We manage and evolve your AI systems every month. Monthly improvements, 
+
+priority WhatsApp support, and a full performance report — so your AI 
+
+keeps working as your business grows.
+
+</p>
+
+```
+
+Also VERIFY the AI Retainer card shows its features list. It should include:
+- ✅ Ongoing AI system management
+- ✅ Monthly improvements & optimizations  
+- ✅ Priority WhatsApp support
+- ✅ Monthly performance report
+
+If any of these are missing from the card, add them in the same style as the other pricing cards.
+
+══════════════════════════════════
+FIX 13 — CONTACT FORM (UX Improvement)
+Currently: 6 fields + generic "Message received!" inline (no thank-you page).
+══════════════════════════════════
+
+Find the Contact page (src/pages/Contact.tsx or /contact route).
+
+PART A — Reduce form fields from 6 to 4:
+Keep only:
+  1. Name (required, placeholder: "Your name")
+  2. Email or WhatsApp (required, placeholder: "email@example.com or +880...")
+  3. Biggest problem (required, textarea, placeholder: "Describe your biggest workflow pain point...")
+  4. Service interest (OPTIONAL dropdown: "Not sure yet / AI Quick Win / AI Sprint / AI Retainer / AI Coaching / Notion OS / AI Agent Dev / n8n Automation / Corporate Training")
+
+REMOVE any other fields beyond these 4.
+
+PART B — After successful form submission, replace the inline "Message received!" with:
+
+```
+
+{submitted && (
+
+<div className="text-center py-10 px-6 bg-gradient-to-br from-green-50 to-emerald-50 
+
+rounded-2xl border border-green-200 animate-fade-in">
+
+<div className="text-6xl mb-5">✅</div>
+
+<h3 className="text-2xl font-bold text-green-800 mb-3">
+
+Message Received!
+
+</h3>
+
+<p className="text-green-700 mb-2 max-w-md mx-auto">
+
+Emon will personally review your message and reply within 
+
+<strong> 2 hours</strong> on working days.
+
+</p>
+
+<p className="text-green-600 text-sm mb-6">
+
+For the fastest response, continue directly on WhatsApp:
+
+</p>
+
+<a
+
+href="https://wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%20just%20submitted%20your%20contact%20form"
+
+target="_blank"
+
+rel="noopener noreferrer"
+
+className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 
+
+text-white font-semibold px-8 py-3.5 rounded-xl 
+
+transition-all duration-200 shadow-md hover:shadow-lg"
+
+> 
+> 
+> 
+> 💬 Continue on WhatsApp
+> 
+
+</a>
+
+<p className="text-slate-400 text-xs mt-6">
+
+We reply Monday–Saturday, 9 AM – 7 PM (Bangladesh Time)
+
+</p>
+
+</div>
+
+)}
+
+```
+
+══════════════════════════════════
+BONUS FIX — TOOL LOGOS TRUST STRIP
+Add a "Tools We Master" section for instant credibility.
+══════════════════════════════════
+
+Find a good location between the Problem and Services sections OR after How It Works.
+ADD this tools strip:
+
+```
+
+{/ *Tools Trust Strip* /}
+
+<section className="py-12 bg-slate-50 border-y border-slate-100">
+
+<div className="max-w-5xl mx-auto px-6">
+
+<p className="text-center text-sm font-semibold text-slate-400 uppercase 
+
+tracking-widest mb-8">
+
+Tools We Master
+
+</p>
+
+<div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+
+{[
+
+{ name: "ChatGPT", emoji: "🤖" },
+
+{ name: "Claude", emoji: "🧠" },
+
+{ name: "Notion", emoji: "📋" },
+
+{ name: "n8n", emoji: "⚡" },
+
+{ name: "Zapier", emoji: "🔗" },
+
+{ name: "WhatsApp API", emoji: "💬" },
+
+{ name: "Make", emoji: "🔄" },
+
+{ name: "Google Workspace", emoji: "📊" },
+
+].map((tool) => (
+
+<div key={[tool.name](http://tool.name)} 
+
+className="flex items-center gap-2 text-slate-500 hover:text-slate-800 
+
+transition-colors duration-200 group">
+
+{tool.emoji}
+
+</span>
+
+{[tool.name](http://tool.name)}
+
+</div>
+
+))}
+
+</div>
+
+</div>
+
+</section>
+
+```
+
+══════════════════════════════════
+FINAL VERIFICATION — Run after all fixes
+══════════════════════════════════
+
+After completing all fixes above:
+
+1. npm run build → must exit 0, zero errors
+2. Confirm on homepage:
+   - Gallery shows 3 branded cards (not stock photos)
+   - FAQ page has 12 questions
+   - Urgency banner visible in final CTA section
+   - Trust strip (✓ No commitment, ✓ Reply in 2 hours, etc.) under CTA button
+   - Tool logos strip visible somewhere on homepage
+   - AI Retainer card has description + feature list
+3. Check /contact page:
+   - Form has exactly 4 fields
+   - Submission shows full success state with WhatsApp button
+4. Check page source for JSON-LD schema in <head>
+
+OUTPUT COMPLETION REPORT:
+  ✅ Fix 8 Gallery: [before/after description]
+  ✅ Fix 9 JSON-LD: [where added, confirmed in source]
+  ✅ Fix 10 FAQ: [total question count after addition]
+  ✅ Fix 11 Urgency: [location on page confirmed]
+  ✅ Fix 12 Retainer card: [what was added]
+  ✅ Fix 13 Contact form: [fields reduced, success state confirmed]
+  ✅ Bonus Tool logos: [added, location confirmed]
+  BUILD: exit [0/error]
+  ESTIMATED HOMEPAGE SCORE: [X/100]
+
+⚠️ MANUAL ITEMS (Emon must do these — cannot be coded):
+  - Add real founder photo as /public/founder.jpg (replace EH placeholder)
+  - Add real social media profile URLs to footer (Facebook/LinkedIn/YouTube)
+  - Record and embed 60-second intro video (remove placeholder or add real video)
+  - Add real testimonial photos and client company names (with permission)
+════════════════════════════════════════════════════════════════
+```

@@ -24,13 +24,31 @@ const faqs = [
   { q: 'I\'m a student / freelancer / individual — is SYSmoAI for me?', a: 'Absolutely. We have solutions for every stage — from students learning AI for the first time to enterprises deploying full AI stacks. See our "For You" pages to find your exact situation.' },
   { q: 'Do you offer international client services?', a: 'Yes. We serve clients in the US, UK, Canada, Australia, and across Southeast Asia. International payments via Wise and Payoneer.' },
   { q: 'What makes SYSmoAI different from hiring a freelancer on Fiverr?', a: 'Freelancers do tasks. SYSmoAI builds repeatable systems. We document everything, train your team, and ensure the system runs without us — with 3 months of support included.' },
+  { q: 'What happens during the free 30-minute AI audit?', a: 'We spend the first 10 minutes understanding your business and current workflow. The next 15 minutes we identify your biggest automation opportunity and map the exact solution. The final 5 minutes we give you a clear action plan with tools, costs, and timeline. You leave knowing exactly what to build — whether you hire us or not.' },
+  { q: 'Is my business data safe with SYSmoAI?', a: 'Absolutely. We sign a confidentiality agreement before every project begins. We never store your business data beyond the project duration. All AI systems are built within your own accounts — your data stays under your control at all times. We follow Bangladesh Personal Data Protection guidelines.' },
+  { q: 'What if I already tried AI tools and they didn\'t work?', a: 'This is the most common situation we encounter. Tools alone rarely work — the implementation is everything. Most people try ChatGPT or Notion on their own, use it for basic tasks, and give up. We build the complete system FOR you, on YOUR specific data and workflows. It\'s a completely different experience from DIY.' },
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": { "@type": "Answer", "text": faq.a }
+  }))
+};
 
 export default function FAQ() {
   React.useEffect(() => { document.title = 'Frequently Asked Questions | SYSmoAI Bangladesh'; }, []);
 
   return (
     <div className="flex flex-col w-full overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       <section className="relative bg-[#0A0B0F] py-20 md:py-28">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-blue-600 opacity-[0.1] blur-[100px] rounded-full" />
