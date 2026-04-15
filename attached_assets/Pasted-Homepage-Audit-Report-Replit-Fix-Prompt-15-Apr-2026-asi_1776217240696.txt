@@ -1,0 +1,82 @@
+Homepage Audit Report + Replit Fix Prompt — 15 Apr 2026
+
+<aside> 🔴
+
+HOMEPAGE AUDIT COMPLETE — Score: 73/100
+
+Auditor: ChatGPT Agent (7-Role) · Date: 15 April 2026 · URL: https://sysmoai.com/
+
+Status: Fix Prompt Ready · Next: Paste into Replit → Then audit /about
+
+</aside>
+
+Critical Issues (Fix Before Any Marketing Spend)
+🔴 Stats bar shows "0" values — "0+ Years of Experience" and "0+ Client Categories" destroy credibility. Remove or replace with: 500+ Projects · 8+ Client Categories · 3+ Years · Top 5% Global.
+🔴 Blog "Read" links broken — All anchor to
+#
+. No articles load. Hide cards until articles published.
+🔴 WhatsApp buttons blocked on desktop —
+whatsapp://send
+scheme fails on desktop browsers. Add
+https://web.whatsapp.com/send
+fallback with device detection.
+🔴 Missing founder photo + biography — No Emon Hossain photo on homepage. Trust killer.
+🔴 "Free AI Audit" CTA goes to generic WhatsApp — Needs dedicated landing page with booking calendar + explanation of what the audit includes.
+🟠 Social media icons missing from footer — LinkedIn, Facebook, YouTube not linked anywhere.
+🟠 Gallery section uses generic stock photos — Replace with AI dashboards, screenshots, Dhaka/BD business imagery.
+🟠 No JSON-LD schema markup — Missing Organization, LocalBusiness, FAQPage schemas.
+🟠 FAQ has only 5 questions — Expand to 12 with pricing, timeline, security questions.
+🟡 No urgency or scarcity — No "limited slots" or time-bound offer anywhere.
+🟡 International clients section missing — No Wise/Payoneer section, no international testimonials.
+Section Scores
+Section	Score	Key Issue
+Navigation/Header	8/10	No WhatsApp number as text in header
+Hero Section	8/10	Stock photo hero, sub-headline needs improvement
+Stats Bar	2/10 🔴	Shows "0+" values — credibility killer
+Problem Statement	8/10	"See how we fix this" anchor not visible enough
+Solution/Benefits	7/10	Stats bar with 0 values directly below
+Client Segments	9/10	"See full solution" links to pricing not segment page
+Services & Pricing	8/10	AI Retainer card has no description
+How It Works	9/10	Steps lack specific timelines
+Testimonials	8/10	No client photos, results lack context
+CTA/Closing	7/10	Both buttons go to WhatsApp only
+Gallery Section	4/10 🟠	Generic stock photos, disconnected from narrative
+Footer	8/10	Social icons missing, WhatsApp number not as text
+FAQ	7/10	Only 5 questions, no schema
+Contact Page	8/10	No thank-you page after submission, 6 fields too many
+Priority Fix List
+🔴 Fix stats bar (remove 0s) — 1 day — HIGH
+🔴 Fix blog links (hide or publish) — 2 days — HIGH
+🔴 Add founder section with photo — 3 days — HIGH
+🔴 Fix WhatsApp desktop fallback — 1 day — HIGH
+🟠 Add social icons to footer — 1 day — HIGH
+🟠 Create Free AI Audit landing page — 2 days — HIGH
+🟠 Add JSON-LD schema markup — 2 days — MEDIUM
+🟠 Expand FAQ to 12 questions — 3 days — MEDIUM
+🟡 Replace gallery with real screenshots — 5 days — MEDIUM
+🟡 Add international clients section + ROI calculator — 7 days — LOW
+Approved Copy Improvements
+
+Hero H1 (current): "We Build AI Systems That Work For You"
+
+Hero H1 (improved): "Build Your Own AI-Powered Business in 72 Hours"
+
+Hero Sub (improved): "SYSmoAI designs, builds and deploys custom AI operating systems for founders, agencies and freelancers in Bangladesh and worldwide. Automate workflows, free up 20+ hours/week — without hiring a team."
+
+CTA Button (current): "Start on WhatsApp"
+
+CTA Button (improved): "Book a Free 30-Minute Consultation"
+
+CTA Micro-copy (add below button): "No sales pitch. We'll analyse your biggest bottleneck and outline a practical AI plan."
+
+How It Works (add timelines):
+
+Step 1 DIAGNOSE → (Day 1) — Free consultation, map bottleneck, identify quick wins
+Step 2 DESIGN → (Day 2) — AI blueprint: workflows, tools, integrations
+Step 3 BUILD → (Day 3) — Engineers build, test, deploy in 72 hours
+Step 4 SCALE → (Day 4–90) — Train team, track ROI, continuous improvement
+
+Free AI Audit CTA (improved): "In your free AI audit, we'll analyse your current workflow, identify the highest-ROI opportunities, and deliver a custom action plan. No jargon. No obligation."
+
+Audit by EMON HOSSAIN · Processed by CEOA · 15 April 2026 · Replit Fix Prompt below
+

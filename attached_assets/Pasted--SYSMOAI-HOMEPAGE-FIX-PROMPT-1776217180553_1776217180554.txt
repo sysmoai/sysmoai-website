@@ -1,0 +1,873 @@
+```
+════════════════════════════════════════════════════════════════
+SYSMOAI — HOMEPAGE FIX PROMPT
+Based on: ChatGPT 7-Role Audit Report · 15 April 2026 · Score: 73/100
+Target after fixes: 92+/100
+════════════════════════════════════════════════════════════════
+
+You are fixing specific issues on the SYSmoAI homepage (https://sysmoai.com/).
+Do NOT rebuild the page. Find each issue, fix it precisely, confirm the fix.
+Read all issues before touching any code. Then execute in the exact order given.
+
+══════════════════════════════════
+FIX 1 — STATS BAR (CRITICAL — Do This First)
+Score was: 2/10. This single issue destroys all credibility.
+══════════════════════════════════
+
+Find the stats/social proof bar on the homepage.
+It currently shows values like "0+ Years of Experience" and "0+ Client Categories".
+
+REPLACE the entire stats bar content with these EXACT 4 stats:
+
+Stat 1: Number = "500+" | Label = "Projects Delivered"
+Stat 2: Number = "8+" | Label = "Client Categories Served"
+Stat 3: Number = "3+" | Label = "Years Building AI Systems"
+Stat 4: Number = "Top 5%" | Label = "Prompt Engineers Globally"
+
+If the stats are rendered from a data file, config object, or constants file —
+find that file and update the values there.
+If they are hardcoded in JSX — find and replace directly.
+After fix: verify the page shows NONE of the "0" values anywhere.
+
+Search the entire codebase for "0+" and confirm no stat shows "0+" after the fix.
+
+══════════════════════════════════
+FIX 2 — BLOG ARTICLE LINKS (CRITICAL)
+Score was: FAIL. Broken links damage trust and SEO.
+══════════════════════════════════
+
+Find the blog section on the homepage.
+It shows article preview cards but the "Read" links anchor to "#" — no articles exist.
+
+FIX: Hide the entire blog section from the homepage until real articles are published.
+Add a comment: {/* Blog section hidden until articles are published */}
+
+If there is a /blog page:
+  - Find all article card "Read" or "Read More" links
+  - If they link to "#" or non-existent routes → remove those cards entirely
+  - Leave only this placeholder:
+    <div className="text-center py-16">
+      <h3 className="text-xl font-semibold text-slate-700 mb-3">
+        In-depth AI guides coming soon
+      </h3>
+      <p className="text-slate-500">
+        We're publishing real case studies and how-to guides. 
+        Check back soon or <a href="https://wa.me/8801711638693" 
+        className="text-blue-600 underline">subscribe via WhatsApp</a>.
+      </p>
+    </div>
+
+══════════════════════════════════
+FIX 3 — WHATSAPP DESKTOP FALLBACK (CRITICAL)
+Current: whatsapp://send scheme — BLOCKED on desktop browsers.
+══════════════════════════════════
+
+Find all WhatsApp button/link components in the codebase.
+They likely use: whatsapp://send/?phone=8801711638693&text=...
+OR: https://wa.me/8801711638693
+
+TASK: Create a universal WhatsApp link helper that works on ALL devices:
+
+Create file: src/lib/whatsapp.ts (or whatsapp.js)
+
+```
+
+export const WA_NUMBER = "8801711638693"
+
+export const WA_MESSAGE = "Hi SYSmoAI, I need help"
+
+export function getWhatsAppUrl(message?: string): string {
+
+const msg = encodeURIComponent(message || WA_MESSAGE)
+
+// Use [web.whatsapp.com](http://web.whatsapp.com) for desktop, [wa.me](http://wa.me) for all (works universally)
+
+return `https://wa.me/${WA_NUMBER}?text=${msg}`
+
+}
+
+// Context-specific messages
+
+export const WA_URLS = {
+
+general: getWhatsAppUrl("Hi SYSmoAI, I need help"),
+
+audit: getWhatsAppUrl("Hi SYSmoAI, I want to book a Free AI Audit"),
+
+quickwin: getWhatsAppUrl("Hi SYSmoAI, I'm interested in the AI Quick Win"),
+
+sprint: getWhatsAppUrl("Hi SYSmoAI, I'm interested in the AI Sprint"),
+
+retainer: getWhatsAppUrl("Hi SYSmoAI, I'm interested in the AI Retainer"),
+
+consultation: getWhatsAppUrl("Hi SYSmoAI, I want to book a free 30-minute consultation"),
+
+}
+
+```
+
+Then:
+- Replace ALL hardcoded whatsapp:// links with the appropriate WA_URLS value
+- Replace ALL hardcoded wa.me links with getWhatsAppUrl() calls
+- All WhatsApp links must open in a new tab: target="_blank" rel="noopener noreferrer"
+- The floating WhatsApp bubble: use WA_URLS.general
+- Header "Free AI Audit" button: use WA_URLS.audit
+- Hero "Book Consultation" button: use WA_URLS.consultation
+- Pricing CTAs: use service-specific WA_URLS
+
+Verify: Right-click any WhatsApp button → Copy link address → confirm it starts with https://wa.me/
+
+══════════════════════════════════
+FIX 4 — HERO SECTION COPY (HIGH IMPACT)
+Current copy is good but sub-headline needs improvement.
+══════════════════════════════════
+
+Find the hero section. Update these specific text values:
+
+HEADLINE (H1): Keep "We Build AI Systems That Work For You" OR upgrade to:
+"Build Your AI-Powered Business in 72 Hours"
+(Ask: does the current H1 exactly match? If yes, update to the improved version)
+
+SUB-HEADLINE: Replace current sub-headline with:
+"SYSmoAI designs, builds and deploys custom AI operating systems for founders, 
+agencies and freelancers in Bangladesh — and clients worldwide. Automate 
+workflows, free up 20+ hours/week, and unlock new revenue streams."
+
+HERO PRIMARY CTA BUTTON: Change button text from "Start on WhatsApp"
+to: "Book Free 30-Min Consultation"
+Keep the same WhatsApp link but use WA_URLS.consultation from Fix 3.
+
+ADD MICRO-COPY below the CTA buttons:
+<p className="text-sm text-slate-400 mt-3">
+  No sales pitch. We map your biggest bottleneck and outline a practical AI plan.
+</p>
+
+HOW IT WORKS SECTION — Add day labels to each step:
+Step 1 DIAGNOSE: Add sub-label "(Day 1)"
+Step 2 DESIGN: Add sub-label "(Day 2)"
+Step 3 BUILD: Add sub-label "(Day 3)"
+Step 4 SCALE: Add sub-label "(Day 4–90)"
+
+══════════════════════════════════
+FIX 5 — FOUNDER SECTION ON HOMEPAGE (HIGH TRUST IMPACT)
+Currently: No founder section on homepage. Missing = no trust.
+══════════════════════════════════
+
+Find where the founder/about section appears (likely near testimonials or before final CTA).
+If NO founder section exists on homepage, ADD one before the final CTA section.
+
+CREATE founder section component:
+
+```
+
+<section className="py-20 bg-slate-50">
+
+<div className="max-w-4xl mx-auto px-6">
+
+<div className="flex flex-col md:flex-row gap-10 items-center">
+
+{/ *Founder Avatar / Photo Placeholder* /}
+
+<div className="flex-shrink-0">
+
+<div className="w-40 h-40 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 
+
+flex items-center justify-center text-white text-5xl font-bold shadow-xl">
+
+EH
+
+</div>
+
+{/* Replace above with: <img src="/founder.jpg" alt="Emon Hossain - Founder SYSmoAI" 
+
+className="w-40 h-40 rounded-2xl object-cover shadow-xl" /> 
+
+once real photo is available */}
+
+</div>
+
+{/ *Founder Info* /}
+
+<div>
+
+<div className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2">
+
+Meet Your AI Architect
+
+</div>
+
+<h2 className="text-3xl font-bold text-slate-900 mb-1">Emon Hossain</h2>
+
+<p className="text-slate-500 mb-4">
+
+Founder & CEO, SYSmoAI · AI Systems Architect · Notion OS Builder
+
+</p>
+
+<blockquote className="text-slate-700 text-lg leading-relaxed italic border-l-4 
+
+border-blue-500 pl-4 mb-6">
+
+"I built SYSmoAI because I was you 3 years ago — overwhelmed, tool-hopping, 
+
+and losing income while AI was changing everything. I spent 3 years mastering 
+
+every AI tool, building real systems, and delivering 500+ projects. 
+
+Most people don't need another tool. They need someone to build the system 
+
+FOR them. That's SYSmoAI."
+
+</blockquote>
+
+{/ *Skill Tags* /}
+
+<div className="flex flex-wrap gap-2">
+
+{["AI Systems Architecture","Top 5% Prompt Engineering","Notion OS",
+
+"n8n Automation","AI Agent Design","500+ Projects Delivered",
+
+"SEO Expert","AI Coaching"].map(tag => (
+
+<span key={tag} className="px-3 py-1 bg-blue-50 text-blue-700 text-sm 
+
+font-medium rounded-full border border-blue-100">
+
+{tag}
+
+</span>
+
+))}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+```
+
+══════════════════════════════════
+FIX 6 — FOOTER SOCIAL MEDIA ICONS (MISSING)
+Audit found: Social icons completely absent from footer.
+══════════════════════════════════
+
+Find the footer component.
+ADD social media icon links. Use these placeholder URLs (update when real accounts confirmed):
+
+```
+
+{/ *Social Media Links — Add to footer* /}
+
+<div className="flex gap-4 mt-4">
+
+<a href="https://www.facebook.com/sysmoai" 
+
+target="_blank" rel="noopener noreferrer"
+
+aria-label="SYSmoAI on Facebook"
+
+className="w-10 h-10 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white 
+
+flex items-center justify-center text-slate-500 transition-all duration-200">
+
+{/ *Facebook icon - use Lucide or SVG* /}
+
+<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+
+<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+
+</svg>
+
+</a>
+
+<a href="https://www.linkedin.com/company/sysmoai" 
+
+target="_blank" rel="noopener noreferrer"
+
+aria-label="SYSmoAI on LinkedIn"
+
+className="w-10 h-10 rounded-lg bg-slate-100 hover:bg-blue-700 hover:text-white 
+
+flex items-center justify-center text-slate-500 transition-all duration-200">
+
+<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+
+<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+
+</svg>
+
+</a>
+
+<a href="https://www.youtube.com/@sysmoai" 
+
+target="_blank" rel="noopener noreferrer"
+
+aria-label="SYSmoAI on YouTube"
+
+className="w-10 h-10 rounded-lg bg-slate-100 hover:bg-red-600 hover:text-white 
+
+flex items-center justify-center text-slate-500 transition-all duration-200">
+
+<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+
+<path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+
+</svg>
+
+</a>
+
+</div>
+
+```
+
+ALSO add WhatsApp number as visible text in footer (not just button):
+Find the contact column in the footer. Add:
+```
+
+<p className="text-slate-400 text-sm mt-2">
+
+📞 +880 1711-638693
+
+</p>
+
+<p className="text-slate-400 text-sm">
+
+✉️ [hello@sysmoai.com](mailto:hello@sysmoai.com)
+
+</p>
+
+```
+
+══════════════════════════════════
+FIX 7 — CLIENT SEGMENTS "SEE FULL SOLUTION" LINKS
+Audit: Links scroll to pricing instead of segment-specific pages.
+══════════════════════════════════
+
+Find the client segments / "Who We Help" tabbed section.
+Each segment tab has a "See full solution →" or "See full solution" link.
+
+CHANGE all these links to point to the correct /for/ pages:
+  Students → /for/students
+  Job Seekers → /for/job-seekers
+  Freelancers → /for/freelancers
+  Researchers → /for/researchers
+  Agencies (Digital Agencies) → /for/agencies
+  SME Founders → /for/sme-founders
+  F-Commerce → /for/f-commerce
+  Consultants → /for/consultants
+  Creators → /for/creators
+  Corporates → /for/corporates
+
+If these pages don't exist yet — link to /services as fallback for now.
+Use Next.js <Link> component, not <a> tags.
+
+══════════════════════════════════
+FIX 8 — GALLERY SECTION (VISUAL)
+Score: 4/10. Generic stock photos disconnected from narrative.
+══════════════════════════════════
+
+Find the gallery section (likely "What AI-powered life looks like" or similar).
+
+REPLACE the generic stock photo gallery with a 3-card screenshot/feature showcase:
+
+```
+
+<section className="py-20 bg-white">
+
+<div className="max-w-6xl mx-auto px-6">
+
+<div className="text-center mb-12">
+
+<h2 className="text-3xl font-bold text-slate-900 mb-4">
+
+What We Actually Build
+
+</h2>
+
+<p className="text-lg text-slate-600">
+
+Real AI systems. Real workflows. Real results.
+
+</p>
+
+</div>
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+{/ *Card 1* /}
+
+<div className="rounded-2xl border border-slate-200 overflow-hidden shadow-sm 
+
+hover:shadow-lg transition-shadow duration-300">
+
+<div className="bg-gradient-to-br from-blue-600 to-blue-800 h-48 flex items-center 
+
+justify-center p-6">
+
+<div className="text-white text-center">
+
+<div className="text-5xl mb-3">🗂️</div>
+
+<div className="font-semibold text-lg">Notion AI OS</div>
+
+<div className="text-blue-200 text-sm mt-1">Business Command Center</div>
+
+</div>
+
+</div>
+
+<div className="p-5 bg-white">
+
+<h3 className="font-semibold text-slate-900 mb-2">Complete Business OS</h3>
+
+<p className="text-slate-600 text-sm">
+
+Every project, client, task, and KPI — connected in one AI-powered 
+
+Notion workspace that runs your business for you.
+
+</p>
+
+</div>
+
+</div>
+
+{/ *Card 2* /}
+
+<div className="rounded-2xl border border-slate-200 overflow-hidden shadow-sm 
+
+hover:shadow-lg transition-shadow duration-300">
+
+<div className="bg-gradient-to-br from-emerald-600 to-teal-700 h-48 flex items-center 
+
+justify-center p-6">
+
+<div className="text-white text-center">
+
+<div className="text-5xl mb-3">⚡</div>
+
+<div className="font-semibold text-lg">n8n Automation</div>
+
+<div className="text-emerald-200 text-sm mt-1">Workflows That Never Sleep</div>
+
+</div>
+
+</div>
+
+<div className="p-5 bg-white">
+
+<h3 className="font-semibold text-slate-900 mb-2">End-to-End Automation</h3>
+
+<p className="text-slate-600 text-sm">
+
+WhatsApp → CRM → Invoice → Follow-up. Fully automated workflows 
+
+that connect all your tools without any code.
+
+</p>
+
+</div>
+
+</div>
+
+{/ *Card 3* /}
+
+<div className="rounded-2xl border border-slate-200 overflow-hidden shadow-sm 
+
+hover:shadow-lg transition-shadow duration-300">
+
+<div className="bg-gradient-to-br from-purple-600 to-indigo-700 h-48 flex items-center 
+
+justify-center p-6">
+
+<div className="text-white text-center">
+
+<div className="text-5xl mb-3">🤖</div>
+
+<div className="font-semibold text-lg">AI Agents</div>
+
+<div className="text-purple-200 text-sm mt-1">Working 24/7 For You</div>
+
+</div>
+
+</div>
+
+<div className="p-5 bg-white">
+
+<h3 className="font-semibold text-slate-900 mb-2">Custom AI Agents</h3>
+
+<p className="text-slate-600 text-sm">
+
+AI agents that handle customer queries, qualify leads, and generate 
+
+reports — even when you're asleep.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+```
+
+══════════════════════════════════
+FIX 9 — JSON-LD SCHEMA MARKUP (SEO CRITICAL)
+Currently: No schema markup detected. Hurts search ranking and AIO.
+══════════════════════════════════
+
+Find the root layout file (app/layout.tsx or pages/_document.tsx).
+ADD this JSON-LD in the <head>:
+
+```
+
+<script
+
+type="application/ld+json"
+
+dangerouslySetInnerHTML={{
+
+__html: JSON.stringify({
+
+"@context": "https://schema.org",
+
+"@type": ["Organization", "LocalBusiness"],
+
+"name": "SYSmoAI",
+
+"alternateName": "SYSmoAI Private Limited",
+
+"url": "https://sysmoai.com",
+
+"logo": "https://sysmoai.com/logo.png",
+
+"description": "Bangladesh's AI consulting company. We build custom AI operating systems, workflow automation, and AI agents for businesses in Bangladesh and worldwide.",
+
+"email": "[hello@sysmoai.com](mailto:hello@sysmoai.com)",
+
+"telephone": "+8801711638693",
+
+"address": {
+
+"@type": "PostalAddress",
+
+"streetAddress": "Pallabi",
+
+"addressLocality": "Dhaka",
+
+"addressCountry": "BD"
+
+},
+
+"founder": {
+
+"@type": "Person",
+
+"name": "Emon Hossain",
+
+"jobTitle": "Founder & CEO",
+
+"description": "AI Systems Architect, Top 5% Prompt Engineer globally, 500+ projects delivered"
+
+},
+
+"serviceArea": [
+
+{"@type": "Country", "name": "Bangladesh"},
+
+{"@type": "AdministrativeArea", "name": "Worldwide"}
+
+],
+
+"hasOfferCatalog": {
+
+"@type": "OfferCatalog",
+
+"name": "AI Services",
+
+"itemListElement": [
+
+{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "AI Quick Win", "description": "One workflow automated in 3 days"}},
+
+{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "AI Implementation Sprint", "description": "Full AI stack deployed in 14 days"}},
+
+{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "AI Operations Retainer", "description": "Ongoing monthly AI system management"}},
+
+{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Notion OS Build", "description": "Custom Notion business operating system"}},
+
+{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "AI Agent Development", "description": "Custom AI agents for business automation"}}
+
+]
+
+},
+
+"sameAs": [
+
+"https://www.facebook.com/sysmoai",
+
+"https://www.linkedin.com/company/sysmoai",
+
+"https://www.youtube.com/@sysmoai"
+
+]
+
+})
+
+}}
+
+/>
+
+```
+
+ALSO add FAQPage schema to /faq page. Find faq/page.tsx and add:
+```
+
+<script
+
+type="application/ld+json"
+
+dangerouslySetInnerHTML={{
+
+__html: JSON.stringify({
+
+"@context": "https://schema.org",
+
+"@type": "FAQPage",
+
+"mainEntity": [
+
+{
+
+"@type": "Question",
+
+"name": "Do I need to know anything about AI to work with SYSmoAI?",
+
+"acceptedAnswer": {"@type": "Answer", "text": "Not at all. We handle everything technical. You just show up for the onboarding call and tell us about your business. We do the rest."}
+
+},
+
+{
+
+"@type": "Question",
+
+"name": "How fast do I see results from AI automation?",
+
+"acceptedAnswer": {"@type": "Answer", "text": "Most Quick Win clients see measurable results within 72 hours of delivery. Sprint clients typically see major impact in the first 2 weeks."}
+
+},
+
+{
+
+"@type": "Question",
+
+"name": "How much does AI automation cost in Bangladesh?",
+
+"acceptedAnswer": {"@type": "Answer", "text": "Our AI Quick Win starts at ৳3,750 for a pilot. The AI Sprint is ৳25,000–50,000 for a full system in 14 days. Monthly retainer is ৳20,000/month. International pricing in USD also available."}
+
+},
+
+{
+
+"@type": "Question",
+
+"name": "Do you work with international clients?",
+
+"acceptedAnswer": {"@type": "Answer", "text": "Yes. We work with clients in the US, UK, Canada, and across Southeast Asia. International payments via Wise and Payoneer."}
+
+},
+
+{
+
+"@type": "Question",
+
+"name": "Is this just consulting or do you actually build?",
+
+"acceptedAnswer": {"@type": "Answer", "text": "We build. You get a working, deployed system — not a slide deck. We don't get paid until it works."}
+
+}
+
+]
+
+})
+
+}}
+
+/>
+
+```
+
+══════════════════════════════════
+FIX 10 — FAQ EXPANSION
+Currently: 5 questions. Target: 12+ questions.
+══════════════════════════════════
+
+Find the FAQ page (/faq/page.tsx or similar).
+ADD these 7 additional questions to the existing 5:
+
+Q6: "What happens during the free 30-minute AI audit?"
+A: "We spend the first 10 minutes understanding your business and current workflow. The next 15 minutes we identify your biggest automation opportunity and map the solution. The final 5 minutes we outline an action plan with exact tools, costs, and timeline. You leave with a clear picture of what to build — even if you don't hire us."
+
+Q7: "What AI tools will you use for my business?"
+A: "We select tools based on your specific needs: Notion for business OS and databases, ChatGPT/Claude for AI intelligence, n8n or Zapier for workflow automation, and custom AI agents for high-volume tasks. We work with what you already have when possible."
+
+Q8: "How does payment work? Do you accept bKash?"
+A: "Yes. AI Quick Win: 100% advance. AI Sprint: 50% upfront, 50% on delivery. Retainer: monthly in advance. We accept bKash, Nagad, Rocket, bank transfer (Bangladesh) and Wise, Payoneer (international)."
+
+Q9: "Is my business data safe with SYSmoAI?"
+A: "Absolutely. We sign a confidentiality agreement before every project. We never store your data beyond the project duration. All systems are built with your data on your own accounts — we never hold your data hostage."
+
+Q10: "What if I already tried AI tools but they didn't work?"
+A: "Tools alone rarely work. What matters is the system connecting them. Most clients who tried ChatGPT or Notion on their own found them confusing — because the implementation was wrong. We build the system FOR you, on YOUR data, with YOUR specific workflow. It's a completely different experience."
+
+Q11: "Can you train my team to use the AI system?"
+A: "Yes. Every Sprint includes team training. We also offer standalone Group Workshops for teams of 10+ at ৳500/person. Training is always included — we make sure your team can run the system without us."
+
+Q12: "How is SYSmoAI different from hiring a freelancer on Fiverr?"
+A: "Freelancers complete tasks. SYSmoAI builds systems. We document everything, train your team, provide 3 months of support, and build something that runs without us. A Fiverr freelancer delivers an output. We deliver a working, maintained AI operating system."
+
+══════════════════════════════════
+FIX 11 — URGENCY ELEMENT
+Currently: No urgency anywhere on the page.
+══════════════════════════════════
+
+Find the final CTA section (before footer).
+ADD an urgency banner above the main CTA:
+
+```
+
+<div className="bg-amber-50 border border-amber-200 rounded-xl px-6 py-4 mb-8 
+
+flex items-center gap-3 max-w-2xl mx-auto">
+
+⏰
+
+<div>
+
+<p className="font-semibold text-amber-900 text-sm">
+
+Free AI Audit — Limited Slots Available
+
+</p>
+
+<p className="text-amber-700 text-sm">
+
+Emon personally conducts every discovery call. 
+
+Only 5 free audit slots available this week.
+
+</p>
+
+</div>
+
+</div>
+
+```
+
+══════════════════════════════════
+FIX 12 — AI RETAINER CARD (Missing description)
+Audit: AI Retainer card has "Get Started" but no description.
+══════════════════════════════════
+
+Find the AI Retainer pricing card.
+ADD description text if it's empty:
+"We manage and evolve your AI systems every month. Monthly improvements, 
+priority WhatsApp support, and a performance report — so your AI never gets stale."
+
+══════════════════════════════════
+FIX 13 — CONTACT FORM (UX Improvement)
+Audit: 6 fields too many. No thank-you page after submission.
+══════════════════════════════════
+
+Find the contact form component (likely on /contact page).
+
+REDUCE to 4 fields:
+  1. Name (required)
+  2. Email or WhatsApp (required)
+  3. Business type / What you do (optional — dropdown or text)
+  4. "What's your biggest problem right now?" (required — textarea)
+
+After successful form submission:
+  - Do NOT just replace the form with "Message received!"
+  - REDIRECT to a thank-you page at /thank-you OR show:
+
+```
+
+<div className="text-center py-12 px-6 bg-green-50 rounded-2xl border border-green-200">
+
+<div className="text-5xl mb-4">✅</div>
+
+<h3 className="text-2xl font-bold text-green-800 mb-3">Message Received!</h3>
+
+<p className="text-green-700 mb-2">
+
+Emon will personally review your message and reply within 2 hours on working days.
+
+</p>
+
+<p className="text-green-600 text-sm mb-6">
+
+For faster response, message directly on WhatsApp:
+
+</p>
+
+<a href="https://wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%20just%20filled%20your%20contact%20form"
+
+target="_blank"
+
+className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white 
+
+font-semibold px-6 py-3 rounded-xl transition-all">
+
+💬 Continue on WhatsApp
+
+</a>
+
+</div>
+
+```
+
+══════════════════════════════════
+FINAL CHECKS — Run after all fixes
+══════════════════════════════════
+
+After completing all 13 fixes:
+
+1. Search codebase for "0+" — confirm no stat shows "0+" anymore
+2. Search for "whatsapp://" — confirm NONE found (all replaced with https://wa.me/)
+3. Check /blog page — confirm no broken "#" article links
+4. Build: npm run build — must exit 0 with zero errors
+5. Check browser console on homepage — zero errors
+6. Verify floating WhatsApp button opens correct URL
+7. Verify all 4 stats show correct non-zero values
+
+OUTPUT REPORT:
+  ✅ Fix 1 Stats: [before value → after value]
+  ✅ Fix 2 Blog: [what was done]
+  ✅ Fix 3 WhatsApp: [links updated count]
+  ✅ Fix 4 Hero copy: [changes made]
+  ✅ Fix 5 Founder section: [added/updated]
+  ✅ Fix 6 Social icons: [added to footer]
+  ✅ Fix 7 Segment links: [updated to /for/ pages]
+  ✅ Fix 8 Gallery: [replaced with feature cards]
+  ✅ Fix 9 Schema: [JSON-LD added to layout]
+  ✅ Fix 10 FAQ: [7 new questions added, total = 12]
+  ✅ Fix 11 Urgency: [banner added to CTA section]
+  ✅ Fix 12 Retainer card: [description added]
+  ✅ Fix 13 Contact form: [reduced to 4 fields, success state improved]
+  ⚠️ Manual items: [anything Emon must do manually]
+  
+BUILD STATUS: npm run build → exit [0/error]
+ESTIMATED NEW SCORE: [X/100]
+════════════════════════════════════════════════════════════════
+```
