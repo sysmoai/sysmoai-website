@@ -42,6 +42,27 @@ const businessCol = [
   { href: '/for/corporates',   icon: Megaphone,   label: 'Corporates & NGOs' },
 ];
 
+const blogAudienceCol = [
+  { href: '/blog?group=students',    icon: GraduationCap, label: 'Students' },
+  { href: '/blog?group=job-seekers', icon: Briefcase,     label: 'Job Seekers' },
+  { href: '/blog?group=freelancers', icon: Laptop,        label: 'Freelancers' },
+  { href: '/blog?group=researchers', icon: FlaskConical,  label: 'Researchers' },
+  { href: '/blog?group=creators',    icon: Video,         label: 'Creators' },
+  { href: '/blog?group=agencies',    icon: Building2,     label: 'Agencies' },
+  { href: '/blog?group=sme-founders',icon: Star,          label: 'SME Founders' },
+  { href: '/blog?group=f-commerce',  icon: ShoppingBag,   label: 'F-Commerce' },
+  { href: '/blog?group=consultants', icon: Users2,        label: 'Consultants' },
+  { href: '/blog?group=corporates',  icon: Megaphone,     label: 'Corporates' },
+];
+
+const blogTypeCol = [
+  { href: '/blog', icon: Zap,       label: 'Wake-Up Calls',  desc: 'Realize the gap' },
+  { href: '/blog', icon: Settings,  label: 'System Reveals', desc: "See what's possible" },
+  { href: '/blog', icon: ArrowRight,label: 'Transformations',desc: 'Real before/after' },
+  { href: '/blog', icon: BookOpen,  label: 'Free Value',     desc: 'Try it yourself' },
+  { href: '/blog', icon: Timer,     label: 'Future Shock',   desc: '2027 with vs without' },
+];
+
 const panelAnim = {
   hidden:  { opacity: 0, y: -8, scale: 0.97 },
   visible: { opacity: 1, y: 0,  scale: 1, transition: { duration: 0.2, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
@@ -159,6 +180,86 @@ function AudiencePanel({ onClose, isDark }: { onClose: () => void; isDark: boole
   );
 }
 
+/* ─── BLOG PANEL ─── */
+function BlogPanel({ onClose, isDark }: { onClose: () => void; isDark: boolean }) {
+  const panelBg = isDark ? '#0C1018' : '#FFFFFF';
+  const borderC = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(37,99,235,0.1)';
+  const divider = isDark ? 'rgba(255,255,255,0.04)' : 'rgba(37,99,235,0.04)';
+
+  return (
+    <div className="w-[520px] overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+         style={{ background: panelBg, border: `1px solid ${borderC}` }}>
+      <div className="grid grid-cols-2 gap-px" style={{ background: divider }}>
+        {/* Column 1: By Audience */}
+        <div className="p-4" style={{ background: panelBg }}>
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] px-2 mb-2"
+             style={{ color: isDark ? '#475569' : '#94A3B8' }}>By Audience</p>
+          <div className="space-y-0.5">
+            {blogAudienceCol.map((a) => (
+              <Link key={a.href} href={a.href} onClick={onClose}
+                className="group flex items-center gap-2.5 px-2 py-2 rounded-xl transition-all duration-150"
+                onMouseEnter={e => (e.currentTarget.style.background = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(37,99,235,0.05)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+                <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
+                     style={{ background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(37,99,235,0.08)' }}>
+                  <a.icon size={12} className="text-blue-400" />
+                </div>
+                <span className="text-[13px] font-medium"
+                      style={{ color: isDark ? '#94A3B8' : '#64748B' }}>{a.label}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+        {/* Column 2: By Type */}
+        <div className="p-4" style={{ background: panelBg }}>
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] px-2 mb-2"
+             style={{ color: isDark ? '#475569' : '#94A3B8' }}>By Article Type</p>
+          <div className="space-y-0.5">
+            {blogTypeCol.map((t) => (
+              <Link key={t.label} href={t.href} onClick={onClose}
+                className="group flex items-center gap-3 px-2 py-2.5 rounded-xl transition-all duration-150"
+                onMouseEnter={e => (e.currentTarget.style.background = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(37,99,235,0.05)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+                <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
+                     style={{ background: 'rgba(37,99,235,0.12)' }}>
+                  <t.icon size={12} className="text-blue-400" />
+                </div>
+                <div>
+                  <div className="text-[13px] font-medium"
+                       style={{ color: isDark ? '#94A3B8' : '#64748B' }}>{t.label}</div>
+                  <div className="text-[10px]"
+                       style={{ color: isDark ? '#334155' : '#CBD5E1' }}>{t.desc}</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+          {/* Latest Article highlight */}
+          <div className="mt-3 p-3 rounded-xl"
+               style={{ background: isDark ? 'rgba(37,99,235,0.08)' : '#EFF6FF' }}>
+            <p className="text-[10px] font-bold uppercase tracking-wider mb-1"
+               style={{ color: '#2563EB' }}>Latest</p>
+            <Link href="/blog/ai-study-system-students-2026" onClick={onClose}
+              className="text-[12px] font-semibold leading-snug hover:text-blue-500 transition-colors"
+              style={{ color: isDark ? '#E2E8F0' : '#1E293B' }}>
+              Your Classmate Is Getting A+ Using AI Systems You Don't Know Exist
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="px-5 py-3 flex items-center justify-between"
+           style={{ background: isDark ? 'rgba(0,0,0,0.3)' : 'rgba(248,250,252,0.8)', borderTop: `1px solid ${borderC}` }}>
+        <span className="text-[11px]" style={{ color: isDark ? '#475569' : '#94A3B8' }}>
+          10 audiences · 50 articles planned · AI-powered insights
+        </span>
+        <Link href="/blog" onClick={onClose}
+          className="flex items-center gap-1 text-[11px] font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+          All Articles <ArrowRight size={10} />
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 /* ─── THEME TOGGLE ─── */
 function ThemeToggle() {
   const { isDark, toggle } = useTheme();
@@ -201,7 +302,8 @@ export function Header() {
 
   const svc = useDropdown();
   const aud = useDropdown();
-  const closeAll = () => { svc.close_(); aud.close_(); };
+  const blog = useDropdown();
+  const closeAll = () => { svc.close_(); aud.close_(); blog.close_(); };
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20);
@@ -313,10 +415,35 @@ export function Header() {
               </AnimatePresence>
             </div>
 
+            {/* Blog */}
+            <div className="relative"
+              onMouseEnter={() => { svc.close_(); aud.close_(); blog.open_(); }}
+              onMouseLeave={blog.close_}
+            >
+              <button
+                className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-150"
+                style={{ color: blog.open ? (isDark ? '#FFFFFF' : '#0A0B0F') : navText, background: blog.open ? (isDark ? 'rgba(255,255,255,0.06)' : 'rgba(37,99,235,0.06)') : 'transparent' }}
+                aria-expanded={blog.open}
+              >
+                Blog
+                <ChevronDown size={13} strokeWidth={2.5} className={`transition-transform duration-200 ${blog.open ? 'rotate-180' : ''}`} />
+              </button>
+              {blog.open && <div className="absolute inset-x-0 top-full h-3 z-40" onMouseEnter={blog.open_} onMouseLeave={blog.close_} />}
+              <AnimatePresence>
+                {blog.open && (
+                  <motion.div key="blog" variants={panelAnim}
+                    initial="hidden" animate="visible" exit="exit"
+                    className="absolute left-1/2 -translate-x-1/2 top-[calc(100%+10px)] z-50"
+                    onMouseEnter={blog.open_} onMouseLeave={blog.close_}>
+                    <BlogPanel onClose={closeAll} isDark={isDark} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
             {/* Static links */}
             {[
               { href: '/pricing', label: 'Pricing' },
-              { href: '/results', label: 'Results' },
               { href: '/about',   label: 'About'   },
               { href: '/contact', label: 'Contact' },
             ].map((l) => (

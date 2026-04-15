@@ -110,10 +110,19 @@ function SEOManager() {
   return null;
 }
 
+function ScrollToTop() {
+  const [location] = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [location]);
+  return null;
+}
+
 function Router() {
   return (
     <div className="min-h-[100dvh] flex flex-col font-sans">
       <SEOManager />
+      <ScrollToTop />
       <Header />
       <main className="flex-1">
         <Suspense fallback={<Fallback />}>

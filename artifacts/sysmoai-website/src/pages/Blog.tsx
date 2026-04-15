@@ -60,7 +60,9 @@ function PostCard({ post }: { post: BlogPost }) {
 
 export default function Blog() {
   const { isDark } = useTheme();
-  const [activeGroup, setActiveGroup] = useState('all');
+  const searchParams = new URLSearchParams(window.location.search);
+  const initialGroup = searchParams.get('group') || 'all';
+  const [activeGroup, setActiveGroup] = useState(initialGroup);
 
   React.useEffect(() => {
     document.title = 'AI Blog Bangladesh — Practical Guides | SYSmoAI';

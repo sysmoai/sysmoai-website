@@ -1,0 +1,292 @@
+⚡ FIX: Header upgrade + Scroll-to-top + Blog verification
+
+Do NOT rewrite full files. Make SURGICAL changes only.
+Do NOT break ANY existing pages or functionality.
+All changes are in: artifacts/sysmoai-website/src/
+Package manager: pnpm (NOT npm)
+Router: wouter (NOT react-router)
+
+════════════════════════════════════════
+FIX 1: SCROLL TO TOP ON ROUTE CHANGE
+════════════════════════════════════════
+
+File: src/App.tsx
+
+PROBLEM: Clicking any link (footer, navbar, blog) changes the 
+page but scroll stays at the bottom. User must manually scroll 
+up. This is the #1 UX bug right now.
+
+FIX: Add a ScrollToTop component ABOVE the Router function:
+
+function ScrollToTop() {
+  const [location] = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [location]);
+  return null;
+}
+
+Then add <ScrollToTop /> inside Router, right after <SEOManager />:
+
+function Router() {
+  return (
+    <div className="min-h-[100dvh] flex flex-col font-sans">
+      <SEOManager />
+      <ScrollToTop />
+      <Header />
+      ...
+
+useLocation and useEffect are ALREADY imported. Do NOT duplicate.
+
+════════════════════════════════════════
+FIX 2: BLOG MEGA DROPDOWN IN DESKTOP HEADER
+════════════════════════════════════════
+
+File: src/components/Header.tsx
+
+PROBLEM: Desktop nav has: Services | Who We Help | Pricing | 
+Results | About | Contact. Blog is missing. Blog is our 
+customer acquisition engine and needs a mega dropdown with 
+categories by audience + article type.
+
+IMPORTANT: Follow the EXACT same pattern as the existing 
+Services and Who We Help dropdowns. Use the same useDropdown 
+hook, same panelAnim, same AnimatePresence pattern. This 
+ensures consistency and prevents bugs.
+
+STEP 2A: Add blog data arrays at the top (after businessCol):
+
+const blogAudienceCol = [
+  { href: '/blog?group=students',    icon: GraduationCap, label: 'Students' },
+  { href: '/blog?group=job-seekers', icon: Briefcase,     label: 'Job Seekers' },
+  { href: '/blog?group=freelancers', icon: Laptop,        label: 'Freelancers' },
+  { href: '/blog?group=researchers', icon: FlaskConical,  label: 'Researchers' },
+  { href: '/blog?group=creators',    icon: Video,         label: 'Creators' },
+  { href: '/blog?group=agencies',    icon: Building2,     label: 'Agencies' },
+  { href: '/blog?group=sme-founders',icon: Star,          label: 'SME Founders' },
+  { href: '/blog?group=f-commerce',  icon: ShoppingBag,   label: 'F-Commerce' },
+  { href: '/blog?group=consultants', icon: Users2,        label: 'Consultants' },
+  { href: '/blog?group=corporates',  icon: Megaphone,     label: 'Corporates' },
+];
+
+const blogTypeCol = [
+  { href: '/blog', icon: Zap,       label: 'Wake-Up Calls',   desc: 'Realize the gap' },
+  { href: '/blog', icon: Settings,  label: 'System Reveals',   desc: 'See what\'s possible' },
+  { href: '/blog', icon: ArrowRight,label: 'Transformations',  desc: 'Real before/after' },
+  { href: '/blog', icon: BookOpen,  label: 'Free Value',       desc: 'Try it yourself' },
+  { href: '/blog', icon: Timer,     label: 'Future Shock',     desc: '2027 with vs without' },
+];
+
+All icons above are ALREADY imported in Header.tsx.
+
+STEP 2B: Add a BlogPanel component (same pattern as 
+ServicesPanel and AudiencePanel):
+
+function BlogPanel({ onClose, isDark }: { onClose: () => void; isDark: boolean }) {
+  const panelBg = isDark ? '#0C1018' : '#FFFFFF';
+  const borderC = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(37,99,235,0.1)';
+  const divider = isDark ? 'rgba(255,255,255,0.04)' : 'rgba(37,99,235,0.04)';
+
+  return (
+    <div className="w-[520px] overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.5)]" 
+         style={{ background: panelBg, border: `1px solid ${borderC}` }}>
+      <div className="grid grid-cols-2 gap-px" style= background: divider >
+        {/* Column 1: By Audience */}
+        <div className="p-4" style= background: panelBg >
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] px-2 mb-2" 
+             style= color: isDark ? '#475569' : '#94A3B8' >By Audience</p>
+          <div className="space-y-0.5">
+            {blogAudienceCol.map((a) => (
+              <Link key={a.href} href={a.href} onClick={onClose}
+                className="group flex items-center gap-2.5 px-2 py-2 rounded-xl transition-all duration-150"
+                onMouseEnter={e => (e.currentTarget.style.background = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(37,99,235,0.05)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+                <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0" 
+                     style= background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(37,99,235,0.08)' >
+                  <a.icon size={12} className="text-blue-400" />
+                </div>
+                <span className="text-[13px] font-medium" 
+                      style= color: isDark ? '#94A3B8' : '#64748B' >{a.label}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+        {/* Column 2: By Type */}
+        <div className="p-4" style= background: panelBg >
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] px-2 mb-2" 
+             style= color: isDark ? '#475569' : '#94A3B8' >By Article Type</p>
+          <div className="space-y-0.5">
+            {blogTypeCol.map((t) => (
+              <Link key={t.label} href={t.href} onClick={onClose}
+                className="group flex items-center gap-3 px-2 py-2.5 rounded-xl transition-all duration-150"
+                onMouseEnter={e => (e.currentTarget.style.background = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(37,99,235,0.05)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+                <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0" 
+                     style= background: 'rgba(37,99,235,0.12)' >
+                  <t.icon size={12} className="text-blue-400" />
+                </div>
+                <div>
+                  <div className="text-[13px] font-medium" 
+                       style= color: isDark ? '#94A3B8' : '#64748B' >{t.label}</div>
+                  <div className="text-[10px]" 
+                       style= color: isDark ? '#334155' : '#CBD5E1' >{t.desc}</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+          {/* Latest Article highlight */}
+          <div className="mt-3 p-3 rounded-xl" 
+               style= background: isDark ? 'rgba(37,99,235,0.08)' : '#EFF6FF' >
+            <p className="text-[10px] font-bold uppercase tracking-wider mb-1" 
+               style= color: '#2563EB' >Latest</p>
+            <Link href="/blog/ai-study-system-students-2026" onClick={onClose}
+              className="text-[12px] font-semibold leading-snug hover:text-blue-500 transition-colors"
+              style= color: isDark ? '#E2E8F0' : '#1E293B' >
+              Your Classmate Is Getting A+ Using AI Systems You Don't Know Exist
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="px-5 py-3 flex items-center justify-between" 
+           style={{ background: isDark ? 'rgba(0,0,0,0.3)' : 'rgba(248,250,252,0.8)', 
+                    borderTop: `1px solid ${borderC}` }}>
+        <span className="text-[11px]" style= color: isDark ? '#475569' : '#94A3B8' >
+          10 audiences · 50 articles planned · AI-powered insights
+        </span>
+        <Link href="/blog" onClick={onClose}
+          className="flex items-center gap-1 text-[11px] font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+          All Articles <ArrowRight size={10} />
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+STEP 2C: Inside the Header() component, add a blog dropdown 
+hook next to the existing svc and aud hooks:
+
+const blog = useDropdown();
+
+Update the closeAll function:
+const closeAll = () => { svc.close_(); aud.close_(); blog.close_(); };
+
+STEP 2D: In the desktop nav section, REPLACE the Results 
+static link with a Blog dropdown. The desktop nav currently 
+has static links array with Pricing, Results, About, Contact.
+
+Remove { href: '/results', label: 'Results' } from that array.
+
+ADD a Blog dropdown div BEFORE the static links, right after 
+the Who We Help dropdown div. Use the EXACT same pattern:
+
+{/* Blog */}
+<div className="relative"
+  onMouseEnter={() => { svc.close_(); aud.close_(); blog.open_(); }}
+  onMouseLeave={blog.close_}
+>
+  <button
+    className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-150"
+    style= 
+      color: blog.open ? (isDark ? '#FFFFFF' : '#0A0B0F') : navText, 
+      background: blog.open ? (isDark ? 'rgba(255,255,255,0.06)' : 'rgba(37,99,235,0.06)') : 'transparent' 
+    
+    aria-expanded={blog.open}
+  >
+    Blog
+    <ChevronDown size={13} strokeWidth={2.5} 
+      className={`transition-transform duration-200 ${blog.open ? 'rotate-180' : ''}`} />
+  </button>
+  {blog.open && <div className="absolute inset-x-0 top-full h-3 z-40" 
+    onMouseEnter={blog.open_} onMouseLeave={blog.close_} />}
+  <AnimatePresence>
+    {blog.open && (
+      <motion.div key="blog" variants={panelAnim} 
+        initial="hidden" animate="visible" exit="exit"
+        className="absolute left-1/2 -translate-x-1/2 top-[calc(100%+10px)] z-50"
+        onMouseEnter={blog.open_} onMouseLeave={blog.close_}>
+        <BlogPanel onClose={closeAll} isDark={isDark} />
+      </motion.div>
+    )}
+  </AnimatePresence>
+</div>
+
+STEP 2E: Update the static links array to remove Results 
+(Blog is now a dropdown):
+
+Change:
+{ href: '/pricing', label: 'Pricing' },
+{ href: '/results', label: 'Results' },
+{ href: '/about',   label: 'About'   },
+{ href: '/contact', label: 'Contact' },
+
+To:
+{ href: '/pricing', label: 'Pricing' },
+{ href: '/about',   label: 'About'   },
+{ href: '/contact', label: 'Contact' },
+
+(Results removed — it's accessible via footer and /results 
+route still works)
+
+STEP 2F: In the mobile menu, make sure Blog dropdown 
+functionality already works. The mobile menu already has 
+Blog as a simple link. For now, keep it as-is — the mobile 
+menu works fine with a direct link to /blog.
+
+Do NOT add a mobile accordion for Blog — mobile space is 
+limited and direct link is better UX.
+
+════════════════════════════════════════
+FIX 3: BLOG FILTER FROM URL PARAMS
+════════════════════════════════════════
+
+File: src/pages/Blog.tsx
+
+PROBLEM: The Blog mega dropdown links to 
+/blog?group=students etc. But Blog.tsx currently only 
+uses React state for filtering — it doesn't read URL 
+params. So clicking "Students" in the Blog dropdown 
+opens /blog but doesn't auto-filter.
+
+FIX: Read the ?group= URL param on page load and set 
+the initial filter.
+
+Add at the top of the Blog component (inside the function):
+
+// Read group from URL params
+const searchParams = new URLSearchParams(window.location.search);
+const initialGroup = searchParams.get('group') || 'all';
+const [activeGroup, setActiveGroup] = useState(initialGroup);
+
+REMOVE the existing line:
+const [activeGroup, setActiveGroup] = useState('all');
+
+This way:
+- /blog shows all articles
+- /blog?group=students shows only student articles
+- /blog?group=freelancers shows only freelancer articles
+- Filter tabs still work for manual switching
+
+════════════════════════════════════════
+FIX 4: VERIFY EVERYTHING
+════════════════════════════════════════
+
+1. Run: cd artifacts/sysmoai-website && pnpm run build
+2. Build must succeed with ZERO errors
+3. Test in webview:
+   a. Homepage loads correctly
+   b. Desktop header shows: Services\u25bc | Who We Help\u25bc | Blog\u25bc | Pricing | About | Contact | [Free AI Audit]
+   c. Hover over Blog\u25bc → mega dropdown appears with:
+      - Left column: 10 audience categories
+      - Right column: 5 article types + Latest article link
+      - Bottom bar: "All Articles \u2192" link
+   d. Click "Students" in Blog dropdown → /blog?group=students → filtered to student articles
+   e. Click "All Articles" → /blog → shows all 10 articles
+   f. Click any blog article → full content renders
+   g. Click any footer link → scrolls to TOP
+   h. Services dropdown still works
+   i. Who We Help dropdown still works
+   j. All other pages work (/, /about, /pricing, /contact, /free-ai-audit)
+   k. Mobile menu opens and all links work
+4. Report results for each check.
+
+Then I will Republish.
