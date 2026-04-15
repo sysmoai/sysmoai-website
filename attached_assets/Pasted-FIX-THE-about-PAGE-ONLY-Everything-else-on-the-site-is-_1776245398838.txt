@@ -1,0 +1,59 @@
+FIX THE /about PAGE ONLY. Everything else on the site is clean.
+This is a FOCUSED fix — 3 specific items on one page.
+
+STEP 1 — Find the about page file:
+grep -rn "From Overworked Founder" app/ --include="*.tsx" -l
+
+STEP 2 — In that file, find the skill tags section.
+Search for these exact strings:
+grep -n "AI Systems Architecture\|Prompt Engineering\|Notion OS\|n8n Automation\|AI Agent Design\|500+ Projects\|SEO Expert\|AI Coaching" [THE FILE YOU FOUND]
+
+STEP 3 — Convert each skill tag from <span> to <a> with these EXACT hrefs:
+
+"AI Systems Architecture" → href="/services"
+"Prompt Engineering" OR "Top 5% Prompt Engineering" → href="/free-ai-audit"
+"Notion OS" → href="/services/notion-os"
+"n8n Automation" → href="/services/n8n-automation"
+"AI Agent Design" → href="/services/ai-agent-dev"
+"500+ Projects" OR "500+ Projects Delivered" → href="/results"
+"SEO Expert" → href="/services"
+"AI Coaching" → href="/services/ai-coaching"
+
+Keep the SAME className as before. Just change <span to <a and add the href.
+Also add these extra classes: hover:bg-blue-100 hover:border-blue-300 transition-all duration-150 cursor-pointer no-underline
+
+STEP 4 — Find all "See case studies" links in the same file:
+grep -n "See case studies" [THE FILE]
+
+Change EVERY href to "/results"
+If any point to "/proof" → change to "/results"
+If any have no href → add href="/results"
+
+STEP 5 — Find all "See example" links in the same file:
+grep -n "See example" [THE FILE]
+
+Change them IN ORDER to these specific hrefs:
+1st occurrence ("We Build, Not Consult") → href="/services/ai-quick-win"
+2nd occurrence ("Results First") → href="/results"
+3rd occurrence ("Your System, Your Control") → href="/services/ai-sprint"
+4th occurrence ("Bangladesh-Rooted") → href="/services"
+5th occurrence ("Global Standards") → href="/pricing"
+
+STEP 6 — Verify the changes:
+grep -n "href=" [THE FILE] | tail -30
+(Should show all the new hrefs you just added)
+
+STEP 7 — Build:
+npm run build
+(Must exit 0 with no errors)
+
+STEP 8 — Commit and push:
+git add -A
+git commit -m "fix: about page — skill tags clickable + case study links to /results + example links to specific pages"
+git push origin main
+
+REPORT:
+- How many skill tags converted from span to a?
+- How many "See case studies" links updated?
+- How many "See example" links updated?
+- Build exit code?
