@@ -1,0 +1,867 @@
+```
+════════════════════════════════════════════════════════════════
+SYSMOAI — /about PAGE FULL FIX PROMPT
+Based on: ChatGPT 7-Role Audit · Score: 76/100 → Target: 92+/100
+════════════════════════════════════════════════════════════════
+
+File to work on: src/pages/About.tsx (or wherever the /about route is rendered)
+DO NOT touch Homepage, FAQ, Contact, or any other page.
+Execute all fixes below in order.
+
+══════════════════════════════════
+FIX 1 — UNIQUE META TITLE + DESCRIPTION (Critical SEO)
+Currently inheriting site-wide title. Must be page-specific.
+══════════════════════════════════
+
+Find the About page component. 
+Find where document title or meta tags are set (react-helmet, vite plugin, or index.html).
+
+Set the About page title to:
+  "About SYSmoAI & Founder Emon Hossain | AI Systems Architect Bangladesh"
+
+Set the About page meta description to:
+  "Meet Emon Hossain — AI Systems Architect, Top 5% Prompt Engineer globally, 
+  500+ projects delivered. SYSmoAI was built from his own 3-year AI journey. 
+  Bangladesh-based, globally-rated."
+
+If using react-helmet, add inside the About component return:
+```
+
+import { Helmet } from 'react-helmet'
+
+// Inside JSX:
+
+<Helmet>
+
+<title>About SYSmoAI & Founder Emon Hossain | AI Systems Architect Bangladesh</title>
+
+<meta name="description" content="Meet Emon Hossain — AI Systems Architect, Top 5% Prompt Engineer globally, 500+ projects delivered. SYSmoAI was built from his own 3-year AI journey. Bangladesh-based, globally-rated." />
+
+<meta property="og:title" content="About SYSmoAI & Founder Emon Hossain" />
+
+<meta property="og:description" content="500+ projects. Top 5% globally. Built AI for his own business first. Now building it for yours." />
+
+<meta property="og:url" content="https://sysmoai.com/about" />
+
+</Helmet>
+
+```
+
+══════════════════════════════════
+FIX 2 — WHATSAPP LINKS (Same fix as Homepage — apply to About page)
+About page still uses whatsapp:// scheme. Already fixed on Homepage.
+══════════════════════════════════
+
+Import the whatsapp helper already created in Fix 3 of the homepage session:
+```
+
+import { WA_URLS } from '../lib/whatsapp'
+
+```
+
+Find ALL WhatsApp links in About.tsx.
+They likely look like:
+  href="whatsapp://send/?phone=8801711638693&text=..."
+  OR href="https://wa.me/8801711638693"
+
+Replace ALL of them:
+  - CTA section "Start on WhatsApp" button → href={WA_URLS.consultation}
+  - Any other WhatsApp buttons → href={WA_URLS.general}
+  - All must have: target="_blank" rel="noopener noreferrer"
+
+══════════════════════════════════
+FIX 3 — HERO SECTION UPGRADE
+Currently: No CTA above the fold. Tagline repeats homepage copy.
+══════════════════════════════════
+
+Find the hero/mission section at the top of the About page.
+
+UPDATE the H1 headline from current to:
+  "From Overworked Founder to AI Visionary"
+
+UPDATE the sub-headline to:
+  "After 3 years of building his own AI operating system and delivering 500+ 
+  projects, Emon Hossain created SYSmoAI — so founders, agencies and 
+  freelancers in Bangladesh and worldwide can achieve the same freedom."
+
+ADD a CTA button BELOW the sub-headline (before anything else):
+
+```
+
+<div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
+
+<a
+
+href="/free-ai-audit"
+
+className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 
+
+text-white font-bold px-8 py-4 rounded-xl transition-all 
+
+duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+
+> 
+> 
+> 
+> Book Free 30-Min Consultation
+> 
+
+</a>
+
+<a
+
+href={WA_URLS.general}
+
+target="_blank"
+
+rel="noopener noreferrer"
+
+className="inline-flex items-center gap-2 border-2 border-white/30 
+
+text-white hover:bg-white/10 font-semibold px-8 py-4 
+
+rounded-xl transition-all duration-200"
+
+> 
+> 
+> 
+> 💬 Chat on WhatsApp
+> 
+
+</a>
+
+</div>
+
+```
+
+══════════════════════════════════
+FIX 4 — FOUNDER CREDENTIALS UPGRADE (High Trust Impact)
+Currently: Credentials are tiny tags easy to overlook.
+══════════════════════════════════
+
+Find the Founder Card section (the card with "EH" placeholder and skill tags).
+
+ABOVE the existing skill tags row, ADD a prominent credentials block:
+
+```
+
+{/ *Credentials Block — Add before skill tags* /}
+
+<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+
+{[
+
+{ icon: "🏆", number: "Top 5%", label: "Prompt Engineers Globally", sub: "Verified benchmark" },
+
+{ icon: "📦", number: "500+", label: "Projects Delivered", sub: "AI systems & automations" },
+
+{ icon: "🗓️", number: "3+", label: "Years Building AI", sub: "Notion, n8n, AI Agents" },
+
+].map((cred) => (
+
+<div key={cred.label}
+
+className="text-center p-4 rounded-xl bg-blue-50 border border-blue-100">
+
+<div className="text-3xl mb-2">{cred.icon}</div>
+
+<div className="text-2xl font-bold text-blue-700">{cred.number}</div>
+
+<div className="font-semibold text-slate-800 text-sm">{cred.label}</div>
+
+<div className="text-slate-500 text-xs mt-0.5">{cred.sub}</div>
+
+</div>
+
+))}
+
+</div>
+
+```
+
+REPLACE the long founder quote with this shorter, punchier version:
+```
+
+<blockquote className="text-slate-700 text-lg leading-relaxed italic 
+
+border-l-4 border-blue-500 pl-5 my-5">
+
+"I built SYSmoAI because I was you 3 years ago — overwhelmed, tool-hopping,
+
+and losing income while AI changed everything around me. I spent 3 years 
+
+mastering every AI tool. Then I realized: most people don't need another 
+
+tool. They need someone to build the system FOR them."
+
+<footer className="mt-3 text-sm font-semibold text-slate-600 not-italic">
+
+- Emon Hossain, Founder & CEO, SYSmoAI
+
+</footer>
+
+</blockquote>
+
+```
+
+UPDATE the founder card heading to be more prominent:
+```
+
+<div className="mb-1">
+
+<h2 className="text-2xl font-bold text-slate-900">Emon Hossain</h2>
+
+<p className="text-blue-600 font-semibold">
+
+Founder & CEO · AI Systems Architect · Top 5% Prompt Engineer
+
+</p>
+
+</div>
+
+```
+
+MAKE SKILL TAGS CLICKABLE — link each to its service page:
+Find the skill tags array. Update to include href:
+```
+
+const skillTags = [
+
+{ label: "AI Systems Architecture", href: "/services/ai-sprint" },
+
+{ label: "Prompt Engineering", href: "/proof" },
+
+{ label: "Notion OS", href: "/services/notion-os" },
+
+{ label: "n8n Automation", href: "/services/n8n-automation" },
+
+{ label: "AI Agent Design", href: "/services/ai-agent-dev" },
+
+{ label: "500+ Projects", href: "/proof" },
+
+{ label: "SEO Expert", href: "/services" },
+
+{ label: "AI Coaching", href: "/services/ai-coaching" },
+
+]
+
+// Render as links:
+
+{[skillTags.map](http://skillTags.map)(tag => (
+
+<a key={tag.label} href={tag.href}
+
+className="px-3 py-1 bg-blue-50 text-blue-700 text-sm font-medium 
+
+rounded-full border border-blue-100 hover:bg-blue-100 
+
+hover:border-blue-300 transition-all duration-150">
+
+{tag.label}
+
+</a>
+
+))}
+
+```
+
+══════════════════════════════════
+FIX 5 — HOW WE OPERATE SECTION (Greyed cards + Internal links)
+Some cards appear greyed out / inactive. Copy needs expansion.
+══════════════════════════════════
+
+Find the "How We Operate" section with 5 principle cards.
+Ensure ALL 5 cards have identical styling — no card should look greyed out or inactive.
+
+Check for any conditional opacity or disabled styling. Remove it.
+
+UPDATE each card's description to be more specific:
+
+```
+
+const principles = [
+
+{
+
+icon: "🔨",
+
+title: "We Build, Not Consult",
+
+desc: "You get a working, deployed AI system — not a strategy document or slide deck. We measure success by what runs, not what's recommended.",
+
+link: "/services"
+
+},
+
+{
+
+icon: "✅",
+
+title: "Results First",
+
+desc: "We don't get paid until your system delivers ROI. If the stated goal isn't met on a Quick Win, we rebuild it at no extra charge.",
+
+link: "/proof"
+
+},
+
+{
+
+icon: "🎯",
+
+title: "Your System, Your Control",
+
+desc: "Every system we build comes with documentation and training. Your team runs it independently after day 1. No dependency on us.",
+
+link: "/services/ai-sprint"
+
+},
+
+{
+
+icon: "🇧🇩",
+
+title: "Bangladesh-Rooted",
+
+desc: "We understand bKash, Nagad, F-commerce, WhatsApp-first business culture, and local market realities that global firms never will.",
+
+link: "/for/sme-founders"
+
+},
+
+{
+
+icon: "🌍",
+
+title: "Global Standards",
+
+desc: "Top 5% prompt engineering. International AI best practices. Our quality benchmark is global — not the local average. Clients in US, UK, Canada trust our work.",
+
+link: "/services/international"
+
+},
+
+]
+
+```
+
+ADD a "Learn more" link on each card:
+```
+
+<a href={[principle.link](http://principle.link)}
+
+className="text-blue-600 text-sm font-semibold hover:text-blue-800 
+
+transition-colors mt-3 inline-flex items-center gap-1">
+
+See example →
+
+</a>
+
+```
+
+══════════════════════════════════
+FIX 6 — TIMELINE SECTION (Add milestones + metrics)
+Currently text heavy, no metrics, no milestones.
+══════════════════════════════════
+
+Find the timeline section (Founder's Story).
+
+ADD metric callouts alongside the key timeline steps. Find the steps array and update:
+
+```
+
+const timelineSteps = [
+
+{
+
+icon: "🧠",
+
+step: "01",
+
+title: "The Overwhelm Begins",
+
+desc: "Emon was running a solo business — managing orders, follow-ups, content, and clients entirely manually. Sound familiar?",
+
+metric: null
+
+},
+
+{
+
+icon: "😤",
+
+step: "02",
+
+title: "Every Tool Failed",
+
+desc: "He tried Trello, Asana, spreadsheets, Notion without a system. They all failed alone. The problem wasn't the tools — it was the missing system.",
+
+metric: null
+
+},
+
+{
+
+icon: "⚡",
+
+step: "03",
+
+title: "3 Years Mastering AI",
+
+desc: "Deep mastery of ChatGPT, Claude, Notion, n8n, and full automation stacks. Not casual use — building real production systems.",
+
+metric: "3 years · 10,000+ hours"
+
+},
+
+{
+
+icon: "🏗️",
+
+step: "04",
+
+title: "Built His Own AI OS",
+
+desc: "He built a complete AI Operating System for his own business. Everything connected. Follow-ups automated. Visibility restored. Chaos ended.",
+
+metric: null
+
+},
+
+{
+
+icon: "🚀",
+
+step: "05",
+
+title: "Results Followed",
+
+desc: "Revenue grew. Time freed up. Clients and peers noticed the transformation and started asking: 'Can you build this for us?'",
+
+metric: "First client: 2022"
+
+},
+
+{
+
+icon: "🌍",
+
+step: "06",
+
+title: "SYSmoAI Was Born",
+
+desc: "To give every founder, freelancer, and team the same unfair competitive advantage — AI systems that work, built by someone who needed them first.",
+
+metric: "500+ projects · 8+ categories · Bangladesh → World"
+
+},
+
+]
+
+```
+
+Render the metric (when not null) as a styled badge next to the step:
+```
+
+{step.metric && (
+
+<span className="inline-block mt-2 px-3 py-1 bg-blue-100 text-blue-700 
+
+text-xs font-semibold rounded-full">
+
+{step.metric}
+
+</span>
+
+)}
+
+```
+
+══════════════════════════════════
+FIX 7 — BY THE NUMBERS SECTION (Link to proof)
+Good section but metrics are disconnected. Add links to evidence.
+══════════════════════════════════
+
+Find the "By the Numbers" metrics section.
+
+ADD a link to each metric pointing to the proof page:
+```
+
+<a href="/proof"
+
+className="text-blue-600 text-xs font-semibold hover:underline mt-1 
+
+inline-block">
+
+See case studies →
+
+</a>
+
+```
+
+ALSO integrate the numbers into the section header:
+Update the section headline from current to:
+  "Proven Results. Verified Numbers."
+
+Add below the headline:
+```
+
+<p className="text-slate-600 mt-3 max-w-xl mx-auto">
+
+Every number below is backed by real projects, real clients, and real 
+
+outcomes — not projections or estimates.
+
+</p>
+
+```
+
+══════════════════════════════════
+FIX 8 — CTA SECTION UPGRADE (Dual CTA + value explanation)
+Currently: WhatsApp only, no urgency, no explanation of call value.
+══════════════════════════════════
+
+Find the CTA section at the bottom of the About page ("Ready to work with us?").
+
+REPLACE with this upgraded version:
+
+```
+
+<section className="py-20 bg-gradient-to-br from-blue-600 to-blue-800">
+
+<div className="max-w-3xl mx-auto px-6 text-center">
+
+<h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+
+Ready to Work Together?
+
+</h2>
+
+<p className="text-blue-100 text-lg mb-4 max-w-xl mx-auto">
+
+Book a free 30-minute consultation where we analyse your workflow, 
+
+identify your highest-ROI AI opportunity, and design a clear action plan.
+
+</p>
+
+<p className="text-blue-200 text-sm mb-10">
+
+No commitment required. No sales pitch. Just a practical plan you can act on.
+
+</p>
+
+{/ *What the call covers* /}
+
+<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 text-left">
+
+{[
+
+{ icon: "🔍", title: "Workflow audit", desc: "We map where your time goes" },
+
+{ icon: "💡", title: "AI opportunity", desc: "We identify the highest-ROI fix" },
+
+{ icon: "📋", title: "Action plan", desc: "You leave with a clear next step" },
+
+].map(item => (
+
+<div key={item.title}
+
+className="bg-white/10 border border-white/20 rounded-xl p-4">
+
+<div className="text-2xl mb-2">{item.icon}</div>
+
+<div className="font-semibold text-white text-sm">{item.title}</div>
+
+<div className="text-blue-200 text-xs mt-1">{item.desc}</div>
+
+</div>
+
+))}
+
+</div>
+
+{/ *Dual CTA* /}
+
+<div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+<a
+
+href="/free-ai-audit"
+
+className="inline-flex items-center gap-2 bg-white text-blue-700 
+
+font-bold px-8 py-4 rounded-xl transition-all duration-200 
+
+shadow-lg hover:shadow-xl hover:-translate-y-0.5 hover:bg-blue-50"
+
+> 
+> 
+> 
+> 📅 Book via Free Audit Page
+> 
+
+</a>
+
+<a
+
+href={WA_URLS.consultation}
+
+target="_blank"
+
+rel="noopener noreferrer"
+
+className="inline-flex items-center gap-2 border-2 border-white/40 
+
+text-white hover:bg-white/10 font-semibold px-8 py-4 
+
+rounded-xl transition-all duration-200"
+
+> 
+> 
+> 
+> 💬 Start on WhatsApp
+> 
+
+</a>
+
+</div>
+
+{/ *Secondary contact option* /}
+
+<p className="text-blue-300 text-sm mt-6">
+
+Prefer email? Write to{" "}
+
+<a href="[mailto:hello@sysmoai.com](mailto:hello@sysmoai.com)"
+
+className="text-white underline hover:text-blue-100">
+
+[hello@sysmoai.com](mailto:hello@sysmoai.com)
+
+</a>
+
+</p>
+
+</div>
+
+</section>
+
+```
+
+══════════════════════════════════
+FIX 9 — PERSON JSON-LD SCHEMA (SEO Critical for AIO)
+No Person schema detected. Required for Google AI Overviews to recognize Emon.
+══════════════════════════════════
+
+Inside the About page component, ADD this JSON-LD script:
+
+```
+
+useEffect(() => {
+
+const script = document.createElement('script')
+
+script.type = 'application/ld+json'
+
+script.text = JSON.stringify({
+
+"@context": "https://schema.org",
+
+"@type": "Person",
+
+"name": "Emon Hossain",
+
+"jobTitle": "Founder & CEO, AI Systems Architect",
+
+"description": "Top 5% Prompt Engineer globally. 500+ AI projects delivered. Founder of SYSmoAI — Bangladesh's AI consulting company. Specializes in Notion OS, n8n automation, and custom AI agent development.",
+
+"url": "https://sysmoai.com/about",
+
+"image": "https://sysmoai.com/founder.jpg",
+
+"email": "[hello@sysmoai.com](mailto:hello@sysmoai.com)",
+
+"telephone": "+8801711638693",
+
+"worksFor": {
+
+"@type": "Organization",
+
+"name": "SYSmoAI",
+
+"url": "https://sysmoai.com"
+
+},
+
+"address": {
+
+"@type": "PostalAddress",
+
+"addressLocality": "Dhaka",
+
+"addressCountry": "BD"
+
+},
+
+"knowsAbout": [
+
+"AI Systems Architecture",
+
+"Prompt Engineering",
+
+"Notion OS Design",
+
+"n8n Automation",
+
+"AI Agent Development",
+
+"Business Process Automation",
+
+"SEO"
+
+],
+
+"sameAs": [
+
+"https://www.linkedin.com/in/emonhossain",
+
+"https://www.facebook.com/sysmoai"
+
+]
+
+})
+
+document.head.appendChild(script)
+
+return () => { document.head.removeChild(script) }
+
+}, [])
+
+```
+
+Add `import { useEffect } from 'react'` at the top if not already imported.
+
+══════════════════════════════════
+FIX 10 — INTERNAL LINKING IN NARRATIVE
+Link key phrases in the founder story and principles to service pages.
+══════════════════════════════════
+
+Find the narrative text in the founder story and operating principles.
+
+ADD these inline links wherever these phrases appear:
+
+  "Notion OS" or "Notion" → href="/services/notion-os"
+  "n8n" or "n8n automation" → href="/services/n8n-automation"
+  "AI agents" or "custom AI agents" → href="/services/ai-agent-dev"
+  "500+ projects" → href="/proof"
+  "Top 5% Prompt Engineer" → href="/proof"
+  "bKash" or "F-commerce" → href="/for/f-commerce"
+  "AI operating system" → href="/services/ai-sprint"
+  "international clients" or "worldwide" → href="/services/international"
+
+Style all inline links consistently:
+```
+
+className="text-blue-600 hover:text-blue-800 underline decoration-blue-300 
+
+hover:decoration-blue-600 transition-colors duration-150"
+
+```
+
+══════════════════════════════════
+FIX 11 — FOUNDER PHOTO PLACEHOLDER UPGRADE
+Currently: Generic "EH" blue box. Until real photo exists, make it more premium.
+══════════════════════════════════
+
+Find the founder avatar/placeholder. Replace the basic "EH" placeholder with:
+
+```
+
+{/ *Founder Photo — Replace EH box with premium placeholder* /}
+
+<div className="relative">
+
+<div className="w-48 h-48 md:w-56 md:h-56 rounded-3xl overflow-hidden 
+
+shadow-2xl bg-gradient-to-br from-blue-600 via-blue-700 
+
+to-indigo-800 flex flex-col items-center justify-center
+
+border-4 border-white ring-4 ring-blue-100">
+
+EH
+
+Founder & CEO
+
+</span>
+
+</div>
+
+{/ *Verified badge* /}
+
+<div className="absolute -bottom-3 -right-3 bg-blue-600 rounded-full p-2 shadow-lg">
+
+<svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+
+<path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+
+</svg>
+
+</div>
+
+{/ *Photo placeholder note — visible only in dev, hidden in prod* /}
+
+{/ *TODO: Replace with <img src="/founder.jpg" alt="Emon Hossain - Founder SYSmoAI" className="w-full h-full object-cover" />* /}
+
+</div>
+
+```
+
+══════════════════════════════════
+FINAL CHECKS
+══════════════════════════════════
+
+After all 11 fixes:
+
+1. View /about in browser — confirm:
+   - H1 reads "From Overworked Founder to AI Visionary"
+   - 2 CTA buttons visible in hero (Book + WhatsApp)
+   - 3 credential cards visible (Top 5%, 500+, 3+ Years)
+   - All 5 "How We Operate" cards have equal styling (none greyed)
+   - Each principle card has "See example →" link
+   - Timeline steps have metric badges on steps 3, 5, 6
+   - CTA section is dark blue gradient with 3 "what you get" cards
+   - Dual CTA buttons (Audit page + WhatsApp)
+   - Email link (hello@sysmoai.com) visible
+
+2. View page source — confirm JSON-LD Person schema in <head>
+
+3. Click all links — confirm no broken links
+
+4. Right-click "Start on WhatsApp" → copy link → confirm starts with https://wa.me/
+
+5. npm run build → exit 0
+
+OUTPUT REPORT:
+  ✅ Fix 1 Meta: [new title confirmed]
+  ✅ Fix 2 WhatsApp: [all links updated]
+  ✅ Fix 3 Hero CTA: [button added above fold]
+  ✅ Fix 4 Credentials: [3-card block + updated quote + linked tags]
+  ✅ Fix 5 Principles: [all 5 cards equal styling + links]
+  ✅ Fix 6 Timeline: [milestone metrics added]
+  ✅ Fix 7 Numbers: [linked to /proof]
+  ✅ Fix 8 CTA section: [dual CTA + email + 3 value cards]
+  ✅ Fix 9 Person schema: [JSON-LD confirmed in page source]
+  ✅ Fix 10 Internal links: [key phrases linked to services]
+  ✅ Fix 11 Photo placeholder: [premium EH card with badge]
+  BUILD: exit [0/error]
+  ESTIMATED /about SCORE: [X/100]
+
+⚠️ MANUAL ITEMS (Emon must do — cannot be coded):
+  - Add real founder photo as /public/founder.jpg
+  - Add real LinkedIn URL to sameAs in Person schema
+  - Add real Facebook page URL to sameAs
+════════════════════════════════════════════════════════════════
+```
