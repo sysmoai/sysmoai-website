@@ -1,8 +1,8 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Header } from "@/components/Header";
@@ -57,9 +57,61 @@ const Fallback = () => (
   </div>
 );
 
+function SEOManager() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    const existingSchema = document.querySelector('script[data-schema="organization"]');
+    if (!existingSchema) {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.setAttribute('data-schema', 'organization');
+      script.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "SYSmoAI",
+        "url": "https://sysmoai.com",
+        "description": "AI Systems Consultancy — Dhaka, Bangladesh. Custom AI automation, Notion OS, AI agents for businesses worldwide.",
+        "founder": {
+          "@type": "Person",
+          "name": "Emon Hossain",
+          "jobTitle": "AI Systems Architect & Founder",
+          "url": "https://sysmoai.com/about"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Dhaka",
+          "addressCountry": "BD"
+        },
+        "telephone": "+8801711638693",
+        "email": "hello@sysmoai.com",
+        "sameAs": [
+          "https://www.facebook.com/sysmoai",
+          "https://www.linkedin.com/company/sysmoai",
+          "https://www.youtube.com/@sysmoai"
+        ]
+      });
+      document.head.appendChild(script);
+    }
+  }, []);
+
+  useEffect(() => {
+    let link = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'canonical';
+      document.head.appendChild(link);
+    }
+    link.href = 'https://sysmoai.com' + location;
+  }, [location]);
+
+  return null;
+}
+
 function Router() {
   return (
     <div className="min-h-[100dvh] flex flex-col font-sans">
+      <SEOManager />
       <Header />
       <main className="flex-1">
         <Suspense fallback={<Fallback />}>

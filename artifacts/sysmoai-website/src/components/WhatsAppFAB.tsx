@@ -33,6 +33,7 @@ export function WhatsAppFAB() {
           target="_blank"
           rel="noopener noreferrer"
           className="relative flex items-center justify-center w-14 h-14 bg-[#25D366] hover:bg-[#20b858] text-white rounded-full shadow-lg transition-all hover:scale-110 z-10"
+          aria-label="Chat with SYSmoAI on WhatsApp"
           title="Chat on WhatsApp"
           data-testid="link-fab-whatsapp"
         >

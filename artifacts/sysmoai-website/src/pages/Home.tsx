@@ -130,7 +130,7 @@ function AnimatedCounter({ target, suffix = '', prefix = '' }: { target: number;
    TOOL MARQUEE
 ══════════════════════════════════════════ */
 function ToolMarquee({ isDark }: { isDark: boolean }) {
-  const repeated = [...toolItems, ...toolItems, ...toolItems, ...toolItems];
+  const repeated = [...toolItems, ...toolItems];
   return (
     <div className={`py-5 border-y overflow-hidden relative mask-fade-x ${isDark ? 'bg-[#06080C] border-white/[0.05]' : 'bg-slate-50 border-slate-200'}`}>
       <div className="flex animate-marquee whitespace-nowrap">
@@ -659,6 +659,9 @@ export default function Home() {
             ))}
           </div>
         </div>
+        <noscript>
+          <div className="text-center text-sm text-slate-500 mt-4">500+ Projects Delivered · 8+ Client Categories · 3+ Years Building AI · Top 5% Prompt Engineers Globally</div>
+        </noscript>
       </div>
 
       {/* ══════════════════════════════════════
