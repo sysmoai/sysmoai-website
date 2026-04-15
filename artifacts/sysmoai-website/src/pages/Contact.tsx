@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle, Mail, MapPin, Clock, CheckCircle2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { WA_LINK, EMAIL } from '@/lib/config';
+import { WA_URLS } from '../lib/whatsapp';
+import { EMAIL } from '@/lib/config';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -24,7 +25,30 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  React.useEffect(() => { document.title = 'Contact SYSmoAI | Get Your Free AI Audit'; }, []);
+  useEffect(() => {
+    document.title = 'Contact SYSmoAI — Book Your Free AI Audit';
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', 'Book a free 30-minute AI audit. Map your bottlenecks, uncover AI opportunities, get an action plan. WhatsApp, email, or contact form. Reply within 2 hours.');
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "SYSmoAI",
+      "description": "AI Systems Studio in Bangladesh",
+      "url": "https://sysmoai.com",
+      "telephone": "+8801711638693",
+      "email": "hello@sysmoai.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Dhaka",
+        "addressCountry": "BD"
+      }
+    });
+    document.head.appendChild(script);
+    return () => { document.head.removeChild(script); };
+  }, []);
 
   const onSubmit = async (_data: FormData) => {
     await new Promise(r => setTimeout(r, 800));
@@ -43,8 +67,8 @@ export default function Contact() {
             Let's talk about your business.
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="text-slate-400 text-lg">
-            Book a free 30-minute AI Audit — no pitch, no commitment.
+            className="text-slate-400 text-lg max-w-2xl mx-auto">
+            Book a free AI audit to map your bottlenecks, uncover your highest-ROI opportunity and see a real example of what AI can do for you. No commitment required.
           </motion.p>
         </div>
       </section>
@@ -57,7 +81,7 @@ export default function Contact() {
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="space-y-8">
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 mb-6">Fastest way to reach us</h2>
-                <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
+                <a href={WA_URLS.consultation} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-4 bg-[#25D366] hover:bg-[#20b858] text-white px-6 py-5 rounded-xl font-semibold text-lg transition-all hover:shadow-lg group">
                   <MessageCircle size={26} className="shrink-0" />
                   <div>
@@ -66,6 +90,17 @@ export default function Contact() {
                   </div>
                 </a>
               </div>
+
+              {/* Calendar booking */}
+              <div className="p-5 bg-blue-50 border border-blue-100 rounded-2xl">
+                <h3 className="font-bold text-slate-900 mb-1">Prefer to pick a time?</h3>
+                <p className="text-slate-500 text-sm mb-4">Book a free 30-min consultation on our audit page — pick the slot that works for you.</p>
+                <a href="/free-ai-audit"
+                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-xl text-sm transition-colors">
+                  📅 Book via Free Audit Page
+                </a>
+              </div>
+
               <div className="space-y-4">
                 <a href={`mailto:${EMAIL}`} className="flex items-center gap-3 text-slate-600 hover:text-blue-600 transition-colors">
                   <Mail size={18} className="text-blue-500 shrink-0" />
@@ -104,68 +139,52 @@ export default function Contact() {
               {submitted ? (
                 <div className="text-center py-10 px-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border border-green-200">
                   <div className="text-6xl mb-5">✅</div>
-                  <h3 className="text-2xl font-bold text-green-800 mb-3">
-                    Message Received!
-                  </h3>
+                  <h3 className="text-2xl font-bold text-green-800 mb-3">Message Received!</h3>
                   <p className="text-green-700 mb-2 max-w-md mx-auto">
-                    Emon will personally review your message and reply within{' '}
-                    <strong>2 hours</strong> on working days.
+                    Emon will personally review your message and reply within <strong>2 hours</strong> on working days.
                   </p>
-                  <p className="text-green-600 text-sm mb-6">
-                    For the fastest response, continue directly on WhatsApp:
-                  </p>
-                  <a
-                    href="https://wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%20just%20submitted%20your%20contact%20form"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-3.5 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg"
-                  >
-                    💬 Continue on WhatsApp
-                  </a>
-                  <p className="text-slate-400 text-xs mt-6">
-                    We reply Monday–Saturday, 9 AM – 7 PM (Bangladesh Time)
+                  <p className="text-green-600 text-sm mb-6">For the fastest response, continue directly on WhatsApp:</p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <a href={WA_URLS.general} target="_blank" rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3.5 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg">
+                      💬 Continue on WhatsApp
+                    </a>
+                    <a href="/free-ai-audit"
+                      className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3.5 rounded-xl transition-all duration-200">
+                      📅 Book Audit Call
+                    </a>
+                  </div>
+                  <p className="text-slate-400 text-xs mt-5">
+                    Or <a href="/services" className="text-blue-600 hover:underline">browse our services</a> while you wait.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   <div>
                     <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-1.5">Your Name *</label>
-                    <input
-                      id="name"
-                      {...register('name')}
+                    <input id="name" {...register('name')}
                       className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-slate-900 placeholder:text-slate-400"
-                      placeholder="Your name"
-                    />
+                      placeholder="Your name" />
                     {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
                   </div>
                   <div>
                     <label htmlFor="contact" className="block text-sm font-semibold text-slate-700 mb-1.5">Email or WhatsApp *</label>
-                    <input
-                      id="contact"
-                      {...register('contact')}
+                    <input id="contact" {...register('contact')}
                       className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-slate-900 placeholder:text-slate-400"
-                      placeholder="email@example.com or +880..."
-                    />
+                      placeholder="email@example.com or +880..." />
                     {errors.contact && <p className="text-red-500 text-sm mt-1">{errors.contact.message}</p>}
                   </div>
                   <div>
                     <label htmlFor="message" className="block text-sm font-semibold text-slate-700 mb-1.5">Your Biggest Workflow Problem *</label>
-                    <textarea
-                      id="message"
-                      {...register('message')}
-                      rows={5}
+                    <textarea id="message" {...register('message')} rows={5}
                       className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-slate-900 placeholder:text-slate-400 resize-none"
-                      placeholder="Describe your biggest workflow pain point..."
-                    />
+                      placeholder="Describe your biggest workflow pain point..." />
                     {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
                   </div>
                   <div>
                     <label htmlFor="service" className="block text-sm font-semibold text-slate-700 mb-1.5">Service Interest <span className="font-normal text-slate-400">(optional)</span></label>
-                    <select
-                      id="service"
-                      {...register('service')}
-                      className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-slate-900 bg-white"
-                    >
+                    <select id="service" {...register('service')}
+                      className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-slate-900 bg-white">
                       <option value="">Not sure yet</option>
                       <option value="ai-quick-win">AI Quick Win</option>
                       <option value="ai-sprint">AI Sprint</option>
@@ -177,11 +196,13 @@ export default function Contact() {
                       <option value="corporate-training">Corporate Training</option>
                     </select>
                   </div>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white py-4 rounded-xl font-bold text-lg transition-all min-h-[52px]"
-                  >
+                  <p className="text-xs text-slate-400 mt-1">
+                    By submitting, you agree to our{' '}
+                    <a href="/privacy-policy" className="text-blue-600 hover:underline">Privacy Policy</a>.
+                    We'll only use your details to respond to your inquiry.
+                  </p>
+                  <button type="submit" disabled={isSubmitting}
+                    className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white py-4 rounded-xl font-bold text-lg transition-all min-h-[52px]">
                     {isSubmitting ? 'Sending...' : 'Send Message'}
                   </button>
                   <p className="text-slate-400 text-xs text-center">For fastest response: WhatsApp us directly above.</p>

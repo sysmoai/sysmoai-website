@@ -1,0 +1,631 @@
+This is the AUDIT FIX prompt for sysmoai.com.
+You have direct filesystem access and shell. Do everything in order.
+Do NOT skip any step. Report after each phase.
+
+CONTEXT:
+- Stack: Next.js 14 + Tailwind CSS
+- Brand primary: #0057FF
+- WhatsApp canonical: +880 1711-638693
+- WhatsApp URL: https://wa.me/8801711638693
+- Site: sysmoai.com (Replit hosted)
+- This prompt fixes ALL issues from the 15 April 2026 multi-page audit
+- Audit pages: /about (82/100), /services (79/100), /pricing (81/100), /contact (84/100)
+
+══════════════════════════════════
+PHASE 0 — INVENTORY + PRE-CHECK
+══════════════════════════════════
+
+1. List all page routes:
+   find app -name "page.tsx" | grep -v node_modules | sort
+
+2. Find all broken WhatsApp links:
+   grep -rn "whatsapp://send" app/ components/ --include="*.tsx" --include="*.ts" | grep -v node_modules
+
+3. Check current branch + last 3 commits:
+   git branch --show-current
+   git log --oneline -3
+
+4. Find the WhatsApp helper or config:
+   grep -rn "wa.me\|whatsapp" lib/ utils/ config/ constants/ --include="*.ts" --include="*.tsx" 2>/dev/null | head -10
+
+Report what you find. Then proceed.
+
+══════════════════════════════════
+PHASE 1 — FIX ALL WHATSAPP LINKS (CRITICAL)
+══════════════════════════════════
+
+This is the #1 blocker. Every WhatsApp link on the site is broken on desktop.
+
+1. Create or update the WhatsApp helper (lib/whatsapp.ts or utils/whatsapp.ts):
+
+const WA_NUMBER = "8801711638693"
+const WA_MESSAGE = "Hi SYSmoAI, I need help"
+
+export function getWhatsAppUrl(message?: string): string {
+  const msg = encodeURIComponent(message || WA_MESSAGE)
+  return `https://wa.me/${WA_NUMBER}?text=${msg}`
+}
+
+export function getWhatsAppBookingUrl(): string {
+  return getWhatsAppUrl("Hi SYSmoAI, I'd like to book a free AI audit")
+}
+
+export function getWhatsAppServiceUrl(service: string): string {
+  return getWhatsAppUrl(`Hi SYSmoAI, I'm interested in ${service}`)
+}
+
+export const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_MESSAGE)}`
+
+2. Find and replace EVERY instance of whatsapp://send across ALL files:
+   grep -rn "whatsapp://send" app/ components/ --include="*.tsx" --include="*.ts" | grep -v node_modules
+
+   For each match, replace the href with the appropriate getWhatsAppUrl() call
+   or the direct URL: https://wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%20need%20help
+
+3. Also find any hardcoded wa.me links without proper encoding and fix them:
+   grep -rn "wa.me" app/ components/ --include="*.tsx" --include="*.ts" | grep -v node_modules
+
+4. Verify zero broken links remain:
+   grep -rn "whatsapp://send" app/ components/ --include="*.tsx" --include="*.ts" | grep -v node_modules
+   (must return 0 matches)
+
+Report: how many links fixed, which files changed.
+
+══════════════════════════════════
+PHASE 2 — MAKE SKILL TAGS CLICKABLE (ABOUT PAGE)
+══════════════════════════════════
+
+On /about, the founder card has skill tags that are currently <span> elements.
+They must become <a> links pointing to the correct service/proof pages.
+
+1. Find the about page or founder card component:
+   grep -rn "Top 5%\|Prompt Engineering\|Notion OS\|500+ Projects" app/ components/ --include="*.tsx" | head -20
+
+2. Create a skill tag mapping (in the same file or a shared constants file):
+
+const skillTagLinks: Record<string, string> = {
+  "AI Systems Architecture": "/services/ai-sprint",
+  "Top 5% Prompt Engineering": "/proof",
+  "Prompt Engineering": "/proof",
+  "Notion OS": "/services/notion-os",
+  "n8n Automation": "/services/n8n-automation",
+  "AI Agent Design": "/services/ai-agent-dev",
+  "AI Agent Dev": "/services/ai-agent-dev",
+  "500+ Projects Delivered": "/proof",
+  "500+ Projects": "/proof",
+  "SEO Expert": "/services",
+  "WordPress": "/services",
+  "AI Coaching": "/services/ai-coaching",
+}
+
+3. Replace each <span> skill tag with an <a> tag:
+
+BEFORE:
+<span className="px-3 py-1 bg-blue-50 text-blue-700 text-sm font-medium rounded-full ...">
+  AI Systems Architecture
+</span>
+
+AFTER:
+<a href="/services/ai-sprint"
+   className="px-3 py-1 bg-blue-50 text-blue-700 text-sm font-medium
+   rounded-full border border-blue-100 hover:bg-blue-100
+   hover:border-blue-300 transition-all duration-150
+   cursor-pointer no-underline">
+  AI Systems Architecture
+</a>
+
+4. Do this for ALL skill tags on the about page.
+
+Report: how many tags converted, which file.
+
+══════════════════════════════════
+PHASE 3 — ADD SOCIAL LINKS TO FOOTER
+══════════════════════════════════
+
+1. Find the footer component:
+   find app components -iname "*footer*" --include="*.tsx" 2>/dev/null
+   grep -rn "footer" app/ components/ --include="*.tsx" -l | head -5
+
+2. Add or update the social links array in the footer:
+
+const socialLinks = [
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/sysmoai",
+    icon: /* Facebook SVG icon */
+  },
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/company/sysmoai",
+    icon: /* LinkedIn SVG icon */
+  },
+  {
+    name: "YouTube",
+    href: "https://www.youtube.com/@sysmoai",
+    icon: /* YouTube SVG icon */
+  }
+]
+
+3. Render with proper accessibility:
+{socialLinks.map(social => (
+  <a
+    key={social.name}
+    href={social.href}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`SYSmoAI on ${social.name}`}
+    className="w-10 h-10 rounded-lg bg-slate-100 hover:bg-blue-600
+    hover:text-white flex items-center justify-center
+    text-slate-500 transition-all duration-200">
+    {social.icon}
+  </a>
+))}
+
+Report: which footer file was updated.
+
+══════════════════════════════════
+PHASE 4 — UNIQUE SEO META PER PAGE
+══════════════════════════════════
+
+Each page needs a unique <title> and <meta description>.
+Update the metadata export in each page file:
+
+1. /about page:
+export const metadata: Metadata = {
+  title: 'About SYSmoAI & Founder Emon Hossain — AI Systems Studio in Bangladesh',
+  description: 'Meet Emon Hossain, Top 5% prompt engineer with 500+ projects delivered. Learn how SYSmoAI builds AI operating systems for businesses in Bangladesh and worldwide.',
+}
+
+2. /services page:
+export const metadata: Metadata = {
+  title: 'AI Services — SYSmoAI | Automation, Notion OS, AI Agents for Bangladesh',
+  description: 'From 3-day quick wins to full AI operating systems. AI automation, Notion OS builds, AI agent development, n8n workflows, and corporate training. Bangladesh rates, global standards.',
+}
+
+3. /pricing page:
+export const metadata: Metadata = {
+  title: 'Transparent AI Pricing — SYSmoAI | BDT & USD',
+  description: 'Bangladesh rates meet global standards. AI Quick Win from ৳5,000, AI Sprint from ৳25,000, Monthly Retainer from ৳15,000. Currency toggle for international clients. No hidden fees.',
+}
+
+4. /contact page:
+export const metadata: Metadata = {
+  title: 'Contact SYSmoAI — Book Your Free AI Audit',
+  description: 'Book a free 30-minute AI audit. Map your bottlenecks, uncover AI opportunities, get an action plan. WhatsApp, email, or contact form. Reply within 2 hours.',
+}
+
+Report: which page files were updated.
+
+══════════════════════════════════
+PHASE 5 — ADD BOOKING ALTERNATIVE (CONTACT + ABOUT)
+══════════════════════════════════
+
+The site relies 100% on WhatsApp. Add a secondary booking option.
+
+1. On /contact page, after the contact form, add a booking section:
+
+<div className="mt-8 p-6 bg-sysmoai-surface border border-sysmoai-border rounded-xl text-center">
+  <h3 className="text-white font-semibold mb-2">Prefer to pick a time?</h3>
+  <p className="text-sysmoai-muted text-sm mb-4">Book a free 30-min consultation directly on our calendar.</p>
+  <a href="https://calendly.com/sysmoai/free-ai-audit"
+     target="_blank" rel="noopener noreferrer"
+     className="inline-block bg-white text-sysmoai-dark font-semibold px-6 py-3 rounded-xl hover:bg-gray-100 transition-colors">
+    📅 Book via Calendar
+  </a>
+</div>
+
+2. On /about CTA section, add the same calendar link as a secondary button:
+
+<a href="https://calendly.com/sysmoai/free-ai-audit"
+   target="_blank" rel="noopener noreferrer"
+   className="inline-block border border-white text-white font-semibold px-6 py-3 rounded-xl hover:bg-white hover:text-sysmoai-dark transition-colors ml-4">
+  📅 Book via Calendar
+</a>
+
+3. On the /contact success state, update the "Continue on WhatsApp" button:
+   - Fix the WhatsApp link (wa.me)
+   - Add: "Or book a call via our calendar" with the Calendly link
+   - Add: "Browse our services while you wait" linking to /services
+
+Note: If Calendly is not set up yet, use href="/free-ai-audit" as placeholder.
+The founder can replace with actual Calendly link later.
+
+Report: which files updated.
+
+══════════════════════════════════
+PHASE 6 — PRIVACY NOTICE ON CONTACT FORM
+══════════════════════════════════
+
+1. Find the contact form component:
+   grep -rn "Send Message\|contact.*form\|handleSubmit" app/ components/ --include="*.tsx" | head -10
+
+2. Add a privacy notice just above the submit button:
+
+<p className="text-xs text-sysmoai-muted mt-4">
+  By submitting, you agree to our{' '}
+  <a href="/privacy" className="text-sysmoai-primary hover:underline">Privacy Policy</a>.
+  We'll only use your details to respond to your inquiry.
+</p>
+
+3. Optionally add a "Business Name" field to the form (after the Name field).
+
+Report: which file updated.
+
+══════════════════════════════════
+PHASE 7 — RISK-FREE GUARANTEE ON PRICING
+══════════════════════════════════
+
+1. Find the pricing page hero:
+   grep -rn "Transparent pricing\|No surprises" app/ --include="*.tsx" | head -5
+
+2. Add guarantee messaging below the hero sub-heading:
+
+<div className="mt-6 inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-2">
+  <span className="text-green-400 text-sm font-medium">✓ Results-first guarantee — you don't pay until your system delivers</span>
+</div>
+
+3. Add a guarantee section above the final CTA:
+
+<section className="px-6 py-12 max-w-3xl mx-auto">
+  <div className="bg-green-500/10 border border-green-500/30 rounded-2xl p-8 text-center">
+    <h3 className="text-xl font-bold text-white mb-3">🛡️ Our Guarantee</h3>
+    <p className="text-sysmoai-muted">
+      We don't charge until your system delivers measurable results.
+      If we can't improve your workflow within the agreed timeline,
+      you get a full refund. Zero risk.
+    </p>
+  </div>
+</section>
+
+Report: which file updated.
+
+══════════════════════════════════
+PHASE 8 — FAQ SECTIONS (SERVICES + PRICING)
+══════════════════════════════════
+
+1. Create a reusable FAQ component (components/ui/faq-section.tsx):
+
+interface FAQItem {
+  question: string
+  answer: string
+}
+
+export function FAQSection({ items, title }: { items: FAQItem[], title?: string }) {
+  return (
+    <section className="px-6 py-16 max-w-3xl mx-auto">
+      <h2 className="text-2xl font-bold text-white text-center mb-8">
+        {title || 'Frequently Asked Questions'}
+      </h2>
+      <div className="space-y-4">
+        {items.map((faq, i) => (
+          <details key={i} className="bg-sysmoai-surface border border-sysmoai-border rounded-xl p-4 group">
+            <summary className="text-white font-medium cursor-pointer list-none flex justify-between items-center">
+              {faq.question}
+              <span className="text-sysmoai-muted group-open:rotate-180 transition-transform">▼</span>
+            </summary>
+            <p className="mt-3 text-sysmoai-muted text-sm">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+2. Add FAQ to /services page (before the final CTA):
+
+const servicesFAQ = [
+  {
+    question: "How long does each package take?",
+    answer: "AI Quick Win: 3 days. AI Implementation Sprint: 3 weeks. AI Operations Retainer: ongoing monthly."
+  },
+  {
+    question: "Can I start with a Quick Win and upgrade later?",
+    answer: "Absolutely. Most clients start with a Quick Win to see results fast, then move to a Sprint for full transformation."
+  },
+  {
+    question: "What if I need more workflows than included?",
+    answer: "We scope every project individually. If you need more, we adjust the package or recommend the next tier."
+  },
+  {
+    question: "Do you work with international clients?",
+    answer: "Yes. We accept USD via Wise, Payoneer, and Stripe. We coordinate across timezones and communicate in English."
+  },
+  {
+    question: "What's your revision policy?",
+    answer: "Quick Win includes 1 free revision. Sprint includes unlimited revisions during the 3-week build. Retainer includes continuous improvements."
+  }
+]
+
+3. Add FAQ to /pricing page (before the final CTA):
+
+const pricingFAQ = [
+  {
+    question: "Are there any hidden fees?",
+    answer: "No. The price shown is the price you pay. Payment terms are listed clearly for each package."
+  },
+  {
+    question: "How do international clients pay?",
+    answer: "USD payments via Wise, Payoneer, or Stripe. No currency conversion fees on our side."
+  },
+  {
+    question: "What if the system doesn't deliver results?",
+    answer: "We offer a results-first guarantee. If we can't improve your workflow within the agreed timeline, you get a full refund."
+  },
+  {
+    question: "Can I cancel the retainer anytime?",
+    answer: "Yes. The AI Operations Retainer is month-to-month with no long-term commitment. Cancel anytime."
+  }
+]
+
+4. Add JSON-LD FAQPage schema to both pages (in the metadata or via a <script> tag):
+
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": servicesFAQ.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+})}} />
+
+Report: files created and updated.
+
+══════════════════════════════════
+PHASE 9 — COMPARISON TABLE ON SERVICES
+══════════════════════════════════
+
+1. Add a comparison table section on /services (after the core packages, before FAQ):
+
+<section className="px-6 py-16 max-w-5xl mx-auto">
+  <h2 className="text-2xl font-bold text-white text-center mb-8">Compare Packages</h2>
+  <div className="overflow-x-auto">
+    <table className="w-full text-sm text-left">
+      <thead>
+        <tr className="border-b border-sysmoai-border">
+          <th className="py-3 px-4 text-sysmoai-muted">Feature</th>
+          <th className="py-3 px-4 text-white">AI Quick Win</th>
+          <th className="py-3 px-4 text-white">AI Sprint</th>
+          <th className="py-3 px-4 text-white">AI Retainer</th>
+        </tr>
+      </thead>
+      <tbody className="text-sysmoai-muted">
+        <tr className="border-b border-sysmoai-border/50">
+          <td className="py-3 px-4">Workflows automated</td>
+          <td className="py-3 px-4">1</td>
+          <td className="py-3 px-4">5–10</td>
+          <td className="py-3 px-4">Ongoing</td>
+        </tr>
+        <tr className="border-b border-sysmoai-border/50">
+          <td className="py-3 px-4">Timeline</td>
+          <td className="py-3 px-4">3 days</td>
+          <td className="py-3 px-4">3 weeks</td>
+          <td className="py-3 px-4">Monthly</td>
+        </tr>
+        <tr className="border-b border-sysmoai-border/50">
+          <td className="py-3 px-4">Team training</td>
+          <td className="py-3 px-4">Video walkthrough</td>
+          <td className="py-3 px-4">Full training + docs</td>
+          <td className="py-3 px-4">Continuous</td>
+        </tr>
+        <tr className="border-b border-sysmoai-border/50">
+          <td className="py-3 px-4">Revisions</td>
+          <td className="py-3 px-4">1 free</td>
+          <td className="py-3 px-4">Unlimited (during build)</td>
+          <td className="py-3 px-4">Continuous</td>
+        </tr>
+        <tr className="border-b border-sysmoai-border/50">
+          <td className="py-3 px-4">Support</td>
+          <td className="py-3 px-4">WhatsApp (1 week)</td>
+          <td className="py-3 px-4">3 months post-launch</td>
+          <td className="py-3 px-4">Priority (ongoing)</td>
+        </tr>
+        <tr className="border-b border-sysmoai-border/50">
+          <td className="py-3 px-4">Payment</td>
+          <td className="py-3 px-4">100% upfront</td>
+          <td className="py-3 px-4">50/50</td>
+          <td className="py-3 px-4">Monthly</td>
+        </tr>
+        <tr>
+          <td className="py-3 px-4">Best for</td>
+          <td className="py-3 px-4">Quick relief</td>
+          <td className="py-3 px-4">Full transformation</td>
+          <td className="py-3 px-4">Continuous growth</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+Report: file updated.
+
+══════════════════════════════════
+PHASE 10 — INTERNATIONAL CLIENTS SECTION ON PRICING
+══════════════════════════════════
+
+1. Add a section on /pricing (after the pricing cards, before FAQ):
+
+<section className="px-6 py-16 max-w-3xl mx-auto">
+  <div className="bg-sysmoai-surface border border-sysmoai-border rounded-2xl p-8">
+    <h2 className="text-xl font-bold text-white mb-4">🌍 International Clients</h2>
+    <p className="text-sysmoai-muted mb-4">
+      We serve clients worldwide at competitive USD rates —
+      typically 60–80% less than US/EU agencies for the same quality.
+    </p>
+    <div className="grid md:grid-cols-2 gap-4 text-sm">
+      <div>
+        <h4 className="text-white font-medium mb-2">Payment Methods</h4>
+        <ul className="text-sysmoai-muted space-y-1">
+          <li>• Wise (preferred — zero fees)</li>
+          <li>• Payoneer</li>
+          <li>• Stripe</li>
+          <li>• Bank transfer (SWIFT)</li>
+        </ul>
+      </div>
+      <div>
+        <h4 className="text-white font-medium mb-2">How It Works</h4>
+        <ul className="text-sysmoai-muted space-y-1">
+          <li>• All prices available in USD (use toggle)</li>
+          <li>• Communication in English</li>
+          <li>• Timezone-flexible scheduling</li>
+          <li>• Same deliverables & guarantee</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+Report: file updated.
+
+══════════════════════════════════
+PHASE 11 — STRUCTURED DATA (SCHEMA.ORG)
+══════════════════════════════════
+
+1. /about — Add Person schema:
+
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Emon Hossain",
+  "jobTitle": "AI Systems Architect & Founder",
+  "description": "Top 5% prompt engineer with 500+ projects delivered. Founder of SYSmoAI.",
+  "url": "https://sysmoai.com/about",
+  "sameAs": [
+    "https://www.linkedin.com/company/sysmoai",
+    "https://www.facebook.com/sysmoai",
+    "https://www.youtube.com/@sysmoai"
+  ],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "SYSmoAI",
+    "url": "https://sysmoai.com"
+  }
+})}} />
+
+2. /contact — Add ContactPage + LocalBusiness schema:
+
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "SYSmoAI",
+  "description": "AI Systems Studio in Bangladesh",
+  "url": "https://sysmoai.com",
+  "telephone": "+8801711638693",
+  "email": "hello@sysmoai.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Dhaka",
+    "addressCountry": "BD"
+  }
+})}} />
+
+3. /pricing — Add Offer schema for each package (wrap in an array).
+
+Report: which files updated.
+
+══════════════════════════════════
+PHASE 12 — COPY IMPROVEMENTS (AUDIT RECOMMENDATIONS)
+══════════════════════════════════
+
+1. /about hero — update to:
+   Headline: "From Overworked Founder to AI Visionary"
+   Sub-headline: "Emon Hossain spent three years building his own AI operating system,
+   automating every workflow and delivering 500+ projects for clients worldwide.
+   Now he helps founders, agencies and freelancers achieve the same freedom."
+
+2. /about CTA — update to:
+   "Book your free consultation — We'll map your bottlenecks, show an AI plan
+   tailored to your business and answer all your questions.
+   Choose a call via our calendar or chat on WhatsApp."
+
+3. /services hero — ensure it says:
+   "From 3-Day Quick Wins to Full AI Operating Systems"
+   Sub: "Whether you want a single workflow automated or a complete AI transformation,
+   SYSmoAI has a package for you — built in days, not months."
+
+4. /pricing hero — ensure it says:
+   "Transparent Pricing. No Surprises."
+   Sub: "Bangladesh rates meet global standards. Choose the package that fits
+   your business and only pay when your AI system delivers results."
+
+5. /contact hero — update to:
+   "Let's talk about your business"
+   Sub: "Book a free AI audit to map your bottlenecks, uncover your highest-ROI
+   opportunity and see a real example of what AI can do for you. No commitment required."
+
+Report: which copy was updated.
+
+══════════════════════════════════
+PHASE 13 — BUILD + QUALITY GATES
+══════════════════════════════════
+
+1. Run build:
+   npm run build
+
+2. Quality checks (all must return 0):
+   grep -rn "whatsapp://send" app/ components/ | grep -v node_modules
+   grep -rn "01865|385348" app/ components/ | grep -v node_modules
+   grep -rn "lorem ipsum\|\[insert\]\|example\.com" app/ components/ | grep -v node_modules
+
+3. Verify all pages render:
+   Open preview URL and check:
+   - /about loads ✅
+   - /services loads ✅
+   - /pricing loads ✅
+   - /contact loads ✅
+   - Contact form submits ✅
+   - WhatsApp links open wa.me ✅
+   - Skill tags are clickable ✅
+   - Social links in footer ✅
+
+Report: build exit code + route count + quality check results.
+
+══════════════════════════════════
+PHASE 14 — COMMIT + PUSH + DEPLOY
+══════════════════════════════════
+
+1. Commit:
+   git add -A
+   git commit -m "fix: audit fixes — WhatsApp links, SEO meta, FAQ, comparison table, skill tag links, social links, booking alt, privacy notice, intl clients, structured data, copy improvements"
+
+2. Push:
+   git push origin main
+
+3. Redeploy in Replit Deployments.
+
+4. Verify live URL:
+   - All 4 pages load
+   - WhatsApp links work on desktop
+   - FAQ sections render
+   - Comparison table visible
+   - Skill tags are clickable links
+
+Report final status.
+
+══════════════════════════════════
+FINAL REPORT FORMAT
+══════════════════════════════════
+
+PHASE 1 - WhatsApp fix: [N] links fixed in [N] files
+PHASE 2 - Skill tags: [N] tags linked
+PHASE 3 - Social links: DONE
+PHASE 4 - SEO meta: 4 pages updated
+PHASE 5 - Booking alt: DONE / placeholder
+PHASE 6 - Privacy notice: DONE
+PHASE 7 - Guarantee: DONE
+PHASE 8 - FAQ: [N] questions on [N] pages
+PHASE 9 - Comparison table: DONE
+PHASE 10 - Intl clients: DONE
+PHASE 11 - Structured data: [N] schemas added
+PHASE 12 - Copy updates: DONE
+PHASE 13 - Build: exit [N] · [N] routes · quality: all 0 ✅
+PHASE 14 - Deploy: commit [hash] · live ✅
+
+STILL NEEDS CEO ACTION:
+- Set up Calendly account and replace placeholder URL
+- Add real case study content to /proof
+- Capture screenshots for proof artifacts
+- Submit sitemap to Google Search Console

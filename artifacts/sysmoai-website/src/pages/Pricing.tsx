@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'wouter';
-import { MessageCircle, CheckCircle2, ArrowRight } from 'lucide-react';
-import { WA_LINK } from '@/lib/config';
+import { CheckCircle2, ArrowRight, ChevronDown } from 'lucide-react';
+import { WA_URLS } from '../lib/whatsapp';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -67,12 +67,53 @@ const payments = [
 
 const methods = ['bKash', 'Nagad', 'Bank transfer', 'Wise', 'Payoneer', 'Credit card (via Stripe)'];
 
+const pricingFAQ = [
+  { q: 'Are there any hidden fees?', a: 'No. The price shown is the price you pay. Payment terms are listed clearly for each package.' },
+  { q: 'How do international clients pay?', a: 'USD payments via Wise, Payoneer, or Stripe. No currency conversion fees on our side.' },
+  { q: "What if the system doesn't deliver results?", a: "We offer a results-first guarantee. If we can't improve your workflow within the agreed timeline, you get a full refund." },
+  { q: 'Can I cancel the retainer anytime?', a: 'Yes. The AI Operations Retainer is month-to-month with no long-term commitment. Cancel anytime.' },
+];
+
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <div className="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden cursor-pointer" onClick={() => setOpen(!open)}>
+      <div className="flex justify-between items-center p-5">
+        <span className="font-semibold text-slate-900 pr-4">{q}</span>
+        <ChevronDown size={18} className={`text-slate-400 shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+      </div>
+      {open && <p className="text-slate-600 text-sm px-5 pb-5 leading-relaxed">{a}</p>}
+    </div>
+  );
+}
+
 export default function Pricing() {
   const [showUSD, setShowUSD] = useState(false);
-  React.useEffect(() => { document.title = 'AI Services Pricing Bangladesh | SYSmoAI'; }, []);
+
+  useEffect(() => {
+    document.title = 'Transparent AI Pricing — SYSmoAI | BDT & USD';
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', 'Bangladesh rates meet global standards. AI Quick Win from ৳5,000, AI Sprint from ৳25,000, Monthly Retainer from ৳15,000. Currency toggle for international clients. No hidden fees.');
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": pricingFAQ.map(faq => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": { "@type": "Answer", "text": faq.a }
+      }))
+    });
+    document.head.appendChild(script);
+    return () => { document.head.removeChild(script); };
+  }, []);
 
   return (
     <div className="flex flex-col w-full overflow-hidden">
+
+      {/* Hero */}
       <section className="relative bg-[#0A0B0F] py-20 md:py-28">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-blue-600 opacity-[0.1] blur-[120px] rounded-full" />
@@ -80,10 +121,17 @@ export default function Pricing() {
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
           <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
-            Transparent pricing. No surprises.
+            Transparent Pricing. No Surprises.
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="text-slate-400 text-lg mb-8">Bangladesh rates. International quality. We don't get paid until it works.</motion.p>
+            className="text-slate-400 text-lg mb-6">
+            Bangladesh rates meet global standards. Choose the package that fits your business and only pay when your AI system delivers results.
+          </motion.p>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}>
+            <span className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-2 mb-8">
+              <span className="text-green-400 text-sm font-medium">✓ Results-first guarantee — you don't pay until your system delivers</span>
+            </span>
+          </motion.div>
           <div className="flex items-center justify-center gap-3">
             <span className={`text-sm font-medium ${!showUSD ? 'text-white' : 'text-slate-400'}`}>🇧🇩 BDT ৳</span>
             <button onClick={() => setShowUSD(!showUSD)}
@@ -95,6 +143,7 @@ export default function Pricing() {
         </div>
       </section>
 
+      {/* Pricing cards */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
@@ -127,6 +176,7 @@ export default function Pricing() {
         </div>
       </section>
 
+      {/* Payment terms */}
       <section className="py-16 bg-slate-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
@@ -158,6 +208,72 @@ export default function Pricing() {
         </div>
       </section>
 
+      {/* International Clients */}
+      <section className="py-16 bg-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="bg-slate-900 border border-slate-700 rounded-2xl p-8">
+            <h2 className="text-xl font-bold text-white mb-4">🌍 International Clients</h2>
+            <p className="text-slate-400 mb-6">
+              We serve clients worldwide at competitive USD rates — typically 60–80% less than US/EU agencies for the same quality.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6 text-sm">
+              <div>
+                <h4 className="text-white font-semibold mb-3">Payment Methods</h4>
+                <ul className="text-slate-400 space-y-2">
+                  {['Wise (preferred — zero fees)', 'Payoneer', 'Stripe', 'Bank transfer (SWIFT)'].map(m => (
+                    <li key={m} className="flex items-center gap-2"><span className="text-green-400">•</span>{m}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-white font-semibold mb-3">How It Works</h4>
+                <ul className="text-slate-400 space-y-2">
+                  {['All prices available in USD (use toggle)', 'Communication in English', 'Timezone-flexible scheduling', 'Same deliverables & guarantee'].map(m => (
+                    <li key={m} className="flex items-center gap-2"><span className="text-green-400">•</span>{m}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="mt-6">
+              <Link href="/services/international"
+                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-xl text-sm transition-colors">
+                View International Pricing <ArrowRight size={14} />
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Guarantee */}
+      <section className="py-10 bg-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="bg-green-500/10 border border-green-500/30 rounded-2xl p-8 text-center">
+            <h3 className="text-xl font-bold text-slate-900 mb-3">🛡️ Our Results-First Guarantee</h3>
+            <p className="text-slate-600">
+              We don't charge until your system delivers measurable results. If we can't improve your workflow within the agreed timeline, you get a full refund. Zero risk.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-16 bg-slate-50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="text-2xl font-bold text-slate-900 text-center mb-10">Pricing FAQs</motion.h2>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="space-y-3">
+            {pricingFAQ.map((faq, i) => (
+              <motion.div key={i} variants={fadeUp}>
+                <FAQItem q={faq.q} a={faq.a} />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
       <section className="py-20 bg-[#0A0B0F]">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
@@ -166,10 +282,15 @@ export default function Pricing() {
             className="text-slate-400 mb-8">
             Book a free 30-minute call. We'll recommend the right service for your budget and goals.
           </motion.p>
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-10 py-4 rounded-xl font-bold text-lg transition-all min-h-[56px]">
-              <MessageCircle size={22} /> WhatsApp Us
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/free-ai-audit"
+              className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-base transition-all min-h-[52px]">
+              📅 Book Free AI Audit
+            </Link>
+            <a href={WA_URLS.general} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 border-2 border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-xl font-semibold text-base transition-all min-h-[52px]">
+              💬 Chat on WhatsApp
             </a>
           </motion.div>
         </div>
