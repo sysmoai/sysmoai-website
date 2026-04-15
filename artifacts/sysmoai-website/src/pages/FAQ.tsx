@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
 import { WA_LINK } from '@/lib/config';
+import { useTheme } from '@/contexts/ThemeContext';
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
@@ -40,10 +41,18 @@ const faqSchema = {
 };
 
 export default function FAQ() {
+  const { isDark } = useTheme();
+
+  const bg1 = isDark ? '#0A0B0F' : '#FFFFFF';
+  const bg2 = isDark ? '#0D0F14' : '#F8FAFF';
+  const cardBorder = isDark ? 'rgba(255,255,255,0.08)' : '#E2E8F0';
+  const heading = isDark ? '#F1F5F9' : '#0A0B0F';
+  const body = isDark ? '#94A3B8' : '#475569';
+
   React.useEffect(() => { document.title = 'Frequently Asked Questions | SYSmoAI Bangladesh'; }, []);
 
   return (
-    <div className="flex flex-col w-full overflow-hidden">
+    <div className="flex flex-col w-full overflow-hidden" style={{ background: bg1 }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -63,16 +72,18 @@ export default function FAQ() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="py-20" style={{ background: bg1 }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, i) => (
-                <AccordionItem key={i} value={`faq-${i}`} className="border-b border-slate-100">
-                  <AccordionTrigger className="text-left font-semibold text-slate-900 hover:text-blue-600 py-5">
+                <AccordionItem key={i} value={`faq-${i}`} style={{ borderBottomColor: cardBorder }}>
+                  <AccordionTrigger
+                    className="text-left font-semibold hover:text-blue-500 py-5"
+                    style={{ color: heading }}>
                     {faq.q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-slate-600 leading-relaxed pb-5">
+                  <AccordionContent className="leading-relaxed pb-5" style={{ color: body }}>
                     {faq.a}
                   </AccordionContent>
                 </AccordionItem>
@@ -82,12 +93,12 @@ export default function FAQ() {
         </div>
       </section>
 
-      <section className="py-16 bg-slate-50 border-t border-slate-100">
+      <section className="py-16" style={{ background: bg2, borderTop: `1px solid ${cardBorder}` }}>
         <div className="max-w-3xl mx-auto px-4 text-center">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl font-bold text-slate-900 mb-4">Still have questions?</motion.h2>
+            className="text-2xl font-bold mb-4" style={{ color: heading }}>Still have questions?</motion.h2>
           <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-slate-500 mb-6">We respond within 2 hours on working days.</motion.p>
+            className="mb-6" style={{ color: body }}>We respond within 2 hours on working days.</motion.p>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
             <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-8 py-4 rounded-xl font-bold transition-all min-h-[52px]">

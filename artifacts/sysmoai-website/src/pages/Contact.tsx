@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { WA_URLS } from '../lib/whatsapp';
 import { EMAIL } from '@/lib/config';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -23,7 +24,18 @@ type FormData = z.infer<typeof schema>;
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const { isDark } = useTheme();
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>({ resolver: zodResolver(schema) });
+
+  const bg1 = isDark ? '#0A0B0F' : '#FFFFFF';
+  const bg2 = isDark ? '#0D0F14' : '#F8FAFF';
+  const cardBg = isDark ? 'rgba(255,255,255,0.04)' : '#F8FAFF';
+  const cardBorder = isDark ? 'rgba(255,255,255,0.08)' : '#E2E8F0';
+  const heading = isDark ? '#F1F5F9' : '#0A0B0F';
+  const body = isDark ? '#94A3B8' : '#475569';
+  const inputBg = isDark ? 'rgba(255,255,255,0.05)' : '#FFFFFF';
+  const inputBorder = isDark ? 'rgba(255,255,255,0.12)' : '#E2E8F0';
+  const inputText = isDark ? '#F1F5F9' : '#0A0B0F';
 
   useEffect(() => {
     document.title = 'Contact SYSmoAI — Book Your Free AI Audit';
@@ -56,7 +68,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="flex flex-col w-full overflow-hidden">
+    <div className="flex flex-col w-full overflow-hidden" style={{ background: bg1 }}>
       <section className="relative bg-[#0A0B0F] py-20 md:py-24">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[300px] bg-blue-600 opacity-[0.1] blur-[100px] rounded-full" />
@@ -73,14 +85,14 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="py-20" style={{ background: bg1 }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
 
             {/* Left: Info */}
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="space-y-8">
               <div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">Fastest way to reach us</h2>
+                <h2 className="text-2xl font-bold mb-6" style={{ color: heading }}>Fastest way to reach us</h2>
                 <a href={WA_URLS.consultation} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-4 bg-[#25D366] hover:bg-[#20b858] text-white px-6 py-5 rounded-xl font-semibold text-lg transition-all hover:shadow-lg group">
                   <MessageCircle size={26} className="shrink-0" />
@@ -92,9 +104,9 @@ export default function Contact() {
               </div>
 
               {/* Calendar booking */}
-              <div className="p-5 bg-blue-50 border border-blue-100 rounded-2xl">
-                <h3 className="font-bold text-slate-900 mb-1">Prefer to pick a time?</h3>
-                <p className="text-slate-500 text-sm mb-4">Book a free 30-min consultation on our audit page — pick the slot that works for you.</p>
+              <div className="p-5 rounded-2xl" style={{ background: isDark ? 'rgba(37,99,235,0.1)' : '#EFF6FF', border: `1px solid ${isDark ? 'rgba(37,99,235,0.25)' : '#BFDBFE'}` }}>
+                <h3 className="font-bold mb-1" style={{ color: heading }}>Prefer to pick a time?</h3>
+                <p className="text-sm mb-4" style={{ color: body }}>Book a free 30-min consultation on our audit page — pick the slot that works for you.</p>
                 <a href="/free-ai-audit"
                   className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-xl text-sm transition-colors">
                   📅 Book via Free Audit Page
@@ -102,22 +114,22 @@ export default function Contact() {
               </div>
 
               <div className="space-y-4">
-                <a href={`mailto:${EMAIL}`} className="flex items-center gap-3 text-slate-600 hover:text-blue-600 transition-colors">
+                <a href={`mailto:${EMAIL}`} className="flex items-center gap-3 transition-colors hover:text-blue-500" style={{ color: body }}>
                   <Mail size={18} className="text-blue-500 shrink-0" />
                   <span>{EMAIL}</span>
                 </a>
-                <div className="flex items-center gap-3 text-slate-600">
+                <div className="flex items-center gap-3" style={{ color: body }}>
                   <MapPin size={18} className="text-blue-500 shrink-0" />
                   <span>Dhaka, Bangladesh 🇧🇩</span>
                 </div>
-                <div className="flex items-center gap-3 text-slate-600">
+                <div className="flex items-center gap-3" style={{ color: body }}>
                   <Clock size={18} className="text-blue-500 shrink-0" />
                   <span>10 AM – Midnight BST (working days)</span>
                 </div>
               </div>
 
-              <div className="bg-slate-50 border border-slate-100 p-6 rounded-2xl">
-                <h3 className="font-bold text-slate-900 mb-3">What happens in the free audit?</h3>
+              <div className="p-6 rounded-2xl" style={{ background: cardBg, border: `1px solid ${cardBorder}` }}>
+                <h3 className="font-bold mb-3" style={{ color: heading }}>What happens in the free audit?</h3>
                 <ul className="space-y-2.5">
                   {[
                     'We map your single biggest workflow bottleneck',
@@ -125,7 +137,7 @@ export default function Contact() {
                     'We show you exactly what a solution would look like',
                     'Zero commitment — even if you don\'t hire us',
                   ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-2.5 text-sm text-slate-600">
+                    <li key={i} className="flex items-start gap-2.5 text-sm" style={{ color: body }}>
                       <CheckCircle2 size={15} className="text-green-500 mt-0.5 shrink-0" />
                       {item}
                     </li>
@@ -137,13 +149,14 @@ export default function Contact() {
             {/* Right: Form */}
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
               {submitted ? (
-                <div className="text-center py-10 px-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border border-green-200">
+                <div className="text-center py-10 px-6 rounded-2xl"
+                  style={{ background: isDark ? 'rgba(34,197,94,0.08)' : 'rgba(240,253,244,1)', border: `1px solid ${isDark ? 'rgba(34,197,94,0.2)' : '#BBF7D0'}` }}>
                   <div className="text-6xl mb-5">✅</div>
-                  <h3 className="text-2xl font-bold text-green-800 mb-3">Message Received!</h3>
-                  <p className="text-green-700 mb-2 max-w-md mx-auto">
+                  <h3 className="text-2xl font-bold mb-3" style={{ color: isDark ? '#86EFAC' : '#14532D' }}>Message Received!</h3>
+                  <p className="mb-2 max-w-md mx-auto" style={{ color: isDark ? '#86EFAC' : '#166534' }}>
                     Emon will personally review your message and reply within <strong>2 hours</strong> on working days.
                   </p>
-                  <p className="text-green-600 text-sm mb-6">For the fastest response, continue directly on WhatsApp:</p>
+                  <p className="text-sm mb-6" style={{ color: isDark ? '#6EE7B7' : '#15803D' }}>For the fastest response, continue directly on WhatsApp:</p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <a href={WA_URLS.general} target="_blank" rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3.5 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg">
@@ -154,37 +167,48 @@ export default function Contact() {
                       📅 Book Audit Call
                     </a>
                   </div>
-                  <p className="text-slate-400 text-xs mt-5">
-                    Or <a href="/services" className="text-blue-600 hover:underline">browse our services</a> while you wait.
+                  <p className="text-xs mt-5" style={{ color: body }}>
+                    Or <a href="/services" className="text-blue-500 hover:underline">browse our services</a> while you wait.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-1.5">Your Name *</label>
+                    <label htmlFor="name" className="block text-sm font-semibold mb-1.5" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>Your Name *</label>
                     <input id="name" {...register('name')}
-                      className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-slate-900 placeholder:text-slate-400"
+                      className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 transition-colors"
+                      style={{
+                        background: inputBg,
+                        border: `1px solid ${inputBorder}`,
+                        color: inputText,
+                        focusOutlineColor: '#3B82F6',
+                      }}
                       placeholder="Your name" />
                     {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
                   </div>
                   <div>
-                    <label htmlFor="contact" className="block text-sm font-semibold text-slate-700 mb-1.5">Email or WhatsApp *</label>
+                    <label htmlFor="contact" className="block text-sm font-semibold mb-1.5" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>Email or WhatsApp *</label>
                     <input id="contact" {...register('contact')}
-                      className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-slate-900 placeholder:text-slate-400"
+                      className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 transition-colors"
+                      style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
                       placeholder="email@example.com or +880..." />
                     {errors.contact && <p className="text-red-500 text-sm mt-1">{errors.contact.message}</p>}
                   </div>
                   <div>
-                    <label htmlFor="message" className="block text-sm font-semibold text-slate-700 mb-1.5">Your Biggest Workflow Problem *</label>
+                    <label htmlFor="message" className="block text-sm font-semibold mb-1.5" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>Your Biggest Workflow Problem *</label>
                     <textarea id="message" {...register('message')} rows={5}
-                      className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-slate-900 placeholder:text-slate-400 resize-none"
+                      className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 transition-colors resize-none"
+                      style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
                       placeholder="Describe your biggest workflow pain point..." />
                     {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
                   </div>
                   <div>
-                    <label htmlFor="service" className="block text-sm font-semibold text-slate-700 mb-1.5">Service Interest <span className="font-normal text-slate-400">(optional)</span></label>
+                    <label htmlFor="service" className="block text-sm font-semibold mb-1.5" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>
+                      Service Interest <span className="font-normal" style={{ color: body }}>(optional)</span>
+                    </label>
                     <select id="service" {...register('service')}
-                      className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-slate-900 bg-white">
+                      className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 transition-colors"
+                      style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}>
                       <option value="">Not sure yet</option>
                       <option value="ai-quick-win">AI Quick Win</option>
                       <option value="ai-sprint">AI Sprint</option>
@@ -196,16 +220,16 @@ export default function Contact() {
                       <option value="corporate-training">Corporate Training</option>
                     </select>
                   </div>
-                  <p className="text-xs text-slate-400 mt-1">
+                  <p className="text-xs mt-1" style={{ color: body }}>
                     By submitting, you agree to our{' '}
-                    <a href="/privacy-policy" className="text-blue-600 hover:underline">Privacy Policy</a>.
+                    <a href="/privacy-policy" className="text-blue-500 hover:underline">Privacy Policy</a>.
                     We'll only use your details to respond to your inquiry.
                   </p>
                   <button type="submit" disabled={isSubmitting}
                     className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white py-4 rounded-xl font-bold text-lg transition-all min-h-[52px]">
                     {isSubmitting ? 'Sending...' : 'Send Message'}
                   </button>
-                  <p className="text-slate-400 text-xs text-center">For fastest response: WhatsApp us directly above.</p>
+                  <p className="text-xs text-center" style={{ color: body }}>For fastest response: WhatsApp us directly above.</p>
                 </form>
               )}
             </motion.div>

@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'wouter';
-import { MessageCircle, CheckCircle2, ArrowRight, LucideIcon } from 'lucide-react';
+import { MessageCircle, ArrowRight } from 'lucide-react';
 import { WA_LINK } from '@/lib/config';
+import { useTheme } from '@/contexts/ThemeContext';
 import {
   Accordion,
   AccordionContent,
@@ -58,12 +59,26 @@ export function AudiencePageTemplate({
   metaTitle,
   metaDescription,
 }: AudiencePageProps) {
+  const { isDark } = useTheme();
+
   React.useEffect(() => {
     document.title = metaTitle || `AI for ${segment} Bangladesh | SYSmoAI`;
-  }, [metaTitle, segment]);
+    if (metaDescription) {
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.setAttribute('content', metaDescription);
+    }
+  }, [metaTitle, metaDescription, segment]);
+
+  const bg1 = isDark ? '#0A0B0F' : '#FFFFFF';
+  const bg2 = isDark ? '#0D0F14' : '#F8FAFF';
+  const cardBg = isDark ? 'rgba(255,255,255,0.04)' : '#F8FAFF';
+  const cardBorder = isDark ? 'rgba(255,255,255,0.08)' : '#E2E8F0';
+  const heading = isDark ? '#F1F5F9' : '#0A0B0F';
+  const body = isDark ? '#94A3B8' : '#475569';
+  const bodyDark = isDark ? '#64748B' : '#64748B';
 
   return (
-    <div className="flex flex-col w-full overflow-hidden">
+    <div className="flex flex-col w-full overflow-hidden" style={{ background: bg1 }}>
 
       {/* Hero */}
       <section className="relative bg-[#0A0B0F] py-20 md:py-28 min-h-[70vh] flex items-center">
@@ -103,11 +118,11 @@ export function AudiencePageTemplate({
       </section>
 
       {/* Pain Points */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24" style={{ background: bg1 }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl md:text-3xl font-bold text-slate-900 mb-10 text-center"
+            className="text-2xl md:text-3xl font-bold mb-10 text-center" style={{ color: heading }}
           >
             Does this sound familiar?
           </motion.h2>
@@ -119,11 +134,12 @@ export function AudiencePageTemplate({
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="bg-slate-50 border border-slate-100 p-6 rounded-2xl hover:border-slate-200 hover:shadow-sm transition-all"
+                className="p-6 rounded-2xl transition-all"
+                style={{ background: cardBg, border: `1px solid ${cardBorder}` }}
               >
                 <div className="text-2xl mb-3">{p.emoji}</div>
-                <h3 className="font-bold text-slate-900 mb-2 text-sm">"{p.label}"</h3>
-                <p className="text-slate-500 text-sm leading-relaxed">{p.desc}</p>
+                <h3 className="font-bold mb-2 text-sm" style={{ color: heading }}>"{p.label}"</h3>
+                <p className="text-sm leading-relaxed" style={{ color: body }}>{p.desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -131,11 +147,11 @@ export function AudiencePageTemplate({
       </section>
 
       {/* Before / After */}
-      <section className="py-16 md:py-24 bg-slate-50">
+      <section className="py-16 md:py-24" style={{ background: bg2 }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl md:text-3xl font-bold text-slate-900 mb-10 text-center"
+            className="text-2xl md:text-3xl font-bold mb-10 text-center" style={{ color: heading }}
           >
             Here's what changes
           </motion.h2>
@@ -147,17 +163,29 @@ export function AudiencePageTemplate({
               <div className="text-center mb-4 font-bold text-red-500 uppercase text-xs tracking-widest">❌ Before SYSmoAI</div>
               <div className="space-y-3">
                 {beforeAfter.map((ba, i) => (
-                  <motion.div key={i} variants={fadeUp} className="bg-red-50 border border-red-100 p-4 rounded-xl text-sm text-slate-700 leading-relaxed">
+                  <motion.div key={i} variants={fadeUp}
+                    className="p-4 rounded-xl text-sm leading-relaxed"
+                    style={{
+                      background: isDark ? 'rgba(239,68,68,0.08)' : '#FEF2F2',
+                      border: `1px solid ${isDark ? 'rgba(239,68,68,0.2)' : '#FECACA'}`,
+                      color: isDark ? '#FCA5A5' : '#7F1D1D',
+                    }}>
                     {ba.before}
                   </motion.div>
                 ))}
               </div>
             </div>
             <div>
-              <div className="text-center mb-4 font-bold text-green-600 uppercase text-xs tracking-widest">✅ After SYSmoAI</div>
+              <div className="text-center mb-4 font-bold text-green-500 uppercase text-xs tracking-widest">✅ After SYSmoAI</div>
               <div className="space-y-3">
                 {beforeAfter.map((ba, i) => (
-                  <motion.div key={i} variants={fadeUp} className="bg-green-50 border border-green-100 p-4 rounded-xl text-sm text-slate-700 leading-relaxed">
+                  <motion.div key={i} variants={fadeUp}
+                    className="p-4 rounded-xl text-sm leading-relaxed"
+                    style={{
+                      background: isDark ? 'rgba(34,197,94,0.08)' : '#F0FDF4',
+                      border: `1px solid ${isDark ? 'rgba(34,197,94,0.2)' : '#BBF7D0'}`,
+                      color: isDark ? '#86EFAC' : '#14532D',
+                    }}>
                     {ba.after}
                   </motion.div>
                 ))}
@@ -168,27 +196,28 @@ export function AudiencePageTemplate({
       </section>
 
       {/* Solutions */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24" style={{ background: bg1 }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl md:text-3xl font-bold text-slate-900 mb-10 text-center"
+            className="text-2xl md:text-3xl font-bold mb-10 text-center" style={{ color: heading }}
           >
             How we solve it
           </motion.h2>
           <motion.div
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-6"
           >
             {solutions.map((s, i) => (
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="bg-slate-50 border border-slate-100 p-6 rounded-2xl hover:shadow-sm transition-all"
+                className="p-6 rounded-2xl transition-all"
+                style={{ background: cardBg, border: `1px solid ${cardBorder}` }}
               >
                 <div className="text-2xl mb-3">{s.icon}</div>
-                <h3 className="font-bold text-slate-900 mb-2">{s.title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{s.desc}</p>
+                <h3 className="font-bold mb-2" style={{ color: heading }}>{s.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: body }}>{s.desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -196,7 +225,7 @@ export function AudiencePageTemplate({
       </section>
 
       {/* 3-Step Process */}
-      <section className="py-16 md:py-20 bg-slate-900">
+      <section className="py-16 md:py-20" style={{ background: isDark ? '#060810' : '#0F172A' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
@@ -209,7 +238,9 @@ export function AudiencePageTemplate({
             className="grid grid-cols-1 md:grid-cols-3 gap-6"
           >
             {steps.map((step, i) => (
-              <motion.div key={i} variants={fadeUp} className="bg-slate-800 border border-slate-700 p-6 rounded-xl text-center">
+              <motion.div key={i} variants={fadeUp}
+                className="p-6 rounded-xl text-center"
+                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
                 <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm mx-auto mb-4">0{i + 1}</div>
                 <h3 className="font-bold text-white mb-2">{step.title}</h3>
                 <p className="text-slate-400 text-sm leading-relaxed">{step.desc}</p>
@@ -220,11 +251,11 @@ export function AudiencePageTemplate({
       </section>
 
       {/* Relevant Services */}
-      <section className="py-16 md:py-20 bg-white">
+      <section className="py-16 md:py-20" style={{ background: bg2 }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl font-bold text-slate-900 mb-10 text-center"
+            className="text-2xl font-bold mb-10 text-center" style={{ color: heading }}
           >
             Services built for {segment}
           </motion.h2>
@@ -236,13 +267,15 @@ export function AudiencePageTemplate({
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="bg-slate-50 border border-slate-200 hover:border-blue-300 hover:shadow-md p-6 rounded-2xl transition-all group"
+                className="p-6 rounded-2xl transition-all group"
+                style={{ background: cardBg, border: `1px solid ${cardBorder}` }}
               >
-                <h3 className="font-bold text-slate-900 mb-1 group-hover:text-blue-600 transition-colors">{s.label}</h3>
-                <p className="text-blue-600 font-semibold text-sm mb-4">{s.price}</p>
+                <h3 className="font-bold mb-1 group-hover:text-blue-500 transition-colors" style={{ color: heading }}>{s.label}</h3>
+                <p className="text-blue-500 font-semibold text-sm mb-4">{s.price}</p>
                 <Link
                   href={s.href}
-                  className="inline-flex items-center gap-1.5 text-sm text-slate-600 hover:text-blue-600 font-medium transition-colors"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-blue-500"
+                  style={{ color: bodyDark }}
                 >
                   Learn more <ArrowRight size={14} />
                 </Link>
@@ -254,21 +287,23 @@ export function AudiencePageTemplate({
 
       {/* FAQ */}
       {faqs.length > 0 && (
-        <section className="py-16 bg-slate-50">
+        <section className="py-16" style={{ background: bg1 }}>
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.h2
               initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-              className="text-2xl font-bold text-slate-900 mb-8 text-center"
+              className="text-2xl font-bold mb-8 text-center" style={{ color: heading }}
             >
               Common questions
             </motion.h2>
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, i) => (
-                <AccordionItem key={i} value={`faq-${i}`} className="border-b border-slate-200">
-                  <AccordionTrigger className="text-left font-semibold text-slate-900 hover:text-blue-600 py-4 text-sm">
+                <AccordionItem key={i} value={`faq-${i}`} style={{ borderBottomColor: cardBorder }}>
+                  <AccordionTrigger
+                    className="text-left font-semibold hover:text-blue-500 py-4 text-sm"
+                    style={{ color: heading }}>
                     {faq.q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-slate-600 leading-relaxed pb-4 text-sm">
+                  <AccordionContent className="leading-relaxed pb-4 text-sm" style={{ color: bodyDark }}>
                     {faq.a}
                   </AccordionContent>
                 </AccordionItem>

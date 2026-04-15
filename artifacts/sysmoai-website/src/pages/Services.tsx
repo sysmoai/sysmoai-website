@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'wouter';
 import { Zap, Timer, RefreshCw, Users, BookOpen, Layout, Bot, Settings, Building, Globe, ArrowRight, ChevronDown } from 'lucide-react';
 import { WA_URLS } from '../lib/whatsapp';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -44,23 +45,38 @@ const comparison = [
   { feature: 'Best for', qw: 'Quick relief', sprint: 'Full transformation', retainer: 'Continuous growth' },
 ];
 
-function FAQItem({ q, a }: { q: string; a: string }) {
+function FAQItem({ q, a, isDark }: { q: string; a: string; isDark: boolean }) {
   const [open, setOpen] = React.useState(false);
   return (
     <div
-      className="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden cursor-pointer"
       onClick={() => setOpen(!open)}
+      className="rounded-xl overflow-hidden cursor-pointer"
+      style={{
+        background: isDark ? 'rgba(255,255,255,0.04)' : '#F8FAFF',
+        border: `1px solid ${isDark ? 'rgba(255,255,255,0.08)' : '#E2E8F0'}`,
+      }}
     >
       <div className="flex justify-between items-center p-5">
-        <span className="font-semibold text-slate-900 pr-4">{q}</span>
-        <ChevronDown size={18} className={`text-slate-400 shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+        <span className="font-semibold pr-4" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}>{q}</span>
+        <ChevronDown size={18} className={`shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          style={{ color: isDark ? '#64748B' : '#94A3B8' }} />
       </div>
-      {open && <p className="text-slate-600 text-sm px-5 pb-5 leading-relaxed">{a}</p>}
+      {open && <p className="text-sm px-5 pb-5 leading-relaxed" style={{ color: isDark ? '#94A3B8' : '#475569' }}>{a}</p>}
     </div>
   );
 }
 
 export default function Services() {
+  const { isDark } = useTheme();
+
+  const bg1 = isDark ? '#0A0B0F' : '#FFFFFF';
+  const bg2 = isDark ? '#0D0F14' : '#F8FAFF';
+  const cardBg = isDark ? 'rgba(255,255,255,0.04)' : '#FFFFFF';
+  const cardBorder = isDark ? 'rgba(255,255,255,0.08)' : '#E2E8F0';
+  const heading = isDark ? '#F1F5F9' : '#0A0B0F';
+  const body = isDark ? '#94A3B8' : '#475569';
+  const bodyMuted = isDark ? '#64748B' : '#94A3B8';
+
   useEffect(() => {
     document.title = 'AI Services — SYSmoAI | Automation, Notion OS, AI Agents for Bangladesh';
     const meta = document.querySelector('meta[name="description"]');
@@ -82,7 +98,7 @@ export default function Services() {
   }, []);
 
   return (
-    <div className="flex flex-col w-full overflow-hidden">
+    <div className="flex flex-col w-full overflow-hidden" style={{ background: bg1 }}>
 
       {/* Hero */}
       <section className="relative bg-[#0A0B0F] py-20 md:py-28">
@@ -102,26 +118,27 @@ export default function Services() {
       </section>
 
       {/* Core services */}
-      <section className="py-20 md:py-24 bg-white">
+      <section className="py-20 md:py-24" style={{ background: bg1 }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl font-bold text-slate-900 mb-10">Core services</motion.h2>
+            className="text-2xl font-bold mb-10" style={{ color: heading }}>Core services</motion.h2>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {featured.map((s, i) => (
               <motion.div key={i} variants={fadeUp}
-                className="bg-white border-2 border-slate-200 hover:border-blue-400 hover:shadow-xl p-8 rounded-2xl transition-all group flex flex-col">
+                className="p-8 rounded-2xl transition-all flex flex-col hover:shadow-xl"
+                style={{ background: cardBg, border: `2px solid ${cardBorder}` }}>
                 <div className="flex items-start justify-between mb-5">
-                  <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                    <s.icon size={22} className="text-blue-600" />
+                  <div className="w-12 h-12 bg-blue-600/15 rounded-xl flex items-center justify-center">
+                    <s.icon size={22} className="text-blue-500" />
                   </div>
-                  <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">{s.tag}</span>
+                  <span className="text-xs font-semibold text-blue-500 bg-blue-600/10 px-2.5 py-1 rounded-full border border-blue-500/20">{s.tag}</span>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">{s.title}</h3>
-                <p className="text-slate-500 text-sm mb-5 flex-1">{s.subtitle}</p>
+                <h3 className="text-xl font-bold mb-2" style={{ color: heading }}>{s.title}</h3>
+                <p className="text-sm mb-5 flex-1" style={{ color: body }}>{s.subtitle}</p>
                 <div className="mb-5">
-                  <span className="text-2xl font-bold text-blue-600">{s.bd}</span>
-                  <span className="text-slate-400 text-sm ml-2">· {s.usd} intl</span>
+                  <span className="text-2xl font-bold text-blue-500">{s.bd}</span>
+                  <span className="text-sm ml-2" style={{ color: bodyMuted }}>· {s.usd} intl</span>
                 </div>
                 <Link href={s.href}
                   className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold text-sm transition-all min-h-[44px]">
@@ -134,20 +151,21 @@ export default function Services() {
       </section>
 
       {/* All services */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-20" style={{ background: bg2 }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl font-bold text-slate-900 mb-10">All services</motion.h2>
+            className="text-2xl font-bold mb-10" style={{ color: heading }}>All services</motion.h2>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {other.map((s, i) => (
               <motion.div key={i} variants={fadeUp}
-                className="bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md p-6 rounded-2xl transition-all group">
-                <s.icon size={22} className="text-blue-600 mb-4" />
-                <h3 className="font-bold text-slate-900 mb-1 group-hover:text-blue-600 transition-colors">{s.title}</h3>
-                <p className="text-slate-500 text-sm mb-3">{s.desc}</p>
-                <p className="text-blue-600 font-semibold text-sm mb-4">{s.bd}</p>
-                <Link href={s.href} className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-blue-600 font-medium transition-colors">
+                className="p-6 rounded-2xl transition-all group"
+                style={{ background: isDark ? 'rgba(255,255,255,0.04)' : '#FFFFFF', border: `1px solid ${cardBorder}` }}>
+                <s.icon size={22} className="text-blue-500 mb-4" />
+                <h3 className="font-bold mb-1 group-hover:text-blue-500 transition-colors" style={{ color: heading }}>{s.title}</h3>
+                <p className="text-sm mb-3" style={{ color: body }}>{s.desc}</p>
+                <p className="text-blue-500 font-semibold text-sm mb-4">{s.bd}</p>
+                <Link href={s.href} className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-blue-500" style={{ color: bodyMuted }}>
                   Details <ArrowRight size={13} />
                 </Link>
               </motion.div>
@@ -157,28 +175,32 @@ export default function Services() {
       </section>
 
       {/* Comparison table */}
-      <section className="py-20 bg-white">
+      <section className="py-20" style={{ background: bg1 }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl font-bold text-slate-900 text-center mb-10">Compare Packages</motion.h2>
+            className="text-2xl font-bold text-center mb-10" style={{ color: heading }}>Compare Packages</motion.h2>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm">
+            className="overflow-x-auto rounded-2xl shadow-sm"
+            style={{ border: `1px solid ${cardBorder}` }}>
             <table className="w-full text-sm text-left">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200">
-                  <th className="py-4 px-5 text-slate-500 font-semibold">Feature</th>
-                  <th className="py-4 px-5 text-blue-600 font-bold">AI Quick Win</th>
-                  <th className="py-4 px-5 text-blue-600 font-bold">AI Sprint</th>
-                  <th className="py-4 px-5 text-blue-600 font-bold">AI Retainer</th>
+                <tr style={{ background: bg2, borderBottom: `1px solid ${cardBorder}` }}>
+                  <th className="py-4 px-5 font-semibold" style={{ color: body }}>Feature</th>
+                  <th className="py-4 px-5 font-bold text-blue-500">AI Quick Win</th>
+                  <th className="py-4 px-5 font-bold text-blue-500">AI Sprint</th>
+                  <th className="py-4 px-5 font-bold text-blue-500">AI Retainer</th>
                 </tr>
               </thead>
               <tbody>
                 {comparison.map((row, i) => (
-                  <tr key={i} className={`border-b border-slate-100 ${i % 2 === 0 ? 'bg-white' : 'bg-slate-50/60'}`}>
-                    <td className="py-3.5 px-5 text-slate-500 font-medium">{row.feature}</td>
-                    <td className="py-3.5 px-5 text-slate-700">{row.qw}</td>
-                    <td className="py-3.5 px-5 text-slate-700">{row.sprint}</td>
-                    <td className="py-3.5 px-5 text-slate-700">{row.retainer}</td>
+                  <tr key={i} style={{
+                    borderBottom: `1px solid ${cardBorder}`,
+                    background: i % 2 === 0 ? (isDark ? 'rgba(255,255,255,0.02)' : '#FFFFFF') : (isDark ? 'rgba(255,255,255,0.04)' : '#F8FAFF'),
+                  }}>
+                    <td className="py-3.5 px-5 font-medium" style={{ color: body }}>{row.feature}</td>
+                    <td className="py-3.5 px-5" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>{row.qw}</td>
+                    <td className="py-3.5 px-5" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>{row.sprint}</td>
+                    <td className="py-3.5 px-5" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>{row.retainer}</td>
                   </tr>
                 ))}
               </tbody>
@@ -188,21 +210,23 @@ export default function Services() {
       </section>
 
       {/* Not sure */}
-      <section className="py-20 bg-slate-50 border-t border-slate-100">
+      <section className="py-20" style={{ background: bg2, borderTop: `1px solid ${cardBorder}` }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl font-bold text-slate-900 text-center mb-12">Not sure which service is right for you?</motion.h2>
+            className="text-2xl font-bold text-center mb-12" style={{ color: heading }}>Not sure which service is right for you?</motion.h2>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { label: 'I have one specific problem', rec: 'Start with AI Quick Win', href: '/services/ai-quick-win', external: false },
-              { label: 'I want a complete AI transformation', rec: 'Go with AI Sprint', href: '/services/ai-sprint', external: false },
-              { label: "I don't know where to start", rec: 'Book a free AI audit', href: '/free-ai-audit', external: false },
+              { label: 'I have one specific problem', rec: 'Start with AI Quick Win', href: '/services/ai-quick-win' },
+              { label: 'I want a complete AI transformation', rec: 'Go with AI Sprint', href: '/services/ai-sprint' },
+              { label: "I don't know where to start", rec: 'Book a free AI audit', href: '/free-ai-audit' },
             ].map((item, i) => (
-              <motion.div key={i} variants={fadeUp} className="bg-white border border-slate-200 p-6 rounded-2xl text-center">
-                <p className="text-slate-600 text-sm mb-3">{item.label}</p>
-                <p className="font-bold text-slate-900 mb-4">→ {item.rec}</p>
-                <Link href={item.href} className="inline-flex items-center gap-1.5 text-sm text-blue-600 font-semibold hover:text-blue-700">
+              <motion.div key={i} variants={fadeUp}
+                className="p-6 rounded-2xl text-center"
+                style={{ background: isDark ? 'rgba(255,255,255,0.04)' : '#FFFFFF', border: `1px solid ${cardBorder}` }}>
+                <p className="text-sm mb-3" style={{ color: body }}>{item.label}</p>
+                <p className="font-bold mb-4" style={{ color: heading }}>→ {item.rec}</p>
+                <Link href={item.href} className="inline-flex items-center gap-1.5 text-sm text-blue-500 font-semibold hover:text-blue-400">
                   {i === 2 ? 'Book Free Audit' : 'Learn More'} <ArrowRight size={14} />
                 </Link>
               </motion.div>
@@ -212,15 +236,15 @@ export default function Services() {
       </section>
 
       {/* FAQ */}
-      <section className="py-20 bg-white">
+      <section className="py-20" style={{ background: bg1 }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl font-bold text-slate-900 text-center mb-10">Frequently Asked Questions</motion.h2>
+            className="text-2xl font-bold text-center mb-10" style={{ color: heading }}>Frequently Asked Questions</motion.h2>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="space-y-3">
             {servicesFAQ.map((faq, i) => (
               <motion.div key={i} variants={fadeUp}>
-                <FAQItem q={faq.q} a={faq.a} />
+                <FAQItem q={faq.q} a={faq.a} isDark={isDark} />
               </motion.div>
             ))}
           </motion.div>

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'wouter';
 import { MessageCircle, CheckCircle2, ArrowRight, LucideIcon } from 'lucide-react';
 import { WA_LINK } from '@/lib/config';
+import { useTheme } from '@/contexts/ThemeContext';
 import {
   Accordion,
   AccordionContent,
@@ -54,12 +55,22 @@ export function ServicePageTemplate({
   relatedServices = [],
   metaTitle,
 }: ServicePageProps) {
+  const { isDark } = useTheme();
+
   React.useEffect(() => {
     document.title = metaTitle || `${title} | SYSmoAI`;
   }, [metaTitle, title]);
 
+  const bg1 = isDark ? '#0A0B0F' : '#FFFFFF';
+  const bg2 = isDark ? '#0D0F14' : '#F8FAFF';
+  const cardBg = isDark ? 'rgba(255,255,255,0.04)' : '#FFFFFF';
+  const cardBorder = isDark ? 'rgba(255,255,255,0.08)' : '#E2E8F0';
+  const heading = isDark ? '#F1F5F9' : '#0A0B0F';
+  const body = isDark ? '#94A3B8' : '#475569';
+  const bodyDark = isDark ? '#64748B' : '#64748B';
+
   return (
-    <div className="flex flex-col w-full overflow-hidden">
+    <div className="flex flex-col w-full overflow-hidden" style={{ background: bg1 }}>
 
       {/* Hero */}
       <section className="relative bg-[#0A0B0F] py-20 md:py-28">
@@ -72,11 +83,7 @@ export function ServicePageTemplate({
               ← All Services
             </Link>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <div className="w-14 h-14 bg-blue-600/20 border border-blue-600/30 rounded-2xl flex items-center justify-center mb-6">
               <Icon size={28} className="text-blue-400" />
             </div>
@@ -105,20 +112,20 @@ export function ServicePageTemplate({
       </section>
 
       {/* What It Is */}
-      <section className="py-16 md:py-20 bg-white">
+      <section className="py-16 md:py-20" style={{ background: bg1 }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-5">What is {title}?</h2>
-              <p className="text-slate-600 leading-relaxed text-lg">{whatItIs}</p>
+              <h2 className="text-2xl md:text-3xl font-bold mb-5" style={{ color: heading }}>What is {title}?</h2>
+              <p className="leading-relaxed text-lg" style={{ color: body }}>{whatItIs}</p>
             </motion.div>
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-5">What you get</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-5" style={{ color: heading }}>What you get</h2>
               <ul className="space-y-3">
                 {deliverables.map((d, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <CheckCircle2 size={18} className="text-green-500 mt-0.5 shrink-0" />
-                    <span className="text-slate-700">{d}</span>
+                    <span style={{ color: isDark ? '#CBD5E1' : '#374151' }}>{d}</span>
                   </li>
                 ))}
               </ul>
@@ -128,11 +135,11 @@ export function ServicePageTemplate({
       </section>
 
       {/* Before / After */}
-      <section className="py-16 md:py-20 bg-slate-50">
+      <section className="py-16 md:py-20" style={{ background: bg2 }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl md:text-3xl font-bold text-slate-900 mb-10 text-center"
+            className="text-2xl md:text-3xl font-bold mb-10 text-center" style={{ color: heading }}
           >
             The problem it solves
           </motion.h2>
@@ -144,17 +151,29 @@ export function ServicePageTemplate({
               <div className="text-center mb-4 font-bold text-red-500 uppercase text-sm tracking-wider">❌ Before</div>
               <div className="space-y-3">
                 {beforeAfter.map((ba, i) => (
-                  <motion.div key={i} variants={fadeUp} className="bg-red-50 border border-red-100 p-4 rounded-xl text-sm text-slate-700">
+                  <motion.div key={i} variants={fadeUp}
+                    className="p-4 rounded-xl text-sm leading-relaxed"
+                    style={{
+                      background: isDark ? 'rgba(239,68,68,0.08)' : '#FEF2F2',
+                      border: `1px solid ${isDark ? 'rgba(239,68,68,0.2)' : '#FECACA'}`,
+                      color: isDark ? '#FCA5A5' : '#7F1D1D',
+                    }}>
                     {ba.before}
                   </motion.div>
                 ))}
               </div>
             </div>
             <div>
-              <div className="text-center mb-4 font-bold text-green-600 uppercase text-sm tracking-wider">✅ After SYSmoAI</div>
+              <div className="text-center mb-4 font-bold text-green-500 uppercase text-sm tracking-wider">✅ After SYSmoAI</div>
               <div className="space-y-3">
                 {beforeAfter.map((ba, i) => (
-                  <motion.div key={i} variants={fadeUp} className="bg-green-50 border border-green-100 p-4 rounded-xl text-sm text-slate-700">
+                  <motion.div key={i} variants={fadeUp}
+                    className="p-4 rounded-xl text-sm leading-relaxed"
+                    style={{
+                      background: isDark ? 'rgba(34,197,94,0.08)' : '#F0FDF4',
+                      border: `1px solid ${isDark ? 'rgba(34,197,94,0.2)' : '#BBF7D0'}`,
+                      color: isDark ? '#86EFAC' : '#14532D',
+                    }}>
                     {ba.after}
                   </motion.div>
                 ))}
@@ -165,11 +184,11 @@ export function ServicePageTemplate({
       </section>
 
       {/* Who It's For */}
-      <section className="py-16 md:py-20 bg-white">
+      <section className="py-16 md:py-20" style={{ background: bg1 }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 text-center"
+            className="text-2xl md:text-3xl font-bold mb-8 text-center" style={{ color: heading }}
           >
             Who it's for
           </motion.h2>
@@ -181,7 +200,12 @@ export function ServicePageTemplate({
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="bg-blue-50 border border-blue-100 p-4 rounded-xl text-sm font-medium text-blue-800 text-center"
+                className="p-4 rounded-xl text-sm font-medium text-center"
+                style={{
+                  background: isDark ? 'rgba(37,99,235,0.1)' : '#EFF6FF',
+                  border: `1px solid ${isDark ? 'rgba(37,99,235,0.25)' : '#BFDBFE'}`,
+                  color: isDark ? '#93C5FD' : '#1E40AF',
+                }}
               >
                 {item}
               </motion.div>
@@ -191,7 +215,7 @@ export function ServicePageTemplate({
       </section>
 
       {/* How It Works */}
-      <section className="py-16 md:py-20 bg-slate-900">
+      <section className="py-16 md:py-20" style={{ background: isDark ? '#060810' : '#0F172A' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
@@ -207,7 +231,8 @@ export function ServicePageTemplate({
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="bg-slate-800 border border-slate-700 p-6 rounded-xl"
+                className="p-6 rounded-xl"
+                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}
               >
                 <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm mb-4">
                   {String(i + 1).padStart(2, '0')}
@@ -221,22 +246,25 @@ export function ServicePageTemplate({
       </section>
 
       {/* FAQ */}
-      <section className="py-16 md:py-20 bg-white">
+      <section className="py-16 md:py-20" style={{ background: bg2 }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl md:text-3xl font-bold text-slate-900 mb-10 text-center"
+            className="text-2xl md:text-3xl font-bold mb-10 text-center" style={{ color: heading }}
           >
             Frequently asked questions
           </motion.h2>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, i) => (
-                <AccordionItem key={i} value={`faq-${i}`} className="border-b border-slate-100">
-                  <AccordionTrigger className="text-left font-semibold text-slate-900 hover:text-blue-600 py-5 text-sm md:text-base">
+                <AccordionItem key={i} value={`faq-${i}`}
+                  style={{ borderBottomColor: cardBorder }}>
+                  <AccordionTrigger
+                    className="text-left font-semibold hover:text-blue-500 py-5 text-sm md:text-base"
+                    style={{ color: heading }}>
                     {faq.q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-slate-600 leading-relaxed pb-5 text-sm">
+                  <AccordionContent className="leading-relaxed pb-5 text-sm" style={{ color: bodyDark }}>
                     {faq.a}
                   </AccordionContent>
                 </AccordionItem>
@@ -248,15 +276,16 @@ export function ServicePageTemplate({
 
       {/* Related Services */}
       {relatedServices.length > 0 && (
-        <section className="py-12 bg-slate-50">
+        <section className="py-12" style={{ background: bg1 }}>
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-6 text-center">Related Services</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wider mb-6 text-center" style={{ color: bodyDark }}>Related Services</h3>
             <div className="flex flex-wrap justify-center gap-3">
               {relatedServices.map((s, i) => (
                 <Link
                   key={i}
                   href={s.href}
-                  className="px-5 py-2.5 bg-white border border-slate-200 hover:border-blue-300 hover:text-blue-600 text-slate-700 rounded-xl text-sm font-medium transition-all"
+                  className="px-5 py-2.5 rounded-xl text-sm font-medium transition-all hover:text-blue-500"
+                  style={{ background: cardBg, border: `1px solid ${cardBorder}`, color: isDark ? '#CBD5E1' : '#374151' }}
                 >
                   {s.label}
                 </Link>

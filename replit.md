@@ -64,6 +64,18 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - `ServicePageTemplate.tsx` — Used by all 9 service pages (hero, deliverables, Before/After, steps, FAQ, related)
 - `AudiencePageTemplate.tsx` — Used by all 10 audience pages (pain points, Before/After, solutions, FAQ)
 
+### Theme System
+- **Context**: `src/contexts/ThemeContext.tsx` — `isDark` boolean, defaults to dark mode, saved to localStorage
+- **Pattern**: All pages use `const { isDark } = useTheme()` and inline `style={{...}}` props with isDark-conditional values
+- **Color tokens** (dark → light):
+  - bg primary: `#0A0B0F` → `#FFFFFF`
+  - bg alternate: `#0D0F14` → `#F8FAFF`
+  - card bg: `rgba(255,255,255,0.04)` → `#FFFFFF`
+  - card border: `rgba(255,255,255,0.08)` → `#E2E8F0`
+  - heading: `#F1F5F9` → `#0A0B0F`
+  - body: `#94A3B8` → `#475569`
+- **Fully themed pages**: Home, Services, About, Pricing, FAQ, Contact, Blog, BlogPost, Footer, ServicePageTemplate (×9), AudiencePageTemplate (×10)
+
 ### Blog System
 - **Data**: `src/data/blogPosts.ts` — 50 articles total
 - **Structure**: 10 target groups × 5 article types = 50 articles

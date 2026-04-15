@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'wouter';
 import { CheckCircle2, ArrowRight, ChevronDown } from 'lucide-react';
 import { WA_URLS } from '../lib/whatsapp';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -74,21 +75,38 @@ const pricingFAQ = [
   { q: 'Can I cancel the retainer anytime?', a: 'Yes. The AI Operations Retainer is month-to-month with no long-term commitment. Cancel anytime.' },
 ];
 
-function FAQItem({ q, a }: { q: string; a: string }) {
+function FAQItem({ q, a, isDark }: { q: string; a: string; isDark: boolean }) {
   const [open, setOpen] = React.useState(false);
   return (
-    <div className="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden cursor-pointer" onClick={() => setOpen(!open)}>
+    <div
+      onClick={() => setOpen(!open)}
+      className="rounded-xl overflow-hidden cursor-pointer"
+      style={{
+        background: isDark ? 'rgba(255,255,255,0.04)' : '#F8FAFF',
+        border: `1px solid ${isDark ? 'rgba(255,255,255,0.08)' : '#E2E8F0'}`,
+      }}
+    >
       <div className="flex justify-between items-center p-5">
-        <span className="font-semibold text-slate-900 pr-4">{q}</span>
-        <ChevronDown size={18} className={`text-slate-400 shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+        <span className="font-semibold pr-4" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}>{q}</span>
+        <ChevronDown size={18} className={`shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          style={{ color: isDark ? '#64748B' : '#94A3B8' }} />
       </div>
-      {open && <p className="text-slate-600 text-sm px-5 pb-5 leading-relaxed">{a}</p>}
+      {open && <p className="text-sm px-5 pb-5 leading-relaxed" style={{ color: isDark ? '#94A3B8' : '#475569' }}>{a}</p>}
     </div>
   );
 }
 
 export default function Pricing() {
   const [showUSD, setShowUSD] = useState(false);
+  const { isDark } = useTheme();
+
+  const bg1 = isDark ? '#0A0B0F' : '#FFFFFF';
+  const bg2 = isDark ? '#0D0F14' : '#F8FAFF';
+  const cardBg = isDark ? 'rgba(255,255,255,0.04)' : '#FFFFFF';
+  const cardBorder = isDark ? 'rgba(255,255,255,0.08)' : '#E2E8F0';
+  const heading = isDark ? '#F1F5F9' : '#0A0B0F';
+  const body = isDark ? '#94A3B8' : '#475569';
+  const bodyMuted = isDark ? '#64748B' : '#64748B';
 
   useEffect(() => {
     document.title = 'Transparent AI Pricing — SYSmoAI | BDT & USD';
@@ -111,7 +129,7 @@ export default function Pricing() {
   }, []);
 
   return (
-    <div className="flex flex-col w-full overflow-hidden">
+    <div className="flex flex-col w-full overflow-hidden" style={{ background: bg1 }}>
 
       {/* Hero */}
       <section className="relative bg-[#0A0B0F] py-20 md:py-28">
@@ -144,30 +162,42 @@ export default function Pricing() {
       </section>
 
       {/* Pricing cards */}
-      <section className="py-20 bg-white">
+      <section className="py-20" style={{ background: bg1 }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((s, i) => (
               <motion.div key={i} variants={fadeUp}
-                className={`rounded-2xl p-7 border-2 flex flex-col transition-all hover:shadow-lg ${s.featured ? 'border-blue-400 bg-blue-600 text-white shadow-xl shadow-blue-600/20' : 'border-slate-200 bg-white hover:border-blue-300'}`}>
+                className="rounded-2xl p-7 flex flex-col transition-all hover:shadow-lg"
+                style={s.featured ? {
+                  border: '2px solid #3B82F6',
+                  background: 'linear-gradient(135deg, #2563EB, #1D4ED8)',
+                  boxShadow: '0 20px 40px rgba(37,99,235,0.25)',
+                } : {
+                  border: `2px solid ${cardBorder}`,
+                  background: cardBg,
+                }}>
                 <div className="flex items-start justify-between mb-4">
-                  <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${s.featured ? 'bg-white/20 text-white' : 'bg-blue-50 text-blue-600'}`}>{s.tag}</span>
+                  <span className="text-xs font-bold px-2.5 py-1 rounded-full"
+                    style={s.featured ? { background: 'rgba(255,255,255,0.2)', color: '#FFFFFF' } : { background: isDark ? 'rgba(37,99,235,0.15)' : '#EFF6FF', color: '#3B82F6' }}>
+                    {s.tag}
+                  </span>
                 </div>
-                <h3 className={`text-lg font-bold mb-2 ${s.featured ? 'text-white' : 'text-slate-900'}`}>{s.title}</h3>
-                <p className={`text-2xl font-bold mb-5 min-h-[2rem] ${s.featured ? 'text-white' : 'text-blue-600'}`}>
+                <h3 className="text-lg font-bold mb-2" style={{ color: s.featured ? '#FFFFFF' : heading }}>{s.title}</h3>
+                <p className="text-2xl font-bold mb-5 min-h-[2rem]" style={{ color: s.featured ? '#FFFFFF' : '#3B82F6' }}>
                   {showUSD ? s.usd : s.bd}
                 </p>
                 <ul className="space-y-2.5 flex-1 mb-6">
                   {s.features.map((f, j) => (
                     <li key={j} className="flex items-start gap-2.5 text-sm">
                       <CheckCircle2 size={15} className={`mt-0.5 shrink-0 ${s.featured ? 'text-green-300' : 'text-green-500'}`} />
-                      <span className={s.featured ? 'text-blue-100' : 'text-slate-600'}>{f}</span>
+                      <span style={{ color: s.featured ? 'rgba(219,234,254,0.9)' : body }}>{f}</span>
                     </li>
                   ))}
                 </ul>
                 <Link href={s.href}
-                  className={`inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all min-h-[44px] ${s.featured ? 'bg-white text-blue-600 hover:bg-blue-50' : 'bg-blue-600 hover:bg-blue-700 text-white'}`}>
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all min-h-[44px]"
+                  style={s.featured ? { background: '#FFFFFF', color: '#2563EB' } : { background: '#2563EB', color: '#FFFFFF' }}>
                   View Full Details <ArrowRight size={14} />
                 </Link>
               </motion.div>
@@ -177,29 +207,31 @@ export default function Pricing() {
       </section>
 
       {/* Payment terms */}
-      <section className="py-16 bg-slate-50">
+      <section className="py-16" style={{ background: bg2 }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl font-bold text-slate-900 text-center mb-10">Payment terms & methods</motion.h2>
+            className="text-2xl font-bold text-center mb-10" style={{ color: heading }}>Payment terms & methods</motion.h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h3 className="font-semibold text-slate-700 mb-4 text-sm uppercase tracking-wider">Payment Terms</h3>
+              <h3 className="font-semibold mb-4 text-sm uppercase tracking-wider" style={{ color: bodyMuted }}>Payment Terms</h3>
               <div className="space-y-3">
                 {payments.map((p, i) => (
-                  <div key={i} className="flex justify-between items-center bg-white border border-slate-100 p-4 rounded-xl text-sm">
-                    <span className="font-medium text-slate-700">{p.label}</span>
-                    <span className="text-slate-500">{p.terms}</span>
+                  <div key={i} className="flex justify-between items-center p-4 rounded-xl text-sm"
+                    style={{ background: cardBg, border: `1px solid ${cardBorder}` }}>
+                    <span className="font-medium" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>{p.label}</span>
+                    <span style={{ color: body }}>{p.terms}</span>
                   </div>
                 ))}
               </div>
             </div>
             <div>
-              <h3 className="font-semibold text-slate-700 mb-4 text-sm uppercase tracking-wider">Accepted Payment Methods</h3>
+              <h3 className="font-semibold mb-4 text-sm uppercase tracking-wider" style={{ color: bodyMuted }}>Accepted Payment Methods</h3>
               <div className="grid grid-cols-2 gap-3">
                 {methods.map((m, i) => (
-                  <div key={i} className="flex items-center gap-2 bg-white border border-slate-100 p-4 rounded-xl text-sm">
+                  <div key={i} className="flex items-center gap-2 p-4 rounded-xl text-sm"
+                    style={{ background: cardBg, border: `1px solid ${cardBorder}` }}>
                     <CheckCircle2 size={14} className="text-green-500 shrink-0" />
-                    <span className="text-slate-700 font-medium">{m}</span>
+                    <span className="font-medium" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>{m}</span>
                   </div>
                 ))}
               </div>
@@ -209,10 +241,11 @@ export default function Pricing() {
       </section>
 
       {/* International Clients */}
-      <section className="py-16 bg-white">
+      <section className="py-16" style={{ background: bg1 }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="bg-slate-900 border border-slate-700 rounded-2xl p-8">
+            className="rounded-2xl p-8"
+            style={{ background: isDark ? 'rgba(255,255,255,0.04)' : '#0F172A', border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : '#1E293B'}` }}>
             <h2 className="text-xl font-bold text-white mb-4">🌍 International Clients</h2>
             <p className="text-slate-400 mb-6">
               We serve clients worldwide at competitive USD rates — typically 60–80% less than US/EU agencies for the same quality.
@@ -246,12 +279,16 @@ export default function Pricing() {
       </section>
 
       {/* Guarantee */}
-      <section className="py-10 bg-white">
+      <section className="py-10" style={{ background: bg1 }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="bg-green-500/10 border border-green-500/30 rounded-2xl p-8 text-center">
-            <h3 className="text-xl font-bold text-slate-900 mb-3">🛡️ Our Results-First Guarantee</h3>
-            <p className="text-slate-600">
+            className="rounded-2xl p-8 text-center"
+            style={{
+              background: isDark ? 'rgba(34,197,94,0.06)' : 'rgba(34,197,94,0.06)',
+              border: `1px solid ${isDark ? 'rgba(34,197,94,0.25)' : 'rgba(34,197,94,0.3)'}`,
+            }}>
+            <h3 className="text-xl font-bold mb-3" style={{ color: heading }}>🛡️ Our Results-First Guarantee</h3>
+            <p style={{ color: body }}>
               We don't charge until your system delivers measurable results. If we can't improve your workflow within the agreed timeline, you get a full refund. Zero risk.
             </p>
           </motion.div>
@@ -259,14 +296,14 @@ export default function Pricing() {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 bg-slate-50">
+      <section className="py-16" style={{ background: bg2 }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl font-bold text-slate-900 text-center mb-10">Pricing FAQs</motion.h2>
+            className="text-2xl font-bold text-center mb-10" style={{ color: heading }}>Pricing FAQs</motion.h2>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="space-y-3">
             {pricingFAQ.map((faq, i) => (
               <motion.div key={i} variants={fadeUp}>
-                <FAQItem q={faq.q} a={faq.a} />
+                <FAQItem q={faq.q} a={faq.a} isDark={isDark} />
               </motion.div>
             ))}
           </motion.div>
