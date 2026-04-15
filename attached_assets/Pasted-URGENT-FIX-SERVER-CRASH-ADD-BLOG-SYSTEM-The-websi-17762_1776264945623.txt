@@ -1,0 +1,171 @@
+URGENT: FIX SERVER CRASH + ADD BLOG SYSTEM
+═══════════════════════════════════════════
+
+The website built successfully (exit 0) but the server process is crashing.
+The logs show: "artifact process exited with error error=signal: terminated"
+
+Source code at: ~/workspace/artifacts/sysmoai-website/
+
+═══════════════════════════════════════════
+PHASE 1 — DIAGNOSE & FIX THE SERVER CRASH
+═══════════════════════════════════════════
+
+1. Check the error logs:
+   cd ~/workspace/artifacts/sysmoai-website
+   cat dist/api-server/index.mjs | head -50
+   
+2. Check if the server entry point exists:
+   ls -la dist/api-server/
+   ls -la artifacts/api-server/
+
+3. Check package.json for the start script:
+   cat package.json | grep -A5 "scripts"
+
+4. The error "signal: terminated" usually means:
+   a) The server runs out of memory → Fix: reduce bundle size
+   b) The port is already in use → Fix: kill existing processes
+   c) The entry file path is wrong → Fix: correct the path
+   d) Missing environment variables → Fix: add them
+
+5. Try running the server manually to see the actual error:
+   cd ~/workspace/artifacts/sysmoai-website
+   node dist/api-server/index.mjs
+
+6. If it's a Vite/React SPA (no server needed), check if the
+   deployment is wrongly configured as a server app instead of
+   static site. For a React SPA:
+   - Build should output to dist/public/
+   - Deployment type should be "static" not "server"
+
+7. Check .replit config:
+   cat .replit
+   
+   If it references api-server but this is a static React app,
+   change the run command to serve the static files:
+   
+   [deployment]
+   run = ["npx", "serve", "-s", "dist"]
+   
+   OR for the existing setup, make sure the static handler
+   path matches the actual build output directory.
+
+FIX the crash. Verify the site loads at the preview URL.
+Report the exact error and what you changed.
+
+═══════════════════════════════════════════
+PHASE 2 — ADD BLOG SYSTEM TO THE WEBSITE
+═══════════════════════════════════════════
+
+After the server is fixed and running, add the blog system:
+
+1. Create the blog data structure:
+   Create src/data/blogPosts.ts with this structure:
+
+   export interface BlogPost {
+     slug: string;
+     title: string;
+     headline: string;
+     targetGroup: string;
+     articleType: 'wake-up-call' | 'system-reveal' | 'transformation' | 'free-value' | 'future-shock';
+     metaDescription: string;
+     metaKeywords: string[];
+     author: string;
+     publishDate: string;
+     readTime: string;
+     heroImageAlt: string;
+     content: string; // HTML or Markdown content
+     faq: Array<{ question: string; answer: string }>;
+     ctaService: string;
+     ctaPrice: string;
+     ctaLink: string;
+     relatedGroups: string[];
+     internalLinks: Array<{ text: string; href: string }>;
+   }
+
+   // Start with 1 placeholder article per group (we'll add real content later)
+   export const blogPosts: BlogPost[] = [
+     {
+       slug: 'ai-study-system-students-2026',
+       title: 'Your Classmate Is Getting A+ Using AI Systems You Don\'t Know Exist',
+       headline: 'Your Classmate Is Getting A+ Using AI Systems You Don\'t Know Exist',
+       targetGroup: 'students',
+       articleType: 'wake-up-call',
+       metaDescription: 'Stop using ChatGPT like Google. Build a complete AI study system that learns YOUR way, tracks YOUR progress, and costs less than your phone recharge.',
+       metaKeywords: ['AI study system', 'ChatGPT for students', 'how to study with AI', 'AI learning system 2026', 'study smarter with AI'],
+       author: 'Emon Hossain',
+       publishDate: '2026-04-15',
+       readTime: '12 min read',
+       heroImageAlt: 'Student using AI study system on laptop',
+       content: '<p>Coming soon — full article in progress.</p>',
+       faq: [
+         { question: 'How much does an AI study system cost?', answer: 'Starting from ৳2,500 per coaching session or ৳3,750 for a Quick Win automation.' },
+         { question: 'Will it work for my subject?', answer: 'Yes — the system adapts to any subject, any language, any learning style.' },
+         { question: 'Is this different from just using ChatGPT?', answer: 'Completely. ChatGPT is one tool. We build a connected SYSTEM — Notion + AI + tracking + automation.' },
+       ],
+       ctaService: 'AI Coaching',
+       ctaPrice: '৳2,500/session',
+       ctaLink: '/services/ai-coaching',
+       relatedGroups: ['job-seekers', 'freelancers', 'researchers'],
+       internalLinks: [
+         { text: 'See our student solutions', href: '/for/students' },
+         { text: 'Book Free AI Audit', href: '/free-ai-audit' },
+       ],
+     },
+     // Add 9 more placeholder posts — one per target group
+     // (job-seekers, freelancers, researchers, creators, agencies, sme-founders, f-commerce, consultants, corporates)
+   ];
+
+2. Create the Blog listing page:
+   Create src/pages/Blog.tsx — a grid/list of all blog posts
+   with filters by target group.
+
+3. Create the BlogPost detail page:
+   Create src/pages/BlogPost.tsx — renders a single article
+   with: hero image area, content, FAQ section with JSON-LD schema,
+   3 tiered CTAs, related articles, social share buttons.
+
+4. Add FAQPage JSON-LD schema to each blog post page:
+   In BlogPost.tsx, add a useEffect that injects:
+   <script type="application/ld+json">
+   { "@context": "https://schema.org", "@type": "FAQPage", ... }
+   </script>
+
+5. Add Article JSON-LD schema too:
+   { "@context": "https://schema.org", "@type": "Article",
+     "headline": ..., "author": ..., "datePublished": ... }
+
+6. Add routes:
+   /blog → Blog.tsx (listing)
+   /blog/:slug → BlogPost.tsx (detail)
+
+7. Add "Blog" to the navigation menu (header + footer).
+
+8. Update sitemap.xml to include /blog and all /blog/:slug URLs.
+
+═══════════════════════════════════════════
+PHASE 3 — BUILD, VERIFY & DEPLOY
+═══════════════════════════════════════════
+
+1. Build:
+   cd ~/workspace/artifacts/sysmoai-website && npm run build
+
+2. Verify:
+   - Site loads without crash
+   - /blog page shows article cards
+   - /blog/ai-study-system-students-2026 loads
+   - FAQ schema appears in page source
+   - Navigation has "Blog" link
+   - Sitemap includes blog URLs
+
+3. Commit:
+   git add -A
+   git commit -m "fix: server crash + feat: blog system with data structure, listing, detail, FAQ schema, Article schema"
+   git push origin main
+
+REPORT:
+- Server crash cause: [describe]
+- Server crash fix: [describe]  
+- Blog pages created: [N]
+- Routes added: /blog, /blog/:slug
+- Schemas added: FAQPage + Article
+- Build: exit 0 ✅ or ❌

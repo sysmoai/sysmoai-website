@@ -18,6 +18,7 @@ const Services = lazy(() => import("@/pages/Services"));
 const About = lazy(() => import("@/pages/About"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const Blog = lazy(() => import("@/pages/Blog"));
+const BlogPost = lazy(() => import("@/pages/BlogPost"));
 const Pricing = lazy(() => import("@/pages/Pricing"));
 const Proof = lazy(() => import("@/pages/Proof"));
 const FAQ = lazy(() => import("@/pages/FAQ"));
@@ -145,6 +146,7 @@ function Router() {
             <Route path="/results" component={Proof} />
             <Route path="/faq" component={FAQ} />
             <Route path="/blog" component={Blog} />
+            <Route path="/blog/:slug" component={BlogPost} />
             <Route path="/contact" component={Contact} />
             <Route path="/free-ai-audit" component={FreeAudit} />
             <Route path="/privacy-policy" component={PrivacyPolicy} />
