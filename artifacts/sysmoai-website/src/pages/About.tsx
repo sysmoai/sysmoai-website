@@ -58,13 +58,13 @@ const principles = [
     icon: '🔨',
     title: 'We Build, Not Consult',
     desc: 'You get a working, deployed AI system — not a strategy document or slide deck. We measure success by what runs, not what\'s recommended.',
-    link: '/services'
+    link: '/services/ai-quick-win'
   },
   {
     icon: '✅',
     title: 'Results First',
     desc: 'We don\'t get paid until your system delivers ROI. If the stated goal isn\'t met on a Quick Win, we rebuild it at no extra charge.',
-    link: '/proof'
+    link: '/results'
   },
   {
     icon: '🎯',
@@ -82,7 +82,7 @@ const principles = [
     icon: '🌍',
     title: 'Global Standards',
     desc: <>Top 5% prompt engineering. International AI best practices. Our quality benchmark is global — not the local average. Clients in US, UK, Canada trust our <InlineLink href="/services/international">international services</InlineLink>.</>,
-    link: '/services/international'
+    link: '/pricing'
   },
 ];
 
@@ -95,11 +95,11 @@ const stats = [
 
 const skillTags = [
   { label: 'AI Systems Architecture', href: '/services/ai-sprint' },
-  { label: 'Prompt Engineering', href: '/proof' },
+  { label: 'Prompt Engineering', href: '/free-ai-audit' },
   { label: 'Notion OS', href: '/services/notion-os' },
   { label: 'n8n Automation', href: '/services/n8n-automation' },
   { label: 'AI Agent Design', href: '/services/ai-agent-dev' },
-  { label: '500+ Projects', href: '/proof' },
+  { label: '500+ Projects', href: '/results' },
   { label: 'SEO Expert', href: '/services' },
   { label: 'AI Coaching', href: '/services/ai-coaching' },
 ];
@@ -173,7 +173,7 @@ export default function About() {
             className="text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto mb-8"
           >
             After 3 years of building his own AI operating system and delivering{' '}
-            <a href="/proof" className="text-blue-400 hover:text-blue-300 underline decoration-blue-600 transition-colors">500+ projects</a>,
+            <a href="/results" className="text-blue-400 hover:text-blue-300 underline decoration-blue-600 transition-colors">500+ projects</a>,
             Emon Hossain created SYSmoAI — so founders, agencies and freelancers in Bangladesh and{' '}
             <a href="/services/international" className="text-blue-400 hover:text-blue-300 underline decoration-blue-600 transition-colors">worldwide</a>{' '}
             can achieve the same freedom.
@@ -224,7 +224,7 @@ export default function About() {
                 <div className="mb-4">
                   <h2 className="text-2xl font-bold text-slate-900">Emon Hossain</h2>
                   <p className="text-blue-600 font-semibold">
-                    Founder & CEO · AI Systems Architect · <a href="/proof" className="hover:text-blue-800 underline decoration-blue-300 transition-colors">Top 5% Prompt Engineer</a>
+                    Founder & CEO · AI Systems Architect · <a href="/results" className="hover:text-blue-800 underline decoration-blue-300 transition-colors">Top 5% Prompt Engineer</a>
                   </p>
                 </div>
 
@@ -348,7 +348,7 @@ export default function About() {
               <motion.div key={i} variants={fadeUp} className="bg-slate-800 border border-slate-700 p-6 rounded-2xl">
                 <div className="text-3xl font-bold text-blue-400 mb-2">{s.value}</div>
                 <div className="text-slate-400 text-sm">{s.label}</div>
-                <a href="/proof" className="text-blue-500 text-xs font-semibold hover:underline mt-2 inline-block">
+                <a href="/results" className="text-blue-500 text-xs font-semibold hover:underline mt-2 inline-block">
                   See case studies →
                 </a>
               </motion.div>

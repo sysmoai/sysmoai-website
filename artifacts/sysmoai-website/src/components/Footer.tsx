@@ -139,7 +139,7 @@ export function Footer() {
             <h3 className="text-sm font-bold uppercase tracking-[0.12em] pt-2" style={{ color: headingColor }}>Resources</h3>
             <ul className="space-y-2 text-sm">
               {[
-                { href: '/proof',   label: 'Case Studies' },
+                { href: '/results', label: 'Case Studies' },
                 { href: '/blog',    label: 'Blog'         },
                 { href: '/faq',     label: 'FAQ'          },
                 { href: '/pricing', label: 'Pricing'      },
