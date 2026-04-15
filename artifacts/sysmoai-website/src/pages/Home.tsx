@@ -701,7 +701,8 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Active panel */}
+          {/* Active panel — min-h prevents CLS when switching tabs */}
+          <div className="min-h-[320px] md:min-h-[260px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeAudience}
@@ -736,6 +737,7 @@ export default function Home() {
               </div>
             </motion.div>
           </AnimatePresence>
+          </div>
         </div>
       </section>
 

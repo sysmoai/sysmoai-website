@@ -1,0 +1,157 @@
+STEP 2: PERFORMANCE OPTIMIZATION for sysmoai.com
+Target: Lighthouse 95+ on all 4 categories.
+Source code at: ~/workspace/artifacts/sysmoai-website/
+
+Do everything in order. Report after each phase.
+
+════════════════════════════════════════
+PHASE 1 — AUDIT CURRENT PERFORMANCE
+════════════════════════════════════════
+
+1. Check current bundle size:
+   cd ~/workspace/artifacts/sysmoai-website && npm run build 2>&1 | tail -30
+
+2. Find the largest files in the build output:
+   find dist -name "*.js" -exec ls -lhS {} \; | head -10
+   find dist -name "*.css" -exec ls -lhS {} \; | head -10
+
+3. Check if images are optimized:
+   find public -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" | xargs ls -lhS 2>/dev/null | head -10
+
+Report: bundle sizes, largest files, image sizes.
+
+════════════════════════════════════════
+PHASE 2 — IMAGE OPTIMIZATION
+════════════════════════════════════════
+
+1. Convert large PNG/JPG images to WebP format where possible.
+   For each large image (>100KB):
+   - Keep the original as fallback
+   - Create a WebP version
+   
+   If sharp or imagemin is not available, skip conversion but ensure
+   images are reasonably sized (<200KB for photos, <50KB for icons).
+
+2. Add width and height attributes to all <img> tags to prevent
+   Cumulative Layout Shift (CLS):
+   
+   grep -rn "<img\|<LazyImage" src/ --include="*.tsx" | grep -v "width" | head -10
+   
+   For each image without explicit dimensions, add width and height.
+
+3. Ensure lazy loading is on all below-fold images:
+   grep -rn "loading=" src/ --include="*.tsx" | head -10
+   
+   If any images above the fold have loading="lazy", remove it
+   (above-fold images should load eagerly).
+   If below-fold images don't have loading="lazy", add it.
+
+Report: images optimized, dimensions added, lazy loading configured.
+
+════════════════════════════════════════
+PHASE 3 — CSS/JS OPTIMIZATION
+════════════════════════════════════════
+
+1. Check if code splitting is configured:
+   grep -rn "React.lazy\|lazy(" src/ --include="*.tsx" | head -10
+
+2. Add route-based code splitting for pages NOT needed on first load.
+   In the router/App component, lazy-load pages:
+   
+   const About = React.lazy(() => import('./pages/About'));
+   const Services = React.lazy(() => import('./pages/Services'));
+   const Pricing = React.lazy(() => import('./pages/Pricing'));
+   const Contact = React.lazy(() => import('./pages/Contact'));
+   const Results = React.lazy(() => import('./pages/Results'));
+   const FreeAiAudit = React.lazy(() => import('./pages/FreeAiAudit'));
+   
+   Wrap routes in <Suspense fallback={<div className="min-h-screen bg-[#0A0B0F]" />}>
+   
+   Keep Home page as eager import (it's the landing page).
+
+3. Check for unused CSS:
+   Look for any large CSS files or unused Tailwind classes.
+   If using Tailwind, ensure purge/content config covers all tsx files:
+   
+   grep -rn "content:" tailwind.config* | head -5
+
+4. Add font-display: swap for any custom fonts:
+   grep -rn "font-face\|@import.*font" src/ public/ --include="*.css" --include="*.html" | head -5
+   
+   Ensure all @font-face declarations have font-display: swap;
+
+Report: code splitting added? CSS purged? Fonts optimized?
+
+════════════════════════════════════════
+PHASE 4 — PRECONNECT + RESOURCE HINTS
+════════════════════════════════════════
+
+1. Find the index.html:
+   cat ~/workspace/artifacts/sysmoai-website/index.html | head -20
+
+2. Add preconnect hints for external resources:
+   Add these in <head> BEFORE any external resource loads:
+   
+   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link rel="preconnect" href="https://wa.me" />
+   
+   (Only add for domains actually used — check which external domains exist)
+
+3. Add dns-prefetch as fallback:
+   <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+   <link rel="dns-prefetch" href="https://wa.me" />
+
+4. If there's a hero image, add preload for it:
+   <link rel="preload" as="image" href="/path-to-hero-image" />
+
+Report: preconnects added for which domains?
+
+════════════════════════════════════════
+PHASE 5 — PREVENT LAYOUT SHIFT (CLS)
+════════════════════════════════════════
+
+1. The "BEFORE AI" / "WITH SYSMOAI" comparison at the top of homepage
+   may cause layout shift as animations load. Ensure the container
+   has explicit min-height:
+   
+   Find the hero/comparison section in Home.tsx and add:
+   min-height on the container so content doesn't jump.
+
+2. The currency toggle (BDT/USD) on pricing may cause layout shift
+   when switching. Ensure both states have the same container height.
+
+3. The "Who We Help" tabs section — ensure tab content container
+   has min-height so switching tabs doesn't shift layout.
+
+4. Cookie consent banner — ensure it's positioned fixed/sticky
+   so it doesn't push content.
+
+Report: CLS fixes applied to which sections?
+
+════════════════════════════════════════
+PHASE 6 — BUILD + VERIFY
+════════════════════════════════════════
+
+1. Build:
+   cd ~/workspace/artifacts/sysmoai-website && npm run build
+
+2. Check final bundle sizes:
+   find dist -name "*.js" -exec ls -lhS {} \; | head -5
+   find dist -name "*.css" -exec ls -lhS {} \; | head -5
+
+3. Compare before vs after:
+   Report the improvement in total JS + CSS size.
+
+4. Commit:
+   git add -A
+   git commit -m "perf: Step 2 — Performance optimization — code splitting, image optimization, preconnects, CLS fixes, font-display swap"
+   git push origin main
+
+REPORT:
+PHASE 1 - Baseline: JS [X]KB, CSS [X]KB, largest image [X]KB
+PHASE 2 - Images: [N] optimized, dimensions added, lazy loading configured
+PHASE 3 - Code splitting: [N] routes lazy loaded, CSS purged, fonts optimized
+PHASE 4 - Preconnects: [N] domains
+PHASE 5 - CLS: [N] sections fixed
+PHASE 6 - Final: JS [X]KB, CSS [X]KB, improvement [X]%

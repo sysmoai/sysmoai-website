@@ -155,7 +155,7 @@ export default function Pricing() {
                   <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${s.featured ? 'bg-white/20 text-white' : 'bg-blue-50 text-blue-600'}`}>{s.tag}</span>
                 </div>
                 <h3 className={`text-lg font-bold mb-2 ${s.featured ? 'text-white' : 'text-slate-900'}`}>{s.title}</h3>
-                <p className={`text-2xl font-bold mb-5 ${s.featured ? 'text-white' : 'text-blue-600'}`}>
+                <p className={`text-2xl font-bold mb-5 min-h-[2rem] ${s.featured ? 'text-white' : 'text-blue-600'}`}>
                   {showUSD ? s.usd : s.bd}
                 </p>
                 <ul className="space-y-2.5 flex-1 mb-6">
