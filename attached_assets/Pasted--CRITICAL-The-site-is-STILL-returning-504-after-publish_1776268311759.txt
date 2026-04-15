@@ -1,0 +1,69 @@
+🚨 CRITICAL: The site is STILL returning 504 after publish.
+
+ROOT CAUSE: The deployment is set to "Autoscale" but there is NO server 
+process. The artifact uses serve = "static" but the deployment type in 
+Replit expects a running process.
+
+FIX — Pick ONE of these two options:
+
+OPTION A (RECOMMENDED — simplest fix):
+==========================================
+Create a minimal server to satisfy Autoscale deployment.
+
+1. Run: npm install express
+
+2. Create server.js in the project root (same level as package.json):
+
+const express = require('express');
+const path = require('path');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(express.static(path.join(__dirname, 'dist', 'public'), {
+  maxAge: '1h'
+}));
+
+app.use('/assets', express.static(path.join(__dirname, 'dist', 'public', 'assets'), {
+  maxAge: '1y',
+  immutable: true
+}));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'public', 'index.html'));
+});
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log('SYSmoAI server running on port ' + PORT);
+});
+
+IMPORTANT: Check where index.html actually is! Run these commands:
+  find dist -name "index.html" -type f
+  ls -la dist/
+  ls -la dist/public/ 2>/dev/null || echo "no dist/public"
+
+If index.html is at dist/index.html (not dist/public/index.html), 
+then change ALL occurrences of 'dist', 'public' to just 'dist' in server.js:
+  path.join(__dirname, 'dist')  instead of  path.join(__dirname, 'dist', 'public')
+
+3. Add to package.json scripts:
+   "start": "node server.js"
+
+4. Make sure .replit has:
+[deployment]
+build = ["sh", "-c", "npm run build"]
+run = ["sh", "-c", "node server.js"]
+
+5. Test:
+   - Run: npm run build
+   - Run: node server.js
+   - Open webview — site should load
+   - Test /about and /services routes
+
+6. VERIFY the exact path:
+   - Run: node -e "const p=require('path'); const fs=require('fs'); const check=['dist/public/index.html','dist/index.html']; check.forEach(f => console.log(f, fs.existsSync(f)));"
+   - This tells us EXACTLY where index.html is
+
+Report:
+- Where is index.html? (exact path)
+- Does node server.js work? Yes/No
+- Does the site load in webview? Yes/No
