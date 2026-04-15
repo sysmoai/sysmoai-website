@@ -39,7 +39,7 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - `/pricing` — BDT/USD toggle pricing grid (all 9 services)
 - `/proof` — Case studies + testimonials
 - `/faq` — FAQ accordion (12 questions)
-- `/blog` — Blog index with seed posts
+- `/blog` — Blog index (50 articles, filterable by 10 audience groups)
 - `/contact` — Contact form (react-hook-form + zod) + WhatsApp CTA
 
 **Service pages** (`/services/`)
@@ -64,8 +64,17 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - `ServicePageTemplate.tsx` — Used by all 9 service pages (hero, deliverables, Before/After, steps, FAQ, related)
 - `AudiencePageTemplate.tsx` — Used by all 10 audience pages (pain points, Before/After, solutions, FAQ)
 
+### Blog System
+- **Data**: `src/data/blogPosts.ts` — 50 articles total
+- **Structure**: 10 target groups × 5 article types = 50 articles
+  - Groups: students, job-seekers, freelancers, researchers, creators, agencies, sme-founders, f-commerce, consultants, corporates
+  - Types: wake-up-call, system-reveal, transformation, free-value, future-shock
+- **Exports**: `blogPosts`, `getBlogPost(slug)`, `getBlogPostsByGroup(group)`, `groupLabels`, `articleTypeLabels`
+- **Filtering**: Blog.tsx uses URL query param `?group=<slug>` for group-based filtering
+- **Individual pages**: `/blog/:slug` via BlogPost.tsx
+
 ### SEO
-- `public/sitemap.xml` — All 32 pages with priorities and changefreq
+- `public/sitemap.xml` — 82 URLs (all 50 blog posts + core pages + service/audience pages)
 - `public/robots.txt` — Allow all, Sitemap directive
 - Every page sets `document.title` via `useEffect`
 
