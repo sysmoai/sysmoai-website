@@ -24,11 +24,11 @@ gsap.registerPlugin(ScrollTrigger);
 ══════════════════════════════════════════ */
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
 const fadeIn = {
   hidden: { opacity: 0 },
-  show:   { opacity: 1, transition: { duration: 0.7, ease: 'easeOut' } },
+  show:   { opacity: 1, transition: { duration: 0.7, ease: 'easeOut' as const } },
 };
 const stagger = {
   hidden: {},
@@ -36,11 +36,11 @@ const stagger = {
 };
 const slideLeft = {
   hidden: { opacity: 0, x: -32 },
-  show:   { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+  show:   { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
 const slideRight = {
   hidden: { opacity: 0, x: 32 },
-  show:   { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+  show:   { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
 
 /* ══════════════════════════════════════════
@@ -347,7 +347,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: -18, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
             className="inline-flex items-center gap-2.5 border px-5 py-2 rounded-full mb-8 relative overflow-hidden"
             style={{
               background: isDark ? 'rgba(37,99,235,0.08)' : 'rgba(219,234,254,0.8)',
@@ -368,7 +368,7 @@ export default function Home() {
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
             className="text-5xl sm:text-6xl lg:text-[5rem] font-bold tracking-[-0.032em] leading-[1.04] mb-6"
             style={{ fontFamily: "'Space Grotesk', sans-serif", color: isDark ? '#F1F5F9' : '#0A0B0F' }}
           >
@@ -760,7 +760,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
               className="grid grid-cols-1 md:grid-cols-2 gap-6"
             >
               {/* Problems */}
@@ -938,7 +938,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.6, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.6, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                 className="gsap-scale relative rounded-2xl p-7 glow-card"
                 style={{
                   background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(255,255,255,0.9)',

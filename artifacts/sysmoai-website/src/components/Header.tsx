@@ -44,13 +44,13 @@ const businessCol = [
 
 const panelAnim = {
   hidden:  { opacity: 0, y: -8, scale: 0.97 },
-  visible: { opacity: 1, y: 0,  scale: 1, transition: { duration: 0.2, ease: [0.16, 1, 0.3, 1] } },
-  exit:    { opacity: 0, y: -5, scale: 0.97, transition: { duration: 0.12, ease: 'easeIn' } },
+  visible: { opacity: 1, y: 0,  scale: 1, transition: { duration: 0.2, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
+  exit:    { opacity: 0, y: -5, scale: 0.97, transition: { duration: 0.12, ease: 'easeIn' as const } },
 };
 
 function useDropdown() {
   const [open, setOpen] = useState(false);
-  const timer = useRef<ReturnType<typeof setTimeout>>();
+  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const open_  = () => { clearTimeout(timer.current); setOpen(true); };
   const close_ = () => { timer.current = setTimeout(() => setOpen(false), 100); };
   useEffect(() => () => clearTimeout(timer.current), []);
@@ -365,7 +365,7 @@ export function Header() {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
             className="md:hidden fixed inset-x-0 top-[60px] bottom-0 z-50 overflow-y-auto"
             style={{ background: isDark ? '#0A0B0F' : '#FAFBFF' }}
           >
