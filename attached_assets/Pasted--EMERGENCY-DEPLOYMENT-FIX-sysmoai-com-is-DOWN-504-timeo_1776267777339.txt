@@ -1,0 +1,154 @@
+🚨 EMERGENCY DEPLOYMENT FIX — sysmoai.com is DOWN (504 timeout)
+
+ROOT CAUSE: The app is deployed as Autoscale but there is no production 
+server. Vite dev server only runs in development. In production (Autoscale),
+we need an Express server to serve the built static files.
+
+DO THESE STEPS IN EXACT ORDER. DO NOT SKIP ANY STEP.
+
+════════════════════════════════════════
+STEP 1: Install Express
+════════════════════════════════════════
+
+Run this command:
+npm install express compression
+
+════════════════════════════════════════
+STEP 2: Create Production Server
+════════════════════════════════════════
+
+Create a new file called server.js in the PROJECT ROOT 
+(same level as package.json, NOT inside src/):
+
+const express = require('express');
+const compression = require('compression');
+const path = require('path');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Enable gzip compression for all responses
+app.use(compression());
+
+// Security headers
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
+
+// Cache static assets aggressively (JS, CSS, images)
+app.use('/assets', express.static(path.join(__dirname, 'dist', 'assets'), {
+  maxAge: '1y',
+  immutable: true
+}));
+
+// Cache images
+app.use('/images', express.static(path.join(__dirname, 'dist', 'images'), {
+  maxAge: '30d'
+}));
+
+// Serve other static files with short cache
+app.use(express.static(path.join(__dirname, 'dist'), {
+  maxAge: '1h',
+  index: false
+}));
+
+// SPA fallback — ALL routes serve index.html
+// This is critical for React Router to work on /about, /services, /blog, etc.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ SYSmoAI production server running on port ${PORT}`);
+  console.log(`📁 Serving from: ${path.join(__dirname, 'dist')}`);
+});
+
+════════════════════════════════════════
+STEP 3: Update package.json Scripts
+════════════════════════════════════════
+
+Update the "scripts" section in package.json to include:
+
+"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "start": "node server.js",
+  "preview": "vite preview"
+}
+
+IMPORTANT: "start" must be "node server.js" — this is what 
+Autoscale runs in production.
+
+════════════════════════════════════════
+STEP 4: Update .replit Configuration
+════════════════════════════════════════
+
+Update the .replit file to have these deployment settings:
+
+[deployment]
+deploymentTarget = "autoscale"
+build = ["sh", "-c", "npm run build"]
+run = ["sh", "-c", "npm start"]
+
+This tells Replit:
+1. Build: run "npm run build" (creates dist/ folder)
+2. Run: run "npm start" (starts Express server)
+
+════════════════════════════════════════
+STEP 5: Build and Test Locally
+════════════════════════════════════════
+
+1. Run: npm run build
+2. Verify dist/index.html exists
+3. Verify dist/assets/ folder has JS and CSS files
+4. Run: npm start
+5. The server should say "SYSmoAI production server running on port XXXX"
+6. Open the webview — the site should load completely
+7. Test these routes in the browser:
+   - / (homepage)
+   - /about
+   - /services
+   - /contact
+   - /pricing
+   All should work (React Router handles them)
+
+════════════════════════════════════════
+STEP 6: Verify Build Output
+════════════════════════════════════════
+
+Run: ls -la dist/
+Run: ls -la dist/assets/
+
+Confirm:
+- dist/index.html exists (should be ~5-20 KB)
+- dist/assets/ has .js and .css files
+- No build errors in terminal
+
+════════════════════════════════════════
+IMPORTANT NOTES
+════════════════════════════════════════
+
+- Do NOT change vite.config.ts — it's already correct for dev
+- Do NOT change any React components
+- Do NOT change the port — use process.env.PORT
+- The Express server ONLY runs in production (deployment)
+- In development, Vite dev server still runs as normal
+- server.js must be in PROJECT ROOT, not in src/
+
+════════════════════════════════════════
+AFTER COMPLETING ALL STEPS, REPORT:
+════════════════════════════════════════
+
+1. server.js created? Yes/No
+2. package.json updated? Yes/No  
+3. .replit updated? Yes/No
+4. npm run build successful? Yes/No
+5. npm start works? Yes/No
+6. Site loads in webview? Yes/No
+7. Routes /about, /services work? Yes/No
+
+Then I will click Republish to deploy.
