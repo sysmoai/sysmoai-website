@@ -1,15 +1,57 @@
 import React from 'react';
 
+// SYSmoAI® Official Logo Mark — Brand Identity v2.0
+// 3 concentric hexagonal layers:
+//   Layer 1 (outer):  Infrastructure foundation   #1E3A8A / #2563EB
+//   Layer 2 (mid):    System orchestration         #2563EB / #3B82F6
+//   Layer 3 (core):   AI intelligence engine       #3B82F6 / #60A5FA
+// Geometry: viewBox 100×100, optically centered at (50,50), 0.78× scale ratio
+
+type LogoVariant = 'brand-dark' | 'brand-light' | 'mono-white' | 'mono-black';
+
 interface LogoProps {
   size?: number;
+  variant?: LogoVariant;
   className?: string;
   animated?: boolean;
-  withBg?: boolean;
 }
 
-export function SYSmoAILogo({ size = 40, className = '', animated = false, withBg = true }: LogoProps) {
-  const sw = size <= 28 ? 3 : size <= 52 ? 2.5 : 2;
-  const id = `glow-${Math.round(size)}`;
+const PATHS = {
+  layer1: 'M25 34 L50 24 L75 34 L75 54 L50 64 L25 54 Z',
+  layer2: 'M30 49 L50 40 L70 49 L70 64 L50 73 L30 64 Z',
+  layer3: 'M40 61 L50 56 L60 61 L60 71 L50 76 L40 71 Z',
+};
+
+const STYLES: Record<LogoVariant, {
+  l1Fill: string; l1FillOp: number; l1Stroke: string; l1StrokeOp: number;
+  l2Fill: string; l2FillOp: number; l2Stroke: string; l2StrokeOp: number;
+  l3Fill: string; l3FillOp: number; l3Stroke: string; l3StrokeOp: number;
+}> = {
+  'brand-dark': {
+    l1Fill: '#1E3A8A', l1FillOp: 0.30, l1Stroke: '#2563EB', l1StrokeOp: 0.60,
+    l2Fill: '#2563EB', l2FillOp: 0.50, l2Stroke: '#3B82F6', l2StrokeOp: 0.80,
+    l3Fill: '#3B82F6', l3FillOp: 1.00, l3Stroke: '#60A5FA', l3StrokeOp: 1.00,
+  },
+  'brand-light': {
+    l1Fill: '#1E3A8A', l1FillOp: 0.08, l1Stroke: '#1E40AF', l1StrokeOp: 0.35,
+    l2Fill: '#2563EB', l2FillOp: 0.15, l2Stroke: '#2563EB', l2StrokeOp: 0.55,
+    l3Fill: '#1E3A8A', l3FillOp: 0.85, l3Stroke: '#1E3A8A', l3StrokeOp: 1.00,
+  },
+  'mono-white': {
+    l1Fill: '#FFFFFF', l1FillOp: 0.12, l1Stroke: '#FFFFFF', l1StrokeOp: 0.50,
+    l2Fill: '#FFFFFF', l2FillOp: 0.30, l2Stroke: '#FFFFFF', l2StrokeOp: 0.70,
+    l3Fill: '#FFFFFF', l3FillOp: 1.00, l3Stroke: '#FFFFFF', l3StrokeOp: 1.00,
+  },
+  'mono-black': {
+    l1Fill: '#000000', l1FillOp: 0.08, l1Stroke: '#000000', l1StrokeOp: 0.40,
+    l2Fill: '#000000', l2FillOp: 0.20, l2Stroke: '#000000', l2StrokeOp: 0.60,
+    l3Fill: '#000000', l3FillOp: 0.90, l3Stroke: '#000000', l3StrokeOp: 1.00,
+  },
+};
+
+export function SYSmoAILogo({ size = 40, variant = 'brand-dark', className = '', animated = false }: LogoProps) {
+  const s = STYLES[variant];
+  const sw = size <= 32 ? 3 : size <= 64 ? 2.5 : 2;
 
   return (
     <svg
@@ -21,61 +63,24 @@ export function SYSmoAILogo({ size = 40, className = '', animated = false, withB
       className={`${animated ? 'transition-transform duration-300 hover:scale-110' : ''} ${className}`}
       data-testid="logo-sysmoai"
     >
-      <defs>
-        <filter id={id} x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-        <radialGradient id={`bg-${id}`} cx="50%" cy="40%" r="60%">
-          <stop offset="0%" stopColor="#1a2f6e" stopOpacity="0.6" />
-          <stop offset="100%" stopColor="#0A0B0F" stopOpacity="1" />
-        </radialGradient>
-      </defs>
-
-      {/* Dark rounded-square background — always present (matches official logo) */}
-      {withBg && (
-        <rect width="100" height="100" rx="20" fill={`url(#bg-${id})`} />
-      )}
-      {withBg && (
-        <rect width="100" height="100" rx="20" fill="none"
-          stroke="#2563EB" strokeOpacity="0.18" strokeWidth="1.5" />
-      )}
-
-      {/* Back hexagon — dark navy, blue border, fills upper portion */}
       <path
-        d="M50 17 L78 33 L78 59 L50 75 L22 59 L22 33 Z"
-        fill="#0D1B52"
-        fillOpacity="0.95"
-        stroke="#2563EB"
-        strokeOpacity="0.75"
-        strokeWidth={sw}
-        strokeLinejoin="round"
+        d={PATHS.layer1}
+        fill={s.l1Fill} fillOpacity={s.l1FillOp}
+        stroke={s.l1Stroke} strokeOpacity={s.l1StrokeOp}
+        strokeWidth={sw} strokeLinejoin="round"
       />
-
-      {/* Front hexagon — solid bright blue, positioned lower to create 3D depth */}
       <path
-        d="M50 43 L69 54 L69 75 L50 86 L31 75 L31 54 Z"
-        fill="#2563EB"
-        fillOpacity="0.95"
-        stroke="#60A5FA"
-        strokeOpacity="0.55"
-        strokeWidth={sw * 0.85}
-        strokeLinejoin="round"
+        d={PATHS.layer2}
+        fill={s.l2Fill} fillOpacity={s.l2FillOp}
+        stroke={s.l2Stroke} strokeOpacity={s.l2StrokeOp}
+        strokeWidth={sw} strokeLinejoin="round"
       />
-
-      {/* Inner highlight on front hexagon — subtle shine */}
       <path
-        d="M50 43 L69 54 L50 65 L31 54 Z"
-        fill="#3B82F6"
-        fillOpacity="0.45"
+        d={PATHS.layer3}
+        fill={s.l3Fill} fillOpacity={s.l3FillOp}
+        stroke={s.l3Stroke} strokeOpacity={s.l3StrokeOp}
+        strokeWidth={sw} strokeLinejoin="round"
       />
-
-      {/* Glowing dot — top-right corner accent (matches official logo) */}
-      <circle cx="82" cy="17" r="4.5" fill="#60A5FA" filter={`url(#${id})`} />
-      <circle cx="82" cy="17" r="2.5" fill="#BFDBFE" />
     </svg>
   );
 }

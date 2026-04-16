@@ -55,18 +55,19 @@ export function Footer() {
           {/* Column 1 — Brand */}
           <div className="space-y-4 sm:col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2.5">
-              <SYSmoAILogo size={32} />
+              <SYSmoAILogo size={32} variant={isDark ? 'brand-dark' : 'brand-light'} />
               <span style={{
                 fontSize: 18,
-                fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+                fontFamily: "'Inter', 'SF Pro Display', -apple-system, system-ui, sans-serif",
+                fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
                 color: isDark ? '#FFFFFF' : '#0A0B0F',
                 letterSpacing: '-0.02em',
                 display: 'inline-flex',
                 alignItems: 'baseline',
               }}>
-                <span style={{ fontWeight: 700 }}>SYS</span>
-                <span style={{ fontWeight: 500, color: '#2563EB' }}>mo</span>
-                <span style={{ fontWeight: 700 }}>AI</span>
+                <span style={{ fontWeight: 700, letterSpacing: '-0.02em' }}>SYS</span>
+                <span style={{ fontWeight: 400, letterSpacing: '-0.04em', opacity: 0.65 }}>mo</span>
+                <span style={{ fontWeight: 700, letterSpacing: '0.02em' }}>AI</span>
               </span>
             </Link>
             <p className="text-sm leading-relaxed" style={{ color: textColor }}>

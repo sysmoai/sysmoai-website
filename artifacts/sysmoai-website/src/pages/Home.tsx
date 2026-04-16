@@ -1708,11 +1708,16 @@ export default function Home() {
           </div>
 
           <div className="flex items-center justify-center gap-3 mb-4">
-            <SYSmoAILogo size={32} animated />
-            <span className="text-xl font-bold tracking-[-0.02em]" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F', fontFamily: "'Space Grotesk', sans-serif" }}>
-              <span className="font-bold">SYS</span>
-              <span className="font-medium" style={{ color: '#2563EB' }}>mo</span>
-              <span className="font-bold">AI</span>
+            <SYSmoAILogo size={32} variant={isDark ? 'brand-dark' : 'brand-light'} animated />
+            <span style={{
+              fontSize: 20, display: 'inline-flex', alignItems: 'baseline', whiteSpace: 'nowrap',
+              fontFamily: "'Inter', 'SF Pro Display', -apple-system, system-ui, sans-serif",
+              fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
+              color: isDark ? '#F1F5F9' : '#0A0B0F', letterSpacing: '-0.02em', lineHeight: 1,
+            }}>
+              <span style={{ fontWeight: 700, letterSpacing: '-0.02em' }}>SYS</span>
+              <span style={{ fontWeight: 400, letterSpacing: '-0.04em', opacity: 0.65 }}>mo</span>
+              <span style={{ fontWeight: 700, letterSpacing: '0.02em' }}>AI</span>
             </span>
           </div>
           <p className="text-sm italic mb-6" style={{ color: isDark ? '#475569' : '#94A3B8', fontFamily: "'Space Grotesk', sans-serif" }}>
