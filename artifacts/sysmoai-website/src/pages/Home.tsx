@@ -401,7 +401,7 @@ export default function Home() {
               WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,0.55) 0%, transparent 100%)',
             }}>
               <LazyImage
-                src="/images/hero-chaos-before.png"
+                src="/images/hero-chaos-before.webp"
                 alt="Entrepreneur overwhelmed without AI systems"
                 className="w-full h-full brand-photo-chaos"
                 priority
@@ -423,7 +423,7 @@ export default function Home() {
               WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,0.55) 0%, transparent 100%)',
             }}>
               <LazyImage
-                src="/images/hero-success-after.png"
+                src="/images/hero-success-after.webp"
                 alt="Professional thriving with AI systems"
                 className="w-full h-full brand-photo-success"
                 priority
@@ -751,7 +751,7 @@ export default function Home() {
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={slideRight}
               className="relative rounded-3xl overflow-hidden order-1 lg:order-2" style={{ height: 380 }}>
               <LazyImage
-                src="/images/solution-ai-life.png"
+                src="/images/solution-ai-life.webp"
                 alt="Entrepreneur thriving with AI automation"
                 className="w-full h-full brand-photo-success"
                 objectFit="cover"
@@ -1513,7 +1513,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                img: '/images/notion-os-dashboard.png',
+                img: '/images/notion-os-dashboard.webp',
                 accentColor: '#2563EB',
                 tag: 'Notion AI OS',
                 tagSub: 'Business Command Center',
@@ -1524,7 +1524,7 @@ export default function Home() {
                 gradient: 'linear-gradient(135deg, rgba(37,99,235,0.85) 0%, rgba(30,64,175,0.9) 100%)',
               },
               {
-                img: '/images/n8n-automation-flow.png',
+                img: '/images/n8n-automation-flow.webp',
                 accentColor: '#10B981',
                 tag: 'n8n Automation',
                 tagSub: 'Workflows That Never Sleep',
@@ -1535,7 +1535,7 @@ export default function Home() {
                 gradient: 'linear-gradient(135deg, rgba(5,150,105,0.85) 0%, rgba(13,148,136,0.9) 100%)',
               },
               {
-                img: '/images/ai-agents-network.png',
+                img: '/images/ai-agents-network.webp',
                 accentColor: '#8B5CF6',
                 tag: 'Custom AI Agents',
                 tagSub: 'Working 24/7 For You',

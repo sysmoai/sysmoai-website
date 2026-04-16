@@ -29,13 +29,11 @@ export function LazyImage({
     if (priority || inView) return;
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setInView(true); observer.disconnect(); } },
-      { rootMargin: '200px' }
+      { rootMargin: '300px' }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [priority, inView]);
-
-  const tinyBlur = `${src.split('?')[0]}?w=20&q=10&blur=5`;
 
   return (
     <div
@@ -43,32 +41,25 @@ export function LazyImage({
       className={`relative overflow-hidden ${className}`}
       style={{ width, height, ...style }}
     >
-      {/* Blur-up placeholder */}
-      <img
-        src={tinyBlur}
-        aria-hidden
-        alt=""
-        className="absolute inset-0 w-full h-full transition-opacity duration-500"
-        style={{
-          objectFit,
-          filter: 'blur(12px) saturate(1.1)',
-          transform: 'scale(1.05)',
-          opacity: loaded ? 0 : 1,
-        }}
-      />
+      {/* Skeleton shimmer shown before image loads */}
+      {!loaded && (
+        <div
+          aria-hidden
+          className="absolute inset-0 animate-shimmer"
+          style={{ background: 'rgba(255,255,255,0.03)' }}
+        />
+      )}
       {/* Main image */}
       {inView && (
         <img
           src={src}
           alt={alt}
           loading={priority ? 'eager' : 'lazy'}
-          decoding="async"
+          decoding={priority ? 'sync' : 'async'}
+          fetchPriority={priority ? 'high' : 'auto'}
           onLoad={() => setLoaded(true)}
           className="absolute inset-0 w-full h-full transition-opacity duration-700"
-          style={{
-            objectFit,
-            opacity: loaded ? 1 : 0,
-          }}
+          style={{ objectFit, opacity: loaded ? 1 : 0 }}
         />
       )}
     </div>

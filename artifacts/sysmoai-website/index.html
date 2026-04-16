@@ -25,14 +25,17 @@
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-  <!-- Google Fonts: Space Grotesk + Inter -->
+  <!-- Preconnect for fonts only -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
   <link rel="dns-prefetch" href="https://wa.me" />
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-  <link rel="dns-prefetch" href="https://images.unsplash.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Preload critical hero images -->
+  <link rel="preload" as="image" href="/images/hero-chaos-before.webp" type="image/webp" />
+  <link rel="preload" as="image" href="/images/hero-success-after.webp" type="image/webp" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- JSON-LD Organization + LocalBusiness Schema -->
   <script type="application/ld+json">
@@ -96,9 +99,152 @@
       }
     })();
   </script>
+
+  <!-- Splash screen styles — inlined for zero-latency paint -->
+  <style>
+    #sysmoai-splash {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #0A0B0F;
+      pointer-events: none;
+      transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    #sysmoai-splash.fade-out {
+      opacity: 0;
+    }
+    .splash-glow {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(37,99,235,0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .splash-logo-wrap {
+      position: relative;
+      z-index: 1;
+      animation: splash-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+    @keyframes splash-pop {
+      from { opacity: 0; transform: scale(0.7); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .splash-ring {
+      position: absolute;
+      inset: -14px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(37,99,235,0.35);
+      animation: splash-spin 2.8s linear infinite;
+    }
+    .splash-ring::after {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      background: #3B82F6;
+      border-radius: 50%;
+      box-shadow: 0 0 10px 3px rgba(59,130,246,0.7);
+    }
+    @keyframes splash-spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .splash-wordmark {
+      margin-top: 20px;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #F1F5F9;
+      z-index: 1;
+      animation: splash-fade-up 0.55s 0.15s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+    .splash-wordmark span { color: #2563EB; }
+    .splash-tagline {
+      margin-top: 6px;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(148,163,184,0.7);
+      z-index: 1;
+      animation: splash-fade-up 0.55s 0.25s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+    .splash-bar-track {
+      margin-top: 36px;
+      width: 100px;
+      height: 2px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 99px;
+      overflow: hidden;
+      z-index: 1;
+      animation: splash-fade-up 0.55s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+    .splash-bar-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #2563EB, #60A5FA);
+      border-radius: 99px;
+      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @keyframes splash-fade-up {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
+  <!-- Instant splash screen — shows before any JS loads -->
+  <div id="sysmoai-splash" role="status" aria-label="Loading SYSmoAI">
+    <div class="splash-glow"></div>
+    <div class="splash-logo-wrap">
+      <div class="splash-ring"></div>
+      <!-- SYSmoAI hexagonal logo mark -->
+      <svg width="80" height="80" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;filter:drop-shadow(0 0 18px rgba(37,99,235,0.5))">
+        <rect width="180" height="180" rx="36" fill="#0A0B0F"/>
+        <path d="M45 61 L90 43 L135 61 L135 97 L90 115 L45 97 Z" fill="#1E3A8A" fill-opacity="0.35" stroke="#2563EB" stroke-opacity="0.65" stroke-width="4.5" stroke-linejoin="round"/>
+        <path d="M54 88 L90 72 L126 88 L126 115 L90 131 L54 115 Z" fill="#2563EB" fill-opacity="0.55" stroke="#3B82F6" stroke-opacity="0.85" stroke-width="4.5" stroke-linejoin="round"/>
+        <path d="M72 110 L90 101 L108 110 L108 128 L90 137 L72 128 Z" fill="#3B82F6" stroke="#93C5FD" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="90" cy="79" r="6" fill="#60A5FA" opacity="0.9"/>
+      </svg>
+    </div>
+    <div class="splash-wordmark">SYS<span>mo</span>AI</div>
+    <div class="splash-tagline">AI Systems · Bangladesh</div>
+    <div class="splash-bar-track">
+      <div class="splash-bar-fill" id="splash-bar-fill"></div>
+    </div>
+  </div>
+
   <div id="root"></div>
+
+  <script>
+    // Start loading bar immediately
+    requestAnimationFrame(function() {
+      setTimeout(function() {
+        var bar = document.getElementById('splash-bar-fill');
+        if (bar) bar.style.width = '100%';
+      }, 60);
+    });
+
+    // Dismiss splash on 'sysmoai-ready' event OR after max 2.2s
+    function dismissSplash() {
+      var el = document.getElementById('sysmoai-splash');
+      if (!el || el._dismissed) return;
+      el._dismissed = true;
+      el.classList.add('fade-out');
+      setTimeout(function() { if (el.parentNode) el.parentNode.removeChild(el); }, 480);
+    }
+    window.addEventListener('sysmoai-ready', dismissSplash);
+    setTimeout(dismissSplash, 2200);
+  </script>
+
   <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>
