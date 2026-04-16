@@ -16,6 +16,7 @@ import { WA_URLS } from '@/lib/whatsapp';
 import { useTheme } from '@/contexts/ThemeContext';
 import { SYSmoAILogo } from '@/components/SYSmoAILogo';
 import { LazyImage } from '@/components/LazyImage';
+import { BrandMarkConstruction } from '@/components/BrandMarkConstruction';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -1268,6 +1269,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ══════════════════════════════════════
+          BRAND MARK CONSTRUCTION
+      ══════════════════════════════════════ */}
+      <BrandMarkConstruction />
 
       {/* ══════════════════════════════════════
           SECTION 7 — RESULTS / PROOF
