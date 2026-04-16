@@ -1,0 +1,38 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "Gqr7FhoL0maLLM_RZiZRx"
+uri = "file://artifacts/sysmoai-website/public/images/solution-ai-life.png"
+type = "image"
+title = "ai powered success lifestyle"
+
+[[generated]]
+id = "WCN_Ekrg33h7p6vcq7wob"
+uri = "file://artifacts/sysmoai-website/public/images/notion-os-dashboard.png"
+type = "image"
+title = "notion os business dashboard dark"
+
+[[generated]]
+id = "9YDSESZVakakrFSp6JipO"
+uri = "file://artifacts/sysmoai-website/public/images/n8n-automation-flow.png"
+type = "image"
+title = "workflow automation flow visualization"
+
+[[generated]]
+id = "OjZUy4saU1TNoy-xkSDo5"
+uri = "file://artifacts/sysmoai-website/public/images/ai-agents-network.png"
+type = "image"
+title = "ai agents autonomous neural network"
+
+[[generated]]
+id = "vrVazkTuia6CvHz5p6gJ4"
+uri = "file://artifacts/sysmoai-website/public/images/hero-chaos-before.png"
+type = "image"
+title = "entrepreneur overwhelmed before ai"
+
+[[generated]]
+id = "lyGiZH4fXLvzcwRIFozTy"
+uri = "file://artifacts/sysmoai-website/public/images/hero-success-after.png"
+type = "image"
+title = "entrepreneur thriving with ai success"

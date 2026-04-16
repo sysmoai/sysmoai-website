@@ -401,8 +401,8 @@ export default function Home() {
               WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,0.55) 0%, transparent 100%)',
             }}>
               <LazyImage
-                src="https://images.unsplash.com/photo-1541614101331-1a5a3a194e92?w=800&q=75&auto=format"
-                alt="Person overwhelmed without AI"
+                src="/images/hero-chaos-before.png"
+                alt="Entrepreneur overwhelmed without AI systems"
                 className="w-full h-full brand-photo-chaos"
                 priority
                 objectFit="cover"
@@ -423,7 +423,7 @@ export default function Home() {
               WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,0.55) 0%, transparent 100%)',
             }}>
               <LazyImage
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=75&auto=format"
+                src="/images/hero-success-after.png"
                 alt="Professional thriving with AI systems"
                 className="w-full h-full brand-photo-success"
                 priority
@@ -747,11 +747,11 @@ export default function Home() {
               ))}
             </motion.div>
 
-            {/* Right: success photo */}
+            {/* Right: success photo — AI generated */}
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={slideRight}
               className="relative rounded-3xl overflow-hidden order-1 lg:order-2" style={{ height: 380 }}>
               <LazyImage
-                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=700&q=75&auto=format"
+                src="/images/solution-ai-life.png"
                 alt="Entrepreneur thriving with AI automation"
                 className="w-full h-full brand-photo-success"
                 objectFit="cover"
@@ -799,6 +799,77 @@ export default function Home() {
           <div className="text-center text-sm text-slate-500 mt-4">500+ Projects Delivered · 8+ Client Categories · 3+ Years Building AI · Top 5% Prompt Engineers Globally</div>
         </noscript>
       </div>
+
+      {/* ══════════════════════════════════════
+          SECTION — AI IN ACTION VIDEO
+      ══════════════════════════════════════ */}
+      <section className="py-20 md:py-24 relative overflow-hidden" style={{ background: isDark ? '#080A10' : '#FFFFFF' }}>
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full" style={{ background: 'radial-gradient(ellipse, rgba(37,99,235,0.07) 0%, transparent 70%)' }} />
+        </div>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mb-10">
+            <p className="text-blue-500 text-xs font-bold uppercase tracking-[0.2em] mb-3">Live System</p>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}>
+              Watch your AI system run.
+            </h2>
+            <p className="text-base max-w-lg mx-auto" style={{ color: isDark ? '#64748B' : '#94A3B8' }}>
+              Automations completing in real time. WhatsApp replies. Revenue tracking. Reports — all without lifting a finger.
+            </p>
+          </motion.div>
+
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="relative rounded-3xl overflow-hidden mx-auto max-w-4xl"
+            style={{
+              boxShadow: isDark ? '0 0 0 1px rgba(37,99,235,0.2), 0 40px 80px rgba(0,0,0,0.6)' : '0 0 0 1px rgba(37,99,235,0.12), 0 20px 60px rgba(37,99,235,0.12)',
+            }}>
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full block"
+              style={{ aspectRatio: '16/9', objectFit: 'cover' }}
+            >
+              <source src="/images/ai-automation-demo.mp4" type="video/mp4" />
+            </video>
+            {/* Overlay: corner badge */}
+            <div className="absolute top-4 left-4 flex items-center gap-2 backdrop-blur-sm px-3 py-1.5 rounded-xl"
+              style={{ background: isDark ? 'rgba(10,11,15,0.8)' : 'rgba(255,255,255,0.85)', border: `1px solid ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(37,99,235,0.15)'}` }}>
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-xs font-semibold" style={{ color: isDark ? '#94A3B8' : '#475569' }}>Live automation running</span>
+            </div>
+            {/* Overlay: bottom CTA */}
+            <div className="absolute bottom-0 left-0 right-0 p-5 flex items-center justify-between"
+              style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%)' }}>
+              <div>
+                <div className="text-white font-bold text-sm">This is what your business looks like with SYSmoAI</div>
+                <div className="text-white/60 text-xs mt-0.5">Automated. Calm. Growing.</div>
+              </div>
+              <Link href="/contact"
+                className="shrink-0 px-4 py-2 rounded-xl text-xs font-bold text-white transition-opacity hover:opacity-90"
+                style={{ background: '#2563EB' }}>
+                Get this system →
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Three proof points below video */}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }} variants={stagger}
+            className="grid grid-cols-3 gap-6 mt-10">
+            {[
+              { stat: '< 3 sec', label: 'WhatsApp reply time', color: '#10B981' },
+              { stat: '24/7',    label: 'Always-on automation', color: '#3B82F6' },
+              { stat: '৳0',      label: 'Human labor for routine tasks', color: '#8B5CF6' },
+            ].map((item, i) => (
+              <motion.div key={i} variants={fadeUp} className="text-center">
+                <div className="text-2xl md:text-3xl font-black mb-1" style={{ color: item.color }}>{item.stat}</div>
+                <div className="text-xs font-medium" style={{ color: isDark ? '#64748B' : '#94A3B8' }}>{item.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
       {/* ══════════════════════════════════════
           SECTION 4 — WHO WE HELP
@@ -1440,92 +1511,83 @@ export default function Home() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Card 1 — Notion AI OS */}
-            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-              className="rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
-              style={{ border: `1px solid ${isDark ? 'rgba(255,255,255,0.07)' : '#E2E8F0'}` }}>
-              <div className="h-52 flex items-center justify-center p-8 relative overflow-hidden"
-                style={{ background: 'linear-gradient(135deg, #2563EB 0%, #1E40AF 100%)' }}>
-                <div className="absolute inset-0 opacity-10"
-                  style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, white 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
-                <div className="text-white text-center relative z-10">
-                  <div className="text-6xl mb-3 group-hover:scale-110 transition-transform duration-300">🗂️</div>
-                  <div className="font-bold text-xl">Notion AI OS</div>
-                  <div className="text-blue-200 text-sm mt-1">Business Command Center</div>
+            {[
+              {
+                img: '/images/notion-os-dashboard.png',
+                accentColor: '#2563EB',
+                tag: 'Notion AI OS',
+                tagSub: 'Business Command Center',
+                title: 'Complete Business Operating System',
+                desc: 'Every project, client, task, invoice, and KPI — connected in one AI-powered Notion workspace. Your business runs even when you\'re offline.',
+                features: ['CRM & pipeline tracking', 'Automated task management', 'Real-time KPI dashboards', 'Team SOPs & knowledge base'],
+                href: '/services/notion-os',
+                gradient: 'linear-gradient(135deg, rgba(37,99,235,0.85) 0%, rgba(30,64,175,0.9) 100%)',
+              },
+              {
+                img: '/images/n8n-automation-flow.png',
+                accentColor: '#10B981',
+                tag: 'n8n Automation',
+                tagSub: 'Workflows That Never Sleep',
+                title: 'End-to-End Workflow Automation',
+                desc: 'WhatsApp → CRM → Invoice → Follow-up sequence. Fully automated pipelines connecting all your tools — zero manual steps.',
+                features: ['WhatsApp auto-replies 24/7', 'Lead capture & qualification', 'Auto invoice generation', 'Customer follow-up sequences'],
+                href: '/services/n8n-automation',
+                gradient: 'linear-gradient(135deg, rgba(5,150,105,0.85) 0%, rgba(13,148,136,0.9) 100%)',
+              },
+              {
+                img: '/images/ai-agents-network.png',
+                accentColor: '#8B5CF6',
+                tag: 'Custom AI Agents',
+                tagSub: 'Working 24/7 For You',
+                title: 'AI Agents That Work While You Sleep',
+                desc: 'Custom-trained AI agents for WhatsApp, web, and your platforms. Handle queries, qualify leads, and generate reports autonomously.',
+                features: ['Customer support automation', 'Lead qualification & scoring', 'Automated report generation', 'Multi-platform deployment'],
+                href: '/services/ai-agent-dev',
+                gradient: 'linear-gradient(135deg, rgba(124,58,237,0.85) 0%, rgba(67,56,202,0.9) 100%)',
+              },
+            ].map((card, ci) => (
+              <motion.div key={ci} initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+                className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 group"
+                style={{
+                  border: `1px solid ${isDark ? `${card.accentColor}20` : '#E2E8F0'}`,
+                  boxShadow: isDark ? `0 4px 24px rgba(0,0,0,0.4)` : `0 4px 24px rgba(0,0,0,0.06)`,
+                }}>
+                {/* Image header */}
+                <div className="h-52 relative overflow-hidden">
+                  <img
+                    src={card.img}
+                    alt={card.tag}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0" style={{ background: card.gradient }} />
+                  {/* Tag overlay */}
+                  <div className="absolute inset-0 flex flex-col items-start justify-end p-5">
+                    <span className="text-[10px] font-black tracking-[0.15em] text-white/60 uppercase mb-1">{card.tagSub}</span>
+                    <span className="text-lg font-black text-white">{card.tag}</span>
+                    <div className="w-8 h-0.5 mt-2 rounded-full" style={{ background: card.accentColor }} />
+                  </div>
                 </div>
-              </div>
-              <div className="p-6" style={{ background: isDark ? '#111827' : '#FFFFFF' }}>
-                <h3 className="font-bold text-lg mb-2" style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}>Complete Business Operating System</h3>
-                <p className="text-sm leading-relaxed mb-4" style={{ color: isDark ? '#94A3B8' : '#6B7280' }}>
-                  Every project, client, task, invoice, and KPI — connected in one AI-powered Notion workspace. Your business runs even when you're offline.
-                </p>
-                <ul className="space-y-1">
-                  {['CRM & pipeline tracking', 'Automated task management', 'Real-time dashboards', 'Team SOPs & knowledge base'].map(item => (
-                    <li key={item} className="flex items-center gap-2 text-sm" style={{ color: isDark ? '#64748B' : '#6B7280' }}>
-                      <span className="text-green-500 font-bold">✓</span> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-
-            {/* Card 2 — n8n Automation */}
-            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-              className="rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
-              style={{ border: `1px solid ${isDark ? 'rgba(255,255,255,0.07)' : '#E2E8F0'}` }}>
-              <div className="h-52 flex items-center justify-center p-8 relative overflow-hidden"
-                style={{ background: 'linear-gradient(135deg, #059669 0%, #0D9488 100%)' }}>
-                <div className="absolute inset-0 opacity-10"
-                  style={{ backgroundImage: 'radial-gradient(circle at 80% 50%, white 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
-                <div className="text-white text-center relative z-10">
-                  <div className="text-6xl mb-3 group-hover:scale-110 transition-transform duration-300">⚡</div>
-                  <div className="font-bold text-xl">n8n Automation</div>
-                  <div className="text-emerald-200 text-sm mt-1">Workflows That Never Sleep</div>
+                {/* Content */}
+                <div className="p-6" style={{ background: isDark ? 'rgba(255,255,255,0.03)' : '#FFFFFF' }}>
+                  <h3 className="font-bold text-lg mb-2" style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}>{card.title}</h3>
+                  <p className="text-sm leading-relaxed mb-4" style={{ color: isDark ? '#94A3B8' : '#6B7280' }}>{card.desc}</p>
+                  <ul className="space-y-1.5 mb-5">
+                    {card.features.map(item => (
+                      <li key={item} className="flex items-center gap-2 text-sm" style={{ color: isDark ? '#64748B' : '#6B7280' }}>
+                        <span className="font-bold" style={{ color: card.accentColor }}>✓</span> {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href={card.href}
+                    className="inline-flex items-center gap-1.5 text-sm font-bold transition-colors group/link"
+                    style={{ color: card.accentColor }}>
+                    Learn more <ArrowRight size={13} className="group-hover/link:translate-x-1 transition-transform" />
+                  </Link>
                 </div>
-              </div>
-              <div className="p-6" style={{ background: isDark ? '#111827' : '#FFFFFF' }}>
-                <h3 className="font-bold text-lg mb-2" style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}>End-to-End Workflow Automation</h3>
-                <p className="text-sm leading-relaxed mb-4" style={{ color: isDark ? '#94A3B8' : '#6B7280' }}>
-                  WhatsApp → CRM → Invoice → Follow-up sequence. Fully automated pipelines connecting all your tools — zero manual steps.
-                </p>
-                <ul className="space-y-1">
-                  {['WhatsApp auto-replies 24/7', 'Lead capture & qualification', 'Auto invoice generation', 'Follow-up sequences'].map(item => (
-                    <li key={item} className="flex items-center gap-2 text-sm" style={{ color: isDark ? '#64748B' : '#6B7280' }}>
-                      <span className="text-green-500 font-bold">✓</span> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-
-            {/* Card 3 — Custom AI Agents */}
-            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-              className="rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
-              style={{ border: `1px solid ${isDark ? 'rgba(255,255,255,0.07)' : '#E2E8F0'}` }}>
-              <div className="h-52 flex items-center justify-center p-8 relative overflow-hidden"
-                style={{ background: 'linear-gradient(135deg, #7C3AED 0%, #4338CA 100%)' }}>
-                <div className="absolute inset-0 opacity-10"
-                  style={{ backgroundImage: 'radial-gradient(circle at 50% 80%, white 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
-                <div className="text-white text-center relative z-10">
-                  <div className="text-6xl mb-3 group-hover:scale-110 transition-transform duration-300">🤖</div>
-                  <div className="font-bold text-xl">Custom AI Agents</div>
-                  <div className="text-purple-200 text-sm mt-1">Working 24/7 For You</div>
-                </div>
-              </div>
-              <div className="p-6" style={{ background: isDark ? '#111827' : '#FFFFFF' }}>
-                <h3 className="font-bold text-lg mb-2" style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}>AI Agents That Work While You Sleep</h3>
-                <p className="text-sm leading-relaxed mb-4" style={{ color: isDark ? '#94A3B8' : '#6B7280' }}>
-                  Custom-trained AI agents for WhatsApp, web, and your platforms. Handle queries, qualify leads, and generate reports autonomously.
-                </p>
-                <ul className="space-y-1">
-                  {['Customer support automation', 'Lead qualification & scoring', 'Automated report generation', 'Multi-platform deployment'].map(item => (
-                    <li key={item} className="flex items-center gap-2 text-sm" style={{ color: isDark ? '#64748B' : '#6B7280' }}>
-                      <span className="text-green-500 font-bold">✓</span> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
+              </motion.div>
+            ))}
           </div>
 
           <div className="text-center mt-10">
