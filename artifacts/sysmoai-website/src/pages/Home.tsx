@@ -1708,10 +1708,10 @@ export default function Home() {
           </div>
 
           <div className="flex items-center justify-center gap-3 mb-4">
-            <SYSmoAILogo size={32} variant={isDark ? 'brand-dark' : 'brand-light'} animated />
+            <SYSmoAILogo size={32} animated />
             <span className="text-xl font-bold tracking-[-0.02em]" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F', fontFamily: "'Space Grotesk', sans-serif" }}>
               <span className="font-bold">SYS</span>
-              <span className="font-normal opacity-65">mo</span>
+              <span className="font-medium" style={{ color: '#2563EB' }}>mo</span>
               <span className="font-bold">AI</span>
             </span>
           </div>

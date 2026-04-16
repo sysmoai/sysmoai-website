@@ -6,24 +6,24 @@ interface Props {
 }
 
 export function SYSmoAIWordmark({ darkMode = true, size = 20 }: Props) {
-  const color = darkMode ? '#FFFFFF' : '#0A0B0F';
+  const textColor = darkMode ? '#FFFFFF' : '#0A0B0F';
   return (
     <span
       style={{
         fontSize: size,
         lineHeight: 1,
         fontFamily: "'Space Grotesk', 'Inter', -apple-system, system-ui, sans-serif",
-        color,
+        color: textColor,
         display: 'inline-flex',
         alignItems: 'baseline',
         whiteSpace: 'nowrap',
-        letterSpacing: `${-size * 0.015}px`,
+        letterSpacing: '-0.02em',
       }}
       data-testid="wordmark-sysmoai"
     >
-      <span style={{ fontWeight: 700, letterSpacing: '-0.02em' }}>SYS</span>
-      <span style={{ fontWeight: 400, letterSpacing: '-0.04em', opacity: 0.65 }}>mo</span>
-      <span style={{ fontWeight: 700, letterSpacing: '0.02em' }}>AI</span>
+      <span style={{ fontWeight: 700 }}>SYS</span>
+      <span style={{ fontWeight: 500, color: '#2563EB' }}>mo</span>
+      <span style={{ fontWeight: 700 }}>AI</span>
     </span>
   );
 }

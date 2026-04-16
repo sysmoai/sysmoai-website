@@ -342,20 +342,20 @@ export function Header() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0" data-testid="link-home-logo">
-            <SYSmoAILogo size={30} variant={isDark ? 'brand-dark' : 'brand-light'} />
+            <SYSmoAILogo size={30} />
             <span
               style={{
                 fontSize: 18,
                 fontFamily: "'Space Grotesk', 'Inter', sans-serif",
                 color: isDark ? '#FFFFFF' : '#0A0B0F',
-                letterSpacing: '-0.03em',
+                letterSpacing: '-0.02em',
                 lineHeight: 1,
                 display: 'inline-flex',
                 alignItems: 'baseline',
               }}
             >
               <span style={{ fontWeight: 700 }}>SYS</span>
-              <span style={{ fontWeight: 400, opacity: 0.65 }}>mo</span>
+              <span style={{ fontWeight: 500, color: '#2563EB' }}>mo</span>
               <span style={{ fontWeight: 700 }}>AI</span>
             </span>
           </Link>
