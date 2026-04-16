@@ -261,20 +261,21 @@ export function BrandMarkConstruction() {
             className="text-xs font-bold uppercase tracking-[0.28em] mb-5"
             style={{ color: '#2563EB' }}
           >
-            The Mark · Intelligent Infrastructure
+            Brand Identity · Systems in Motion
           </motion.p>
           <motion.h2 variants={fadeUp}
             className="text-3xl md:text-5xl font-bold tracking-tight mb-5 leading-tight"
             style={{ color: headingC, letterSpacing: '-0.03em' }}
           >
-            Three Layers.<br className="sm:hidden" /> One Operating System.
+            Engineered Down<br className="sm:hidden" /> to the Geometry
           </motion.h2>
           <motion.p variants={fadeUp}
-            className="text-base md:text-lg max-w-xl mx-auto leading-relaxed"
+            className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
             style={{ color: subC }}
           >
-            The SYSmoAI icon isn't decoration — it's a blueprint. Every hexagon represents a
-            layer of the AI operating system we build inside your business.
+            The SYSmoAI mark isn't just a logo — it's a declaration. Three hexagonal layers,
+            mathematically proportioned and optically centered. Every dimension intentional.
+            Every ratio deliberate.
           </motion.p>
         </motion.div>
 
@@ -429,7 +430,7 @@ export function BrandMarkConstruction() {
               </span>
             </div>
             <p className="text-xs uppercase tracking-[0.22em] mb-8" style={{ color: isDark ? '#2D3A52' : '#94A3B8' }}>
-              Intelligent Infrastructure
+              Systems in Motion
             </p>
 
             {/* CTA */}

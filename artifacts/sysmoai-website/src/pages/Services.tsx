@@ -106,7 +106,13 @@ export default function Services() {
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600 opacity-[0.1] blur-[120px] rounded-full" />
         </div>
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+          <motion.p
+            initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+            className="text-xs font-bold uppercase tracking-[0.26em] text-blue-500 mb-5"
+          >
+            SYSmoAI · Systems in Motion
+          </motion.p>
+          <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.08 }}
             className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight mb-6">
             From 3-Day Quick Wins to Full AI Operating Systems
           </motion.h1>

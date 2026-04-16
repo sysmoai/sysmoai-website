@@ -1,22 +1,36 @@
-<svg width="180" height="180" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- SYSmoAI® Official Icon Mark v2.0 — 3 concentric hexagonal layers -->
-  <!-- Layer 1: Infrastructure  Layer 2: Orchestration  Layer 3: Intelligence -->
-
-  <!-- Layer 1 — outer, infrastructure, navy/blue -->
-  <path d="M25 34 L50 24 L75 34 L75 54 L50 64 L25 54 Z"
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background: dark navy, rounded square for favicon readability on all browser tabs -->
+  <rect width="180" height="180" rx="40" fill="#0A0B0F"/>
+  <!-- Subtle inner glow -->
+  <rect width="180" height="180" rx="40" fill="url(#bg-glow)"/>
+  <defs>
+    <radialGradient id="bg-glow" cx="50%" cy="58%" r="52%">
+      <stop offset="0%" stop-color="#1E3A8A" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#0A0B0F" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- SYSmoAI® Icon Mark v2.0 — 3 concentric hexagonal layers, viewBox 0 0 100 100 mapped to 180x180 -->
+  <!-- Layer 1 — Infrastructure, outer -->
+  <path
+    d="M45 61.2 L90 43.2 L135 61.2 L135 97.2 L90 115.2 L45 97.2 Z"
     fill="#1E3A8A" fill-opacity="0.30"
-    stroke="#2563EB" stroke-opacity="0.60"
-    stroke-width="2" stroke-linejoin="round"/>
-
-  <!-- Layer 2 — mid, orchestration, blue -->
-  <path d="M30 49 L50 40 L70 49 L70 64 L50 73 L30 64 Z"
-    fill="#2563EB" fill-opacity="0.50"
-    stroke="#3B82F6" stroke-opacity="0.80"
-    stroke-width="2" stroke-linejoin="round"/>
-
-  <!-- Layer 3 — core, intelligence, bright blue solid -->
-  <path d="M40 61 L50 56 L60 61 L60 71 L50 76 L40 71 Z"
+    stroke="#2563EB" stroke-opacity="0.75"
+    stroke-width="3.8" stroke-linejoin="round"/>
+  <!-- Layer 2 — Orchestration, mid -->
+  <path
+    d="M54 88.2 L90 72 L126 88.2 L126 115.2 L90 131.4 L54 115.2 Z"
+    fill="#2563EB" fill-opacity="0.55"
+    stroke="#3B82F6" stroke-opacity="0.90"
+    stroke-width="3.8" stroke-linejoin="round"/>
+  <!-- Layer 3 — Intelligence, core -->
+  <path
+    d="M72 109.8 L90 100.8 L108 109.8 L108 127.8 L90 136.8 L72 127.8 Z"
     fill="#3B82F6" fill-opacity="1.00"
     stroke="#60A5FA" stroke-opacity="1.00"
-    stroke-width="2" stroke-linejoin="round"/>
+    stroke-width="3.8" stroke-linejoin="round"/>
+  <!-- Core glow -->
+  <path
+    d="M72 109.8 L90 100.8 L108 109.8 L108 127.8 L90 136.8 L72 127.8 Z"
+    fill="#60A5FA" fill-opacity="0.18"
+    stroke="none"/>
 </svg>
