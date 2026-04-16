@@ -181,7 +181,7 @@ export default function Contact() {
                         background: inputBg,
                         border: `1px solid ${inputBorder}`,
                         color: inputText,
-                        focusOutlineColor: '#3B82F6',
+                        outlineColor: '#3B82F6',
                       }}
                       placeholder="Your name" />
                     {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}

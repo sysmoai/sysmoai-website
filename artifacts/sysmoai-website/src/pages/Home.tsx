@@ -214,6 +214,106 @@ function ChaosCard() {
 }
 
 /* ══════════════════════════════════════════
+   CHAOS VISUAL (Problem Section)
+══════════════════════════════════════════ */
+function ChaosVisual() {
+  const messages = [
+    { name: 'Ahmed Reza',    msg: 'Still waiting for the invoice?? 😤',     time: '2 days ago',  color: '#2563EB', badge: '#60A5FA' },
+    { name: 'Priya Kapoor',  msg: 'Can you confirm my order status?',       time: '3 days ago',  color: '#7C3AED', badge: '#A78BFA' },
+    { name: 'Client Group',  msg: 'Raisa: Hello? Anyone there???',          time: '1 week ago',  color: '#0D9488', badge: '#2DD4BF' },
+    { name: 'Salam vai',     msg: 'Urgent: proposal needed ASAP!!',         time: '2 weeks ago', color: '#DC2626', badge: '#FCA5A5' },
+    { name: 'New Lead 🔥',   msg: 'How much for full package setup?',       time: '2 weeks ago', color: '#D97706', badge: '#FCD34D' },
+  ];
+  const tasks = [
+    { label: 'Send invoice to Karim bhai', overdue: '5 days overdue', done: false },
+    { label: 'Follow up 12 cold leads',    overdue: '3 days overdue', done: false },
+    { label: 'Monthly report for client',  overdue: '1 week overdue', done: false },
+  ];
+  return (
+    <div className="relative w-full rounded-3xl overflow-hidden flex flex-col" style={{ background: '#080B14', height: 380, fontFamily: 'system-ui, sans-serif' }}>
+      {/* Window bar */}
+      <div className="flex items-center justify-between px-4 py-2.5 shrink-0" style={{ background: 'rgba(255,255,255,0.03)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full" style={{ background: '#EF4444' }} />
+          <div className="w-2.5 h-2.5 rounded-full" style={{ background: '#F59E0B' }} />
+          <div className="w-2.5 h-2.5 rounded-full" style={{ background: '#22C55E' }} />
+        </div>
+        <span className="text-[11px] font-mono" style={{ color: '#475569' }}>Your Business — Without AI</span>
+        <div className="w-16" />
+      </div>
+      {/* Tabs */}
+      <div className="flex gap-0 px-4 pt-2.5 shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+        {[
+          { label: 'WhatsApp', badge: '847', active: true, color: '#25D366' },
+          { label: 'Tasks',    badge: '31',  active: false },
+          { label: 'Reports',  badge: '0',   active: false },
+        ].map((tab, i) => (
+          <div key={i} className="flex items-center gap-1.5 px-3 pb-2 text-xs font-semibold cursor-default"
+            style={tab.active ? { color: tab.color, borderBottom: `2px solid ${tab.color}` } : { color: '#475569' }}>
+            {tab.label}
+            <span className="px-1.5 py-0.5 rounded-full text-[9px] font-black"
+              style={{ background: tab.active ? `${tab.color}25` : 'rgba(255,255,255,0.07)', color: tab.active ? tab.color : '#64748B' }}>
+              {tab.badge}
+            </span>
+          </div>
+        ))}
+      </div>
+      {/* Messages list */}
+      <div className="flex-1 overflow-hidden px-3 py-2 space-y-1.5">
+        {messages.map((m, i) => (
+          <motion.div key={i}
+            initial={{ opacity: 0, x: -16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.07, duration: 0.35 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-3 rounded-xl px-3 py-2.5 cursor-default"
+            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.04)' }}>
+            <div className="w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-black"
+              style={{ background: m.color + '25', color: m.badge }}>
+              {m.name[0]}
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between gap-2 mb-0.5">
+                <span className="text-xs font-semibold truncate" style={{ color: '#E2E8F0' }}>{m.name}</span>
+                <span className="text-[10px] shrink-0" style={{ color: '#334155' }}>{m.time}</span>
+              </div>
+              <p className="text-[11px] truncate" style={{ color: '#64748B' }}>{m.msg}</p>
+            </div>
+            <div className="w-2 h-2 rounded-full shrink-0" style={{ background: '#25D366' }} />
+          </motion.div>
+        ))}
+      </div>
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
+        style={{ background: 'linear-gradient(to top, rgba(8,11,20,1) 0%, rgba(8,11,20,0.7) 60%, transparent 100%)' }} />
+      {/* Floating badge: LOST REVENUE */}
+      <motion.div
+        animate={{ y: [0, -5, 0] }}
+        transition={{ repeat: Infinity, duration: 3.2, ease: 'easeInOut' }}
+        className="absolute top-20 right-4 rounded-xl px-3.5 py-2.5 shadow-2xl"
+        style={{ background: 'rgba(127,29,29,0.92)', border: '1px solid rgba(239,68,68,0.3)', backdropFilter: 'blur(8px)' }}>
+        <div className="text-[10px] font-black tracking-wider" style={{ color: '#FCA5A5' }}>LOST THIS MONTH</div>
+        <div className="text-lg font-black text-white">৳2,40,000</div>
+        <div className="text-[10px]" style={{ color: '#DC2626' }}>untracked leads</div>
+      </motion.div>
+      {/* Overdue tasks overlay */}
+      <div className="absolute bottom-3 left-3 right-3 rounded-xl p-3"
+        style={{ background: 'rgba(6,8,16,0.95)', border: '1px solid rgba(220,38,38,0.25)', backdropFilter: 'blur(8px)' }}>
+        <div className="text-[10px] font-black tracking-[0.15em] mb-2" style={{ color: '#EF4444' }}>⚠ OVERDUE TASKS</div>
+        <div className="space-y-1">
+          {tasks.map((t, i) => (
+            <div key={i} className="flex items-center justify-between gap-2">
+              <span className="text-[11px] truncate" style={{ color: '#94A3B8' }}>{t.label}</span>
+              <span className="text-[10px] shrink-0 font-bold" style={{ color: '#EF4444' }}>{t.overdue}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════
    HOME PAGE
 ══════════════════════════════════════════ */
 export default function Home() {
@@ -550,25 +650,10 @@ export default function Home() {
 
           {/* Split layout: image + problem cards */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-16">
-            {/* Left: chaos image */}
+            {/* Left: chaos visual */}
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={slideLeft}
-              className="relative rounded-3xl overflow-hidden gsap-reveal" style={{ height: 380 }}>
-              <LazyImage
-                src="https://images.unsplash.com/photo-1571721795195-a2ca2d3370a9?w=700&q=75&auto=format"
-                alt="Overwhelmed without AI systems"
-                className="w-full h-full brand-photo-chaos"
-                objectFit="cover"
-              />
-              <div className="absolute inset-0" style={{ background: isDark ? 'linear-gradient(135deg, rgba(127,29,29,0.3) 0%, rgba(10,11,15,0.5) 100%)' : 'linear-gradient(135deg, rgba(254,226,226,0.5) 0%, rgba(249,250,251,0.4) 100%)' }} />
-              {/* Floating chaos stats */}
-              <div className="absolute top-5 left-5 bg-red-950/85 border border-red-800/50 backdrop-blur-md px-4 py-2.5 rounded-xl">
-                <div className="text-red-400 text-xs font-bold tracking-wider mb-0.5">WITHOUT AI</div>
-                <div className="text-white text-sm font-bold">14-hour workdays</div>
-              </div>
-              <div className="absolute bottom-5 right-5 bg-black/70 border border-red-900/40 backdrop-blur-md px-4 py-3 rounded-xl">
-                <div className="text-red-400 font-bold text-xl">847</div>
-                <div className="text-slate-400 text-xs">unread messages</div>
-              </div>
+              className="gsap-reveal" style={{ height: 380 }}>
+              <ChaosVisual />
             </motion.div>
 
             {/* Right: problem cards */}
@@ -822,88 +907,188 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Featured 3 services */}
+          {/* Featured 3 service cards — premium redesign */}
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }} variants={stagger}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            {featuredServices.map((s, i) => (
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {[
+              {
+                icon: Zap,
+                tag: 'Best Entry Point',
+                tagColor: '#10B981',
+                title: 'AI Quick Win',
+                subtitle: 'Your #1 bottleneck automated in just 3 days',
+                outcome: '3 days',
+                outcomeLabel: 'to first result',
+                outcomeBg: '#10B981',
+                price: showUSD ? '$50–$100' : '৳3,750–7,500',
+                highlights: [
+                  'Map your biggest workflow bottleneck',
+                  'Custom automation built & deployed',
+                  '30-day support included',
+                  'Video walkthrough + handover',
+                ],
+                href: '/services/ai-quick-win',
+                featured: false,
+                ctaLabel: 'Get Started',
+              },
+              {
+                icon: Timer,
+                tag: '⭐ Most Popular',
+                tagColor: '#F59E0B',
+                title: 'AI Sprint',
+                subtitle: 'Full AI operating system deployed in 14 days',
+                outcome: '14 days',
+                outcomeLabel: 'full stack deployed',
+                outcomeBg: '#3B82F6',
+                price: showUSD ? '$300–$600' : '৳25,000–50,000',
+                highlights: [
+                  'Complete AI OS — Notion + n8n + WhatsApp',
+                  '20+ hours/week saved from day one',
+                  'Team training & adoption support',
+                  '90-day scaling & optimization',
+                ],
+                href: '/services/ai-sprint',
+                featured: true,
+                ctaLabel: 'Start Your Sprint',
+              },
+              {
+                icon: RefreshCw,
+                tag: 'Cancel Anytime',
+                tagColor: '#8B5CF6',
+                title: 'AI Retainer',
+                subtitle: 'AI managed and evolved every month',
+                outcome: 'Monthly',
+                outcomeLabel: 'ongoing growth',
+                outcomeBg: '#8B5CF6',
+                price: showUSD ? '$250/mo' : '৳20,000/mo',
+                highlights: [
+                  'Monthly AI system improvements',
+                  'Priority WhatsApp support',
+                  'Performance report each month',
+                  'New automations as you grow',
+                ],
+                href: '/services/ai-retainer',
+                featured: false,
+                ctaLabel: 'Get Monthly AI',
+              },
+            ].map((s, i) => (
               <motion.div key={i} variants={fadeUp}
-                className="gsap-scale relative rounded-2xl p-7 glow-card flex flex-col"
+                className="gsap-scale relative rounded-2xl overflow-hidden flex flex-col"
                 style={{
                   background: s.featured
-                    ? isDark ? 'linear-gradient(135deg, #1E3A8A 0%, #1E40AF 100%)' : 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)'
-                    : isDark ? 'rgba(255,255,255,0.03)' : 'rgba(248,250,252,0.9)',
-                  border: s.featured ? '1px solid rgba(96,165,250,0.3)' : `1px solid ${isDark ? 'rgba(255,255,255,0.07)' : 'rgba(37,99,235,0.1)'}`,
-                  boxShadow: s.featured ? '0 20px 60px rgba(37,99,235,0.25)' : undefined,
+                    ? 'linear-gradient(155deg, #1E3A8A 0%, #1E40AF 55%, #2563EB 100%)'
+                    : isDark ? 'rgba(255,255,255,0.03)' : '#FFFFFF',
+                  border: s.featured
+                    ? '1px solid rgba(96,165,250,0.35)'
+                    : `1px solid ${isDark ? 'rgba(255,255,255,0.07)' : 'rgba(37,99,235,0.12)'}`,
+                  boxShadow: s.featured
+                    ? '0 30px 80px rgba(37,99,235,0.35), 0 0 0 1px rgba(96,165,250,0.1)'
+                    : isDark ? '0 4px 24px rgba(0,0,0,0.3)' : '0 4px 24px rgba(37,99,235,0.06)',
                 }}
-                whileHover={{ y: -6, transition: { duration: 0.3 } }}
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
               >
-                {/* Tag */}
+                {/* Top accent line */}
                 {s.featured && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-amber-400 to-orange-400 text-black text-xs font-black px-3 py-1 rounded-full shadow-lg animate-pulse">
-                      ⭐ Most Popular
+                  <div className="h-0.5 w-full" style={{ background: 'linear-gradient(90deg,#60A5FA,#A78BFA,#60A5FA)' }} />
+                )}
+
+                {/* Header section — outcome metric */}
+                <div className="px-6 pt-5 pb-4" style={{ borderBottom: `1px solid ${s.featured ? 'rgba(255,255,255,0.08)' : isDark ? 'rgba(255,255,255,0.05)' : 'rgba(37,99,235,0.07)'}` }}>
+                  <div className="flex items-start justify-between mb-4">
+                    <span className="text-[10px] font-black tracking-[0.15em] px-2.5 py-1 rounded-full uppercase"
+                      style={s.featured
+                        ? { background: 'rgba(255,255,255,0.12)', color: '#BFDBFE', border: '1px solid rgba(255,255,255,0.15)' }
+                        : { background: `${s.outcomeBg}15`, color: s.outcomeBg, border: `1px solid ${s.outcomeBg}30` }}>
+                      {s.tag}
                     </span>
+                    <div className="w-9 h-9 rounded-xl flex items-center justify-center"
+                      style={{ background: s.featured ? 'rgba(255,255,255,0.12)' : `${s.outcomeBg}15`, border: `1px solid ${s.featured ? 'rgba(255,255,255,0.2)' : s.outcomeBg + '30'}` }}>
+                      <s.icon size={17} style={{ color: s.featured ? '#BFDBFE' : s.outcomeBg }} />
+                    </div>
                   </div>
-                )}
-                <div className="w-10 h-10 rounded-xl mb-5 flex items-center justify-center"
-                  style={{ background: s.featured ? 'rgba(255,255,255,0.12)' : 'rgba(37,99,235,0.1)' }}>
-                  <s.icon size={19} className={s.featured ? 'text-blue-200' : 'text-blue-400'} />
+                  <div className="text-3xl font-black tracking-tight" style={{ color: s.featured ? '#FFFFFF' : s.outcomeBg }}>
+                    {s.outcome}
+                  </div>
+                  <div className="text-xs font-semibold mt-0.5" style={{ color: s.featured ? 'rgba(255,255,255,0.45)' : isDark ? '#475569' : '#94A3B8' }}>
+                    {s.outcomeLabel}
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold mb-1.5" style={{ color: s.featured ? '#FFFFFF' : isDark ? '#F1F5F9' : '#0A0B0F' }}>
-                  {s.title}
-                </h3>
-                <p className="text-sm mb-3" style={{ color: s.featured ? 'rgba(255,255,255,0.65)' : isDark ? '#64748B' : '#6B7280' }}>
-                  {s.subtitle}
-                </p>
-                {(s as any).description && (
-                  <p className="text-sm leading-relaxed mb-3 flex-1" style={{ color: s.featured ? 'rgba(255,255,255,0.55)' : isDark ? '#94A3B8' : '#6B7280' }}>
-                    {(s as any).description}
+
+                {/* Body */}
+                <div className="px-6 py-5 flex-1 flex flex-col">
+                  <h3 className="text-xl font-bold mb-1.5 tracking-tight" style={{ color: s.featured ? '#FFFFFF' : isDark ? '#F1F5F9' : '#0A0B0F' }}>
+                    {s.title}
+                  </h3>
+                  <p className="text-sm mb-5 leading-relaxed" style={{ color: s.featured ? 'rgba(255,255,255,0.6)' : isDark ? '#64748B' : '#6B7280' }}>
+                    {s.subtitle}
                   </p>
-                )}
-                {(s as any).features && (
-                  <ul className="space-y-1 mb-4">
-                    {((s as any).features as string[]).map((f: string) => (
-                      <li key={f} className="flex items-center gap-2 text-xs" style={{ color: s.featured ? 'rgba(255,255,255,0.65)' : isDark ? '#64748B' : '#6B7280' }}>
-                        <span className="text-green-400 font-bold">✅</span> {f}
+
+                  {/* Highlights */}
+                  <ul className="space-y-2.5 mb-6 flex-1">
+                    {s.highlights.map((item, j) => (
+                      <li key={j} className="flex items-start gap-2.5 text-sm" style={{ color: s.featured ? 'rgba(255,255,255,0.75)' : isDark ? '#94A3B8' : '#4B5563' }}>
+                        <span className="shrink-0 mt-0.5 font-bold" style={{ color: s.featured ? '#4ADE80' : '#10B981', fontSize: 13 }}>✓</span>
+                        {item}
                       </li>
                     ))}
                   </ul>
-                )}
-                <div className="flex items-baseline gap-2 mb-6">
-                  <span className="text-2xl font-bold" style={{ color: s.featured ? '#FFFFFF' : isDark ? '#F1F5F9' : '#0A0B0F' }}>
-                    {showUSD ? s.usdPrice : s.bdPrice}
-                  </span>
+
+                  {/* Price + CTA */}
+                  <div className="pt-4" style={{ borderTop: `1px solid ${s.featured ? 'rgba(255,255,255,0.08)' : isDark ? 'rgba(255,255,255,0.05)' : 'rgba(37,99,235,0.07)'}` }}>
+                    <div className="flex items-baseline gap-1.5 mb-4">
+                      <span className="text-2xl font-black" style={{ color: s.featured ? '#FFFFFF' : isDark ? '#F1F5F9' : '#0A0B0F' }}>
+                        {s.price}
+                      </span>
+                      {!showUSD && (
+                        <span className="text-xs font-semibold" style={{ color: s.featured ? 'rgba(255,255,255,0.35)' : isDark ? '#334155' : '#CBD5E1' }}>BDT</span>
+                      )}
+                    </div>
+                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                      <Link href={s.href}
+                        className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-sm transition-all duration-200"
+                        style={s.featured
+                          ? { background: '#25D366', color: '#FFFFFF', boxShadow: '0 4px 20px rgba(37,211,102,0.35)' }
+                          : { background: isDark ? 'rgba(37,99,235,0.12)' : '#EFF6FF', color: '#2563EB', border: `1px solid ${isDark ? 'rgba(59,130,246,0.25)' : '#BFDBFE'}` }}>
+                        {s.featured && <MessageCircle size={15} />}
+                        {s.ctaLabel}
+                        {!s.featured && <ArrowRight size={14} />}
+                      </Link>
+                    </motion.div>
+                  </div>
                 </div>
-                <Link href={s.href}
-                  className="inline-flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm transition-all duration-200"
-                  style={s.featured ? { background: 'rgba(255,255,255,0.15)', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.2)' }
-                    : { background: '#2563EB', color: '#FFFFFF' }}>
-                  Get Started <ChevronRight size={15} />
-                </Link>
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Other 6 services chips */}
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="flex flex-wrap justify-center gap-3">
-            {otherServices.map((s, i) => (
-              <motion.div key={i} variants={fadeIn}>
-                <Link href={s.href}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 hover:scale-105"
-                  style={{
-                    background: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(37,99,235,0.05)',
-                    border: `1px solid ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(37,99,235,0.12)'}`,
-                    color: isDark ? '#94A3B8' : '#4B5563',
-                  }}>
-                  <s.icon size={13} className="text-blue-400" />
-                  {s.label}
+          {/* Other specialized services — polished grid */}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="rounded-2xl p-6"
+            style={{ background: isDark ? 'rgba(255,255,255,0.02)' : 'rgba(248,250,252,0.8)', border: `1px solid ${isDark ? 'rgba(255,255,255,0.05)' : 'rgba(37,99,235,0.08)'}` }}>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <p className="text-xs font-bold uppercase tracking-[0.18em]" style={{ color: isDark ? '#475569' : '#94A3B8' }}>
+                More Specialized Services
+              </p>
+              <div className="flex flex-wrap gap-2.5">
+                {otherServices.map((s, i) => (
+                  <motion.div key={i} whileHover={{ y: -2 }}>
+                    <Link href={s.href}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
+                      style={{
+                        background: isDark ? 'rgba(255,255,255,0.04)' : '#FFFFFF',
+                        border: `1px solid ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(37,99,235,0.12)'}`,
+                        color: isDark ? '#94A3B8' : '#475569',
+                      }}>
+                      <s.icon size={13} className="text-blue-400" />
+                      {s.label}
+                    </Link>
+                  </motion.div>
+                ))}
+                <Link href="/services"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-blue-500 hover:text-blue-400 transition-colors">
+                  All services <ArrowRight size={13} />
                 </Link>
-              </motion.div>
-            ))}
-            <Link href="/services" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold text-blue-500 hover:text-blue-400 transition-colors">
-              All services <ArrowRight size={14} />
-            </Link>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -1064,13 +1249,44 @@ export default function Home() {
             initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }} variants={fadeUp}
             className="flex flex-col md:flex-row gap-10 items-center"
           >
-            {/* Founder Avatar */}
+            {/* Founder Avatar — real photo */}
             <div className="flex-shrink-0">
-              <div
-                className="w-40 h-40 rounded-2xl flex items-center justify-center text-white text-5xl font-bold shadow-xl"
-                style={{ background: 'linear-gradient(135deg, #2563EB 0%, #1E40AF 100%)' }}
-              >
-                EH
+              <div className="relative">
+                {/* Gradient ring */}
+                <div className="w-44 h-44 rounded-2xl p-[3px]"
+                  style={{ background: 'linear-gradient(135deg, #2563EB 0%, #7C3AED 50%, #06B6D4 100%)' }}>
+                  <div className="w-full h-full rounded-[14px] overflow-hidden">
+                    <img
+                      src="/founder.jpg"
+                      alt="Emon Hossain — Founder & CEO, SYSmoAI"
+                      className="w-full h-full object-cover object-top"
+                      onError={e => {
+                        const t = e.currentTarget as HTMLImageElement;
+                        t.style.display = 'none';
+                        const parent = t.parentElement!;
+                        parent.style.background = 'linear-gradient(135deg,#2563EB,#1E40AF)';
+                        parent.style.display = 'flex';
+                        parent.style.alignItems = 'center';
+                        parent.style.justifyContent = 'center';
+                        const span = document.createElement('span');
+                        span.textContent = 'EH';
+                        span.style.cssText = 'color:#fff;font-size:2.5rem;font-weight:800;';
+                        parent.appendChild(span);
+                      }}
+                    />
+                  </div>
+                </div>
+                {/* Credential badge */}
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap text-white text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-xl"
+                  style={{ background: 'linear-gradient(90deg,#2563EB,#7C3AED)', border: '1px solid rgba(255,255,255,0.15)' }}>
+                  🏆 Top 5% AI Engineer Globally
+                </div>
+                {/* Online dot */}
+                <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2 py-1 rounded-full"
+                  style={{ background: 'rgba(0,0,0,0.65)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                  <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#4ADE80' }} />
+                  <span className="text-[10px] font-semibold" style={{ color: '#4ADE80' }}>Available</span>
+                </div>
               </div>
             </div>
 
@@ -1409,18 +1625,22 @@ export default function Home() {
           className="max-w-4xl mx-auto px-4 text-center">
 
           {/* Urgency Banner */}
-          <div className="bg-amber-50 border border-amber-200 rounded-2xl px-6 py-4 mb-10 flex items-start md:items-center gap-4 max-w-2xl mx-auto text-left">
+          <div className="rounded-2xl px-6 py-4 mb-10 flex items-start md:items-center gap-4 max-w-2xl mx-auto text-left"
+            style={{
+              background: isDark ? 'rgba(217,119,6,0.08)' : '#FFFBEB',
+              border: `1px solid ${isDark ? 'rgba(217,119,6,0.25)' : '#FCD34D'}`,
+            }}>
             <span className="text-2xl shrink-0">⏰</span>
             <div>
-              <p className="font-bold text-amber-900 text-sm md:text-base">
+              <p className="font-bold text-sm md:text-base" style={{ color: isDark ? '#FCD34D' : '#78350F' }}>
                 Free AI Audit — Limited Availability
               </p>
-              <p className="text-amber-700 text-sm mt-0.5">
+              <p className="text-sm mt-0.5" style={{ color: isDark ? '#B45309' : '#92400E' }}>
                 Emon personally conducts every discovery call. We keep slots limited to ensure quality. Book yours before this week fills up.
               </p>
               <div className="flex items-center gap-2 mt-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse shrink-0" />
-                <span className="text-green-700 text-xs font-medium">3 audit slots remaining this week</span>
+                <span className="text-xs font-medium" style={{ color: isDark ? '#4ADE80' : '#166534' }}>3 audit slots remaining this week</span>
               </div>
             </div>
           </div>
