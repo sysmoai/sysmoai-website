@@ -16,9 +16,11 @@
   <meta property="og:url" content="https://sysmoai.com/" />
   <meta property="og:site_name" content="SYSmoAI" />
   <meta property="og:image" content="https://sysmoai.com/opengraph.jpg" />
+  <meta property="og:locale" content="en_US" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@sysmoai" />
   <meta name="twitter:title" content="SYSmoAI — Systems in Motion | AI Consulting Bangladesh" />
   <meta name="twitter:description" content="Bangladesh's premier AI consulting company. Systems in Motion — AI-powered operating systems, workflow automation, and custom AI agents." />
   <meta name="twitter:image" content="https://sysmoai.com/opengraph.jpg" />
@@ -36,8 +38,10 @@
   <link rel="preload" as="image" href="/images/hero-chaos-before.webp" type="image/webp" />
   <link rel="preload" as="image" href="/images/hero-success-after.webp" type="image/webp" />
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Google Fonts — async load to prevent render-blocking -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
 
   <!-- JSON-LD Organization + LocalBusiness Schema -->
   <script type="application/ld+json">
