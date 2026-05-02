@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { WA_URLS } from '../lib/whatsapp';
 import { EMAIL } from '@/lib/config';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useCreateContactSubmission } from '@workspace/api-client-react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -24,8 +25,10 @@ type FormData = z.infer<typeof schema>;
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const { isDark } = useTheme();
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>({ resolver: zodResolver(schema) });
+  const createSubmission = useCreateContactSubmission();
 
   const bg1 = isDark ? '#0A0B0F' : '#FFFFFF';
   const bg2 = isDark ? '#0D0F14' : '#F8FAFF';
@@ -62,9 +65,25 @@ export default function Contact() {
     return () => { document.head.removeChild(script); };
   }, []);
 
-  const onSubmit = async (_data: FormData) => {
-    await new Promise(r => setTimeout(r, 800));
-    setSubmitted(true);
+  const onSubmit = async (data: FormData) => {
+    setSubmitError(null);
+    try {
+      await createSubmission.mutateAsync({
+        data: {
+          name: data.name,
+          contact: data.contact,
+          message: data.message,
+          service: data.service && data.service.length > 0 ? data.service : null,
+        },
+      });
+      setSubmitted(true);
+    } catch (err) {
+      const msg =
+        err instanceof Error
+          ? err.message
+          : 'Something went wrong. Please try again or message us on WhatsApp.';
+      setSubmitError(msg);
+    }
   };
 
   return (
@@ -231,6 +250,14 @@ export default function Contact() {
                     <a href="/privacy-policy" className="text-blue-500 hover:underline">Privacy Policy</a>.
                     We'll only use your details to respond to your inquiry.
                   </p>
+                  {submitError && (
+                    <p
+                      className="text-red-500 text-sm"
+                      data-testid="text-submit-error"
+                    >
+                      {submitError}
+                    </p>
+                  )}
                   <button type="submit" disabled={isSubmitting}
                     className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white py-4 rounded-xl font-bold text-lg transition-all min-h-[52px]">
                     {isSubmitting ? 'Sending...' : 'Send Message'}

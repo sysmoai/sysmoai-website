@@ -1,0 +1,70 @@
+import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import {
+  useGetAuditRequest,
+  useUpdateAuditRequest,
+  getGetAuditRequestQueryKey,
+  getListAuditRequestsQueryKey,
+  getGetAdminSummaryQueryKey,
+} from "@workspace/api-client-react";
+import { SubmissionDetailShell } from "@/components/SubmissionDetailShell";
+import { describeApiError } from "@/lib/format";
+
+export function AuditDetailPage({ id }: { id: number }) {
+  const qc = useQueryClient();
+  const detail = useGetAuditRequest(id);
+  const update = useUpdateAuditRequest();
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const [saveSuccess, setSaveSuccess] = useState(false);
+
+  return (
+    <SubmissionDetailShell
+      title={`Audit request #${id}`}
+      backHref="/audits"
+      backLabel="All audits"
+      isLoading={detail.isLoading}
+      isError={detail.isError}
+      errorMessage={describeApiError(detail.error)}
+      data={detail.data}
+      onSave={async ({ status, internalNote }) => {
+        setSaveError(null);
+        setSaveSuccess(false);
+        try {
+          await update.mutateAsync({
+            id,
+            data: { status, internalNote },
+          });
+          setSaveSuccess(true);
+          await Promise.all([
+            qc.invalidateQueries({
+              queryKey: getGetAuditRequestQueryKey(id),
+            }),
+            qc.invalidateQueries({
+              queryKey: getListAuditRequestsQueryKey(),
+            }),
+            qc.invalidateQueries({ queryKey: getGetAdminSummaryQueryKey() }),
+          ]);
+        } catch (err) {
+          setSaveError(describeApiError(err, "Could not save changes."));
+        }
+      }}
+      isSaving={update.isPending}
+      saveError={saveError}
+      saveSuccess={saveSuccess}
+      fields={
+        detail.data
+          ? [
+              { label: "Name", value: detail.data.name },
+              { label: "Email", value: detail.data.email },
+              { label: "WhatsApp", value: detail.data.whatsapp ?? "—" },
+              { label: "Company", value: detail.data.company ?? "—" },
+              {
+                label: "Biggest challenge",
+                value: detail.data.biggestChallenge,
+              },
+            ]
+          : []
+      }
+    />
+  );
+}
