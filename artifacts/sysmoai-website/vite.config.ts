@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
+import fs from "fs";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 const rawPort = process.env.PORT ?? "3000";
@@ -14,6 +15,24 @@ export default defineConfig({
     react(),
     tailwindcss(),
     runtimeErrorOverlay(),
+    {
+      name: "serve-route-specific-html",
+      configurePreviewServer(server) {
+        const distDir = path.resolve(import.meta.dirname, "dist/public");
+        server.middlewares.use((req, res, next) => {
+          const url = (req.url || "/").split("?")[0];
+          if (url !== "/" && !path.extname(url)) {
+            const routeHtml = path.join(distDir, url, "index.html");
+            if (fs.existsSync(routeHtml)) {
+              res.setHeader("Content-Type", "text/html; charset=utf-8");
+              res.end(fs.readFileSync(routeHtml));
+              return;
+            }
+          }
+          next();
+        });
+      },
+    },
     ...(process.env.NODE_ENV !== "production" &&
     process.env.REPL_ID !== undefined
       ? [

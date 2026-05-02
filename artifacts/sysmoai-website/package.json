@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
     "build": "vite build --config vite.config.ts && tsx scripts/generate-static.ts",
-    "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
+    "serve": "node server.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "generate-static": "tsx scripts/generate-static.ts",
     "generate-sitemap": "tsx scripts/generate-static.ts"
