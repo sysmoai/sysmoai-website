@@ -135,52 +135,42 @@ for (const [route, seo] of Object.entries(seoConfig)) {
 console.log(`✓ Generated ${generated} static HTML files (${skipped} skipped)`);
 
 // ---------------------------------------------------------------------------
-// 4. Generate dynamic sitemap.xml
+// 4. Generate dynamic sitemap.xml — URLs derived from seoConfig (not hard-coded)
 // ---------------------------------------------------------------------------
 
 const TODAY = new Date().toISOString().slice(0, 10);
+const SITE_URL = 'https://sysmoai.com';
 
-const staticUrlEntries = [
-  { loc: 'https://sysmoai.com/', lastmod: TODAY, changefreq: 'weekly', priority: '1.0' },
-  { loc: 'https://sysmoai.com/services', lastmod: TODAY, changefreq: 'weekly', priority: '0.9' },
-  { loc: 'https://sysmoai.com/about', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/contact', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/pricing', lastmod: TODAY, changefreq: 'weekly', priority: '0.9' },
-  { loc: 'https://sysmoai.com/proof', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/free-ai-audit', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/faq', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/blog', lastmod: TODAY, changefreq: 'weekly', priority: '0.8' },
-  // Service pages
-  { loc: 'https://sysmoai.com/services/ai-quick-win', lastmod: TODAY, changefreq: 'monthly', priority: '0.9' },
-  { loc: 'https://sysmoai.com/services/ai-sprint', lastmod: TODAY, changefreq: 'monthly', priority: '0.9' },
-  { loc: 'https://sysmoai.com/services/ai-retainer', lastmod: TODAY, changefreq: 'monthly', priority: '0.9' },
-  { loc: 'https://sysmoai.com/services/ai-coaching', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/services/group-workshop', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/services/notion-os', lastmod: TODAY, changefreq: 'monthly', priority: '0.9' },
-  { loc: 'https://sysmoai.com/services/ai-agent-dev', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/services/n8n-automation', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/services/corporate-training', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/services/international', lastmod: TODAY, changefreq: 'monthly', priority: '0.7' },
-  // For pages
-  { loc: 'https://sysmoai.com/for/students', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/for/job-seekers', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/for/freelancers', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/for/researchers', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/for/agencies', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/for/sme-founders', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/for/f-commerce', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/for/consultants', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/for/creators', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://sysmoai.com/for/corporates', lastmod: TODAY, changefreq: 'monthly', priority: '0.8' },
-  // Legal
-  { loc: 'https://sysmoai.com/privacy-policy', lastmod: TODAY, changefreq: 'yearly', priority: '0.3' },
-  { loc: 'https://sysmoai.com/terms-of-service', lastmod: TODAY, changefreq: 'yearly', priority: '0.3' },
-  { loc: 'https://sysmoai.com/refund-policy', lastmod: TODAY, changefreq: 'yearly', priority: '0.3' },
-];
+// Priority / changefreq rules by route pattern (first match wins)
+function routeMeta(route: string): { changefreq: string; priority: string } {
+  if (route === '/') return { changefreq: 'weekly', priority: '1.0' };
+  if (route === '/services' || route === '/pricing') return { changefreq: 'weekly', priority: '0.9' };
+  if (route.startsWith('/services/')) return { changefreq: 'monthly', priority: '0.9' };
+  if (route === '/blog') return { changefreq: 'weekly', priority: '0.8' };
+  if (route.startsWith('/privacy') || route.startsWith('/terms') || route.startsWith('/refund')) {
+    return { changefreq: 'yearly', priority: '0.3' };
+  }
+  return { changefreq: 'monthly', priority: '0.8' };
+}
 
-// Add blog posts dynamically
+// Derive static entries from seoConfig, excluding non-canonical routes (e.g. /results → canonical /proof)
+const staticUrlEntries = Object.entries(seoConfig)
+  // Skip blog post routes (handled separately below with accurate publishDate)
+  .filter(([route]) => !route.startsWith('/blog/'))
+  // Only include routes where the canonical URL matches the route itself
+  .filter(([route, seo]) => {
+    const expected = route === '/' ? SITE_URL : `${SITE_URL}${route}`;
+    return seo.canonical === expected || seo.canonical === `${expected}/`;
+  })
+  .map(([route, _seo]) => {
+    const loc = route === '/' ? `${SITE_URL}/` : `${SITE_URL}${route}`;
+    const { changefreq, priority } = routeMeta(route);
+    return { loc, lastmod: TODAY, changefreq, priority };
+  });
+
+// Blog posts get accurate lastmod from their publishDate field
 const blogUrlEntries = blogPosts.map((post) => ({
-  loc: `https://sysmoai.com/blog/${post.slug}`,
+  loc: `${SITE_URL}/blog/${post.slug}`,
   lastmod: post.publishDate ?? TODAY,
   changefreq: 'monthly',
   priority: '0.7',
