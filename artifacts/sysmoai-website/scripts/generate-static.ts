@@ -97,8 +97,15 @@ function injectIntoHtml(html: string, headContent: string): string {
   result = result.replace(/<meta\s+name="twitter:[^"]*"[^>]*>/gi, '');
   result = result.replace(/<script\s+type="application\/ld\+json"[\s\S]*?<\/script>/gi, '');
 
-  // Insert new head content just after <head>
-  result = result.replace(/<head>/i, `<head>\n${headContent}`);
+  // Insert new head content AFTER <meta charset> so charset stays first,
+  // then fall back to inserting immediately after <head> if no charset tag.
+  const charsetMatch = result.match(/<meta\s+charset[^>]*>/i);
+  if (charsetMatch && charsetMatch.index !== undefined) {
+    const insertAt = charsetMatch.index + charsetMatch[0].length;
+    result = result.slice(0, insertAt) + '\n' + headContent + result.slice(insertAt);
+  } else {
+    result = result.replace(/<head>/i, `<head>\n${headContent}`);
+  }
   return result;
 }
 
