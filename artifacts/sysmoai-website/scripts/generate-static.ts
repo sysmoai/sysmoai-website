@@ -16,11 +16,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const DIST = path.join(ROOT, 'dist', 'public');
 
-// ---------------------------------------------------------------------------
-// Inline the minimal data we need so this script has zero extra imports
-// (blogPosts is huge — we pull only slug + title + metaDescription + publishDate)
-// ---------------------------------------------------------------------------
-
 // tsx resolves .js → .ts automatically in Node ESM mode
 const { seoConfig } = (await import('../src/data/seo.js')) as typeof import('../src/data/seo');
 const { blogPosts } = (await import('../src/data/blogPosts.js')) as typeof import('../src/data/blogPosts');

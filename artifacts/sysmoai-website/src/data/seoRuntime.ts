@@ -1,14 +1,4 @@
-/**
- * Lightweight runtime SEO metadata for the useSeo hook.
- *
- * IMPORTANT: This file must NEVER import blogPosts.ts (449KB+ of article bodies).
- * It exists solely to provide title/description/canonical/ogType for client-side
- * head tag updates on in-app navigation. Schemas are already baked into the
- * static HTML by generate-static.ts and do NOT need to be re-injected at runtime.
- *
- * Blog post routes are handled via pattern matching in useSeo.ts using the
- * document title already set by the BlogPost page component.
- */
+import { blogPostsMeta } from './blogMeta';
 
 export const SITE_URL = 'https://sysmoai.com';
 export const OG_IMAGE = `${SITE_URL}/opengraph.jpg`;
@@ -224,65 +214,59 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   },
 
   '/free-ai-audit': {
-    title: 'Free AI Audit | 30-Minute AI Business Assessment | SYSmoAI',
+    title: 'Free AI Audit — 30-Minute Session with Emon Hossain | SYSmoAI',
     description:
-      "Book your free 30-minute AI audit with SYSmoAI. We'll identify your biggest automation opportunity and give you a clear action plan — tools, costs, and timeline. No commitment.",
+      "Book your free 30-minute AI audit with SYSmoAI's founder Emon Hossain. Walk away with a clear automation opportunity, action plan, and cost estimate — no commitment required.",
     canonical: `${SITE_URL}/free-ai-audit`,
   },
 
   '/contact': {
-    title: 'Contact SYSmoAI | Start Your AI Project Today',
+    title: 'Contact SYSmoAI | AI Consulting Bangladesh — Book a Free Audit',
     description:
-      "Get in touch with SYSmoAI — Bangladesh's leading AI consulting company. WhatsApp, email, or book a discovery call. We respond within 2 hours on working days.",
+      'Get in touch with SYSmoAI. Book a free 30-minute AI audit, ask about our services, or start your AI journey today. WhatsApp, email, and contact form available.',
     canonical: `${SITE_URL}/contact`,
   },
 
   '/privacy-policy': {
     title: 'Privacy Policy | SYSmoAI',
-    description: "SYSmoAI's privacy policy — how we collect, use, and protect your personal information.",
+    description:
+      "SYSmoAI's privacy policy — how we collect, use, and protect your data in compliance with Bangladesh data protection guidelines.",
     canonical: `${SITE_URL}/privacy-policy`,
   },
 
   '/terms-of-service': {
     title: 'Terms of Service | SYSmoAI',
-    description: "SYSmoAI's terms of service — conditions for using our AI consulting services.",
+    description: "SYSmoAI's terms of service — the rules and agreements governing our AI consulting services.",
     canonical: `${SITE_URL}/terms-of-service`,
   },
 
   '/refund-policy': {
     title: 'Refund Policy | SYSmoAI',
-    description: "SYSmoAI's refund policy — our guarantee and refund conditions for all service packages.",
+    description: "SYSmoAI's refund policy — our guarantee and refund terms for all AI consulting services.",
     canonical: `${SITE_URL}/refund-policy`,
   },
 };
 
-/**
- * Get runtime SEO meta for a given location path.
- * For blog post routes (/blog/:slug), falls back to a pattern-based derivation
- * using whatever the page component has already set in document.title.
- */
-export function getRuntimeSeo(location: string): RuntimeSeo {
-  const found = runtimeSeoConfig[location];
-  if (found) return found;
-
-  // Blog post pattern: /blog/:slug
-  if (location.startsWith('/blog/')) {
-    const slug = location.slice('/blog/'.length);
-    const currentTitle = typeof document !== 'undefined' ? document.title : 'SYSmoAI Blog';
-    return {
-      title: currentTitle,
-      description: `Read the latest AI insights from SYSmoAI — ${slug.replace(/-/g, ' ')}.`,
-      canonical: `${SITE_URL}${location}`,
+const blogRuntimeConfig: Record<string, RuntimeSeo> = Object.fromEntries(
+  blogPostsMeta.map((post) => [
+    `/blog/${post.slug}`,
+    {
+      title: `${post.title} | SYSmoAI`,
+      description: post.metaDescription,
+      canonical: `${SITE_URL}/blog/${post.slug}`,
       ogType: 'article',
-    };
-  }
+    } satisfies RuntimeSeo,
+  ]),
+);
 
-  // Default fallback
-  return {
-    title: 'SYSmoAI — Systems in Motion | AI Consulting Bangladesh',
-    description:
-      "SYSmoAI is Bangladesh's premier AI consulting company specializing in AI automation, workflows, and AI agent development.",
-    canonical: `${SITE_URL}${location}`,
-    ogType: 'website',
-  };
+const DEFAULT_RUNTIME_SEO: RuntimeSeo = {
+  title: 'SYSmoAI — Systems in Motion | AI Consulting Bangladesh',
+  description:
+    "SYSmoAI is Bangladesh's premier AI consulting company specializing in AI automation, workflows, and AI agent development.",
+  canonical: `${SITE_URL}/`,
+  ogType: 'website',
+};
+
+export function getRuntimeSeo(location: string): RuntimeSeo {
+  return runtimeSeoConfig[location] ?? blogRuntimeConfig[location] ?? DEFAULT_RUNTIME_SEO;
 }
