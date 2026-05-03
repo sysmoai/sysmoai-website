@@ -6,8 +6,10 @@
 //   so they survive in-tab navigation across the funnel (post → /free-ai-audit
 //   → form submission).
 // - When the audit form submits, read the latest snapshot back out.
-// - Also fall back to document.referrer when no UTM is present, so external
-//   traffic still gets a coarse source.
+// - When a landing has no utm_* but DOES have an external `document.referrer`
+//   (i.e. the user came from another origin), persist a referrer-only
+//   snapshot so we still get a coarse source. Same-origin internal
+//   navigations are ignored so we don't overwrite a real campaign snapshot.
 //
 // We intentionally use sessionStorage (not localStorage) so that a returning
 // visitor who lands organically a week later isn't credited to the original
@@ -69,28 +71,50 @@ export function captureUtmFromLocation(): UtmSnapshot {
       typeof document !== "undefined" ? document.referrer : null,
     ),
   };
-  // Only persist when at least one campaign signal was on the URL — we do not
-  // want to clobber an existing real attribution with an empty fallback when
-  // the user navigates internally.
-  const hasAny =
+  const hasAnyUtm =
     fromUrl.utmSource ||
     fromUrl.utmMedium ||
     fromUrl.utmCampaign ||
     fromUrl.utmContent ||
     fromUrl.utmTerm;
-  if (hasAny) {
+
+  // External referrer = document.referrer set AND not from our own origin.
+  // We use this to persist a coarse source for direct/organic traffic that
+  // didn't come through a UTM-tagged link.
+  const externalReferrer = (() => {
+    if (!fromUrl.referrer) return null;
+    try {
+      const refOrigin = new URL(fromUrl.referrer).origin;
+      if (refOrigin === window.location.origin) return null;
+      return fromUrl.referrer;
+    } catch {
+      return fromUrl.referrer;
+    }
+  })();
+
+  // Persist when we have campaign signal OR a fresh external referrer.
+  // We deliberately skip persistence on plain same-origin nav so an
+  // internal hop doesn't clobber an earlier real attribution.
+  const existing = readUtmSnapshot();
+  if (hasAnyUtm) {
     const store = safeSession();
     if (store) {
-      try {
-        store.setItem(SESSION_KEY, JSON.stringify(fromUrl));
-      } catch {
-        // sessionStorage full / disabled — fine, we still return the snapshot
-      }
+      try { store.setItem(SESSION_KEY, JSON.stringify(fromUrl)); } catch {}
     }
     return fromUrl;
   }
-  // No UTM on URL → fall back to whatever we previously persisted.
-  return readUtmSnapshot();
+  if (externalReferrer && !existing.utmSource && !existing.utmCampaign) {
+    // Don't overwrite a previously captured UTM snapshot with a referrer-
+    // only one — campaign signal always beats coarse referrer.
+    const referrerOnly: UtmSnapshot = { ...EMPTY, referrer: externalReferrer };
+    const store = safeSession();
+    if (store) {
+      try { store.setItem(SESSION_KEY, JSON.stringify(referrerOnly)); } catch {}
+    }
+    return referrerOnly;
+  }
+  // No new signal → fall back to whatever we previously persisted.
+  return existing;
 }
 
 export function readUtmSnapshot(): UtmSnapshot {
