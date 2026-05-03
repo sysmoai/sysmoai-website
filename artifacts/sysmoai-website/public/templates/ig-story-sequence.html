@@ -79,13 +79,31 @@
         <div class="subhead success" style="margin-top: 28px;">No orders lost in the noise.</div>
       </div>
 
-      <div class="block center safe" style="top: 48%;">
-        <div class="body">
-          <span class="line">Verified result from an F-commerce client.</span>
+      <!-- Notion-style dashboard mock: a database view from a real
+           client build, "Orders / Last 7 days". -->
+      <div class="notion-card" style="top: 42%;">
+        <div class="nb-head">
+          <span class="dot"></span>
+          <span class="nb-title">Orders · Last 7 days</span>
+          <span class="nb-meta">Notion · auto-synced</span>
         </div>
-        <div class="body" style="margin-top:18px; color:#cbd5e1;">
+        <table>
+          <thead>
+            <tr><th>Day</th><th>DMs</th><th>Auto-replied</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Mon</td><td class="num">412</td><td class="num">412</td><td><span class="tag green">100%</span></td></tr>
+            <tr><td>Tue</td><td class="num">388</td><td class="num">388</td><td><span class="tag green">100%</span></td></tr>
+            <tr><td>Wed</td><td class="num">441</td><td class="num">441</td><td><span class="tag green">100%</span></td></tr>
+            <tr><td>Thu</td><td class="num">409</td><td class="num">409</td><td><span class="tag blue">F-Sprint</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="block center safe" style="top: 76%;">
+        <div class="body" style="font-size: 44px;">
           <strong style="color: var(--brand-soft);">F-Commerce AI Sprint</strong>
-          <br>৳50,000 · 14 days
+          · ৳50,000 · 14 days
         </div>
       </div>
 
