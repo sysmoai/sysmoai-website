@@ -17,6 +17,7 @@ import { SYSmoAILogo } from '@/components/SYSmoAILogo';
 import { LazyImage } from '@/components/LazyImage';
 import { BrandMarkConstruction } from '@/components/BrandMarkConstruction';
 import { useCreateWaitlistSignup } from '@workspace/api-client-react';
+import { captureUtmFromLocation, readUtmSnapshot } from '@/lib/utm';
 import { F_COMMERCE_PROOF } from '@/data/fCommerceProof';
 import { DirectAnswer } from '@/components/DirectAnswer';
 
@@ -321,13 +322,28 @@ function WaitlistSection({ isDark }: { isDark: boolean }) {
   const inputBorder = isDark ? 'rgba(255,255,255,0.12)' : '#BFDBFE';
   const inputText = isDark ? '#F1F5F9' : '#0A0B0F';
 
+  // Capture utm_* on mount so a campaign click that lands on the home page
+  // and converts via the hero waitlist form is still attributable.
+  useEffect(() => { captureUtmFromLocation(); }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || status === 'loading') return;
     setStatus('loading');
     try {
+      const utm = readUtmSnapshot();
       await createWaitlistSignup.mutateAsync({
-        data: { email, name: name || null, source: 'home_hero' },
+        data: {
+          email,
+          name: name || null,
+          source: 'home_hero',
+          utmSource: utm.utmSource,
+          utmMedium: utm.utmMedium,
+          utmCampaign: utm.utmCampaign,
+          utmContent: utm.utmContent,
+          utmTerm: utm.utmTerm,
+          referrer: utm.referrer,
+        },
       });
       setStatus('success');
       setEmail('');

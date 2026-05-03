@@ -43,9 +43,12 @@ turned into nothing. `Thread W1` → `thread1`, `IS3 — 3-Frame Seq` → `is3`,
 publishes in (W1 = 11–15 May 2026, W2 = 18–22 May, W3 = 25–29 May,
 W4 = 1–5 Jun).
 
-You do **not** need to hand-write these — both the `scheduled_posts.fileRef`
-slug and the `Performance` view in the admin compute the canonical campaign
-slug automatically.
+You do **not** need to hand-write these — `scripts/src/buildContentSchedule.ts`
+exposes `campaignSlugFor(weekNumber, fileRef)` and `auditUrlWithUtm(weekNumber,
+fileRef, platform)` and uses them to bake UTM URLs into every row of
+`contentSchedule.json` at build time. The admin **Performance** view + the
+`POST /admin/scheduled-posts/attribution-rollup` endpoint compute the same
+slug at read time so build-time and rollup-time stay in lockstep.
 
 ## How attribution flows
 
@@ -69,8 +72,10 @@ slug automatically.
 
 ## Building the URL during content writing
 
-When drafting a post body, write the placeholder `[A]` and let the
-operator (or a future codegen pass) substitute the full UTM URL based on
-the row's `fileRef` and week. The canonical resolver lives in
-`scripts/src/buildContentSchedule.ts` — `campaignSlugFor(row)` and
-`auditUrlWithUtm(row)`.
+When drafting a post body, write the plain URL `https://sysmoai.com/free-ai-audit`.
+At build time, `scripts/src/buildContentSchedule.ts` matches every plain
+audit URL in each row's `content` / `hookLine` and replaces it with the
+UTM-tagged variant computed by `auditUrlWithUtm(weekNumber, fileRef,
+platform)`. The substitution is idempotent — re-running the build never
+double-tags. Markdown content-pack files keep the plain URL so they stay
+human-readable; only the published JSON carries UTM URLs.

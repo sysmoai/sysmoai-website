@@ -85,8 +85,12 @@ function aggregate<K extends string>(
   rows: PostRow[],
   pick: (r: PostRow) => K,
 ): Aggregate[] {
+  // Apply the documented noise floor — pieces with very few clicks and no
+  // signups can't be interpreted, so they're excluded from the aggregate
+  // (treated as neutral, not as a negative signal).
   const m = new Map<K, { signups: number; pieces: number }>();
   for (const r of rows) {
+    if (r.clicks < NOISE_FLOOR_CLICKS && r.waitlistSignups === 0) continue;
     const k = pick(r);
     const cur = m.get(k) ?? { signups: 0, pieces: 0 };
     cur.signups += r.waitlistSignups;

@@ -532,11 +532,18 @@ router.get("/scheduled-posts/top-performers", async (req, res) => {
     campaignSlug,
   }));
 
-  // Aggregations span the WHOLE pack, not just the top N — otherwise we'd
-  // bias toward dimensions that already have high-signup pieces.
+  // Aggregations span the WHOLE pack so a high-converting hook isn't hidden
+  // by just appearing in fewer slots. We RANK by signups-per-piece (so a
+  // pillar with 1 piece × 10 signups beats one with 8 pieces × 12 signups),
+  // and apply the documented noise floor: pieces with < 50 clicks AND zero
+  // signups don't have enough data to interpret, so they're excluded
+  // entirely from both numerator and denominator (treated as neutral, not
+  // negative signal).
+  const NOISE_FLOOR_CLICKS = 50;
   const agg = <K extends string>(key: (r: ScheduledPost) => K) => {
     const m = new Map<K, { signups: number; pieces: number }>();
     for (const r of allPosts) {
+      if (r.clicks < NOISE_FLOOR_CLICKS && r.waitlistSignups === 0) continue;
       const k = key(r);
       const cur = m.get(k) ?? { signups: 0, pieces: 0 };
       cur.signups += r.waitlistSignups;
@@ -545,7 +552,12 @@ router.get("/scheduled-posts/top-performers", async (req, res) => {
     }
     return Array.from(m.entries())
       .map(([k, v]) => ({ key: k, ...v }))
-      .sort((a, b) => b.signups - a.signups);
+      .sort((a, b) => {
+        const aPer = a.pieces === 0 ? 0 : a.signups / a.pieces;
+        const bPer = b.pieces === 0 ? 0 : b.signups / b.pieces;
+        if (bPer !== aPer) return bPer - aPer;
+        return b.signups - a.signups;
+      });
   };
 
   const byPillar = agg((r) => r.pillar).map(({ key, signups, pieces }) => ({

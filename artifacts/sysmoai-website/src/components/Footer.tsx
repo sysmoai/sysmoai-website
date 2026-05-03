@@ -5,6 +5,7 @@ import { SYSmoAILogo } from './SYSmoAILogo';
 import { WA_LINK, EMAIL } from '@/lib/config';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useCreateWaitlistSignup } from '@workspace/api-client-react';
+import { captureUtmFromLocation, readUtmSnapshot } from '@/lib/utm';
 
 export function Footer() {
   const { isDark } = useTheme();
@@ -18,12 +19,29 @@ export function Footer() {
   const textColor = isDark ? '#64748B' : '#94A3B8';
   const hoverColor = isDark ? '#FFFFFF' : '#0A0B0F';
 
+  // Make sure we've captured any utm_* params from the URL on mount; the
+  // Free Audit page does the same. Safe to call repeatedly — only persists
+  // when the URL actually carries campaign signal.
+  React.useEffect(() => { captureUtmFromLocation(); }, []);
+
   const handleWaitlistSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || waitlistStatus === 'loading') return;
     setWaitlistStatus('loading');
     try {
-      await createWaitlistSignup.mutateAsync({ data: { email, source: 'footer' } });
+      const utm = readUtmSnapshot();
+      await createWaitlistSignup.mutateAsync({
+        data: {
+          email,
+          source: 'footer',
+          utmSource: utm.utmSource,
+          utmMedium: utm.utmMedium,
+          utmCampaign: utm.utmCampaign,
+          utmContent: utm.utmContent,
+          utmTerm: utm.utmTerm,
+          referrer: utm.referrer,
+        },
+      });
       setWaitlistStatus('success');
       setEmail('');
     } catch {

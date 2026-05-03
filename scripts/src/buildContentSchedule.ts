@@ -356,6 +356,107 @@ function extractBody(platform: Platform, fileRef: string): ExtractedBody {
   }
 }
 
+// ───────────────────────────────────────────── UTM URL substitution
+//
+// Every published audit CTA must carry UTM params so attribution lands on
+// the correct scheduled_posts row when the visitor submits the form. The
+// canonical URL builder lives here so there's exactly one place where the
+// scheme is encoded — `utm-scheme.md` documents it for content writers.
+//
+// utm_source is the human-friendly platform name (linkedin / x / instagram
+// / tiktok / newsletter), utm_medium is "social" for everything except
+// newsletter ("email"), and utm_campaign is `w<weekNumber>-<fileref-slug>`
+// where weekNumber is the BDT-Monday week index over the whole pack.
+
+const AUDIT_BASE = "https://sysmoai.com/free-ai-audit";
+
+function utmSourceForPlatform(platform: Platform): string {
+  switch (platform) {
+    case "linkedin": return "linkedin";
+    case "x_standalone":
+    case "x_thread": return "x";
+    case "instagram_feed":
+    case "instagram_story": return "instagram";
+    case "tiktok_reel": return "tiktok";
+    case "newsletter": return "newsletter";
+  }
+}
+
+function utmMediumForPlatform(platform: Platform): string {
+  return platform === "newsletter" ? "email" : "social";
+}
+
+function fileRefSlug(fileRef: string): string {
+  return fileRef.toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+export function campaignSlugFor(weekNumber: number, fileRef: string): string {
+  return `w${weekNumber}-${fileRefSlug(fileRef)}`;
+}
+
+export function auditUrlWithUtm(
+  weekNumber: number,
+  fileRef: string,
+  platform: Platform,
+): string {
+  const params = new URLSearchParams({
+    utm_source: utmSourceForPlatform(platform),
+    utm_medium: utmMediumForPlatform(platform),
+    utm_campaign: campaignSlugFor(weekNumber, fileRef),
+  });
+  return `${AUDIT_BASE}?${params.toString()}`;
+}
+
+/**
+ * Assign 1-based week numbers to rows by sorting unique BDT-Monday anchors.
+ * Mirrors scheduledPosts.ts so the canonical slug stays in sync between
+ * build-time (this script) and rollup-time (the API).
+ */
+function bdtMondayUtcMs(d: Date): number {
+  const fmt = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Dhaka",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    weekday: "short",
+  });
+  const parts = fmt.formatToParts(d);
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";
+  const y = Number(get("year"));
+  const m = Number(get("month"));
+  const day = Number(get("day"));
+  const wkdayShort = get("weekday");
+  const wkdayIdx: Record<string, number> = {
+    Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6,
+  };
+  const daysSinceMon = wkdayIdx[wkdayShort] ?? 0;
+  return Date.UTC(y, m - 1, day) - daysSinceMon * 86_400_000;
+}
+
+function assignWeekNumbers(rows: ScheduledRow[]): number[] {
+  const unique = Array.from(
+    new Set(rows.map((r) => bdtMondayUtcMs(new Date(r.scheduledFor)))),
+  ).sort((a, b) => a - b);
+  const weekByMonday = new Map<number, number>();
+  unique.forEach((ms, i) => weekByMonday.set(ms, i + 1));
+  return rows.map((r) => weekByMonday.get(bdtMondayUtcMs(new Date(r.scheduledFor))) ?? 1);
+}
+
+/**
+ * Replace every plain audit URL in the post body with its UTM-tagged
+ * variant. Matches `https://sysmoai.com/free-ai-audit` with an optional
+ * trailing slash and only when not already followed by a query string —
+ * so re-running the build is idempotent.
+ */
+const PLAIN_AUDIT_RE = new RegExp(
+  AUDIT_BASE.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(?!\\?)/?",
+  "g",
+);
+
+function applyUtmToBody(body: string, utmUrl: string): string {
+  return body.replace(PLAIN_AUDIT_RE, utmUrl);
+}
+
 // ───────────────────────────────────────────── Build
 
 function build() {
@@ -400,6 +501,28 @@ function build() {
     }
     seen.add(r.sequenceNo);
   }
+
+  // ── Bake UTM-tagged audit URLs into every row's content + hookLine.
+  // We do this AFTER initial build so the BDT-week index is computed across
+  // the full pack (W1 = first week, W2 = second, etc).
+  const weekNumbers = assignWeekNumbers(out);
+  let substitutions = 0;
+  for (let i = 0; i < out.length; i++) {
+    const row = out[i];
+    const week = weekNumbers[i];
+    const utmUrl = auditUrlWithUtm(week, row.fileRef, row.platform);
+    const newContent = applyUtmToBody(row.content, utmUrl);
+    if (newContent !== row.content) {
+      substitutions += (row.content.match(PLAIN_AUDIT_RE) ?? []).length;
+      row.content = newContent;
+    }
+    if (row.hookLine) {
+      row.hookLine = applyUtmToBody(row.hookLine, utmUrl);
+    }
+  }
+  // eslint-disable-next-line no-console
+  console.log(`Applied UTM to ${substitutions} audit URL occurrences.`);
+
   mkdirSync(dirname(OUT_PATH), { recursive: true });
   writeFileSync(OUT_PATH, JSON.stringify(out, null, 2) + "\n", "utf8");
   // eslint-disable-next-line no-console
