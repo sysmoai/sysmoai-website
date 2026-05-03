@@ -1,6 +1,6 @@
 {
   "name": "SYSmoAI — Content Pack Auto-Publisher",
-  "_about": "Hourly cron sweeps the queue for posts due in the next 24h, pushes text-only channels into Buffer with provider-side scheduled_at so each row publishes at its own BDT slot, sends the newsletter via Resend only when its slot is within the next hour, and posts a Slack manual-publish alert (also gated to within 1h of the slot) for IG / TikTok which need media-asset upload. X threads are split on '\\n---\\n', the 'Tweet N/M' header is stripped, and each tweet is sent as a real Buffer thread (text=tweet1, thread[][text]=tweet2..N). Rows already pushed (postUrl set) are skipped on later sweeps. Every Buffer / Resend node has continueErrorOutput → Slack failure channel. Required env: SYSMOAI_API_BASE, SYSMOAI_AUTOMATION_TOKEN, SYSMOAI_ADMIN_BASE, BUFFER_ACCESS_TOKEN, BUFFER_PROFILE_LINKEDIN, BUFFER_PROFILE_X, RESEND_API_KEY, NEWSLETTER_FROM, NEWSLETTER_AUDIENCE_ID, SLACK_FALLBACK_CHANNEL.",
+  "_about": "Hourly cron sweeps the queue for posts whose scheduledFor is in [now-30m, now+24h], pushes text-only channels into Buffer with provider-side scheduled_at so each row publishes at its own BDT slot, sends the newsletter via Resend within 1h of its slot, and (a) Buffer-schedules IG/TikTok with media when the operator has set assetUrl on the row, otherwise (b) posts a Slack manual-publish alert (also gated to within 1h of slot) so the operator can publish manually. X threads are split on '\\n---\\n', the 'Tweet N/M' header is stripped, and each tweet is sent as a real Buffer thread. Rows already pushed (postUrl set) are skipped on later sweeps. The lower bound on scheduledFor prevents stale queued rows from being re-sent. Required env: SYSMOAI_API_BASE, SYSMOAI_AUTOMATION_TOKEN, SYSMOAI_ADMIN_BASE, BUFFER_ACCESS_TOKEN, BUFFER_PROFILE_LINKEDIN, BUFFER_PROFILE_X, BUFFER_PROFILE_INSTAGRAM, BUFFER_PROFILE_TIKTOK, RESEND_API_KEY, NEWSLETTER_FROM, NEWSLETTER_AUDIENCE_ID, SLACK_FALLBACK_CHANNEL.",
   "nodes": [
     {
       "parameters": { "rule": { "interval": [{ "field": "hours", "hoursInterval": 1 }] } },
@@ -15,7 +15,8 @@
         "url": "={{ $env.SYSMOAI_API_BASE }}/api/admin/scheduled-posts",
         "qs": {
           "status": "queued",
-          "dueBefore": "={{ $now.plus({ hours: 24 }).toISO() }}",
+          "from": "={{ $now.minus({ minutes: 30 }).toISO() }}",
+          "to": "={{ $now.plus({ hours: 24 }).toISO() }}",
           "pageSize": 50
         },
         "options": {
@@ -27,10 +28,11 @@
         }
       },
       "id": "fetch-due",
-      "name": "Fetch posts due in next 24h",
+      "name": "Fetch posts in [now-30m, now+24h]",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [400, 360]
+      "position": [400, 360],
+      "_about": "Lower bound (now-30m) prevents stale queued rows (e.g. a slot we missed days ago) from being auto-published or auto-alerted. Upper bound (now+24h) is what feeds Buffer's provider-side scheduling queue."
     },
     {
       "parameters": { "fieldToSplitOut": "items", "options": {} },
@@ -52,8 +54,7 @@
       "name": "Skip if already queued",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
-      "position": [780, 360],
-      "_about": "Rows with postUrl set have already been pushed to Buffer or Slack-alerted — true branch (empty) continues, false dead-ends so we don't double-send."
+      "position": [780, 360]
     },
     {
       "parameters": {
@@ -65,7 +66,7 @@
             { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "newsletter", "outputIndex": 3 },
             { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "instagram_feed", "outputIndex": 4 },
             { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "instagram_story", "outputIndex": 4 },
-            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "tiktok_reel", "outputIndex": 4 }
+            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "tiktok_reel", "outputIndex": 5 }
           ]
         },
         "fallbackOutput": 4
@@ -97,7 +98,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "onError": "continueErrorOutput",
-      "position": [1200, 80]
+      "position": [1200, 60]
     },
     {
       "parameters": {
@@ -120,20 +121,19 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "onError": "continueErrorOutput",
-      "position": [1200, 240]
+      "position": [1200, 200]
     },
     {
       "parameters": {
         "language": "javaScript",
-        "jsCode": "// Split the thread body into individual tweets and POST a real Buffer thread.\n// Source format (from the parser): \"Tweet 1/N\\n<body>\\n\\n---\\n\\nTweet 2/N\\n<body>...\"\nconst row = $input.item.json;\nconst raw = String(row.content || '');\nconst tweets = raw\n  .split(/\\n-{3,}\\n/)\n  .map((part) => part.replace(/^\\s*Tweet\\s+\\d+\\s*\\/\\s*\\d+\\s*\\n/i, '').trim())\n  .filter((t) => t.length > 0);\nif (tweets.length === 0) {\n  throw new Error(`Thread row ${row.id} (${row.fileRef}) parsed to 0 tweets`);\n}\nfor (const t of tweets) {\n  if (t.length > 280) {\n    throw new Error(`Thread row ${row.id} has a tweet over 280 chars: ${t.length}`);\n  }\n}\nconst scheduledAt = Math.floor(new Date(row.scheduledFor).getTime() / 1000);\nconst params = new URLSearchParams();\nparams.append('access_token', String(process.env.BUFFER_ACCESS_TOKEN || ''));\nparams.append('profile_ids[]', String(process.env.BUFFER_PROFILE_X || ''));\nparams.append('scheduled_at', String(scheduledAt));\nparams.append('text', tweets[0]);\nfor (let i = 1; i < tweets.length; i += 1) {\n  // Buffer's threading parameter: each subsequent tweet is appended via thread[][text].\n  params.append('thread[][text]', tweets[i]);\n}\nconst resp = await fetch('https://api.bufferapp.com/1/updates/create.json', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },\n  body: params.toString(),\n});\nconst body = await resp.json().catch(() => ({}));\nif (!resp.ok || body.success === false) {\n  throw new Error(`Buffer thread schedule failed for ${row.fileRef}: ${resp.status} ${JSON.stringify(body).slice(0, 300)}`);\n}\nreturn { json: { tweetCount: tweets.length, bufferUpdateId: body && body.updates && body.updates[0] && body.updates[0].id, bufferResponse: body } };"
+        "jsCode": "// Split the thread body into individual tweets and POST a real Buffer thread.\n// Source format: \"Tweet 1/N\\n<body>\\n\\n---\\n\\nTweet 2/N\\n<body>...\"\nconst row = $input.item.json;\nconst raw = String(row.content || '');\nconst tweets = raw\n  .split(/\\n-{3,}\\n/)\n  .map((part) => part.replace(/^\\s*Tweet\\s+\\d+\\s*\\/\\s*\\d+\\s*\\n/i, '').trim())\n  .filter((t) => t.length > 0);\nif (tweets.length === 0) {\n  throw new Error(`Thread row ${row.id} (${row.fileRef}) parsed to 0 tweets`);\n}\nfor (const t of tweets) {\n  if (t.length > 280) {\n    throw new Error(`Thread row ${row.id} has a tweet over 280 chars: ${t.length}`);\n  }\n}\nconst scheduledAt = Math.floor(new Date(row.scheduledFor).getTime() / 1000);\nconst params = new URLSearchParams();\nparams.append('access_token', String(process.env.BUFFER_ACCESS_TOKEN || ''));\nparams.append('profile_ids[]', String(process.env.BUFFER_PROFILE_X || ''));\nparams.append('scheduled_at', String(scheduledAt));\nparams.append('text', tweets[0]);\nfor (let i = 1; i < tweets.length; i += 1) {\n  params.append('thread[][text]', tweets[i]);\n}\nconst resp = await fetch('https://api.bufferapp.com/1/updates/create.json', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },\n  body: params.toString(),\n});\nconst body = await resp.json().catch(() => ({}));\nif (!resp.ok || body.success === false) {\n  throw new Error(`Buffer thread schedule failed for ${row.fileRef}: ${resp.status} ${JSON.stringify(body).slice(0, 300)}`);\n}\nreturn { json: { tweetCount: tweets.length, bufferUpdateId: body && body.updates && body.updates[0] && body.updates[0].id, bufferResponse: body } };"
       },
       "id": "buffer-x-thread",
       "name": "Buffer schedule → X thread",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "onError": "continueErrorOutput",
-      "position": [1200, 400],
-      "_about": "Real X thread scheduling: parses the row's content into individual tweets (split on '---', strip 'Tweet N/M' headers), validates each ≤280 chars, then POSTs to Buffer with text=tweet1 + thread[][text]=tweet2..N. Buffer publishes the whole sequence at scheduled_at. Throws on any failure → Slack provider-failure branch."
+      "position": [1200, 340]
     },
     {
       "parameters": {
@@ -151,8 +151,7 @@
       "name": "Newsletter — due within 1h?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
-      "position": [1200, 560],
-      "_about": "Resend has no native scheduling — only fire when within the current cron window (≈1h)."
+      "position": [1200, 480]
     },
     {
       "parameters": {
@@ -175,7 +174,84 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "onError": "continueErrorOutput",
-      "position": [1420, 560]
+      "position": [1420, 480]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            { "value1": "={{ $json.assetUrl || '' }}", "operation": "isNotEmpty" }
+          ]
+        }
+      },
+      "id": "ig-has-asset",
+      "name": "IG — has assetUrl?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1200, 640],
+      "_about": "When the operator has attached an assetUrl in the admin UI, push to Buffer with provider-side scheduling. When not, fall through to the Slack 'manual publish at slot' branch."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.bufferapp.com/1/updates/create.json",
+        "sendBody": true,
+        "specifyBody": "form",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "access_token", "value": "={{ $env.BUFFER_ACCESS_TOKEN }}" },
+            { "name": "text", "value": "={{ $json.content }}" },
+            { "name": "profile_ids[]", "value": "={{ $env.BUFFER_PROFILE_INSTAGRAM }}" },
+            { "name": "scheduled_at", "value": "={{ Math.floor(new Date($json.scheduledFor).getTime() / 1000) }}" },
+            { "name": "media[photo]", "value": "={{ $json.assetUrl }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "buffer-instagram",
+      "name": "Buffer schedule → Instagram",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "onError": "continueErrorOutput",
+      "position": [1420, 640]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            { "value1": "={{ $json.assetUrl || '' }}", "operation": "isNotEmpty" }
+          ]
+        }
+      },
+      "id": "tiktok-has-asset",
+      "name": "TikTok — has assetUrl?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1200, 800]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.bufferapp.com/1/updates/create.json",
+        "sendBody": true,
+        "specifyBody": "form",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "access_token", "value": "={{ $env.BUFFER_ACCESS_TOKEN }}" },
+            { "name": "text", "value": "={{ $json.content }}" },
+            { "name": "profile_ids[]", "value": "={{ $env.BUFFER_PROFILE_TIKTOK }}" },
+            { "name": "scheduled_at", "value": "={{ Math.floor(new Date($json.scheduledFor).getTime() / 1000) }}" },
+            { "name": "media[video]", "value": "={{ $json.assetUrl }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "buffer-tiktok",
+      "name": "Buffer schedule → TikTok",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "onError": "continueErrorOutput",
+      "position": [1420, 800]
     },
     {
       "parameters": {
@@ -189,24 +265,23 @@
           ]
         }
       },
-      "id": "visual-due-now",
-      "name": "Visual — due within 1h?",
+      "id": "visual-manual-due-now",
+      "name": "Visual manual — due within 1h?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
-      "position": [1200, 720],
-      "_about": "IG / TikTok need a human to upload media. Only ping Slack when the row's BDT slot is within the next hour, so the operator gets the alert at the actual peak time — not 24h early."
+      "position": [1420, 960]
     },
     {
       "parameters": {
         "channel": "={{ $env.SLACK_FALLBACK_CHANNEL }}",
-        "text": "=📸 Manual publish needed *now* for *{{ $('Split items').item.json.fileRef }}* ({{ $('Split items').item.json.platform }}). Slot: {{ $('Split items').item.json.scheduledFor }}.\nWe don't auto-publish Instagram / TikTok yet (no asset hosting).\n\n*Hook:* {{ $('Split items').item.json.hookLine }}\n```{{ $('Split items').item.json.content }}```\nMark posted: {{ $env.SYSMOAI_ADMIN_BASE }}/scheduled-posts/{{ $('Split items').item.json.id }}",
+        "text": "=📸 Manual publish needed *now* for *{{ $('Split items').item.json.fileRef }}* ({{ $('Split items').item.json.platform }}). Slot: {{ $('Split items').item.json.scheduledFor }}.\nNo assetUrl set on this row — attach one in the admin UI to enable provider scheduling.\n\n*Hook:* {{ $('Split items').item.json.hookLine }}\n```{{ $('Split items').item.json.content }}```\nMark posted: {{ $env.SYSMOAI_ADMIN_BASE }}/scheduled-posts/{{ $('Split items').item.json.id }}",
         "otherOptions": {}
       },
       "id": "slack-visual-manual",
       "name": "Slack — visual manual publish",
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2,
-      "position": [1420, 720]
+      "position": [1640, 960]
     },
     {
       "parameters": {
@@ -214,7 +289,7 @@
         "url": "={{ $env.SYSMOAI_API_BASE }}/api/admin/scheduled-posts/{{ $('Split items').item.json.id }}",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"postUrl\": \"manual://{{ $('Split items').item.json.platform }}/{{ $('Split items').item.json.id }}\",\n  \"notes\": \"Manual publish requested in Slack at {{ $now.toISO() }} (visual asset required).\"\n}",
+        "jsonBody": "={\n  \"postUrl\": \"manual://{{ $('Split items').item.json.platform }}/{{ $('Split items').item.json.id }}\",\n  \"notes\": \"Manual publish requested in Slack at {{ $now.toISO() }} (no assetUrl).\"\n}",
         "options": {
           "headers": {
             "parameters": {
@@ -228,7 +303,7 @@
       "name": "Mark manual-pending",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [1640, 720]
+      "position": [1860, 960]
     },
     {
       "parameters": {
@@ -250,8 +325,8 @@
       "name": "Mark Buffer-queued",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [1640, 240],
-      "_about": "Stamps postUrl with the Buffer update id (using the original row id from Split items, NOT $json.id which is now Buffer's response). Skip-if-already-queued IF then ignores this row on the next sweep. Handles both Buffer HTTP responses and the X-thread Code-node payload shape."
+      "position": [1640, 200],
+      "_about": "Stamps postUrl with the Buffer update id (using the original row id from Split items, NOT $json.id which is now Buffer's response). Single sink for LinkedIn / X-standalone / X-thread / Instagram / TikTok success branches."
     },
     {
       "parameters": {
@@ -273,7 +348,7 @@
       "name": "Mark newsletter posted",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [1640, 560]
+      "position": [1640, 480]
     },
     {
       "parameters": {
@@ -285,13 +360,12 @@
       "name": "Slack — provider failure",
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2,
-      "position": [1640, 80],
-      "_about": "Receives error outputs from every Buffer / Resend / thread Code node (continueErrorOutput). Covers missing tokens / network failures / 4xx / thread-validation errors."
+      "position": [1860, 60]
     }
   ],
   "connections": {
-    "Every hour": { "main": [[{ "node": "Fetch posts due in next 24h", "type": "main", "index": 0 }]] },
-    "Fetch posts due in next 24h": { "main": [[{ "node": "Split items", "type": "main", "index": 0 }]] },
+    "Every hour": { "main": [[{ "node": "Fetch posts in [now-30m, now+24h]", "type": "main", "index": 0 }]] },
+    "Fetch posts in [now-30m, now+24h]": { "main": [[{ "node": "Split items", "type": "main", "index": 0 }]] },
     "Split items": { "main": [[{ "node": "Skip if already queued", "type": "main", "index": 0 }]] },
     "Skip if already queued": {
       "main": [
@@ -305,7 +379,8 @@
         [{ "node": "Buffer schedule → X (standalone)", "type": "main", "index": 0 }],
         [{ "node": "Buffer schedule → X thread", "type": "main", "index": 0 }],
         [{ "node": "Newsletter — due within 1h?", "type": "main", "index": 0 }],
-        [{ "node": "Visual — due within 1h?", "type": "main", "index": 0 }]
+        [{ "node": "IG — has assetUrl?", "type": "main", "index": 0 }],
+        [{ "node": "TikTok — has assetUrl?", "type": "main", "index": 0 }]
       ]
     },
     "Buffer schedule → LinkedIn": {
@@ -330,7 +405,27 @@
       "main": [[{ "node": "Mark newsletter posted", "type": "main", "index": 0 }]],
       "error": [[{ "node": "Slack — provider failure", "type": "main", "index": 0 }]]
     },
-    "Visual — due within 1h?": {
+    "IG — has assetUrl?": {
+      "main": [
+        [{ "node": "Buffer schedule → Instagram", "type": "main", "index": 0 }],
+        [{ "node": "Visual manual — due within 1h?", "type": "main", "index": 0 }]
+      ]
+    },
+    "Buffer schedule → Instagram": {
+      "main": [[{ "node": "Mark Buffer-queued", "type": "main", "index": 0 }]],
+      "error": [[{ "node": "Slack — provider failure", "type": "main", "index": 0 }]]
+    },
+    "TikTok — has assetUrl?": {
+      "main": [
+        [{ "node": "Buffer schedule → TikTok", "type": "main", "index": 0 }],
+        [{ "node": "Visual manual — due within 1h?", "type": "main", "index": 0 }]
+      ]
+    },
+    "Buffer schedule → TikTok": {
+      "main": [[{ "node": "Mark Buffer-queued", "type": "main", "index": 0 }]],
+      "error": [[{ "node": "Slack — provider failure", "type": "main", "index": 0 }]]
+    },
+    "Visual manual — due within 1h?": {
       "main": [
         [{ "node": "Slack — visual manual publish", "type": "main", "index": 0 }],
         []

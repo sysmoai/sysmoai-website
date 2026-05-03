@@ -59,6 +59,7 @@ interface CalendarRow {
 
 interface ScheduledRow {
   sequenceNo: number;
+  assetUrl: string | null;
   fileRef: string;
   platform: Platform;
   pillar: string;
@@ -385,6 +386,10 @@ function build() {
       hookLine: body.hookLine,
       content: body.content,
       scheduledFor,
+      // Operators populate assetUrl via the admin UI for IG / TikTok rows.
+      // When set, n8n hands the post to Buffer with media[photo|video]; when
+      // null, n8n falls back to a Slack manual-publish alert at the slot.
+      assetUrl: null,
     });
   }
   // Sanity: unique sequence numbers

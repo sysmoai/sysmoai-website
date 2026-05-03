@@ -33,6 +33,7 @@ interface SeedRow {
   hookLine: string | null;
   content: string;
   scheduledFor: string;
+  assetUrl?: string | null;
 }
 
 function loadSchedule(): SeedRow[] {
@@ -180,10 +181,16 @@ router.post("/scheduled-posts/seed", async (req, res) => {
       updatedAt: new Date(),
     };
     if (!prev) {
-      await db.insert(scheduledPostsTable).values(canonical);
+      // Honor the seed's assetUrl on first insert (null by default — the
+      // operator sets it later from the admin UI for IG / TikTok rows).
+      await db.insert(scheduledPostsTable).values({
+        ...canonical,
+        assetUrl: row.assetUrl ?? null,
+      });
       imported += 1;
     } else {
-      // Refresh canonical fields, leave operational fields intact
+      // Refresh canonical fields, leave operational fields intact (including
+      // any assetUrl the operator has already attached).
       await db
         .update(scheduledPostsTable)
         .set(canonical)

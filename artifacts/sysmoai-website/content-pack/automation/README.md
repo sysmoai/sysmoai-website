@@ -23,7 +23,9 @@ imported into the admin queue and operated as a publishing dashboard.
    waitlist signups.
 5. **Automate** — `n8n-workflow.json` is an hourly sweeper that hands posts
    off to the right channel **using each row's own BDT slot**:
-   1. Polls `GET /api/admin/scheduled-posts?status=queued&dueBefore=<now+24h>`.
+   1. Polls `GET /api/admin/scheduled-posts?status=queued&from=<now-30m>&to=<now+24h>`.
+      The lower bound (`now-30m`) prevents stale queued rows (e.g. a slot
+      we missed days ago) from being auto-published or auto-alerted.
    2. Skips rows whose `postUrl` is already populated (already pushed).
    3. Routes by `platform`:
       - **LinkedIn / X standalone** → pushed to **Buffer** with
@@ -35,13 +37,21 @@ imported into the admin queue and operated as a publishing dashboard.
         validates each ≤ 280 chars), then schedules a real Buffer X thread
         (`text=tweet1`, `thread[][text]=tweet2..N`, single
         `scheduled_at`). Buffer fires the whole sequence at the slot.
+      - **Instagram feed / story** → IF `assetUrl` is set on the row,
+        pushed to **Buffer** with `scheduled_at = scheduledFor` and
+        `media[photo] = assetUrl`. If `assetUrl` is empty, falls through to
+        a Slack manual-publish alert (gated to "within 1h of slot") so the
+        operator publishes at the peak time.
+      - **TikTok** → IF `assetUrl` is set, pushed to **Buffer** with
+        `media[video] = assetUrl`. Same Slack-at-slot fallback when no
+        asset is attached.
       - **Newsletter** → only sent when its slot is within the next hour
         (Resend has no provider-side scheduling), via Resend's `/emails`.
-      - **Instagram feed / story / TikTok** → also gated to "due within
-        1h", then posts a Slack alert with the full copy + admin deep link
-        so the operator publishes manually at the actual peak slot. We do
-        not auto-publish visual channels until media asset hosting is in
-        place.
+
+   Operators attach IG / TikTok asset URLs from the post detail page in
+   the admin UI; once `assetUrl` is set, the next sweep will hand the row
+   to Buffer with provider-side scheduling and no further manual action
+   is required.
    4. After Buffer accepts a post, the workflow PATCHes the row with
       `postUrl=buffer://<update-id>` and a note. Status stays `queued` —
       Buffer flips it to live at the slot, and the operator marks it posted
@@ -76,11 +86,11 @@ edit `content-pack/calendar.md` dates, re-run the build script, and click
 |-----------------|------------------|-------------------------------------|----------------------------------------------------|
 | LinkedIn        | Buffer           | Provider-side `scheduled_at`        | Fully automated                                    |
 | X standalone    | Buffer           | Provider-side `scheduled_at`        | Fully automated                                    |
-| X thread        | Buffer (real thread) | Provider-side `scheduled_at`    | Code node splits + sends `thread[][text]` for tweets 2..N |
+| X thread        | Buffer (real thread) | Provider-side `scheduled_at`    | Code node splits + sends `thread[][text]` 2..N    |
 | Newsletter      | Resend           | Cron must hit within 1h of slot     | Hourly cron + 1h IF gate                          |
-| Instagram feed  | Slack alert      | Cron + 1h IF gate (alert at slot)   | Operator publishes manually (asset upload)        |
-| Instagram story | Slack alert      | Cron + 1h IF gate (alert at slot)   | Operator publishes manually (asset upload)        |
-| TikTok / Reel   | Slack alert      | Cron + 1h IF gate (alert at slot)   | Operator publishes manually (video upload)        |
+| Instagram feed  | Buffer w/ media OR Slack | Provider-side if `assetUrl` set; else Slack at slot | Set `assetUrl` in admin UI to fully automate |
+| Instagram story | Buffer w/ media OR Slack | Provider-side if `assetUrl` set; else Slack at slot | Set `assetUrl` in admin UI to fully automate |
+| TikTok / Reel   | Buffer w/ media OR Slack | Provider-side if `assetUrl` set; else Slack at slot | Set `assetUrl` (video URL) in admin UI       |
 
 ## Authentication (least-privilege M2M)
 
