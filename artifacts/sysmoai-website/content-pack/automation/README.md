@@ -26,16 +26,22 @@ imported into the admin queue and operated as a publishing dashboard.
    1. Polls `GET /api/admin/scheduled-posts?status=queued&dueBefore=<now+24h>`.
    2. Skips rows whose `postUrl` is already populated (already pushed).
    3. Routes by `platform`:
-      - **LinkedIn / X (standalone + thread)** → pushed to **Buffer** with
+      - **LinkedIn / X standalone** → pushed to **Buffer** with
         `scheduled_at = scheduledFor` (unix epoch). Buffer publishes at the
         row's exact peak slot — the cron only acts as a queue feeder, so
         slot timing is preserved no matter when the cron fires.
+      - **X thread** → a Code node parses `content` into individual tweets
+        (split on `\n---\n`, strips the leading `Tweet N/M` header,
+        validates each ≤ 280 chars), then schedules a real Buffer X thread
+        (`text=tweet1`, `thread[][text]=tweet2..N`, single
+        `scheduled_at`). Buffer fires the whole sequence at the slot.
       - **Newsletter** → only sent when its slot is within the next hour
         (Resend has no provider-side scheduling), via Resend's `/emails`.
-      - **Instagram feed / story / TikTok** → posts a Slack alert with the
-        full copy + admin deep link, so the operator can publish manually at
-        the slot. We do not auto-publish visual channels until media asset
-        hosting is in place.
+      - **Instagram feed / story / TikTok** → also gated to "due within
+        1h", then posts a Slack alert with the full copy + admin deep link
+        so the operator publishes manually at the actual peak slot. We do
+        not auto-publish visual channels until media asset hosting is in
+        place.
    4. After Buffer accepts a post, the workflow PATCHes the row with
       `postUrl=buffer://<update-id>` and a note. Status stays `queued` —
       Buffer flips it to live at the slot, and the operator marks it posted
@@ -70,24 +76,32 @@ edit `content-pack/calendar.md` dates, re-run the build script, and click
 |-----------------|------------------|-------------------------------------|----------------------------------------------------|
 | LinkedIn        | Buffer           | Provider-side `scheduled_at`        | Fully automated                                    |
 | X standalone    | Buffer           | Provider-side `scheduled_at`        | Fully automated                                    |
-| X thread        | Buffer (1st post)| Provider-side `scheduled_at`        | Reply tweets posted manually from the same draft  |
+| X thread        | Buffer (real thread) | Provider-side `scheduled_at`    | Code node splits + sends `thread[][text]` for tweets 2..N |
 | Newsletter      | Resend           | Cron must hit within 1h of slot     | Hourly cron + 1h IF gate                          |
-| Instagram feed  | Slack alert      | Cron sends alert at sweep time      | Operator publishes manually (asset upload)        |
-| Instagram story | Slack alert      | Cron sends alert at sweep time      | Operator publishes manually (asset upload)        |
-| TikTok / Reel   | Slack alert      | Cron sends alert at sweep time      | Operator publishes manually (video upload)        |
+| Instagram feed  | Slack alert      | Cron + 1h IF gate (alert at slot)   | Operator publishes manually (asset upload)        |
+| Instagram story | Slack alert      | Cron + 1h IF gate (alert at slot)   | Operator publishes manually (asset upload)        |
+| TikTok / Reel   | Slack alert      | Cron + 1h IF gate (alert at slot)   | Operator publishes manually (video upload)        |
 
-## Authentication
+## Authentication (least-privilege M2M)
 
 n8n authenticates to the admin API with a static bearer token, **not** a
-Clerk session — see `artifacts/api-server/src/middlewares/requireAdmin.ts`.
+Clerk session.
+
+The bearer-token path is implemented in
+`artifacts/api-server/src/middlewares/requireAdminOrAutomation.ts` and is
+mounted **only on the `/api/admin/scheduled-posts/*` router**. Every other
+admin route (waitlist, contacts, audits, sprint availability, …) keeps the
+Clerk-only `requireAdmin` middleware. So even if the automation token leaks,
+the blast radius is restricted to the publishing queue — no PII access.
 
 Set the secret on **both sides**:
 
 - API server env: `SYSMOAI_AUTOMATION_TOKEN=<long random string, ≥ 24 chars>`
 - n8n credential: same value, sent as `Authorization: Bearer …`
 
-If the env var is unset, the bypass is disabled and the API only accepts
-Clerk-authenticated admins (the human dashboard path keeps working).
+If the env var is unset (or under 24 chars) the bypass is disabled, and the
+publishing endpoints fall back to Clerk-only auth — the human dashboard
+path keeps working in either case.
 
 ## Environment
 

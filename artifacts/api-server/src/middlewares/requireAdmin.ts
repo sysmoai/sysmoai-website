@@ -16,45 +16,11 @@ declare global {
   }
 }
 
-const AUTOMATION_USER_ID = "service:automation";
-const AUTOMATION_EMAIL = "automation@sysmoai.local";
-
-function timingSafeEquals(a: string, b: string): boolean {
-  if (a.length !== b.length) return false;
-  let mismatch = 0;
-  for (let i = 0; i < a.length; i += 1) {
-    mismatch |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  }
-  return mismatch === 0;
-}
-
-function extractBearer(req: Request): string | null {
-  const header = req.header("authorization") ?? req.header("Authorization");
-  if (!header) return null;
-  const [scheme, token] = header.split(" ", 2);
-  if (!scheme || scheme.toLowerCase() !== "bearer" || !token) return null;
-  return token.trim();
-}
-
 export async function requireAdmin(
   req: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> {
-  // Machine-to-machine path: a static bearer token lets n8n / cron / other
-  // backend automations call admin endpoints without holding a Clerk session.
-  // Set SYSMOAI_AUTOMATION_TOKEN in the deployment env (long random string)
-  // and pass `Authorization: Bearer <token>` from the automation runtime.
-  const automationToken = process.env.SYSMOAI_AUTOMATION_TOKEN;
-  if (automationToken && automationToken.length >= 24) {
-    const presented = extractBearer(req);
-    if (presented && timingSafeEquals(presented, automationToken)) {
-      req.admin = { userId: AUTOMATION_USER_ID, email: AUTOMATION_EMAIL };
-      next();
-      return;
-    }
-  }
-
   const auth = getAuth(req);
   const userId = auth?.userId;
 

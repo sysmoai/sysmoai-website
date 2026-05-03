@@ -17,7 +17,7 @@ import {
   GetScheduledPostsSummaryResponse,
   SeedScheduledPostsResponse,
 } from "@workspace/api-zod";
-import { requireAdmin } from "../middlewares/requireAdmin";
+import { requireAdminOrAutomation } from "../middlewares/requireAdminOrAutomation";
 import { validateBody, validateListQuery } from "../lib/validation";
 import { rowsToCsv } from "../lib/csv";
 
@@ -68,7 +68,7 @@ function serialize(row: ScheduledPost) {
 
 const router: IRouter = Router();
 
-router.use(requireAdmin);
+router.use(requireAdminOrAutomation);
 
 // ─── Summary ────────────────────────────────────────────────────────────
 
