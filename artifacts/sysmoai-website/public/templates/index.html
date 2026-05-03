@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SYSmoAI Social Templates</title>
+<link rel="stylesheet" href="./templates.css">
+<style>
+  body { background: #0A0B0F; }
+  .gallery { max-width: 1100px; margin: 0 auto; padding: 64px 32px; }
+  .gallery h1 { font-size: 36px; font-weight: 800; letter-spacing: -0.02em; }
+  .gallery h1 small { display:block; margin-top: 8px; font-size: 16px; color: #94a3b8; font-weight: 400; }
+  .grid { margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+  .card { background: #11141b; border: 1px solid #1f2937; border-radius: 18px; padding: 24px; transition: transform .15s ease, border-color .15s ease; text-decoration: none; color: inherit; display: block; }
+  .card:hover { transform: translateY(-2px); border-color: #2563EB; }
+  .card .tag { display: inline-block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #2563EB; font-weight: 700; }
+  .card h3 { margin: 10px 0 6px; font-size: 20px; font-weight: 700; }
+  .card p { color: #94a3b8; font-size: 14px; line-height: 1.5; }
+  .meta-row { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill { background: rgba(37,99,235,0.12); color: #93c5fd; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+  .note { background: #11141b; border: 1px solid #1f2937; border-radius: 14px; padding: 18px 22px; margin-top: 32px; color: #cbd5e1; font-size: 14px; line-height: 1.6; }
+  .note code { background: #0A0B0F; padding: 2px 6px; border-radius: 6px; color: #93c5fd; }
+</style>
+</head>
+<body>
+<div class="gallery">
+  <h1>SYSmoAI Social Templates
+    <small>On-brand 1080 × 1920 templates for the content pack · #0A0B0F bg · #2563EB brand · Inter</small>
+  </h1>
+
+  <div class="note">
+    Each template renders at exact post dimensions inside a scaled preview frame. To export,
+    open the template, set browser zoom to 100%, then in DevTools right-click the
+    <code>.frame</code> element → <code>Capture node screenshot</code> for a pixel-perfect
+    1080 × 1920 PNG. All copy is editable in the HTML — duplicate a file to spin a new variant.
+    Brand tokens live in <code>templates.css</code>. Bookmark this page at
+    <code>/templates/index.html</code> (the SPA owns <code>/templates/</code> without a filename).
+  </div>
+
+  <div class="grid">
+    <a class="card" href="./ig-story-single.html">
+      <span class="tag">IG Story · Single frame</span>
+      <h3>IS1 — "847 unread."</h3>
+      <p>One-shot pain hook with red-tinted background and oversized notification badge.</p>
+      <div class="meta-row"><span class="pill">Pain · TOF</span><span class="pill">1 frame</span><span class="pill">CTA: free-ai-audit</span></div>
+    </a>
+
+    <a class="card" href="./ig-story-poll.html">
+      <span class="tag">IG Story · Poll + Reveal</span>
+      <h3>IS2 — "Honest question:"</h3>
+      <p>2-frame engagement set: native poll mock today, big-number reveal tomorrow.</p>
+      <div class="meta-row"><span class="pill">Educational</span><span class="pill">2 frames</span><span class="pill">CTA on reveal</span></div>
+    </a>
+
+    <a class="card" href="./ig-story-sequence.html">
+      <span class="tag">IG Story · 3-frame sequence</span>
+      <h3>IS3 — Problem → Solution → Result</h3>
+      <p>Chat-overflow → auto-reply mock → "400+ DMs/day automated" payoff frame.</p>
+      <div class="meta-row"><span class="pill">F-Commerce</span><span class="pill">3 frames</span><span class="pill">CTA on F3</span></div>
+    </a>
+
+    <a class="card" href="./ig-story-tips.html">
+      <span class="tag">IG Story · Tips list</span>
+      <h3>IS6 — 3 systems to build first</h3>
+      <p>"Tip 1 / 3" sequence with decorative numerals — auto-reply, Notion CRM, follow-up flow.</p>
+      <div class="meta-row"><span class="pill">Educational</span><span class="pill">3 frames</span><span class="pill">CTA on F3</span></div>
+    </a>
+
+    <a class="card" href="./reel-title-1.html">
+      <span class="tag">Reel / TikTok · Title card</span>
+      <h3>TR1 — "847 unread messages."</h3>
+      <p>Specificity-signal hook with phone-glow mock; freeze-frame for the first 3s.</p>
+      <div class="meta-row"><span class="pill">Pain · TOF</span><span class="pill">Hook frame</span><span class="pill">CTA bar</span></div>
+    </a>
+
+    <a class="card" href="./reel-title-2.html">
+      <span class="tag">Reel / TikTok · Title card</span>
+      <h3>TR3 — "What does 400 DMs/day automated look like?"</h3>
+      <p>Curiosity-gap hook with chat bubbles showing instant Bangla auto-reply.</p>
+      <div class="meta-row"><span class="pill">F-Commerce</span><span class="pill">Hook frame</span><span class="pill">CTA bar</span></div>
+    </a>
+  </div>
+</div>
+</body>
+</html>

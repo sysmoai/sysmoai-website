@@ -1,0 +1,388 @@
+/* SYSmoAI social templates — brand-locked, 1080x1920 frames.
+ * Colors mirror sysmoai.com (#0A0B0F bg, #2563EB brand blue, white type).
+ * Use the print/screenshot view at /templates/<name>.html, then export at
+ * device pixel ratio 1 for an exact 1080x1920 PNG (or 2160x3840 at 2x).
+ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --bg: #0A0B0F;
+  --brand: #2563EB;
+  --brand-soft: #3B82F6;
+  --brand-deep: #1D4ED8;
+  --brand-tint: #BFDBFE;
+  --text: #ffffff;
+  --muted: #94A3B8;
+  --muted-2: #64748B;
+  --danger: #FCA5A5;
+  --danger-deep: rgba(180, 0, 0, 0.18);
+  --success: #86EFAC;
+  --line: rgba(255, 255, 255, 0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #1f2937; color: var(--text); font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+
+/* Stage = scrollable workspace, scales frames down for on-screen viewing. */
+.stage {
+  min-height: 100vh;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+.stage h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #e2e8f0;
+  letter-spacing: 0.02em;
+}
+.stage h1 small {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.frame-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* The frame is the export surface. Lock at 1080x1920, scale via CSS zoom. */
+.frame {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  background: var(--bg);
+  overflow: hidden;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--text);
+  /* Down-scale for previewing in the browser; doesn't affect screenshots
+   * taken at the .frame element directly. */
+  zoom: 0.32;
+  border: 1px solid #1e293b;
+  border-radius: 18px;
+}
+@media (min-width: 1400px) {
+  .frame { zoom: 0.4; }
+}
+
+/* Safe zone: IG keeps content between 14% and 80% vertical. */
+.safe { position: absolute; left: 0; right: 0; }
+
+/* Tap hint — bottom safe zone, centered. */
+.tap-hint {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 6%;
+  text-align: center;
+  font-size: 38px;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Progress indicators (dots or pill). */
+.progress-dots {
+  position: absolute;
+  top: 4%;
+  left: 0; right: 0;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+.progress-dots span {
+  width: 56px; height: 8px; border-radius: 4px;
+  background: rgba(255,255,255,0.18);
+}
+.progress-dots span.on { background: var(--brand); }
+
+.progress-pill {
+  position: absolute;
+  top: 4.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--brand);
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 999px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* CTA strip (bottom). Sized to fit on one line at 1080px wide. */
+.cta {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 11%;
+  padding: 30px 48px;
+  font-weight: 700;
+  text-align: center;
+  font-size: 50px;
+  line-height: 1.15;
+}
+.cta--blue { background: var(--brand); color: white; }
+.cta--bordered {
+  background: rgba(15, 18, 26, 0.85);
+  border-top: 4px solid var(--brand);
+  color: white;
+}
+.cta .sub {
+  display: block;
+  margin-top: 12px;
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--brand-tint);
+  letter-spacing: 0.02em;
+}
+
+/* Brand chip — bottom-left for credit. */
+.brand-chip {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 3.5%;
+  text-align: center;
+  font-size: 28px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  font-weight: 600;
+}
+.brand-chip strong { color: var(--text); letter-spacing: 0.18em; }
+
+/* Vertically positioned text block (use top/bottom %). */
+.block { position: absolute; left: 8%; right: 8%; }
+.block.center { text-align: center; }
+.block.left { text-align: left; }
+
+.headline {
+  font-weight: 800;
+  font-size: 130px;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+.headline.smaller { font-size: 110px; }
+.subhead {
+  font-weight: 600;
+  font-size: 88px;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+.subhead.danger { color: var(--danger); }
+.subhead.success { color: var(--success); }
+.subhead.muted { color: var(--muted); }
+.body {
+  font-size: 56px;
+  line-height: 1.35;
+  color: var(--muted);
+  font-weight: 400;
+}
+.body strong, .body .accent { color: var(--brand-soft); font-weight: 600; }
+.body .line { display: block; margin-bottom: 14px; }
+
+/* Decorative number watermark (tips list). */
+.watermark {
+  position: absolute;
+  font-weight: 900;
+  font-size: 720px;
+  color: var(--brand);
+  opacity: 0.18;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  user-select: none;
+}
+
+/* Background tint helpers. */
+.bg-red-tint::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(60% 50% at 50% 30%, rgba(220, 38, 38, 0.22), transparent 70%),
+              linear-gradient(180deg, rgba(180, 0, 0, 0.08), transparent 60%);
+  pointer-events: none;
+}
+.bg-blue-glow::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(45% 35% at 50% 35%, rgba(37, 99, 235, 0.28), transparent 70%);
+  pointer-events: none;
+}
+.bg-green-glow::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(50% 40% at 50% 30%, rgba(34, 197, 94, 0.18), transparent 70%);
+  pointer-events: none;
+}
+
+/* Notification badge (IS1). */
+.badge {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-8deg);
+  width: 460px; height: 460px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ef4444, #b91c1c 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 220px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: white;
+  box-shadow: 0 40px 90px rgba(220, 38, 38, 0.45),
+              inset 0 -20px 60px rgba(0,0,0,0.35);
+}
+.badge::after {
+  content: '';
+  position: absolute;
+  inset: -36px;
+  border-radius: 50%;
+  border: 3px dashed rgba(239, 68, 68, 0.35);
+}
+
+/* Poll widget mock (IS2). */
+.poll-card {
+  position: absolute;
+  left: 8%; right: 8%;
+  top: 48%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--line);
+  border-radius: 36px;
+  padding: 36px 40px;
+  backdrop-filter: blur(8px);
+}
+.poll-q { font-size: 44px; font-weight: 600; color: #cbd5e1; margin-bottom: 28px; text-align: center; }
+.poll-options { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.poll-option {
+  background: rgba(255,255,255,0.05);
+  border: 1.5px solid var(--line);
+  border-radius: 24px;
+  padding: 32px 16px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 46px;
+  color: white;
+}
+.poll-option.danger { background: rgba(239, 68, 68, 0.12); border-color: rgba(239, 68, 68, 0.35); }
+.poll-option.success { background: rgba(34, 197, 94, 0.12); border-color: rgba(34, 197, 94, 0.35); }
+
+/* Reveal number (IS2 reveal). */
+.reveal-number {
+  position: absolute;
+  left: 0; right: 0;
+  top: 32%;
+  text-align: center;
+  font-size: 360px;
+  font-weight: 900;
+  color: var(--brand);
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+.reveal-sub {
+  position: absolute; left: 0; right: 0;
+  top: 56%;
+  text-align: center;
+  font-size: 56px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Mockup card for sequences (chat / dashboard look). */
+.mock {
+  position: absolute;
+  left: 8%; right: 8%;
+  background: #11141b;
+  border: 1px solid #1f2937;
+  border-radius: 28px;
+  padding: 28px;
+  font-size: 32px;
+  color: #e2e8f0;
+}
+.mock-row { display: flex; align-items: center; gap: 18px; padding: 14px 0; border-bottom: 1px solid #1f2937; }
+.mock-row:last-child { border-bottom: 0; }
+.mock-dot { width: 14px; height: 14px; border-radius: 50%; }
+.mock-dot.red { background: #ef4444; }
+.mock-dot.green { background: #22c55e; }
+.mock-dot.blue { background: var(--brand); }
+.mock-pill {
+  margin-left: auto; font-size: 26px; padding: 6px 14px; border-radius: 999px;
+  background: rgba(239, 68, 68, 0.18); color: #fca5a5; font-weight: 700;
+}
+.mock-pill.green { background: rgba(34, 197, 94, 0.18); color: #86efac; }
+
+/* Reel title-card specific. */
+.reel-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10,11,15,0.55) 0%, rgba(10,11,15,0.35) 40%, rgba(10,11,15,0.85) 100%);
+}
+.reel-eyebrow {
+  position: absolute;
+  top: 12%;
+  left: 0; right: 0;
+  text-align: center;
+  font-size: 38px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--brand-soft);
+  font-weight: 700;
+}
+.reel-headline {
+  position: absolute;
+  left: 7%; right: 7%;
+  top: 30%;
+  font-size: 150px;
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+.reel-headline em { font-style: normal; color: var(--brand-soft); }
+.reel-sub {
+  position: absolute;
+  left: 7%; right: 7%;
+  top: 65%;
+  font-size: 56px;
+  font-weight: 500;
+  color: var(--muted);
+  line-height: 1.25;
+}
+.reel-cta {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 8%;
+  text-align: center;
+  font-size: 44px;
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.reel-cta span { color: var(--brand-soft); }
+
+/* Phone-style chat bubbles (used in reel-title-2). */
+.chat-strip {
+  position: absolute;
+  left: 7%; right: 7%;
+  top: 18%;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.bubble {
+  max-width: 70%;
+  padding: 24px 32px;
+  border-radius: 36px;
+  font-size: 36px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+.bubble.in { align-self: flex-start; background: #1f2937; color: #f1f5f9; border-bottom-left-radius: 8px; }
+.bubble.out { align-self: flex-end; background: var(--brand); color: white; border-bottom-right-radius: 8px; }
+.bubble .meta { display: block; font-size: 22px; opacity: 0.7; margin-top: 8px; font-weight: 400; }
