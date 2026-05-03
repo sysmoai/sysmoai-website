@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 import { WA_URLS } from '@/lib/whatsapp';
+import { SprintSlots } from '@/components/SprintSlots';
 
 export default function StickyCTA() {
   const [visible, setVisible] = useState(false);
@@ -19,6 +20,7 @@ export default function StickyCTA() {
         <div className="hidden sm:block">
           <p className="text-white text-sm font-semibold">Stop losing orders in your DMs.</p>
           <p className="text-slate-400 text-xs">Free 30-min F-Commerce AI audit · No commitment</p>
+          <SprintSlots variant="compact" className="mt-1" />
         </div>
         <div className="flex gap-3 w-full sm:w-auto">
           <Link href="/free-ai-audit"

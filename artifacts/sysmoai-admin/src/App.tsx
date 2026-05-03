@@ -34,6 +34,7 @@ import { AuditsPage } from "@/pages/Audits";
 import { AuditDetailPage } from "@/pages/AuditDetail";
 import { WaitlistPage } from "@/pages/Waitlist";
 import { WaitlistDetailPage } from "@/pages/WaitlistDetail";
+import { SprintAvailabilityPage } from "@/pages/SprintAvailability";
 import { AccessDeniedPage } from "@/pages/AccessDenied";
 import NotFound from "@/pages/not-found";
 
@@ -222,6 +223,7 @@ function ProtectedRoutes() {
             return <AuditDetailPage id={id} />;
           }}
         </Route>
+        <Route path="/sprint-availability" component={SprintAvailabilityPage} />
         <Route path="/waitlist" component={WaitlistPage} />
         <Route path="/waitlist/:id">
           {(params) => {

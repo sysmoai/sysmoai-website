@@ -6,6 +6,7 @@ import {
   ClipboardCheck,
   Users,
   LogOut,
+  Zap,
 } from "lucide-react";
 import { useClerk, useUser } from "@clerk/react";
 
@@ -16,6 +17,7 @@ const NAV = [
   { href: "/contacts", label: "Contacts", icon: MessageSquare },
   { href: "/audits", label: "Audits", icon: ClipboardCheck },
   { href: "/waitlist", label: "Waitlist", icon: Users },
+  { href: "/sprint-availability", label: "Sprint slots", icon: Zap },
 ] as const;
 
 interface AdminShellProps {

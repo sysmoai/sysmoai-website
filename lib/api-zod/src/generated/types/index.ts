@@ -39,6 +39,8 @@ export * from "./pageSizeParamParameter";
 export * from "./pagination";
 export * from "./rateLimitedResponse";
 export * from "./resourceCounts";
+export * from "./sprintAvailability";
+export * from "./sprintAvailabilityUpdate";
 export * from "./statusParamParameter";
 export * from "./submissionAck";
 export * from "./submissionStatus";

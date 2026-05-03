@@ -362,6 +362,59 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
 
+  /sprint-availability:
+    get:
+      operationId: getSprintAvailability
+      tags: [public]
+      summary: Public Sprint slot availability for F-Commerce pages
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SprintAvailability"
+
+  /admin/sprint-availability:
+    get:
+      operationId: getAdminSprintAvailability
+      tags: [admin]
+      summary: Admin view of the Sprint availability config
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SprintAvailability"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+    patch:
+      operationId: updateSprintAvailability
+      tags: [admin]
+      summary: Update the Sprint availability config
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SprintAvailabilityUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SprintAvailability"
+        "400":
+          $ref: "#/components/responses/ValidationError"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
   /admin/waitlist-signups:
     get:
       operationId: listWaitlistSignups
@@ -805,6 +858,40 @@ components:
         createdAt:
           type: string
           format: date-time
+
+    SprintAvailability:
+      type: object
+      required: [slotsAvailable, monthLabel, updatedAt]
+      properties:
+        slotsAvailable:
+          type: integer
+          minimum: 0
+        monthLabel:
+          type: string
+          description: e.g. "May 2026"
+        nextStartDate:
+          type: string
+          nullable: true
+          description: Free-form e.g. "May 19" or "2026-05-19"
+        updatedAt:
+          type: string
+          format: date-time
+
+    SprintAvailabilityUpdate:
+      type: object
+      properties:
+        slotsAvailable:
+          type: integer
+          minimum: 0
+          maximum: 99
+        monthLabel:
+          type: string
+          minLength: 1
+          maxLength: 50
+        nextStartDate:
+          type: string
+          maxLength: 50
+          nullable: true
 
     WaitlistSignupList:
       type: object

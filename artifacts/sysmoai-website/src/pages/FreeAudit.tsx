@@ -8,6 +8,7 @@ import { CheckCircle2 } from 'lucide-react';
 import { WA_URLS } from '../lib/whatsapp';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useCreateAuditRequest } from '@workspace/api-client-react';
+import { SprintSlots } from '@/components/SprintSlots';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -188,10 +189,12 @@ export default function FreeAudit() {
       {/* Hero */}
       <section className="py-20 bg-gradient-to-br from-slate-900 to-blue-900">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            <span className="inline-block px-4 py-1.5 bg-blue-500/20 text-blue-300 text-sm font-semibold rounded-full border border-blue-500/30 mb-6">
+          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
+            className="flex flex-wrap items-center justify-center gap-3 mb-6">
+            <span className="inline-block px-4 py-1.5 bg-blue-500/20 text-blue-300 text-sm font-semibold rounded-full border border-blue-500/30">
               100% Free · No Commitment · No Sales Pitch
             </span>
+            <SprintSlots variant="banner" />
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}

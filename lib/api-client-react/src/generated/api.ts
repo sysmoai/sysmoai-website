@@ -32,6 +32,8 @@ import type {
   ListWaitlistSignupsParams,
   NotFoundResponse,
   RateLimitedResponse,
+  SprintAvailability,
+  SprintAvailabilityUpdate,
   SubmissionAck,
   SubmissionUpdate,
   UnauthorizedResponse,
@@ -1294,6 +1296,252 @@ export const useUpdateAuditRequest = <
   TContext
 > => {
   return useMutation(getUpdateAuditRequestMutationOptions(options));
+};
+
+/**
+ * @summary Public Sprint slot availability for F-Commerce pages
+ */
+export const getGetSprintAvailabilityUrl = () => {
+  return `/api/sprint-availability`;
+};
+
+export const getSprintAvailability = async (
+  options?: RequestInit,
+): Promise<SprintAvailability> => {
+  return customFetch<SprintAvailability>(getGetSprintAvailabilityUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetSprintAvailabilityQueryKey = () => {
+  return [`/api/sprint-availability`] as const;
+};
+
+export const getGetSprintAvailabilityQueryOptions = <
+  TData = Awaited<ReturnType<typeof getSprintAvailability>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getSprintAvailability>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetSprintAvailabilityQueryKey();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getSprintAvailability>>
+  > = ({ signal }) => getSprintAvailability({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getSprintAvailability>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetSprintAvailabilityQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getSprintAvailability>>
+>;
+export type GetSprintAvailabilityQueryError = ErrorType<unknown>;
+
+/**
+ * @summary Public Sprint slot availability for F-Commerce pages
+ */
+
+export function useGetSprintAvailability<
+  TData = Awaited<ReturnType<typeof getSprintAvailability>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getSprintAvailability>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetSprintAvailabilityQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Admin view of the Sprint availability config
+ */
+export const getGetAdminSprintAvailabilityUrl = () => {
+  return `/api/admin/sprint-availability`;
+};
+
+export const getAdminSprintAvailability = async (
+  options?: RequestInit,
+): Promise<SprintAvailability> => {
+  return customFetch<SprintAvailability>(getGetAdminSprintAvailabilityUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetAdminSprintAvailabilityQueryKey = () => {
+  return [`/api/admin/sprint-availability`] as const;
+};
+
+export const getGetAdminSprintAvailabilityQueryOptions = <
+  TData = Awaited<ReturnType<typeof getAdminSprintAvailability>>,
+  TError = ErrorType<UnauthorizedResponse | ForbiddenResponse>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getAdminSprintAvailability>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetAdminSprintAvailabilityQueryKey();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getAdminSprintAvailability>>
+  > = ({ signal }) => getAdminSprintAvailability({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getAdminSprintAvailability>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetAdminSprintAvailabilityQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getAdminSprintAvailability>>
+>;
+export type GetAdminSprintAvailabilityQueryError = ErrorType<
+  UnauthorizedResponse | ForbiddenResponse
+>;
+
+/**
+ * @summary Admin view of the Sprint availability config
+ */
+
+export function useGetAdminSprintAvailability<
+  TData = Awaited<ReturnType<typeof getAdminSprintAvailability>>,
+  TError = ErrorType<UnauthorizedResponse | ForbiddenResponse>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getAdminSprintAvailability>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetAdminSprintAvailabilityQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Update the Sprint availability config
+ */
+export const getUpdateSprintAvailabilityUrl = () => {
+  return `/api/admin/sprint-availability`;
+};
+
+export const updateSprintAvailability = async (
+  sprintAvailabilityUpdate: SprintAvailabilityUpdate,
+  options?: RequestInit,
+): Promise<SprintAvailability> => {
+  return customFetch<SprintAvailability>(getUpdateSprintAvailabilityUrl(), {
+    ...options,
+    method: "PATCH",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(sprintAvailabilityUpdate),
+  });
+};
+
+export const getUpdateSprintAvailabilityMutationOptions = <
+  TError = ErrorType<
+    ValidationErrorResponse | UnauthorizedResponse | ForbiddenResponse
+  >,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof updateSprintAvailability>>,
+    TError,
+    { data: BodyType<SprintAvailabilityUpdate> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof updateSprintAvailability>>,
+  TError,
+  { data: BodyType<SprintAvailabilityUpdate> },
+  TContext
+> => {
+  const mutationKey = ["updateSprintAvailability"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof updateSprintAvailability>>,
+    { data: BodyType<SprintAvailabilityUpdate> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return updateSprintAvailability(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type UpdateSprintAvailabilityMutationResult = NonNullable<
+  Awaited<ReturnType<typeof updateSprintAvailability>>
+>;
+export type UpdateSprintAvailabilityMutationBody =
+  BodyType<SprintAvailabilityUpdate>;
+export type UpdateSprintAvailabilityMutationError = ErrorType<
+  ValidationErrorResponse | UnauthorizedResponse | ForbiddenResponse
+>;
+
+/**
+ * @summary Update the Sprint availability config
+ */
+export const useUpdateSprintAvailability = <
+  TError = ErrorType<
+    ValidationErrorResponse | UnauthorizedResponse | ForbiddenResponse
+  >,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof updateSprintAvailability>>,
+    TError,
+    { data: BodyType<SprintAvailabilityUpdate> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof updateSprintAvailability>>,
+  TError,
+  { data: BodyType<SprintAvailabilityUpdate> },
+  TContext
+> => {
+  return useMutation(getUpdateSprintAvailabilityMutationOptions(options));
 };
 
 /**

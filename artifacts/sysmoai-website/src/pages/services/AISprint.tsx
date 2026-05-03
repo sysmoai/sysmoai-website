@@ -4,6 +4,7 @@ import { Link } from 'wouter';
 import { CheckCircle2, ArrowRight, MessageCircle, ShoppingBag, Clock, TrendingUp, Zap } from 'lucide-react';
 import { WA_URLS } from '@/lib/whatsapp';
 import { useTheme } from '@/contexts/ThemeContext';
+import { SprintSlots } from '@/components/SprintSlots';
 import {
   Accordion,
   AccordionContent,
@@ -115,6 +116,7 @@ export default function AISprint() {
                 style={{ background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.25)' }}>
                 ⭐ Anchor Offer
               </span>
+              <SprintSlots variant="banner" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4">
               F-Commerce AI Sprint

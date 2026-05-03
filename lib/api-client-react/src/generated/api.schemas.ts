@@ -217,6 +217,31 @@ export interface WaitlistSignup {
   createdAt: string;
 }
 
+export interface SprintAvailability {
+  /** @minimum 0 */
+  slotsAvailable: number;
+  /** e.g. "May 2026" */
+  monthLabel: string;
+  /** Free-form e.g. "May 19" or "2026-05-19" */
+  nextStartDate?: string | null;
+  updatedAt: string;
+}
+
+export interface SprintAvailabilityUpdate {
+  /**
+   * @minimum 0
+   * @maximum 99
+   */
+  slotsAvailable?: number;
+  /**
+   * @minLength 1
+   * @maxLength 50
+   */
+  monthLabel?: string;
+  /** @maxLength 50 */
+  nextStartDate?: string | null;
+}
+
 export interface WaitlistSignupList {
   items: WaitlistSignup[];
   pagination: Pagination;

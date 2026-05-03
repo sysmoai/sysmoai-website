@@ -357,6 +357,81 @@ export const UpdateAuditRequestResponse = zod.object({
 });
 
 /**
+ * @summary Public Sprint slot availability for F-Commerce pages
+ */
+export const getSprintAvailabilityResponseSlotsAvailableMin = 0;
+
+export const GetSprintAvailabilityResponse = zod.object({
+  slotsAvailable: zod
+    .number()
+    .min(getSprintAvailabilityResponseSlotsAvailableMin),
+  monthLabel: zod.string().describe('e.g. \"May 2026\"'),
+  nextStartDate: zod
+    .string()
+    .nullish()
+    .describe('Free-form e.g. \"May 19\" or \"2026-05-19\"'),
+  updatedAt: zod.coerce.date(),
+});
+
+/**
+ * @summary Admin view of the Sprint availability config
+ */
+export const getAdminSprintAvailabilityResponseSlotsAvailableMin = 0;
+
+export const GetAdminSprintAvailabilityResponse = zod.object({
+  slotsAvailable: zod
+    .number()
+    .min(getAdminSprintAvailabilityResponseSlotsAvailableMin),
+  monthLabel: zod.string().describe('e.g. \"May 2026\"'),
+  nextStartDate: zod
+    .string()
+    .nullish()
+    .describe('Free-form e.g. \"May 19\" or \"2026-05-19\"'),
+  updatedAt: zod.coerce.date(),
+});
+
+/**
+ * @summary Update the Sprint availability config
+ */
+export const updateSprintAvailabilityBodySlotsAvailableMin = 0;
+export const updateSprintAvailabilityBodySlotsAvailableMax = 99;
+
+export const updateSprintAvailabilityBodyMonthLabelMax = 50;
+
+export const updateSprintAvailabilityBodyNextStartDateMax = 50;
+
+export const UpdateSprintAvailabilityBody = zod.object({
+  slotsAvailable: zod
+    .number()
+    .min(updateSprintAvailabilityBodySlotsAvailableMin)
+    .max(updateSprintAvailabilityBodySlotsAvailableMax)
+    .optional(),
+  monthLabel: zod
+    .string()
+    .min(1)
+    .max(updateSprintAvailabilityBodyMonthLabelMax)
+    .optional(),
+  nextStartDate: zod
+    .string()
+    .max(updateSprintAvailabilityBodyNextStartDateMax)
+    .nullish(),
+});
+
+export const updateSprintAvailabilityResponseSlotsAvailableMin = 0;
+
+export const UpdateSprintAvailabilityResponse = zod.object({
+  slotsAvailable: zod
+    .number()
+    .min(updateSprintAvailabilityResponseSlotsAvailableMin),
+  monthLabel: zod.string().describe('e.g. \"May 2026\"'),
+  nextStartDate: zod
+    .string()
+    .nullish()
+    .describe('Free-form e.g. \"May 19\" or \"2026-05-19\"'),
+  updatedAt: zod.coerce.date(),
+});
+
+/**
  * @summary List waitlist signups
  */
 export const listWaitlistSignupsQueryPageDefault = 1;
