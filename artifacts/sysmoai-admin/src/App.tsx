@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import {
   ClerkProvider,
   SignIn,
@@ -263,12 +263,13 @@ function ProtectedRoutes() {
 function ClerkProviderWithRoutes() {
   const [, setLocation] = useLocation();
   const { isDark } = useTheme();
+  const appearance = useMemo(() => buildClerkAppearance(isDark), [isDark]);
 
   return (
     <ClerkProvider
       publishableKey={clerkPubKey}
       proxyUrl={clerkProxyUrl}
-      appearance={buildClerkAppearance(isDark)}
+      appearance={appearance}
       localization={clerkLocalization}
       signInUrl={`${basePath}/sign-in`}
       routerPush={(to) => setLocation(stripBase(to))}
