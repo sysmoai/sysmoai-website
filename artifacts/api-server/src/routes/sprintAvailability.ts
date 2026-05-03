@@ -57,6 +57,15 @@ adminSprintRouter.patch(
     const data = req.body as ReturnType<
       typeof UpdateSprintAvailabilityBody.parse
     >;
+    if (
+      data.slotsAvailable !== undefined &&
+      !Number.isInteger(data.slotsAvailable)
+    ) {
+      res
+        .status(400)
+        .json({ error: "slotsAvailable must be a whole number." });
+      return;
+    }
     await loadOrSeed();
     const patch: Record<string, unknown> = { updatedAt: new Date() };
     if (data.slotsAvailable !== undefined)

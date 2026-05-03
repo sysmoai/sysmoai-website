@@ -35,7 +35,11 @@ export function SprintAvailabilityPage() {
     setSaveError(null);
     setSaveSuccess(false);
     const slotsNum = Number(slots);
-    if (!Number.isFinite(slotsNum) || slotsNum < 0 || slotsNum > 99) {
+    if (
+      !Number.isInteger(slotsNum) ||
+      slotsNum < 0 ||
+      slotsNum > 99
+    ) {
       setSaveError("Slots must be a whole number between 0 and 99.");
       return;
     }
@@ -103,10 +107,14 @@ export function SprintAvailabilityPage() {
                   </label>
                   <input
                     type="number"
+                    inputMode="numeric"
                     min={0}
                     max={99}
+                    step={1}
                     value={slots}
-                    onChange={(e) => setSlots(e.target.value)}
+                    onChange={(e) =>
+                      setSlots(e.target.value.replace(/[^0-9]/g, ""))
+                    }
                     data-testid="input-slots"
                     className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
                   />

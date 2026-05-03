@@ -16,6 +16,10 @@ export default function StickyCTA() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#0A0B0F]/95 backdrop-blur-sm border-t border-slate-800 py-3 px-4 transition-all duration-300">
+      {/* Mobile-only slot row, since the descriptive text is hidden on mobile. */}
+      <div className="sm:hidden max-w-5xl mx-auto mb-2 flex justify-center">
+        <SprintSlots variant="compact" />
+      </div>
       <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
         <div className="hidden sm:block">
           <p className="text-white text-sm font-semibold">Stop losing orders in your DMs.</p>
