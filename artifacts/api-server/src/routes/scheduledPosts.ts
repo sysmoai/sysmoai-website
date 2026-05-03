@@ -6,6 +6,8 @@ import scheduleSeed from "../data/contentSchedule.json" with { type: "json" };
 import {
   db,
   scheduledPostsTable,
+  auditRequestsTable,
+  waitlistSignupsTable,
   type ScheduledPost,
 } from "@workspace/db";
 import {
@@ -16,6 +18,8 @@ import {
   UpdateScheduledPostResponse,
   GetScheduledPostsSummaryResponse,
   SeedScheduledPostsResponse,
+  RollupScheduledPostAttributionResponse,
+  GetScheduledPostTopPerformersResponse,
 } from "@workspace/api-zod";
 import { requireAdminOrAutomation } from "../middlewares/requireAdminOrAutomation";
 import { validateBody, validateListQuery } from "../lib/validation";
@@ -371,5 +375,199 @@ router.patch(
     res.json(UpdateScheduledPostResponse.parse(serialize(row)));
   },
 );
+
+// ─── Attribution rollup + top performers ────────────────────────────────
+//
+// Both endpoints derive a canonical "campaign slug" per scheduled_posts row
+// in the form `w<week>-<fileref-slug>`, where week is the Asia/Dhaka calendar
+// week (Mon-anchored, W1 = first week containing any seeded post) and
+// fileref-slug is the row's fileRef stripped to alphanumerics + lowercased.
+// This is the value the public site puts in `utm_campaign` on every CTA.
+
+const bdtDateFmtForSlug = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Dhaka",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  weekday: "short",
+});
+
+function fileRefSlug(fileRef: string): string {
+  return fileRef.toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+function bdtMondayUtc(d: Date): Date {
+  const parts = bdtDateFmtForSlug.formatToParts(d);
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";
+  const y = Number(get("year"));
+  const m = Number(get("month"));
+  const day = Number(get("day"));
+  const wkdayShort = get("weekday");
+  const wkdayIdx: Record<string, number> = {
+    Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6,
+  };
+  const daysSinceMon = wkdayIdx[wkdayShort] ?? 0;
+  return new Date(Date.UTC(y, m - 1, day) - daysSinceMon * 86_400_000);
+}
+
+function buildWeekIndex(rows: { scheduledFor: Date }[]): Map<number, number> {
+  // Returns a map row-id-index → week-number (1-based) by sorting unique
+  // BDT-Monday UTC anchors. We can't store week-number directly because the
+  // pack might be reseeded with an earlier start date.
+  const unique = new Set<number>();
+  for (const r of rows) unique.add(bdtMondayUtc(r.scheduledFor).getTime());
+  const sorted = Array.from(unique).sort((a, b) => a - b);
+  const weekByMondayMs = new Map<number, number>();
+  sorted.forEach((ms, i) => weekByMondayMs.set(ms, i + 1));
+  const weekByIdx = new Map<number, number>();
+  rows.forEach((r, i) => {
+    const monMs = bdtMondayUtc(r.scheduledFor).getTime();
+    weekByIdx.set(i, weekByMondayMs.get(monMs) ?? 1);
+  });
+  return weekByIdx;
+}
+
+function campaignSlugFor(weekNumber: number, fileRef: string): string {
+  return `w${weekNumber}-${fileRefSlug(fileRef)}`;
+}
+
+router.post("/scheduled-posts/attribution-rollup", async (_req, res) => {
+  // Pull every campaign-tagged lead from both tables and tally by campaign.
+  const [audits, waitlist, allPosts] = await Promise.all([
+    db
+      .select({ campaign: auditRequestsTable.utmCampaign })
+      .from(auditRequestsTable),
+    db
+      .select({ campaign: waitlistSignupsTable.utmCampaign })
+      .from(waitlistSignupsTable),
+    db
+      .select()
+      .from(scheduledPostsTable)
+      .orderBy(asc(scheduledPostsTable.scheduledFor)),
+  ]);
+
+  const counts = new Map<string, number>();
+  for (const row of audits) {
+    const c = row.campaign?.trim().toLowerCase();
+    if (c) counts.set(c, (counts.get(c) ?? 0) + 1);
+  }
+  for (const row of waitlist) {
+    const c = row.campaign?.trim().toLowerCase();
+    if (c) counts.set(c, (counts.get(c) ?? 0) + 1);
+  }
+
+  const weekByIdx = buildWeekIndex(allPosts);
+  const knownCampaigns = new Set<string>();
+  let updatedRows = 0;
+
+  // Update each row that needs a new value. Drizzle has no bulk CASE update
+  // helper, so we issue one UPDATE per changed row — fine at 76 rows.
+  for (let i = 0; i < allPosts.length; i++) {
+    const row = allPosts[i];
+    const slug = campaignSlugFor(weekByIdx.get(i) ?? 1, row.fileRef);
+    knownCampaigns.add(slug);
+    const desired = counts.get(slug) ?? 0;
+    if (desired !== row.waitlistSignups) {
+      await db
+        .update(scheduledPostsTable)
+        .set({ waitlistSignups: desired, updatedAt: new Date() })
+        .where(eq(scheduledPostsTable.id, row.id));
+      updatedRows += 1;
+    }
+  }
+
+  const unmatched: { campaign: string; count: number }[] = [];
+  for (const [campaign, count] of counts.entries()) {
+    if (!knownCampaigns.has(campaign)) unmatched.push({ campaign, count });
+  }
+  unmatched.sort((a, b) => b.count - a.count);
+
+  res.json(
+    RollupScheduledPostAttributionResponse.parse({
+      scannedAuditRequests: audits.length,
+      scannedWaitlistSignups: waitlist.length,
+      updatedRows,
+      unmatchedCampaigns: unmatched,
+    }),
+  );
+});
+
+router.get("/scheduled-posts/top-performers", async (req, res) => {
+  const limitRaw = Number(req.query.limit ?? 20);
+  const limit = Math.min(50, Math.max(1, Number.isFinite(limitRaw) ? limitRaw : 20));
+
+  const allPosts = await db
+    .select()
+    .from(scheduledPostsTable)
+    .orderBy(asc(scheduledPostsTable.scheduledFor));
+
+  const weekByIdx = buildWeekIndex(allPosts);
+
+  const annotated = allPosts.map((row, i) => ({
+    row,
+    campaignSlug: campaignSlugFor(weekByIdx.get(i) ?? 1, row.fileRef),
+  }));
+
+  // Sort by signups DESC, then clicks DESC, then earliest scheduledFor for
+  // determinism (so the same data always yields the same ranking).
+  const ranked = [...annotated].sort((a, b) => {
+    if (b.row.waitlistSignups !== a.row.waitlistSignups)
+      return b.row.waitlistSignups - a.row.waitlistSignups;
+    if (b.row.clicks !== a.row.clicks) return b.row.clicks - a.row.clicks;
+    return a.row.scheduledFor.getTime() - b.row.scheduledFor.getTime();
+  });
+
+  const items = ranked.slice(0, limit).map(({ row, campaignSlug }) => ({
+    id: row.id,
+    sequenceNo: row.sequenceNo,
+    fileRef: row.fileRef,
+    platform: row.platform,
+    pillar: row.pillar,
+    hookPattern: row.hookPattern,
+    funnel: row.funnel,
+    title: row.title,
+    waitlistSignups: row.waitlistSignups,
+    clicks: row.clicks,
+    impressions: row.impressions,
+    campaignSlug,
+  }));
+
+  // Aggregations span the WHOLE pack, not just the top N — otherwise we'd
+  // bias toward dimensions that already have high-signup pieces.
+  const agg = <K extends string>(key: (r: ScheduledPost) => K) => {
+    const m = new Map<K, { signups: number; pieces: number }>();
+    for (const r of allPosts) {
+      const k = key(r);
+      const cur = m.get(k) ?? { signups: 0, pieces: 0 };
+      cur.signups += r.waitlistSignups;
+      cur.pieces += 1;
+      m.set(k, cur);
+    }
+    return Array.from(m.entries())
+      .map(([k, v]) => ({ key: k, ...v }))
+      .sort((a, b) => b.signups - a.signups);
+  };
+
+  const byPillar = agg((r) => r.pillar).map(({ key, signups, pieces }) => ({
+    pillar: key,
+    signups,
+    pieces,
+  }));
+  const byPlatform = agg((r) => r.platform).map(
+    ({ key, signups, pieces }) => ({ platform: key, signups, pieces }),
+  );
+  const byHookPattern = agg((r) => r.hookPattern).map(
+    ({ key, signups, pieces }) => ({ hookPattern: key, signups, pieces }),
+  );
+
+  res.json(
+    GetScheduledPostTopPerformersResponse.parse({
+      items,
+      byPillar,
+      byPlatform,
+      byHookPattern,
+    }),
+  );
+});
 
 export default router;

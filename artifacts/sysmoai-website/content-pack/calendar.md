@@ -1,7 +1,9 @@
 # Master Content Calendar — 4-Week SMB Waitlist Pack
 
 *One row per standalone piece, thread, or story set. Thread body tweets and multi-frame story frames are detailed in the validation section below.*
-*CTA destinations: [A] = https://sysmoai.com/free-ai-audit | [W] = https://wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%20need%20help*
+*CTA destinations: [A] = https://sysmoai.com/free-ai-audit?utm_source=<platform>&utm_medium=social&utm_campaign=w<week>-<fileref-slug> | [W] = https://wa.me/8801711638693?text=Hi%20SYSmoAI%2C%20I%20need%20help*
+
+*Attribution: every [A] CTA must carry UTM params so the post that drove the audit booking is recorded on `audit_requests`. See `utm-scheme.md` for the slug rules and the live URL builder. Newsletter posts use `utm_medium=email` instead of `social`. WhatsApp `[W]` CTAs cannot carry UTMs through the wa.me handoff and so are reserved for already-warm prospects.*
 *Hook Chars column: LinkedIn = hook line chars (≤110 limit) | IG Feed = first line chars (≤125 limit) | X = full post chars (≤280 limit) | TikTok = caption chars (≤200 limit) | Newsletter = subject line chars (≤50 limit) | X Thread = Tweet 1 chars | IG Story = N/A (visual format).*
 
 ---

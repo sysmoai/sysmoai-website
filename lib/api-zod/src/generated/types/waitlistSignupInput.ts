@@ -13,4 +13,16 @@ export interface WaitlistSignupInput {
   name?: string | null;
   /** @maxLength 100 */
   source?: string | null;
+  /** @maxLength 200 */
+  utmSource?: string | null;
+  /** @maxLength 200 */
+  utmMedium?: string | null;
+  /** @maxLength 200 */
+  utmCampaign?: string | null;
+  /** @maxLength 200 */
+  utmContent?: string | null;
+  /** @maxLength 200 */
+  utmTerm?: string | null;
+  /** @maxLength 500 */
+  referrer?: string | null;
 }

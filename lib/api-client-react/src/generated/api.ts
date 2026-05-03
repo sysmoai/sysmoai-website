@@ -19,6 +19,7 @@ import type {
 import type {
   AdminMe,
   AdminSummary,
+  AttributionRollupResult,
   AuditRequest,
   AuditRequestInput,
   AuditRequestList,
@@ -26,6 +27,7 @@ import type {
   ContactSubmissionInput,
   ContactSubmissionList,
   ForbiddenResponse,
+  GetScheduledPostTopPerformersParams,
   HealthStatus,
   ListAuditRequestsParams,
   ListContactSubmissionsParams,
@@ -42,6 +44,7 @@ import type {
   SprintAvailabilityUpdate,
   SubmissionAck,
   SubmissionUpdate,
+  TopPerformersResponse,
   UnauthorizedResponse,
   ValidationErrorResponse,
   WaitlistSignup,
@@ -1719,6 +1722,209 @@ export function useGetScheduledPostsSummary<
   request?: SecondParameter<typeof customFetch>;
 }): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetScheduledPostsSummaryQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * Counts audit_requests + waitlist_signups by their utm_campaign value
+and writes the per-piece total back to scheduled_posts.waitlistSignups
+for every row whose campaign slug matches. Idempotent — running again
+with no new leads produces the same result. Returns a summary of what
+was touched so the operator can sanity-check.
+
+ * @summary Recompute waitlist signups per scheduled post from UTM attribution
+ */
+export const getRollupScheduledPostAttributionUrl = () => {
+  return `/api/admin/scheduled-posts/attribution-rollup`;
+};
+
+export const rollupScheduledPostAttribution = async (
+  options?: RequestInit,
+): Promise<AttributionRollupResult> => {
+  return customFetch<AttributionRollupResult>(
+    getRollupScheduledPostAttributionUrl(),
+    {
+      ...options,
+      method: "POST",
+    },
+  );
+};
+
+export const getRollupScheduledPostAttributionMutationOptions = <
+  TError = ErrorType<UnauthorizedResponse | ForbiddenResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof rollupScheduledPostAttribution>>,
+    TError,
+    void,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof rollupScheduledPostAttribution>>,
+  TError,
+  void,
+  TContext
+> => {
+  const mutationKey = ["rollupScheduledPostAttribution"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof rollupScheduledPostAttribution>>,
+    void
+  > = () => {
+    return rollupScheduledPostAttribution(requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type RollupScheduledPostAttributionMutationResult = NonNullable<
+  Awaited<ReturnType<typeof rollupScheduledPostAttribution>>
+>;
+
+export type RollupScheduledPostAttributionMutationError = ErrorType<
+  UnauthorizedResponse | ForbiddenResponse
+>;
+
+/**
+ * @summary Recompute waitlist signups per scheduled post from UTM attribution
+ */
+export const useRollupScheduledPostAttribution = <
+  TError = ErrorType<UnauthorizedResponse | ForbiddenResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof rollupScheduledPostAttribution>>,
+    TError,
+    void,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof rollupScheduledPostAttribution>>,
+  TError,
+  void,
+  TContext
+> => {
+  return useMutation(getRollupScheduledPostAttributionMutationOptions(options));
+};
+
+/**
+ * @summary Top scheduled posts by waitlist signups (drives Week 5+ planning)
+ */
+export const getGetScheduledPostTopPerformersUrl = (
+  params?: GetScheduledPostTopPerformersParams,
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/admin/scheduled-posts/top-performers?${stringifiedParams}`
+    : `/api/admin/scheduled-posts/top-performers`;
+};
+
+export const getScheduledPostTopPerformers = async (
+  params?: GetScheduledPostTopPerformersParams,
+  options?: RequestInit,
+): Promise<TopPerformersResponse> => {
+  return customFetch<TopPerformersResponse>(
+    getGetScheduledPostTopPerformersUrl(params),
+    {
+      ...options,
+      method: "GET",
+    },
+  );
+};
+
+export const getGetScheduledPostTopPerformersQueryKey = (
+  params?: GetScheduledPostTopPerformersParams,
+) => {
+  return [
+    `/api/admin/scheduled-posts/top-performers`,
+    ...(params ? [params] : []),
+  ] as const;
+};
+
+export const getGetScheduledPostTopPerformersQueryOptions = <
+  TData = Awaited<ReturnType<typeof getScheduledPostTopPerformers>>,
+  TError = ErrorType<UnauthorizedResponse | ForbiddenResponse>,
+>(
+  params?: GetScheduledPostTopPerformersParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getScheduledPostTopPerformers>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetScheduledPostTopPerformersQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getScheduledPostTopPerformers>>
+  > = ({ signal }) =>
+    getScheduledPostTopPerformers(params, { signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getScheduledPostTopPerformers>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetScheduledPostTopPerformersQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getScheduledPostTopPerformers>>
+>;
+export type GetScheduledPostTopPerformersQueryError = ErrorType<
+  UnauthorizedResponse | ForbiddenResponse
+>;
+
+/**
+ * @summary Top scheduled posts by waitlist signups (drives Week 5+ planning)
+ */
+
+export function useGetScheduledPostTopPerformers<
+  TData = Awaited<ReturnType<typeof getScheduledPostTopPerformers>>,
+  TError = ErrorType<UnauthorizedResponse | ForbiddenResponse>,
+>(
+  params?: GetScheduledPostTopPerformersParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getScheduledPostTopPerformers>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetScheduledPostTopPerformersQueryOptions(
+    params,
+    options,
+  );
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;

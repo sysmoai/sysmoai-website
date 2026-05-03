@@ -488,6 +488,54 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
 
+  /admin/scheduled-posts/attribution-rollup:
+    post:
+      operationId: rollupScheduledPostAttribution
+      tags: [admin]
+      summary: Recompute waitlist signups per scheduled post from UTM attribution
+      description: |
+        Counts audit_requests + waitlist_signups by their utm_campaign value
+        and writes the per-piece total back to scheduled_posts.waitlistSignups
+        for every row whose campaign slug matches. Idempotent — running again
+        with no new leads produces the same result. Returns a summary of what
+        was touched so the operator can sanity-check.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AttributionRollupResult"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+  /admin/scheduled-posts/top-performers:
+    get:
+      operationId: getScheduledPostTopPerformers
+      tags: [admin]
+      summary: Top scheduled posts by waitlist signups (drives Week 5+ planning)
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 20
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TopPerformersResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
   /admin/scheduled-posts/seed:
     post:
       operationId: seedScheduledPosts
@@ -923,6 +971,31 @@ components:
           type: string
           enum: [BDT, USD]
           nullable: true
+        utmSource:
+          type: string
+          maxLength: 200
+          nullable: true
+        utmMedium:
+          type: string
+          maxLength: 200
+          nullable: true
+        utmCampaign:
+          type: string
+          maxLength: 200
+          nullable: true
+          description: Slug matching scheduled_posts (e.g. "w1-l1", "w2-thread2").
+        utmContent:
+          type: string
+          maxLength: 200
+          nullable: true
+        utmTerm:
+          type: string
+          maxLength: 200
+          nullable: true
+        referrer:
+          type: string
+          maxLength: 500
+          nullable: true
 
     AuditRequest:
       type: object
@@ -958,6 +1031,24 @@ components:
           type: string
           nullable: true
         preferredCurrency:
+          type: string
+          nullable: true
+        utmSource:
+          type: string
+          nullable: true
+        utmMedium:
+          type: string
+          nullable: true
+        utmCampaign:
+          type: string
+          nullable: true
+        utmContent:
+          type: string
+          nullable: true
+        utmTerm:
+          type: string
+          nullable: true
+        referrer:
           type: string
           nullable: true
         status:
@@ -996,6 +1087,30 @@ components:
           type: string
           maxLength: 100
           nullable: true
+        utmSource:
+          type: string
+          maxLength: 200
+          nullable: true
+        utmMedium:
+          type: string
+          maxLength: 200
+          nullable: true
+        utmCampaign:
+          type: string
+          maxLength: 200
+          nullable: true
+        utmContent:
+          type: string
+          maxLength: 200
+          nullable: true
+        utmTerm:
+          type: string
+          maxLength: 200
+          nullable: true
+        referrer:
+          type: string
+          maxLength: 500
+          nullable: true
 
     WaitlistSignup:
       type: object
@@ -1009,6 +1124,24 @@ components:
           type: string
           nullable: true
         source:
+          type: string
+          nullable: true
+        utmSource:
+          type: string
+          nullable: true
+        utmMedium:
+          type: string
+          nullable: true
+        utmCampaign:
+          type: string
+          nullable: true
+        utmContent:
+          type: string
+          nullable: true
+        utmTerm:
+          type: string
+          nullable: true
+        referrer:
           type: string
           nullable: true
         status:
@@ -1064,6 +1197,115 @@ components:
             $ref: "#/components/schemas/WaitlistSignup"
         pagination:
           $ref: "#/components/schemas/Pagination"
+
+    AttributionRollupResult:
+      type: object
+      required: [scannedAuditRequests, scannedWaitlistSignups, updatedRows, unmatchedCampaigns]
+      properties:
+        scannedAuditRequests:
+          type: integer
+        scannedWaitlistSignups:
+          type: integer
+        updatedRows:
+          type: integer
+          description: Count of scheduled_posts rows whose waitlistSignups changed.
+        unmatchedCampaigns:
+          type: array
+          description: utm_campaign values that did not match any scheduled_posts slug.
+          items:
+            type: object
+            required: [campaign, count]
+            properties:
+              campaign:
+                type: string
+              count:
+                type: integer
+
+    TopPerformerRow:
+      type: object
+      required:
+        - id
+        - sequenceNo
+        - fileRef
+        - platform
+        - pillar
+        - hookPattern
+        - funnel
+        - title
+        - waitlistSignups
+        - clicks
+        - impressions
+        - campaignSlug
+      properties:
+        id:
+          type: integer
+        sequenceNo:
+          type: integer
+        fileRef:
+          type: string
+        platform:
+          $ref: "#/components/schemas/ScheduledPostPlatform"
+        pillar:
+          type: string
+        hookPattern:
+          type: string
+        funnel:
+          $ref: "#/components/schemas/ScheduledPostFunnel"
+        title:
+          type: string
+        waitlistSignups:
+          type: integer
+        clicks:
+          type: integer
+        impressions:
+          type: integer
+        campaignSlug:
+          type: string
+
+    TopPerformersResponse:
+      type: object
+      required: [items, byPillar, byPlatform, byHookPattern]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/TopPerformerRow"
+        byPillar:
+          type: array
+          items:
+            type: object
+            required: [pillar, signups, pieces]
+            properties:
+              pillar:
+                type: string
+              signups:
+                type: integer
+              pieces:
+                type: integer
+        byPlatform:
+          type: array
+          items:
+            type: object
+            required: [platform, signups, pieces]
+            properties:
+              platform:
+                $ref: "#/components/schemas/ScheduledPostPlatform"
+              signups:
+                type: integer
+              pieces:
+                type: integer
+        byHookPattern:
+          type: array
+          items:
+            type: object
+            required: [hookPattern, signups, pieces]
+            properties:
+              hookPattern:
+                type: string
+              signups:
+                type: integer
+              pieces:
+                type: integer
 
     ScheduledPostPlatform:
       type: string

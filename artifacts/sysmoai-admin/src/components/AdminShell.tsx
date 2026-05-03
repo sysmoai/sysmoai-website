@@ -8,6 +8,7 @@ import {
   LogOut,
   Zap,
   CalendarClock,
+  TrendingUp,
 } from "lucide-react";
 import { useClerk, useUser } from "@clerk/react";
 
@@ -19,6 +20,7 @@ const NAV = [
   { href: "/audits", label: "Audits", icon: ClipboardCheck },
   { href: "/waitlist", label: "Waitlist", icon: Users },
   { href: "/scheduled-posts", label: "Publishing", icon: CalendarClock },
+  { href: "/performance", label: "Performance", icon: TrendingUp },
   { href: "/sprint-availability", label: "Sprint slots", icon: Zap },
 ] as const;
 

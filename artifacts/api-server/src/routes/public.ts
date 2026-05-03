@@ -92,6 +92,12 @@ router.post(
           currentTools: data.currentTools ?? null,
           usesBkashNagad: data.usesBkashNagad ?? null,
           preferredCurrency: data.preferredCurrency ?? null,
+          utmSource: data.utmSource ?? null,
+          utmMedium: data.utmMedium ?? null,
+          utmCampaign: data.utmCampaign ?? null,
+          utmContent: data.utmContent ?? null,
+          utmTerm: data.utmTerm ?? null,
+          referrer: data.referrer ?? null,
         })
         .returning({ id: auditRequestsTable.id });
       req.log.info({ id: row.id }, "Audit request saved");
@@ -140,6 +146,12 @@ router.post(
           email: data.email,
           name: data.name ?? null,
           source: data.source ?? null,
+          utmSource: data.utmSource ?? null,
+          utmMedium: data.utmMedium ?? null,
+          utmCampaign: data.utmCampaign ?? null,
+          utmContent: data.utmContent ?? null,
+          utmTerm: data.utmTerm ?? null,
+          referrer: data.referrer ?? null,
         })
         .returning({ id: waitlistSignupsTable.id });
       req.log.info({ id: row.id }, "Waitlist signup saved");

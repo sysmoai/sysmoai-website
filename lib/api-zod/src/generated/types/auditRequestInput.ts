@@ -35,4 +35,19 @@ export interface AuditRequestInput {
   currentTools?: string | null;
   usesBkashNagad?: AuditRequestInputUsesBkashNagad;
   preferredCurrency?: AuditRequestInputPreferredCurrency;
+  /** @maxLength 200 */
+  utmSource?: string | null;
+  /** @maxLength 200 */
+  utmMedium?: string | null;
+  /**
+   * Slug matching scheduled_posts (e.g. "w1-l1", "w2-thread2").
+   * @maxLength 200
+   */
+  utmCampaign?: string | null;
+  /** @maxLength 200 */
+  utmContent?: string | null;
+  /** @maxLength 200 */
+  utmTerm?: string | null;
+  /** @maxLength 500 */
+  referrer?: string | null;
 }

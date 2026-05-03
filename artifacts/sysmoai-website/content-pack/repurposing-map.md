@@ -126,3 +126,47 @@ CORE IDEA
 - [ ] For Stories: all content confirmed within 14%–80% safe zone
 - [ ] Hook pattern is not repeated back-to-back on the same platform in the same week
 - [ ] All proof points traceable to Proof.tsx, Services.tsx, or blogPosts.ts — no invented stats
+
+---
+
+## Week 5+ Re-Authoring Workflow (Data-Driven)
+
+After Week 4 closes, the Week 5+ pack is no longer a hypothesis — it is a
+re-mix of what actually drove signups. The flow:
+
+1. **Roll up attribution.** In the admin **Performance** page, hit
+   *Run attribution rollup*. This recomputes `scheduled_posts.waitlistSignups`
+   from `audit_requests.utm_campaign` + `waitlist_signups.utm_campaign`. The
+   campaign slug is `w<week>-<fileref-slug>` (see `utm-scheme.md`).
+
+2. **Identify winners.** The Performance page surfaces:
+   - Top pieces by attributed signups
+   - Signups-per-piece by **pillar** (decides what to lead with)
+   - Signups-per-piece by **hook pattern** (decides which formulas to repeat)
+   - Signups-per-piece by **platform** (decides where to invest more slots)
+
+3. **Generate the Week 5+ outline.** Run
+   `pnpm --filter @workspace/scripts run build-week5-pack`. The script reads
+   the same data and overwrites the `## Generated outline` section of
+   `week5-plus-template.md` with: recommendations, top performers table, and
+   per-pillar / per-hook / per-platform breakdown.
+
+4. **Re-author each recommended slot by hand.** Use:
+   - `voice-guide.md` — for tone, pillar definitions, hook patterns
+   - `proof-points.md` — for verified numbers from real Sprint clients
+   - The original Week 1–4 piece that won — as a reference for what
+     specifically resonated, then sharpen the angle further
+
+5. **Repurposing chains stay the same.** A Week 5+ tentpole still maps:
+   `LinkedIn carousel → X thread → IG feed → IG stories → TikTok → newsletter`,
+   re-authored per platform. The only thing that changed is *which angle*
+   becomes the tentpole — chosen by data, not gut.
+
+6. **Retire bottom pillars.** The lowest signups-per-piece pillar from
+   Weeks 1–4 is removed from the Week 5+ rotation. Refill those slots with
+   a new angle from `voice-guide.md`'s reserve list (or a brand-new
+   pillar if the founder wants to test one).
+
+7. **Pieces under the noise floor (< 50 clicks) are neutral, not negative.**
+   Don't drop a hook pattern that simply hasn't been seen by enough people
+   yet — only drop ones that *were* seen and *didn't* convert.

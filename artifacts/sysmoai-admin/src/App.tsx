@@ -37,6 +37,7 @@ import { WaitlistDetailPage } from "@/pages/WaitlistDetail";
 import { SprintAvailabilityPage } from "@/pages/SprintAvailability";
 import { ScheduledPostsPage } from "@/pages/ScheduledPosts";
 import { ScheduledPostDetailPage } from "@/pages/ScheduledPostDetail";
+import { PerformancePage } from "@/pages/Performance";
 import { AccessDeniedPage } from "@/pages/AccessDenied";
 import NotFound from "@/pages/not-found";
 
@@ -226,6 +227,7 @@ function ProtectedRoutes() {
           }}
         </Route>
         <Route path="/sprint-availability" component={SprintAvailabilityPage} />
+        <Route path="/performance" component={PerformancePage} />
         <Route path="/scheduled-posts" component={ScheduledPostsPage} />
         <Route path="/scheduled-posts/:id">
           {(params) => {

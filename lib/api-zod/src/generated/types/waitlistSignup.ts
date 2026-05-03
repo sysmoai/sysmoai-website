@@ -12,6 +12,12 @@ export interface WaitlistSignup {
   email: string;
   name?: string | null;
   source?: string | null;
+  utmSource?: string | null;
+  utmMedium?: string | null;
+  utmCampaign?: string | null;
+  utmContent?: string | null;
+  utmTerm?: string | null;
+  referrer?: string | null;
   status: SubmissionStatus;
   internalNote?: string | null;
   createdAt: Date;

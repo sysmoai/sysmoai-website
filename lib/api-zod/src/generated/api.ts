@@ -62,6 +62,18 @@ export const createAuditRequestBodyBiggestChallengeMax = 5000;
 
 export const createAuditRequestBodyCurrentToolsMax = 500;
 
+export const createAuditRequestBodyUtmSourceMax = 200;
+
+export const createAuditRequestBodyUtmMediumMax = 200;
+
+export const createAuditRequestBodyUtmCampaignMax = 200;
+
+export const createAuditRequestBodyUtmContentMax = 200;
+
+export const createAuditRequestBodyUtmTermMax = 200;
+
+export const createAuditRequestBodyReferrerMax = 500;
+
 export const CreateAuditRequestBody = zod.object({
   name: zod
     .string()
@@ -85,6 +97,18 @@ export const CreateAuditRequestBody = zod.object({
     .nullish(),
   usesBkashNagad: zod.enum(["yes", "no", "mix"]).nullish(),
   preferredCurrency: zod.enum(["BDT", "USD"]).nullish(),
+  utmSource: zod.string().max(createAuditRequestBodyUtmSourceMax).nullish(),
+  utmMedium: zod.string().max(createAuditRequestBodyUtmMediumMax).nullish(),
+  utmCampaign: zod
+    .string()
+    .max(createAuditRequestBodyUtmCampaignMax)
+    .nullish()
+    .describe(
+      'Slug matching scheduled_posts (e.g. \"w1-l1\", \"w2-thread2\").',
+    ),
+  utmContent: zod.string().max(createAuditRequestBodyUtmContentMax).nullish(),
+  utmTerm: zod.string().max(createAuditRequestBodyUtmTermMax).nullish(),
+  referrer: zod.string().max(createAuditRequestBodyReferrerMax).nullish(),
 });
 
 /**
@@ -96,10 +120,31 @@ export const createWaitlistSignupBodyNameMax = 200;
 
 export const createWaitlistSignupBodySourceMax = 100;
 
+export const createWaitlistSignupBodyUtmSourceMax = 200;
+
+export const createWaitlistSignupBodyUtmMediumMax = 200;
+
+export const createWaitlistSignupBodyUtmCampaignMax = 200;
+
+export const createWaitlistSignupBodyUtmContentMax = 200;
+
+export const createWaitlistSignupBodyUtmTermMax = 200;
+
+export const createWaitlistSignupBodyReferrerMax = 500;
+
 export const CreateWaitlistSignupBody = zod.object({
   email: zod.string().email().max(createWaitlistSignupBodyEmailMax),
   name: zod.string().max(createWaitlistSignupBodyNameMax).nullish(),
   source: zod.string().max(createWaitlistSignupBodySourceMax).nullish(),
+  utmSource: zod.string().max(createWaitlistSignupBodyUtmSourceMax).nullish(),
+  utmMedium: zod.string().max(createWaitlistSignupBodyUtmMediumMax).nullish(),
+  utmCampaign: zod
+    .string()
+    .max(createWaitlistSignupBodyUtmCampaignMax)
+    .nullish(),
+  utmContent: zod.string().max(createWaitlistSignupBodyUtmContentMax).nullish(),
+  utmTerm: zod.string().max(createWaitlistSignupBodyUtmTermMax).nullish(),
+  referrer: zod.string().max(createWaitlistSignupBodyReferrerMax).nullish(),
 });
 
 /**
@@ -288,6 +333,12 @@ export const ListAuditRequestsResponse = zod.object({
       currentTools: zod.string().nullish(),
       usesBkashNagad: zod.string().nullish(),
       preferredCurrency: zod.string().nullish(),
+      utmSource: zod.string().nullish(),
+      utmMedium: zod.string().nullish(),
+      utmCampaign: zod.string().nullish(),
+      utmContent: zod.string().nullish(),
+      utmTerm: zod.string().nullish(),
+      referrer: zod.string().nullish(),
       status: zod.enum(["new", "contacted", "archived"]),
       internalNote: zod.string().nullish(),
       createdAt: zod.coerce.date(),
@@ -321,6 +372,12 @@ export const GetAuditRequestResponse = zod.object({
   currentTools: zod.string().nullish(),
   usesBkashNagad: zod.string().nullish(),
   preferredCurrency: zod.string().nullish(),
+  utmSource: zod.string().nullish(),
+  utmMedium: zod.string().nullish(),
+  utmCampaign: zod.string().nullish(),
+  utmContent: zod.string().nullish(),
+  utmTerm: zod.string().nullish(),
+  referrer: zod.string().nullish(),
   status: zod.enum(["new", "contacted", "archived"]),
   internalNote: zod.string().nullish(),
   createdAt: zod.coerce.date(),
@@ -351,6 +408,12 @@ export const UpdateAuditRequestResponse = zod.object({
   currentTools: zod.string().nullish(),
   usesBkashNagad: zod.string().nullish(),
   preferredCurrency: zod.string().nullish(),
+  utmSource: zod.string().nullish(),
+  utmMedium: zod.string().nullish(),
+  utmCampaign: zod.string().nullish(),
+  utmContent: zod.string().nullish(),
+  utmTerm: zod.string().nullish(),
+  referrer: zod.string().nullish(),
   status: zod.enum(["new", "contacted", "archived"]),
   internalNote: zod.string().nullish(),
   createdAt: zod.coerce.date(),
@@ -614,6 +677,103 @@ export const GetScheduledPostsSummaryResponse = zod.object({
 });
 
 /**
+ * Counts audit_requests + waitlist_signups by their utm_campaign value
+and writes the per-piece total back to scheduled_posts.waitlistSignups
+for every row whose campaign slug matches. Idempotent — running again
+with no new leads produces the same result. Returns a summary of what
+was touched so the operator can sanity-check.
+
+ * @summary Recompute waitlist signups per scheduled post from UTM attribution
+ */
+export const RollupScheduledPostAttributionResponse = zod.object({
+  scannedAuditRequests: zod.number(),
+  scannedWaitlistSignups: zod.number(),
+  updatedRows: zod
+    .number()
+    .describe("Count of scheduled_posts rows whose waitlistSignups changed."),
+  unmatchedCampaigns: zod
+    .array(
+      zod.object({
+        campaign: zod.string(),
+        count: zod.number(),
+      }),
+    )
+    .describe(
+      "utm_campaign values that did not match any scheduled_posts slug.",
+    ),
+});
+
+/**
+ * @summary Top scheduled posts by waitlist signups (drives Week 5+ planning)
+ */
+export const getScheduledPostTopPerformersQueryLimitDefault = 20;
+export const getScheduledPostTopPerformersQueryLimitMax = 50;
+
+export const GetScheduledPostTopPerformersQueryParams = zod.object({
+  limit: zod.coerce
+    .number()
+    .min(1)
+    .max(getScheduledPostTopPerformersQueryLimitMax)
+    .default(getScheduledPostTopPerformersQueryLimitDefault),
+});
+
+export const GetScheduledPostTopPerformersResponse = zod.object({
+  items: zod.array(
+    zod.object({
+      id: zod.number(),
+      sequenceNo: zod.number(),
+      fileRef: zod.string(),
+      platform: zod.enum([
+        "linkedin",
+        "x_standalone",
+        "x_thread",
+        "instagram_feed",
+        "instagram_story",
+        "tiktok_reel",
+        "newsletter",
+      ]),
+      pillar: zod.string(),
+      hookPattern: zod.string(),
+      funnel: zod.enum(["TOF", "MOF", "MOF_BOF", "BOF"]),
+      title: zod.string(),
+      waitlistSignups: zod.number(),
+      clicks: zod.number(),
+      impressions: zod.number(),
+      campaignSlug: zod.string(),
+    }),
+  ),
+  byPillar: zod.array(
+    zod.object({
+      pillar: zod.string(),
+      signups: zod.number(),
+      pieces: zod.number(),
+    }),
+  ),
+  byPlatform: zod.array(
+    zod.object({
+      platform: zod.enum([
+        "linkedin",
+        "x_standalone",
+        "x_thread",
+        "instagram_feed",
+        "instagram_story",
+        "tiktok_reel",
+        "newsletter",
+      ]),
+      signups: zod.number(),
+      pieces: zod.number(),
+    }),
+  ),
+  byHookPattern: zod.array(
+    zod.object({
+      hookPattern: zod.string(),
+      signups: zod.number(),
+      pieces: zod.number(),
+    }),
+  ),
+});
+
+/**
  * Reads the bundled content schedule (parsed from content-pack/) and
 upserts rows by sequenceNo. Existing rows have their canonical
 metadata (title, content, scheduledFor, etc.) refreshed but their
@@ -767,6 +927,12 @@ export const ListWaitlistSignupsResponse = zod.object({
       email: zod.string(),
       name: zod.string().nullish(),
       source: zod.string().nullish(),
+      utmSource: zod.string().nullish(),
+      utmMedium: zod.string().nullish(),
+      utmCampaign: zod.string().nullish(),
+      utmContent: zod.string().nullish(),
+      utmTerm: zod.string().nullish(),
+      referrer: zod.string().nullish(),
       status: zod.enum(["new", "contacted", "archived"]),
       internalNote: zod.string().nullish(),
       createdAt: zod.coerce.date(),
@@ -792,6 +958,12 @@ export const GetWaitlistSignupResponse = zod.object({
   email: zod.string(),
   name: zod.string().nullish(),
   source: zod.string().nullish(),
+  utmSource: zod.string().nullish(),
+  utmMedium: zod.string().nullish(),
+  utmCampaign: zod.string().nullish(),
+  utmContent: zod.string().nullish(),
+  utmTerm: zod.string().nullish(),
+  referrer: zod.string().nullish(),
   status: zod.enum(["new", "contacted", "archived"]),
   internalNote: zod.string().nullish(),
   createdAt: zod.coerce.date(),
@@ -814,6 +986,12 @@ export const UpdateWaitlistSignupResponse = zod.object({
   email: zod.string(),
   name: zod.string().nullish(),
   source: zod.string().nullish(),
+  utmSource: zod.string().nullish(),
+  utmMedium: zod.string().nullish(),
+  utmCampaign: zod.string().nullish(),
+  utmContent: zod.string().nullish(),
+  utmTerm: zod.string().nullish(),
+  referrer: zod.string().nullish(),
   status: zod.enum(["new", "contacted", "archived"]),
   internalNote: zod.string().nullish(),
   createdAt: zod.coerce.date(),

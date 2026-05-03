@@ -10,6 +10,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useCreateAuditRequest } from '@workspace/api-client-react';
 import { SprintSlots } from '@/components/SprintSlots';
 import { DirectAnswer } from '@/components/DirectAnswer';
+import { captureUtmFromLocation, readUtmSnapshot } from '@/lib/utm';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -109,6 +110,11 @@ export default function FreeAudit() {
 
   React.useEffect(() => {
     document.title = 'Free AI Audit — 30-Minute Business Review | SYSmoAI';
+    // Capture utm_* params from the URL on landing so we can attribute the
+    // signup to the scheduled_posts row that drove the click. Persists to
+    // sessionStorage so the snapshot survives if the visitor scrolls,
+    // re-renders, or briefly navigates away before submitting.
+    captureUtmFromLocation();
   }, []);
 
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<AuditFormData>({
@@ -123,6 +129,7 @@ export default function FreeAudit() {
   const onSubmit = async (data: AuditFormData) => {
     setSubmitError(null);
     try {
+      const utm = readUtmSnapshot();
       await createAudit.mutateAsync({
         data: {
           name: data.name,
@@ -135,6 +142,12 @@ export default function FreeAudit() {
           currentTools: data.currentTools,
           usesBkashNagad: data.usesBkashNagad,
           preferredCurrency: data.preferredCurrency,
+          utmSource: utm.utmSource,
+          utmMedium: utm.utmMedium,
+          utmCampaign: utm.utmCampaign,
+          utmContent: utm.utmContent,
+          utmTerm: utm.utmTerm,
+          referrer: utm.referrer,
         },
       });
       setSubmitted(true);

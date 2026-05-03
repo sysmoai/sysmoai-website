@@ -130,6 +130,12 @@ function csvHeaders(resource: "contact" | "audit" | "waitlist"): string[] {
       "status",
       "biggestChallenge",
       "internalNote",
+      "utmSource",
+      "utmMedium",
+      "utmCampaign",
+      "utmContent",
+      "utmTerm",
+      "referrer",
     ];
   return [
     "id",
@@ -139,6 +145,12 @@ function csvHeaders(resource: "contact" | "audit" | "waitlist"): string[] {
     "source",
     "status",
     "internalNote",
+    "utmSource",
+    "utmMedium",
+    "utmCampaign",
+    "utmContent",
+    "utmTerm",
+    "referrer",
   ];
 }
 
@@ -307,6 +319,12 @@ router.get(
         status: r.status,
         biggestChallenge: r.biggestChallenge,
         internalNote: r.internalNote,
+        utmSource: r.utmSource,
+        utmMedium: r.utmMedium,
+        utmCampaign: r.utmCampaign,
+        utmContent: r.utmContent,
+        utmTerm: r.utmTerm,
+        referrer: r.referrer,
       })),
     );
     sendCsv(res, "audit-requests", csv);
@@ -452,6 +470,12 @@ router.get(
         source: r.source,
         status: r.status,
         internalNote: r.internalNote,
+        utmSource: r.utmSource,
+        utmMedium: r.utmMedium,
+        utmCampaign: r.utmCampaign,
+        utmContent: r.utmContent,
+        utmTerm: r.utmTerm,
+        referrer: r.referrer,
       })),
     );
     sendCsv(res, "waitlist-signups", csv);

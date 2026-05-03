@@ -173,6 +173,21 @@ export interface AuditRequestInput {
   currentTools?: string | null;
   usesBkashNagad?: AuditRequestInputUsesBkashNagad;
   preferredCurrency?: AuditRequestInputPreferredCurrency;
+  /** @maxLength 200 */
+  utmSource?: string | null;
+  /** @maxLength 200 */
+  utmMedium?: string | null;
+  /**
+   * Slug matching scheduled_posts (e.g. "w1-l1", "w2-thread2").
+   * @maxLength 200
+   */
+  utmCampaign?: string | null;
+  /** @maxLength 200 */
+  utmContent?: string | null;
+  /** @maxLength 200 */
+  utmTerm?: string | null;
+  /** @maxLength 500 */
+  referrer?: string | null;
 }
 
 export interface AuditRequest {
@@ -188,6 +203,12 @@ export interface AuditRequest {
   currentTools?: string | null;
   usesBkashNagad?: string | null;
   preferredCurrency?: string | null;
+  utmSource?: string | null;
+  utmMedium?: string | null;
+  utmCampaign?: string | null;
+  utmContent?: string | null;
+  utmTerm?: string | null;
+  referrer?: string | null;
   status: SubmissionStatus;
   internalNote?: string | null;
   createdAt: string;
@@ -205,6 +226,18 @@ export interface WaitlistSignupInput {
   name?: string | null;
   /** @maxLength 100 */
   source?: string | null;
+  /** @maxLength 200 */
+  utmSource?: string | null;
+  /** @maxLength 200 */
+  utmMedium?: string | null;
+  /** @maxLength 200 */
+  utmCampaign?: string | null;
+  /** @maxLength 200 */
+  utmContent?: string | null;
+  /** @maxLength 200 */
+  utmTerm?: string | null;
+  /** @maxLength 500 */
+  referrer?: string | null;
 }
 
 export interface WaitlistSignup {
@@ -212,6 +245,12 @@ export interface WaitlistSignup {
   email: string;
   name?: string | null;
   source?: string | null;
+  utmSource?: string | null;
+  utmMedium?: string | null;
+  utmCampaign?: string | null;
+  utmContent?: string | null;
+  utmTerm?: string | null;
+  referrer?: string | null;
   status: SubmissionStatus;
   internalNote?: string | null;
   createdAt: string;
@@ -247,6 +286,20 @@ export interface WaitlistSignupList {
   pagination: Pagination;
 }
 
+export type AttributionRollupResultUnmatchedCampaignsItem = {
+  campaign: string;
+  count: number;
+};
+
+export interface AttributionRollupResult {
+  scannedAuditRequests: number;
+  scannedWaitlistSignups: number;
+  /** Count of scheduled_posts rows whose waitlistSignups changed. */
+  updatedRows: number;
+  /** utm_campaign values that did not match any scheduled_posts slug. */
+  unmatchedCampaigns: AttributionRollupResultUnmatchedCampaignsItem[];
+}
+
 export type ScheduledPostPlatform =
   (typeof ScheduledPostPlatform)[keyof typeof ScheduledPostPlatform];
 
@@ -260,16 +313,6 @@ export const ScheduledPostPlatform = {
   newsletter: "newsletter",
 } as const;
 
-export type ScheduledPostStatus =
-  (typeof ScheduledPostStatus)[keyof typeof ScheduledPostStatus];
-
-export const ScheduledPostStatus = {
-  queued: "queued",
-  posted: "posted",
-  skipped: "skipped",
-  failed: "failed",
-} as const;
-
 export type ScheduledPostFunnel =
   (typeof ScheduledPostFunnel)[keyof typeof ScheduledPostFunnel];
 
@@ -278,6 +321,56 @@ export const ScheduledPostFunnel = {
   MOF: "MOF",
   MOF_BOF: "MOF_BOF",
   BOF: "BOF",
+} as const;
+
+export interface TopPerformerRow {
+  id: number;
+  sequenceNo: number;
+  fileRef: string;
+  platform: ScheduledPostPlatform;
+  pillar: string;
+  hookPattern: string;
+  funnel: ScheduledPostFunnel;
+  title: string;
+  waitlistSignups: number;
+  clicks: number;
+  impressions: number;
+  campaignSlug: string;
+}
+
+export type TopPerformersResponseByPillarItem = {
+  pillar: string;
+  signups: number;
+  pieces: number;
+};
+
+export type TopPerformersResponseByPlatformItem = {
+  platform: ScheduledPostPlatform;
+  signups: number;
+  pieces: number;
+};
+
+export type TopPerformersResponseByHookPatternItem = {
+  hookPattern: string;
+  signups: number;
+  pieces: number;
+};
+
+export interface TopPerformersResponse {
+  items: TopPerformerRow[];
+  byPillar: TopPerformersResponseByPillarItem[];
+  byPlatform: TopPerformersResponseByPlatformItem[];
+  byHookPattern: TopPerformersResponseByHookPatternItem[];
+}
+
+export type ScheduledPostStatus =
+  (typeof ScheduledPostStatus)[keyof typeof ScheduledPostStatus];
+
+export const ScheduledPostStatus = {
+  queued: "queued",
+  posted: "posted",
+  skipped: "skipped",
+  failed: "failed",
 } as const;
 
 export interface ScheduledPost {
@@ -558,6 +651,14 @@ export type ListScheduledPostsParams = {
    * @minLength 1
    */
   dueBefore?: string;
+};
+
+export type GetScheduledPostTopPerformersParams = {
+  /**
+   * @minimum 1
+   * @maximum 50
+   */
+  limit?: number;
 };
 
 export type ListWaitlistSignupsParams = {
