@@ -1,50 +1,36 @@
 {
   "name": "SYSmoAI — Content Pack Auto-Publisher",
-  "_about": "Hourly cron polls /api/admin/scheduled-posts?dueBefore=now and pushes each due post to Buffer (which fans it out to LinkedIn, X, Instagram, TikTok). Newsletter pieces are routed to Resend instead. After Buffer accepts the post, the workflow PATCHes the row to status=posted with the live permalink. Fallback path: if the Buffer call fails or BUFFER_ACCESS_TOKEN is unset, a Slack reminder is sent so the team can publish manually. Required env: SYSMOAI_API_BASE, SYSMOAI_ADMIN_TOKEN, SYSMOAI_ADMIN_BASE, BUFFER_ACCESS_TOKEN, BUFFER_PROFILE_LINKEDIN, BUFFER_PROFILE_X, BUFFER_PROFILE_INSTAGRAM, BUFFER_PROFILE_TIKTOK, RESEND_API_KEY, NEWSLETTER_FROM, NEWSLETTER_AUDIENCE_ID, SLACK_FALLBACK_CHANNEL.",
+  "_about": "Hourly cron polls /api/admin/scheduled-posts?dueBefore=now and publishes each due post via Buffer (LinkedIn / X / Instagram / TikTok) or Resend (newsletter). On any provider failure (or unknown platform) a Slack alert fires with the deep link to mark it posted manually. After a successful publish the workflow PATCHes the original row (id pulled from the upstream Split node — NOT $json.id, which by then is the provider response) to status=posted with the live permalink. Required env: SYSMOAI_API_BASE, SYSMOAI_ADMIN_TOKEN, SYSMOAI_ADMIN_BASE, BUFFER_ACCESS_TOKEN, BUFFER_PROFILE_LINKEDIN, BUFFER_PROFILE_X, BUFFER_PROFILE_INSTAGRAM, BUFFER_PROFILE_TIKTOK, RESEND_API_KEY, NEWSLETTER_FROM, NEWSLETTER_AUDIENCE_ID, SLACK_FALLBACK_CHANNEL.",
   "nodes": [
     {
-      "parameters": {
-        "rule": {
-          "interval": [{ "field": "hours", "hoursInterval": 1 }]
-        }
-      },
+      "parameters": { "rule": { "interval": [{ "field": "hours", "hoursInterval": 1 }] } },
       "id": "cron-hourly",
       "name": "Every hour",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1,
-      "position": [200, 320]
+      "position": [180, 360]
     },
     {
       "parameters": {
         "url": "={{ $env.SYSMOAI_API_BASE }}/api/admin/scheduled-posts",
-        "qs": {
-          "dueBefore": "={{ $now.toISO() }}",
-          "pageSize": 25
-        },
+        "qs": { "dueBefore": "={{ $now.toISO() }}", "pageSize": 25 },
         "options": {
-          "headers": {
-            "parameters": {
-              "Authorization": "=Bearer {{ $env.SYSMOAI_ADMIN_TOKEN }}"
-            }
-          }
+          "headers": { "parameters": { "Authorization": "=Bearer {{ $env.SYSMOAI_ADMIN_TOKEN }}" } }
         }
       },
       "id": "fetch-due",
       "name": "Fetch due posts",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [420, 320]
+      "position": [400, 360]
     },
     {
-      "parameters": {
-        "fieldToSplitOut": "items",
-        "options": {}
-      },
+      "parameters": { "fieldToSplitOut": "items", "options": {} },
       "id": "split",
       "name": "Split items",
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
-      "position": [620, 320]
+      "position": [600, 360]
     },
     {
       "parameters": {
@@ -65,8 +51,7 @@
       "name": "Route by platform",
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
-      "position": [820, 320],
-      "_about": "0=LinkedIn, 1=X, 2=Instagram, 3=TikTok via Buffer; 4=Newsletter via Resend; 5=fallback Slack reminder."
+      "position": [800, 360]
     },
     {
       "parameters": {
@@ -79,16 +64,17 @@
             { "name": "access_token", "value": "={{ $env.BUFFER_ACCESS_TOKEN }}" },
             { "name": "text", "value": "={{ $json.content }}" },
             { "name": "profile_ids[]", "value": "={{ $env.BUFFER_PROFILE_LINKEDIN }}" },
-            { "name": "now", "value": "true" },
-            { "name": "media[link]", "value": "={{ $json.postUrl || '' }}" }
+            { "name": "now", "value": "true" }
           ]
-        }
+        },
+        "options": {}
       },
       "id": "buffer-linkedin",
       "name": "Buffer → LinkedIn",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [1080, 60]
+      "onError": "continueErrorOutput",
+      "position": [1040, 80]
     },
     {
       "parameters": {
@@ -103,13 +89,15 @@
             { "name": "profile_ids[]", "value": "={{ $env.BUFFER_PROFILE_X }}" },
             { "name": "now", "value": "true" }
           ]
-        }
+        },
+        "options": {}
       },
       "id": "buffer-x",
       "name": "Buffer → X",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [1080, 200]
+      "onError": "continueErrorOutput",
+      "position": [1040, 220]
     },
     {
       "parameters": {
@@ -125,13 +113,15 @@
             { "name": "now", "value": "true" },
             { "name": "media[photo]", "value": "={{ $json.assetUrl || '' }}" }
           ]
-        }
+        },
+        "options": {}
       },
       "id": "buffer-instagram",
       "name": "Buffer → Instagram",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [1080, 340]
+      "onError": "continueErrorOutput",
+      "position": [1040, 360]
     },
     {
       "parameters": {
@@ -147,13 +137,15 @@
             { "name": "now", "value": "true" },
             { "name": "media[video]", "value": "={{ $json.assetUrl || '' }}" }
           ]
-        }
+        },
+        "options": {}
       },
       "id": "buffer-tiktok",
       "name": "Buffer → TikTok",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [1080, 480]
+      "onError": "continueErrorOutput",
+      "position": [1040, 500]
     },
     {
       "parameters": {
@@ -175,26 +167,29 @@
       "name": "Resend → Newsletter",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [1080, 620]
+      "onError": "continueErrorOutput",
+      "position": [1040, 640]
     },
     {
       "parameters": {
         "channel": "={{ $env.SLACK_FALLBACK_CHANNEL }}",
-        "text": "=⚠️ Could not auto-publish `{{ $json.fileRef }}` ({{ $json.platform }}) — please post manually.\n*Hook:* {{ $json.hookLine }}\n```{{ $json.content }}```\nMark posted: {{ $env.SYSMOAI_ADMIN_BASE }}/scheduled-posts/{{ $json.id }}"
+        "text": "=⚠️ Could not auto-publish `{{ $('Split items').item.json.fileRef }}` ({{ $('Split items').item.json.platform }}). Publish it manually:\n*Hook:* {{ $('Split items').item.json.hookLine }}\n```{{ $('Split items').item.json.content }}```\nMark posted: {{ $env.SYSMOAI_ADMIN_BASE }}/scheduled-posts/{{ $('Split items').item.json.id }}",
+        "otherOptions": {}
       },
       "id": "slack-fallback",
       "name": "Slack fallback",
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2,
-      "position": [1080, 760]
+      "position": [1340, 760],
+      "_about": "Single fallback sink. Receives: (a) unknown-platform output from the switch, AND (b) error outputs from each Buffer/Resend node via continueErrorOutput. Missing BUFFER_ACCESS_TOKEN / RESEND_API_KEY makes the provider call 4xx, which trips the same error branch."
     },
     {
       "parameters": {
         "method": "PATCH",
-        "url": "={{ $env.SYSMOAI_API_BASE }}/api/admin/scheduled-posts/{{ $json.id }}",
+        "url": "={{ $env.SYSMOAI_API_BASE }}/api/admin/scheduled-posts/{{ $('Split items').item.json.id }}",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"status\": \"posted\",\n  \"postUrl\": \"{{ $json.postUrl || ($json.body && $json.body.permalink) || '' }}\",\n  \"notes\": \"Auto-published by n8n at {{ $now.toISO() }}\"\n}",
+        "jsonBody": "={\n  \"status\": \"posted\",\n  \"postUrl\": \"{{ ($json.body && $json.body.permalink) || ($json.id ? 'buffer://' + $json.id : '') }}\",\n  \"notes\": \"Auto-published by n8n at {{ $now.toISO() }}\"\n}",
         "options": {
           "headers": {
             "parameters": {
@@ -208,8 +203,8 @@
       "name": "Mark posted",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [1340, 340],
-      "_about": "Stamps the row as posted; the API server auto-fills postedAt server-side."
+      "position": [1340, 360],
+      "_about": "URL uses $('Split items').item.json.id so the PATCH targets the original scheduled-post row, not the Buffer/Resend response payload. The API server stamps postedAt server-side."
     }
   ],
   "connections": {
@@ -226,10 +221,25 @@
         [{ "node": "Slack fallback", "type": "main", "index": 0 }]
       ]
     },
-    "Buffer → LinkedIn":   { "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]] },
-    "Buffer → X":          { "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]] },
-    "Buffer → Instagram":  { "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]] },
-    "Buffer → TikTok":     { "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]] },
-    "Resend → Newsletter": { "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]] }
+    "Buffer → LinkedIn": {
+      "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]],
+      "error": [[{ "node": "Slack fallback", "type": "main", "index": 0 }]]
+    },
+    "Buffer → X": {
+      "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]],
+      "error": [[{ "node": "Slack fallback", "type": "main", "index": 0 }]]
+    },
+    "Buffer → Instagram": {
+      "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]],
+      "error": [[{ "node": "Slack fallback", "type": "main", "index": 0 }]]
+    },
+    "Buffer → TikTok": {
+      "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]],
+      "error": [[{ "node": "Slack fallback", "type": "main", "index": 0 }]]
+    },
+    "Resend → Newsletter": {
+      "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]],
+      "error": [[{ "node": "Slack fallback", "type": "main", "index": 0 }]]
+    }
   }
 }

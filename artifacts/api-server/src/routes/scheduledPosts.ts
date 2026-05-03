@@ -1,9 +1,8 @@
 import { Router, type IRouter, type Request, type Response } from "express";
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
-import { fileURLToPath } from "node:url";
-import { dirname } from "node:path";
 import { sql, desc, asc, eq, and, gte, lte, type SQL } from "drizzle-orm";
+// Static JSON import — esbuild inlines this into dist/index.mjs so the seed
+// works in production (no relative-path readFileSync against the source tree).
+import scheduleSeed from "../data/contentSchedule.json" with { type: "json" };
 import {
   db,
   scheduledPostsTable,
@@ -22,9 +21,6 @@ import { requireAdmin } from "../middlewares/requireAdmin";
 import { validateBody, validateListQuery } from "../lib/validation";
 import { rowsToCsv } from "../lib/csv";
 
-const HERE = dirname(fileURLToPath(import.meta.url));
-const SCHEDULE_JSON_PATH = resolve(HERE, "../data/contentSchedule.json");
-
 interface SeedRow {
   sequenceNo: number;
   fileRef: string;
@@ -40,8 +36,7 @@ interface SeedRow {
 }
 
 function loadSchedule(): SeedRow[] {
-  const raw = readFileSync(SCHEDULE_JSON_PATH, "utf8");
-  return JSON.parse(raw) as SeedRow[];
+  return scheduleSeed as SeedRow[];
 }
 
 function serialize(row: ScheduledPost) {

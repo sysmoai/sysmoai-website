@@ -366,8 +366,9 @@ function build() {
   for (const row of calendar) {
     const platform = platformFromLabel(row.platformLabel);
     const fileRef = normaliseFileRef(row.fileRefRaw);
-    const year = row.dateLabel.includes("Jun") ? 2026 : 2026;
-    const { y, m, d } = parseDate(row.dateLabel, year);
+    // The 4-week pack runs in calendar year 2026 — both May and June dates
+    // belong to the same year.
+    const { y, m, d } = parseDate(row.dateLabel, 2026);
     const slot = bdtSlotForPlatform(platform);
     const scheduledFor = bdtToUtc(y, m, d, slot.hour, slot.minute);
     const body = extractBody(platform, fileRef);
