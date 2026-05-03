@@ -19,6 +19,7 @@ export function SprintSlots({ variant = 'pill', className = '' }: SprintSlotsPro
     query: {
       queryKey: getGetSprintAvailabilityQueryKey(),
       staleTime: 60_000,
+      refetchOnWindowFocus: true,
       retry: false,
     },
   });

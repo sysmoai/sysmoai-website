@@ -164,7 +164,7 @@ export function SprintAvailabilityPage() {
                     className="text-sm text-emerald-300"
                     data-testid="text-save-success"
                   >
-                    Saved. The website will pick up the change within a minute.
+                    Saved. The public site will pick up the change on the next page load (or when an open tab regains focus).
                   </p>
                 )}
 
