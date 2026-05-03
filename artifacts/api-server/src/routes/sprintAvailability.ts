@@ -15,7 +15,9 @@ async function loadOrSeed() {
     .from(sprintAvailabilityTable)
     .where(eq(sprintAvailabilityTable.id, SINGLETON_ID));
   if (row) return row;
-  const [inserted] = await db
+  // Conflict-safe insert in case of a concurrent first request creating
+  // the singleton at the same time.
+  await db
     .insert(sprintAvailabilityTable)
     .values({
       id: SINGLETON_ID,
@@ -23,8 +25,12 @@ async function loadOrSeed() {
       monthLabel: "",
       nextStartDate: null,
     })
-    .returning();
-  return inserted;
+    .onConflictDoNothing({ target: sprintAvailabilityTable.id });
+  const [seeded] = await db
+    .select()
+    .from(sprintAvailabilityTable)
+    .where(eq(sprintAvailabilityTable.id, SINGLETON_ID));
+  return seeded;
 }
 
 function serialize(row: Awaited<ReturnType<typeof loadOrSeed>>) {
