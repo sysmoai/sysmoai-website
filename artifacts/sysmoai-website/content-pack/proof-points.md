@@ -46,3 +46,45 @@ When a Sprint client closes a milestone:
 > Week 5+ copy must reuse the existing 4-week proof points (Tarek 18hrs/wk,
 > 847 unread DMs anchor) or be rewritten in question form ("how would you
 > measure if your auto-reply is actually working?")._
+
+## Dry-run example proof points (placeholder — DO NOT publish)
+
+> ⚠️ The entries below are **shape-only examples** illustrating what a real
+> Month 1 proof point looks like. They are not real clients and must NOT
+> appear in published copy. Delete this section as soon as PP-001 is
+> verified from a real Sprint debrief.
+
+```yaml
+- id: PP-EXAMPLE-1
+  collectedOn: 2026-06-15  # placeholder
+  client: "F-commerce client A (anonymised)"
+  consentToUse: anonymised
+  pillar: Proof + Specificity
+  metric: "DM first-reply: 4hr → 12 min over 3 weeks"
+  detail: >
+    Before: founder-handled DMs, average first reply 4 hours, ~30% of evening
+    inquiries lost overnight. After: Messenger API + n8n auto-reply deployed
+    Week 1, 12-minute median first reply by Week 3 (measured from inbox
+    timestamp to outbound reply timestamp in n8n logs).
+  source: n8n execution log + client WhatsApp confirmation
+  bestFor: [linkedin, x_standalone, newsletter]
+  notes: >
+    Replaces the generic "3x faster reply" claim used in Week 1–4.
+
+- id: PP-EXAMPLE-2
+  collectedOn: 2026-06-20  # placeholder
+  client: "Service business B (anonymised)"
+  consentToUse: anonymised
+  pillar: What Good Looks Like
+  metric: "18 hours/week reclaimed in admin time"
+  detail: >
+    Founder previously spent ~3 hours/day in DMs, calendar back-and-forth, and
+    proposal drafting. After Sprint deployment of CRM + booking automation +
+    proposal templates, time tracking shows 18 hours/week reduction sustained
+    over 4 weeks.
+  source: Toggl export + Sprint debrief notes
+  bestFor: [linkedin, instagram_feed]
+  notes: >
+    Pairs well with Proof + Specificity pillar. Use when audience leans
+    service-business rather than F-commerce.
+```
