@@ -92,6 +92,7 @@ export default function AISprint() {
   const cardBorder = isDark ? 'rgba(255,255,255,0.08)' : '#E2E8F0';
   const heading = isDark ? '#F1F5F9' : '#0A0B0F';
   const body = isDark ? '#94A3B8' : '#475569';
+  const bodyMuted = isDark ? '#64748B' : '#94A3B8';
 
   return (
     <div className="flex flex-col w-full overflow-hidden" style={{ background: bg1 }}>
@@ -106,14 +107,14 @@ export default function AISprint() {
       </div>
 
       {/* Hero */}
-      <section className="relative bg-[#0A0B0F] py-20 md:py-28 overflow-hidden">
+      <section className="relative py-20 md:py-28 overflow-hidden" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #FFFFFF 0%, #F0F6FF 100%)' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-blue-600 opacity-[0.1] blur-[130px] rounded-full" />
           <div className="absolute right-1/4 top-1/4 w-[300px] h-[300px] bg-emerald-600 opacity-[0.06] blur-[100px] rounded-full" />
         </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            <Link href="/services" className="inline-flex items-center gap-1.5 text-slate-400 hover:text-white text-sm mb-8 transition-colors">
+            <Link href="/services" className="inline-flex items-center gap-1.5 text-sm mb-8 transition-colors hover:text-blue-500" style={{ color: body }}>
               ← All Services
             </Link>
           </motion.div>
@@ -122,41 +123,43 @@ export default function AISprint() {
               <div className="w-12 h-12 bg-blue-600/20 border border-blue-600/30 rounded-2xl flex items-center justify-center">
                 <ShoppingBag size={24} className="text-blue-400" />
               </div>
-              <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full text-amber-300"
-                style={{ background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.25)' }}>
+              <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full"
+                style={{ background: isDark ? 'rgba(251,191,36,0.12)' : '#FEF3C7', border: `1px solid ${isDark ? 'rgba(251,191,36,0.25)' : '#FDE68A'}`, color: isDark ? '#FCD34D' : '#92400E' }}>
                 ⭐ Anchor Offer
               </span>
               <SprintSlots variant="banner" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4" style={{ color: heading }}>
               F-Commerce AI Sprint
             </h1>
-            <p className="text-xl text-slate-300 mb-3 max-w-2xl">
+            <p className="text-xl mb-3 max-w-2xl" style={{ color: body }}>
               Stop losing orders in your DMs. Get a Bangla auto-reply agent, order tracker, bKash workflow, and customer follow-up system — fully built and deployed in 14 days.
             </p>
 
             {/* Price toggle */}
             <div className="flex items-center gap-3 mb-7">
               <button onClick={() => setShowUSD(false)}
-                className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-all ${!showUSD ? 'bg-blue-600 text-white' : 'text-slate-400'}`}>
+                className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-all ${!showUSD ? 'bg-blue-600 text-white' : ''}`}
+                style={!showUSD ? {} : { color: body }}>
                 ৳ BDT
               </button>
               <button onClick={() => setShowUSD(true)}
-                className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-all ${showUSD ? 'bg-blue-600 text-white' : 'text-slate-400'}`}>
+                className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-all ${showUSD ? 'bg-blue-600 text-white' : ''}`}
+                style={showUSD ? {} : { color: body }}>
                 $ USD
               </button>
             </div>
 
-            <div className="flex items-baseline gap-3 mb-3">
-              <span className="text-4xl font-black text-blue-400">
+            <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+              <span className="text-4xl font-black" style={{ color: isDark ? '#60A5FA' : '#1D4ED8' }}>
                 {showUSD ? '$600' : '৳50,000'}
               </span>
-              <span className="text-slate-400 text-lg">one-time Sprint</span>
-              <span className="text-slate-500">+</span>
-              <span className="text-xl font-bold text-slate-300">
+              <span className="text-lg" style={{ color: body }}>one-time Sprint</span>
+              <span style={{ color: bodyMuted }}>+</span>
+              <span className="text-xl font-bold" style={{ color: heading }}>
                 {showUSD ? '$250/mo' : '৳20,000/mo'}
               </span>
-              <span className="text-slate-400 text-sm">retainer</span>
+              <span className="text-sm" style={{ color: body }}>retainer</span>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 mb-6">
@@ -173,11 +176,11 @@ export default function AISprint() {
               </a>
             </div>
 
-            <div className="flex flex-wrap gap-4 text-sm text-slate-400">
-              <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-400" /> Results-first guarantee</span>
-              <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-400" /> Bangla + English</span>
-              <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-400" /> bKash / Nagad ready</span>
-              <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-400" /> 90-day support</span>
+            <div className="flex flex-wrap gap-4 text-sm" style={{ color: body }}>
+              <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-500" /> Results-first guarantee</span>
+              <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-500" /> Bangla + English</span>
+              <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-500" /> bKash / Nagad ready</span>
+              <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-500" /> 90-day support</span>
             </div>
           </motion.div>
         </div>

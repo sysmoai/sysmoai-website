@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 import { WA_URLS } from '@/lib/whatsapp';
 import { SprintSlots } from '@/components/SprintSlots';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function StickyCTA() {
   const [visible, setVisible] = useState(false);
+  const { isDark } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 600);
@@ -14,16 +16,22 @@ export default function StickyCTA() {
 
   if (!visible) return null;
 
+  const bg = isDark ? 'rgba(10,11,15,0.95)' : 'rgba(255,255,255,0.97)';
+  const borderC = isDark ? 'rgba(30,41,59,1)' : 'rgba(226,232,240,1)';
+  const heading = isDark ? '#F1F5F9' : '#0A0B0F';
+  const body = isDark ? '#94A3B8' : '#64748B';
+
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#0A0B0F]/95 backdrop-blur-sm border-t border-slate-800 py-3 px-4 transition-all duration-300">
+    <div className="fixed bottom-0 left-0 right-0 z-40 backdrop-blur-sm py-3 px-4 transition-all duration-300"
+      style={{ background: bg, borderTop: `1px solid ${borderC}` }}>
       {/* Mobile-only slot row, since the descriptive text is hidden on mobile. */}
       <div className="sm:hidden max-w-5xl mx-auto mb-2 flex justify-center">
         <SprintSlots variant="compact" />
       </div>
       <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
         <div className="hidden sm:block">
-          <p className="text-white text-sm font-semibold">Stop losing orders in your DMs.</p>
-          <p className="text-slate-400 text-xs">Free 30-min F-Commerce AI audit · No commitment</p>
+          <p className="text-sm font-semibold" style={{ color: heading }}>Stop losing orders in your DMs.</p>
+          <p className="text-xs" style={{ color: body }}>Free 30-min F-Commerce AI audit · No commitment</p>
           <SprintSlots variant="compact" className="mt-1" />
         </div>
         <div className="flex gap-3 w-full sm:w-auto">

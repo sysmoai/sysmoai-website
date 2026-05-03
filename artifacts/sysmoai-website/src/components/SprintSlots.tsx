@@ -2,6 +2,7 @@ import {
   useGetSprintAvailability,
   getGetSprintAvailabilityQueryKey,
 } from '@workspace/api-client-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface SprintSlotsProps {
   /** "pill" = inline rounded chip; "banner" = wider bar with more text. */
@@ -15,6 +16,7 @@ interface SprintSlotsProps {
  * — we'd rather show nothing than a stale/empty pill.
  */
 export function SprintSlots({ variant = 'pill', className = '' }: SprintSlotsProps) {
+  const { isDark } = useTheme();
   const { data, isError } = useGetSprintAvailability({
     query: {
       queryKey: getGetSprintAvailabilityQueryKey(),
@@ -35,14 +37,15 @@ export function SprintSlots({ variant = 'pill', className = '' }: SprintSlotsPro
     : '';
   const fullText = `Only ${slotsAvailable} Sprint ${slotWord} available in ${monthLabel}${startSuffix}`;
 
+  const amberBg = isDark ? 'rgba(245,158,11,0.15)' : '#FEF3C7';
+  const amberBorder = isDark ? 'rgba(251,191,36,0.40)' : '#F59E0B';
+  const amberText = isDark ? '#FDE68A' : '#92400E';
+
   if (variant === 'banner') {
     return (
       <div
-        className={
-          'inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold ' +
-          'bg-amber-500/15 border-amber-400/40 text-amber-200 ' +
-          className
-        }
+        className={'inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold ' + className}
+        style={{ background: amberBg, borderColor: amberBorder, color: amberText }}
         data-testid="sprint-slots-banner"
       >
         <span aria-hidden>⚡</span>
@@ -54,10 +57,8 @@ export function SprintSlots({ variant = 'pill', className = '' }: SprintSlotsPro
   if (variant === 'compact') {
     return (
       <span
-        className={
-          'inline-flex items-center gap-1 text-amber-300 text-xs font-semibold ' +
-          className
-        }
+        className={'inline-flex items-center gap-1 text-xs font-semibold ' + className}
+        style={{ color: amberText }}
         data-testid="sprint-slots-compact"
       >
         <span aria-hidden>⚡</span>
@@ -68,11 +69,8 @@ export function SprintSlots({ variant = 'pill', className = '' }: SprintSlotsPro
 
   return (
     <span
-      className={
-        'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ' +
-        'bg-amber-500/15 border border-amber-400/30 text-amber-300 ' +
-        className
-      }
+      className={'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ' + className}
+      style={{ background: amberBg, borderColor: amberBorder, color: amberText }}
       data-testid="sprint-slots-pill"
     >
       <span aria-hidden>⚡</span>

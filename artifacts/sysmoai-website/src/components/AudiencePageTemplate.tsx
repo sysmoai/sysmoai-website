@@ -82,25 +82,27 @@ export function AudiencePageTemplate({
     <div className="flex flex-col w-full overflow-hidden" style={{ background: bg1 }}>
 
       {/* Hero */}
-      <section className="relative bg-[#0A0B0F] py-20 md:py-28 min-h-[70vh] flex items-center">
+      <section className="relative py-20 md:py-28 min-h-[70vh] flex items-center" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #FFFFFF 0%, #F0F6FF 100%)' }}>
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600 opacity-[0.1] blur-[120px] rounded-full" />
         </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            <span className="inline-block bg-blue-600/10 border border-blue-600/20 text-blue-400 text-sm font-medium px-4 py-2 rounded-full mb-8">
+            <span className="inline-block text-sm font-medium px-4 py-2 rounded-full mb-8" style={{ background: isDark ? 'rgba(37,99,235,0.10)' : '#EFF6FF', border: `1px solid ${isDark ? 'rgba(37,99,235,0.20)' : '#BFDBFE'}`, color: isDark ? '#60A5FA' : '#1D4ED8' }}>
               For {segment}
             </span>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight mb-6"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6"
+            style={{ color: heading }}
           >
             {heroHeadline}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.25 }}
-            className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl leading-relaxed"
+            className="text-lg md:text-xl mb-10 max-w-2xl leading-relaxed"
+            style={{ color: body }}
           >
             {heroSub}
           </motion.p>
@@ -333,17 +335,19 @@ export function AudiencePageTemplate({
       )}
 
       {/* Final CTA */}
-      <section className="py-20 bg-[#0A0B0F]">
+      <section className="py-20" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #F8FAFF 0%, #EFF6FF 100%)' }}>
         <div className="max-w-3xl mx-auto px-4 text-center">
           <motion.h2
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight"
+            className="text-3xl md:text-4xl font-bold mb-4 tracking-tight"
+            style={{ color: heading }}
           >
             {finalCtaHeadline}
           </motion.h2>
           <motion.p
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-slate-400 mb-8"
+            className="mb-8"
+            style={{ color: body }}
           >
             Book a free 30-min AI Audit — no commitment required.
           </motion.p>

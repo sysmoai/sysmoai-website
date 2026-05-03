@@ -76,13 +76,13 @@ export function ServicePageTemplate({
     <div className="flex flex-col w-full overflow-hidden" style={{ background: bg1 }}>
 
       {/* Hero */}
-      <section className="relative bg-[#0A0B0F] py-20 md:py-28">
+      <section className="relative py-20 md:py-28" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #FFFFFF 0%, #F0F6FF 100%)' }}>
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600 opacity-[0.1] blur-[120px] rounded-full" />
         </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <Link href="/services" className="inline-flex items-center gap-1.5 text-slate-400 hover:text-white text-sm mb-8 transition-colors">
+            <Link href="/services" className="inline-flex items-center gap-1.5 text-sm mb-8 transition-colors hover:text-blue-500" style={{ color: body }}>
               ← All Services
             </Link>
           </motion.div>
@@ -90,13 +90,13 @@ export function ServicePageTemplate({
             <div className="w-14 h-14 bg-blue-600/20 border border-blue-600/30 rounded-2xl flex items-center justify-center mb-6">
               <Icon size={28} className="text-blue-400" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4" style={{ color: heading }}>
               {headline}
             </h1>
             <div className="flex flex-wrap gap-3 items-center mb-8">
-              <span className="text-2xl font-bold text-blue-400">{bdPrice}</span>
-              <span className="text-slate-500 text-sm">·</span>
-              <span className="text-lg font-semibold text-slate-400">{usdPrice} international</span>
+              <span className="text-2xl font-bold" style={{ color: isDark ? '#60A5FA' : '#1D4ED8' }}>{bdPrice}</span>
+              <span className="text-sm" style={{ color: bodyDark }}>·</span>
+              <span className="text-lg font-semibold" style={{ color: body }}>{usdPrice} international</span>
               {guarantee && (
                 <span className="px-3 py-1 bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-medium rounded-full">{guarantee}</span>
               )}
@@ -317,17 +317,19 @@ export function ServicePageTemplate({
       )}
 
       {/* Final CTA */}
-      <section className="py-20 bg-[#0A0B0F]">
+      <section className="py-20" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #F8FAFF 0%, #EFF6FF 100%)' }}>
         <div className="max-w-3xl mx-auto px-4 text-center">
           <motion.h2
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight"
+            className="text-3xl md:text-4xl font-bold mb-4 tracking-tight"
+            style={{ color: heading }}
           >
             Ready to get started?
           </motion.h2>
           <motion.p
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-slate-400 mb-8"
+            className="mb-8"
+            style={{ color: body }}
           >
             Not sure? Talk to us first — no commitment required.
           </motion.p>

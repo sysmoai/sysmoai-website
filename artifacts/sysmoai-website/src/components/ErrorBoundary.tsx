@@ -37,12 +37,12 @@ export class ErrorBoundary extends React.Component<Props, State> {
     return (
       <div
         role="alert"
-        className="min-h-[60vh] w-full flex flex-col items-center justify-center px-4 text-center bg-[#0A0B0F]"
+        className="min-h-[60vh] w-full flex flex-col items-center justify-center px-4 text-center bg-background"
       >
-        <h1 className="text-3xl font-bold text-white mb-3">
+        <h1 className="text-3xl font-bold text-foreground mb-3">
           Something went wrong.
         </h1>
-        <p className="text-gray-400 mb-6 max-w-md">
+        <p className="text-muted-foreground mb-6 max-w-md">
           The page hit an unexpected error. We&rsquo;ve logged it. Try going
           home — and if it keeps happening,{" "}
           <a href="https://wa.me/8801711638693" className="text-blue-400 underline">

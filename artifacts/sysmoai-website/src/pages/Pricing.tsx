@@ -146,7 +146,7 @@ export default function Pricing() {
     <div className="flex flex-col w-full overflow-hidden" style={{ background: bg1 }}>
 
       {/* Hero */}
-      <section className="relative bg-[#0A0B0F] py-20 md:py-28">
+      <section className="relative py-20 md:py-28" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #FFFFFF 0%, #F0F6FF 100%)' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-blue-600 opacity-[0.1] blur-[120px] rounded-full" />
         </div>
@@ -158,25 +158,27 @@ export default function Pricing() {
             SYSmoAI · F-Commerce Operating System
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.08 }}
-            className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
+            className="text-4xl md:text-5xl font-bold tracking-tight mb-4" style={{ color: heading }}>
             One offer. Transparent pricing.
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="text-slate-400 text-lg mb-6 max-w-2xl mx-auto">
+            className="text-lg mb-6 max-w-2xl mx-auto" style={{ color: body }}>
             The F-Commerce AI Sprint at ৳50,000 — full DM automation, order tracking, and bKash workflow deployed in 14 days. Followed by a ৳20,000/mo retainer to keep growing.
           </motion.p>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}>
-            <span className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-2 mb-8">
-              <span className="text-green-400 text-sm font-medium">✓ Results-first guarantee — refund if your system doesn't deliver</span>
+            <span className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-8"
+              style={{ background: isDark ? 'rgba(34,197,94,0.10)' : '#DCFCE7', border: `1px solid ${isDark ? 'rgba(34,197,94,0.30)' : '#86EFAC'}` }}>
+              <span className="text-sm font-medium" style={{ color: isDark ? '#4ADE80' : '#15803D' }}>✓ Results-first guarantee — refund if your system doesn't deliver</span>
             </span>
           </motion.div>
           <div className="flex items-center justify-center gap-3">
-            <span className={`text-sm font-medium ${!showUSD ? 'text-white' : 'text-slate-400'}`}>🇧🇩 BDT ৳</span>
+            <span className="text-sm font-medium" style={{ color: !showUSD ? heading : body }}>🇧🇩 BDT ৳</span>
             <button onClick={() => setShowUSD(!showUSD)}
-              className={`relative w-12 h-6 rounded-full transition-colors ${showUSD ? 'bg-blue-600' : 'bg-slate-600'}`}>
+              className={`relative w-12 h-6 rounded-full transition-colors ${showUSD ? 'bg-blue-600' : ''}`}
+              style={showUSD ? {} : { background: isDark ? '#475569' : '#CBD5E1' }}>
               <span className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${showUSD ? 'left-7' : 'left-1'}`} />
             </button>
-            <span className={`text-sm font-medium ${showUSD ? 'text-white' : 'text-slate-400'}`}>🌍 USD $</span>
+            <span className="text-sm font-medium" style={{ color: showUSD ? heading : body }}>🌍 USD $</span>
           </div>
         </div>
       </section>
@@ -388,14 +390,14 @@ export default function Pricing() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 bg-[#0A0B0F]">
+      <section className="py-20" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #F8FAFF 0%, #EFF6FF 100%)' }}>
         <div className="max-w-3xl mx-auto px-4 text-center">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-3xl font-bold text-white mb-4">
+            className="text-3xl font-bold mb-4" style={{ color: heading }}>
             Ready to automate your F-commerce?
           </motion.h2>
           <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-slate-400 mb-8">
+            className="mb-8" style={{ color: body }}>
             Book a free 30-minute audit. Emon reviews your operation and gives you a clear action plan — no commitment required.
           </motion.p>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
@@ -405,7 +407,8 @@ export default function Pricing() {
               📅 Book Free F-Commerce Audit
             </Link>
             <a href={WA_URLS.general} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 border-2 border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-xl font-semibold text-base transition-all min-h-[52px]">
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-base transition-all min-h-[52px]"
+              style={{ border: `2px solid ${isDark ? 'rgba(255,255,255,0.30)' : '#1D4ED8'}`, color: isDark ? '#FFFFFF' : '#1D4ED8' }}>
               💬 Chat on WhatsApp
             </a>
           </motion.div>

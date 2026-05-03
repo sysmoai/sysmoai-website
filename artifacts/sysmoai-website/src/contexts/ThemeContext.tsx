@@ -17,6 +17,17 @@ const ThemeContext = createContext<ThemeContextValue>({
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === 'undefined') return 'dark';
+    // Allow ?theme=light/dark URL override (used for QA + email-link previews)
+    try {
+      const url = new URL(window.location.href);
+      const q = url.searchParams.get('theme');
+      if (q === 'light' || q === 'dark') {
+        localStorage.setItem('sysmoai-theme', q);
+        return q;
+      }
+    } catch {
+      // ignore — only relevant in browser
+    }
     const saved = localStorage.getItem('sysmoai-theme') as Theme | null;
     if (saved === 'light' || saved === 'dark') return saved;
     return 'dark';

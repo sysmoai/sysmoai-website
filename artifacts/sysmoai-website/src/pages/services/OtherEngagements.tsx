@@ -98,25 +98,25 @@ export default function OtherEngagements() {
       </section>
 
       {/* Hero */}
-      <section className="relative bg-[#0A0B0F] py-20 md:py-24">
+      <section className="relative py-20 md:py-24" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #FFFFFF 0%, #F0F6FF 100%)' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-blue-600 opacity-[0.07] blur-[140px] rounded-full" />
         </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            <Link href="/services" className="inline-flex items-center gap-1.5 text-slate-400 hover:text-white text-sm mb-8 transition-colors">
+            <Link href="/services" className="inline-flex items-center gap-1.5 text-sm mb-8 transition-colors hover:text-blue-500" style={{ color: body }}>
               ← All Services
             </Link>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-5 text-blue-400"
-              style={{ background: 'rgba(37,99,235,0.12)', border: '1px solid rgba(37,99,235,0.25)' }}>
+            <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-5"
+              style={{ background: isDark ? 'rgba(37,99,235,0.12)' : '#EFF6FF', border: `1px solid ${isDark ? 'rgba(37,99,235,0.25)' : '#BFDBFE'}`, color: isDark ? '#60A5FA' : '#1D4ED8' }}>
               By Inquiry
             </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-5">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-5" style={{ color: heading }}>
               Other Engagements
             </h1>
-            <p className="text-lg text-slate-400 max-w-2xl mb-8">
+            <p className="text-lg max-w-2xl mb-8" style={{ color: body }}>
               Beyond our F-Commerce AI Sprint, we take select engagements for agent development, corporate training, international clients, and specialised automation work. These are by inquiry — reach out on WhatsApp to discuss your situation.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">

@@ -210,30 +210,34 @@ export default function FreeAudit() {
       </section>
 
       {/* Hero */}
-      <section className="py-20 bg-gradient-to-br from-slate-900 to-blue-900">
+      <section className="py-20" style={{ background: isDark ? 'linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%)' : 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)' }}>
         <div className="max-w-3xl mx-auto px-6 text-center">
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
             className="flex flex-wrap items-center justify-center gap-3 mb-6">
-            <span className="inline-block px-4 py-1.5 bg-blue-500/20 text-blue-300 text-sm font-semibold rounded-full border border-blue-500/30">
+            <span className="inline-block px-4 py-1.5 text-sm font-semibold rounded-full"
+              style={{ background: isDark ? 'rgba(59,130,246,0.20)' : '#DBEAFE', color: isDark ? '#93C5FD' : '#1D4ED8', border: `1px solid ${isDark ? 'rgba(59,130,246,0.30)' : '#BFDBFE'}` }}>
               100% Free · No Commitment · No Sales Pitch
             </span>
             <SprintSlots variant="banner" />
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight"
+            className="text-4xl md:text-5xl font-bold mb-6 leading-tight"
+            style={{ color: isDark ? '#FFFFFF' : '#0A0B0F' }}
           >
             Book Your Free 30-Minute AI Audit
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.2 }}
-            className="text-xl text-blue-100 mb-4 leading-relaxed"
+            className="text-xl mb-4 leading-relaxed"
+            style={{ color: isDark ? '#DBEAFE' : '#1E3A8A' }}
           >
             Emon Hossain personally reviews your business workflow, identifies your biggest AI automation opportunity, and gives you a clear action plan — free.
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}
-            className="text-blue-300 text-sm"
+            className="text-sm"
+            style={{ color: isDark ? '#93C5FD' : '#1D4ED8' }}
           >
             Available for businesses in Bangladesh and worldwide.
           </motion.p>
@@ -243,7 +247,7 @@ export default function FreeAudit() {
             </a>
             <div className="flex items-center justify-center gap-2 mt-4">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-green-400 text-sm">Usually responds within 2 hours</span>
+              <span className="text-sm" style={{ color: isDark ? '#4ADE80' : '#15803D' }}>Usually responds within 2 hours</span>
             </div>
           </motion.div>
         </div>

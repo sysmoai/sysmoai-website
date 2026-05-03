@@ -91,7 +91,7 @@ export default function Contact() {
 
   return (
     <div className="flex flex-col w-full overflow-hidden" style={{ background: bg1 }}>
-      <section className="relative bg-[#0A0B0F] py-20 md:py-24">
+      <section className="relative py-20 md:py-24" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #FFFFFF 0%, #F0F6FF 100%)' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[300px] bg-blue-600 opacity-[0.1] blur-[100px] rounded-full" />
         </div>
@@ -103,11 +103,11 @@ export default function Contact() {
             SYSmoAI · Systems in Motion
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}
-            className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
+            className="text-4xl md:text-5xl font-bold tracking-tight mb-4" style={{ color: heading }}>
             Let's talk about your business.
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="text-slate-400 text-lg max-w-2xl mx-auto">
+            className="text-lg max-w-2xl mx-auto" style={{ color: body }}>
             Book a free AI audit to map your bottlenecks, uncover your highest-ROI opportunity and see a real example of what AI can do for you. No commitment required.
           </motion.p>
         </div>

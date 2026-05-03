@@ -102,7 +102,7 @@ export default function Services() {
     <div className="flex flex-col w-full overflow-hidden" style={{ background: bg1 }}>
 
       {/* Hero */}
-      <section className="relative bg-[#0A0B0F] py-20 md:py-28">
+      <section className="relative py-20 md:py-28" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #FFFFFF 0%, #F0F6FF 100%)' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600 opacity-[0.1] blur-[120px] rounded-full" />
         </div>
@@ -114,11 +114,11 @@ export default function Services() {
             SYSmoAI · Systems in Motion
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.08 }}
-            className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight mb-6">
+            className="text-4xl md:text-6xl font-bold tracking-tight leading-tight mb-6" style={{ color: heading }}>
             The F-Commerce AI Sprint — and Everything Around It
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="text-lg text-slate-400 max-w-2xl mx-auto">
+            className="text-lg max-w-2xl mx-auto" style={{ color: body }}>
             Our anchor offer is the 14-day F-Commerce AI Sprint. Everything else is by inquiry — for founders who need something beyond the Sprint.
           </motion.p>
         </div>
@@ -272,13 +272,13 @@ export default function Services() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-[#0A0B0F]">
+      <section className="py-20" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #F8FAFF 0%, #EFF6FF 100%)' }}>
         <div className="max-w-3xl mx-auto px-4 text-center">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+            className="text-3xl md:text-4xl font-bold mb-4 tracking-tight" style={{ color: heading }}>
             Ready to get started?
           </motion.h2>
-          <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-slate-400 mb-8">
+          <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-8" style={{ color: body }}>
             Book a free 30-minute AI Audit — map your bottlenecks, get a real action plan.
           </motion.p>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
@@ -288,7 +288,8 @@ export default function Services() {
               📅 Book Free AI Audit
             </Link>
             <a href={WA_URLS.general} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 border-2 border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-xl font-semibold text-base transition-all min-h-[52px]">
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-base transition-all min-h-[52px]"
+              style={{ border: `2px solid ${isDark ? 'rgba(255,255,255,0.30)' : '#1D4ED8'}`, color: isDark ? '#FFFFFF' : '#1D4ED8' }}>
               💬 Chat on WhatsApp
             </a>
           </motion.div>
