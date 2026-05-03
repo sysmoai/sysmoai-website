@@ -20,6 +20,7 @@
   .note { background: #11141b; border: 1px solid #1f2937; border-radius: 14px; padding: 18px 22px; margin-top: 32px; color: #cbd5e1; font-size: 14px; line-height: 1.6; }
   .note code { background: #0A0B0F; padding: 2px 6px; border-radius: 6px; color: #93c5fd; }
 </style>
+<script defer src="./export.js"></script>
 </head>
 <body>
 <div class="gallery">
@@ -28,12 +29,15 @@
   </h1>
 
   <div class="note">
-    Each template renders at exact post dimensions inside a scaled preview frame. To export,
-    open the template, set browser zoom to 100%, then in DevTools right-click the
-    <code>.frame</code> element → <code>Capture node screenshot</code> for a pixel-perfect
-    1080 × 1920 PNG. All copy is editable in the HTML — duplicate a file to spin a new variant.
-    Brand tokens live in <code>templates.css</code>. Bookmark this page at
-    <code>/templates/index.html</code> (the SPA owns <code>/templates/</code> without a filename).
+    Each template renders inside a scaled preview frame for easy on-screen review. To export
+    a real 1080 × 1920 PNG: open a template, click the blue <strong>Export size 1080×1920</strong>
+    button (top-right) to disable preview scaling, then in DevTools right-click the
+    <code>.frame</code> element → <code>Capture node screenshot</code>. The screenshot writes at
+    true 1:1 because the underlying frame is sized in real CSS pixels, not <code>zoom</code>. All
+    copy is editable in the HTML — duplicate a file to spin a new variant. Brand tokens
+    (<code>#0A0B0F</code>, <code>#2563EB</code>, Space Grotesk for headlines, Inter for body)
+    live in <code>templates.css</code>. Bookmark this page at <code>/templates/index.html</code>
+    (the SPA owns <code>/templates/</code> without a filename).
   </div>
 
   <div class="grid">

@@ -3,7 +3,7 @@
  * Use the print/screenshot view at /templates/<name>.html, then export at
  * device pixel ratio 1 for an exact 1080x1920 PNG (or 2160x3840 at 2x).
  */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root {
   --bg: #0A0B0F;
@@ -45,6 +45,22 @@ html, body { background: #1f2937; color: var(--text); font-family: 'Inter', syst
   color: #94a3b8;
   margin-top: 4px;
 }
+.export-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 50;
+  background: var(--brand);
+  color: white;
+  border: 0;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font: 600 13px/1 'Inter', system-ui, sans-serif;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+.export-toggle:hover { background: var(--brand-deep); }
+body.export .export-toggle::after { content: ' · ON'; }
 
 .frame-row {
   display: flex;
@@ -53,7 +69,12 @@ html, body { background: #1f2937; color: var(--text); font-family: 'Inter', syst
   justify-content: center;
 }
 
-/* The frame is the export surface. Lock at 1080x1920, scale via CSS zoom. */
+/* The frame is the export surface. Lock at 1080x1920.
+ * Preview-only down-scaling is handled by a wrapper transform on
+ * .frame-row so the .frame's intrinsic CSS box stays 1080x1920 — that
+ * way DevTools "Capture node screenshot" on .frame produces a true
+ * 1080x1920 PNG. Toggle the .export class on body to disable scaling.
+ */
 .frame {
   position: relative;
   width: 1080px;
@@ -62,15 +83,23 @@ html, body { background: #1f2937; color: var(--text); font-family: 'Inter', syst
   overflow: hidden;
   font-family: 'Inter', system-ui, sans-serif;
   color: var(--text);
-  /* Down-scale for previewing in the browser; doesn't affect screenshots
-   * taken at the .frame element directly. */
-  zoom: 0.32;
   border: 1px solid #1e293b;
   border-radius: 18px;
+  flex-shrink: 0;
+}
+/* Preview transform: scale the visible frames down without touching
+ * their layout box. Only the visual presentation shrinks. */
+.frame-row > .frame {
+  transform: scale(0.32);
+  transform-origin: top center;
+  margin: 0 -367px -1306px; /* (1080 - 1080*0.32)/2 = 367; (1920 - 1920*0.32) = 1306 */
 }
 @media (min-width: 1400px) {
-  .frame { zoom: 0.4; }
+  .frame-row > .frame { transform: scale(0.4); margin: 0 -324px -1152px; }
 }
+/* Export mode disables the preview transform so screenshots are 1:1. */
+body.export .frame-row > .frame { transform: none; margin: 0; }
+body.export .frame-row { gap: 80px; }
 
 /* Safe zone: IG keeps content between 14% and 80% vertical. */
 .safe { position: absolute; left: 0; right: 0; }
@@ -163,7 +192,8 @@ html, body { background: #1f2937; color: var(--text); font-family: 'Inter', syst
 .block.left { text-align: left; }
 
 .headline {
-  font-weight: 800;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-weight: 700;
   font-size: 130px;
   line-height: 1.02;
   letter-spacing: -0.025em;
@@ -339,8 +369,9 @@ html, body { background: #1f2937; color: var(--text); font-family: 'Inter', syst
   position: absolute;
   left: 7%; right: 7%;
   top: 30%;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   font-size: 150px;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 0.98;
   letter-spacing: -0.03em;
 }
