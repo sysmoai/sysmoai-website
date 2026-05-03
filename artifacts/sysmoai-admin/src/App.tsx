@@ -44,6 +44,28 @@ const clerkPubKey = publishableKeyFromHost(
 
 const clerkProxyUrl = import.meta.env.VITE_CLERK_PROXY_URL;
 
+const APP_NAME = "SYSmoAI Admin";
+
+const clerkLocalization = {
+  signIn: {
+    start: {
+      title: `Sign in to ${APP_NAME}`,
+      titleCombined: `Sign in to ${APP_NAME}`,
+      subtitle: "Welcome back — please sign in to continue",
+      subtitleCombined: "Welcome back — please sign in to continue",
+    },
+    password: { title: `Sign in to ${APP_NAME}` },
+    emailCode: { title: `Sign in to ${APP_NAME}` },
+    emailLink: { title: `Sign in to ${APP_NAME}` },
+  },
+  signUp: {
+    start: {
+      title: `Create your ${APP_NAME} account`,
+      titleCombined: `Create your ${APP_NAME} account`,
+    },
+  },
+};
+
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 function stripBase(path: string): string {
@@ -222,6 +244,7 @@ function ClerkProviderWithRoutes() {
       publishableKey={clerkPubKey}
       proxyUrl={clerkProxyUrl}
       appearance={clerkAppearance}
+      localization={clerkLocalization}
       signInUrl={`${basePath}/sign-in`}
       routerPush={(to) => setLocation(stripBase(to))}
       routerReplace={(to) => setLocation(stripBase(to), { replace: true })}
