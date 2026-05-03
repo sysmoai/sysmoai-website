@@ -17,6 +17,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { SYSmoAILogo } from '@/components/SYSmoAILogo';
 import { LazyImage } from '@/components/LazyImage';
 import { BrandMarkConstruction } from '@/components/BrandMarkConstruction';
+import { useCreateWaitlistSignup } from '@workspace/api-client-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -315,12 +316,117 @@ function ChaosVisual() {
 }
 
 /* ══════════════════════════════════════════
+   WAITLIST SECTION
+══════════════════════════════════════════ */
+function WaitlistSection({ isDark }: { isDark: boolean }) {
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const createWaitlistSignup = useCreateWaitlistSignup();
+
+  const bg = isDark ? '#060810' : '#EFF6FF';
+  const border = isDark ? 'rgba(37,99,235,0.2)' : 'rgba(37,99,235,0.15)';
+  const headingColor = isDark ? '#F1F5F9' : '#0A0B0F';
+  const bodyColor = isDark ? '#94A3B8' : '#475569';
+  const inputBg = isDark ? 'rgba(255,255,255,0.06)' : '#FFFFFF';
+  const inputBorder = isDark ? 'rgba(255,255,255,0.12)' : '#BFDBFE';
+  const inputText = isDark ? '#F1F5F9' : '#0A0B0F';
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || status === 'loading') return;
+    setStatus('loading');
+    try {
+      await createWaitlistSignup.mutateAsync({
+        data: { email, name: name || null, source: 'home_hero' },
+      });
+      setStatus('success');
+      setEmail('');
+      setName('');
+    } catch {
+      setStatus('error');
+    }
+  };
+
+  return (
+    <section className="py-20" style={{ background: bg, borderTop: `1px solid ${border}` }}>
+      <div className="max-w-xl mx-auto px-4">
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mb-8">
+          <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4"
+            style={{ background: isDark ? 'rgba(37,99,235,0.15)' : 'rgba(37,99,235,0.1)', color: '#3B82F6' }}>
+            Early Access
+          </span>
+          <h2 className="text-3xl font-bold mb-3" style={{ color: headingColor }}>
+            Join the Waitlist
+          </h2>
+          <p className="text-base leading-relaxed" style={{ color: bodyColor }}>
+            Be first to access new AI tools, templates, and F-Commerce automation systems as they launch. No spam — just high-signal updates.
+          </p>
+        </motion.div>
+
+        {status === 'success' ? (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
+            className="text-center py-8 px-6 rounded-2xl"
+            style={{ background: isDark ? 'rgba(34,197,94,0.08)' : '#F0FDF4', border: `1px solid ${isDark ? 'rgba(34,197,94,0.2)' : '#BBF7D0'}` }}
+          >
+            <div className="text-4xl mb-3">✅</div>
+            <p className="font-bold mb-1" style={{ color: isDark ? '#86EFAC' : '#14532D' }}>You're on the list!</p>
+            <p className="text-sm" style={{ color: isDark ? '#6EE7B7' : '#15803D' }}>We'll reach out as soon as something new launches.</p>
+          </motion.div>
+        ) : (
+          <motion.form initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            onSubmit={handleSubmit} className="space-y-3">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="text"
+                placeholder="Your name (optional)"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                className="flex-1 px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
+              />
+              <input
+                type="email"
+                placeholder="your@email.com"
+                required
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                className="flex-1 px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={status === 'loading'}
+              className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-bold py-3.5 rounded-xl transition-all text-base"
+            >
+              {status === 'loading' ? 'Joining...' : 'Join the Waitlist →'}
+            </button>
+            {status === 'error' && (
+              <p className="text-red-500 text-sm text-center">Something went wrong. Please try again.</p>
+            )}
+            <p className="text-center text-xs" style={{ color: bodyColor }}>No spam. Unsubscribe anytime. We reply to every email.</p>
+          </motion.form>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* ══════════════════════════════════════════
    HOME PAGE
 ══════════════════════════════════════════ */
 export default function Home() {
   const { isDark } = useTheme();
   const [activeAudience, setActiveAudience] = useState(0);
-  const [showUSD, setShowUSD] = useState(false);
+  const [showUSD, setShowUSD] = useState(() => {
+    try { return localStorage.getItem('sysmoai-currency') === 'USD'; } catch { return false; }
+  });
+  const toggleCurrency = (v: boolean) => {
+    setShowUSD(v);
+    try { localStorage.setItem('sysmoai-currency', v ? 'USD' : 'BDT'); } catch { /* ignore */ }
+  };
   const heroRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const stepsRef = useRef<HTMLDivElement>(null);
@@ -967,12 +1073,12 @@ export default function Home() {
             {/* BDT / USD Toggle */}
             <div className="inline-flex items-center gap-3 p-1.5 rounded-xl border" style={{ background: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(37,99,235,0.04)', borderColor: isDark ? 'rgba(255,255,255,0.07)' : 'rgba(37,99,235,0.1)' }}>
               <motion.button
-                onClick={() => setShowUSD(false)}
+                onClick={() => toggleCurrency(false)}
                 className="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-200"
                 style={!showUSD ? { background: '#2563EB', color: '#fff' } : { color: isDark ? '#64748B' : '#94A3B8' }}
               >৳ BDT</motion.button>
               <motion.button
-                onClick={() => setShowUSD(true)}
+                onClick={() => toggleCurrency(true)}
                 className="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-200"
                 style={showUSD ? { background: '#2563EB', color: '#fff' } : { color: isDark ? '#64748B' : '#94A3B8' }}
               >$ USD</motion.button>
@@ -1687,6 +1793,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ══════════════════════════════════════
+          WAITLIST SECTION
+      ══════════════════════════════════════ */}
+      <WaitlistSection isDark={isDark} />
 
       <section className="py-16 relative overflow-hidden" style={{ background: isDark ? '#060810' : '#F8FAFF', borderTop: `1px solid ${isDark ? 'rgba(255,255,255,0.04)' : 'rgba(37,99,235,0.08)'}` }}>
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}

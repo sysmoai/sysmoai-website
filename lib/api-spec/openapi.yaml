@@ -228,6 +228,63 @@ paths:
         - $ref: "#/components/parameters/PageParam"
         - $ref: "#/components/parameters/PageSizeParam"
         - $ref: "#/components/parameters/StatusParam"
+        - name: businessType
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [f_commerce, service, agency, other]
+          description: Filter by business type
+        - name: usesBkashNagad
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [yes, no, mix]
+          description: Filter by bKash/Nagad usage
+        - name: preferredCurrency
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [BDT, USD]
+          description: Filter by preferred currency
+        - name: monthlyOrders
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: ["<50", "50-200", "200-1000", "1000+"]
+          description: Filter by monthly orders bucket
+        - name: dailyDmVolume
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: ["<20", "20-100", "100-500", "500+"]
+          description: Filter by daily DM volume bucket
+        - name: currentToolsSearch
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 100
+          description: Case-insensitive substring search on currentTools
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [monthlyOrders, dailyDmVolume]
+          description: Sort by qualifying volume field (bucket-ordered)
+        - name: sortOrder
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: desc
+          description: Sort direction
       responses:
         "200":
           description: OK
@@ -628,6 +685,30 @@ components:
           type: string
           minLength: 10
           maxLength: 5000
+        businessType:
+          type: string
+          enum: [f_commerce, service, agency, other]
+          nullable: true
+        monthlyOrders:
+          type: string
+          enum: ["<50", "50-200", "200-1000", "1000+"]
+          nullable: true
+        dailyDmVolume:
+          type: string
+          enum: ["<20", "20-100", "100-500", "500+"]
+          nullable: true
+        currentTools:
+          type: string
+          maxLength: 500
+          nullable: true
+        usesBkashNagad:
+          type: string
+          enum: [yes, no, mix]
+          nullable: true
+        preferredCurrency:
+          type: string
+          enum: [BDT, USD]
+          nullable: true
 
     AuditRequest:
       type: object
@@ -647,6 +728,24 @@ components:
           nullable: true
         biggestChallenge:
           type: string
+        businessType:
+          type: string
+          nullable: true
+        monthlyOrders:
+          type: string
+          nullable: true
+        dailyDmVolume:
+          type: string
+          nullable: true
+        currentTools:
+          type: string
+          nullable: true
+        usesBkashNagad:
+          type: string
+          nullable: true
+        preferredCurrency:
+          type: string
+          nullable: true
         status:
           $ref: "#/components/schemas/SubmissionStatus"
         internalNote:

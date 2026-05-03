@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'wouter';
 import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { CheckCircle2 } from 'lucide-react';
 import { WA_URLS } from '../lib/whatsapp';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useCreateAuditRequest } from '@workspace/api-client-react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -14,10 +20,137 @@ const WhatsAppIcon = () => (
   </svg>
 );
 
+const auditSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Please enter a valid email'),
+  whatsapp: z.string().optional(),
+  businessType: z.enum(['f_commerce', 'service', 'agency', 'other'], {
+    required_error: 'Please select your business type',
+  }),
+  monthlyOrders: z.enum(['<50', '50-200', '200-1000', '1000+'], {
+    required_error: 'Please select your monthly order volume',
+  }),
+  dailyDmVolume: z.enum(['<20', '20-100', '100-500', '500+'], {
+    required_error: 'Please select your daily message volume',
+  }),
+  currentTools: z.string().min(1, 'Please describe your current tools'),
+  usesBkashNagad: z.enum(['yes', 'no', 'mix'], {
+    required_error: 'Please select your payment method',
+  }),
+  preferredCurrency: z.enum(['BDT', 'USD']),
+  biggestChallenge: z.string().min(10, 'Please describe your biggest challenge — at least 10 characters'),
+});
+
+type AuditFormData = z.infer<typeof auditSchema>;
+
+function RadioGroup({
+  label,
+  banglaLabel,
+  name,
+  options,
+  register,
+  error,
+  isDark,
+}: {
+  label: string;
+  banglaLabel?: string;
+  name: keyof AuditFormData;
+  options: { value: string; label: string }[];
+  register: ReturnType<typeof useForm<AuditFormData>>['register'];
+  error?: string;
+  isDark: boolean;
+}) {
+  const labelColor = isDark ? '#CBD5E1' : '#374151';
+  const banglaLabelColor = isDark ? '#64748B' : '#9CA3AF';
+  const optionBg = isDark ? 'rgba(255,255,255,0.04)' : '#F8FAFF';
+  const optionBorder = isDark ? 'rgba(255,255,255,0.1)' : '#E2E8F0';
+  const optionText = isDark ? '#E2E8F0' : '#374151';
+
+  return (
+    <div>
+      <label className="block text-sm font-semibold mb-1.5" style={{ color: labelColor }}>
+        {label}
+        {banglaLabel && (
+          <span className="ml-2 text-xs font-normal" style={{ color: banglaLabelColor }}>
+            {banglaLabel}
+          </span>
+        )}
+        <span className="text-red-500 ml-1">*</span>
+      </label>
+      <div className="grid grid-cols-2 gap-2">
+        {options.map((opt) => (
+          <label
+            key={opt.value}
+            className="flex items-center gap-2 px-3 py-2.5 rounded-xl cursor-pointer transition-all duration-150"
+            style={{ background: optionBg, border: `1px solid ${optionBorder}`, color: optionText }}
+          >
+            <input
+              type="radio"
+              value={opt.value}
+              {...register(name)}
+              className="accent-blue-600 flex-shrink-0"
+            />
+            <span className="text-sm">{opt.label}</span>
+          </label>
+        ))}
+      </div>
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+    </div>
+  );
+}
+
 export default function FreeAudit() {
+  const { isDark } = useTheme();
+  const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const createAudit = useCreateAuditRequest();
+
   React.useEffect(() => {
     document.title = 'Free AI Audit — 30-Minute Business Review | SYSmoAI';
   }, []);
+
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<AuditFormData>({
+    resolver: zodResolver(auditSchema),
+    defaultValues: {
+      preferredCurrency: (() => {
+        try { return localStorage.getItem('sysmoai-currency') === 'USD' ? 'USD' : 'BDT'; } catch { return 'BDT'; }
+      })() as 'BDT' | 'USD',
+    },
+  });
+
+  const onSubmit = async (data: AuditFormData) => {
+    setSubmitError(null);
+    try {
+      await createAudit.mutateAsync({
+        data: {
+          name: data.name,
+          email: data.email,
+          whatsapp: data.whatsapp || null,
+          biggestChallenge: data.biggestChallenge,
+          businessType: data.businessType,
+          monthlyOrders: data.monthlyOrders,
+          dailyDmVolume: data.dailyDmVolume,
+          currentTools: data.currentTools,
+          usesBkashNagad: data.usesBkashNagad,
+          preferredCurrency: data.preferredCurrency,
+        },
+      });
+      setSubmitted(true);
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error ? err.message : 'Something went wrong. Please try again or message us on WhatsApp.'
+      );
+    }
+  };
+
+  const inputBg = isDark ? 'rgba(255,255,255,0.05)' : '#FFFFFF';
+  const inputBorder = isDark ? 'rgba(255,255,255,0.12)' : '#E2E8F0';
+  const inputText = isDark ? '#F1F5F9' : '#0A0B0F';
+  const labelColor = isDark ? '#CBD5E1' : '#374151';
+  const bodyColor = isDark ? '#94A3B8' : '#475569';
+  const sectionBg = isDark ? '#060810' : '#F8FAFF';
+  const cardBg = isDark ? 'rgba(255,255,255,0.04)' : '#FFFFFF';
+  const cardBorder = isDark ? 'rgba(255,255,255,0.08)' : '#E2E8F0';
 
   const steps = [
     {
@@ -45,12 +178,12 @@ export default function FreeAudit() {
     "Your team is overwhelmed and you don't know where AI fits",
     "You've tried AI tools before but they didn't stick",
     "You want to automate but don't know where to start",
-    "You're a Bangladesh SME, agency, or freelancer",
+    "You're a Bangladesh SME, agency, or F-Commerce seller",
     "You're an international client looking for world-class AI at better rates",
   ];
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
 
       {/* Hero */}
       <section className="py-20 bg-gradient-to-br from-slate-900 to-blue-900">
@@ -78,15 +211,24 @@ export default function FreeAudit() {
           >
             Available for businesses in Bangladesh and worldwide.
           </motion.p>
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }}>
+            <a href="#audit-form" className="inline-flex items-center gap-2 mt-8 bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-xl transition-colors text-lg">
+              Request My Free Audit →
+            </a>
+            <div className="flex items-center justify-center gap-2 mt-4">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              <span className="text-green-400 text-sm">Usually responds within 2 hours</span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* What You Get */}
-      <section className="py-16 bg-white">
+      <section className="py-16" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
         <div className="max-w-3xl mx-auto px-6">
           <motion.h2
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-3xl font-bold text-slate-900 text-center mb-12"
+            className="text-3xl font-bold text-center mb-12" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}
           >
             What Happens in Your Free AI Audit
           </motion.h2>
@@ -95,13 +237,14 @@ export default function FreeAudit() {
               <motion.div
                 key={i}
                 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-                className="flex gap-5 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-blue-100 hover:bg-blue-50/30 transition-all duration-200"
+                className="flex gap-5 p-6 rounded-2xl transition-all duration-200"
+                style={{ background: cardBg, border: `1px solid ${cardBorder}` }}
               >
                 <div className="text-4xl flex-shrink-0">{step.icon}</div>
                 <div>
-                  <div className="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">{step.time}</div>
-                  <h3 className="font-bold text-slate-900 text-lg mb-2">{step.title}</h3>
-                  <p className="text-slate-600 leading-relaxed">{step.desc}</p>
+                  <div className="text-xs font-semibold text-blue-500 uppercase tracking-wider mb-1">{step.time}</div>
+                  <h3 className="font-bold text-lg mb-2" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}>{step.title}</h3>
+                  <p className="leading-relaxed" style={{ color: bodyColor }}>{step.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -110,11 +253,11 @@ export default function FreeAudit() {
       </section>
 
       {/* Who It's For */}
-      <section className="py-16 bg-slate-50">
+      <section className="py-16" style={{ background: sectionBg }}>
         <div className="max-w-3xl mx-auto px-6">
           <motion.h2
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl font-bold text-slate-900 text-center mb-8"
+            className="text-2xl font-bold text-center mb-8" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}
           >
             The Audit Is For You If...
           </motion.h2>
@@ -123,64 +266,240 @@ export default function FreeAudit() {
               <motion.div
                 key={i}
                 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-                className="flex items-start gap-3 p-4 bg-white rounded-xl border border-slate-100"
+                className="flex items-start gap-3 p-4 rounded-xl"
+                style={{ background: isDark ? 'rgba(255,255,255,0.03)' : '#FFFFFF', border: `1px solid ${cardBorder}` }}
               >
                 <span className="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</span>
-                <span className="text-slate-700 text-sm leading-relaxed">{item}</span>
+                <span className="text-sm leading-relaxed" style={{ color: bodyColor }}>{item}</span>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 bg-white">
-        <div className="max-w-xl mx-auto px-6 text-center">
-          <motion.h2
-            initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-3xl font-bold text-slate-900 mb-4"
-          >
-            Ready to Book Your Free Audit?
-          </motion.h2>
-          <motion.p
-            initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-slate-600 mb-8"
-          >
-            Send Emon a WhatsApp message. He'll confirm a time that works for you — usually within 2 hours on working days.
-          </motion.p>
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
-            <div className="space-y-4 max-w-md mx-auto">
-              <a
-                href={WA_URLS.audit}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-4 rounded-xl transition-colors"
-              >
-                <WhatsAppIcon />
-                Book on WhatsApp <span className="text-green-200 text-xs font-normal">(Fastest)</span>
-              </a>
-              <Link href="/contact"
-                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-4 rounded-xl transition-colors">
-                <span>📝</span> Fill Out Contact Form
-              </Link>
-              <a
-                href="mailto:hello@sysmoai.com?subject=Free AI Audit Request"
-                className="w-full flex items-center justify-center gap-2 border text-slate-300 hover:bg-slate-800 font-semibold px-6 py-4 rounded-xl transition-colors"
-                style={{ borderColor: 'rgba(100,116,139,0.4)' }}
-              >
-                <span>📧</span> Email Us Directly
-              </a>
-            </div>
-            <div className="flex items-center justify-center gap-2 mt-6">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-green-400 text-sm">Usually responds within 2 hours</span>
-            </div>
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-5 text-sm text-slate-400">
-              <span>✓ 100% free</span>
-              <span>✓ No obligation</span>
-              <span>✓ Bangladesh & worldwide</span>
-            </div>
+      {/* Audit Form */}
+      <section id="audit-form" className="py-20" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
+        <div className="max-w-2xl mx-auto px-6">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mb-10">
+            <h2 className="text-3xl font-bold mb-3" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}>
+              Request Your Free Audit
+            </h2>
+            <p style={{ color: bodyColor }}>
+              Fill in the form below and Emon will personally reach out to schedule your 30-minute call.
+            </p>
           </motion.div>
+
+          {submitted ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
+              className="text-center py-10 px-6 rounded-2xl"
+              style={{ background: isDark ? 'rgba(34,197,94,0.08)' : 'rgba(240,253,244,1)', border: `1px solid ${isDark ? 'rgba(34,197,94,0.2)' : '#BBF7D0'}` }}
+            >
+              <div className="text-6xl mb-5">✅</div>
+              <h3 className="text-2xl font-bold mb-3" style={{ color: isDark ? '#86EFAC' : '#14532D' }}>Audit Request Received!</h3>
+              <p className="mb-2 max-w-md mx-auto" style={{ color: isDark ? '#86EFAC' : '#166534' }}>
+                Emon will personally review your request and reach out within <strong>2 hours</strong> on working days to schedule your free 30-minute audit.
+              </p>
+              <p className="text-sm mb-6" style={{ color: isDark ? '#6EE7B7' : '#15803D' }}>For the fastest response, continue on WhatsApp:</p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <a href={WA_URLS.audit} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3.5 rounded-xl transition-all">
+                  <WhatsAppIcon /> Continue on WhatsApp
+                </a>
+                <Link href="/services"
+                  className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3.5 rounded-xl transition-all">
+                  Browse our services
+                </Link>
+              </div>
+              <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-6 text-sm" style={{ color: isDark ? '#475569' : '#9CA3AF' }}>
+                <span>✓ 100% free</span>
+                <span>✓ No obligation</span>
+                <span>✓ Bangladesh & worldwide</span>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.form
+              initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+              onSubmit={handleSubmit(onSubmit)}
+              className="space-y-6 p-6 md:p-8 rounded-2xl"
+              style={{ background: cardBg, border: `1px solid ${cardBorder}` }}
+            >
+              {/* Basic Info */}
+              <div className="space-y-5">
+                <h3 className="font-bold text-base" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}>Your details</h3>
+                <div>
+                  <label className="block text-sm font-semibold mb-1.5" style={{ color: labelColor }}>
+                    Full Name <span className="text-red-500">*</span>
+                  </label>
+                  <input {...register('name')}
+                    className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                    style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
+                    placeholder="Your name" />
+                  {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-1.5" style={{ color: labelColor }}>
+                    Email <span className="text-red-500">*</span>
+                  </label>
+                  <input {...register('email')} type="email"
+                    className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                    style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
+                    placeholder="your@email.com" />
+                  {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-1.5" style={{ color: labelColor }}>
+                    WhatsApp Number <span className="text-xs font-normal" style={{ color: bodyColor }}>(optional, for faster reply)</span>
+                  </label>
+                  <input {...register('whatsapp')}
+                    className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                    style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
+                    placeholder="+880 1711-638693" />
+                </div>
+              </div>
+
+              <div className="border-t" style={{ borderColor: cardBorder }} />
+
+              {/* Qualifying questions */}
+              <div className="space-y-6">
+                <h3 className="font-bold text-base" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}>
+                  About your business
+                  <span className="ml-2 text-xs font-normal text-blue-500">(helps us tailor the audit)</span>
+                </h3>
+
+                <RadioGroup
+                  label="Business type"
+                  banglaLabel="ব্যবসার ধরন"
+                  name="businessType"
+                  register={register}
+                  error={errors.businessType?.message}
+                  isDark={isDark}
+                  options={[
+                    { value: 'f_commerce', label: 'F-Commerce (Facebook selling)' },
+                    { value: 'service', label: 'Service business' },
+                    { value: 'agency', label: 'Agency' },
+                    { value: 'other', label: 'Other' },
+                  ]}
+                />
+
+                <RadioGroup
+                  label="Monthly orders or leads"
+                  banglaLabel="মাসিক অর্ডার সংখ্যা"
+                  name="monthlyOrders"
+                  register={register}
+                  error={errors.monthlyOrders?.message}
+                  isDark={isDark}
+                  options={[
+                    { value: '<50', label: 'Less than 50' },
+                    { value: '50-200', label: '50 – 200' },
+                    { value: '200-1000', label: '200 – 1,000' },
+                    { value: '1000+', label: '1,000+' },
+                  ]}
+                />
+
+                <RadioGroup
+                  label="Daily DM / message volume"
+                  banglaLabel="দৈনিক মেসেজ সংখ্যা"
+                  name="dailyDmVolume"
+                  register={register}
+                  error={errors.dailyDmVolume?.message}
+                  isDark={isDark}
+                  options={[
+                    { value: '<20', label: 'Less than 20' },
+                    { value: '20-100', label: '20 – 100' },
+                    { value: '100-500', label: '100 – 500' },
+                    { value: '500+', label: '500+' },
+                  ]}
+                />
+
+                <div>
+                  <label className="block text-sm font-semibold mb-1.5" style={{ color: labelColor }}>
+                    Current tools you use
+                    <span className="ml-2 text-xs font-normal" style={{ color: bodyColor }}>
+                      (বর্তমান টুলস)
+                    </span>
+                    <span className="text-red-500 ml-1">*</span>
+                  </label>
+                  <input {...register('currentTools')}
+                    className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                    style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
+                    placeholder="e.g. Manychat, Excel, manual, none..." />
+                  {errors.currentTools && <p className="text-red-500 text-sm mt-1">{errors.currentTools.message}</p>}
+                </div>
+
+                <RadioGroup
+                  label="Do you use bKash / Nagad for payments?"
+                  banglaLabel="বিকাশ / নগদ ব্যবহার করেন?"
+                  name="usesBkashNagad"
+                  register={register}
+                  error={errors.usesBkashNagad?.message}
+                  isDark={isDark}
+                  options={[
+                    { value: 'yes', label: 'Yes, primarily' },
+                    { value: 'mix', label: 'Mix of methods' },
+                    { value: 'no', label: 'No' },
+                  ]}
+                />
+
+                <RadioGroup
+                  label="Preferred pricing currency"
+                  banglaLabel="মূল্য মুদ্রা"
+                  name="preferredCurrency"
+                  register={register}
+                  error={errors.preferredCurrency?.message}
+                  isDark={isDark}
+                  options={[
+                    { value: 'BDT', label: 'BDT (Bangladeshi Taka ৳)' },
+                    { value: 'USD', label: 'USD ($)' },
+                  ]}
+                />
+              </div>
+
+              <div className="border-t" style={{ borderColor: cardBorder }} />
+
+              {/* Biggest challenge */}
+              <div>
+                <label className="block text-sm font-semibold mb-1.5" style={{ color: labelColor }}>
+                  Your biggest pain right now <span className="text-red-500">*</span>
+                </label>
+                <textarea {...register('biggestChallenge')} rows={4}
+                  className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors resize-none"
+                  style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
+                  placeholder="e.g. I spend 6 hours a day replying to DMs and still miss orders. I have no system for follow-ups..." />
+                {errors.biggestChallenge && <p className="text-red-500 text-sm mt-1">{errors.biggestChallenge.message}</p>}
+              </div>
+
+              <p className="text-xs" style={{ color: bodyColor }}>
+                By submitting, you agree to our{' '}
+                <a href="/privacy-policy" className="text-blue-500 hover:underline">Privacy Policy</a>.
+                We'll only use your details to respond to your audit request.
+              </p>
+
+              {submitError && (
+                <p className="text-red-500 text-sm">{submitError}</p>
+              )}
+
+              <button type="submit" disabled={isSubmitting}
+                className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white py-4 rounded-xl font-bold text-lg transition-all min-h-[52px]">
+                {isSubmitting ? 'Submitting...' : 'Request My Free Audit →'}
+              </button>
+
+              <div className="text-center">
+                <p className="text-sm mb-3" style={{ color: bodyColor }}>Or book instantly via WhatsApp:</p>
+                <a href={WA_URLS.audit} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors">
+                  <WhatsAppIcon />
+                  WhatsApp Emon directly <span className="text-green-200 text-xs font-normal">(Fastest)</span>
+                </a>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm" style={{ color: bodyColor }}>
+                <span className="flex items-center gap-1"><CheckCircle2 size={14} className="text-green-500" /> 100% free</span>
+                <span className="flex items-center gap-1"><CheckCircle2 size={14} className="text-green-500" /> No obligation</span>
+                <span className="flex items-center gap-1"><CheckCircle2 size={14} className="text-green-500" /> Bangladesh & worldwide</span>
+              </div>
+            </motion.form>
+          )}
         </div>
       </section>
 

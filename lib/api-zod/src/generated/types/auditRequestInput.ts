@@ -5,6 +5,11 @@
  * SYSmoAI API — public lead capture + admin dashboard
  * OpenAPI spec version: 0.1.0
  */
+import type { AuditRequestInputBusinessType } from "./auditRequestInputBusinessType";
+import type { AuditRequestInputDailyDmVolume } from "./auditRequestInputDailyDmVolume";
+import type { AuditRequestInputMonthlyOrders } from "./auditRequestInputMonthlyOrders";
+import type { AuditRequestInputPreferredCurrency } from "./auditRequestInputPreferredCurrency";
+import type { AuditRequestInputUsesBkashNagad } from "./auditRequestInputUsesBkashNagad";
 
 export interface AuditRequestInput {
   /**
@@ -23,4 +28,11 @@ export interface AuditRequestInput {
    * @maxLength 5000
    */
   biggestChallenge: string;
+  businessType?: AuditRequestInputBusinessType;
+  monthlyOrders?: AuditRequestInputMonthlyOrders;
+  dailyDmVolume?: AuditRequestInputDailyDmVolume;
+  /** @maxLength 500 */
+  currentTools?: string | null;
+  usesBkashNagad?: AuditRequestInputUsesBkashNagad;
+  preferredCurrency?: AuditRequestInputPreferredCurrency;
 }

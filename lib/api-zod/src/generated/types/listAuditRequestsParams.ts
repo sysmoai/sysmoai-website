@@ -5,6 +5,13 @@
  * SYSmoAI API — public lead capture + admin dashboard
  * OpenAPI spec version: 0.1.0
  */
+import type { ListAuditRequestsBusinessType } from "./listAuditRequestsBusinessType";
+import type { ListAuditRequestsDailyDmVolume } from "./listAuditRequestsDailyDmVolume";
+import type { ListAuditRequestsMonthlyOrders } from "./listAuditRequestsMonthlyOrders";
+import type { ListAuditRequestsPreferredCurrency } from "./listAuditRequestsPreferredCurrency";
+import type { ListAuditRequestsSortBy } from "./listAuditRequestsSortBy";
+import type { ListAuditRequestsSortOrder } from "./listAuditRequestsSortOrder";
+import type { ListAuditRequestsUsesBkashNagad } from "./listAuditRequestsUsesBkashNagad";
 import type { PageParamParameter } from "./pageParamParameter";
 import type { PageSizeParamParameter } from "./pageSizeParamParameter";
 import type { StatusParamParameter } from "./statusParamParameter";
@@ -21,4 +28,37 @@ export type ListAuditRequestsParams = {
    */
   pageSize?: PageSizeParamParameter;
   status?: StatusParamParameter;
+  /**
+   * Filter by business type
+   */
+  businessType?: ListAuditRequestsBusinessType;
+  /**
+   * Filter by bKash/Nagad usage
+   */
+  usesBkashNagad?: ListAuditRequestsUsesBkashNagad;
+  /**
+   * Filter by preferred currency
+   */
+  preferredCurrency?: ListAuditRequestsPreferredCurrency;
+  /**
+   * Filter by monthly orders bucket
+   */
+  monthlyOrders?: ListAuditRequestsMonthlyOrders;
+  /**
+   * Filter by daily DM volume bucket
+   */
+  dailyDmVolume?: ListAuditRequestsDailyDmVolume;
+  /**
+   * Case-insensitive substring search on currentTools
+   * @maxLength 100
+   */
+  currentToolsSearch?: string;
+  /**
+   * Sort by qualifying volume field (bucket-ordered)
+   */
+  sortBy?: ListAuditRequestsSortBy;
+  /**
+   * Sort direction
+   */
+  sortOrder?: ListAuditRequestsSortOrder;
 };

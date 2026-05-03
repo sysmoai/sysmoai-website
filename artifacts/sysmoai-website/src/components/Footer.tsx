@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'wouter';
 import { Mail, MessageCircle, MapPin } from 'lucide-react';
 import { SYSmoAILogo } from './SYSmoAILogo';
 import { WA_LINK, EMAIL } from '@/lib/config';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useCreateWaitlistSignup } from '@workspace/api-client-react';
 
 export function Footer() {
   const { isDark } = useTheme();
+  const [email, setEmail] = useState('');
+  const [waitlistStatus, setWaitlistStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const createWaitlistSignup = useCreateWaitlistSignup();
 
   const bg = isDark ? '#0A0B0F' : '#F8FAFF';
   const borderC = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(37,99,235,0.08)';
@@ -14,38 +18,61 @@ export function Footer() {
   const textColor = isDark ? '#64748B' : '#94A3B8';
   const hoverColor = isDark ? '#FFFFFF' : '#0A0B0F';
 
+  const handleWaitlistSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || waitlistStatus === 'loading') return;
+    setWaitlistStatus('loading');
+    try {
+      await createWaitlistSignup.mutateAsync({ data: { email, source: 'footer' } });
+      setWaitlistStatus('success');
+      setEmail('');
+    } catch {
+      setWaitlistStatus('error');
+    }
+  };
+
   return (
     <footer style={{ background: bg, borderTop: `1px solid ${borderC}` }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-4">
-        {/* Email capture */}
+        {/* Waitlist / Email capture */}
         <div className="mb-10 pb-10" style={{ borderBottom: `1px solid ${borderC}` }}>
           <div className="max-w-md mx-auto text-center">
             <h3 className="font-semibold mb-2" style={{ color: headingColor }}>Get AI tips for your business</h3>
             <p className="text-sm mb-4" style={{ color: textColor }}>
               Weekly insights on AI automation, Notion systems, and growing with AI. Free.
             </p>
-            <form
-              className="flex gap-2"
-              onSubmit={(e) => { e.preventDefault(); }}
-            >
-              <input
-                type="email"
-                placeholder="your@email.com"
-                required
-                className="flex-1 rounded-lg px-4 py-2.5 text-sm focus:outline-none"
-                style={{
-                  background: isDark ? 'rgba(255,255,255,0.06)' : '#F1F5F9',
-                  border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(37,99,235,0.15)'}`,
-                  color: isDark ? '#F1F5F9' : '#0A0B0F',
-                }}
-              />
-              <button
-                type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap"
-              >
-                Subscribe
-              </button>
-            </form>
+            {waitlistStatus === 'success' ? (
+              <div className="px-4 py-3 rounded-xl text-sm font-medium"
+                style={{ background: isDark ? 'rgba(34,197,94,0.1)' : '#F0FDF4', color: isDark ? '#86EFAC' : '#166534', border: `1px solid ${isDark ? 'rgba(34,197,94,0.2)' : '#BBF7D0'}` }}>
+                ✅ You're on the list! We'll be in touch.
+              </div>
+            ) : (
+              <form className="flex gap-2" onSubmit={handleWaitlistSubmit}>
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex-1 rounded-lg px-4 py-2.5 text-sm focus:outline-none"
+                  style={{
+                    background: isDark ? 'rgba(255,255,255,0.06)' : '#F1F5F9',
+                    border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(37,99,235,0.15)'}`,
+                    color: isDark ? '#F1F5F9' : '#0A0B0F',
+                  }}
+                />
+                <button
+                  type="submit"
+                  disabled={waitlistStatus === 'loading'}
+                  className="bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap"
+                >
+                  {waitlistStatus === 'loading' ? 'Joining...' : 'Subscribe'}
+                </button>
+              </form>
+            )}
+            {waitlistStatus === 'error' && (
+              <p className="text-red-500 text-xs mt-2">Something went wrong. Please try again.</p>
+            )}
             <p className="text-xs mt-2" style={{ color: isDark ? '#334155' : '#CBD5E1' }}>No spam. Unsubscribe anytime.</p>
           </div>
         </div>

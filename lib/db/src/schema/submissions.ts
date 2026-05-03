@@ -36,6 +36,12 @@ export const auditRequestsTable = pgTable("audit_requests", {
   whatsapp: text("whatsapp"),
   company: text("company"),
   biggestChallenge: text("biggest_challenge").notNull(),
+  businessType: text("business_type"),
+  monthlyOrders: text("monthly_orders"),
+  dailyDmVolume: text("daily_dm_volume"),
+  currentTools: text("current_tools"),
+  usesBkashNagad: text("uses_bkash_nagad"),
+  preferredCurrency: text("preferred_currency"),
   status: submissionStatusEnum("status").notNull().default("new"),
   internalNote: text("internal_note"),
   createdAt: timestamp("created_at", { withTimezone: true })

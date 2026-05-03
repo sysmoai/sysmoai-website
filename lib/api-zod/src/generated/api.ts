@@ -60,6 +60,8 @@ export const createAuditRequestBodyCompanyMax = 200;
 export const createAuditRequestBodyBiggestChallengeMin = 10;
 export const createAuditRequestBodyBiggestChallengeMax = 5000;
 
+export const createAuditRequestBodyCurrentToolsMax = 500;
+
 export const CreateAuditRequestBody = zod.object({
   name: zod
     .string()
@@ -72,6 +74,17 @@ export const CreateAuditRequestBody = zod.object({
     .string()
     .min(createAuditRequestBodyBiggestChallengeMin)
     .max(createAuditRequestBodyBiggestChallengeMax),
+  businessType: zod
+    .enum(["f_commerce", "service", "agency", "other"])
+    .nullish(),
+  monthlyOrders: zod.enum(["<50", "50-200", "200-1000", "1000+"]).nullish(),
+  dailyDmVolume: zod.enum(["<20", "20-100", "100-500", "500+"]).nullish(),
+  currentTools: zod
+    .string()
+    .max(createAuditRequestBodyCurrentToolsMax)
+    .nullish(),
+  usesBkashNagad: zod.enum(["yes", "no", "mix"]).nullish(),
+  preferredCurrency: zod.enum(["BDT", "USD"]).nullish(),
 });
 
 /**
@@ -213,6 +226,10 @@ export const listAuditRequestsQueryPageDefault = 1;
 export const listAuditRequestsQueryPageSizeDefault = 25;
 export const listAuditRequestsQueryPageSizeMax = 100;
 
+export const listAuditRequestsQueryCurrentToolsSearchMax = 100;
+
+export const listAuditRequestsQuerySortOrderDefault = `desc`;
+
 export const ListAuditRequestsQueryParams = zod.object({
   page: zod.coerce.number().min(1).default(listAuditRequestsQueryPageDefault),
   pageSize: zod.coerce
@@ -221,6 +238,39 @@ export const ListAuditRequestsQueryParams = zod.object({
     .max(listAuditRequestsQueryPageSizeMax)
     .default(listAuditRequestsQueryPageSizeDefault),
   status: zod.enum(["new", "contacted", "archived"]).optional(),
+  businessType: zod
+    .enum(["f_commerce", "service", "agency", "other"])
+    .optional()
+    .describe("Filter by business type"),
+  usesBkashNagad: zod
+    .enum(["yes", "no", "mix"])
+    .optional()
+    .describe("Filter by bKash\/Nagad usage"),
+  preferredCurrency: zod
+    .enum(["BDT", "USD"])
+    .optional()
+    .describe("Filter by preferred currency"),
+  monthlyOrders: zod
+    .enum(["<50", "50-200", "200-1000", "1000+"])
+    .optional()
+    .describe("Filter by monthly orders bucket"),
+  dailyDmVolume: zod
+    .enum(["<20", "20-100", "100-500", "500+"])
+    .optional()
+    .describe("Filter by daily DM volume bucket"),
+  currentToolsSearch: zod.coerce
+    .string()
+    .max(listAuditRequestsQueryCurrentToolsSearchMax)
+    .optional()
+    .describe("Case-insensitive substring search on currentTools"),
+  sortBy: zod
+    .enum(["monthlyOrders", "dailyDmVolume"])
+    .optional()
+    .describe("Sort by qualifying volume field (bucket-ordered)"),
+  sortOrder: zod
+    .enum(["asc", "desc"])
+    .default(listAuditRequestsQuerySortOrderDefault)
+    .describe("Sort direction"),
 });
 
 export const ListAuditRequestsResponse = zod.object({
@@ -232,6 +282,12 @@ export const ListAuditRequestsResponse = zod.object({
       whatsapp: zod.string().nullish(),
       company: zod.string().nullish(),
       biggestChallenge: zod.string(),
+      businessType: zod.string().nullish(),
+      monthlyOrders: zod.string().nullish(),
+      dailyDmVolume: zod.string().nullish(),
+      currentTools: zod.string().nullish(),
+      usesBkashNagad: zod.string().nullish(),
+      preferredCurrency: zod.string().nullish(),
       status: zod.enum(["new", "contacted", "archived"]),
       internalNote: zod.string().nullish(),
       createdAt: zod.coerce.date(),
@@ -259,6 +315,12 @@ export const GetAuditRequestResponse = zod.object({
   whatsapp: zod.string().nullish(),
   company: zod.string().nullish(),
   biggestChallenge: zod.string(),
+  businessType: zod.string().nullish(),
+  monthlyOrders: zod.string().nullish(),
+  dailyDmVolume: zod.string().nullish(),
+  currentTools: zod.string().nullish(),
+  usesBkashNagad: zod.string().nullish(),
+  preferredCurrency: zod.string().nullish(),
   status: zod.enum(["new", "contacted", "archived"]),
   internalNote: zod.string().nullish(),
   createdAt: zod.coerce.date(),
@@ -283,6 +345,12 @@ export const UpdateAuditRequestResponse = zod.object({
   whatsapp: zod.string().nullish(),
   company: zod.string().nullish(),
   biggestChallenge: zod.string(),
+  businessType: zod.string().nullish(),
+  monthlyOrders: zod.string().nullish(),
+  dailyDmVolume: zod.string().nullish(),
+  currentTools: zod.string().nullish(),
+  usesBkashNagad: zod.string().nullish(),
+  preferredCurrency: zod.string().nullish(),
   status: zod.enum(["new", "contacted", "archived"]),
   internalNote: zod.string().nullish(),
   createdAt: zod.coerce.date(),

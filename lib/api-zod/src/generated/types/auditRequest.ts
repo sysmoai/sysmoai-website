@@ -14,6 +14,12 @@ export interface AuditRequest {
   whatsapp?: string | null;
   company?: string | null;
   biggestChallenge: string;
+  businessType?: string | null;
+  monthlyOrders?: string | null;
+  dailyDmVolume?: string | null;
+  currentTools?: string | null;
+  usesBkashNagad?: string | null;
+  preferredCurrency?: string | null;
   status: SubmissionStatus;
   internalNote?: string | null;
   createdAt: Date;

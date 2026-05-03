@@ -1,5 +1,5 @@
 import { Router, type IRouter, type Request, type Response } from "express";
-import { sql, desc, eq, and, type SQL } from "drizzle-orm";
+import { sql, desc, asc, eq, and, ilike, type SQL } from "drizzle-orm";
 import {
   db,
   contactSubmissionsTable,
@@ -121,6 +121,12 @@ function csvHeaders(resource: "contact" | "audit" | "waitlist"): string[] {
       "email",
       "whatsapp",
       "company",
+      "businessType",
+      "monthlyOrders",
+      "dailyDmVolume",
+      "currentTools",
+      "usesBkashNagad",
+      "preferredCurrency",
       "status",
       "biggestChallenge",
       "internalNote",
@@ -292,6 +298,12 @@ router.get(
         email: r.email,
         whatsapp: r.whatsapp,
         company: r.company,
+        businessType: r.businessType,
+        monthlyOrders: r.monthlyOrders,
+        dailyDmVolume: r.dailyDmVolume,
+        currentTools: r.currentTools,
+        usesBkashNagad: r.usesBkashNagad,
+        preferredCurrency: r.preferredCurrency,
         status: r.status,
         biggestChallenge: r.biggestChallenge,
         internalNote: r.internalNote,
@@ -304,10 +316,37 @@ router.get(
 router.get("/audit-requests", async (req: Request, res: Response) => {
   const q = validateListQuery(ListAuditRequestsQueryParams, req, res);
   if (!q) return;
-  const { page, pageSize, status } = q;
+  const { page, pageSize, status, businessType, usesBkashNagad, preferredCurrency, monthlyOrders: monthlyOrdersFilter, dailyDmVolume: dailyDmVolumeFilter, currentToolsSearch, sortBy, sortOrder } = q;
   const filters: SQL[] = [];
   if (status) filters.push(eq(auditRequestsTable.status, status));
+  if (businessType) filters.push(eq(auditRequestsTable.businessType, businessType));
+  if (usesBkashNagad) filters.push(eq(auditRequestsTable.usesBkashNagad, usesBkashNagad));
+  if (preferredCurrency) filters.push(eq(auditRequestsTable.preferredCurrency, preferredCurrency));
+  if (monthlyOrdersFilter) filters.push(eq(auditRequestsTable.monthlyOrders, monthlyOrdersFilter));
+  if (dailyDmVolumeFilter) filters.push(eq(auditRequestsTable.dailyDmVolume, dailyDmVolumeFilter));
+  if (currentToolsSearch) filters.push(ilike(auditRequestsTable.currentTools, `%${currentToolsSearch}%`));
   const where = filters.length ? and(...filters) : undefined;
+
+  // Bucket-order sort: unknown/null values sort last in both directions
+  const orderExpr = (() => {
+    if (sortBy === "monthlyOrders") {
+      const dir = sortOrder === "asc" ? sql`ASC` : sql`DESC`;
+      return sql`CASE WHEN ${auditRequestsTable.monthlyOrders} = '<50' THEN 1
+        WHEN ${auditRequestsTable.monthlyOrders} = '50-200' THEN 2
+        WHEN ${auditRequestsTable.monthlyOrders} = '200-1000' THEN 3
+        WHEN ${auditRequestsTable.monthlyOrders} = '1000+' THEN 4
+        ELSE NULL END ${dir} NULLS LAST`;
+    }
+    if (sortBy === "dailyDmVolume") {
+      const dir = sortOrder === "asc" ? sql`ASC` : sql`DESC`;
+      return sql`CASE WHEN ${auditRequestsTable.dailyDmVolume} = '<20' THEN 1
+        WHEN ${auditRequestsTable.dailyDmVolume} = '20-100' THEN 2
+        WHEN ${auditRequestsTable.dailyDmVolume} = '100-500' THEN 3
+        WHEN ${auditRequestsTable.dailyDmVolume} = '500+' THEN 4
+        ELSE NULL END ${dir} NULLS LAST`;
+    }
+    return desc(auditRequestsTable.createdAt);
+  })();
 
   const countQuery = db
     .select({ count: sql<number>`count(*)::int` })
@@ -318,7 +357,7 @@ router.get("/audit-requests", async (req: Request, res: Response) => {
   const itemsQuery = db.select().from(auditRequestsTable);
   if (where) itemsQuery.where(where);
   const items = await itemsQuery
-    .orderBy(desc(auditRequestsTable.createdAt))
+    .orderBy(orderExpr)
     .limit(pageSize)
     .offset((page - 1) * pageSize);
 

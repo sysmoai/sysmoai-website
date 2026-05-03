@@ -62,6 +62,12 @@ router.post(
           whatsapp: data.whatsapp ?? null,
           company: data.company ?? null,
           biggestChallenge: data.biggestChallenge,
+          businessType: data.businessType ?? null,
+          monthlyOrders: data.monthlyOrders ?? null,
+          dailyDmVolume: data.dailyDmVolume ?? null,
+          currentTools: data.currentTools ?? null,
+          usesBkashNagad: data.usesBkashNagad ?? null,
+          preferredCurrency: data.preferredCurrency ?? null,
         })
         .returning({ id: auditRequestsTable.id });
       req.log.info({ id: row.id }, "Audit request saved");

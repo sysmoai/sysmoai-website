@@ -97,6 +97,58 @@ export interface ContactSubmissionList {
   pagination: Pagination;
 }
 
+export type AuditRequestInputBusinessType =
+  | (typeof AuditRequestInputBusinessType)[keyof typeof AuditRequestInputBusinessType]
+  | null;
+
+export const AuditRequestInputBusinessType = {
+  f_commerce: "f_commerce",
+  service: "service",
+  agency: "agency",
+  other: "other",
+} as const;
+
+export type AuditRequestInputMonthlyOrders =
+  | (typeof AuditRequestInputMonthlyOrders)[keyof typeof AuditRequestInputMonthlyOrders]
+  | null;
+
+export const AuditRequestInputMonthlyOrders = {
+  "<50": "<50",
+  "50-200": "50-200",
+  "200-1000": "200-1000",
+  "1000+": "1000+",
+} as const;
+
+export type AuditRequestInputDailyDmVolume =
+  | (typeof AuditRequestInputDailyDmVolume)[keyof typeof AuditRequestInputDailyDmVolume]
+  | null;
+
+export const AuditRequestInputDailyDmVolume = {
+  "<20": "<20",
+  "20-100": "20-100",
+  "100-500": "100-500",
+  "500+": "500+",
+} as const;
+
+export type AuditRequestInputUsesBkashNagad =
+  | (typeof AuditRequestInputUsesBkashNagad)[keyof typeof AuditRequestInputUsesBkashNagad]
+  | null;
+
+export const AuditRequestInputUsesBkashNagad = {
+  yes: "yes",
+  no: "no",
+  mix: "mix",
+} as const;
+
+export type AuditRequestInputPreferredCurrency =
+  | (typeof AuditRequestInputPreferredCurrency)[keyof typeof AuditRequestInputPreferredCurrency]
+  | null;
+
+export const AuditRequestInputPreferredCurrency = {
+  BDT: "BDT",
+  USD: "USD",
+} as const;
+
 export interface AuditRequestInput {
   /**
    * @minLength 2
@@ -114,6 +166,13 @@ export interface AuditRequestInput {
    * @maxLength 5000
    */
   biggestChallenge: string;
+  businessType?: AuditRequestInputBusinessType;
+  monthlyOrders?: AuditRequestInputMonthlyOrders;
+  dailyDmVolume?: AuditRequestInputDailyDmVolume;
+  /** @maxLength 500 */
+  currentTools?: string | null;
+  usesBkashNagad?: AuditRequestInputUsesBkashNagad;
+  preferredCurrency?: AuditRequestInputPreferredCurrency;
 }
 
 export interface AuditRequest {
@@ -123,6 +182,12 @@ export interface AuditRequest {
   whatsapp?: string | null;
   company?: string | null;
   biggestChallenge: string;
+  businessType?: string | null;
+  monthlyOrders?: string | null;
+  dailyDmVolume?: string | null;
+  currentTools?: string | null;
+  usesBkashNagad?: string | null;
+  preferredCurrency?: string | null;
   status: SubmissionStatus;
   internalNote?: string | null;
   createdAt: string;
@@ -212,7 +277,103 @@ export type ListAuditRequestsParams = {
    */
   pageSize?: PageSizeParamParameter;
   status?: StatusParamParameter;
+  /**
+   * Filter by business type
+   */
+  businessType?: ListAuditRequestsBusinessType;
+  /**
+   * Filter by bKash/Nagad usage
+   */
+  usesBkashNagad?: ListAuditRequestsUsesBkashNagad;
+  /**
+   * Filter by preferred currency
+   */
+  preferredCurrency?: ListAuditRequestsPreferredCurrency;
+  /**
+   * Filter by monthly orders bucket
+   */
+  monthlyOrders?: ListAuditRequestsMonthlyOrders;
+  /**
+   * Filter by daily DM volume bucket
+   */
+  dailyDmVolume?: ListAuditRequestsDailyDmVolume;
+  /**
+   * Case-insensitive substring search on currentTools
+   * @maxLength 100
+   */
+  currentToolsSearch?: string;
+  /**
+   * Sort by qualifying volume field (bucket-ordered)
+   */
+  sortBy?: ListAuditRequestsSortBy;
+  /**
+   * Sort direction
+   */
+  sortOrder?: ListAuditRequestsSortOrder;
 };
+
+export type ListAuditRequestsBusinessType =
+  (typeof ListAuditRequestsBusinessType)[keyof typeof ListAuditRequestsBusinessType];
+
+export const ListAuditRequestsBusinessType = {
+  f_commerce: "f_commerce",
+  service: "service",
+  agency: "agency",
+  other: "other",
+} as const;
+
+export type ListAuditRequestsUsesBkashNagad =
+  (typeof ListAuditRequestsUsesBkashNagad)[keyof typeof ListAuditRequestsUsesBkashNagad];
+
+export const ListAuditRequestsUsesBkashNagad = {
+  yes: "yes",
+  no: "no",
+  mix: "mix",
+} as const;
+
+export type ListAuditRequestsPreferredCurrency =
+  (typeof ListAuditRequestsPreferredCurrency)[keyof typeof ListAuditRequestsPreferredCurrency];
+
+export const ListAuditRequestsPreferredCurrency = {
+  BDT: "BDT",
+  USD: "USD",
+} as const;
+
+export type ListAuditRequestsMonthlyOrders =
+  (typeof ListAuditRequestsMonthlyOrders)[keyof typeof ListAuditRequestsMonthlyOrders];
+
+export const ListAuditRequestsMonthlyOrders = {
+  "<50": "<50",
+  "50-200": "50-200",
+  "200-1000": "200-1000",
+  "1000+": "1000+",
+} as const;
+
+export type ListAuditRequestsDailyDmVolume =
+  (typeof ListAuditRequestsDailyDmVolume)[keyof typeof ListAuditRequestsDailyDmVolume];
+
+export const ListAuditRequestsDailyDmVolume = {
+  "<20": "<20",
+  "20-100": "20-100",
+  "100-500": "100-500",
+  "500+": "500+",
+} as const;
+
+export type ListAuditRequestsSortBy =
+  (typeof ListAuditRequestsSortBy)[keyof typeof ListAuditRequestsSortBy];
+
+export const ListAuditRequestsSortBy = {
+  monthlyOrders: "monthlyOrders",
+  dailyDmVolume: "dailyDmVolume",
+} as const;
+
+export type ListAuditRequestsSortOrder =
+  (typeof ListAuditRequestsSortOrder)[keyof typeof ListAuditRequestsSortOrder];
+
+export const ListAuditRequestsSortOrder = {
+  asc: "asc",
+  desc: "desc",
+} as const;
 
 export type ListWaitlistSignupsParams = {
   /**
