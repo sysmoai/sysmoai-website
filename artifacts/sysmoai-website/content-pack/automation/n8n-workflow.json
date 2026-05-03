@@ -1,16 +1,11 @@
 {
-  "name": "SYSmoAI — Content Pack Daily Reminder",
-  "_about": "Polls /api/admin/scheduled-posts?dueBefore=now hourly and pings Slack/email/WhatsApp with the next pieces to publish. Set $env.SYSMOAI_API_BASE and $env.SYSMOAI_ADMIN_TOKEN before importing. Designed for the BD peak windows (08–10am, 12–2pm, 8–11pm BDT) — n8n cron runs every hour and the API only returns posts whose scheduledFor has been crossed.",
+  "name": "SYSmoAI — Content Pack Auto-Publisher",
+  "_about": "Hourly cron polls /api/admin/scheduled-posts?dueBefore=now and pushes each due post to Buffer (which fans it out to LinkedIn, X, Instagram, TikTok). Newsletter pieces are routed to Resend instead. After Buffer accepts the post, the workflow PATCHes the row to status=posted with the live permalink. Fallback path: if the Buffer call fails or BUFFER_ACCESS_TOKEN is unset, a Slack reminder is sent so the team can publish manually. Required env: SYSMOAI_API_BASE, SYSMOAI_ADMIN_TOKEN, SYSMOAI_ADMIN_BASE, BUFFER_ACCESS_TOKEN, BUFFER_PROFILE_LINKEDIN, BUFFER_PROFILE_X, BUFFER_PROFILE_INSTAGRAM, BUFFER_PROFILE_TIKTOK, RESEND_API_KEY, NEWSLETTER_FROM, NEWSLETTER_AUDIENCE_ID, SLACK_FALLBACK_CHANNEL.",
   "nodes": [
     {
       "parameters": {
         "rule": {
-          "interval": [
-            {
-              "field": "hours",
-              "hoursInterval": 1
-            }
-          ]
+          "interval": [{ "field": "hours", "hoursInterval": 1 }]
         }
       },
       "id": "cron-hourly",
@@ -38,7 +33,7 @@
       "name": "Fetch due posts",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [440, 320]
+      "position": [420, 320]
     },
     {
       "parameters": {
@@ -46,22 +41,152 @@
         "options": {}
       },
       "id": "split",
-      "name": "Split into items",
+      "name": "Split items",
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
-      "position": [680, 320]
+      "position": [620, 320]
     },
     {
       "parameters": {
-        "channel": "#sysmoai-publishing",
-        "text": "=📣 *Time to publish* `{{ $json.fileRef }}` ({{ $json.platform }})\n*Hook:* {{ $json.hookLine }}\n*Scheduled:* {{ $json.scheduledFor }}\n```{{ $json.content }}```\nMark posted: {{ $env.SYSMOAI_ADMIN_BASE }}/scheduled-posts/{{ $json.id }}"
+        "rules": {
+          "values": [
+            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "linkedin", "outputIndex": 0 },
+            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "x_standalone", "outputIndex": 1 },
+            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "x_thread", "outputIndex": 1 },
+            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "instagram_feed", "outputIndex": 2 },
+            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "instagram_story", "outputIndex": 2 },
+            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "tiktok_reel", "outputIndex": 3 },
+            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "newsletter", "outputIndex": 4 }
+          ]
+        },
+        "fallbackOutput": 5
       },
-      "id": "slack-notify",
-      "name": "Slack reminder",
+      "id": "route-platform",
+      "name": "Route by platform",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [820, 320],
+      "_about": "0=LinkedIn, 1=X, 2=Instagram, 3=TikTok via Buffer; 4=Newsletter via Resend; 5=fallback Slack reminder."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.bufferapp.com/1/updates/create.json",
+        "sendBody": true,
+        "specifyBody": "form",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "access_token", "value": "={{ $env.BUFFER_ACCESS_TOKEN }}" },
+            { "name": "text", "value": "={{ $json.content }}" },
+            { "name": "profile_ids[]", "value": "={{ $env.BUFFER_PROFILE_LINKEDIN }}" },
+            { "name": "now", "value": "true" },
+            { "name": "media[link]", "value": "={{ $json.postUrl || '' }}" }
+          ]
+        }
+      },
+      "id": "buffer-linkedin",
+      "name": "Buffer → LinkedIn",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1080, 60]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.bufferapp.com/1/updates/create.json",
+        "sendBody": true,
+        "specifyBody": "form",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "access_token", "value": "={{ $env.BUFFER_ACCESS_TOKEN }}" },
+            { "name": "text", "value": "={{ $json.content }}" },
+            { "name": "profile_ids[]", "value": "={{ $env.BUFFER_PROFILE_X }}" },
+            { "name": "now", "value": "true" }
+          ]
+        }
+      },
+      "id": "buffer-x",
+      "name": "Buffer → X",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1080, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.bufferapp.com/1/updates/create.json",
+        "sendBody": true,
+        "specifyBody": "form",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "access_token", "value": "={{ $env.BUFFER_ACCESS_TOKEN }}" },
+            { "name": "text", "value": "={{ $json.content }}" },
+            { "name": "profile_ids[]", "value": "={{ $env.BUFFER_PROFILE_INSTAGRAM }}" },
+            { "name": "now", "value": "true" },
+            { "name": "media[photo]", "value": "={{ $json.assetUrl || '' }}" }
+          ]
+        }
+      },
+      "id": "buffer-instagram",
+      "name": "Buffer → Instagram",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1080, 340]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.bufferapp.com/1/updates/create.json",
+        "sendBody": true,
+        "specifyBody": "form",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "access_token", "value": "={{ $env.BUFFER_ACCESS_TOKEN }}" },
+            { "name": "text", "value": "={{ $json.content }}" },
+            { "name": "profile_ids[]", "value": "={{ $env.BUFFER_PROFILE_TIKTOK }}" },
+            { "name": "now", "value": "true" },
+            { "name": "media[video]", "value": "={{ $json.assetUrl || '' }}" }
+          ]
+        }
+      },
+      "id": "buffer-tiktok",
+      "name": "Buffer → TikTok",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1080, 480]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"from\": \"{{ $env.NEWSLETTER_FROM }}\",\n  \"to\": [\"{{ $env.NEWSLETTER_AUDIENCE_ID }}\"],\n  \"subject\": \"{{ $json.hookLine }}\",\n  \"text\": \"{{ $json.content }}\"\n}",
+        "options": {
+          "headers": {
+            "parameters": {
+              "Authorization": "=Bearer {{ $env.RESEND_API_KEY }}",
+              "Content-Type": "application/json"
+            }
+          }
+        }
+      },
+      "id": "resend-newsletter",
+      "name": "Resend → Newsletter",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1080, 620]
+    },
+    {
+      "parameters": {
+        "channel": "={{ $env.SLACK_FALLBACK_CHANNEL }}",
+        "text": "=⚠️ Could not auto-publish `{{ $json.fileRef }}` ({{ $json.platform }}) — please post manually.\n*Hook:* {{ $json.hookLine }}\n```{{ $json.content }}```\nMark posted: {{ $env.SYSMOAI_ADMIN_BASE }}/scheduled-posts/{{ $json.id }}"
+      },
+      "id": "slack-fallback",
+      "name": "Slack fallback",
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2,
-      "position": [920, 200],
-      "_alternative": "Replace with WhatsApp / Telegram / Email node — payload stays the same."
+      "position": [1080, 760]
     },
     {
       "parameters": {
@@ -69,7 +194,7 @@
         "url": "={{ $env.SYSMOAI_API_BASE }}/api/admin/scheduled-posts/{{ $json.id }}",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"notes\": \"Reminder sent at {{ $now.toISO() }} via n8n\"\n}",
+        "jsonBody": "={\n  \"status\": \"posted\",\n  \"postUrl\": \"{{ $json.postUrl || ($json.body && $json.body.permalink) || '' }}\",\n  \"notes\": \"Auto-published by n8n at {{ $now.toISO() }}\"\n}",
         "options": {
           "headers": {
             "parameters": {
@@ -79,28 +204,32 @@
           }
         }
       },
-      "id": "log-reminder",
-      "name": "Log reminder on post",
+      "id": "mark-posted",
+      "name": "Mark posted",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [920, 440],
-      "_about": "Optional: stamps the post's notes field so we don't double-ping."
+      "position": [1340, 340],
+      "_about": "Stamps the row as posted; the API server auto-fills postedAt server-side."
     }
   ],
   "connections": {
-    "Every hour": {
-      "main": [[{ "node": "Fetch due posts", "type": "main", "index": 0 }]]
-    },
-    "Fetch due posts": {
-      "main": [[{ "node": "Split into items", "type": "main", "index": 0 }]]
-    },
-    "Split into items": {
+    "Every hour": { "main": [[{ "node": "Fetch due posts", "type": "main", "index": 0 }]] },
+    "Fetch due posts": { "main": [[{ "node": "Split items", "type": "main", "index": 0 }]] },
+    "Split items": { "main": [[{ "node": "Route by platform", "type": "main", "index": 0 }]] },
+    "Route by platform": {
       "main": [
-        [
-          { "node": "Slack reminder", "type": "main", "index": 0 },
-          { "node": "Log reminder on post", "type": "main", "index": 0 }
-        ]
+        [{ "node": "Buffer → LinkedIn", "type": "main", "index": 0 }],
+        [{ "node": "Buffer → X", "type": "main", "index": 0 }],
+        [{ "node": "Buffer → Instagram", "type": "main", "index": 0 }],
+        [{ "node": "Buffer → TikTok", "type": "main", "index": 0 }],
+        [{ "node": "Resend → Newsletter", "type": "main", "index": 0 }],
+        [{ "node": "Slack fallback", "type": "main", "index": 0 }]
       ]
-    }
+    },
+    "Buffer → LinkedIn":   { "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]] },
+    "Buffer → X":          { "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]] },
+    "Buffer → Instagram":  { "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]] },
+    "Buffer → TikTok":     { "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]] },
+    "Resend → Newsletter": { "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]] }
   }
 }

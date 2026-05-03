@@ -25,15 +25,18 @@ export type ListScheduledPostsParams = {
   platform?: ScheduledPostPlatform;
   funnel?: ScheduledPostFunnel;
   /**
-   * ISO date — only posts scheduled on/after this date
+   * ISO 8601 date-time — only posts scheduled on/after this instant
+   * @minLength 1
    */
-  from?: Date;
+  from?: string;
   /**
-   * ISO date — only posts scheduled on/before this date
+   * ISO 8601 date-time — only posts scheduled on/before this instant
+   * @minLength 1
    */
-  to?: Date;
+  to?: string;
   /**
-   * Convenience filter for n8n — return queued posts whose scheduledFor is on or before this instant
+   * ISO 8601 date-time — convenience for n8n; returns queued posts whose scheduledFor is on or before this instant
+   * @minLength 1
    */
-  dueBefore?: Date;
+  dueBefore?: string;
 };

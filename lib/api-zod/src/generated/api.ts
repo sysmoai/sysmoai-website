@@ -459,19 +459,26 @@ export const ListScheduledPostsQueryParams = zod.object({
     ])
     .optional(),
   funnel: zod.enum(["TOF", "MOF", "MOF_BOF", "BOF"]).optional(),
-  from: zod
-    .date()
-    .optional()
-    .describe("ISO date — only posts scheduled on\/after this date"),
-  to: zod
-    .date()
-    .optional()
-    .describe("ISO date — only posts scheduled on\/before this date"),
-  dueBefore: zod
-    .date()
+  from: zod.coerce
+    .string()
+    .min(1)
     .optional()
     .describe(
-      "Convenience filter for n8n — return queued posts whose scheduledFor is on or before this instant",
+      "ISO 8601 date-time — only posts scheduled on\/after this instant",
+    ),
+  to: zod.coerce
+    .string()
+    .min(1)
+    .optional()
+    .describe(
+      "ISO 8601 date-time — only posts scheduled on\/before this instant",
+    ),
+  dueBefore: zod.coerce
+    .string()
+    .min(1)
+    .optional()
+    .describe(
+      "ISO 8601 date-time — convenience for n8n; returns queued posts whose scheduledFor is on or before this instant",
     ),
 });
 

@@ -20,10 +20,18 @@ imported into the admin queue and operated as a publishing dashboard.
    skipped / failed counts plus per-platform and per-week breakdowns. Click a
    row to mark posted, log the live URL, and capture impressions / clicks /
    waitlist signups.
-5. **Automate** — point n8n (or any scheduler) at
-   `GET /api/admin/scheduled-posts?dueBefore=<now>` on a cron trigger; the
-   sample workflow in `n8n-workflow.json` pings Slack / WhatsApp with the
-   exact copy block and the deep link to mark it posted.
+5. **Automate** — `n8n-workflow.json` is an hourly auto-publisher that:
+   1. Polls `GET /api/admin/scheduled-posts?dueBefore=<now>` for queued
+      posts whose slot has elapsed.
+   2. Routes each post by `platform` to the right channel — **Buffer**
+      for LinkedIn / X / Instagram / TikTok (one configured Buffer
+      profile per channel), **Resend** for newsletter issues.
+   3. On success, calls `PATCH /api/admin/scheduled-posts/{id}` with
+      `status: "posted"` and the live permalink (the API stamps
+      `postedAt` server-side).
+   4. On failure or when `BUFFER_ACCESS_TOKEN` is unset, falls back to a
+      Slack message with the exact copy block + deep link to mark it
+      posted manually.
 
 ## BDT peak-hour publishing slots
 
@@ -48,13 +56,26 @@ edit `content-pack/calendar.md` dates, re-run the build script, and click
 
 `n8n-workflow.json` expects:
 
-- `SYSMOAI_API_BASE` — e.g. `https://yourdomain.com`
-- `SYSMOAI_ADMIN_TOKEN` — Clerk session token (or a dedicated bot allowlisted
-  via `ADMIN_ALLOWED_EMAILS`)
-- `SYSMOAI_ADMIN_BASE` — e.g. `https://yourdomain.com/admin`
-- A configured Slack credential for the Slack node (swap for WhatsApp /
-  Telegram / Email if preferred — payload stays the same)
+| Var                          | Purpose                                                   |
+|------------------------------|-----------------------------------------------------------|
+| `SYSMOAI_API_BASE`           | e.g. `https://yourdomain.com`                             |
+| `SYSMOAI_ADMIN_TOKEN`        | Clerk session token (or bot allowlisted via `ADMIN_ALLOWED_EMAILS`) |
+| `SYSMOAI_ADMIN_BASE`         | e.g. `https://yourdomain.com/admin`                       |
+| `BUFFER_ACCESS_TOKEN`        | Buffer access token (one Business plan covers all four social profiles) |
+| `BUFFER_PROFILE_LINKEDIN`    | Buffer profile ID for the LinkedIn page                   |
+| `BUFFER_PROFILE_X`           | Buffer profile ID for the X account                       |
+| `BUFFER_PROFILE_INSTAGRAM`   | Buffer profile ID for the IG account                      |
+| `BUFFER_PROFILE_TIKTOK`      | Buffer profile ID for the TikTok account                  |
+| `RESEND_API_KEY`             | Resend API key for the newsletter sends                   |
+| `NEWSLETTER_FROM`            | e.g. `"SYSmoAI <hello@yourdomain.com>"`                   |
+| `NEWSLETTER_AUDIENCE_ID`     | Resend audience or list email                             |
+| `SLACK_FALLBACK_CHANNEL`     | e.g. `#sysmoai-publishing` for the manual-fallback path   |
 
 The workflow runs hourly. The `dueBefore` filter only returns *queued* posts
-whose `scheduledFor` has elapsed, so you can safely re-trigger without
-sending duplicates after a row has been marked posted.
+whose `scheduledFor` has elapsed, so once `Mark posted` flips the row to
+`posted` the same piece will not re-publish on the next tick — the workflow
+is safe to re-trigger.
+
+If you'd rather drive things from another tool (Hootsuite, Make, etc.) the
+contract is the same: poll the `dueBefore` list, post via your channel
+integration, then PATCH the row with `status: "posted"` and the permalink.

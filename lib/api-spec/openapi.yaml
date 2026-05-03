@@ -441,24 +441,24 @@ paths:
         - name: from
           in: query
           required: false
-          description: ISO date — only posts scheduled on/after this date
+          description: ISO 8601 date-time — only posts scheduled on/after this instant
           schema:
             type: string
-            format: date-time
+            minLength: 1
         - name: to
           in: query
           required: false
-          description: ISO date — only posts scheduled on/before this date
+          description: ISO 8601 date-time — only posts scheduled on/before this instant
           schema:
             type: string
-            format: date-time
+            minLength: 1
         - name: dueBefore
           in: query
           required: false
-          description: Convenience filter for n8n — return queued posts whose scheduledFor is on or before this instant
+          description: ISO 8601 date-time — convenience for n8n; returns queued posts whose scheduledFor is on or before this instant
           schema:
             type: string
-            format: date-time
+            minLength: 1
       responses:
         "200":
           description: OK
