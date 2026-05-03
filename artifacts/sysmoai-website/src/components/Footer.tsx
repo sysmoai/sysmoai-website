@@ -26,6 +26,8 @@ export function Footer() {
 
   const handleWaitlistSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const hp = (e.currentTarget as HTMLFormElement).elements.namedItem('website') as HTMLInputElement | null;
+    if (hp?.value) return; // Honeypot tripped
     if (!email || waitlistStatus === 'loading') return;
     setWaitlistStatus('loading');
     try {
@@ -69,6 +71,11 @@ export function Footer() {
               </div>
             ) : (
               <form className="flex gap-2" onSubmit={handleWaitlistSubmit}>
+                <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', width: '1px', height: '1px', overflow: 'hidden' }}>
+                  <label>Website (leave blank)
+                    <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+                  </label>
+                </div>
                 <input
                   type="email"
                   placeholder="your@email.com"

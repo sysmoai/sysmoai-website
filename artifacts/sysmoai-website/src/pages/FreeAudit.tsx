@@ -346,10 +346,20 @@ export default function FreeAudit() {
           ) : (
             <motion.form
               initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={handleSubmit((data) => {
+                const hp = (document.getElementById('fa-website-hp') as HTMLInputElement | null)?.value;
+                if (hp) return; // Honeypot tripped — silently drop on client too.
+                return onSubmit(data);
+              })}
               className="space-y-6 p-6 md:p-8 rounded-2xl"
               style={{ background: cardBg, border: `1px solid ${cardBorder}` }}
             >
+              {/* Honeypot — real users never see or fill this */}
+              <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', width: '1px', height: '1px', overflow: 'hidden' }}>
+                <label>Website (leave blank)
+                  <input id="fa-website-hp" type="text" name="website" tabIndex={-1} autoComplete="off" />
+                </label>
+              </div>
               {/* Basic Info */}
               <div className="space-y-5">
                 <h3 className="font-bold text-base" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}>Your details</h3>

@@ -1,5 +1,6 @@
 import express, { type Express } from "express";
 import cors from "cors";
+import helmet from "helmet";
 import pinoHttp from "pino-http";
 import { clerkMiddleware } from "@clerk/express";
 import { publishableKeyFromHost } from "@clerk/shared/keys";
@@ -12,6 +13,22 @@ import router from "./routes";
 import { logger } from "./lib/logger";
 
 const app: Express = express();
+
+// We sit behind the Replit proxy. Trust the first hop so req.ip and the
+// X-Forwarded-For-derived rate-limit key reflect the real client IP instead
+// of 127.0.0.1.
+app.set("trust proxy", 1);
+
+// Conservative security headers. CSP is disabled here because the Vite-built
+// SPAs ship inline styles and dynamic chunks; it should be enforced at the
+// edge / hosting layer where it can be tuned per artifact.
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+  }),
+);
 
 app.use(
   pinoHttp({

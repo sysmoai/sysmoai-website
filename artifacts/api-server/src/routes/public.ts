@@ -11,6 +11,7 @@ import {
   waitlistSignupsTable,
 } from "@workspace/db";
 import { rateLimit } from "../middlewares/rateLimit";
+import { honeypot } from "../middlewares/honeypot";
 import { validateBody } from "../lib/validation";
 import { notifyNewLead } from "../lib/notify";
 
@@ -20,6 +21,8 @@ const submissionRateLimit = rateLimit({
   windowMs: 10 * 60 * 1000,
   max: 10,
 });
+
+const submissionHoneypot = honeypot();
 
 function formatBkashNagad(
   value: "yes" | "no" | "mix" | null | undefined,
@@ -33,6 +36,7 @@ function formatBkashNagad(
 router.post(
   "/contact",
   submissionRateLimit,
+  submissionHoneypot,
   validateBody(CreateContactSubmissionBody),
   async (req, res) => {
     try {
@@ -74,6 +78,7 @@ router.post(
 router.post(
   "/audit-requests",
   submissionRateLimit,
+  submissionHoneypot,
   validateBody(CreateAuditRequestBody),
   async (req, res) => {
     try {
@@ -134,6 +139,7 @@ router.post(
 router.post(
   "/waitlist",
   submissionRateLimit,
+  submissionHoneypot,
   validateBody(CreateWaitlistSignupBody),
   async (req, res) => {
     try {
@@ -168,6 +174,27 @@ router.post(
       });
       res.status(201).json({ id: row.id, ok: true });
     } catch (err) {
+      // Treat unique-violation on the case-insensitive email index as a
+      // success — the user is already on the list. Drizzle wraps the pg
+      // error so walk the cause chain looking for SQLSTATE 23505 AND the
+      // specific constraint name; any other unique-violation should still
+      // surface as a 500 so we don't silently mask data-integrity bugs.
+      const isWaitlistEmailDup = (() => {
+        let cur: unknown = err;
+        for (let i = 0; i < 5 && cur; i++) {
+          const c = cur as { code?: string; constraint?: string };
+          if (c.code === "23505" && c.constraint === "waitlist_signups_email_lower_uniq") {
+            return true;
+          }
+          cur = (cur as { cause?: unknown }).cause;
+        }
+        return false;
+      })();
+      if (isWaitlistEmailDup) {
+        req.log.info({ err }, "Waitlist re-signup (already on list)");
+        res.status(200).json({ ok: true, alreadySubscribed: true });
+        return;
+      }
       req.log.error({ err }, "Failed to save waitlist signup");
       res.status(500).json({ error: "Failed to save submission." });
     }

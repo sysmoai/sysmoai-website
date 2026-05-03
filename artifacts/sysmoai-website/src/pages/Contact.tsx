@@ -67,6 +67,8 @@ export default function Contact() {
   }, []);
 
   const onSubmit = async (data: FormData) => {
+    const hp = document.querySelector<HTMLInputElement>('form input[name="website"]');
+    if (hp?.value) return; // Honeypot tripped
     setSubmitError(null);
     try {
       await createSubmission.mutateAsync({
@@ -208,6 +210,12 @@ export default function Contact() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                  {/* Honeypot — real users never see or fill this */}
+                  <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }}>
+                    <label>Website (leave blank)
+                      <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+                    </label>
+                  </div>
                   <div>
                     <label htmlFor="name" className="block text-sm font-semibold mb-1.5" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>Your Name *</label>
                     <input id="name" {...register('name')}

@@ -27,6 +27,7 @@ import {
 import { queryClient } from "@/lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { DashboardPage } from "@/pages/Dashboard";
 import { ContactsPage } from "@/pages/Contacts";
 import { ContactDetailPage } from "@/pages/ContactDetail";
@@ -289,9 +290,11 @@ function ClerkProviderWithRoutes() {
 
 function App() {
   return (
-    <WouterRouter base={basePath}>
-      <ClerkProviderWithRoutes />
-    </WouterRouter>
+    <ErrorBoundary>
+      <WouterRouter base={basePath}>
+        <ClerkProviderWithRoutes />
+      </WouterRouter>
+    </ErrorBoundary>
   );
 }
 

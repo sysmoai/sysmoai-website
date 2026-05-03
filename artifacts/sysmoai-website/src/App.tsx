@@ -6,6 +6,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { useSeo } from "@/hooks/useSeo";
 
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFAB } from "@/components/WhatsAppFAB";
@@ -249,6 +250,7 @@ function Router() {
 
 function App() {
   return (
+    <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <ThemeProvider>
@@ -259,6 +261,7 @@ function App() {
         </ThemeProvider>
       </TooltipProvider>
     </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
 

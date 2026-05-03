@@ -328,6 +328,8 @@ function WaitlistSection({ isDark }: { isDark: boolean }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const hp = (e.currentTarget as HTMLFormElement).elements.namedItem('website') as HTMLInputElement | null;
+    if (hp?.value) return; // Honeypot tripped
     if (!email || status === 'loading') return;
     setStatus('loading');
     try {
@@ -382,6 +384,14 @@ function WaitlistSection({ isDark }: { isDark: boolean }) {
         ) : (
           <motion.form initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             onSubmit={handleSubmit} className="space-y-3">
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0, pointerEvents: 'none' }}
+            />
             <div className="flex flex-col sm:flex-row gap-3">
               <input
                 type="text"
@@ -1553,6 +1563,8 @@ export default function Home() {
                       src="/founder.jpg"
                       alt="Emon Hossain — Founder & CEO, SYSmoAI"
                       className="w-full h-full object-cover object-top"
+                      loading="lazy"
+                      decoding="async"
                       onError={e => {
                         const t = e.currentTarget as HTMLImageElement;
                         t.style.display = 'none';
