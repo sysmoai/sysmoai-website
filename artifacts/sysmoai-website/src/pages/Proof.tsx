@@ -18,8 +18,10 @@ const stats = [
   { value: '3+',     label: 'Years Building AI Systems' },
 ];
 
+// Note: F-Commerce results live in their own dedicated section above
+// (sourced from src/data/fCommerceProof.ts). The cards below cover other
+// industries we've shipped for, to keep this list non-duplicative.
 const resultCards = [
-  { icon: '🛒', category: 'F-Commerce',      result: '400+ DMs/day automated',         detail: 'Facebook DM auto-reply system + order management'         },
   { icon: '🏢', category: 'Digital Agency',  result: '15 hrs/week saved',              detail: 'AI Quick Win — automated reporting + client updates'       },
   { icon: '🎓', category: 'Coaching Business', result: '20 hrs/week freed',            detail: 'Notion OS + client onboarding automation'                 },
   { icon: '💼', category: 'Senior Freelancer', result: 'Revenue tripled',              detail: 'Skill upgrade + premium AI service package launch'        },
