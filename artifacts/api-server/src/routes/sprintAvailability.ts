@@ -72,13 +72,28 @@ adminSprintRouter.patch(
         .json({ error: "slotsAvailable must be a whole number." });
       return;
     }
+    let trimmedMonthLabel: string | undefined;
+    if (data.monthLabel !== undefined) {
+      trimmedMonthLabel = data.monthLabel.trim();
+      if (!trimmedMonthLabel) {
+        res
+          .status(400)
+          .json({ error: "monthLabel cannot be blank." });
+        return;
+      }
+    }
+    const trimmedNextStartDate =
+      typeof data.nextStartDate === "string"
+        ? data.nextStartDate.trim()
+        : data.nextStartDate;
     await loadOrSeed();
     const patch: Record<string, unknown> = { updatedAt: new Date() };
     if (data.slotsAvailable !== undefined)
       patch.slotsAvailable = data.slotsAvailable;
-    if (data.monthLabel !== undefined) patch.monthLabel = data.monthLabel;
+    if (trimmedMonthLabel !== undefined) patch.monthLabel = trimmedMonthLabel;
     if (data.nextStartDate !== undefined)
-      patch.nextStartDate = data.nextStartDate;
+      patch.nextStartDate =
+        trimmedNextStartDate === "" ? null : trimmedNextStartDate;
 
     const [updated] = await db
       .update(sprintAvailabilityTable)
