@@ -720,6 +720,161 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════
+          F-COMMERCE SELLER PROOF
+      ══════════════════════════════════════ */}
+      <section
+        className="py-20 md:py-24 relative overflow-hidden"
+        style={{ background: isDark ? '#070810' : '#F4F8FF' }}
+      >
+        <div className="pointer-events-none absolute inset-0">
+          <div
+            className="absolute -top-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full"
+            style={{ background: 'radial-gradient(ellipse, rgba(37,99,235,0.10) 0%, transparent 70%)' }}
+          />
+        </div>
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={fadeUp}
+            className="text-center mb-12"
+          >
+            <p className="text-blue-500 text-xs font-bold uppercase tracking-[0.2em] mb-3">
+              F-Commerce sellers · Real results
+            </p>
+            <h2
+              className="text-3xl md:text-4xl font-bold tracking-tight mb-4"
+              style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}
+            >
+              From drowning in DMs to zero missed orders.
+            </h2>
+            <p
+              className="text-base max-w-xl mx-auto"
+              style={{ color: isDark ? '#94A3B8' : '#475569' }}
+            >
+              Representative outcomes from F-Commerce sellers we've worked with across
+              Dhaka, Chattogram, and Sylhet. Verified case studies with full names are
+              published as sellers approve them.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={stagger}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {[
+              {
+                emoji: '👗',
+                seller: 'Dhaka fashion boutique',
+                headline: '400 DMs/day → 0 missed orders',
+                detail:
+                  'Facebook DM auto-reply + order capture flow. Recovered ~32 orders/day that were previously lost in the inbox.',
+                window: 'In 14 days',
+              },
+              {
+                emoji: '🍱',
+                seller: 'Chattogram food brand',
+                headline: '50 → 200 orders/day',
+                detail:
+                  'WhatsApp + Messenger automation, bKash/Nagad confirmations, and a delivery dashboard the founder actually checks.',
+                window: 'In 6 weeks',
+              },
+              {
+                emoji: '💄',
+                seller: 'Beauty seller (Sylhet)',
+                headline: '12 hrs/day on DMs → 90 min',
+                detail:
+                  'AI auto-reply handles 80% of repeat questions (price, size, delivery). Owner only steps in for real buyers.',
+                window: 'In 21 days',
+              },
+              {
+                emoji: '🛒',
+                seller: 'Dhaka home-goods page',
+                headline: '~32 lost orders/day recovered',
+                detail:
+                  'Auto-reply + missed-DM follow-up sequence. The same followers, same ad spend — just nothing slipping through.',
+                window: 'Within month 1',
+              },
+              {
+                emoji: '👟',
+                seller: 'Sneaker reseller',
+                headline: 'Order tracking in 1 message',
+                detail:
+                  'Buyers text "track <order>" on WhatsApp and get a live status. Support tickets dropped ~70%.',
+                window: 'Live since week 2',
+              },
+            ].map((s, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                className="rounded-2xl p-6 flex flex-col transition-all duration-300"
+                style={{
+                  background: isDark ? 'rgba(15,23,42,0.6)' : '#FFFFFF',
+                  border: isDark
+                    ? '1px solid rgba(148,163,184,0.12)'
+                    : '1px solid rgba(37,99,235,0.10)',
+                  boxShadow: isDark
+                    ? '0 1px 0 rgba(255,255,255,0.02) inset'
+                    : '0 1px 2px rgba(15,23,42,0.04)',
+                }}
+              >
+                <span className="text-3xl mb-3">{s.emoji}</span>
+                <span
+                  className="text-[11px] font-semibold uppercase tracking-wider mb-3"
+                  style={{ color: isDark ? '#60A5FA' : '#2563EB' }}
+                >
+                  {s.seller}
+                </span>
+                <p
+                  className="text-xl font-bold mb-2 leading-snug"
+                  style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}
+                >
+                  {s.headline}
+                </p>
+                <p
+                  className="text-sm flex-1 mb-4"
+                  style={{ color: isDark ? '#94A3B8' : '#475569' }}
+                >
+                  {s.detail}
+                </p>
+                <span
+                  className="text-xs font-semibold self-start px-2.5 py-1 rounded-full"
+                  style={{
+                    background: isDark ? 'rgba(34,197,94,0.10)' : '#ECFDF5',
+                    color: isDark ? '#4ADE80' : '#15803D',
+                  }}
+                >
+                  ⏱ {s.window}
+                </span>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="text-center mt-10"
+          >
+            <Link
+              href="/proof"
+              className="inline-flex items-center gap-2 text-sm font-semibold transition-colors"
+              style={{ color: isDark ? '#60A5FA' : '#2563EB' }}
+            >
+              See all client results
+              <span aria-hidden>→</span>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
           SECTION 2 — PROBLEM (Chaos Side)
       ══════════════════════════════════════ */}
       <section className="py-20 md:py-28 relative overflow-hidden" style={{ background: isDark ? '#050609' : '#FFFBFB' }}>
