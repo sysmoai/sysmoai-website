@@ -4,6 +4,7 @@ import { Link } from 'wouter';
 import { MessageCircle, CheckCircle2, ArrowRight, LucideIcon } from 'lucide-react';
 import { WA_LINK } from '@/lib/config';
 import { useTheme } from '@/contexts/ThemeContext';
+import { DirectAnswer } from '@/components/DirectAnswer';
 import {
   Accordion,
   AccordionContent,
@@ -37,6 +38,7 @@ interface ServicePageProps {
   faqs: FAQ[];
   relatedServices?: { href: string; label: string; price?: string }[];
   metaTitle?: string;
+  directAnswer?: string;
 }
 
 export function ServicePageTemplate({
@@ -54,6 +56,7 @@ export function ServicePageTemplate({
   faqs,
   relatedServices = [],
   metaTitle,
+  directAnswer,
 }: ServicePageProps) {
   const { isDark } = useTheme();
 
@@ -120,6 +123,15 @@ export function ServicePageTemplate({
         </div>
       </section>
 
+      {/* Direct Answer — GEO */}
+      {directAnswer && (
+        <section className="pt-10 pb-0" style={{ background: bg1 }}>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <DirectAnswer>{directAnswer}</DirectAnswer>
+          </div>
+        </section>
+      )}
+
       {/* What It Is */}
       <section className="py-16 md:py-20" style={{ background: bg1 }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -129,7 +141,7 @@ export function ServicePageTemplate({
               <p className="leading-relaxed text-lg" style={{ color: body }}>{whatItIs}</p>
             </motion.div>
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
-              <h2 className="text-2xl md:text-3xl font-bold mb-5" style={{ color: heading }}>What you get</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-5" style={{ color: heading }}>What does {title} deliver?</h2>
               <ul className="space-y-3">
                 {deliverables.map((d, i) => (
                   <li key={i} className="flex items-start gap-3">
@@ -199,7 +211,7 @@ export function ServicePageTemplate({
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="text-2xl md:text-3xl font-bold mb-8 text-center" style={{ color: heading }}
           >
-            Who it's for
+            Who is {title} designed for?
           </motion.h2>
           <motion.div
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
@@ -230,7 +242,7 @@ export function ServicePageTemplate({
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="text-2xl md:text-3xl font-bold text-white mb-10 text-center"
           >
-            How it works
+            How does the {title} process work?
           </motion.h2>
           <motion.div
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}

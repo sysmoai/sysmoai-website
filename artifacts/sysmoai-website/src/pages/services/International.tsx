@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'wouter';
 import { Globe, MessageCircle, CheckCircle2, ArrowRight } from 'lucide-react';
 import { WA_LINK, EMAIL } from '@/lib/config';
+import { DirectAnswer } from '@/components/DirectAnswer';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -71,6 +72,15 @@ export default function International() {
               <MessageCircle size={18} /> WhatsApp
             </a>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Direct Answer — GEO */}
+      <section className="pt-10 pb-0 bg-white">
+        <div className="max-w-4xl mx-auto px-4">
+          <DirectAnswer>
+            SYSmoAI serves international clients (US, UK, Canada, Australia, Southeast Asia) with world-class AI consulting at Bangladesh rates — 60–80% below US/EU agency prices. Services: AI Quick Win ($50–$100), F-Commerce AI Sprint ($600), AI Retainer ($250/month), Notion OS ($800–$5,000), AI Agents ($2,500–$15,000). Payment via Wise or Payoneer. Founder Emon Hossain is ranked top 5% globally in prompt engineering.
+          </DirectAnswer>
         </div>
       </section>
 

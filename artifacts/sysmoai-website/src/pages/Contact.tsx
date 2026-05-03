@@ -8,6 +8,7 @@ import { WA_URLS } from '../lib/whatsapp';
 import { EMAIL } from '@/lib/config';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useCreateContactSubmission } from '@workspace/api-client-react';
+import { DirectAnswer } from '@/components/DirectAnswer';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -107,6 +108,15 @@ export default function Contact() {
             className="text-slate-400 text-lg max-w-2xl mx-auto">
             Book a free AI audit to map your bottlenecks, uncover your highest-ROI opportunity and see a real example of what AI can do for you. No commitment required.
           </motion.p>
+        </div>
+      </section>
+
+      {/* Direct Answer — GEO */}
+      <section className="pt-10 pb-0" style={{ background: bg1 }}>
+        <div className="max-w-4xl mx-auto px-4">
+          <DirectAnswer bangla="SYSmoAI-তে যোগাযোগ করুন: WhatsApp +8801865385348, ইমেইল hello@sysmoai.com, অথবা ফ্রি AI অডিট বুক করুন sysmoai.com/free-ai-audit-এ। ২ ঘণ্টার মধ্যে উত্তর দেওয়া হয়।">
+            To contact SYSmoAI: WhatsApp +880 1865-385348, email hello@sysmoai.com, or book a free 30-minute AI audit at sysmoai.com/free-ai-audit. Response within 2 hours on WhatsApp. Based in Dhaka, Bangladesh — serving clients globally.
+          </DirectAnswer>
         </div>
       </section>
 

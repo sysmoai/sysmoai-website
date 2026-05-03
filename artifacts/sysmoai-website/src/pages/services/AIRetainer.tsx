@@ -11,6 +11,7 @@ export default function AIRetainer() {
       bdPrice="৳20,000/month"
       usdPrice="$250/month"
       guarantee="Cancel anytime"
+      directAnswer="The AI Retainer is SYSmoAI's monthly managed service at ৳20,000/month ($250/month) — 4–8 hours of hands-on AI work, monthly system improvements, priority WhatsApp support (2-hour response), and a monthly performance report. Cancel anytime, no lock-in."
       whatItIs="The AI Retainer is a monthly managed service where SYSmoAI acts as your ongoing AI operations partner. Each month, we improve your existing systems, add new automations, fix issues, and identify new AI opportunities as your business evolves. Perfect for post-Sprint clients or businesses that want continuous AI improvement without hiring a full-time AI person."
       deliverables={[
         '4–8 hours of hands-on AI work per month',

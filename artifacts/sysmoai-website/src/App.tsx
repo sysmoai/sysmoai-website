@@ -43,6 +43,9 @@ const PrivacyPolicy = lazy(() => import("@/pages/legal/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("@/pages/legal/TermsOfService"));
 const RefundPolicy = lazy(() => import("@/pages/legal/RefundPolicy"));
 
+const AnswersList = lazy(() => import("@/pages/answers/AnswersList"));
+const AnswerPost = lazy(() => import("@/pages/answers/AnswerPost"));
+
 const queryClient = new QueryClient();
 
 const PATHS = {
@@ -225,6 +228,8 @@ function Router() {
             <Route path="/faq" component={FAQ} />
             <Route path="/blog" component={Blog} />
             <Route path="/blog/:slug" component={BlogPost} />
+            <Route path="/answers" component={AnswersList} />
+            <Route path="/answers/:slug" component={AnswerPost} />
             <Route path="/contact" component={Contact} />
             <Route path="/free-ai-audit" component={FreeAudit} />
             <Route path="/privacy-policy" component={PrivacyPolicy} />

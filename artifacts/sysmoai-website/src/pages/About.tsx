@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { WA_URLS } from '../lib/whatsapp';
 import { useTheme } from '@/contexts/ThemeContext';
+import { DirectAnswer } from '@/components/DirectAnswer';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -213,6 +214,15 @@ export default function About() {
               💬 Chat on WhatsApp
             </a>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Direct Answer — GEO */}
+      <section className="pt-10 pb-0" style={{ background: bg1 }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <DirectAnswer bangla="ইমন হোসেন হলেন SYSmoAI-এর প্রতিষ্ঠাতা ও CEO — বিশ্বব্যাপী শীর্ষ ৫% প্রম্পট ইঞ্জিনিয়ার এবং ৫০০+ AI প্রজেক্ট সম্পন্নকারী। তিনি ২০২২ সালে ঢাকায় SYSmoAI প্রতিষ্ঠা করেন।">
+            Emon Hossain is the founder of SYSmoAI — Bangladesh's AI consulting company. Ranked top 5% globally in prompt engineering with 500+ AI projects delivered across 8+ industries. He founded SYSmoAI in 2022 in Dhaka after spending 3 years mastering ChatGPT, Claude, Notion, n8n, and automation stacks. Now serving clients in Bangladesh and worldwide.
+          </DirectAnswer>
         </div>
       </section>
 

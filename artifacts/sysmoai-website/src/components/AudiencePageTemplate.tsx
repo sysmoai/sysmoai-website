@@ -4,6 +4,7 @@ import { Link } from 'wouter';
 import { MessageCircle, ArrowRight } from 'lucide-react';
 import { WA_LINK } from '@/lib/config';
 import { useTheme } from '@/contexts/ThemeContext';
+import { DirectAnswer } from '@/components/DirectAnswer';
 import {
   Accordion,
   AccordionContent,
@@ -121,6 +122,17 @@ export function AudiencePageTemplate({
               WhatsApp
             </a>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Direct Answer — GEO */}
+      <section className="pt-10 pb-0" style={{ background: bg1 }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <DirectAnswer>
+            {segment === 'F-Commerce Sellers'
+              ? "SYSmoAI automates F-commerce operations in Bangladesh — DM auto-reply, order tracking, bKash payment workflows, and customer re-engagement — so sellers stop missing 400+ leads per day. The F-Commerce AI Sprint deploys the full stack in 14 days for ৳50,000."
+              : `SYSmoAI helps ${segment} in Bangladesh automate repetitive workflows with AI — cutting manual work by 40–70% and letting you scale without adding staff. Starting at ৳3,750 for a single workflow automation.`}
+          </DirectAnswer>
         </div>
       </section>
 

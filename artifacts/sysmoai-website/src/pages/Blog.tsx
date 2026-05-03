@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Clock, ArrowRight } from 'lucide-react';
 import { blogPosts, groupLabels, articleTypeLabels, type BlogPost } from '@/data/blogPosts';
 import { useTheme } from '@/contexts/ThemeContext';
+import { DirectAnswer } from '@/components/DirectAnswer';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -101,6 +102,15 @@ export default function Blog() {
             className="text-lg max-w-xl mx-auto" style={{ color: subColor }}>
             No theory. No fluff. Actionable systems for students, businesses, and professionals.
           </motion.p>
+        </div>
+      </section>
+
+      {/* Direct Answer — GEO */}
+      <section className="pt-10 pb-0" style={{ background: bg }}>
+        <div className="max-w-4xl mx-auto px-4">
+          <DirectAnswer>
+            SYSmoAI's blog covers practical AI guides for Bangladesh — covering F-commerce automation, freelancing with AI, AI tools for students, SME digital transformation, and step-by-step tutorials for ChatGPT, n8n, Notion, and automation. All content is written by Emon Hossain, founder and top-5% global prompt engineer. New posts published weekly at sysmoai.com/blog.
+          </DirectAnswer>
         </div>
       </section>
 

@@ -149,6 +149,8 @@ function routeMeta(route: string): { changefreq: string; priority: string } {
   if (route === '/services' || route === '/pricing') return { changefreq: 'weekly', priority: '0.9' };
   if (route.startsWith('/services/')) return { changefreq: 'monthly', priority: '0.9' };
   if (route === '/blog') return { changefreq: 'weekly', priority: '0.8' };
+  if (route === '/answers') return { changefreq: 'weekly', priority: '0.85' };
+  if (route.startsWith('/answers/')) return { changefreq: 'monthly', priority: '0.85' };
   if (route.startsWith('/privacy') || route.startsWith('/terms') || route.startsWith('/refund')) {
     return { changefreq: 'yearly', priority: '0.3' };
   }

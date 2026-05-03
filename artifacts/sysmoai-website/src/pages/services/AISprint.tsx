@@ -5,6 +5,7 @@ import { CheckCircle2, ArrowRight, MessageCircle, ShoppingBag, Clock, TrendingUp
 import { WA_URLS } from '@/lib/whatsapp';
 import { useTheme } from '@/contexts/ThemeContext';
 import { SprintSlots } from '@/components/SprintSlots';
+import { DirectAnswer } from '@/components/DirectAnswer';
 import {
   Accordion,
   AccordionContent,
@@ -94,6 +95,15 @@ export default function AISprint() {
 
   return (
     <div className="flex flex-col w-full overflow-hidden" style={{ background: bg1 }}>
+
+      {/* Direct Answer — GEO */}
+      <div style={{ background: bg1 }} className="pt-10 pb-0">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <DirectAnswer bangla="F-কমার্স AI স্প্রিন্ট হলো SYSmoAI-এর ১৪ দিনের সম্পূর্ণ অটোমেশন প্যাকেজ। বাংলা DM এজেন্ট, অর্ডার ট্র্যাকার, bKash পেমেন্ট ওয়ার্কফ্লো এবং কাস্টমার ফলো-আপ — একসাথে ৳৫০,০০০-এ।">
+            The F-Commerce AI Sprint is SYSmoAI's flagship 14-day package for Bangladeshi Facebook sellers: Bangla-aware DM agent, order tracker, bKash payment workflow, and customer re-engagement — all deployed, trained, and live for ৳50,000 ($600 USD). 50% upfront, 50% on delivery. Includes 90-day support.
+          </DirectAnswer>
+        </div>
+      </div>
 
       {/* Hero */}
       <section className="relative bg-[#0A0B0F] py-20 md:py-28 overflow-hidden">
@@ -200,7 +210,7 @@ export default function AISprint() {
       <section className="py-20" style={{ background: bg1 }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mb-12">
-            <h2 className="text-3xl font-bold" style={{ color: heading }}>What's included in the Sprint</h2>
+            <h2 className="text-3xl font-bold" style={{ color: heading }}>What does the F-Commerce AI Sprint include?</h2>
           </motion.div>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="grid grid-cols-1 md:grid-cols-2 gap-4">

@@ -4,6 +4,8 @@ import { MessageCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
 import { WA_URLS } from '../lib/whatsapp';
 import { F_COMMERCE_PROOF } from '../data/fCommerceProof';
+import { DirectAnswer } from '@/components/DirectAnswer';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -30,6 +32,7 @@ const resultCards = [
 ];
 
 export default function Proof() {
+  const { isDark } = useTheme();
   React.useEffect(() => {
     document.title = 'Client Results & Case Studies — SYSmoAI';
     const meta = document.querySelector('meta[name="description"]');
@@ -53,6 +56,15 @@ export default function Proof() {
             className="text-slate-400 text-lg">
             We measure success by your results — not our hours.
           </motion.p>
+        </div>
+      </section>
+
+      {/* Direct Answer — GEO */}
+      <section className="pt-10 pb-0" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
+        <div className="max-w-4xl mx-auto px-4">
+          <DirectAnswer>
+            SYSmoAI has delivered 500+ AI projects across 8+ client categories in Bangladesh and worldwide. Representative results: 400+ DMs/day automated for F-commerce sellers, 15 hrs/week saved for agencies, revenue tripled for freelancers, WhatsApp chaos eliminated for SME founders. Emon Hossain (founder) is ranked top 5% globally in prompt engineering with 3+ years building AI systems.
+          </DirectAnswer>
         </div>
       </section>
 

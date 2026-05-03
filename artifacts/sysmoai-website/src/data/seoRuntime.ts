@@ -149,6 +149,28 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   },
 };
 
+import { answersPosts } from './answersPosts';
+
+const answersRuntimeConfig: Record<string, RuntimeSeo> = {
+  '/answers': {
+    title: 'AI Answers — Bangladesh Business & F-Commerce | SYSmoAI',
+    description:
+      'Direct answers to the most-asked questions about AI consulting, F-commerce automation, and AI implementation in Bangladesh. Written by Emon Hossain, SYSmoAI founder.',
+    canonical: `${SITE_URL}/answers`,
+  },
+  ...Object.fromEntries(
+    answersPosts.map((post) => [
+      `/answers/${post.slug}`,
+      {
+        title: `${post.title} | SYSmoAI`,
+        description: post.metaDescription,
+        canonical: `${SITE_URL}/answers/${post.slug}`,
+        ogType: 'article',
+      } satisfies RuntimeSeo,
+    ]),
+  ),
+};
+
 const blogRuntimeConfig: Record<string, RuntimeSeo> = Object.fromEntries(
   blogPostsMeta.map((post) => [
     `/blog/${post.slug}`,
@@ -170,5 +192,5 @@ const DEFAULT_RUNTIME_SEO: RuntimeSeo = {
 };
 
 export function getRuntimeSeo(location: string): RuntimeSeo {
-  return runtimeSeoConfig[location] ?? blogRuntimeConfig[location] ?? DEFAULT_RUNTIME_SEO;
+  return runtimeSeoConfig[location] ?? blogRuntimeConfig[location] ?? answersRuntimeConfig[location] ?? DEFAULT_RUNTIME_SEO;
 }

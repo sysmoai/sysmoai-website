@@ -5,6 +5,7 @@ import { Clock, ArrowLeft, ArrowRight, Share2, MessageCircle } from 'lucide-reac
 import { blogPosts, groupLabels, articleTypeLabels, type BlogPost } from '@/data/blogPosts';
 import { useTheme } from '@/contexts/ThemeContext';
 import { WA_URLS } from '@/lib/whatsapp';
+import { DirectAnswer } from '@/components/DirectAnswer';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -135,6 +136,15 @@ export default function BlogPostPage() {
             <span className="flex items-center gap-1"><Clock size={13} /> {post.readTime}</span>
             <span>{new Date(post.publishDate).toLocaleDateString('en-BD', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Direct Answer — GEO */}
+      <section className="pt-8 pb-0" style={{ background: bg }}>
+        <div className="max-w-3xl mx-auto px-4">
+          <DirectAnswer>
+            {post.metaDescription}
+          </DirectAnswer>
         </div>
       </section>
 

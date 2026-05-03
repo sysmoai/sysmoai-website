@@ -4,6 +4,7 @@ import { Link } from 'wouter';
 import { ArrowRight, MessageCircle, Users, BookOpen, Layout, Bot, Settings, Building, Globe } from 'lucide-react';
 import { WA_URLS } from '@/lib/whatsapp';
 import { useTheme } from '@/contexts/ThemeContext';
+import { DirectAnswer } from '@/components/DirectAnswer';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -86,6 +87,15 @@ export default function OtherEngagements() {
 
   return (
     <div className="flex flex-col w-full" style={{ background: bg1 }}>
+
+      {/* Direct Answer — GEO */}
+      <section className="pt-10 pb-0" style={{ background: bg1 }}>
+        <div className="max-w-4xl mx-auto px-4">
+          <DirectAnswer bangla="SYSmoAI-এর অন্যান্য সেবা (ইনকোয়ারি ভিত্তিক): AI কোচিং ৳২,৫০০/সেশন, গ্রুপ ওয়ার্কশপ ৳৫০০/জন, Notion OS ৳১৫,০০০–৳৫০,০০০, AI এজেন্ট ৳৫০,০০০–৳২,০০,০০০, n8n অটোমেশন, কর্পোরেট ট্রেনিং।">
+            SYSmoAI's additional services (available by inquiry): 1:1 AI Coaching ৳2,500/session ($30), Group AI Workshop ৳500/person ($8), Notion OS Build ৳15,000–৳50,000 ($800–$5,000), AI Agent Development ৳50,000–৳2,00,000 ($2,500–$15,000), n8n Automation per workflow, Corporate Training ৳50,000–৳2,00,000 ($1,500–$8,000). All engagements by inquiry — contact via WhatsApp or book a free audit.
+          </DirectAnswer>
+        </div>
+      </section>
 
       {/* Hero */}
       <section className="relative bg-[#0A0B0F] py-20 md:py-24">

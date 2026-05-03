@@ -9,6 +9,7 @@ import { WA_URLS } from '../lib/whatsapp';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useCreateAuditRequest } from '@workspace/api-client-react';
 import { SprintSlots } from '@/components/SprintSlots';
+import { DirectAnswer } from '@/components/DirectAnswer';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -185,6 +186,15 @@ export default function FreeAudit() {
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
+
+      {/* Direct Answer — GEO */}
+      <section className="pt-10 pb-0" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
+        <div className="max-w-4xl mx-auto px-4">
+          <DirectAnswer bangla="SYSmoAI-এর ফ্রি AI অডিট হলো একটি ৩০ মিনিটের সেশন — আপনার ব্যবসার সবচেয়ে বড় ব্যথার জায়গা চিহ্নিত করা, AI সমাধান প্রস্তাব এবং একটি লিখিত অ্যাকশন প্ল্যান। সম্পূর্ণ বিনামূল্যে।">
+            SYSmoAI's free 30-minute AI audit maps your biggest manual bottleneck, identifies your highest-ROI automation opportunity, and gives you a written action plan — completely free with no commitment. Book at sysmoai.com/free-ai-audit. Emon Hossain (top-5% global prompt engineer) conducts every audit personally. Available for Bangladesh and international clients.
+          </DirectAnswer>
+        </div>
+      </section>
 
       {/* Hero */}
       <section className="py-20 bg-gradient-to-br from-slate-900 to-blue-900">

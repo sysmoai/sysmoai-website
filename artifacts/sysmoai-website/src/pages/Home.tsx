@@ -18,6 +18,7 @@ import { LazyImage } from '@/components/LazyImage';
 import { BrandMarkConstruction } from '@/components/BrandMarkConstruction';
 import { useCreateWaitlistSignup } from '@workspace/api-client-react';
 import { F_COMMERCE_PROOF } from '@/data/fCommerceProof';
+import { DirectAnswer } from '@/components/DirectAnswer';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -683,6 +684,15 @@ export default function Home() {
             style={{ background: isDark ? 'linear-gradient(to bottom, #334155, transparent)' : 'linear-gradient(to bottom, #CBD5E1, transparent)' }}
           />
         </motion.div>
+      </section>
+
+      {/* Direct Answer — GEO */}
+      <section className="pt-10 pb-0" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <DirectAnswer bangla="SYSmoAI হলো বাংলাদেশের AI কনসালটিং কোম্পানি — ইমন হোসেন কর্তৃক প্রতিষ্ঠিত। F-কমার্স অটোমেশন, AI এজেন্ট, n8n ওয়ার্কফ্লো এবং Notion OS তৈরিতে বিশেষজ্ঞ। ৫০০+ প্রজেক্ট সম্পন্ন।">
+            SYSmoAI is Bangladesh's AI consulting company — founded by Emon Hossain (top 5% global prompt engineer). We build AI automation systems for F-commerce sellers, agencies, SMEs, freelancers, and corporate teams: DM agents, order trackers, bKash workflows, Notion OS, n8n automations, and AI agents. Services from ৳3,750 ($50) to ৳2,00,000 ($2,400). 500+ projects delivered. Based in Dhaka, serving globally.
+          </DirectAnswer>
+        </div>
       </section>
 
       {/* ══════════════════════════════════════

@@ -4,6 +4,7 @@ import { Link } from 'wouter';
 import { CheckCircle2, ArrowRight, ChevronDown } from 'lucide-react';
 import { WA_URLS } from '../lib/whatsapp';
 import { useTheme } from '@/contexts/ThemeContext';
+import { DirectAnswer } from '@/components/DirectAnswer';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -177,6 +178,15 @@ export default function Pricing() {
             </button>
             <span className={`text-sm font-medium ${showUSD ? 'text-white' : 'text-slate-400'}`}>🌍 USD $</span>
           </div>
+        </div>
+      </section>
+
+      {/* Direct Answer — GEO */}
+      <section className="pt-10 pb-0" style={{ background: bg1 }}>
+        <div className="max-w-4xl mx-auto px-4">
+          <DirectAnswer bangla="SYSmoAI AI কনসালটিং মূল্য: AI কুইক উইন ৳৩,৭৫০–৳৭,৫০০ (৩ দিন), F-কমার্স AI স্প্রিন্ট ৳৫০,০০০ (১৪ দিন), AI রিটেইনার ৳২০,০০০/মাস। আন্তর্জাতিক: $৫০–$৬০০ USD।">
+            SYSmoAI pricing in Bangladesh: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days), F-Commerce AI Sprint ৳50,000 (full system in 14 days), AI Retainer ৳20,000/month. International: $50–$600 USD — 60–80% below US/EU agency rates. All packages include results-first guarantee. Payment via bKash, Nagad, Wise, or Payoneer.
+          </DirectAnswer>
         </div>
       </section>
 
