@@ -12,6 +12,7 @@ import {
 } from "@workspace/db";
 import { rateLimit } from "../middlewares/rateLimit";
 import { validateBody } from "../lib/validation";
+import { notifyNewLead } from "../lib/notify";
 
 const router: IRouter = Router();
 
@@ -39,6 +40,18 @@ router.post(
         })
         .returning({ id: contactSubmissionsTable.id });
       req.log.info({ id: row.id }, "Contact submission saved");
+      void notifyNewLead({
+        kind: "contact",
+        id: row.id,
+        submitter: { name: data.name, email: data.contact },
+        fields: [
+          { label: "Name", value: data.name },
+          { label: "Contact", value: data.contact },
+          { label: "Service", value: data.service ?? null },
+          { label: "Message", value: data.message },
+        ],
+        log: req.log,
+      });
       res.status(201).json({ id: row.id, ok: true });
     } catch (err) {
       req.log.error({ err }, "Failed to save contact submission");
@@ -71,6 +84,33 @@ router.post(
         })
         .returning({ id: auditRequestsTable.id });
       req.log.info({ id: row.id }, "Audit request saved");
+      void notifyNewLead({
+        kind: "audit",
+        id: row.id,
+        submitter: { name: data.name, email: data.email },
+        fields: [
+          { label: "Name", value: data.name },
+          { label: "Email", value: data.email },
+          { label: "WhatsApp", value: data.whatsapp ?? null },
+          { label: "Company", value: data.company ?? null },
+          { label: "Business type", value: data.businessType ?? null },
+          { label: "Monthly orders", value: data.monthlyOrders ?? null },
+          { label: "Daily DM volume", value: data.dailyDmVolume ?? null },
+          { label: "Current tools", value: data.currentTools ?? null },
+          {
+            label: "Uses bKash/Nagad",
+            value:
+              data.usesBkashNagad === null || data.usesBkashNagad === undefined
+                ? null
+                : data.usesBkashNagad
+                  ? "Yes"
+                  : "No",
+          },
+          { label: "Preferred currency", value: data.preferredCurrency ?? null },
+          { label: "Biggest challenge", value: data.biggestChallenge },
+        ],
+        log: req.log,
+      });
       res.status(201).json({ id: row.id, ok: true });
     } catch (err) {
       req.log.error({ err }, "Failed to save audit request");
@@ -97,6 +137,17 @@ router.post(
         })
         .returning({ id: waitlistSignupsTable.id });
       req.log.info({ id: row.id }, "Waitlist signup saved");
+      void notifyNewLead({
+        kind: "waitlist",
+        id: row.id,
+        submitter: { name: data.name ?? null, email: data.email },
+        fields: [
+          { label: "Email", value: data.email },
+          { label: "Name", value: data.name ?? null },
+          { label: "Source", value: data.source ?? null },
+        ],
+        log: req.log,
+      });
       res.status(201).json({ id: row.id, ok: true });
     } catch (err) {
       req.log.error({ err }, "Failed to save waitlist signup");
