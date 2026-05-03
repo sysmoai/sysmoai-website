@@ -44,9 +44,9 @@ export default function AIQuickWin() {
         { q: 'What if I want more workflows after this?', a: 'Many Quick Win clients upgrade to our AI Sprint — a full AI system build. The Quick Win is often the first step in a longer journey.' },
       ]}
       relatedServices={[
-        { href: '/services/ai-sprint', label: 'AI Sprint (14 days)', price: '৳25,000–50,000' },
-        { href: '/services/notion-os', label: 'Notion OS Build', price: '৳15,000–50,000' },
-        { href: '/services/n8n-automation', label: 'n8n Automation', price: '৳2,000–10,000/workflow' },
+        { href: '/services/ai-sprint', label: 'F-Commerce AI Sprint (14 days)', price: '৳50,000' },
+        { href: '/services/ai-retainer', label: 'AI Retainer (monthly)', price: '৳20,000/mo' },
+        { href: '/services/other-engagements', label: 'Other Engagements', price: 'By inquiry' },
       ]}
     />
   );

@@ -53,14 +53,9 @@ export const ORG_SCHEMA: SeoSchema = {
     '@type': 'OfferCatalog',
     name: 'AI Consulting Services',
     itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Quick Win', description: 'One workflow automated in 3 days. ৳3,750–৳7,500.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Implementation Sprint', description: 'Full AI stack deployed in 14 days. ৳25,000–৳50,000.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Operations Retainer', description: 'Ongoing monthly AI management. ৳20,000/month.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: '1:1 AI Coaching', description: 'Personalized 60-min AI session. ৳2,500/session.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Notion OS Build', description: 'Custom Notion business operating system. ৳15,000–৳50,000.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Agent Development', description: 'Custom AI agents for business automation. ৳50,000–৳2,00,000.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'n8n Automation', description: 'Workflow automation per-workflow. ৳2,000–৳10,000.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Corporate AI Training', description: 'Full-day enterprise AI workshop. ৳50,000–৳2,00,000.' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'F-Commerce AI Quick Win', description: 'One F-Commerce workflow automated in 3 days. ৳3,750–৳7,500.' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'F-Commerce AI Sprint', description: 'Full F-Commerce AI stack deployed in 14 days. ৳25,000–৳50,000.' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'F-Commerce AI Retainer', description: 'Ongoing monthly F-Commerce AI management. ৳20,000/month.' } },
     ],
   },
   sameAs: [
@@ -133,15 +128,10 @@ const staticRoutes: Record<string, RouteSeo> = {
         name: 'SYSmoAI AI Consulting Services',
         url: `${SITE_URL}/services`,
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'AI Quick Win', url: `${SITE_URL}/services/ai-quick-win` },
-          { '@type': 'ListItem', position: 2, name: 'AI Implementation Sprint', url: `${SITE_URL}/services/ai-sprint` },
-          { '@type': 'ListItem', position: 3, name: 'AI Operations Retainer', url: `${SITE_URL}/services/ai-retainer` },
-          { '@type': 'ListItem', position: 4, name: '1:1 AI Coaching', url: `${SITE_URL}/services/ai-coaching` },
-          { '@type': 'ListItem', position: 5, name: 'Group AI Workshop', url: `${SITE_URL}/services/group-workshop` },
-          { '@type': 'ListItem', position: 6, name: 'Notion OS Build', url: `${SITE_URL}/services/notion-os` },
-          { '@type': 'ListItem', position: 7, name: 'AI Agent Development', url: `${SITE_URL}/services/ai-agent-dev` },
-          { '@type': 'ListItem', position: 8, name: 'n8n Workflow Automation', url: `${SITE_URL}/services/n8n-automation` },
-          { '@type': 'ListItem', position: 9, name: 'Corporate AI Training', url: `${SITE_URL}/services/corporate-training` },
+          { '@type': 'ListItem', position: 1, name: 'F-Commerce AI Quick Win', url: `${SITE_URL}/services/ai-quick-win` },
+          { '@type': 'ListItem', position: 2, name: 'F-Commerce AI Sprint', url: `${SITE_URL}/services/ai-sprint` },
+          { '@type': 'ListItem', position: 3, name: 'F-Commerce AI Retainer', url: `${SITE_URL}/services/ai-retainer` },
+          { '@type': 'ListItem', position: 4, name: 'Other Engagements (by inquiry)', url: `${SITE_URL}/services/other-engagements` },
         ],
       },
       breadcrumbSchema([home, services]),
@@ -161,8 +151,8 @@ const staticRoutes: Record<string, RouteSeo> = {
     ...base('/services/ai-sprint'),
     schemas: [
       ORG_SCHEMA,
-      serviceSchema('AI Implementation Sprint', 'Full AI system built in 14 days — 3-5 workflows automated, team training, 3-month post-launch support.', `${SITE_URL}/services/ai-sprint`, '25000–50000'),
-      breadcrumbSchema([home, services, { name: 'AI Implementation Sprint', url: `${SITE_URL}/services/ai-sprint` }]),
+      serviceSchema('F-Commerce AI Sprint', 'Full F-Commerce AI system deployed in 14 days — DM auto-reply agent, order tracker, bKash workflows, team training.', `${SITE_URL}/services/ai-sprint`, '50000'),
+      breadcrumbSchema([home, services, { name: 'F-Commerce AI Sprint', url: `${SITE_URL}/services/ai-sprint` }]),
     ],
   },
 
@@ -175,57 +165,12 @@ const staticRoutes: Record<string, RouteSeo> = {
     ],
   },
 
-  '/services/ai-coaching': {
-    ...base('/services/ai-coaching'),
+  '/services/other-engagements': {
+    ...base('/services/other-engagements'),
     schemas: [
       ORG_SCHEMA,
-      serviceSchema('1:1 AI Coaching', 'Personalized 60-minute AI coaching session — custom action plan, recording, 3-day follow-up Q&A.', `${SITE_URL}/services/ai-coaching`, '2500'),
-      breadcrumbSchema([home, services, { name: '1:1 AI Coaching', url: `${SITE_URL}/services/ai-coaching` }]),
-    ],
-  },
-
-  '/services/group-workshop': {
-    ...base('/services/group-workshop'),
-    schemas: [
-      ORG_SCHEMA,
-      serviceSchema('Group AI Workshop', 'Half-day hands-on AI workshop for teams of 10+. Custom industry curriculum, real exercises, post-workshop resources.', `${SITE_URL}/services/group-workshop`, '500'),
-      breadcrumbSchema([home, services, { name: 'Group AI Workshop', url: `${SITE_URL}/services/group-workshop` }]),
-    ],
-  },
-
-  '/services/notion-os': {
-    ...base('/services/notion-os'),
-    schemas: [
-      ORG_SCHEMA,
-      serviceSchema('Notion OS Build', 'Custom Notion business operating system — clients, projects, finance, HR all interconnected with video tutorial and training.', `${SITE_URL}/services/notion-os`, '15000–50000'),
-      breadcrumbSchema([home, services, { name: 'Notion OS Build', url: `${SITE_URL}/services/notion-os` }]),
-    ],
-  },
-
-  '/services/ai-agent-dev': {
-    ...base('/services/ai-agent-dev'),
-    schemas: [
-      ORG_SCHEMA,
-      serviceSchema('AI Agent Development', 'Custom AI agents trained on your business knowledge — WhatsApp, web, or custom platform integration. 24/7 operation.', `${SITE_URL}/services/ai-agent-dev`, '50000–200000'),
-      breadcrumbSchema([home, services, { name: 'AI Agent Development', url: `${SITE_URL}/services/ai-agent-dev` }]),
-    ],
-  },
-
-  '/services/n8n-automation': {
-    ...base('/services/n8n-automation'),
-    schemas: [
-      ORG_SCHEMA,
-      serviceSchema('n8n Workflow Automation', 'Per-workflow automation using n8n — any app integration, error handling built in, video documentation. 1-3 day delivery.', `${SITE_URL}/services/n8n-automation`, '2000–10000'),
-      breadcrumbSchema([home, services, { name: 'n8n Workflow Automation', url: `${SITE_URL}/services/n8n-automation` }]),
-    ],
-  },
-
-  '/services/corporate-training': {
-    ...base('/services/corporate-training'),
-    schemas: [
-      ORG_SCHEMA,
-      serviceSchema('Corporate AI Training', 'Enterprise AI transformation — audit, structured training, automation implementation, 90-day roadmap.', `${SITE_URL}/services/corporate-training`, '50000–200000'),
-      breadcrumbSchema([home, services, { name: 'Corporate AI Training', url: `${SITE_URL}/services/corporate-training` }]),
+      serviceSchema('Other Engagements', 'AI coaching, workshops, Notion OS, AI agent development, n8n automation, and corporate training — all by inquiry for founders who need something beyond the Sprint.', `${SITE_URL}/services/other-engagements`),
+      breadcrumbSchema([home, services, { name: 'Other Engagements', url: `${SITE_URL}/services/other-engagements` }]),
     ],
   },
 
@@ -238,54 +183,9 @@ const staticRoutes: Record<string, RouteSeo> = {
     ],
   },
 
-  '/for/students': {
-    ...base('/for/students'),
-    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'For Students', url: `${SITE_URL}/for/students` }])],
-  },
-
-  '/for/job-seekers': {
-    ...base('/for/job-seekers'),
-    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'For Job Seekers', url: `${SITE_URL}/for/job-seekers` }])],
-  },
-
-  '/for/freelancers': {
-    ...base('/for/freelancers'),
-    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'For Freelancers', url: `${SITE_URL}/for/freelancers` }])],
-  },
-
-  '/for/researchers': {
-    ...base('/for/researchers'),
-    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'For Researchers', url: `${SITE_URL}/for/researchers` }])],
-  },
-
-  '/for/agencies': {
-    ...base('/for/agencies'),
-    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'For Agencies', url: `${SITE_URL}/for/agencies` }])],
-  },
-
-  '/for/sme-founders': {
-    ...base('/for/sme-founders'),
-    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'For SME Founders', url: `${SITE_URL}/for/sme-founders` }])],
-  },
-
   '/for/f-commerce': {
     ...base('/for/f-commerce'),
     schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'For F-Commerce', url: `${SITE_URL}/for/f-commerce` }])],
-  },
-
-  '/for/consultants': {
-    ...base('/for/consultants'),
-    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'For Consultants', url: `${SITE_URL}/for/consultants` }])],
-  },
-
-  '/for/creators': {
-    ...base('/for/creators'),
-    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'For Creators', url: `${SITE_URL}/for/creators` }])],
-  },
-
-  '/for/corporates': {
-    ...base('/for/corporates'),
-    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'For Corporates', url: `${SITE_URL}/for/corporates` }])],
   },
 
   '/about': {

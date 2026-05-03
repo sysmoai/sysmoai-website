@@ -46,7 +46,7 @@ export default function GroupWorkshop() {
       relatedServices={[
         { href: '/services/corporate-training', label: 'Corporate Training (enterprise)', price: '৳50,000–2,00,000' },
         { href: '/services/ai-coaching', label: '1:1 AI Coaching', price: '৳2,500/session' },
-        { href: '/services/ai-sprint', label: 'AI Sprint (implement after)', price: '৳25,000–50,000' },
+        { href: '/services/ai-sprint', label: 'F-Commerce AI Sprint', price: '৳50,000' },
       ]}
     />
   );

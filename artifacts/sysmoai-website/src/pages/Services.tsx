@@ -13,34 +13,34 @@ const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { stag
 
 const featured = [
   { icon: Zap, title: 'AI Quick Win', subtitle: 'Your #1 problem automated in 3 days', bd: '৳3,750–7,500', usd: '$50–$100', href: '/services/ai-quick-win', tag: 'Best starting point' },
-  { icon: Timer, title: 'AI Implementation Sprint', subtitle: 'Full AI stack deployed in 14 days', bd: '৳25,000–50,000', usd: '$300–$600', href: '/services/ai-sprint', tag: 'Most popular' },
+  { icon: Timer, title: 'F-Commerce AI Sprint', subtitle: 'Full F-Commerce AI stack deployed in 14 days', bd: '৳50,000', usd: '$600', href: '/services/ai-sprint', tag: 'Most popular' },
   { icon: RefreshCw, title: 'AI Operations Retainer', subtitle: 'Ongoing AI management, every month', bd: '৳20,000/mo', usd: '$250/mo', href: '/services/ai-retainer', tag: 'Cancel anytime' },
 ];
 
 const other = [
-  { icon: Users, title: '1:1 AI Coaching', desc: '60-min personalized session', bd: '৳2,500/session', href: '/services/ai-coaching' },
-  { icon: BookOpen, title: 'Group AI Workshop', desc: 'Team upskilling, half-day', bd: '৳500/person', href: '/services/group-workshop' },
-  { icon: Layout, title: 'Notion OS Build', desc: 'Your business in one place', bd: '৳15,000–50,000', href: '/services/notion-os' },
-  { icon: Bot, title: 'AI Agent Development', desc: 'Custom AI agents, 24/7', bd: '৳50,000–2,00,000', href: '/services/ai-agent-dev' },
-  { icon: Settings, title: 'n8n Automation', desc: 'Per-workflow automation', bd: '৳2,000–10,000', href: '/services/n8n-automation' },
-  { icon: Building, title: 'Corporate Training', desc: 'Enterprise AI adoption', bd: '৳50,000–2,00,000', href: '/services/corporate-training' },
+  { icon: Users, title: '1:1 AI Coaching', desc: '60-min personalized session', bd: '৳2,500/session', href: '/services/other-engagements' },
+  { icon: BookOpen, title: 'Group AI Workshop', desc: 'Team upskilling, half-day', bd: '৳500/person', href: '/services/other-engagements' },
+  { icon: Layout, title: 'Notion OS Build', desc: 'Your business in one place', bd: '৳15,000–50,000', href: '/services/other-engagements' },
+  { icon: Bot, title: 'AI Agent Development', desc: 'Custom AI agents, 24/7', bd: '৳50,000–2,00,000', href: '/services/other-engagements' },
+  { icon: Settings, title: 'n8n Automation', desc: 'Per-workflow automation', bd: '৳2,000–10,000', href: '/services/other-engagements' },
+  { icon: Building, title: 'Corporate Training', desc: 'Enterprise AI adoption', bd: '৳50,000–2,00,000', href: '/services/other-engagements' },
   { icon: Globe, title: 'International Clients', desc: 'USD pricing, global delivery', bd: 'View USD Pricing', href: '/services/international' },
 ];
 
 const servicesFAQ = [
-  { q: 'How long does each package take?', a: 'AI Quick Win: 3 days. AI Implementation Sprint: 3 weeks. AI Operations Retainer: ongoing monthly.' },
+  { q: 'How long does each package take?', a: 'AI Quick Win: 3 days. F-Commerce AI Sprint: 14 days. AI Operations Retainer: ongoing monthly.' },
   { q: 'Can I start with a Quick Win and upgrade later?', a: 'Absolutely. Most clients start with a Quick Win to see results fast, then move to a Sprint for full transformation.' },
   { q: 'What if I need more workflows than included?', a: 'We scope every project individually. If you need more, we adjust the package or recommend the next tier.' },
   { q: 'Do you work with international clients?', a: 'Yes. We accept USD via Wise, Payoneer, and Stripe. We coordinate across timezones and communicate in English.' },
-  { q: "What's your revision policy?", a: 'Quick Win includes 1 free revision. Sprint includes unlimited revisions during the 3-week build. Retainer includes continuous improvements.' },
+  { q: "What's your revision policy?", a: 'Quick Win includes 1 free revision. Sprint includes unlimited revisions during the 14-day build. Retainer includes continuous improvements.' },
 ];
 
 const comparison = [
   { feature: 'Workflows automated', qw: '1', sprint: '5–10', retainer: 'Ongoing' },
-  { feature: 'Timeline', qw: '3 days', sprint: '3 weeks', retainer: 'Monthly' },
+  { feature: 'Timeline', qw: '3 days', sprint: '14 days', retainer: 'Monthly' },
   { feature: 'Team training', qw: 'Video walkthrough', sprint: 'Full training + docs', retainer: 'Continuous' },
-  { feature: 'Revisions', qw: '1 free', sprint: 'Unlimited (during build)', retainer: 'Continuous' },
-  { feature: 'Support', qw: 'WhatsApp (1 week)', sprint: '3 months post-launch', retainer: 'Priority (ongoing)' },
+  { feature: 'Revisions', qw: '1 free', sprint: 'Unlimited during build', retainer: 'Continuous' },
+  { feature: 'Support', qw: 'WhatsApp (1 week)', sprint: '30 days post-launch', retainer: 'Priority (ongoing)' },
   { feature: 'Payment', qw: '100% upfront', sprint: '50/50', retainer: 'Monthly' },
   { feature: 'Best for', qw: 'Quick relief', sprint: 'Full transformation', retainer: 'Continuous growth' },
 ];
@@ -114,11 +114,11 @@ export default function Services() {
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.08 }}
             className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight mb-6">
-            From 3-Day Quick Wins to Full AI Operating Systems
+            The F-Commerce AI Sprint — and Everything Around It
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
             className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Whether you want a single workflow automated or a complete AI transformation, SYSmoAI has a package for you — built in days, not months.
+            Our anchor offer is the 14-day F-Commerce AI Sprint. Everything else is by inquiry — for founders who need something beyond the Sprint.
           </motion.p>
         </div>
       </section>
@@ -160,7 +160,11 @@ export default function Services() {
       <section className="py-20" style={{ background: bg2 }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl font-bold mb-10" style={{ color: heading }}>All services</motion.h2>
+            className="text-2xl font-bold mb-2" style={{ color: heading }}>Other engagements</motion.h2>
+          <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="text-sm mb-10" style={{ color: heading === '#F1F5F9' ? '#64748B' : '#94A3B8' }}>
+            These are by inquiry only — not our primary service line. <a href="/services/other-engagements" className="text-blue-400 hover:underline">See the full details →</a>
+          </motion.p>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {other.map((s, i) => (

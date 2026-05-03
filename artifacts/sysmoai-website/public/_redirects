@@ -1,1 +1,21 @@
+# Audience pages → specific blog group pages (301)
+/for/sme-founders       /for/f-commerce                 301
+/for/students           /blog?group=students             301
+/for/job-seekers        /blog?group=job-seekers          301
+/for/freelancers        /blog?group=freelancers          301
+/for/researchers        /blog?group=researchers          301
+/for/agencies           /blog?group=agencies             301
+/for/consultants        /blog?group=consultants          301
+/for/creators           /blog?group=creators             301
+/for/corporates         /blog?group=corporates           301
+
+# Demoted service pages → Other Engagements hub (301)
+/services/ai-coaching         /services/other-engagements     301
+/services/group-workshop      /services/other-engagements     301
+/services/notion-os           /services/other-engagements     301
+/services/ai-agent-dev        /services/other-engagements     301
+/services/n8n-automation      /services/other-engagements     301
+/services/corporate-training  /services/other-engagements     301
+
+# SPA fallback (must be last)
 /*    /index.html   200

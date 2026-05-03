@@ -45,7 +45,7 @@ export default function AIAgentDev() {
       ]}
       relatedServices={[
         { href: '/services/n8n-automation', label: 'n8n Automation', price: '৳2,000–10,000/workflow' },
-        { href: '/services/ai-sprint', label: 'AI Sprint', price: '৳25,000–50,000' },
+        { href: '/services/ai-sprint', label: 'F-Commerce AI Sprint', price: '৳50,000' },
         { href: '/services/ai-retainer', label: 'AI Retainer (manage ongoing)', price: '৳20,000/month' },
       ]}
     />

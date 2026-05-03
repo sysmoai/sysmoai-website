@@ -28,8 +28,8 @@ export default function FCommerce() {
       ]}
       relevantServices={[
         { href: '/services/ai-quick-win', label: 'AI Quick Win', price: '৳3,750–7,500' },
-        { href: '/services/n8n-automation', label: 'n8n Automation', price: '৳2,000–10,000/workflow' },
-        { href: '/services/ai-sprint', label: 'AI Sprint (full system)', price: '৳25,000–50,000' },
+        { href: '/services/ai-retainer', label: 'F-Commerce AI Retainer', price: '৳20,000/mo' },
+        { href: '/services/ai-sprint', label: 'F-Commerce AI Sprint', price: '৳50,000' },
       ]}
       finalCtaHeadline="Ready to automate your F-commerce and take back your time?"
       faqs={[

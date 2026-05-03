@@ -29,7 +29,7 @@ export default function Consultants() {
       relevantServices={[
         { href: '/services/ai-quick-win', label: 'AI Quick Win', price: '৳3,750–7,500' },
         { href: '/services/notion-os', label: 'Notion OS Build', price: '৳15,000–50,000' },
-        { href: '/services/ai-sprint', label: 'AI Sprint (full system)', price: '৳25,000–50,000' },
+        { href: '/services/ai-sprint', label: 'F-Commerce AI Sprint', price: '৳50,000' },
       ]}
       finalCtaHeadline="Ready to scale your consulting beyond your own hours?"
       faqs={[

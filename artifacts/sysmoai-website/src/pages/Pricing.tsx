@@ -11,57 +11,69 @@ const fadeUp = {
 };
 const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.08 } } };
 
-const services = [
+const anchorServices = [
   {
-    title: 'AI Quick Win', bd: '৳3,750–7,500', usd: '$50–$100', href: '/services/ai-quick-win',
-    features: ['1 workflow automated', 'Video walkthrough', '1 free revision', '3-day delivery'],
-    tag: 'Start here',
+    title: 'F-Commerce AI Sprint',
+    bd: '৳50,000',
+    usd: '$600',
+    href: '/services/ai-sprint',
+    features: [
+      'Bangla DM auto-reply agent (24/7)',
+      'Order management system (DM → delivery)',
+      'bKash / Nagad payment workflow',
+      'Customer re-engagement sequences',
+      'Daily revenue dashboard in Notion',
+      'Owner training + video documentation',
+      '90-day post-launch support',
+    ],
+    tag: '⭐ Anchor Offer',
+    featured: true,
+    tagline: 'Full F-commerce automation in 14 days',
   },
   {
-    title: 'AI Implementation Sprint', bd: '৳25,000–50,000', usd: '$300–$600', href: '/services/ai-sprint',
-    features: ['Complete AI system (3–5 workflows)', 'Team training included', '3-month post-launch support', 'Video documentation'],
-    tag: 'Most popular', featured: true,
-  },
-  {
-    title: 'AI Operations Retainer', bd: '৳20,000/month', usd: '$250/month', href: '/services/ai-retainer',
-    features: ['4–8 hrs/month hands-on work', 'Monthly improvements', 'Priority WhatsApp support', 'Monthly AI performance report'],
+    title: 'AI Retainer',
+    bd: '৳20,000/month',
+    usd: '$250/month',
+    href: '/services/ai-retainer',
+    features: [
+      'Monthly AI system improvements',
+      'Priority WhatsApp support',
+      'New automations as you grow',
+      'Monthly performance report',
+    ],
     tag: 'Cancel anytime',
+    featured: false,
+    tagline: 'Keep your systems improving every month',
   },
   {
-    title: '1:1 AI Coaching', bd: '৳2,500/session', usd: '$30/session', href: '/services/ai-coaching',
-    features: ['60-min live session', 'Session recording', 'Follow-up Q&A (3 days)', 'Personal action plan'],
-    tag: 'Individual',
+    title: 'AI Quick Win',
+    bd: '৳3,750–7,500',
+    usd: '$50–$100',
+    href: '/services/ai-quick-win',
+    features: [
+      '1 workflow automated in 3 days',
+      'Video walkthrough + handover',
+      '1 free revision',
+      '30-day support included',
+    ],
+    tag: 'Start here',
+    featured: false,
+    tagline: 'Test before the full Sprint',
   },
-  {
-    title: 'Group AI Workshop', bd: '৳500/person', usd: '$15/person', href: '/services/group-workshop',
-    features: ['Custom industry curriculum', 'Hands-on exercises', 'Post-workshop resource pack', 'Min 10 participants'],
-    tag: 'Teams',
-  },
-  {
-    title: 'Notion OS Build', bd: '৳15,000–50,000', usd: '$800–$5,000', href: '/services/notion-os',
-    features: ['Custom workspace architecture', 'All databases + automations', 'Dashboard views', 'Video tutorial + training'],
-    tag: 'One-time',
-  },
-  {
-    title: 'AI Agent Development', bd: '৳50,000–2,00,000', usd: '$2,500–$15,000', href: '/services/ai-agent-dev',
-    features: ['Custom-trained AI agent', 'WhatsApp/web integration', 'Full deployment + testing', '30-day support'],
-    tag: 'Enterprise',
-  },
-  {
-    title: 'n8n Automation', bd: '৳2,000–10,000/workflow', usd: '$50–$300/workflow', href: '/services/n8n-automation',
-    features: ['Per-workflow automation', 'Any app integration', 'Error handling built in', 'Video documentation'],
-    tag: 'Per workflow',
-  },
-  {
-    title: 'Corporate Training', bd: '৳50,000–2,00,000', usd: '$1,500–$8,000', href: '/services/corporate-training',
-    features: ['Enterprise AI audit', 'Custom curriculum', 'Top 3 automations implemented', '90-day AI roadmap'],
-    tag: 'Enterprise',
-  },
+];
+
+const inquiryServices = [
+  { title: 'AI Agent Development', bd: '৳50,000–2,00,000', usd: '$2,500–$15,000', href: '/services/other-engagements' },
+  { title: 'Notion OS Build', bd: '৳15,000–50,000', usd: '$800–$5,000', href: '/services/other-engagements' },
+  { title: 'n8n Automation', bd: '৳2,000–10,000/workflow', usd: '$50–$300/workflow', href: '/services/other-engagements' },
+  { title: '1:1 AI Coaching', bd: '৳2,500/session', usd: '$30/session', href: '/services/other-engagements' },
+  { title: 'Group AI Workshop', bd: '৳500/person', usd: '$15/person', href: '/services/other-engagements' },
+  { title: 'Corporate Training', bd: '৳50,000–2,00,000', usd: '$1,500–$8,000', href: '/services/other-engagements' },
 ];
 
 const payments = [
   { label: 'AI Quick Win', terms: '100% advance' },
-  { label: 'AI Sprint', terms: '50% upfront, 50% on delivery' },
+  { label: 'F-Commerce AI Sprint', terms: '50% upfront, 50% on delivery' },
   { label: 'AI Retainer', terms: 'Monthly billing' },
   { label: 'All other services', terms: '50% upfront, 50% on delivery' },
 ];
@@ -72,7 +84,8 @@ const pricingFAQ = [
   { q: 'Are there any hidden fees?', a: 'No. The price shown is the price you pay. Payment terms are listed clearly for each package.' },
   { q: 'How do international clients pay?', a: 'USD payments via Wise, Payoneer, or Stripe. No currency conversion fees on our side.' },
   { q: "What if the system doesn't deliver results?", a: "We offer a results-first guarantee. If we can't improve your workflow within the agreed timeline, you get a full refund." },
-  { q: 'Can I cancel the retainer anytime?', a: 'Yes. The AI Operations Retainer is month-to-month with no long-term commitment. Cancel anytime.' },
+  { q: 'Can I cancel the retainer anytime?', a: 'Yes. The AI Retainer is month-to-month with no long-term commitment. Cancel anytime.' },
+  { q: 'Can I start with the Quick Win before committing to the Sprint?', a: "Absolutely. The AI Quick Win (৳3,750–7,500) lets you see how we work and gets one workflow automated in 3 days. Most F-commerce sellers who do the Quick Win proceed to the Sprint within 30 days." },
 ];
 
 function FAQItem({ q, a, isDark }: { q: string; a: string; isDark: boolean }) {
@@ -109,9 +122,9 @@ export default function Pricing() {
   const bodyMuted = isDark ? '#64748B' : '#64748B';
 
   useEffect(() => {
-    document.title = 'Transparent AI Pricing — SYSmoAI | BDT & USD';
+    document.title = 'F-Commerce AI Sprint Pricing — SYSmoAI | BDT & USD';
     const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute('content', 'Bangladesh rates meet global standards. AI Quick Win from ৳5,000, AI Sprint from ৳25,000, Monthly Retainer from ৳15,000. Currency toggle for international clients. No hidden fees.');
+    if (meta) meta.setAttribute('content', 'F-Commerce AI Sprint: ৳50,000 one-time + ৳20,000/mo retainer. Cancel anytime. Results-first guarantee. BDT and USD pricing for Bangladesh and international clients.');
 
     const script = document.createElement('script');
     script.type = 'application/ld+json';
@@ -141,19 +154,19 @@ export default function Pricing() {
             initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
             className="text-xs font-bold uppercase tracking-[0.26em] text-blue-500 mb-5"
           >
-            SYSmoAI · Systems in Motion
+            SYSmoAI · F-Commerce Operating System
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.08 }}
             className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
-            Transparent Pricing. No Surprises.
+            One offer. Transparent pricing.
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="text-slate-400 text-lg mb-6">
-            Bangladesh rates meet global standards. Choose the package that fits your business and only pay when your AI system delivers results.
+            className="text-slate-400 text-lg mb-6 max-w-2xl mx-auto">
+            The F-Commerce AI Sprint at ৳50,000 — full DM automation, order tracking, and bKash workflow deployed in 14 days. Followed by a ৳20,000/mo retainer to keep growing.
           </motion.p>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}>
             <span className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-2 mb-8">
-              <span className="text-green-400 text-sm font-medium">✓ Results-first guarantee — you don't pay until your system delivers</span>
+              <span className="text-green-400 text-sm font-medium">✓ Results-first guarantee — refund if your system doesn't deliver</span>
             </span>
           </motion.div>
           <div className="flex items-center justify-center gap-3">
@@ -167,17 +180,22 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* Pricing cards */}
+      {/* Anchor pricing cards */}
       <section className="py-20" style={{ background: bg1 }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((s, i) => (
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="text-center mb-4">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-500 mb-2">F-Commerce Packages</p>
+            <h2 className="text-2xl font-bold" style={{ color: heading }}>Start, sprint, then scale</h2>
+          </motion.div>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-40px' }} variants={stagger}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+            {anchorServices.map((s, i) => (
               <motion.div key={i} variants={fadeUp}
                 className="rounded-2xl p-7 flex flex-col transition-all hover:shadow-lg"
                 style={s.featured ? {
                   border: '2px solid #3B82F6',
-                  background: 'linear-gradient(135deg, #2563EB, #1D4ED8)',
+                  background: 'linear-gradient(135deg, #1E3A8A, #1E40AF 55%, #2563EB)',
                   boxShadow: '0 20px 40px rgba(37,99,235,0.25)',
                 } : {
                   border: `2px solid ${cardBorder}`,
@@ -189,7 +207,8 @@ export default function Pricing() {
                     {s.tag}
                   </span>
                 </div>
-                <h3 className="text-lg font-bold mb-2" style={{ color: s.featured ? '#FFFFFF' : heading }}>{s.title}</h3>
+                <h3 className="text-lg font-bold mb-1" style={{ color: s.featured ? '#FFFFFF' : heading }}>{s.title}</h3>
+                <p className="text-xs mb-4" style={{ color: s.featured ? 'rgba(219,234,254,0.7)' : bodyMuted }}>{s.tagline}</p>
                 <p className="text-2xl font-bold mb-5 min-h-[2rem]" style={{ color: s.featured ? '#FFFFFF' : '#3B82F6' }}>
                   {showUSD ? s.usd : s.bd}
                 </p>
@@ -204,7 +223,8 @@ export default function Pricing() {
                 <Link href={s.href}
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all min-h-[44px]"
                   style={s.featured ? { background: '#FFFFFF', color: '#2563EB' } : { background: '#2563EB', color: '#FFFFFF' }}>
-                  View Full Details <ArrowRight size={14} />
+                  {s.featured ? 'View Full Sprint Details' : 'View Details'}
+                  <ArrowRight size={14} />
                 </Link>
               </motion.div>
             ))}
@@ -212,11 +232,50 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* Payment terms */}
+      {/* Other engagements — by inquiry */}
       <section className="py-16" style={{ background: bg2 }}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mb-8">
+            <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: isDark ? '#475569' : '#94A3B8' }}>By Inquiry</p>
+            <h2 className="text-xl font-bold" style={{ color: heading }}>Other Engagements</h2>
+            <p className="text-sm mt-2" style={{ color: body }}>
+              We take select engagements beyond the Sprint. Reach out on WhatsApp to discuss your situation.
+            </p>
+          </motion.div>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {inquiryServices.map((s, i) => (
+              <motion.div key={i} variants={fadeUp}
+                className="rounded-xl p-5 flex flex-col gap-2"
+                style={{ background: cardBg, border: `1px solid ${cardBorder}` }}>
+                <h3 className="font-semibold text-sm" style={{ color: heading }}>{s.title}</h3>
+                <p className="text-sm font-bold" style={{ color: '#3B82F6' }}>
+                  {showUSD ? s.usd : s.bd}
+                </p>
+                <Link href={s.href}
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors mt-1 group">
+                  Details <ArrowRight size={11} className="group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="text-center mt-6">
+            <Link href="/services/other-engagements"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+              View all other engagements <ArrowRight size={14} />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Payment terms */}
+      <section className="py-16" style={{ background: bg1 }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl font-bold text-center mb-10" style={{ color: heading }}>Payment terms & methods</motion.h2>
+            className="text-2xl font-bold text-center mb-10" style={{ color: heading }}>
+            Payment terms & methods
+          </motion.h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h3 className="font-semibold mb-4 text-sm uppercase tracking-wider" style={{ color: bodyMuted }}>Payment Terms</h3>
@@ -247,7 +306,7 @@ export default function Pricing() {
       </section>
 
       {/* International Clients */}
-      <section className="py-16" style={{ background: bg1 }}>
+      <section className="py-16" style={{ background: bg2 }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="rounded-2xl p-8"
@@ -305,7 +364,9 @@ export default function Pricing() {
       <section className="py-16" style={{ background: bg2 }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl font-bold text-center mb-10" style={{ color: heading }}>Pricing FAQs</motion.h2>
+            className="text-2xl font-bold text-center mb-10" style={{ color: heading }}>
+            Pricing FAQs
+          </motion.h2>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="space-y-3">
             {pricingFAQ.map((faq, i) => (
               <motion.div key={i} variants={fadeUp}>
@@ -320,16 +381,18 @@ export default function Pricing() {
       <section className="py-20 bg-[#0A0B0F]">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-3xl font-bold text-white mb-4">Not sure which package is right?</motion.h2>
+            className="text-3xl font-bold text-white mb-4">
+            Ready to automate your F-commerce?
+          </motion.h2>
           <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="text-slate-400 mb-8">
-            Book a free 30-minute call. We'll recommend the right service for your budget and goals.
+            Book a free 30-minute audit. Emon reviews your operation and gives you a clear action plan — no commitment required.
           </motion.p>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/free-ai-audit"
               className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-base transition-all min-h-[52px]">
-              📅 Book Free AI Audit
+              📅 Book Free F-Commerce Audit
             </Link>
             <a href={WA_URLS.general} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 border-2 border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-xl font-semibold text-base transition-all min-h-[52px]">

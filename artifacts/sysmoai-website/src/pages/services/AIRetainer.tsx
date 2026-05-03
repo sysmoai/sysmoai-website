@@ -45,9 +45,9 @@ export default function AIRetainer() {
         { q: 'What\'s the minimum commitment?', a: '1 month. Most clients stay 6–12+ months because the value compounds over time.' },
       ]}
       relatedServices={[
-        { href: '/services/ai-sprint', label: 'AI Sprint (start here)', price: '৳25,000–50,000' },
-        { href: '/services/n8n-automation', label: 'n8n Automation', price: '৳2,000–10,000/workflow' },
-        { href: '/services/notion-os', label: 'Notion OS Build', price: '৳15,000–50,000' },
+        { href: '/services/ai-sprint', label: 'F-Commerce AI Sprint (start here)', price: '৳50,000' },
+        { href: '/services/ai-quick-win', label: 'AI Quick Win (try first)', price: '৳3,750–7,500' },
+        { href: '/services/other-engagements', label: 'Other Engagements', price: 'By inquiry' },
       ]}
     />
   );

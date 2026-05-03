@@ -34,12 +34,15 @@ export function Footer() {
   return (
     <footer style={{ background: bg, borderTop: `1px solid ${borderC}` }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-4">
+
         {/* Waitlist / Email capture */}
         <div className="mb-10 pb-10" style={{ borderBottom: `1px solid ${borderC}` }}>
           <div className="max-w-md mx-auto text-center">
-            <h3 className="font-semibold mb-2" style={{ color: headingColor }}>Get AI tips for your business</h3>
+            <h3 className="font-semibold mb-2" style={{ color: headingColor }}>
+              F-Commerce AI tips — straight to your inbox
+            </h3>
             <p className="text-sm mb-4" style={{ color: textColor }}>
-              Weekly insights on AI automation, Notion systems, and growing with AI. Free.
+              Weekly insights on automating DMs, orders, and payments for Bangladesh F-commerce sellers. Free.
             </p>
             {waitlistStatus === 'success' ? (
               <div className="px-4 py-3 rounded-xl text-sm font-medium"
@@ -98,12 +101,12 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-sm leading-relaxed" style={{ color: textColor }}>
-              AI-powered operating systems for ambitious businesses.
+              The F-Commerce Operating System. Built in Dhaka, for Dhaka.
             </p>
             <p className="text-sm italic" style={{ color: isDark ? '#334155' : '#CBD5E1', fontFamily: "'Space Grotesk', sans-serif" }}>
               Systems in Motion.
             </p>
-            <p className="text-sm" style={{ color: textColor }}>🇧🇩 Bangladesh · Serving clients worldwide</p>
+            <p className="text-sm" style={{ color: textColor }}>🇧🇩 Dhaka, Bangladesh · Serving clients worldwide</p>
 
             {/* Social Media Links */}
             <div className="flex gap-3 pt-1">
@@ -143,20 +146,16 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Column 2 — Services */}
+          {/* Column 2 — F-Commerce Hub */}
           <div className="space-y-4">
-            <h3 className="text-sm font-bold uppercase tracking-[0.12em]" style={{ color: headingColor }}>Services</h3>
+            <h3 className="text-sm font-bold uppercase tracking-[0.12em]" style={{ color: headingColor }}>F-Commerce</h3>
             <ul className="space-y-2 text-sm">
               {[
-                { href: '/services/ai-quick-win',       label: 'AI Quick Win' },
-                { href: '/services/ai-sprint',           label: 'AI Sprint' },
-                { href: '/services/ai-retainer',         label: 'AI Retainer' },
-                { href: '/services/notion-os',           label: 'Notion OS Build' },
-                { href: '/services/ai-agent-dev',        label: 'AI Agent Dev' },
-                { href: '/services/n8n-automation',      label: 'n8n Automation' },
-                { href: '/services/ai-coaching',         label: '1:1 AI Coaching' },
-                { href: '/services/corporate-training',  label: 'Corporate Training' },
-                { href: '/services/international',       label: 'International Clients' },
+                { href: '/for/f-commerce',      label: 'F-Commerce Sellers' },
+                { href: '/services/ai-sprint',  label: 'The AI Sprint (14 days)' },
+                { href: '/services/ai-retainer',label: 'AI Retainer (৳20K/mo)' },
+                { href: '/free-ai-audit',        label: 'Book Free Audit' },
+                { href: '/pricing',              label: 'Pricing' },
               ].map(link => (
                 <li key={link.href}>
                   <Link href={link.href}
@@ -171,39 +170,18 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 3 — Who We Help + Resources */}
+          {/* Column 3 — Resources */}
           <div className="space-y-4">
-            <h3 className="text-sm font-bold uppercase tracking-[0.12em]" style={{ color: headingColor }}>Who We Help</h3>
+            <h3 className="text-sm font-bold uppercase tracking-[0.12em]" style={{ color: headingColor }}>Resources</h3>
             <ul className="space-y-2 text-sm">
               {[
-                { href: '/for/students',     label: 'Students' },
-                { href: '/for/job-seekers',  label: 'Job Seekers' },
-                { href: '/for/freelancers',  label: 'Freelancers' },
-                { href: '/for/sme-founders', label: 'SME Founders' },
-                { href: '/for/f-commerce',   label: 'F-Commerce Sellers' },
-                { href: '/for/agencies',     label: 'Digital Agencies' },
-                { href: '/for/consultants',  label: 'Consultants' },
-                { href: '/for/creators',     label: 'Content Creators' },
-                { href: '/for/corporates',   label: 'Corporates' },
-              ].map(link => (
-                <li key={link.href}>
-                  <Link href={link.href}
-                    className="transition-colors"
-                    style={{ color: textColor }}
-                    onMouseEnter={e => (e.currentTarget.style.color = hoverColor)}
-                    onMouseLeave={e => (e.currentTarget.style.color = textColor)}>
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <h3 className="text-sm font-bold uppercase tracking-[0.12em] pt-2" style={{ color: headingColor }}>Resources</h3>
-            <ul className="space-y-2 text-sm">
-              {[
-                { href: '/results', label: 'Case Studies' },
-                { href: '/blog',    label: 'Blog'         },
-                { href: '/faq',     label: 'FAQ'          },
-                { href: '/pricing', label: 'Pricing'      },
+                { href: '/proof',   label: 'Results & Proof' },
+                { href: '/blog',    label: 'Blog' },
+                { href: '/faq',     label: 'FAQ' },
+                { href: '/about',   label: 'About Emon' },
+                { href: '/contact', label: 'Contact' },
+                { href: '/services', label: 'All Services' },
+                { href: '/services/other-engagements', label: 'Other Engagements' },
               ].map(link => (
                 <li key={link.href}>
                   <Link href={link.href}

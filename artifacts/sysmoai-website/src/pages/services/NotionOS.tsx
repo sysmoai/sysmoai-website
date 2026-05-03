@@ -45,7 +45,7 @@ export default function NotionOS() {
         { q: 'Can you migrate my existing data?', a: 'Yes. We import from spreadsheets, Trello, Asana, Airtable, and most major tools. Included in the project scope.' },
       ]}
       relatedServices={[
-        { href: '/services/ai-sprint', label: 'AI Sprint (full AI stack)', price: '৳25,000–50,000' },
+        { href: '/services/ai-sprint', label: 'F-Commerce AI Sprint', price: '৳50,000' },
         { href: '/services/n8n-automation', label: 'n8n Automation', price: '৳2,000–10,000/workflow' },
         { href: '/services/ai-quick-win', label: 'AI Quick Win', price: '৳3,750–7,500' },
       ]}

@@ -28,7 +28,7 @@ export default function Corporates() {
       ]}
       relevantServices={[
         { href: '/services/corporate-training', label: 'Corporate Training', price: '৳50,000–2,00,000' },
-        { href: '/services/ai-sprint', label: 'AI Sprint', price: '৳25,000–50,000' },
+        { href: '/services/ai-sprint', label: 'F-Commerce AI Sprint', price: '৳50,000' },
         { href: '/services/ai-retainer', label: 'AI Retainer', price: '৳20,000/month' },
       ]}
       finalCtaHeadline="Ready for an AI transformation that actually works?"

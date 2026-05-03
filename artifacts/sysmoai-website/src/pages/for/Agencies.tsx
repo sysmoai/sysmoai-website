@@ -27,7 +27,7 @@ export default function Agencies() {
         { icon: '🧠', title: 'Team AI Training', desc: 'Half-day hands-on workshop that upskills your entire team with industry-specific exercises.' },
       ]}
       relevantServices={[
-        { href: '/services/ai-sprint', label: 'AI Sprint (14 days)', price: '৳25,000–50,000' },
+        { href: '/services/ai-sprint', label: 'F-Commerce AI Sprint', price: '৳50,000' },
         { href: '/services/ai-retainer', label: 'AI Retainer', price: '৳20,000/month' },
         { href: '/services/group-workshop', label: 'Group AI Workshop', price: '৳500/person' },
       ]}

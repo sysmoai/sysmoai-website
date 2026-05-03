@@ -103,15 +103,22 @@ export function AudiencePageTemplate({
           >
             {heroSub}
           </motion.p>
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }}>
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="flex flex-wrap gap-4 items-center">
+            <Link
+              href="/free-ai-audit"
+              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] min-h-[52px]"
+            >
+              <ArrowRight size={20} />
+              Book Free F-Commerce Audit
+            </Link>
             <a
               href={WA_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-[0_0_20px_rgba(37,211,102,0.3)] min-h-[52px]"
+              className="inline-flex items-center gap-2 border border-[#25D366]/40 text-[#25D366] hover:bg-[#25D366]/10 px-6 py-4 rounded-xl font-semibold text-base transition-all min-h-[52px]"
             >
-              <MessageCircle size={20} />
-              Book Free AI Audit on WhatsApp
+              <MessageCircle size={18} />
+              WhatsApp
             </a>
           </motion.div>
         </div>

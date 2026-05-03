@@ -17,8 +17,8 @@ export default function StickyCTA() {
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#0A0B0F]/95 backdrop-blur-sm border-t border-slate-800 py-3 px-4 transition-all duration-300">
       <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
         <div className="hidden sm:block">
-          <p className="text-white text-sm font-semibold">Ready to automate your business?</p>
-          <p className="text-slate-400 text-xs">Free 30-min AI audit · No commitment</p>
+          <p className="text-white text-sm font-semibold">Stop losing orders in your DMs.</p>
+          <p className="text-slate-400 text-xs">Free 30-min F-Commerce AI audit · No commitment</p>
         </div>
         <div className="flex gap-3 w-full sm:w-auto">
           <Link href="/free-ai-audit"

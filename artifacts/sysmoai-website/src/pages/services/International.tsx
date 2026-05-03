@@ -23,7 +23,7 @@ const reasons = [
 
 const services = [
   { label: 'AI Quick Win', price: '$50–$100', href: '/services/ai-quick-win' },
-  { label: 'AI Sprint (14 days)', price: '$300–$600', href: '/services/ai-sprint' },
+  { label: 'F-Commerce AI Sprint (14 days)', price: '$600', href: '/services/ai-sprint' },
   { label: 'AI Retainer', price: '$250/month', href: '/services/ai-retainer' },
   { label: '1:1 AI Coaching', price: '$30/session', href: '/services/ai-coaching' },
   { label: 'Notion OS Build', price: '$800–$5,000', href: '/services/notion-os' },
@@ -64,11 +64,11 @@ export default function International() {
             US and EU AI consultants charge $200–$500/hr. SYSmoAI delivers the same expertise — Notion OS, custom AI agents, n8n automation — at a fraction of the cost. International payments via Wise and Payoneer.
           </motion.p>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all min-h-[52px]">
-              <MessageCircle size={20} /> Message on WhatsApp
-            </a>
-            <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all min-h-[52px]">
-              Email Us
+            <Link href="/free-ai-audit" className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all min-h-[52px]">
+              <ArrowRight size={20} /> Book Free AI Audit
+            </Link>
+            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-[#25D366]/40 text-[#25D366] hover:bg-[#25D366]/10 px-6 py-4 rounded-xl font-semibold text-base transition-all min-h-[52px]">
+              <MessageCircle size={18} /> WhatsApp
             </a>
           </motion.div>
         </div>
@@ -170,11 +170,11 @@ export default function International() {
             Book a free 30-minute discovery call. No commitment.
           </motion.p>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-8 py-4 rounded-xl font-bold text-lg transition-all min-h-[52px]">
-              <MessageCircle size={20} /> WhatsApp (fastest)
-            </a>
-            <a href={`mailto:${EMAIL}?subject=International Project Inquiry`} className="inline-flex items-center gap-2 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all min-h-[52px]">
-              {EMAIL}
+            <Link href="/free-ai-audit" className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all min-h-[52px]">
+              <ArrowRight size={20} /> Book Free AI Audit
+            </Link>
+            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-[#25D366]/40 text-[#25D366] hover:bg-[#25D366]/10 px-6 py-4 rounded-xl font-semibold text-base transition-all min-h-[52px]">
+              <MessageCircle size={18} /> WhatsApp
             </a>
           </motion.div>
         </div>
