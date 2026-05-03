@@ -128,10 +128,12 @@ function aggregate<K extends string>(
 
 // ── Concrete Week 5–8 slot plan ──────────────────────────────────────
 //
-// We re-use the exact weekly cadence of Week 1–4 (19 slots/week, same
-// BDT peak times) so production rhythm doesn't change — only the
-// pillar/hook/platform allocation does. Slot dates start the Monday
-// after W4 closes (Mon 8 Jun 2026 BDT) and run for 4 consecutive weeks.
+// We keep the weekly slot count (19/week) and BDT peak times of the
+// Week 1–4 pack so production rhythm doesn't change, BUT we DO reweight
+// the per-platform slot count based on observed signups-per-piece per
+// platform. That's the whole point of the planner — double down on what
+// converts. Slot dates start the Monday after W4 closes (Mon 8 Jun 2026
+// BDT) and run for 4 consecutive weeks.
 
 interface SlotTemplate {
   dayOfWeek: 0 | 1 | 2 | 3 | 4; // 0=Mon … 4=Fri
@@ -142,33 +144,137 @@ interface SlotTemplate {
   ctaCode: "A" | "W";
 }
 
-// Mirrors week 1 of the existing pack. Total = 19 slots per week.
-const WEEK_TEMPLATE: SlotTemplate[] = [
-  // Mon
-  { dayOfWeek: 0, platform: "linkedin",         bdtSlot: "09:00", filePrefix: "L",  filePerWeekIndex: 1, ctaCode: "A" },
-  { dayOfWeek: 0, platform: "instagram_feed",   bdtSlot: "13:00", filePrefix: "IF", filePerWeekIndex: 1, ctaCode: "A" },
-  { dayOfWeek: 0, platform: "instagram_story",  bdtSlot: "20:00", filePrefix: "IS", filePerWeekIndex: 1, ctaCode: "A" },
-  { dayOfWeek: 0, platform: "x_standalone",     bdtSlot: "12:30", filePrefix: "X",  filePerWeekIndex: 1, ctaCode: "A" },
-  // Tue
-  { dayOfWeek: 1, platform: "linkedin",         bdtSlot: "09:00", filePrefix: "L",  filePerWeekIndex: 2, ctaCode: "A" },
-  { dayOfWeek: 1, platform: "x_standalone",     bdtSlot: "12:30", filePrefix: "X",  filePerWeekIndex: 2, ctaCode: "A" },
-  { dayOfWeek: 1, platform: "tiktok_reel",      bdtSlot: "21:00", filePrefix: "TR", filePerWeekIndex: 1, ctaCode: "A" },
-  // Wed
-  { dayOfWeek: 2, platform: "linkedin",         bdtSlot: "09:00", filePrefix: "L",  filePerWeekIndex: 3, ctaCode: "A" },
-  { dayOfWeek: 2, platform: "instagram_feed",   bdtSlot: "13:00", filePrefix: "IF", filePerWeekIndex: 2, ctaCode: "A" },
-  { dayOfWeek: 2, platform: "instagram_story",  bdtSlot: "20:00", filePrefix: "IS", filePerWeekIndex: 2, ctaCode: "A" },
-  { dayOfWeek: 2, platform: "x_standalone",     bdtSlot: "12:30", filePrefix: "X",  filePerWeekIndex: 3, ctaCode: "A" },
-  { dayOfWeek: 2, platform: "x_thread",         bdtSlot: "21:00", filePrefix: "XT", filePerWeekIndex: 1, ctaCode: "A" },
-  // Thu
-  { dayOfWeek: 3, platform: "linkedin",         bdtSlot: "09:00", filePrefix: "L",  filePerWeekIndex: 4, ctaCode: "A" },
-  { dayOfWeek: 3, platform: "x_standalone",     bdtSlot: "12:30", filePrefix: "X",  filePerWeekIndex: 4, ctaCode: "A" },
-  { dayOfWeek: 3, platform: "tiktok_reel",      bdtSlot: "21:00", filePrefix: "TR", filePerWeekIndex: 2, ctaCode: "A" },
-  // Fri
-  { dayOfWeek: 4, platform: "linkedin",         bdtSlot: "09:00", filePrefix: "L",  filePerWeekIndex: 5, ctaCode: "A" },
-  { dayOfWeek: 4, platform: "instagram_feed",   bdtSlot: "13:00", filePrefix: "IF", filePerWeekIndex: 3, ctaCode: "A" },
-  { dayOfWeek: 4, platform: "instagram_story",  bdtSlot: "20:00", filePrefix: "IS", filePerWeekIndex: 3, ctaCode: "A" },
-  { dayOfWeek: 4, platform: "newsletter",       bdtSlot: "10:00", filePrefix: "NL", filePerWeekIndex: 1, ctaCode: "A" },
-];
+const TOTAL_SLOTS_PER_WEEK = 19;
+
+// Per-platform invariants: BDT peak slot, fileRef prefix, baseline weight
+// (= count in Week 1–4 cadence, used as fallback share when no signal).
+const PLATFORM_META: Record<
+  string,
+  { bdtSlot: string; filePrefix: string; baseline: number; minSlots: number; maxSlots: number }
+> = {
+  linkedin:        { bdtSlot: "09:00", filePrefix: "L",  baseline: 5, minSlots: 2, maxSlots: 8 },
+  x_standalone:    { bdtSlot: "12:30", filePrefix: "X",  baseline: 4, minSlots: 1, maxSlots: 7 },
+  instagram_feed:  { bdtSlot: "13:00", filePrefix: "IF", baseline: 3, minSlots: 1, maxSlots: 6 },
+  instagram_story: { bdtSlot: "20:00", filePrefix: "IS", baseline: 3, minSlots: 1, maxSlots: 6 },
+  tiktok_reel:     { bdtSlot: "21:00", filePrefix: "TR", baseline: 2, minSlots: 1, maxSlots: 5 },
+  x_thread:        { bdtSlot: "21:00", filePrefix: "XT", baseline: 1, minSlots: 1, maxSlots: 3 },
+  newsletter:      { bdtSlot: "10:00", filePrefix: "NL", baseline: 1, minSlots: 1, maxSlots: 2 },
+};
+
+// Compute per-platform target slot counts from attribution data.
+// Strategy:
+//  - Start from each platform's signupsPerPiece share (or baseline when
+//    no data).
+//  - Apply min/max caps so no single platform monopolises and rarely-used
+//    platforms still get at least 1 slot.
+//  - Use largest-remainder rounding to hit exactly TOTAL_SLOTS_PER_WEEK.
+function computePlatformAllocation(byPlatform: Aggregate[]): Record<string, number> {
+  const platforms = Object.keys(PLATFORM_META);
+  const observed = new Map(byPlatform.map((r) => [r.key, r.signupsPerPiece]));
+  const totalObserved = byPlatform.reduce((s, r) => s + r.signupsPerPiece, 0);
+
+  // Raw weights: prefer real attribution share, fall back to baseline share.
+  const rawWeights: Record<string, number> = {};
+  if (totalObserved > 0) {
+    for (const p of platforms) {
+      // Blend 80% observed + 20% baseline so cold-start platforms keep
+      // some presence even if a single hot week dominated their share.
+      const obsShare = (observed.get(p) ?? 0) / totalObserved;
+      const baseShare = PLATFORM_META[p].baseline / TOTAL_SLOTS_PER_WEEK;
+      rawWeights[p] = 0.8 * obsShare + 0.2 * baseShare;
+    }
+  } else {
+    for (const p of platforms) {
+      rawWeights[p] = PLATFORM_META[p].baseline / TOTAL_SLOTS_PER_WEEK;
+    }
+  }
+
+  // Scale to TOTAL_SLOTS_PER_WEEK.
+  const sumW = Object.values(rawWeights).reduce((s, v) => s + v, 0) || 1;
+  const scaled: Record<string, number> = {};
+  for (const p of platforms) {
+    scaled[p] = (rawWeights[p] / sumW) * TOTAL_SLOTS_PER_WEEK;
+  }
+
+  // Apply min floor first (every supported platform keeps minSlots).
+  const counts: Record<string, number> = {};
+  let remaining = TOTAL_SLOTS_PER_WEEK;
+  for (const p of platforms) {
+    counts[p] = PLATFORM_META[p].minSlots;
+    remaining -= counts[p];
+  }
+  // Distribute the remaining slots by largest remainder of (scaled-min),
+  // respecting maxSlots caps.
+  const slack = platforms.map((p) => ({
+    p,
+    want: Math.max(0, scaled[p] - counts[p]),
+    cap: PLATFORM_META[p].maxSlots - counts[p],
+  }));
+  const sumSlack = slack.reduce((s, x) => s + x.want, 0) || 1;
+  // Integer base allocation.
+  const baseAlloc = slack.map((x) => {
+    const ideal = (x.want / sumSlack) * remaining;
+    const floor = Math.min(Math.floor(ideal), x.cap);
+    return { ...x, ideal, floor, frac: ideal - Math.floor(ideal) };
+  });
+  let usedExtra = baseAlloc.reduce((s, x) => s + x.floor, 0);
+  // Apply floors.
+  for (const x of baseAlloc) counts[x.p] += x.floor;
+  // Distribute the leftover via largest remainder, respecting caps.
+  let leftover = remaining - usedExtra;
+  const sortedByFrac = [...baseAlloc].sort((a, b) => b.frac - a.frac);
+  for (const x of sortedByFrac) {
+    if (leftover <= 0) break;
+    const room = PLATFORM_META[x.p].maxSlots - counts[x.p];
+    if (room > 0) {
+      counts[x.p] += 1;
+      leftover -= 1;
+    }
+  }
+  // If still leftover (e.g. caps blocked everyone), spill into top-share
+  // platforms ignoring caps as a last resort.
+  if (leftover > 0) {
+    const order = [...platforms].sort((a, b) => rawWeights[b] - rawWeights[a]);
+    for (const p of order) {
+      if (leftover <= 0) break;
+      counts[p] += 1;
+      leftover -= 1;
+    }
+  }
+  return counts;
+}
+
+// Build a 19-slot weekly template from per-platform target counts.
+// Each platform's slots are spread round-robin across Mon→Fri starting
+// from a deterministic offset so the same days don't always cluster.
+function buildWeekTemplate(allocation: Record<string, number>): SlotTemplate[] {
+  const platforms = Object.keys(allocation).filter((p) => allocation[p] > 0);
+  const slots: SlotTemplate[] = [];
+  // Stable ordering: highest-allocation first so popular platforms claim
+  // their preferred spread first.
+  const ordered = [...platforms].sort((a, b) => allocation[b] - allocation[a]);
+  let offset = 0;
+  for (const p of ordered) {
+    const meta = PLATFORM_META[p];
+    const count = allocation[p];
+    for (let i = 0; i < count; i++) {
+      const dayOfWeek = ((offset + i) % 5) as 0 | 1 | 2 | 3 | 4;
+      slots.push({
+        dayOfWeek,
+        platform: p,
+        bdtSlot: meta.bdtSlot,
+        filePrefix: meta.filePrefix,
+        filePerWeekIndex: i + 1,
+        ctaCode: "A",
+      });
+    }
+    offset += 1; // shift each platform's start so they don't all pile on Monday
+  }
+  return slots.sort((a, b) => {
+    if (a.dayOfWeek !== b.dayOfWeek) return a.dayOfWeek - b.dayOfWeek;
+    return a.bdtSlot.localeCompare(b.bdtSlot);
+  });
+}
 
 const DEFAULT_PILLARS = [
   "Pain Recognition",
@@ -290,11 +396,13 @@ function buildConcretePlan(
   byPillar: Aggregate[],
   byHook: Aggregate[],
   byPlatform: Aggregate[],
-): PlannedSlot[] {
+): { slots: PlannedSlot[]; allocation: Record<string, number> } {
   const pillars = rankedPillars(byPillar);
   const hooks = rankedHooks(byHook);
   const topPlatform = byPlatform[0]?.key;
   const w5Start = week5StartUtcMs(posts);
+  const allocation = computePlatformAllocation(byPlatform);
+  const WEEK_TEMPLATE = buildWeekTemplate(allocation);
 
   // Pillar allocation across 19 weekly slots: 50/25/25 (drop bottom).
   // Slot indices 0..9 → top, 10..14 → second, 15..18 → third.
@@ -335,7 +443,7 @@ function buildConcretePlan(
       });
     });
   }
-  return slots;
+  return { slots, allocation };
 }
 
 function fmtPlanTable(slots: PlannedSlot[]): string {
@@ -501,7 +609,24 @@ function buildOutline(posts: PostRow[]): string {
         .join("\n")
     : "_(no piece has any attributed signups yet)_";
 
-  const plan = buildConcretePlan(workingPosts, byPillar, byHook, byPlatform);
+  const { slots: planSlots, allocation: planAllocation } = buildConcretePlan(
+    workingPosts, byPillar, byHook, byPlatform,
+  );
+  const baselineAlloc: Record<string, number> = {
+    linkedin: 5, x_standalone: 4, instagram_feed: 3, instagram_story: 3,
+    tiktok_reel: 2, x_thread: 1, newsletter: 1,
+  };
+  const allocTable = [
+    "| Platform | Week 1–4 slots | Week 5–8 slots | Δ |",
+    "|---|---:|---:|---:|",
+    ...Object.keys(planAllocation).map((p) => {
+      const before = baselineAlloc[p] ?? 0;
+      const after = planAllocation[p];
+      const d = after - before;
+      const sign = d > 0 ? `+${d}` : `${d}`;
+      return `| ${p} | ${before} | ${after} | ${sign} |`;
+    }),
+  ].join("\n");
   const banner =
     dataMode === "dry-run synthetic"
       ? [
@@ -529,7 +654,13 @@ function buildOutline(posts: PostRow[]): string {
     "",
     planNote,
     "",
-    fmtPlanTable(plan),
+    fmtPlanTable(planSlots),
+    "",
+    "### Per-platform slot allocation (vs Week 1–4 baseline)",
+    "",
+    "_The planner reweights weekly slot counts per platform from observed signups-per-piece (80% observed share + 20% baseline) so Week 5+ doubles down on what actually converts. Total slots/week stays at 19 to preserve production rhythm._",
+    "",
+    allocTable,
     "",
     "### Recommendations",
     "",

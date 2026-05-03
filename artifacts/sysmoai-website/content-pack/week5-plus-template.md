@@ -67,7 +67,7 @@ each regeneration.
 > `pnpm --filter @workspace/scripts run build-week5-pack` to overwrite
 > this section with the real data-driven plan.
 
-_Generated 2026-05-03T08:26:54.647Z from 76 scheduled posts (208 attributed signups, dry-run synthetic)._
+_Generated 2026-05-03T08:33:48.640Z from 76 scheduled posts (208 attributed signups, dry-run synthetic)._
 
 ### Week 5–8 concrete plan
 
@@ -76,81 +76,95 @@ _Dry-run synthetic scenario applied to 76 scheduled posts. Replace by re-running
 | # | Week | Date | Day | Platform | File Ref | Pillar | Hook | Funnel | CTA | Planned utm_campaign |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1 | W5 | 08 Jun | Mon | linkedin | W5L1 | Proof + Specificity | Specificity Signal | TOF | [A] | `w5-w5l1` |
-| 2 | W5 | 08 Jun | Mon | instagram_feed | W5IF1 | Proof + Specificity | Negative Hook | TOF | [A] | `w5-w5if1` |
-| 3 | W5 | 08 Jun | Mon | instagram_story | W5IS1 | Proof + Specificity | Callout | TOF | [A] | `w5-w5is1` |
-| 4 | W5 | 08 Jun | Mon | x_standalone | W5X1 | Proof + Specificity | PAS | TOF | [A] | `w5-w5x1` |
-| 5 | W5 | 09 Jun | Tue | linkedin | W5L2 | Proof + Specificity | Specificity Signal | TOF | [A] | `w5-w5l2` |
-| 6 | W5 | 09 Jun | Tue | x_standalone | W5X2 | Proof + Specificity | Slippery Slope | TOF | [A] | `w5-w5x2` |
-| 7 | W5 | 09 Jun | Tue | tiktok_reel | W5TR1 | Proof + Specificity | Permission | MOF | [A] | `w5-w5tr1` |
+| 2 | W5 | 08 Jun | Mon | instagram_story | W5IS2 | Proof + Specificity | Negative Hook | TOF | [A] | `w5-w5is2` |
+| 3 | W5 | 08 Jun | Mon | tiktok_reel | W5TR1 | Proof + Specificity | Callout | TOF | [A] | `w5-w5tr1` |
+| 4 | W5 | 09 Jun | Tue | linkedin | W5L2 | Proof + Specificity | Specificity Signal | TOF | [A] | `w5-w5l2` |
+| 5 | W5 | 09 Jun | Tue | newsletter | W5NL1 | Proof + Specificity | Curiosity Gap | TOF | [A] | `w5-w5nl1` |
+| 6 | W5 | 09 Jun | Tue | x_standalone | W5X1 | Proof + Specificity | Slippery Slope | TOF | [A] | `w5-w5x1` |
+| 7 | W5 | 09 Jun | Tue | tiktok_reel | W5TR2 | Proof + Specificity | Permission | MOF | [A] | `w5-w5tr2` |
 | 8 | W5 | 10 Jun | Wed | linkedin | W5L3 | Proof + Specificity | BAB | MOF | [A] | `w5-w5l3` |
-| 9 | W5 | 10 Jun | Wed | instagram_feed | W5IF2 | Proof + Specificity | Pain / Single Frame | MOF | [A] | `w5-w5if2` |
-| 10 | W5 | 10 Jun | Wed | instagram_story | W5IS2 | Proof + Specificity | Educational / Poll | MOF | [A] | `w5-w5is2` |
-| 11 | W5 | 10 Jun | Wed | x_standalone | W5X3 | Pain Recognition | Contrarian | MOF | [A] | `w5-w5x3` |
-| 12 | W5 | 10 Jun | Wed | x_thread | W5XT1 | Pain Recognition | 3-Frame Sequence | MOF | [A] | `w5-w5xt1` |
-| 13 | W5 | 11 Jun | Thu | linkedin | W5L4 | Pain Recognition | Educational | MOF | [A] | `w5-w5l4` |
-| 14 | W5 | 11 Jun | Thu | x_standalone | W5X4 | Pain Recognition | Question | MOF | [A] | `w5-w5x4` |
-| 15 | W5 | 11 Jun | Thu | tiktok_reel | W5TR2 | Pain Recognition | Specificity Signal | BOF | [A] | `w5-w5tr2` |
+| 9 | W5 | 10 Jun | Wed | newsletter | W5NL2 | Proof + Specificity | Pain / Single Frame | MOF | [A] | `w5-w5nl2` |
+| 10 | W5 | 10 Jun | Wed | x_standalone | W5X2 | Proof + Specificity | Educational / Poll | MOF | [A] | `w5-w5x2` |
+| 11 | W5 | 10 Jun | Wed | x_thread | W5XT1 | Pain Recognition | Contrarian | MOF | [A] | `w5-w5xt1` |
+| 12 | W5 | 11 Jun | Thu | linkedin | W5L4 | Pain Recognition | 3-Frame Sequence | MOF | [A] | `w5-w5l4` |
+| 13 | W5 | 11 Jun | Thu | x_standalone | W5X3 | Pain Recognition | Educational | MOF | [A] | `w5-w5x3` |
+| 14 | W5 | 11 Jun | Thu | instagram_feed | W5IF1 | Pain Recognition | Question | MOF | [A] | `w5-w5if1` |
+| 15 | W5 | 11 Jun | Thu | x_thread | W5XT2 | Pain Recognition | Specificity Signal | BOF | [A] | `w5-w5xt2` |
 | 16 | W5 | 12 Jun | Fri | linkedin | W5L5 | What Good Looks Like | Negative Hook | BOF | [A] | `w5-w5l5` |
-| 17 | W5 | 12 Jun | Fri | instagram_feed | W5IF3 | What Good Looks Like | Callout | BOF | [A] | `w5-w5if3` |
-| 18 | W5 | 12 Jun | Fri | instagram_story | W5IS3 | What Good Looks Like | PAS | BOF | [A] | `w5-w5is3` |
-| 19 | W5 | 12 Jun | Fri | newsletter | W5NL1 | What Good Looks Like | Curiosity Gap | MOF_BOF | [A] | `w5-w5nl1` |
+| 17 | W5 | 12 Jun | Fri | instagram_feed | W5IF2 | What Good Looks Like | Callout | BOF | [A] | `w5-w5if2` |
+| 18 | W5 | 12 Jun | Fri | instagram_story | W5IS1 | What Good Looks Like | PAS | BOF | [A] | `w5-w5is1` |
+| 19 | W5 | 12 Jun | Fri | x_thread | W5XT3 | What Good Looks Like | Curiosity Gap | MOF_BOF | [A] | `w5-w5xt3` |
 | 20 | W6 | 15 Jun | Mon | linkedin | W6L1 | Proof + Specificity | Specificity Signal | TOF | [A] | `w6-w6l1` |
-| 21 | W6 | 15 Jun | Mon | instagram_feed | W6IF1 | Proof + Specificity | Callout | TOF | [A] | `w6-w6if1` |
-| 22 | W6 | 15 Jun | Mon | instagram_story | W6IS1 | Proof + Specificity | PAS | TOF | [A] | `w6-w6is1` |
-| 23 | W6 | 15 Jun | Mon | x_standalone | W6X1 | Proof + Specificity | Curiosity Gap | TOF | [A] | `w6-w6x1` |
-| 24 | W6 | 16 Jun | Tue | linkedin | W6L2 | Proof + Specificity | Specificity Signal | TOF | [A] | `w6-w6l2` |
-| 25 | W6 | 16 Jun | Tue | x_standalone | W6X2 | Proof + Specificity | Permission | TOF | [A] | `w6-w6x2` |
-| 26 | W6 | 16 Jun | Tue | tiktok_reel | W6TR1 | Proof + Specificity | BAB | MOF | [A] | `w6-w6tr1` |
+| 21 | W6 | 15 Jun | Mon | instagram_story | W6IS2 | Proof + Specificity | Callout | TOF | [A] | `w6-w6is2` |
+| 22 | W6 | 15 Jun | Mon | tiktok_reel | W6TR1 | Proof + Specificity | PAS | TOF | [A] | `w6-w6tr1` |
+| 23 | W6 | 16 Jun | Tue | linkedin | W6L2 | Proof + Specificity | Specificity Signal | TOF | [A] | `w6-w6l2` |
+| 24 | W6 | 16 Jun | Tue | newsletter | W6NL1 | Proof + Specificity | Slippery Slope | TOF | [A] | `w6-w6nl1` |
+| 25 | W6 | 16 Jun | Tue | x_standalone | W6X1 | Proof + Specificity | Permission | TOF | [A] | `w6-w6x1` |
+| 26 | W6 | 16 Jun | Tue | tiktok_reel | W6TR2 | Proof + Specificity | BAB | MOF | [A] | `w6-w6tr2` |
 | 27 | W6 | 17 Jun | Wed | linkedin | W6L3 | Proof + Specificity | Pain / Single Frame | MOF | [A] | `w6-w6l3` |
-| 28 | W6 | 17 Jun | Wed | instagram_feed | W6IF2 | Proof + Specificity | Educational / Poll | MOF | [A] | `w6-w6if2` |
-| 29 | W6 | 17 Jun | Wed | instagram_story | W6IS2 | Proof + Specificity | Contrarian | MOF | [A] | `w6-w6is2` |
-| 30 | W6 | 17 Jun | Wed | x_standalone | W6X3 | Pain Recognition | 3-Frame Sequence | MOF | [A] | `w6-w6x3` |
-| 31 | W6 | 17 Jun | Wed | x_thread | W6XT1 | Pain Recognition | Educational | MOF | [A] | `w6-w6xt1` |
-| 32 | W6 | 18 Jun | Thu | linkedin | W6L4 | Pain Recognition | Question | MOF | [A] | `w6-w6l4` |
-| 33 | W6 | 18 Jun | Thu | x_standalone | W6X4 | Pain Recognition | Specificity Signal | MOF | [A] | `w6-w6x4` |
-| 34 | W6 | 18 Jun | Thu | tiktok_reel | W6TR2 | Pain Recognition | Negative Hook | BOF | [A] | `w6-w6tr2` |
+| 28 | W6 | 17 Jun | Wed | newsletter | W6NL2 | Proof + Specificity | Educational / Poll | MOF | [A] | `w6-w6nl2` |
+| 29 | W6 | 17 Jun | Wed | x_standalone | W6X2 | Proof + Specificity | Contrarian | MOF | [A] | `w6-w6x2` |
+| 30 | W6 | 17 Jun | Wed | x_thread | W6XT1 | Pain Recognition | 3-Frame Sequence | MOF | [A] | `w6-w6xt1` |
+| 31 | W6 | 18 Jun | Thu | linkedin | W6L4 | Pain Recognition | Educational | MOF | [A] | `w6-w6l4` |
+| 32 | W6 | 18 Jun | Thu | x_standalone | W6X3 | Pain Recognition | Question | MOF | [A] | `w6-w6x3` |
+| 33 | W6 | 18 Jun | Thu | instagram_feed | W6IF1 | Pain Recognition | Specificity Signal | MOF | [A] | `w6-w6if1` |
+| 34 | W6 | 18 Jun | Thu | x_thread | W6XT2 | Pain Recognition | Negative Hook | BOF | [A] | `w6-w6xt2` |
 | 35 | W6 | 19 Jun | Fri | linkedin | W6L5 | What Good Looks Like | Callout | BOF | [A] | `w6-w6l5` |
-| 36 | W6 | 19 Jun | Fri | instagram_feed | W6IF3 | What Good Looks Like | PAS | BOF | [A] | `w6-w6if3` |
-| 37 | W6 | 19 Jun | Fri | instagram_story | W6IS3 | What Good Looks Like | Curiosity Gap | BOF | [A] | `w6-w6is3` |
-| 38 | W6 | 19 Jun | Fri | newsletter | W6NL1 | What Good Looks Like | Slippery Slope | MOF_BOF | [A] | `w6-w6nl1` |
+| 36 | W6 | 19 Jun | Fri | instagram_feed | W6IF2 | What Good Looks Like | PAS | BOF | [A] | `w6-w6if2` |
+| 37 | W6 | 19 Jun | Fri | instagram_story | W6IS1 | What Good Looks Like | Curiosity Gap | BOF | [A] | `w6-w6is1` |
+| 38 | W6 | 19 Jun | Fri | x_thread | W6XT3 | What Good Looks Like | Slippery Slope | MOF_BOF | [A] | `w6-w6xt3` |
 | 39 | W7 | 22 Jun | Mon | linkedin | W7L1 | Proof + Specificity | Specificity Signal | TOF | [A] | `w7-w7l1` |
-| 40 | W7 | 22 Jun | Mon | instagram_feed | W7IF1 | Proof + Specificity | PAS | TOF | [A] | `w7-w7if1` |
-| 41 | W7 | 22 Jun | Mon | instagram_story | W7IS1 | Proof + Specificity | Curiosity Gap | TOF | [A] | `w7-w7is1` |
-| 42 | W7 | 22 Jun | Mon | x_standalone | W7X1 | Proof + Specificity | Slippery Slope | TOF | [A] | `w7-w7x1` |
-| 43 | W7 | 23 Jun | Tue | linkedin | W7L2 | Proof + Specificity | Specificity Signal | TOF | [A] | `w7-w7l2` |
-| 44 | W7 | 23 Jun | Tue | x_standalone | W7X2 | Proof + Specificity | BAB | TOF | [A] | `w7-w7x2` |
-| 45 | W7 | 23 Jun | Tue | tiktok_reel | W7TR1 | Proof + Specificity | Pain / Single Frame | MOF | [A] | `w7-w7tr1` |
+| 40 | W7 | 22 Jun | Mon | instagram_story | W7IS2 | Proof + Specificity | PAS | TOF | [A] | `w7-w7is2` |
+| 41 | W7 | 22 Jun | Mon | tiktok_reel | W7TR1 | Proof + Specificity | Curiosity Gap | TOF | [A] | `w7-w7tr1` |
+| 42 | W7 | 23 Jun | Tue | linkedin | W7L2 | Proof + Specificity | Specificity Signal | TOF | [A] | `w7-w7l2` |
+| 43 | W7 | 23 Jun | Tue | newsletter | W7NL1 | Proof + Specificity | Permission | TOF | [A] | `w7-w7nl1` |
+| 44 | W7 | 23 Jun | Tue | x_standalone | W7X1 | Proof + Specificity | BAB | TOF | [A] | `w7-w7x1` |
+| 45 | W7 | 23 Jun | Tue | tiktok_reel | W7TR2 | Proof + Specificity | Pain / Single Frame | MOF | [A] | `w7-w7tr2` |
 | 46 | W7 | 24 Jun | Wed | linkedin | W7L3 | Proof + Specificity | Educational / Poll | MOF | [A] | `w7-w7l3` |
-| 47 | W7 | 24 Jun | Wed | instagram_feed | W7IF2 | Proof + Specificity | Contrarian | MOF | [A] | `w7-w7if2` |
-| 48 | W7 | 24 Jun | Wed | instagram_story | W7IS2 | Proof + Specificity | 3-Frame Sequence | MOF | [A] | `w7-w7is2` |
-| 49 | W7 | 24 Jun | Wed | x_standalone | W7X3 | Pain Recognition | Educational | MOF | [A] | `w7-w7x3` |
-| 50 | W7 | 24 Jun | Wed | x_thread | W7XT1 | Pain Recognition | Question | MOF | [A] | `w7-w7xt1` |
-| 51 | W7 | 25 Jun | Thu | linkedin | W7L4 | Pain Recognition | Specificity Signal | MOF | [A] | `w7-w7l4` |
-| 52 | W7 | 25 Jun | Thu | x_standalone | W7X4 | Pain Recognition | Negative Hook | MOF | [A] | `w7-w7x4` |
-| 53 | W7 | 25 Jun | Thu | tiktok_reel | W7TR2 | Pain Recognition | Callout | BOF | [A] | `w7-w7tr2` |
+| 47 | W7 | 24 Jun | Wed | newsletter | W7NL2 | Proof + Specificity | Contrarian | MOF | [A] | `w7-w7nl2` |
+| 48 | W7 | 24 Jun | Wed | x_standalone | W7X2 | Proof + Specificity | 3-Frame Sequence | MOF | [A] | `w7-w7x2` |
+| 49 | W7 | 24 Jun | Wed | x_thread | W7XT1 | Pain Recognition | Educational | MOF | [A] | `w7-w7xt1` |
+| 50 | W7 | 25 Jun | Thu | linkedin | W7L4 | Pain Recognition | Question | MOF | [A] | `w7-w7l4` |
+| 51 | W7 | 25 Jun | Thu | x_standalone | W7X3 | Pain Recognition | Specificity Signal | MOF | [A] | `w7-w7x3` |
+| 52 | W7 | 25 Jun | Thu | instagram_feed | W7IF1 | Pain Recognition | Negative Hook | MOF | [A] | `w7-w7if1` |
+| 53 | W7 | 25 Jun | Thu | x_thread | W7XT2 | Pain Recognition | Callout | BOF | [A] | `w7-w7xt2` |
 | 54 | W7 | 26 Jun | Fri | linkedin | W7L5 | What Good Looks Like | PAS | BOF | [A] | `w7-w7l5` |
-| 55 | W7 | 26 Jun | Fri | instagram_feed | W7IF3 | What Good Looks Like | Curiosity Gap | BOF | [A] | `w7-w7if3` |
-| 56 | W7 | 26 Jun | Fri | instagram_story | W7IS3 | What Good Looks Like | Slippery Slope | BOF | [A] | `w7-w7is3` |
-| 57 | W7 | 26 Jun | Fri | newsletter | W7NL1 | What Good Looks Like | Permission | MOF_BOF | [A] | `w7-w7nl1` |
+| 55 | W7 | 26 Jun | Fri | instagram_feed | W7IF2 | What Good Looks Like | Curiosity Gap | BOF | [A] | `w7-w7if2` |
+| 56 | W7 | 26 Jun | Fri | instagram_story | W7IS1 | What Good Looks Like | Slippery Slope | BOF | [A] | `w7-w7is1` |
+| 57 | W7 | 26 Jun | Fri | x_thread | W7XT3 | What Good Looks Like | Permission | MOF_BOF | [A] | `w7-w7xt3` |
 | 58 | W8 | 29 Jun | Mon | linkedin | W8L1 | Proof + Specificity | Specificity Signal | TOF | [A] | `w8-w8l1` |
-| 59 | W8 | 29 Jun | Mon | instagram_feed | W8IF1 | Proof + Specificity | Curiosity Gap | TOF | [A] | `w8-w8if1` |
-| 60 | W8 | 29 Jun | Mon | instagram_story | W8IS1 | Proof + Specificity | Slippery Slope | TOF | [A] | `w8-w8is1` |
-| 61 | W8 | 29 Jun | Mon | x_standalone | W8X1 | Proof + Specificity | Permission | TOF | [A] | `w8-w8x1` |
-| 62 | W8 | 30 Jun | Tue | linkedin | W8L2 | Proof + Specificity | Specificity Signal | TOF | [A] | `w8-w8l2` |
-| 63 | W8 | 30 Jun | Tue | x_standalone | W8X2 | Proof + Specificity | Pain / Single Frame | TOF | [A] | `w8-w8x2` |
-| 64 | W8 | 30 Jun | Tue | tiktok_reel | W8TR1 | Proof + Specificity | Educational / Poll | MOF | [A] | `w8-w8tr1` |
+| 59 | W8 | 29 Jun | Mon | instagram_story | W8IS2 | Proof + Specificity | Curiosity Gap | TOF | [A] | `w8-w8is2` |
+| 60 | W8 | 29 Jun | Mon | tiktok_reel | W8TR1 | Proof + Specificity | Slippery Slope | TOF | [A] | `w8-w8tr1` |
+| 61 | W8 | 30 Jun | Tue | linkedin | W8L2 | Proof + Specificity | Specificity Signal | TOF | [A] | `w8-w8l2` |
+| 62 | W8 | 30 Jun | Tue | newsletter | W8NL1 | Proof + Specificity | BAB | TOF | [A] | `w8-w8nl1` |
+| 63 | W8 | 30 Jun | Tue | x_standalone | W8X1 | Proof + Specificity | Pain / Single Frame | TOF | [A] | `w8-w8x1` |
+| 64 | W8 | 30 Jun | Tue | tiktok_reel | W8TR2 | Proof + Specificity | Educational / Poll | MOF | [A] | `w8-w8tr2` |
 | 65 | W8 | 01 Jul | Wed | linkedin | W8L3 | Proof + Specificity | Contrarian | MOF | [A] | `w8-w8l3` |
-| 66 | W8 | 01 Jul | Wed | instagram_feed | W8IF2 | Proof + Specificity | 3-Frame Sequence | MOF | [A] | `w8-w8if2` |
-| 67 | W8 | 01 Jul | Wed | instagram_story | W8IS2 | Proof + Specificity | Educational | MOF | [A] | `w8-w8is2` |
-| 68 | W8 | 01 Jul | Wed | x_standalone | W8X3 | Pain Recognition | Question | MOF | [A] | `w8-w8x3` |
-| 69 | W8 | 01 Jul | Wed | x_thread | W8XT1 | Pain Recognition | Specificity Signal | MOF | [A] | `w8-w8xt1` |
-| 70 | W8 | 02 Jul | Thu | linkedin | W8L4 | Pain Recognition | Negative Hook | MOF | [A] | `w8-w8l4` |
-| 71 | W8 | 02 Jul | Thu | x_standalone | W8X4 | Pain Recognition | Callout | MOF | [A] | `w8-w8x4` |
-| 72 | W8 | 02 Jul | Thu | tiktok_reel | W8TR2 | Pain Recognition | PAS | BOF | [A] | `w8-w8tr2` |
+| 66 | W8 | 01 Jul | Wed | newsletter | W8NL2 | Proof + Specificity | 3-Frame Sequence | MOF | [A] | `w8-w8nl2` |
+| 67 | W8 | 01 Jul | Wed | x_standalone | W8X2 | Proof + Specificity | Educational | MOF | [A] | `w8-w8x2` |
+| 68 | W8 | 01 Jul | Wed | x_thread | W8XT1 | Pain Recognition | Question | MOF | [A] | `w8-w8xt1` |
+| 69 | W8 | 02 Jul | Thu | linkedin | W8L4 | Pain Recognition | Specificity Signal | MOF | [A] | `w8-w8l4` |
+| 70 | W8 | 02 Jul | Thu | x_standalone | W8X3 | Pain Recognition | Negative Hook | MOF | [A] | `w8-w8x3` |
+| 71 | W8 | 02 Jul | Thu | instagram_feed | W8IF1 | Pain Recognition | Callout | MOF | [A] | `w8-w8if1` |
+| 72 | W8 | 02 Jul | Thu | x_thread | W8XT2 | Pain Recognition | PAS | BOF | [A] | `w8-w8xt2` |
 | 73 | W8 | 03 Jul | Fri | linkedin | W8L5 | What Good Looks Like | Curiosity Gap | BOF | [A] | `w8-w8l5` |
-| 74 | W8 | 03 Jul | Fri | instagram_feed | W8IF3 | What Good Looks Like | Slippery Slope | BOF | [A] | `w8-w8if3` |
-| 75 | W8 | 03 Jul | Fri | instagram_story | W8IS3 | What Good Looks Like | Permission | BOF | [A] | `w8-w8is3` |
-| 76 | W8 | 03 Jul | Fri | newsletter | W8NL1 | What Good Looks Like | BAB | MOF_BOF | [A] | `w8-w8nl1` |
+| 74 | W8 | 03 Jul | Fri | instagram_feed | W8IF2 | What Good Looks Like | Slippery Slope | BOF | [A] | `w8-w8if2` |
+| 75 | W8 | 03 Jul | Fri | instagram_story | W8IS1 | What Good Looks Like | Permission | BOF | [A] | `w8-w8is1` |
+| 76 | W8 | 03 Jul | Fri | x_thread | W8XT3 | What Good Looks Like | BAB | MOF_BOF | [A] | `w8-w8xt3` |
+
+### Per-platform slot allocation (vs Week 1–4 baseline)
+
+_The planner reweights weekly slot counts per platform from observed signups-per-piece (80% observed share + 20% baseline) so Week 5+ doubles down on what actually converts. Total slots/week stays at 19 to preserve production rhythm._
+
+| Platform | Week 1–4 slots | Week 5–8 slots | Δ |
+|---|---:|---:|---:|
+| linkedin | 5 | 5 | 0 |
+| x_standalone | 4 | 3 | -1 |
+| instagram_feed | 3 | 2 | -1 |
+| instagram_story | 3 | 2 | -1 |
+| tiktok_reel | 2 | 2 | 0 |
+| x_thread | 1 | 3 | +2 |
+| newsletter | 1 | 2 | +1 |
 
 ### Recommendations
 

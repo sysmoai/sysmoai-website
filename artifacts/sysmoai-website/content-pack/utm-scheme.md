@@ -16,7 +16,7 @@ Real examples:
 | File ref       | UTM URL                                                                                       |
 |----------------|-----------------------------------------------------------------------------------------------|
 | L1 (Week 1)    | `https://sysmoai.com/free-ai-audit?utm_source=linkedin&utm_medium=social&utm_campaign=w1-l1`  |
-| Thread W1      | `https://sysmoai.com/free-ai-audit?utm_source=x&utm_medium=social&utm_campaign=w1-thread1`    |
+| Thread W1      | `https://sysmoai.com/free-ai-audit?utm_source=x&utm_medium=social&utm_campaign=w1-threadw1`   |
 | IF7 (Week 3)   | `https://sysmoai.com/free-ai-audit?utm_source=instagram&utm_medium=social&utm_campaign=w3-if7`|
 | TR5 (Week 3)   | `https://sysmoai.com/free-ai-audit?utm_source=tiktok&utm_medium=social&utm_campaign=w3-tr5`   |
 | NL2 (Week 2)   | `https://sysmoai.com/free-ai-audit?utm_source=newsletter&utm_medium=email&utm_campaign=w2-nl2`|
@@ -38,10 +38,14 @@ already a known lead.
 ### Campaign slug rules
 
 `<fileref-slug>` is the post's `fileRef` lowercased with all non-alphanumerics
-turned into nothing. `Thread W1` → `thread1`, `IS3 — 3-Frame Seq` → `is3`,
-`L5 [CAROUSEL]` → `l5`. The week number prefix is the BDT week the row
-publishes in (W1 = 11–15 May 2026, W2 = 18–22 May, W3 = 25–29 May,
-W4 = 1–5 Jun).
+**stripped** (not replaced with hyphens — removed entirely). Examples:
+`Thread W1` → `threadw1`, `IS3 — 3-Frame Seq` → `is33frameseq`,
+`L5 [CAROUSEL]` → `l5carousel`, `L1` → `l1`, `NL2` → `nl2`. The week number
+prefix is the BDT week the row publishes in (W1 = 11–15 May 2026,
+W2 = 18–22 May, W3 = 25–29 May, W4 = 1–5 Jun). The canonical implementation
+lives in `scripts/src/buildContentSchedule.ts` (`campaignSlugFor`); the
+admin rollup at `POST /api/admin/scheduled-posts/attribution-rollup`
+computes the same slug at read time.
 
 You do **not** need to hand-write these — `scripts/src/buildContentSchedule.ts`
 exposes `campaignSlugFor(weekNumber, fileRef)` and `auditUrlWithUtm(weekNumber,
