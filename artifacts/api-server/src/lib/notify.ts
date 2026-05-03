@@ -53,6 +53,13 @@ function buildDeepLink(kind: LeadKind, id: string | number): string {
   return `${base}/${KIND_META[kind].adminPath}/${id}`;
 }
 
+// Conservative RFC-5322-ish check: must look like local@domain.tld with no
+// spaces. We are not validating, just gating reply_to to avoid Resend errors
+// when the field can also hold non-email values (e.g. WhatsApp numbers).
+function isLikelyEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+}
+
 function escapeHtml(input: string): string {
   return input
     .replace(/&/g, "&amp;")
@@ -168,7 +175,14 @@ export async function notifyNewLead(args: NotifyArgs): Promise<void> {
 
   const from =
     process.env.NOTIFY_FROM_EMAIL ?? "SYSmoAI Leads <onboarding@resend.dev>";
-  const replyTo = args.submitter.email ?? undefined;
+  // Only set reply_to when the submitter value is a syntactically valid email.
+  // Some endpoints (e.g. contact form) accept "email or WhatsApp number" in
+  // the same field — passing a phone number to Resend's reply_to causes the
+  // send to fail and the team would silently miss the lead.
+  const replyTo =
+    args.submitter.email && isLikelyEmail(args.submitter.email)
+      ? args.submitter.email
+      : undefined;
 
   try {
     const result = await sendViaResend({

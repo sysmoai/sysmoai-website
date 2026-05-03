@@ -21,6 +21,15 @@ const submissionRateLimit = rateLimit({
   max: 10,
 });
 
+function formatBkashNagad(
+  value: "yes" | "no" | "mix" | null | undefined,
+): string | null {
+  if (value === "yes") return "Yes";
+  if (value === "no") return "No";
+  if (value === "mix") return "Mix";
+  return null;
+}
+
 router.post(
   "/contact",
   submissionRateLimit,
@@ -43,6 +52,8 @@ router.post(
       void notifyNewLead({
         kind: "contact",
         id: row.id,
+        // `contact` may be email OR WhatsApp number — notify.ts validates
+        // before using it as a reply_to address.
         submitter: { name: data.name, email: data.contact },
         fields: [
           { label: "Name", value: data.name },
@@ -99,12 +110,7 @@ router.post(
           { label: "Current tools", value: data.currentTools ?? null },
           {
             label: "Uses bKash/Nagad",
-            value:
-              data.usesBkashNagad === null || data.usesBkashNagad === undefined
-                ? null
-                : data.usesBkashNagad
-                  ? "Yes"
-                  : "No",
+            value: formatBkashNagad(data.usesBkashNagad),
           },
           { label: "Preferred currency", value: data.preferredCurrency ?? null },
           { label: "Biggest challenge", value: data.biggestChallenge },
