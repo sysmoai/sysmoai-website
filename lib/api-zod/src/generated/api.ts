@@ -432,6 +432,310 @@ export const UpdateSprintAvailabilityResponse = zod.object({
 });
 
 /**
+ * @summary List scheduled content-pack posts (queue view)
+ */
+export const listScheduledPostsQueryPageDefault = 1;
+
+export const listScheduledPostsQueryPageSizeDefault = 25;
+export const listScheduledPostsQueryPageSizeMax = 100;
+
+export const ListScheduledPostsQueryParams = zod.object({
+  page: zod.coerce.number().min(1).default(listScheduledPostsQueryPageDefault),
+  pageSize: zod.coerce
+    .number()
+    .min(1)
+    .max(listScheduledPostsQueryPageSizeMax)
+    .default(listScheduledPostsQueryPageSizeDefault),
+  status: zod.enum(["queued", "posted", "skipped", "failed"]).optional(),
+  platform: zod
+    .enum([
+      "linkedin",
+      "x_standalone",
+      "x_thread",
+      "instagram_feed",
+      "instagram_story",
+      "tiktok_reel",
+      "newsletter",
+    ])
+    .optional(),
+  funnel: zod.enum(["TOF", "MOF", "MOF_BOF", "BOF"]).optional(),
+  from: zod
+    .date()
+    .optional()
+    .describe("ISO date — only posts scheduled on\/after this date"),
+  to: zod
+    .date()
+    .optional()
+    .describe("ISO date — only posts scheduled on\/before this date"),
+  dueBefore: zod
+    .date()
+    .optional()
+    .describe(
+      "Convenience filter for n8n — return queued posts whose scheduledFor is on or before this instant",
+    ),
+});
+
+export const ListScheduledPostsResponse = zod.object({
+  items: zod.array(
+    zod.object({
+      id: zod.number(),
+      sequenceNo: zod.number().describe("1..76 — order in the master calendar"),
+      fileRef: zod
+        .string()
+        .describe('Source ref e.g. \"L1\", \"X1\", \"Thread W1\"'),
+      platform: zod.enum([
+        "linkedin",
+        "x_standalone",
+        "x_thread",
+        "instagram_feed",
+        "instagram_story",
+        "tiktok_reel",
+        "newsletter",
+      ]),
+      pillar: zod.string(),
+      hookPattern: zod.string(),
+      funnel: zod.enum(["TOF", "MOF", "MOF_BOF", "BOF"]),
+      ctaCode: zod.string().describe('\"A\" = free-AI-audit, \"W\" = WhatsApp'),
+      title: zod.string(),
+      hookLine: zod.string().nullish(),
+      content: zod.string(),
+      assetUrl: zod.string().nullish(),
+      scheduledFor: zod.coerce.date(),
+      status: zod.enum(["queued", "posted", "skipped", "failed"]),
+      postedAt: zod.coerce.date().nullish(),
+      postUrl: zod.string().nullish(),
+      impressions: zod.number(),
+      clicks: zod.number(),
+      waitlistSignups: zod.number(),
+      notes: zod.string().nullish(),
+      createdAt: zod.coerce.date(),
+      updatedAt: zod.coerce.date(),
+    }),
+  ),
+  pagination: zod.object({
+    page: zod.number(),
+    pageSize: zod.number(),
+    total: zod.number(),
+    totalPages: zod.number(),
+  }),
+});
+
+/**
+ * @summary Counts and next-up view for the publishing dashboard
+ */
+export const GetScheduledPostsSummaryResponse = zod.object({
+  totals: zod.object({
+    total: zod.number(),
+    queued: zod.number(),
+    posted: zod.number(),
+    skipped: zod.number(),
+    failed: zod.number(),
+  }),
+  byPlatform: zod.array(
+    zod.object({
+      platform: zod.enum([
+        "linkedin",
+        "x_standalone",
+        "x_thread",
+        "instagram_feed",
+        "instagram_story",
+        "tiktok_reel",
+        "newsletter",
+      ]),
+      queued: zod.number(),
+      posted: zod.number(),
+      skipped: zod.number(),
+      failed: zod.number(),
+      total: zod.number(),
+    }),
+  ),
+  byWeek: zod.array(
+    zod.object({
+      weekStart: zod.coerce.date().describe("BDT week start (Monday)"),
+      queued: zod.number(),
+      posted: zod.number(),
+      total: zod.number(),
+    }),
+  ),
+  upcoming: zod
+    .array(
+      zod.object({
+        id: zod.number(),
+        sequenceNo: zod
+          .number()
+          .describe("1..76 — order in the master calendar"),
+        fileRef: zod
+          .string()
+          .describe('Source ref e.g. \"L1\", \"X1\", \"Thread W1\"'),
+        platform: zod.enum([
+          "linkedin",
+          "x_standalone",
+          "x_thread",
+          "instagram_feed",
+          "instagram_story",
+          "tiktok_reel",
+          "newsletter",
+        ]),
+        pillar: zod.string(),
+        hookPattern: zod.string(),
+        funnel: zod.enum(["TOF", "MOF", "MOF_BOF", "BOF"]),
+        ctaCode: zod
+          .string()
+          .describe('\"A\" = free-AI-audit, \"W\" = WhatsApp'),
+        title: zod.string(),
+        hookLine: zod.string().nullish(),
+        content: zod.string(),
+        assetUrl: zod.string().nullish(),
+        scheduledFor: zod.coerce.date(),
+        status: zod.enum(["queued", "posted", "skipped", "failed"]),
+        postedAt: zod.coerce.date().nullish(),
+        postUrl: zod.string().nullish(),
+        impressions: zod.number(),
+        clicks: zod.number(),
+        waitlistSignups: zod.number(),
+        notes: zod.string().nullish(),
+        createdAt: zod.coerce.date(),
+        updatedAt: zod.coerce.date(),
+      }),
+    )
+    .describe("Next 5 queued posts ordered by scheduledFor ASC"),
+  performance: zod.object({
+    impressions: zod.number(),
+    clicks: zod.number(),
+    waitlistSignups: zod.number(),
+  }),
+});
+
+/**
+ * Reads the bundled content schedule (parsed from content-pack/) and
+upserts rows by sequenceNo. Existing rows have their canonical
+metadata (title, content, scheduledFor, etc.) refreshed but their
+operational fields (status, postedAt, postUrl, metrics, notes) are
+preserved.
+
+ * @summary Idempotently import the 76-piece content pack into the queue
+ */
+export const SeedScheduledPostsResponse = zod.object({
+  imported: zod.number(),
+  updated: zod.number(),
+  total: zod.number(),
+});
+
+/**
+ * @summary Fetch one scheduled post
+ */
+export const GetScheduledPostParams = zod.object({
+  id: zod.coerce.number(),
+});
+
+export const GetScheduledPostResponse = zod.object({
+  id: zod.number(),
+  sequenceNo: zod.number().describe("1..76 — order in the master calendar"),
+  fileRef: zod
+    .string()
+    .describe('Source ref e.g. \"L1\", \"X1\", \"Thread W1\"'),
+  platform: zod.enum([
+    "linkedin",
+    "x_standalone",
+    "x_thread",
+    "instagram_feed",
+    "instagram_story",
+    "tiktok_reel",
+    "newsletter",
+  ]),
+  pillar: zod.string(),
+  hookPattern: zod.string(),
+  funnel: zod.enum(["TOF", "MOF", "MOF_BOF", "BOF"]),
+  ctaCode: zod.string().describe('\"A\" = free-AI-audit, \"W\" = WhatsApp'),
+  title: zod.string(),
+  hookLine: zod.string().nullish(),
+  content: zod.string(),
+  assetUrl: zod.string().nullish(),
+  scheduledFor: zod.coerce.date(),
+  status: zod.enum(["queued", "posted", "skipped", "failed"]),
+  postedAt: zod.coerce.date().nullish(),
+  postUrl: zod.string().nullish(),
+  impressions: zod.number(),
+  clicks: zod.number(),
+  waitlistSignups: zod.number(),
+  notes: zod.string().nullish(),
+  createdAt: zod.coerce.date(),
+  updatedAt: zod.coerce.date(),
+});
+
+/**
+ * @summary Update a scheduled post — mark posted, log metrics, edit notes
+ */
+export const UpdateScheduledPostParams = zod.object({
+  id: zod.coerce.number(),
+});
+
+export const updateScheduledPostBodyPostUrlMax = 500;
+
+export const updateScheduledPostBodyAssetUrlMax = 500;
+
+export const updateScheduledPostBodyImpressionsMin = 0;
+
+export const updateScheduledPostBodyClicksMin = 0;
+
+export const updateScheduledPostBodyWaitlistSignupsMin = 0;
+
+export const updateScheduledPostBodyNotesMax = 5000;
+
+export const UpdateScheduledPostBody = zod.object({
+  status: zod.enum(["queued", "posted", "skipped", "failed"]).optional(),
+  scheduledFor: zod.coerce.date().optional(),
+  postedAt: zod.coerce.date().nullish(),
+  postUrl: zod.string().max(updateScheduledPostBodyPostUrlMax).nullish(),
+  assetUrl: zod.string().max(updateScheduledPostBodyAssetUrlMax).nullish(),
+  impressions: zod
+    .number()
+    .min(updateScheduledPostBodyImpressionsMin)
+    .optional(),
+  clicks: zod.number().min(updateScheduledPostBodyClicksMin).optional(),
+  waitlistSignups: zod
+    .number()
+    .min(updateScheduledPostBodyWaitlistSignupsMin)
+    .optional(),
+  notes: zod.string().max(updateScheduledPostBodyNotesMax).nullish(),
+});
+
+export const UpdateScheduledPostResponse = zod.object({
+  id: zod.number(),
+  sequenceNo: zod.number().describe("1..76 — order in the master calendar"),
+  fileRef: zod
+    .string()
+    .describe('Source ref e.g. \"L1\", \"X1\", \"Thread W1\"'),
+  platform: zod.enum([
+    "linkedin",
+    "x_standalone",
+    "x_thread",
+    "instagram_feed",
+    "instagram_story",
+    "tiktok_reel",
+    "newsletter",
+  ]),
+  pillar: zod.string(),
+  hookPattern: zod.string(),
+  funnel: zod.enum(["TOF", "MOF", "MOF_BOF", "BOF"]),
+  ctaCode: zod.string().describe('\"A\" = free-AI-audit, \"W\" = WhatsApp'),
+  title: zod.string(),
+  hookLine: zod.string().nullish(),
+  content: zod.string(),
+  assetUrl: zod.string().nullish(),
+  scheduledFor: zod.coerce.date(),
+  status: zod.enum(["queued", "posted", "skipped", "failed"]),
+  postedAt: zod.coerce.date().nullish(),
+  postUrl: zod.string().nullish(),
+  impressions: zod.number(),
+  clicks: zod.number(),
+  waitlistSignups: zod.number(),
+  notes: zod.string().nullish(),
+  createdAt: zod.coerce.date(),
+  updatedAt: zod.coerce.date(),
+});
+
+/**
  * @summary List waitlist signups
  */
 export const listWaitlistSignupsQueryPageDefault = 1;

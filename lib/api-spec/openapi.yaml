@@ -415,6 +415,167 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
 
+  /admin/scheduled-posts:
+    get:
+      operationId: listScheduledPosts
+      tags: [admin]
+      summary: List scheduled content-pack posts (queue view)
+      parameters:
+        - $ref: "#/components/parameters/PageParam"
+        - $ref: "#/components/parameters/PageSizeParam"
+        - name: status
+          in: query
+          required: false
+          schema:
+            $ref: "#/components/schemas/ScheduledPostStatus"
+        - name: platform
+          in: query
+          required: false
+          schema:
+            $ref: "#/components/schemas/ScheduledPostPlatform"
+        - name: funnel
+          in: query
+          required: false
+          schema:
+            $ref: "#/components/schemas/ScheduledPostFunnel"
+        - name: from
+          in: query
+          required: false
+          description: ISO date — only posts scheduled on/after this date
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          in: query
+          required: false
+          description: ISO date — only posts scheduled on/before this date
+          schema:
+            type: string
+            format: date-time
+        - name: dueBefore
+          in: query
+          required: false
+          description: Convenience filter for n8n — return queued posts whose scheduledFor is on or before this instant
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScheduledPostList"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+  /admin/scheduled-posts/summary:
+    get:
+      operationId: getScheduledPostsSummary
+      tags: [admin]
+      summary: Counts and next-up view for the publishing dashboard
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScheduledPostsSummary"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+  /admin/scheduled-posts/seed:
+    post:
+      operationId: seedScheduledPosts
+      tags: [admin]
+      summary: Idempotently import the 76-piece content pack into the queue
+      description: |
+        Reads the bundled content schedule (parsed from content-pack/) and
+        upserts rows by sequenceNo. Existing rows have their canonical
+        metadata (title, content, scheduledFor, etc.) refreshed but their
+        operational fields (status, postedAt, postUrl, metrics, notes) are
+        preserved.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScheduledPostsSeedResult"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+  /admin/scheduled-posts/export.csv:
+    get:
+      operationId: exportScheduledPosts
+      tags: [admin]
+      summary: Export the publishing queue as CSV (Buffer/Hootsuite-friendly)
+      responses:
+        "200":
+          description: OK
+          content:
+            text/csv:
+              schema:
+                type: string
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+  /admin/scheduled-posts/{id}:
+    get:
+      operationId: getScheduledPost
+      tags: [admin]
+      summary: Fetch one scheduled post
+      parameters:
+        - $ref: "#/components/parameters/IdParam"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScheduledPost"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    patch:
+      operationId: updateScheduledPost
+      tags: [admin]
+      summary: Update a scheduled post — mark posted, log metrics, edit notes
+      parameters:
+        - $ref: "#/components/parameters/IdParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScheduledPostUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScheduledPost"
+        "400":
+          $ref: "#/components/responses/ValidationError"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
   /admin/waitlist-signups:
     get:
       operationId: listWaitlistSignups
@@ -903,3 +1064,235 @@ components:
             $ref: "#/components/schemas/WaitlistSignup"
         pagination:
           $ref: "#/components/schemas/Pagination"
+
+    ScheduledPostPlatform:
+      type: string
+      enum:
+        - linkedin
+        - x_standalone
+        - x_thread
+        - instagram_feed
+        - instagram_story
+        - tiktok_reel
+        - newsletter
+
+    ScheduledPostStatus:
+      type: string
+      enum: [queued, posted, skipped, failed]
+
+    ScheduledPostFunnel:
+      type: string
+      enum: [TOF, MOF, MOF_BOF, BOF]
+
+    ScheduledPost:
+      type: object
+      required:
+        - id
+        - sequenceNo
+        - fileRef
+        - platform
+        - pillar
+        - hookPattern
+        - funnel
+        - ctaCode
+        - title
+        - content
+        - scheduledFor
+        - status
+        - impressions
+        - clicks
+        - waitlistSignups
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          type: integer
+        sequenceNo:
+          type: integer
+          description: 1..76 — order in the master calendar
+        fileRef:
+          type: string
+          description: Source ref e.g. "L1", "X1", "Thread W1"
+        platform:
+          $ref: "#/components/schemas/ScheduledPostPlatform"
+        pillar:
+          type: string
+        hookPattern:
+          type: string
+        funnel:
+          $ref: "#/components/schemas/ScheduledPostFunnel"
+        ctaCode:
+          type: string
+          description: '"A" = free-AI-audit, "W" = WhatsApp'
+        title:
+          type: string
+        hookLine:
+          type: string
+          nullable: true
+        content:
+          type: string
+        assetUrl:
+          type: string
+          nullable: true
+        scheduledFor:
+          type: string
+          format: date-time
+        status:
+          $ref: "#/components/schemas/ScheduledPostStatus"
+        postedAt:
+          type: string
+          format: date-time
+          nullable: true
+        postUrl:
+          type: string
+          nullable: true
+        impressions:
+          type: integer
+        clicks:
+          type: integer
+        waitlistSignups:
+          type: integer
+        notes:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    ScheduledPostList:
+      type: object
+      required: [items, pagination]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/ScheduledPost"
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+
+    ScheduledPostUpdate:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/ScheduledPostStatus"
+        scheduledFor:
+          type: string
+          format: date-time
+        postedAt:
+          type: string
+          format: date-time
+          nullable: true
+        postUrl:
+          type: string
+          maxLength: 500
+          nullable: true
+        assetUrl:
+          type: string
+          maxLength: 500
+          nullable: true
+        impressions:
+          type: integer
+          minimum: 0
+        clicks:
+          type: integer
+          minimum: 0
+        waitlistSignups:
+          type: integer
+          minimum: 0
+        notes:
+          type: string
+          maxLength: 5000
+          nullable: true
+
+    ScheduledPostsSeedResult:
+      type: object
+      required: [imported, updated, total]
+      properties:
+        imported:
+          type: integer
+        updated:
+          type: integer
+        total:
+          type: integer
+
+    PlatformCount:
+      type: object
+      required: [platform, queued, posted, skipped, failed, total]
+      properties:
+        platform:
+          $ref: "#/components/schemas/ScheduledPostPlatform"
+        queued:
+          type: integer
+        posted:
+          type: integer
+        skipped:
+          type: integer
+        failed:
+          type: integer
+        total:
+          type: integer
+
+    WeekCount:
+      type: object
+      required: [weekStart, queued, posted, total]
+      properties:
+        weekStart:
+          type: string
+          format: date
+          description: BDT week start (Monday)
+        queued:
+          type: integer
+        posted:
+          type: integer
+        total:
+          type: integer
+
+    ScheduledPostsSummary:
+      type: object
+      required:
+        - totals
+        - byPlatform
+        - byWeek
+        - upcoming
+        - performance
+      properties:
+        totals:
+          type: object
+          required: [total, queued, posted, skipped, failed]
+          properties:
+            total:
+              type: integer
+            queued:
+              type: integer
+            posted:
+              type: integer
+            skipped:
+              type: integer
+            failed:
+              type: integer
+        byPlatform:
+          type: array
+          items:
+            $ref: "#/components/schemas/PlatformCount"
+        byWeek:
+          type: array
+          items:
+            $ref: "#/components/schemas/WeekCount"
+        upcoming:
+          type: array
+          description: Next 5 queued posts ordered by scheduledFor ASC
+          items:
+            $ref: "#/components/schemas/ScheduledPost"
+        performance:
+          type: object
+          required: [impressions, clicks, waitlistSignups]
+          properties:
+            impressions:
+              type: integer
+            clicks:
+              type: integer
+            waitlistSignups:
+              type: integer

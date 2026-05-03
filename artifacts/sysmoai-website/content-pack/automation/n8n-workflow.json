@@ -1,0 +1,106 @@
+{
+  "name": "SYSmoAI — Content Pack Daily Reminder",
+  "_about": "Polls /api/admin/scheduled-posts?dueBefore=now hourly and pings Slack/email/WhatsApp with the next pieces to publish. Set $env.SYSMOAI_API_BASE and $env.SYSMOAI_ADMIN_TOKEN before importing. Designed for the BD peak windows (08–10am, 12–2pm, 8–11pm BDT) — n8n cron runs every hour and the API only returns posts whose scheduledFor has been crossed.",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      },
+      "id": "cron-hourly",
+      "name": "Every hour",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [200, 320]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.SYSMOAI_API_BASE }}/api/admin/scheduled-posts",
+        "qs": {
+          "dueBefore": "={{ $now.toISO() }}",
+          "pageSize": 25
+        },
+        "options": {
+          "headers": {
+            "parameters": {
+              "Authorization": "=Bearer {{ $env.SYSMOAI_ADMIN_TOKEN }}"
+            }
+          }
+        }
+      },
+      "id": "fetch-due",
+      "name": "Fetch due posts",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [440, 320]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "items",
+        "options": {}
+      },
+      "id": "split",
+      "name": "Split into items",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [680, 320]
+    },
+    {
+      "parameters": {
+        "channel": "#sysmoai-publishing",
+        "text": "=📣 *Time to publish* `{{ $json.fileRef }}` ({{ $json.platform }})\n*Hook:* {{ $json.hookLine }}\n*Scheduled:* {{ $json.scheduledFor }}\n```{{ $json.content }}```\nMark posted: {{ $env.SYSMOAI_ADMIN_BASE }}/scheduled-posts/{{ $json.id }}"
+      },
+      "id": "slack-notify",
+      "name": "Slack reminder",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [920, 200],
+      "_alternative": "Replace with WhatsApp / Telegram / Email node — payload stays the same."
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $env.SYSMOAI_API_BASE }}/api/admin/scheduled-posts/{{ $json.id }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"notes\": \"Reminder sent at {{ $now.toISO() }} via n8n\"\n}",
+        "options": {
+          "headers": {
+            "parameters": {
+              "Authorization": "=Bearer {{ $env.SYSMOAI_ADMIN_TOKEN }}",
+              "Content-Type": "application/json"
+            }
+          }
+        }
+      },
+      "id": "log-reminder",
+      "name": "Log reminder on post",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [920, 440],
+      "_about": "Optional: stamps the post's notes field so we don't double-ping."
+    }
+  ],
+  "connections": {
+    "Every hour": {
+      "main": [[{ "node": "Fetch due posts", "type": "main", "index": 0 }]]
+    },
+    "Fetch due posts": {
+      "main": [[{ "node": "Split into items", "type": "main", "index": 0 }]]
+    },
+    "Split into items": {
+      "main": [
+        [
+          { "node": "Slack reminder", "type": "main", "index": 0 },
+          { "node": "Log reminder on post", "type": "main", "index": 0 }
+        ]
+      ]
+    }
+  }
+}

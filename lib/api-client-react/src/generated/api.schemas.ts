@@ -247,6 +247,136 @@ export interface WaitlistSignupList {
   pagination: Pagination;
 }
 
+export type ScheduledPostPlatform =
+  (typeof ScheduledPostPlatform)[keyof typeof ScheduledPostPlatform];
+
+export const ScheduledPostPlatform = {
+  linkedin: "linkedin",
+  x_standalone: "x_standalone",
+  x_thread: "x_thread",
+  instagram_feed: "instagram_feed",
+  instagram_story: "instagram_story",
+  tiktok_reel: "tiktok_reel",
+  newsletter: "newsletter",
+} as const;
+
+export type ScheduledPostStatus =
+  (typeof ScheduledPostStatus)[keyof typeof ScheduledPostStatus];
+
+export const ScheduledPostStatus = {
+  queued: "queued",
+  posted: "posted",
+  skipped: "skipped",
+  failed: "failed",
+} as const;
+
+export type ScheduledPostFunnel =
+  (typeof ScheduledPostFunnel)[keyof typeof ScheduledPostFunnel];
+
+export const ScheduledPostFunnel = {
+  TOF: "TOF",
+  MOF: "MOF",
+  MOF_BOF: "MOF_BOF",
+  BOF: "BOF",
+} as const;
+
+export interface ScheduledPost {
+  id: number;
+  /** 1..76 — order in the master calendar */
+  sequenceNo: number;
+  /** Source ref e.g. "L1", "X1", "Thread W1" */
+  fileRef: string;
+  platform: ScheduledPostPlatform;
+  pillar: string;
+  hookPattern: string;
+  funnel: ScheduledPostFunnel;
+  /** "A" = free-AI-audit, "W" = WhatsApp */
+  ctaCode: string;
+  title: string;
+  hookLine?: string | null;
+  content: string;
+  assetUrl?: string | null;
+  scheduledFor: string;
+  status: ScheduledPostStatus;
+  postedAt?: string | null;
+  postUrl?: string | null;
+  impressions: number;
+  clicks: number;
+  waitlistSignups: number;
+  notes?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ScheduledPostList {
+  items: ScheduledPost[];
+  pagination: Pagination;
+}
+
+export interface ScheduledPostUpdate {
+  status?: ScheduledPostStatus;
+  scheduledFor?: string;
+  postedAt?: string | null;
+  /** @maxLength 500 */
+  postUrl?: string | null;
+  /** @maxLength 500 */
+  assetUrl?: string | null;
+  /** @minimum 0 */
+  impressions?: number;
+  /** @minimum 0 */
+  clicks?: number;
+  /** @minimum 0 */
+  waitlistSignups?: number;
+  /** @maxLength 5000 */
+  notes?: string | null;
+}
+
+export interface ScheduledPostsSeedResult {
+  imported: number;
+  updated: number;
+  total: number;
+}
+
+export interface PlatformCount {
+  platform: ScheduledPostPlatform;
+  queued: number;
+  posted: number;
+  skipped: number;
+  failed: number;
+  total: number;
+}
+
+export interface WeekCount {
+  /** BDT week start (Monday) */
+  weekStart: string;
+  queued: number;
+  posted: number;
+  total: number;
+}
+
+export type ScheduledPostsSummaryTotals = {
+  total: number;
+  queued: number;
+  posted: number;
+  skipped: number;
+  failed: number;
+};
+
+export type ScheduledPostsSummaryPerformance = {
+  impressions: number;
+  clicks: number;
+  waitlistSignups: number;
+};
+
+export interface ScheduledPostsSummary {
+  totals: ScheduledPostsSummaryTotals;
+  byPlatform: PlatformCount[];
+  byWeek: WeekCount[];
+  /** Next 5 queued posts ordered by scheduledFor ASC */
+  upcoming: ScheduledPost[];
+  performance: ScheduledPostsSummaryPerformance;
+}
+
 /**
  * Invalid input
  */
@@ -399,6 +529,33 @@ export const ListAuditRequestsSortOrder = {
   asc: "asc",
   desc: "desc",
 } as const;
+
+export type ListScheduledPostsParams = {
+  /**
+   * @minimum 1
+   */
+  page?: PageParamParameter;
+  /**
+   * @minimum 1
+   * @maximum 100
+   */
+  pageSize?: PageSizeParamParameter;
+  status?: ScheduledPostStatus;
+  platform?: ScheduledPostPlatform;
+  funnel?: ScheduledPostFunnel;
+  /**
+   * ISO date — only posts scheduled on/after this date
+   */
+  from?: string;
+  /**
+   * ISO date — only posts scheduled on/before this date
+   */
+  to?: string;
+  /**
+   * Convenience filter for n8n — return queued posts whose scheduledFor is on or before this instant
+   */
+  dueBefore?: string;
+};
 
 export type ListWaitlistSignupsParams = {
   /**

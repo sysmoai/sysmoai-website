@@ -35,6 +35,8 @@ import { AuditDetailPage } from "@/pages/AuditDetail";
 import { WaitlistPage } from "@/pages/Waitlist";
 import { WaitlistDetailPage } from "@/pages/WaitlistDetail";
 import { SprintAvailabilityPage } from "@/pages/SprintAvailability";
+import { ScheduledPostsPage } from "@/pages/ScheduledPosts";
+import { ScheduledPostDetailPage } from "@/pages/ScheduledPostDetail";
 import { AccessDeniedPage } from "@/pages/AccessDenied";
 import NotFound from "@/pages/not-found";
 
@@ -224,6 +226,14 @@ function ProtectedRoutes() {
           }}
         </Route>
         <Route path="/sprint-availability" component={SprintAvailabilityPage} />
+        <Route path="/scheduled-posts" component={ScheduledPostsPage} />
+        <Route path="/scheduled-posts/:id">
+          {(params) => {
+            const id = Number(params.id);
+            if (!Number.isFinite(id)) return <NotFound />;
+            return <ScheduledPostDetailPage id={id} />;
+          }}
+        </Route>
         <Route path="/waitlist" component={WaitlistPage} />
         <Route path="/waitlist/:id">
           {(params) => {
