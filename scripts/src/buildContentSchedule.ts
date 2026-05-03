@@ -329,14 +329,20 @@ function extractTikTok(ref: string): ExtractedBody {
 }
 
 function extractNewsletter(ref: string): ExtractedBody {
+  // Newsletter sections contain `---` dividers between metadata, body, and
+  // sign-off — so we must NOT terminate the section on bare `---`. We bound
+  // strictly on the next `## Issue` heading (or top-level `# `).
   const start = new RegExp(`^## Issue ${ref} — `);
-  const end = /^## Issue |^---$|^# /;
+  const end = /^## Issue |^# /;
   const section = extractSection(newsletterMd, start, end);
   if (!section) throw new Error(`Newsletter section not found for ${ref}`);
   // Subject is in the form: **Subject (NN chars):** `...`
   const subjMatch = section.match(/\*\*Subject[^:]*:\*\*\s*`([^`]+)`/);
   const preMatch = section.match(/\*\*Preheader[^:]*:\*\*\s*`([^`]+)`/);
-  const bodyMatch = section.match(/\*\*Body:\*\*\s*\n([\s\S]+?)(?=\n\*\*[A-Z]|\n## |\n---|$)/);
+  // Body runs from `**Body:**` to the end of the section. We deliberately
+  // keep the `---` separators and the sign-off ("→ Book here: ..." CTA)
+  // so UTM substitution can find every audit URL inside the issue.
+  const bodyMatch = section.match(/\*\*Body:\*\*\s*\n([\s\S]+)$/);
   const subject = subjMatch?.[1]?.trim() ?? "";
   const preheader = preMatch?.[1]?.trim() ?? "";
   const body = bodyMatch?.[1]?.trim() ?? section.trim();
