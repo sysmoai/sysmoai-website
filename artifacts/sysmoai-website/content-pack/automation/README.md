@@ -11,7 +11,8 @@ imported into the admin queue and operated as a publishing dashboard.
 2. **Build the schedule JSON** —
    `pnpm --filter @workspace/scripts run build-content-schedule`
    parses all of the above into
-   `artifacts/api-server/src/data/contentSchedule.json` (76 rows).
+   `artifacts/api-server/src/data/contentSchedule.json` (76 rows). The JSON is
+   statically imported into the API server bundle, so it ships with `dist/`.
 3. **Seed the queue** — sign in to the admin app and click *Import content
    pack* on the **Publishing queue** page (or `POST /api/admin/scheduled-posts/seed`).
    The seed is idempotent: re-running it refreshes copy/timing without
@@ -20,18 +21,29 @@ imported into the admin queue and operated as a publishing dashboard.
    skipped / failed counts plus per-platform and per-week breakdowns. Click a
    row to mark posted, log the live URL, and capture impressions / clicks /
    waitlist signups.
-5. **Automate** — `n8n-workflow.json` is an hourly auto-publisher that:
-   1. Polls `GET /api/admin/scheduled-posts?dueBefore=<now>` for queued
-      posts whose slot has elapsed.
-   2. Routes each post by `platform` to the right channel — **Buffer**
-      for LinkedIn / X / Instagram / TikTok (one configured Buffer
-      profile per channel), **Resend** for newsletter issues.
-   3. On success, calls `PATCH /api/admin/scheduled-posts/{id}` with
-      `status: "posted"` and the live permalink (the API stamps
-      `postedAt` server-side).
-   4. On failure or when `BUFFER_ACCESS_TOKEN` is unset, falls back to a
-      Slack message with the exact copy block + deep link to mark it
-      posted manually.
+5. **Automate** — `n8n-workflow.json` is an hourly sweeper that hands posts
+   off to the right channel **using each row's own BDT slot**:
+   1. Polls `GET /api/admin/scheduled-posts?status=queued&dueBefore=<now+24h>`.
+   2. Skips rows whose `postUrl` is already populated (already pushed).
+   3. Routes by `platform`:
+      - **LinkedIn / X (standalone + thread)** → pushed to **Buffer** with
+        `scheduled_at = scheduledFor` (unix epoch). Buffer publishes at the
+        row's exact peak slot — the cron only acts as a queue feeder, so
+        slot timing is preserved no matter when the cron fires.
+      - **Newsletter** → only sent when its slot is within the next hour
+        (Resend has no provider-side scheduling), via Resend's `/emails`.
+      - **Instagram feed / story / TikTok** → posts a Slack alert with the
+        full copy + admin deep link, so the operator can publish manually at
+        the slot. We do not auto-publish visual channels until media asset
+        hosting is in place.
+   4. After Buffer accepts a post, the workflow PATCHes the row with
+      `postUrl=buffer://<update-id>` and a note. Status stays `queued` —
+      Buffer flips it to live at the slot, and the operator marks it posted
+      in the admin UI (Buffer webhooks would close the loop in a future
+      iteration). Newsletter sends flip status to `posted` immediately.
+   5. Any provider failure (network error, missing `BUFFER_ACCESS_TOKEN`,
+      Resend 4xx, etc.) routes via `continueErrorOutput` to a Slack
+      `Slack — provider failure` alert with the copy block + deep link.
 
 ## BDT peak-hour publishing slots
 
@@ -52,6 +64,31 @@ If you want to shift the schedule (e.g. push the launch week back by 7 days),
 edit `content-pack/calendar.md` dates, re-run the build script, and click
 *Import content pack* again.
 
+## Channel coverage at a glance
+
+| Channel         | Auto-publish via | Slot honoring                       | Notes                                              |
+|-----------------|------------------|-------------------------------------|----------------------------------------------------|
+| LinkedIn        | Buffer           | Provider-side `scheduled_at`        | Fully automated                                    |
+| X standalone    | Buffer           | Provider-side `scheduled_at`        | Fully automated                                    |
+| X thread        | Buffer (1st post)| Provider-side `scheduled_at`        | Reply tweets posted manually from the same draft  |
+| Newsletter      | Resend           | Cron must hit within 1h of slot     | Hourly cron + 1h IF gate                          |
+| Instagram feed  | Slack alert      | Cron sends alert at sweep time      | Operator publishes manually (asset upload)        |
+| Instagram story | Slack alert      | Cron sends alert at sweep time      | Operator publishes manually (asset upload)        |
+| TikTok / Reel   | Slack alert      | Cron sends alert at sweep time      | Operator publishes manually (video upload)        |
+
+## Authentication
+
+n8n authenticates to the admin API with a static bearer token, **not** a
+Clerk session — see `artifacts/api-server/src/middlewares/requireAdmin.ts`.
+
+Set the secret on **both sides**:
+
+- API server env: `SYSMOAI_AUTOMATION_TOKEN=<long random string, ≥ 24 chars>`
+- n8n credential: same value, sent as `Authorization: Bearer …`
+
+If the env var is unset, the bypass is disabled and the API only accepts
+Clerk-authenticated admins (the human dashboard path keeps working).
+
 ## Environment
 
 `n8n-workflow.json` expects:
@@ -59,23 +96,21 @@ edit `content-pack/calendar.md` dates, re-run the build script, and click
 | Var                          | Purpose                                                   |
 |------------------------------|-----------------------------------------------------------|
 | `SYSMOAI_API_BASE`           | e.g. `https://yourdomain.com`                             |
-| `SYSMOAI_ADMIN_TOKEN`        | Clerk session token (or bot allowlisted via `ADMIN_ALLOWED_EMAILS`) |
+| `SYSMOAI_AUTOMATION_TOKEN`   | Static M2M bearer (matches API env of the same name)      |
 | `SYSMOAI_ADMIN_BASE`         | e.g. `https://yourdomain.com/admin`                       |
-| `BUFFER_ACCESS_TOKEN`        | Buffer access token (one Business plan covers all four social profiles) |
+| `BUFFER_ACCESS_TOKEN`        | Buffer access token (one Business plan covers all profiles) |
 | `BUFFER_PROFILE_LINKEDIN`    | Buffer profile ID for the LinkedIn page                   |
 | `BUFFER_PROFILE_X`           | Buffer profile ID for the X account                       |
-| `BUFFER_PROFILE_INSTAGRAM`   | Buffer profile ID for the IG account                      |
-| `BUFFER_PROFILE_TIKTOK`      | Buffer profile ID for the TikTok account                  |
 | `RESEND_API_KEY`             | Resend API key for the newsletter sends                   |
 | `NEWSLETTER_FROM`            | e.g. `"SYSmoAI <hello@yourdomain.com>"`                   |
 | `NEWSLETTER_AUDIENCE_ID`     | Resend audience or list email                             |
-| `SLACK_FALLBACK_CHANNEL`     | e.g. `#sysmoai-publishing` for the manual-fallback path   |
+| `SLACK_FALLBACK_CHANNEL`     | e.g. `#sysmoai-publishing` for both manual + failure paths |
 
-The workflow runs hourly. The `dueBefore` filter only returns *queued* posts
-whose `scheduledFor` has elapsed, so once `Mark posted` flips the row to
-`posted` the same piece will not re-publish on the next tick — the workflow
-is safe to re-trigger.
+The cron runs hourly. The `postUrl` filter in `Skip if already queued` makes
+the workflow idempotent — once a row is in Buffer (or has been Slack-alerted),
+it won't be re-queued on the next tick.
 
 If you'd rather drive things from another tool (Hootsuite, Make, etc.) the
-contract is the same: poll the `dueBefore` list, post via your channel
-integration, then PATCH the row with `status: "posted"` and the permalink.
+contract is the same: poll the `dueBefore` list, push to your channel
+integration with provider-side scheduling, then PATCH the row with
+`postUrl` and (when it's truly live) `status: "posted"`.

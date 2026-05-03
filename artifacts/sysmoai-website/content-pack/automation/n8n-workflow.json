@@ -1,6 +1,6 @@
 {
   "name": "SYSmoAI — Content Pack Auto-Publisher",
-  "_about": "Hourly cron polls /api/admin/scheduled-posts?dueBefore=now and publishes each due post via Buffer (LinkedIn / X / Instagram / TikTok) or Resend (newsletter). On any provider failure (or unknown platform) a Slack alert fires with the deep link to mark it posted manually. After a successful publish the workflow PATCHes the original row (id pulled from the upstream Split node — NOT $json.id, which by then is the provider response) to status=posted with the live permalink. Required env: SYSMOAI_API_BASE, SYSMOAI_ADMIN_TOKEN, SYSMOAI_ADMIN_BASE, BUFFER_ACCESS_TOKEN, BUFFER_PROFILE_LINKEDIN, BUFFER_PROFILE_X, BUFFER_PROFILE_INSTAGRAM, BUFFER_PROFILE_TIKTOK, RESEND_API_KEY, NEWSLETTER_FROM, NEWSLETTER_AUDIENCE_ID, SLACK_FALLBACK_CHANNEL.",
+  "_about": "Hourly cron sweeps the queue for posts due in the next 24h, pushes text-only channels (LinkedIn, X, X-thread) into Buffer with provider-side scheduled_at so each row publishes at its own BDT slot, sends the newsletter via Resend only when its slot is within the next hour, and posts a Slack manual-publish alert for IG / TikTok (which need media assets we don't yet host). Rows already pushed to Buffer (postUrl set) are skipped on subsequent sweeps. Every Buffer / Resend node has continueOnError → Slack fallback. Required env: SYSMOAI_API_BASE, SYSMOAI_AUTOMATION_TOKEN, SYSMOAI_ADMIN_BASE, BUFFER_ACCESS_TOKEN, BUFFER_PROFILE_LINKEDIN, BUFFER_PROFILE_X, RESEND_API_KEY, NEWSLETTER_FROM, NEWSLETTER_AUDIENCE_ID, SLACK_FALLBACK_CHANNEL.",
   "nodes": [
     {
       "parameters": { "rule": { "interval": [{ "field": "hours", "hoursInterval": 1 }] } },
@@ -13,13 +13,21 @@
     {
       "parameters": {
         "url": "={{ $env.SYSMOAI_API_BASE }}/api/admin/scheduled-posts",
-        "qs": { "dueBefore": "={{ $now.toISO() }}", "pageSize": 25 },
+        "qs": {
+          "status": "queued",
+          "dueBefore": "={{ $now.plus({ hours: 24 }).toISO() }}",
+          "pageSize": 50
+        },
         "options": {
-          "headers": { "parameters": { "Authorization": "=Bearer {{ $env.SYSMOAI_ADMIN_TOKEN }}" } }
+          "headers": {
+            "parameters": {
+              "Authorization": "=Bearer {{ $env.SYSMOAI_AUTOMATION_TOKEN }}"
+            }
+          }
         }
       },
       "id": "fetch-due",
-      "name": "Fetch due posts",
+      "name": "Fetch posts due in next 24h",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "position": [400, 360]
@@ -34,24 +42,39 @@
     },
     {
       "parameters": {
+        "conditions": {
+          "string": [
+            { "value1": "={{ $json.postUrl || '' }}", "operation": "isEmpty" }
+          ]
+        }
+      },
+      "id": "skip-if-already-queued",
+      "name": "Skip if already queued",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [780, 360],
+      "_about": "If a row already has postUrl set we have already pushed it to Buffer (or marked it manual). True branch (empty) continues to the platform router; false branch dead-ends so we don't re-queue."
+    },
+    {
+      "parameters": {
         "rules": {
           "values": [
             { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "linkedin", "outputIndex": 0 },
             { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "x_standalone", "outputIndex": 1 },
             { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "x_thread", "outputIndex": 1 },
-            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "instagram_feed", "outputIndex": 2 },
-            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "instagram_story", "outputIndex": 2 },
-            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "tiktok_reel", "outputIndex": 3 },
-            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "newsletter", "outputIndex": 4 }
+            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "newsletter", "outputIndex": 2 },
+            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "instagram_feed", "outputIndex": 3 },
+            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "instagram_story", "outputIndex": 3 },
+            { "operation": "equal", "value1": "={{ $json.platform }}", "value2": "tiktok_reel", "outputIndex": 3 }
           ]
         },
-        "fallbackOutput": 5
+        "fallbackOutput": 3
       },
       "id": "route-platform",
       "name": "Route by platform",
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
-      "position": [800, 360]
+      "position": [980, 360]
     },
     {
       "parameters": {
@@ -64,17 +87,18 @@
             { "name": "access_token", "value": "={{ $env.BUFFER_ACCESS_TOKEN }}" },
             { "name": "text", "value": "={{ $json.content }}" },
             { "name": "profile_ids[]", "value": "={{ $env.BUFFER_PROFILE_LINKEDIN }}" },
-            { "name": "now", "value": "true" }
+            { "name": "scheduled_at", "value": "={{ Math.floor(new Date($json.scheduledFor).getTime() / 1000) }}" }
           ]
         },
         "options": {}
       },
       "id": "buffer-linkedin",
-      "name": "Buffer → LinkedIn",
+      "name": "Buffer schedule → LinkedIn",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "onError": "continueErrorOutput",
-      "position": [1040, 80]
+      "position": [1200, 200],
+      "_about": "Hands the post to Buffer with scheduled_at = the row's own BDT slot (as a unix epoch). Buffer publishes at that exact time — no need for the cron to fire on the slot."
     },
     {
       "parameters": {
@@ -87,65 +111,36 @@
             { "name": "access_token", "value": "={{ $env.BUFFER_ACCESS_TOKEN }}" },
             { "name": "text", "value": "={{ $json.content }}" },
             { "name": "profile_ids[]", "value": "={{ $env.BUFFER_PROFILE_X }}" },
-            { "name": "now", "value": "true" }
+            { "name": "scheduled_at", "value": "={{ Math.floor(new Date($json.scheduledFor).getTime() / 1000) }}" }
           ]
         },
         "options": {}
       },
       "id": "buffer-x",
-      "name": "Buffer → X",
+      "name": "Buffer schedule → X",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "onError": "continueErrorOutput",
-      "position": [1040, 220]
+      "position": [1200, 360]
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "https://api.bufferapp.com/1/updates/create.json",
-        "sendBody": true,
-        "specifyBody": "form",
-        "bodyParameters": {
-          "parameters": [
-            { "name": "access_token", "value": "={{ $env.BUFFER_ACCESS_TOKEN }}" },
-            { "name": "text", "value": "={{ $json.content }}" },
-            { "name": "profile_ids[]", "value": "={{ $env.BUFFER_PROFILE_INSTAGRAM }}" },
-            { "name": "now", "value": "true" },
-            { "name": "media[photo]", "value": "={{ $json.assetUrl || '' }}" }
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ new Date($json.scheduledFor).getTime() - Date.now() }}",
+              "operation": "smaller",
+              "value2": 3600000
+            }
           ]
-        },
-        "options": {}
+        }
       },
-      "id": "buffer-instagram",
-      "name": "Buffer → Instagram",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4,
-      "onError": "continueErrorOutput",
-      "position": [1040, 360]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.bufferapp.com/1/updates/create.json",
-        "sendBody": true,
-        "specifyBody": "form",
-        "bodyParameters": {
-          "parameters": [
-            { "name": "access_token", "value": "={{ $env.BUFFER_ACCESS_TOKEN }}" },
-            { "name": "text", "value": "={{ $json.content }}" },
-            { "name": "profile_ids[]", "value": "={{ $env.BUFFER_PROFILE_TIKTOK }}" },
-            { "name": "now", "value": "true" },
-            { "name": "media[video]", "value": "={{ $json.assetUrl || '' }}" }
-          ]
-        },
-        "options": {}
-      },
-      "id": "buffer-tiktok",
-      "name": "Buffer → TikTok",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4,
-      "onError": "continueErrorOutput",
-      "position": [1040, 500]
+      "id": "newsletter-due-now",
+      "name": "Newsletter — due within 1h?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1200, 520],
+      "_about": "Resend has no native scheduling — only fire when the row's slot is within the current cron window so we don't send 24h early."
     },
     {
       "parameters": {
@@ -168,20 +163,20 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "onError": "continueErrorOutput",
-      "position": [1040, 640]
+      "position": [1420, 520]
     },
     {
       "parameters": {
         "channel": "={{ $env.SLACK_FALLBACK_CHANNEL }}",
-        "text": "=⚠️ Could not auto-publish `{{ $('Split items').item.json.fileRef }}` ({{ $('Split items').item.json.platform }}). Publish it manually:\n*Hook:* {{ $('Split items').item.json.hookLine }}\n```{{ $('Split items').item.json.content }}```\nMark posted: {{ $env.SYSMOAI_ADMIN_BASE }}/scheduled-posts/{{ $('Split items').item.json.id }}",
+        "text": "=📸 Manual publish needed for *{{ $('Split items').item.json.fileRef }}* ({{ $('Split items').item.json.platform }}) at {{ $('Split items').item.json.scheduledFor }}.\nWe don't auto-publish Instagram / TikTok yet (no asset hosting).\n\n*Hook:* {{ $('Split items').item.json.hookLine }}\n```{{ $('Split items').item.json.content }}```\nMark posted: {{ $env.SYSMOAI_ADMIN_BASE }}/scheduled-posts/{{ $('Split items').item.json.id }}",
         "otherOptions": {}
       },
-      "id": "slack-fallback",
-      "name": "Slack fallback",
+      "id": "slack-visual-manual",
+      "name": "Slack — visual manual publish",
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2,
-      "position": [1340, 760],
-      "_about": "Single fallback sink. Receives: (a) unknown-platform output from the switch, AND (b) error outputs from each Buffer/Resend node via continueErrorOutput. Missing BUFFER_ACCESS_TOKEN / RESEND_API_KEY makes the provider call 4xx, which trips the same error branch."
+      "position": [1200, 700],
+      "_about": "Receives IG feed / IG story / TikTok rows (and any unknown platform). Sends a Slack alert with the full copy block + admin deep-link so the operator can post manually at the slot."
     },
     {
       "parameters": {
@@ -189,57 +184,121 @@
         "url": "={{ $env.SYSMOAI_API_BASE }}/api/admin/scheduled-posts/{{ $('Split items').item.json.id }}",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"status\": \"posted\",\n  \"postUrl\": \"{{ ($json.body && $json.body.permalink) || ($json.id ? 'buffer://' + $json.id : '') }}\",\n  \"notes\": \"Auto-published by n8n at {{ $now.toISO() }}\"\n}",
+        "jsonBody": "={\n  \"postUrl\": \"manual://{{ $('Split items').item.json.platform }}/{{ $('Split items').item.json.id }}\",\n  \"notes\": \"Manual publish requested in Slack at {{ $now.toISO() }} (visual asset required).\"\n}",
         "options": {
           "headers": {
             "parameters": {
-              "Authorization": "=Bearer {{ $env.SYSMOAI_ADMIN_TOKEN }}",
+              "Authorization": "=Bearer {{ $env.SYSMOAI_AUTOMATION_TOKEN }}",
               "Content-Type": "application/json"
             }
           }
         }
       },
-      "id": "mark-posted",
-      "name": "Mark posted",
+      "id": "mark-manual-pending",
+      "name": "Mark manual-pending",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [1340, 360],
-      "_about": "URL uses $('Split items').item.json.id so the PATCH targets the original scheduled-post row, not the Buffer/Resend response payload. The API server stamps postedAt server-side."
+      "position": [1420, 700],
+      "_about": "Stamps postUrl=manual://… so the row is filtered out of subsequent sweeps. Status stays queued — the operator flips it to posted in the admin UI after publishing."
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $env.SYSMOAI_API_BASE }}/api/admin/scheduled-posts/{{ $('Split items').item.json.id }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"postUrl\": \"buffer://{{ ($json.body && $json.body.updates && $json.body.updates[0] && $json.body.updates[0].id) || ($json.id || 'unknown') }}\",\n  \"notes\": \"Queued in Buffer for {{ $('Split items').item.json.scheduledFor }}.\"\n}",
+        "options": {
+          "headers": {
+            "parameters": {
+              "Authorization": "=Bearer {{ $env.SYSMOAI_AUTOMATION_TOKEN }}",
+              "Content-Type": "application/json"
+            }
+          }
+        }
+      },
+      "id": "mark-buffer-queued",
+      "name": "Mark Buffer-queued",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1420, 280],
+      "_about": "Stamps postUrl with the Buffer update id (using the original row id from Split items, NOT $json.id which is now Buffer's response). Skip-if-already-queued IF then ignores this row on the next sweep."
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $env.SYSMOAI_API_BASE }}/api/admin/scheduled-posts/{{ $('Split items').item.json.id }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"status\": \"posted\",\n  \"postUrl\": \"resend://{{ ($json.id || 'sent') }}\",\n  \"notes\": \"Sent via Resend at {{ $now.toISO() }}.\"\n}",
+        "options": {
+          "headers": {
+            "parameters": {
+              "Authorization": "=Bearer {{ $env.SYSMOAI_AUTOMATION_TOKEN }}",
+              "Content-Type": "application/json"
+            }
+          }
+        }
+      },
+      "id": "mark-newsletter-posted",
+      "name": "Mark newsletter posted",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1640, 520],
+      "_about": "Newsletter publishes inline (Resend has no scheduling), so we flip status=posted right away. The API stamps postedAt server-side."
+    },
+    {
+      "parameters": {
+        "channel": "={{ $env.SLACK_FALLBACK_CHANNEL }}",
+        "text": "=⚠️ Auto-publish FAILED for *{{ $('Split items').item.json.fileRef }}* ({{ $('Split items').item.json.platform }}). Please publish manually:\n*Hook:* {{ $('Split items').item.json.hookLine }}\n```{{ $('Split items').item.json.content }}```\nMark posted: {{ $env.SYSMOAI_ADMIN_BASE }}/scheduled-posts/{{ $('Split items').item.json.id }}",
+        "otherOptions": {}
+      },
+      "id": "slack-error-fallback",
+      "name": "Slack — provider failure",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [1640, 80],
+      "_about": "Receives error outputs from every Buffer / Resend node (continueErrorOutput). Covers missing BUFFER_ACCESS_TOKEN / RESEND_API_KEY / network failures / 4xx — anything that breaks auto-publish."
     }
   ],
   "connections": {
-    "Every hour": { "main": [[{ "node": "Fetch due posts", "type": "main", "index": 0 }]] },
-    "Fetch due posts": { "main": [[{ "node": "Split items", "type": "main", "index": 0 }]] },
-    "Split items": { "main": [[{ "node": "Route by platform", "type": "main", "index": 0 }]] },
-    "Route by platform": {
+    "Every hour": { "main": [[{ "node": "Fetch posts due in next 24h", "type": "main", "index": 0 }]] },
+    "Fetch posts due in next 24h": { "main": [[{ "node": "Split items", "type": "main", "index": 0 }]] },
+    "Split items": { "main": [[{ "node": "Skip if already queued", "type": "main", "index": 0 }]] },
+    "Skip if already queued": {
       "main": [
-        [{ "node": "Buffer → LinkedIn", "type": "main", "index": 0 }],
-        [{ "node": "Buffer → X", "type": "main", "index": 0 }],
-        [{ "node": "Buffer → Instagram", "type": "main", "index": 0 }],
-        [{ "node": "Buffer → TikTok", "type": "main", "index": 0 }],
-        [{ "node": "Resend → Newsletter", "type": "main", "index": 0 }],
-        [{ "node": "Slack fallback", "type": "main", "index": 0 }]
+        [{ "node": "Route by platform", "type": "main", "index": 0 }],
+        []
       ]
     },
-    "Buffer → LinkedIn": {
-      "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]],
-      "error": [[{ "node": "Slack fallback", "type": "main", "index": 0 }]]
+    "Route by platform": {
+      "main": [
+        [{ "node": "Buffer schedule → LinkedIn", "type": "main", "index": 0 }],
+        [{ "node": "Buffer schedule → X", "type": "main", "index": 0 }],
+        [{ "node": "Newsletter — due within 1h?", "type": "main", "index": 0 }],
+        [{ "node": "Slack — visual manual publish", "type": "main", "index": 0 }]
+      ]
     },
-    "Buffer → X": {
-      "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]],
-      "error": [[{ "node": "Slack fallback", "type": "main", "index": 0 }]]
+    "Buffer schedule → LinkedIn": {
+      "main": [[{ "node": "Mark Buffer-queued", "type": "main", "index": 0 }]],
+      "error": [[{ "node": "Slack — provider failure", "type": "main", "index": 0 }]]
     },
-    "Buffer → Instagram": {
-      "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]],
-      "error": [[{ "node": "Slack fallback", "type": "main", "index": 0 }]]
+    "Buffer schedule → X": {
+      "main": [[{ "node": "Mark Buffer-queued", "type": "main", "index": 0 }]],
+      "error": [[{ "node": "Slack — provider failure", "type": "main", "index": 0 }]]
     },
-    "Buffer → TikTok": {
-      "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]],
-      "error": [[{ "node": "Slack fallback", "type": "main", "index": 0 }]]
+    "Newsletter — due within 1h?": {
+      "main": [
+        [{ "node": "Resend → Newsletter", "type": "main", "index": 0 }],
+        []
+      ]
     },
     "Resend → Newsletter": {
-      "main": [[{ "node": "Mark posted", "type": "main", "index": 0 }]],
-      "error": [[{ "node": "Slack fallback", "type": "main", "index": 0 }]]
+      "main": [[{ "node": "Mark newsletter posted", "type": "main", "index": 0 }]],
+      "error": [[{ "node": "Slack — provider failure", "type": "main", "index": 0 }]]
+    },
+    "Slack — visual manual publish": {
+      "main": [[{ "node": "Mark manual-pending", "type": "main", "index": 0 }]]
     }
   }
 }
