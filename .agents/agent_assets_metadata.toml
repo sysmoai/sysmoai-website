@@ -41,3 +41,9 @@ id = "-caaSvrC3AkSUEs2o9pmy"
 uri = "file://exports/sysmoai-overview-infographic.jpg"
 type = "image"
 title = "SYSmoAI Overview Infographic"
+
+[[outputs]]
+id = "mz90RP4XVPa2RE1T3tyJM"
+uri = "file://exports/admin-theme-audit-infographic.jpg"
+type = "image"
+title = "SYSmoAI Admin Theme Audit"
