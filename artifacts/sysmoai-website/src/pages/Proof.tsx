@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { MessageCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
 import { WA_URLS } from '../lib/whatsapp';
+import { F_COMMERCE_PROOF } from '../data/fCommerceProof';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -62,6 +63,59 @@ export default function Proof() {
               <motion.div key={i} variants={fadeUp} className="text-center">
                 <div className="text-4xl font-bold text-blue-600 mb-1">{s.value}</div>
                 <div className="text-slate-500 text-sm">{s.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* F-Commerce seller proof — shared dataset with Home page */}
+      <section className="py-20 bg-white border-t border-slate-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="text-2xl font-bold text-slate-900 mb-3"
+          >
+            F-Commerce sellers — what we've shipped
+          </motion.h2>
+          <motion.p
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="text-slate-500 text-sm mb-10 max-w-2xl"
+          >
+            Representative outcomes from F-Commerce sellers we've worked with across
+            Dhaka, Chattogram, and Sylhet. Verified case studies with full names are
+            published as sellers approve them.
+          </motion.p>
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {F_COMMERCE_PROOF.map((s) => (
+              <motion.div
+                key={s.id}
+                variants={fadeUp}
+                className="bg-white border border-slate-100 p-7 rounded-2xl shadow-sm flex flex-col"
+              >
+                <span className="text-3xl mb-3">{s.emoji}</span>
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-blue-600 mb-3">
+                  {s.seller}
+                </span>
+                <p className="text-xl font-bold text-slate-900 mb-2 leading-snug">
+                  {s.headline}
+                </p>
+                <p className="text-slate-500 text-sm flex-1 mb-4">{s.detail}</p>
+                <span className="text-xs font-semibold self-start px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700">
+                  ⏱ {s.window}
+                </span>
               </motion.div>
             ))}
           </motion.div>

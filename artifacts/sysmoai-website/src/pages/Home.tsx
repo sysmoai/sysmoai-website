@@ -17,6 +17,7 @@ import { SYSmoAILogo } from '@/components/SYSmoAILogo';
 import { LazyImage } from '@/components/LazyImage';
 import { BrandMarkConstruction } from '@/components/BrandMarkConstruction';
 import { useCreateWaitlistSignup } from '@workspace/api-client-react';
+import { F_COMMERCE_PROOF } from '@/data/fCommerceProof';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -690,37 +691,9 @@ export default function Home() {
       <ToolMarquee isDark={isDark} />
 
       {/* ══════════════════════════════════════
-          TOOLS & PLATFORMS LOGO STRIP
-      ══════════════════════════════════════ */}
-      <section className="py-12 border-y" style={{ background: isDark ? '#0A0B0F' : '#F8FAFF', borderColor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(37,99,235,0.08)' }}>
-        <div className="max-w-5xl mx-auto px-4 text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest mb-8" style={{ color: isDark ? '#475569' : '#94A3B8' }}>
-            Tools &amp; Platforms We Build With
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-x-10 gap-y-5">
-            {[
-              { name: 'OpenAI',           icon: '🤖' },
-              { name: 'Notion',           icon: '📋' },
-              { name: 'n8n',              icon: '⚡' },
-              { name: 'Zapier',           icon: '🔗' },
-              { name: 'Make',             icon: '🔄' },
-              { name: 'WhatsApp API',     icon: '💬' },
-              { name: 'Claude AI',        icon: '🧠' },
-              { name: 'Google Workspace', icon: '📊' },
-            ].map(tool => (
-              <div key={tool.name} className="flex items-center gap-2 transition-colors" style={{ color: isDark ? '#64748B' : '#94A3B8' }}
-                onMouseEnter={e => (e.currentTarget.style.color = isDark ? '#F1F5F9' : '#0A0B0F')}
-                onMouseLeave={e => (e.currentTarget.style.color = isDark ? '#64748B' : '#94A3B8')}>
-                <span className="text-lg">{tool.icon}</span>
-                <span className="text-sm font-medium">{tool.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════
           F-COMMERCE SELLER PROOF
+          (Sourced from src/data/fCommerceProof.ts —
+           shared with /proof so numbers stay in sync.)
       ══════════════════════════════════════ */}
       <section
         className="py-20 md:py-24 relative overflow-hidden"
@@ -767,50 +740,9 @@ export default function Home() {
             variants={stagger}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {[
-              {
-                emoji: '👗',
-                seller: 'Dhaka fashion boutique',
-                headline: '400 DMs/day → 0 missed orders',
-                detail:
-                  'Facebook DM auto-reply + order capture flow. Recovered ~32 orders/day that were previously lost in the inbox.',
-                window: 'In 14 days',
-              },
-              {
-                emoji: '🍱',
-                seller: 'Chattogram food brand',
-                headline: '50 → 200 orders/day',
-                detail:
-                  'WhatsApp + Messenger automation, bKash/Nagad confirmations, and a delivery dashboard the founder actually checks.',
-                window: 'In 6 weeks',
-              },
-              {
-                emoji: '💄',
-                seller: 'Beauty seller (Sylhet)',
-                headline: '12 hrs/day on DMs → 90 min',
-                detail:
-                  'AI auto-reply handles 80% of repeat questions (price, size, delivery). Owner only steps in for real buyers.',
-                window: 'In 21 days',
-              },
-              {
-                emoji: '🛒',
-                seller: 'Dhaka home-goods page',
-                headline: '~32 lost orders/day recovered',
-                detail:
-                  'Auto-reply + missed-DM follow-up sequence. The same followers, same ad spend — just nothing slipping through.',
-                window: 'Within month 1',
-              },
-              {
-                emoji: '👟',
-                seller: 'Sneaker reseller',
-                headline: 'Order tracking in 1 message',
-                detail:
-                  'Buyers text "track <order>" on WhatsApp and get a live status. Support tickets dropped ~70%.',
-                window: 'Live since week 2',
-              },
-            ].map((s, i) => (
+            {F_COMMERCE_PROOF.map((s) => (
               <motion.div
-                key={i}
+                key={s.id}
                 variants={fadeUp}
                 className="rounded-2xl p-6 flex flex-col transition-all duration-300"
                 style={{
@@ -871,6 +803,36 @@ export default function Home() {
               <span aria-hidden>→</span>
             </Link>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          TOOLS & PLATFORMS LOGO STRIP
+      ══════════════════════════════════════ */}
+      <section className="py-12 border-y" style={{ background: isDark ? '#0A0B0F' : '#F8FAFF', borderColor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(37,99,235,0.08)' }}>
+        <div className="max-w-5xl mx-auto px-4 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest mb-8" style={{ color: isDark ? '#475569' : '#94A3B8' }}>
+            Tools &amp; Platforms We Build With
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-x-10 gap-y-5">
+            {[
+              { name: 'OpenAI',           icon: '🤖' },
+              { name: 'Notion',           icon: '📋' },
+              { name: 'n8n',              icon: '⚡' },
+              { name: 'Zapier',           icon: '🔗' },
+              { name: 'Make',             icon: '🔄' },
+              { name: 'WhatsApp API',     icon: '💬' },
+              { name: 'Claude AI',        icon: '🧠' },
+              { name: 'Google Workspace', icon: '📊' },
+            ].map(tool => (
+              <div key={tool.name} className="flex items-center gap-2 transition-colors" style={{ color: isDark ? '#64748B' : '#94A3B8' }}
+                onMouseEnter={e => (e.currentTarget.style.color = isDark ? '#F1F5F9' : '#0A0B0F')}
+                onMouseLeave={e => (e.currentTarget.style.color = isDark ? '#64748B' : '#94A3B8')}>
+                <span className="text-lg">{tool.icon}</span>
+                <span className="text-sm font-medium">{tool.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
