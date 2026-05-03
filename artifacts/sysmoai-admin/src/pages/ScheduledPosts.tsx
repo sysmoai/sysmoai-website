@@ -152,13 +152,13 @@ export function ScheduledPostsPage() {
       }
     >
       {seed.isError && (
-        <p className="text-sm text-red-400 mb-3" data-testid="text-seed-error">
+        <p className="text-sm text-destructive mb-3" data-testid="text-seed-error">
           {describeApiError(seed.error, "Could not import content pack.")}
         </p>
       )}
       {seed.isSuccess && seed.data && (
         <p
-          className="text-sm text-emerald-400 mb-3"
+          className="text-sm text-emerald-600 dark:text-emerald-400 mb-3"
           data-testid="text-seed-success"
         >
           Imported {seed.data.imported} new + refreshed {seed.data.updated} existing of {seed.data.total} pieces.
@@ -368,7 +368,7 @@ export function ScheduledPostsPage() {
               <Skeleton className="h-12 w-full" />
             </div>
           ) : list.isError ? (
-            <div className="p-6 text-sm text-red-400" data-testid="text-list-error">
+            <div className="p-6 text-sm text-destructive" data-testid="text-list-error">
               {describeApiError(list.error)}
             </div>
           ) : items.length === 0 ? (

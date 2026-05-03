@@ -9,8 +9,11 @@ import {
   Zap,
   CalendarClock,
   TrendingUp,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { useClerk, useUser } from "@clerk/react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -35,6 +38,7 @@ export function AdminShell({ title, subtitle, actions, children }: AdminShellPro
   const [location] = useLocation();
   const { signOut } = useClerk();
   const { user } = useUser();
+  const { isDark, toggle } = useTheme();
 
   return (
     <div className="min-h-screen w-full flex">
@@ -106,7 +110,19 @@ export function AdminShell({ title, subtitle, actions, children }: AdminShellPro
               <p className="text-sm text-muted-foreground mt-0.5">{subtitle}</p>
             )}
           </div>
-          {actions && <div className="shrink-0">{actions}</div>}
+          <div className="shrink-0 flex items-center gap-2">
+            <button
+              type="button"
+              onClick={toggle}
+              aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+              title={isDark ? "Switch to light theme" : "Switch to dark theme"}
+              data-testid="button-theme-toggle"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-card text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+            >
+              {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
+            {actions}
+          </div>
         </header>
         <div className="px-6 py-6">{children}</div>
       </main>

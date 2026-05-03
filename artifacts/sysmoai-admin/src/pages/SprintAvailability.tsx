@@ -96,7 +96,7 @@ export function SprintAvailabilityPage() {
                 <Skeleton className="h-9 w-full" />
               </div>
             ) : detail.isError ? (
-              <p className="text-sm text-red-400" data-testid="text-load-error">
+              <p className="text-sm text-destructive" data-testid="text-load-error">
                 {describeApiError(detail.error, "Could not load availability.")}
               </p>
             ) : (
@@ -153,7 +153,7 @@ export function SprintAvailabilityPage() {
 
                 {saveError && (
                   <p
-                    className="text-sm text-red-400"
+                    className="text-sm text-destructive"
                     data-testid="text-save-error"
                   >
                     {saveError}
@@ -161,7 +161,7 @@ export function SprintAvailabilityPage() {
                 )}
                 {saveSuccess && (
                   <p
-                    className="text-sm text-emerald-300"
+                    className="text-sm text-emerald-700 dark:text-emerald-300"
                     data-testid="text-save-success"
                   >
                     Saved. The public site will pick up the change on the next page load (or when an open tab regains focus).
@@ -172,7 +172,7 @@ export function SprintAvailabilityPage() {
                   type="submit"
                   disabled={update.isPending}
                   data-testid="button-save"
-                  className="rounded-md bg-blue-700 hover:bg-blue-800 disabled:opacity-50 px-4 py-2 text-sm font-semibold text-white"
+                  className="rounded-md bg-primary text-primary-foreground hover:opacity-90 disabled:opacity-50 px-4 py-2 text-sm font-semibold"
                 >
                   {update.isPending ? "Saving…" : "Save"}
                 </button>
@@ -193,7 +193,7 @@ export function SprintAvailabilityPage() {
           </CardHeader>
           <CardContent>
             <p
-              className="text-sm font-semibold text-amber-300"
+              className="text-sm font-semibold text-amber-700 dark:text-amber-300"
               data-testid="text-preview"
             >
               {previewText}

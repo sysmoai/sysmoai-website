@@ -121,7 +121,7 @@ export function SubmissionListShell({
     >
       {downloadError && (
         <p
-          className="text-sm text-red-400 mb-3"
+          className="text-sm text-destructive mb-3"
           data-testid="text-export-error"
         >
           {downloadError}
@@ -136,7 +136,7 @@ export function SubmissionListShell({
               <Skeleton className="h-12 w-full" />
             </div>
           ) : isError ? (
-            <div className="p-6 text-sm text-red-400" data-testid="text-list-error">
+            <div className="p-6 text-sm text-destructive" data-testid="text-list-error">
               {errorMessage ?? "Could not load submissions."}
             </div>
           ) : isEmpty ? (

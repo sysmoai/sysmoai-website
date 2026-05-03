@@ -39,13 +39,13 @@ export function postStatusLabel(s: ScheduledPostStatus): string {
 export function postStatusColor(s: ScheduledPostStatus): string {
   switch (s) {
     case "queued":
-      return "bg-blue-500/15 text-blue-300 border border-blue-500/30";
+      return "bg-blue-500/15 text-blue-700 border border-blue-500/30 dark:text-blue-300";
     case "posted":
-      return "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30";
+      return "bg-emerald-500/15 text-emerald-700 border border-emerald-500/30 dark:text-emerald-300";
     case "skipped":
-      return "bg-zinc-500/15 text-zinc-300 border border-zinc-500/30";
+      return "bg-zinc-500/15 text-zinc-700 border border-zinc-500/30 dark:text-zinc-300";
     case "failed":
-      return "bg-red-500/15 text-red-300 border border-red-500/30";
+      return "bg-red-500/15 text-red-700 border border-red-500/30 dark:text-red-300";
   }
 }
 
