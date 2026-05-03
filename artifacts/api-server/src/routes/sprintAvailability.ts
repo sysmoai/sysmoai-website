@@ -6,6 +6,7 @@ import {
   UpdateSprintAvailabilityBody,
 } from "@workspace/api-zod";
 import { validateBody } from "../lib/validation";
+import { requireAdmin } from "../middlewares/requireAdmin";
 
 const SINGLETON_ID = 1;
 
@@ -50,6 +51,10 @@ publicSprintRouter.get("/sprint-availability", async (_req, res) => {
 });
 
 export const adminSprintRouter: IRouter = Router();
+
+// Apply admin auth here so the mount point in routes/index.ts doesn't
+// need to know about it (and we don't double-apply it).
+adminSprintRouter.use(requireAdmin);
 
 adminSprintRouter.get("/sprint-availability", async (_req, res) => {
   const row = await loadOrSeed();
