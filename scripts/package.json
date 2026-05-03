@@ -7,6 +7,7 @@
     "hello": "tsx ./src/hello.ts",
     "build-content-schedule": "tsx ./src/buildContentSchedule.ts",
     "build-week5-pack": "tsx ./src/buildWeek5Pack.ts",
+    "test-slug-parity": "tsx ./src/testCampaignSlugParity.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
