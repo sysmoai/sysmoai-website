@@ -1,5 +1,5 @@
 import { Router, type IRouter, type Request, type Response } from "express";
-import { sql, desc, asc, eq, and, gte, lte, type SQL } from "drizzle-orm";
+import { sql, asc, eq, and, gte, lte, type SQL } from "drizzle-orm";
 // Static JSON import — esbuild inlines this into dist/index.mjs so the seed
 // works in production (no relative-path readFileSync against the source tree).
 import scheduleSeed from "../data/contentSchedule.json" with { type: "json" };
@@ -371,8 +371,5 @@ router.patch(
     res.json(UpdateScheduledPostResponse.parse(serialize(row)));
   },
 );
-
-// keep imports referenced by linter
-void desc;
 
 export default router;

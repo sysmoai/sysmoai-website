@@ -274,36 +274,15 @@
     {
       "parameters": {
         "channel": "={{ $env.SLACK_FALLBACK_CHANNEL }}",
-        "text": "=📸 Manual publish needed *now* for *{{ $('Split items').item.json.fileRef }}* ({{ $('Split items').item.json.platform }}). Slot: {{ $('Split items').item.json.scheduledFor }}.\nNo assetUrl set on this row — attach one in the admin UI to enable provider scheduling.\n\n*Hook:* {{ $('Split items').item.json.hookLine }}\n```{{ $('Split items').item.json.content }}```\nMark posted: {{ $env.SYSMOAI_ADMIN_BASE }}/scheduled-posts/{{ $('Split items').item.json.id }}",
+        "text": "=📸 Manual publish needed *now* for *{{ $('Split items').item.json.fileRef }}* ({{ $('Split items').item.json.platform }}). Slot: {{ $('Split items').item.json.scheduledFor }}.\nNo assetUrl set on this row — attach a media URL in the admin UI to switch this row to fully-automated Buffer scheduling on the next sweep.\n\n*Hook:* {{ $('Split items').item.json.hookLine }}\n```{{ $('Split items').item.json.content }}```\nAttach asset / mark posted: {{ $env.SYSMOAI_ADMIN_BASE }}/scheduled-posts/{{ $('Split items').item.json.id }}",
         "otherOptions": {}
       },
       "id": "slack-visual-manual",
       "name": "Slack — visual manual publish",
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2,
-      "position": [1640, 960]
-    },
-    {
-      "parameters": {
-        "method": "PATCH",
-        "url": "={{ $env.SYSMOAI_API_BASE }}/api/admin/scheduled-posts/{{ $('Split items').item.json.id }}",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"postUrl\": \"manual://{{ $('Split items').item.json.platform }}/{{ $('Split items').item.json.id }}\",\n  \"notes\": \"Manual publish requested in Slack at {{ $now.toISO() }} (no assetUrl).\"\n}",
-        "options": {
-          "headers": {
-            "parameters": {
-              "Authorization": "=Bearer {{ $env.SYSMOAI_AUTOMATION_TOKEN }}",
-              "Content-Type": "application/json"
-            }
-          }
-        }
-      },
-      "id": "mark-manual-pending",
-      "name": "Mark manual-pending",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4,
-      "position": [1860, 960]
+      "position": [1640, 960],
+      "_about": "Intentionally does NOT write a synthetic postUrl. The row stays queued so subsequent hourly sweeps within the [now-30m, now+24h] window will keep alerting until the operator either attaches an assetUrl (auto-scheduled next pass) or marks the row posted in the admin UI."
     },
     {
       "parameters": {
@@ -431,8 +410,6 @@
         []
       ]
     },
-    "Slack — visual manual publish": {
-      "main": [[{ "node": "Mark manual-pending", "type": "main", "index": 0 }]]
-    }
+    "Slack — visual manual publish": { "main": [[]] }
   }
 }

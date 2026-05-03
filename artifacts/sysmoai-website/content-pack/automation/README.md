@@ -41,10 +41,14 @@ imported into the admin queue and operated as a publishing dashboard.
         pushed to **Buffer** with `scheduled_at = scheduledFor` and
         `media[photo] = assetUrl`. If `assetUrl` is empty, falls through to
         a Slack manual-publish alert (gated to "within 1h of slot") so the
-        operator publishes at the peak time.
+        operator publishes at the peak time. The Slack branch deliberately
+        does **not** write `postUrl`, so the row stays queued and the next
+        sweep keeps alerting until the operator either attaches an
+        `assetUrl` (auto-scheduled on the next pass) or marks the row
+        posted in the admin UI.
       - **TikTok** → IF `assetUrl` is set, pushed to **Buffer** with
-        `media[video] = assetUrl`. Same Slack-at-slot fallback when no
-        asset is attached.
+        `media[video] = assetUrl`. Same Slack-at-slot retry-loop fallback
+        when no asset is attached.
       - **Newsletter** → only sent when its slot is within the next hour
         (Resend has no provider-side scheduling), via Resend's `/emails`.
 
