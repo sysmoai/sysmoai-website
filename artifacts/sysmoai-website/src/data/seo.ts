@@ -449,9 +449,9 @@ export const seoConfig: Record<string, RouteSeo> = {
 };
 
 const DEFAULT_SEO: RouteSeo = {
-  title: 'SYSmoAI — Systems in Motion | AI Consulting Bangladesh',
+  title: 'SYSmoAI — Stop Losing Orders in Your DMs | F-Commerce AI Bangladesh',
   description:
-    "SYSmoAI is Bangladesh's premier AI consulting company. AI systems, workflow automation, and custom AI agents for founders, freelancers, agencies, and corporates.",
+    "Bangladesh's F-Commerce Operating System. Bangla DM auto-reply agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — fully deployed in 14 days for ৳50,000.",
   canonical: SITE_URL,
   schemas: [ORG_SCHEMA],
 };

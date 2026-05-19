@@ -16,9 +16,9 @@ export interface RuntimeSeo {
 
 export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/': {
-    title: 'SYSmoAI — Systems in Motion | AI Consulting Bangladesh',
+    title: 'SYSmoAI — Stop Losing Orders in Your DMs | F-Commerce AI Bangladesh',
     description:
-      "SYSmoAI is Bangladesh's premier AI consulting company. We build AI-powered operating systems, automate workflows, and deploy custom AI agents for founders, freelancers, agencies, and corporates worldwide. Founded by Emon Hossain.",
+      "Bangladesh's F-Commerce Operating System. We build Bangla DM auto-reply agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — fully deployed in 14 days for ৳50,000. Book a free F-Commerce audit.",
     canonical: `${SITE_URL}/`,
     ogType: 'website',
   },
@@ -184,9 +184,9 @@ const blogRuntimeConfig: Record<string, RuntimeSeo> = Object.fromEntries(
 );
 
 const DEFAULT_RUNTIME_SEO: RuntimeSeo = {
-  title: 'SYSmoAI — Systems in Motion | AI Consulting Bangladesh',
+  title: 'SYSmoAI — Stop Losing Orders in Your DMs | F-Commerce AI Bangladesh',
   description:
-    "SYSmoAI is Bangladesh's premier AI consulting company specializing in AI automation, workflows, and AI agent development.",
+    "Bangladesh's F-Commerce Operating System. Bangla DM auto-reply agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — fully deployed in 14 days for ৳50,000.",
   canonical: `${SITE_URL}/`,
   ogType: 'website',
 };
