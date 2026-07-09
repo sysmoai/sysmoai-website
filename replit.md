@@ -20,43 +20,43 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 ### SYSmoAI Website (`artifacts/sysmoai-website`)
 - **Type**: React + Vite + Tailwind CSS + wouter + Framer Motion
 - **Preview path**: `/`
-- **Purpose**: Full production marketing website for SYSmoAI — Bangladesh's F-Commerce AI company
-- **Brand**: SYSmoAI — "The F-Commerce Operating System. Built in Dhaka, for Dhaka."
-- **Anchor offer**: F-Commerce AI Sprint (৳50,000 / 14 days) + ৳20,000/mo retainer
-- **Primary conversion**: `/free-ai-audit` (all primary CTAs point here)
+- **Purpose**: Full production marketing website for SYSmoAI — Bangladesh's premier AI consultancy
+- **Brand**: SYSmoAI — "Build Your AI-Powered Business in 72 Hours"
 - **Founder**: Emon Hossain | hello@sysmoai.com | WhatsApp: +880 1711-638693
 - **WhatsApp link helper**: `src/lib/whatsapp.ts` — exports `getWhatsAppUrl()` + `WA_URLS` (general, audit, quickwin, sprint, retainer, consultation)
 
 ### Architecture
 - **Routing**: wouter (30+ routes, lazy-loaded via React.lazy/Suspense)
 - **Constants**: `src/lib/config.ts` (WA_LINK, EMAIL, BRAND) + `src/lib/whatsapp.ts` (WA_URLS)
-- **Global components**: Header (5-item flat nav: F-Commerce / The Sprint / Proof / About / Get Free Audit CTA), Footer (4-column, F-Commerce focused), WhatsAppFAB, CookieConsent, RedirectTo
-- **Redirect component**: `src/components/RedirectTo.tsx` — renders a client-side immediate redirect using wouter's `setLocation`
+- **Global components**: Header (mega-dropdown), Footer (4-column), WhatsAppFAB, CookieConsent
 
-### Pages Built (33 total)
+### Pages Built (32 total)
 
 **Core**
-- `/` — Homepage — hero leads with F-Commerce "Stop Losing Orders in Your DMs." positioning
+- `/` — Homepage (8 sections: Hero, Problem, Who We Help tabs, Services + pricing toggle, How It Works, Proof, Tools, CTA)
 - `/services` — Services hub with featured + all-service grid
 - `/about` — Founder story timeline + operating principles
-- `/pricing` — F-Commerce Sprint + Retainer first, others secondary (by inquiry)
+- `/pricing` — BDT/USD toggle pricing grid (all 9 services)
 - `/proof` — Case studies + testimonials
 - `/faq` — FAQ accordion (12 questions)
-- `/blog` — Blog index (50 articles, filterable by audience groups)
+- `/blog` — Blog index (50 articles, filterable by 10 audience groups)
 - `/contact` — Contact form (react-hook-form + zod) + WhatsApp CTA
-- `/free-ai-audit` — Primary conversion — all primary CTAs across site point here
 
 **Service pages** (`/services/`)
-- `ai-sprint` — **F-Commerce AI Sprint** (rebranded anchor offer, ৳50,000/14 days)
-- `ai-retainer` — Monthly AI ops, ৳20,000/month
-- `ai-quick-win` — Entry offer, ৳3,750–7,500
-- `other-engagements` — **NEW** hub page for by-inquiry services (6 services listed)
-- `ai-coaching`, `group-workshop`, `notion-os`, `ai-agent-dev`, `n8n-automation`, `corporate-training`, `international` — kept as full pages, linked from /services/other-engagements
+- `ai-quick-win` — 3-day automation, ৳3,750–7,500
+- `ai-sprint` — 14-day full AI stack, ৳25,000–50,000
+- `ai-retainer` — Monthly managed AI ops, ৳20,000/month
+- `ai-coaching` — 1:1 60-min sessions, ৳2,500/session
+- `group-workshop` — Team workshops, ৳500/person
+- `notion-os` — Custom Notion OS, ৳15,000–50,000
+- `ai-agent-dev` — Custom AI agents (NemoClaw), ৳50,000–2,00,000
+- `n8n-automation` — Per-workflow automation, ৳2,000–10,000
+- `corporate-training` — Enterprise AI, ৳50,000–2,00,000
+- `international` — International clients, USD pricing
 
 **Audience pages** (`/for/`)
-- `f-commerce` — **PRIMARY WEDGE PAGE** (linked in nav)
-- `sme-founders` → **client-side redirect** → `/for/f-commerce`
-- `students`, `job-seekers`, `freelancers`, `researchers`, `agencies`, `consultants`, `creators`, `corporates` → **client-side redirect** → `/blog`
+- `students`, `job-seekers`, `freelancers`, `researchers`, `agencies`
+- `sme-founders`, `f-commerce`, `consultants`, `creators`, `corporates`
 
 **Legal** (`/privacy-policy`, `/terms-of-service`, `/refund-policy`)
 

@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'wouter';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   MessageCircle, ChevronRight, Zap, Timer, RefreshCw, Users, BookOpen,
-  Layout, Bot, Settings, Building, Globe,
+  Layout, Bot, Settings, Building, Globe, GraduationCap, Briefcase, Laptop,
+  FlaskConical, Building2, ShoppingBag, Users2, Megaphone, Video, Star,
   CheckCircle2, ArrowRight, Search, PenTool, Rocket, Quote, Sun, Moon,
   TrendingUp, Clock, BarChart3, Sparkles, Play,
 } from 'lucide-react';
@@ -16,10 +17,6 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { SYSmoAILogo } from '@/components/SYSmoAILogo';
 import { LazyImage } from '@/components/LazyImage';
 import { BrandMarkConstruction } from '@/components/BrandMarkConstruction';
-import { useCreateWaitlistSignup } from '@workspace/api-client-react';
-import { captureUtmFromLocation, readUtmSnapshot } from '@/lib/utm';
-import { F_COMMERCE_PROOF } from '@/data/fCommerceProof';
-import { DirectAnswer } from '@/components/DirectAnswer';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -50,20 +47,32 @@ const slideRight = {
 /* ══════════════════════════════════════════
    DATA
 ══════════════════════════════════════════ */
+const audiences = [
+  { icon: GraduationCap, label: 'Students',     href: '/for/students',    problems: ['Terrible prompts, no real AI skills', "CV looks like everyone else's", 'No freelance portfolio or income'], solution: 'We teach you exactly which AI tools to learn for your career, build your portfolio, and launch your first freelance service — in 30 days.' },
+  { icon: Briefcase,     label: 'Job Seekers',  href: '/for/job-seekers', problems: ['Getting rejected without knowing why', 'No AI skills on your CV', 'LinkedIn has 0 engagement'], solution: 'We overhaul your CV with AI skills, rebuild your LinkedIn, and build real portfolio projects so you get shortlisted.' },
+  { icon: Laptop,        label: 'Freelancers',  href: '/for/freelancers', problems: ['Income dropped — "ChatGPT can do this"', 'Stuck at low-ticket ৳500 projects', 'Chaotic client management'], solution: 'We upgrade your skills, build your premium service package, and set up a Notion CRM so you earn 3× more.' },
+  { icon: FlaskConical,  label: 'Researchers',  href: '/for/researchers', problems: ['Literature review takes 4 weeks', 'Notes in 6 different apps', 'Paper writing is a bottleneck'], solution: 'We build your AI Research OS — literature review in 3 days, notes organized, papers written 3× faster.' },
+  { icon: Building2,     label: 'Agencies',     href: '/for/agencies',    problems: ['Competitors pitching AI — you have nothing', 'Content production is 3× slower', 'Proposals take 3–5 hours each'], solution: 'We deploy your complete agency AI stack in 14 days — content production, proposal builder, and team training.' },
+  { icon: Star,          label: 'SME Founders', href: '/for/sme-founders',problems: ['847 unread WhatsApp messages', 'No dashboard — you ask 5 people', '14-hour days with nothing automated'], solution: 'We build your AI business OS — WhatsApp auto-replies, connected tools, and a real-time dashboard.' },
+  { icon: ShoppingBag,   label: 'F-Commerce',   href: '/for/f-commerce',  problems: ['500 DMs a day, replying to 100', 'Order tracking in a notebook', '0 repeat customer follow-ups'], solution: 'We automate your Facebook DMs, build an order management system, and set up customer follow-up sequences.' },
+  { icon: Users2,        label: 'Consultants',  href: '/for/consultants', problems: ['Onboarding takes 2–3 days manually', 'Warm leads go cold — revenue lost', 'Everything is in your head'], solution: 'We automate your onboarding, build a proposal system, and document your expertise into a searchable knowledge base.' },
+  { icon: Video,         label: 'Creators',     href: '/for/creators',    problems: ['50 ideas — 0 become posts', '1 YouTube video takes 2 days', 'No content calendar or system'], solution: 'We build your content pipeline OS, AI repurposing engine, and growth tracking dashboard.' },
+  { icon: Megaphone,     label: 'Corporates',   href: '/for/corporates',  problems: ['ChatGPT for 50 employees — 10% use it', 'AI strategy = slide deck, nothing implemented', 'Monthly reports take 3 days'], solution: 'We audit your operations, train your team, automate your top 3 bottlenecks, and give you a 90-day AI roadmap.' },
+];
 
 const featuredServices = [
   { icon: Zap,       title: 'AI Quick Win', subtitle: 'Your #1 problem automated in 3 days',  description: '', bdPrice: '৳3,750–7,500',    usdPrice: '$50–$100',    href: '/services/ai-quick-win', featured: false, tag: 'Best entry point'  },
-  { icon: Timer,     title: 'F-Commerce AI Sprint', subtitle: 'Full F-Commerce AI stack deployed in 14 days', description: '', bdPrice: '৳50,000', usdPrice: '$600', href: '/services/ai-sprint', featured: true, tag: 'Most popular' },
+  { icon: Timer,     title: 'AI Sprint',    subtitle: 'Full AI stack deployed in 14 days',     description: '', bdPrice: '৳25,000–50,000', usdPrice: '$300–$600',   href: '/services/ai-sprint',    featured: true,  tag: 'Most popular'     },
   { icon: RefreshCw, title: 'AI Retainer',  subtitle: 'Ongoing AI management every month',     description: 'We manage and evolve your AI systems every month. Monthly improvements, priority WhatsApp support, and a full performance report — so your AI keeps working as your business grows.', bdPrice: '৳20,000/mo', usdPrice: '$250/mo', href: '/services/ai-retainer', featured: false, tag: 'Cancel anytime', features: ['Ongoing AI system management', 'Monthly improvements & optimizations', 'Priority WhatsApp support', 'Monthly performance report'] },
 ];
 
 const otherServices = [
-  { icon: Users,    label: '1:1 Coaching',  href: '/services/other-engagements' },
-  { icon: BookOpen, label: 'Workshop',       href: '/services/other-engagements' },
-  { icon: Layout,   label: 'Notion OS',      href: '/services/other-engagements' },
-  { icon: Bot,      label: 'AI Agent Dev',   href: '/services/other-engagements' },
-  { icon: Settings, label: 'n8n Automation', href: '/services/other-engagements' },
-  { icon: Building, label: 'Corp Training',  href: '/services/other-engagements' },
+  { icon: Users,    label: '1:1 Coaching',  href: '/services/ai-coaching'        },
+  { icon: BookOpen, label: 'Workshop',       href: '/services/group-workshop'     },
+  { icon: Layout,   label: 'Notion OS',      href: '/services/notion-os'          },
+  { icon: Bot,      label: 'AI Agent Dev',   href: '/services/ai-agent-dev'       },
+  { icon: Settings, label: 'n8n Automation', href: '/services/n8n-automation'     },
+  { icon: Building, label: 'Corp Training',  href: '/services/corporate-training' },
 ];
 
 const toolItems = [
@@ -306,141 +315,12 @@ function ChaosVisual() {
 }
 
 /* ══════════════════════════════════════════
-   WAITLIST SECTION
-══════════════════════════════════════════ */
-function WaitlistSection({ isDark }: { isDark: boolean }) {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const createWaitlistSignup = useCreateWaitlistSignup();
-
-  const bg = isDark ? '#060810' : '#EFF6FF';
-  const border = isDark ? 'rgba(37,99,235,0.2)' : 'rgba(37,99,235,0.15)';
-  const headingColor = isDark ? '#F1F5F9' : '#0A0B0F';
-  const bodyColor = isDark ? '#94A3B8' : '#475569';
-  const inputBg = isDark ? 'rgba(255,255,255,0.06)' : '#FFFFFF';
-  const inputBorder = isDark ? 'rgba(255,255,255,0.12)' : '#BFDBFE';
-  const inputText = isDark ? '#F1F5F9' : '#0A0B0F';
-
-  // Capture utm_* on mount so a campaign click that lands on the home page
-  // and converts via the hero waitlist form is still attributable.
-  useEffect(() => { captureUtmFromLocation(); }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const hp = (e.currentTarget as HTMLFormElement).elements.namedItem('website') as HTMLInputElement | null;
-    if (hp?.value) return; // Honeypot tripped
-    if (!email || status === 'loading') return;
-    setStatus('loading');
-    try {
-      const utm = readUtmSnapshot();
-      await createWaitlistSignup.mutateAsync({
-        data: {
-          email,
-          name: name || null,
-          source: 'home_hero',
-          utmSource: utm.utmSource,
-          utmMedium: utm.utmMedium,
-          utmCampaign: utm.utmCampaign,
-          utmContent: utm.utmContent,
-          utmTerm: utm.utmTerm,
-          referrer: utm.referrer,
-        },
-      });
-      setStatus('success');
-      setEmail('');
-      setName('');
-    } catch {
-      setStatus('error');
-    }
-  };
-
-  return (
-    <section className="py-20" style={{ background: bg, borderTop: `1px solid ${border}` }}>
-      <div className="max-w-xl mx-auto px-4">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mb-8">
-          <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4"
-            style={{ background: isDark ? 'rgba(37,99,235,0.15)' : 'rgba(37,99,235,0.1)', color: '#3B82F6' }}>
-            Early Access
-          </span>
-          <h2 className="text-3xl font-bold mb-3" style={{ color: headingColor }}>
-            Join the Waitlist
-          </h2>
-          <p className="text-base leading-relaxed" style={{ color: bodyColor }}>
-            Be first to access new AI tools, templates, and F-Commerce automation systems as they launch. No spam — just high-signal updates.
-          </p>
-        </motion.div>
-
-        {status === 'success' ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-8 px-6 rounded-2xl"
-            style={{ background: isDark ? 'rgba(34,197,94,0.08)' : '#F0FDF4', border: `1px solid ${isDark ? 'rgba(34,197,94,0.2)' : '#BBF7D0'}` }}
-          >
-            <div className="text-4xl mb-3">✅</div>
-            <p className="font-bold mb-1" style={{ color: isDark ? '#86EFAC' : '#14532D' }}>You're on the list!</p>
-            <p className="text-sm" style={{ color: isDark ? '#6EE7B7' : '#15803D' }}>We'll reach out as soon as something new launches.</p>
-          </motion.div>
-        ) : (
-          <motion.form initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            onSubmit={handleSubmit} className="space-y-3">
-            <input
-              type="text"
-              name="website"
-              tabIndex={-1}
-              autoComplete="off"
-              aria-hidden="true"
-              style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0, pointerEvents: 'none' }}
-            />
-            <div className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="text"
-                placeholder="Your name (optional)"
-                value={name}
-                onChange={e => setName(e.target.value)}
-                className="flex-1 px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
-                style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
-              />
-              <input
-                type="email"
-                placeholder="your@email.com"
-                required
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                className="flex-1 px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
-                style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={status === 'loading'}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-bold py-3.5 rounded-xl transition-all text-base"
-            >
-              {status === 'loading' ? 'Joining...' : 'Join the Waitlist →'}
-            </button>
-            {status === 'error' && (
-              <p className="text-red-500 text-sm text-center">Something went wrong. Please try again.</p>
-            )}
-            <p className="text-center text-xs" style={{ color: bodyColor }}>No spam. Unsubscribe anytime. We reply to every email.</p>
-          </motion.form>
-        )}
-      </div>
-    </section>
-  );
-}
-
-/* ══════════════════════════════════════════
    HOME PAGE
 ══════════════════════════════════════════ */
 export default function Home() {
   const { isDark } = useTheme();
-  const [showUSD, setShowUSD] = useState(() => {
-    try { return localStorage.getItem('sysmoai-currency') === 'USD'; } catch { return false; }
-  });
-  const toggleCurrency = (v: boolean) => {
-    setShowUSD(v);
-    try { localStorage.setItem('sysmoai-currency', v ? 'USD' : 'BDT'); } catch { /* ignore */ }
-  };
+  const [activeAudience, setActiveAudience] = useState(0);
+  const [showUSD, setShowUSD] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const stepsRef = useRef<HTMLDivElement>(null);
@@ -581,7 +461,7 @@ export default function Home() {
               <span className="w-2 h-2 bg-emerald-400 rounded-full block absolute inset-0 animate-badge-ping" />
             </div>
             <span className={`text-sm font-medium ${isDark ? 'text-blue-300' : 'text-blue-700'}`}>
-              🇧🇩 The F-Commerce Operating System — Built in Dhaka, for Dhaka
+              🇧🇩 Bangladesh's AI Consulting Company — Serving Clients Worldwide
             </span>
           </motion.div>
 
@@ -593,8 +473,8 @@ export default function Home() {
             className="text-5xl sm:text-6xl lg:text-[5rem] font-bold tracking-[-0.032em] leading-[1.04] mb-6"
             style={{ fontFamily: "'Space Grotesk', sans-serif", color: isDark ? '#F1F5F9' : '#0A0B0F' }}
           >
-            Stop Losing Orders<br />
-            <span className="brand-gradient-text">in Your DMs.</span>
+            Build Your AI-Powered<br />
+            <span className="brand-gradient-text">Business in 72 Hours</span>
           </motion.h1>
 
           {/* Sub */}
@@ -605,9 +485,9 @@ export default function Home() {
             className="text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed"
             style={{ color: isDark ? '#94A3B8' : '#64748B' }}
           >
-            Bangladesh's F-Commerce Operating System. We build Bangla DM auto-reply agents,
-            order trackers, and bKash workflows for Facebook sellers in Dhaka —
-            fully deployed in 14 days for ৳50,000.
+            SYSmoAI designs, builds and deploys custom AI operating systems for founders,
+            agencies and freelancers in Bangladesh — and clients worldwide. Automate
+            workflows, free up 20+ hours/week, and unlock new revenue streams.
           </motion.p>
 
           {/* CTAs */}
@@ -617,18 +497,20 @@ export default function Home() {
             transition={{ duration: 0.65, delay: 0.42 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4"
           >
-            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
-              <Link href="/free-ai-audit"
-                data-testid="link-hero-audit"
-                className="inline-flex items-center gap-2.5 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 min-w-[220px] justify-center shadow-lg"
-                style={{ boxShadow: '0 4px 24px rgba(37,99,235,0.45)' }}
-              >
-                Book Free F-Commerce Audit
-                <ChevronRight size={20} />
-              </Link>
-            </motion.div>
+            <motion.a
+              href={WA_URLS.consultation}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="link-hero-whatsapp"
+              whileHover={{ scale: 1.04, boxShadow: '0 0 40px rgba(37,211,102,0.40)' }}
+              whileTap={{ scale: 0.96 }}
+              className="inline-flex items-center gap-2.5 bg-[#25D366] hover:bg-[#1ead57] text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 min-w-[220px] justify-center shadow-lg"
+            >
+              <MessageCircle size={21} />
+              Book Free 30-Min Consultation
+            </motion.a>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Link href="/services/ai-sprint"
+              <Link href="/services"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 min-w-[200px] justify-center border"
                 style={{
                   background: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.85)',
@@ -637,7 +519,7 @@ export default function Home() {
                   backdropFilter: 'blur(12px)',
                 }}
               >
-                See the Sprint
+                See How It Works
                 <ChevronRight size={18} />
               </Link>
             </motion.div>
@@ -651,7 +533,7 @@ export default function Home() {
             className="text-sm mb-10"
             style={{ color: isDark ? '#475569' : '#94A3B8' }}
           >
-            Free 30-min audit · No commitment · Usually responds within 2 hours
+            No sales pitch. We map your biggest bottleneck and outline a practical AI plan.
           </motion.p>
 
           {/* Trust signals */}
@@ -662,9 +544,9 @@ export default function Home() {
             className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3"
           >
             {[
-              { label: 'Bangla + English DM automation', icon: Sparkles },
-              { label: 'bKash / Nagad ready workflows', icon: TrendingUp },
-              { label: 'Results-first guarantee', icon: Users },
+              { label: 'Top 5% Prompt Engineers Globally', icon: Sparkles },
+              { label: '500+ Projects Delivered', icon: TrendingUp },
+              { label: '8+ Client Categories', icon: Users },
             ].map(({ label, icon: Icon }, i) => (
               <span key={i} className="flex items-center gap-2 text-sm" style={{ color: isDark ? '#64748B' : '#94A3B8' }}>
                 <Icon size={13} className="text-blue-500 shrink-0" />
@@ -682,9 +564,9 @@ export default function Home() {
           >
             {[
               { emoji: '✓', color: '#4ade80', label: 'Results Guaranteed' },
-              { emoji: '📦', color: '#60a5fa', label: '14 Days to Live' },
-              { emoji: '💬', color: '#c084fc', label: 'Bangla DM Agent' },
-              { emoji: '🏦', color: '#fbbf24', label: 'bKash / Nagad Ready' },
+              { emoji: '🏆', color: '#60a5fa', label: 'Top 5% AI Engineers' },
+              { emoji: '📦', color: '#c084fc', label: '500+ Projects' },
+              { emoji: '🌍', color: '#fbbf24', label: 'BD + International' },
             ].map(({ emoji, color, label }) => (
               <div key={label} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
                 style={{ background: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(37,99,235,0.06)', border: `1px solid ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(37,99,235,0.12)'}` }}>
@@ -712,135 +594,10 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Direct Answer — GEO */}
-      <section className="pt-10 pb-0" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <DirectAnswer bangla="SYSmoAI হলো বাংলাদেশের AI কনসালটিং কোম্পানি — ইমন হোসেন কর্তৃক প্রতিষ্ঠিত। F-কমার্স অটোমেশন, AI এজেন্ট, n8n ওয়ার্কফ্লো এবং Notion OS তৈরিতে বিশেষজ্ঞ। ৫০০+ প্রজেক্ট সম্পন্ন।">
-            SYSmoAI is Bangladesh's AI consulting company — founded by Emon Hossain (top 5% global prompt engineer). We build AI automation systems for F-commerce sellers, agencies, SMEs, freelancers, and corporate teams: DM agents, order trackers, bKash workflows, Notion OS, n8n automations, and AI agents. Services from ৳3,750 ($50) to ৳2,00,000 ($2,400). 500+ projects delivered. Based in Dhaka, serving globally.
-          </DirectAnswer>
-        </div>
-      </section>
-
       {/* ══════════════════════════════════════
           TOOL MARQUEE STRIP
       ══════════════════════════════════════ */}
       <ToolMarquee isDark={isDark} />
-
-      {/* ══════════════════════════════════════
-          F-COMMERCE SELLER PROOF
-          (Sourced from src/data/fCommerceProof.ts —
-           shared with /proof so numbers stay in sync.)
-      ══════════════════════════════════════ */}
-      <section
-        className="py-20 md:py-24 relative overflow-hidden"
-        style={{ background: isDark ? '#070810' : '#F4F8FF' }}
-      >
-        <div className="pointer-events-none absolute inset-0">
-          <div
-            className="absolute -top-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full"
-            style={{ background: 'radial-gradient(ellipse, rgba(37,99,235,0.10) 0%, transparent 70%)' }}
-          />
-        </div>
-
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={fadeUp}
-            className="text-center mb-12"
-          >
-            <p className="text-blue-500 text-xs font-bold uppercase tracking-[0.2em] mb-3">
-              F-Commerce sellers · Real results
-            </p>
-            <h2
-              className="text-3xl md:text-4xl font-bold tracking-tight mb-4"
-              style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}
-            >
-              From drowning in DMs to zero missed orders.
-            </h2>
-            <p
-              className="text-base max-w-xl mx-auto"
-              style={{ color: isDark ? '#94A3B8' : '#475569' }}
-            >
-              Representative outcomes from F-Commerce sellers we've worked with across
-              Dhaka, Chattogram, and Sylhet. Verified case studies with full names are
-              published as sellers approve them.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={stagger}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {F_COMMERCE_PROOF.map((s) => (
-              <motion.div
-                key={s.id}
-                variants={fadeUp}
-                className="rounded-2xl p-6 flex flex-col transition-all duration-300"
-                style={{
-                  background: isDark ? 'rgba(15,23,42,0.6)' : '#FFFFFF',
-                  border: isDark
-                    ? '1px solid rgba(148,163,184,0.12)'
-                    : '1px solid rgba(37,99,235,0.10)',
-                  boxShadow: isDark
-                    ? '0 1px 0 rgba(255,255,255,0.02) inset'
-                    : '0 1px 2px rgba(15,23,42,0.04)',
-                }}
-              >
-                <span className="text-3xl mb-3">{s.emoji}</span>
-                <span
-                  className="text-[11px] font-semibold uppercase tracking-wider mb-3"
-                  style={{ color: isDark ? '#60A5FA' : '#2563EB' }}
-                >
-                  {s.seller}
-                </span>
-                <p
-                  className="text-xl font-bold mb-2 leading-snug"
-                  style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}
-                >
-                  {s.headline}
-                </p>
-                <p
-                  className="text-sm flex-1 mb-4"
-                  style={{ color: isDark ? '#94A3B8' : '#475569' }}
-                >
-                  {s.detail}
-                </p>
-                <span
-                  className="text-xs font-semibold self-start px-2.5 py-1 rounded-full"
-                  style={{
-                    background: isDark ? 'rgba(34,197,94,0.10)' : '#ECFDF5',
-                    color: isDark ? '#4ADE80' : '#15803D',
-                  }}
-                >
-                  ⏱ {s.window}
-                </span>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="text-center mt-10"
-          >
-            <Link
-              href="/proof"
-              className="inline-flex items-center gap-2 text-sm font-semibold transition-colors"
-              style={{ color: isDark ? '#60A5FA' : '#2563EB' }}
-            >
-              See all client results
-              <span aria-hidden>→</span>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
 
       {/* ══════════════════════════════════════
           TOOLS & PLATFORMS LOGO STRIP
@@ -1025,10 +782,10 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { target: 500,  suffix: '+',  prefix: '',  label: 'Orders Automated per Day'   },
-              { target: 14,   suffix: '',   prefix: '',  label: 'Days to Full Automation'    },
-              { target: 3,    suffix: '+',  prefix: '',  label: 'Years Building AI Systems'  },
-              { target: 100,  suffix: '%',  prefix: '',  label: 'F-Commerce Focused'         },
+              { target: 500, suffix: '+',  prefix: '',     label: 'Projects Delivered'        },
+              { target: 8,   suffix: '+',  prefix: '',     label: 'Client Categories Served'  },
+              { target: 3,   suffix: '+',  prefix: '',     label: 'Years Building AI Systems' },
+              { target: 5,   suffix: '%',  prefix: 'Top ', label: 'Prompt Engineers Globally' },
             ].map((stat, i) => (
               <div key={i} className="gsap-reveal">
                 <div className="text-4xl md:text-5xl font-bold tracking-tight mb-1 brand-gradient-text">
@@ -1040,7 +797,7 @@ export default function Home() {
           </div>
         </div>
         <noscript>
-          <div className="text-center text-sm text-slate-500 mt-4">500+ Orders Automated Daily · 14 Days to Full Automation · 3+ Years Building AI Systems · 100% F-Commerce Focused</div>
+          <div className="text-center text-sm text-slate-500 mt-4">500+ Projects Delivered · 8+ Client Categories · 3+ Years Building AI · Top 5% Prompt Engineers Globally</div>
         </noscript>
       </div>
 
@@ -1116,62 +873,79 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════
-          SECTION 4 — F-COMMERCE PAIN POINTS
+          SECTION 4 — WHO WE HELP
       ══════════════════════════════════════ */}
       <section className="py-20 md:py-28 relative overflow-hidden" style={{ background: isDark ? '#060810' : '#F8FAFF' }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mb-12">
-            <p className="text-blue-500 text-xs font-bold uppercase tracking-[0.2em] mb-3">Built for F-Commerce Sellers</p>
+            <p className="text-blue-500 text-xs font-bold uppercase tracking-[0.2em] mb-3">Who We Help</p>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}>
-              Does this sound like your day?
+              Built for every kind of ambitious person.
             </h2>
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-            {/* Problems */}
-            <motion.div variants={fadeUp} className="rounded-2xl p-7"
-              style={{ background: isDark ? 'rgba(127,29,29,0.10)' : 'rgba(254,242,242,0.8)', border: `1px solid ${isDark ? 'rgba(153,27,27,0.2)' : 'rgba(254,202,202,0.5)'}` }}>
-              <p className="text-red-500 text-xs font-bold uppercase tracking-[0.15em] mb-4">The F-Commerce Grind</p>
-              <ul className="space-y-3">
-                {[
-                  '500+ DMs a day — you reply to maybe 100',
-                  'Orders tracked in a notebook or WhatsApp screenshot',
-                  'No follow-up system — customers forget about you',
-                  'Missed messages = missed money',
-                  '14-hour days and you\'re still behind',
-                ].map((p, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="text-red-500 mt-0.5 shrink-0">✗</span>
-                    <span className="text-sm" style={{ color: isDark ? '#CBD5E1' : '#4B5563' }}>{p}</span>
-                  </li>
-                ))}
-              </ul>
+          {/* Audience tabs */}
+          <div className="flex flex-wrap justify-center gap-2 mb-10 scrollbar-none">
+            {audiences.map((a, i) => (
+              <motion.button
+                key={i}
+                onClick={() => setActiveAudience(i)}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                style={i === activeAudience ? {
+                  background: '#2563EB',
+                  color: '#FFFFFF',
+                  boxShadow: '0 0 20px rgba(37,99,235,0.4)',
+                } : {
+                  background: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(37,99,235,0.05)',
+                  border: `1px solid ${isDark ? 'rgba(255,255,255,0.07)' : 'rgba(37,99,235,0.12)'}`,
+                  color: isDark ? '#94A3B8' : '#64748B',
+                }}
+              >
+                <a.icon size={14} />
+                {a.label}
+              </motion.button>
+            ))}
+          </div>
+
+          {/* Active panel — min-h prevents CLS when switching tabs */}
+          <div className="min-h-[320px] md:min-h-[260px]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeAudience}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            >
+              {/* Problems */}
+              <div className="rounded-2xl p-7" style={{ background: isDark ? 'rgba(127,29,29,0.10)' : 'rgba(254,242,242,0.8)', border: `1px solid ${isDark ? 'rgba(153,27,27,0.2)' : 'rgba(254,202,202,0.5)'}` }}>
+                <p className="text-red-500 text-xs font-bold uppercase tracking-[0.15em] mb-4">Your Situation</p>
+                <ul className="space-y-3">
+                  {audiences[activeAudience].problems.map((p, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <span className="text-red-500 mt-0.5 shrink-0">✗</span>
+                      <span className="text-sm" style={{ color: isDark ? '#CBD5E1' : '#4B5563' }}>{p}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {/* Solution */}
+              <div className="rounded-2xl p-7" style={{ background: isDark ? 'rgba(16,185,129,0.06)' : 'rgba(240,253,244,0.9)', border: `1px solid ${isDark ? 'rgba(16,185,129,0.15)' : 'rgba(167,243,208,0.6)'}` }}>
+                <p className="text-emerald-500 text-xs font-bold uppercase tracking-[0.15em] mb-4">SYSmoAI's Fix</p>
+                <p className="text-sm leading-relaxed mb-5" style={{ color: isDark ? '#CBD5E1' : '#4B5563' }}>
+                  {audiences[activeAudience].solution}
+                </p>
+                <Link href={audiences[activeAudience].href}
+                  className="inline-flex items-center gap-2 text-sm font-bold text-emerald-500 hover:text-emerald-400 transition-colors group">
+                  See full solution <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
             </motion.div>
-            {/* Solution */}
-            <motion.div variants={fadeUp} className="rounded-2xl p-7"
-              style={{ background: isDark ? 'rgba(16,185,129,0.06)' : 'rgba(240,253,244,0.9)', border: `1px solid ${isDark ? 'rgba(16,185,129,0.15)' : 'rgba(167,243,208,0.6)'}` }}>
-              <p className="text-emerald-500 text-xs font-bold uppercase tracking-[0.15em] mb-4">After the F-Commerce AI Sprint</p>
-              <ul className="space-y-3 mb-5">
-                {[
-                  'DMs answered automatically, 24/7 — zero missed orders',
-                  'Order management system built inside your existing tools',
-                  'Automated follow-up sequences that bring buyers back',
-                  'Real-time dashboard — know your numbers without asking anyone',
-                  'You run the business. The system runs the ops.',
-                ].map((p, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
-                    <span className="text-sm" style={{ color: isDark ? '#CBD5E1' : '#4B5563' }}>{p}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link href="/for/f-commerce"
-                className="inline-flex items-center gap-2 text-sm font-bold text-emerald-500 hover:text-emerald-400 transition-colors group">
-                See the full F-Commerce solution <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
-          </motion.div>
+          </AnimatePresence>
+          </div>
         </div>
       </section>
 
@@ -1193,12 +967,12 @@ export default function Home() {
             {/* BDT / USD Toggle */}
             <div className="inline-flex items-center gap-3 p-1.5 rounded-xl border" style={{ background: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(37,99,235,0.04)', borderColor: isDark ? 'rgba(255,255,255,0.07)' : 'rgba(37,99,235,0.1)' }}>
               <motion.button
-                onClick={() => toggleCurrency(false)}
+                onClick={() => setShowUSD(false)}
                 className="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-200"
                 style={!showUSD ? { background: '#2563EB', color: '#fff' } : { color: isDark ? '#64748B' : '#94A3B8' }}
               >৳ BDT</motion.button>
               <motion.button
-                onClick={() => toggleCurrency(true)}
+                onClick={() => setShowUSD(true)}
                 className="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-200"
                 style={showUSD ? { background: '#2563EB', color: '#fff' } : { color: isDark ? '#64748B' : '#94A3B8' }}
               >$ USD</motion.button>
@@ -1238,7 +1012,7 @@ export default function Home() {
                 outcome: '14 days',
                 outcomeLabel: 'full stack deployed',
                 outcomeBg: '#3B82F6',
-                price: showUSD ? '$600' : '৳50,000',
+                price: showUSD ? '$300–$600' : '৳25,000–50,000',
                 highlights: [
                   'Complete AI OS — Notion + n8n + WhatsApp',
                   '20+ hours/week saved from day one',
@@ -1563,8 +1337,6 @@ export default function Home() {
                       src="/founder.jpg"
                       alt="Emon Hossain — Founder & CEO, SYSmoAI"
                       className="w-full h-full object-cover object-top"
-                      loading="lazy"
-                      decoding="async"
                       onError={e => {
                         const t = e.currentTarget as HTMLImageElement;
                         t.style.display = 'none';
@@ -1874,7 +1646,7 @@ export default function Home() {
               className="grid grid-cols-2 gap-4">
               {[
                 { service: 'AI Quick Win',    bd: '৳3,750–৳7,500',    usd: '$50–$100'     },
-                { service: 'F-Commerce AI Sprint', bd: '৳50,000', usd: '$600' },
+                { service: 'AI Sprint',       bd: '৳25,000–৳50,000',  usd: '$300–$600'    },
                 { service: 'AI Retainer',     bd: '৳20,000/mo',        usd: '$250/mo'      },
                 { service: 'Notion OS Build', bd: '৳15,000–৳50,000',  usd: '$800–$5,000'  },
                 { service: 'AI Agent Dev',    bd: '৳50,000+',          usd: '$2,500+'      },
@@ -1915,11 +1687,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* ══════════════════════════════════════
-          WAITLIST SECTION
-      ══════════════════════════════════════ */}
-      <WaitlistSection isDark={isDark} />
 
       <section className="py-16 relative overflow-hidden" style={{ background: isDark ? '#060810' : '#F8FAFF', borderTop: `1px solid ${isDark ? 'rgba(255,255,255,0.04)' : 'rgba(37,99,235,0.08)'}` }}>
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}

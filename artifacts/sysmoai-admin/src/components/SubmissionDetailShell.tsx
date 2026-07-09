@@ -76,7 +76,7 @@ export function SubmissionDetailShell({
           <Skeleton className="h-48 w-full" />
         </div>
       ) : isError || !data ? (
-        <p className="text-sm text-destructive" data-testid="text-detail-error">
+        <p className="text-sm text-red-400" data-testid="text-detail-error">
           {errorMessage ?? "Could not load submission."}
         </p>
       ) : (
@@ -145,7 +145,7 @@ export function SubmissionDetailShell({
                 </div>
                 {saveError && (
                   <p
-                    className="text-sm text-destructive"
+                    className="text-sm text-red-400"
                     data-testid="text-save-error"
                   >
                     {saveError}
@@ -153,7 +153,7 @@ export function SubmissionDetailShell({
                 )}
                 {saveSuccess && !saveError && (
                   <p
-                    className="text-sm text-emerald-600 dark:text-emerald-400"
+                    className="text-sm text-emerald-400"
                     data-testid="text-save-success"
                   >
                     Saved.

@@ -27,7 +27,7 @@ export default function SMEFounders() {
         { icon: '📊', title: 'Business Dashboard', desc: 'See revenue, leads, tasks, and team status in 60 seconds — so you\'re always in control without micromanaging.' },
       ]}
       relevantServices={[
-        { href: '/services/ai-sprint', label: 'F-Commerce AI Sprint', price: '৳50,000' },
+        { href: '/services/ai-sprint', label: 'AI Sprint (full OS)', price: '৳25,000–50,000' },
         { href: '/services/ai-retainer', label: 'AI Retainer', price: '৳20,000/month' },
         { href: '/services/notion-os', label: 'Notion OS Build', price: '৳15,000–50,000' },
       ]}

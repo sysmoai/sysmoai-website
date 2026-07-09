@@ -60,20 +60,6 @@ export const createAuditRequestBodyCompanyMax = 200;
 export const createAuditRequestBodyBiggestChallengeMin = 10;
 export const createAuditRequestBodyBiggestChallengeMax = 5000;
 
-export const createAuditRequestBodyCurrentToolsMax = 500;
-
-export const createAuditRequestBodyUtmSourceMax = 200;
-
-export const createAuditRequestBodyUtmMediumMax = 200;
-
-export const createAuditRequestBodyUtmCampaignMax = 200;
-
-export const createAuditRequestBodyUtmContentMax = 200;
-
-export const createAuditRequestBodyUtmTermMax = 200;
-
-export const createAuditRequestBodyReferrerMax = 500;
-
 export const CreateAuditRequestBody = zod.object({
   name: zod
     .string()
@@ -86,29 +72,6 @@ export const CreateAuditRequestBody = zod.object({
     .string()
     .min(createAuditRequestBodyBiggestChallengeMin)
     .max(createAuditRequestBodyBiggestChallengeMax),
-  businessType: zod
-    .enum(["f_commerce", "service", "agency", "other"])
-    .nullish(),
-  monthlyOrders: zod.enum(["<50", "50-200", "200-1000", "1000+"]).nullish(),
-  dailyDmVolume: zod.enum(["<20", "20-100", "100-500", "500+"]).nullish(),
-  currentTools: zod
-    .string()
-    .max(createAuditRequestBodyCurrentToolsMax)
-    .nullish(),
-  usesBkashNagad: zod.enum(["yes", "no", "mix"]).nullish(),
-  preferredCurrency: zod.enum(["BDT", "USD"]).nullish(),
-  utmSource: zod.string().max(createAuditRequestBodyUtmSourceMax).nullish(),
-  utmMedium: zod.string().max(createAuditRequestBodyUtmMediumMax).nullish(),
-  utmCampaign: zod
-    .string()
-    .max(createAuditRequestBodyUtmCampaignMax)
-    .nullish()
-    .describe(
-      'Slug matching scheduled_posts (e.g. \"w1-l1\", \"w2-thread2\").',
-    ),
-  utmContent: zod.string().max(createAuditRequestBodyUtmContentMax).nullish(),
-  utmTerm: zod.string().max(createAuditRequestBodyUtmTermMax).nullish(),
-  referrer: zod.string().max(createAuditRequestBodyReferrerMax).nullish(),
 });
 
 /**
@@ -120,31 +83,10 @@ export const createWaitlistSignupBodyNameMax = 200;
 
 export const createWaitlistSignupBodySourceMax = 100;
 
-export const createWaitlistSignupBodyUtmSourceMax = 200;
-
-export const createWaitlistSignupBodyUtmMediumMax = 200;
-
-export const createWaitlistSignupBodyUtmCampaignMax = 200;
-
-export const createWaitlistSignupBodyUtmContentMax = 200;
-
-export const createWaitlistSignupBodyUtmTermMax = 200;
-
-export const createWaitlistSignupBodyReferrerMax = 500;
-
 export const CreateWaitlistSignupBody = zod.object({
   email: zod.string().email().max(createWaitlistSignupBodyEmailMax),
   name: zod.string().max(createWaitlistSignupBodyNameMax).nullish(),
   source: zod.string().max(createWaitlistSignupBodySourceMax).nullish(),
-  utmSource: zod.string().max(createWaitlistSignupBodyUtmSourceMax).nullish(),
-  utmMedium: zod.string().max(createWaitlistSignupBodyUtmMediumMax).nullish(),
-  utmCampaign: zod
-    .string()
-    .max(createWaitlistSignupBodyUtmCampaignMax)
-    .nullish(),
-  utmContent: zod.string().max(createWaitlistSignupBodyUtmContentMax).nullish(),
-  utmTerm: zod.string().max(createWaitlistSignupBodyUtmTermMax).nullish(),
-  referrer: zod.string().max(createWaitlistSignupBodyReferrerMax).nullish(),
 });
 
 /**
@@ -271,10 +213,6 @@ export const listAuditRequestsQueryPageDefault = 1;
 export const listAuditRequestsQueryPageSizeDefault = 25;
 export const listAuditRequestsQueryPageSizeMax = 100;
 
-export const listAuditRequestsQueryCurrentToolsSearchMax = 100;
-
-export const listAuditRequestsQuerySortOrderDefault = `desc`;
-
 export const ListAuditRequestsQueryParams = zod.object({
   page: zod.coerce.number().min(1).default(listAuditRequestsQueryPageDefault),
   pageSize: zod.coerce
@@ -283,39 +221,6 @@ export const ListAuditRequestsQueryParams = zod.object({
     .max(listAuditRequestsQueryPageSizeMax)
     .default(listAuditRequestsQueryPageSizeDefault),
   status: zod.enum(["new", "contacted", "archived"]).optional(),
-  businessType: zod
-    .enum(["f_commerce", "service", "agency", "other"])
-    .optional()
-    .describe("Filter by business type"),
-  usesBkashNagad: zod
-    .enum(["yes", "no", "mix"])
-    .optional()
-    .describe("Filter by bKash\/Nagad usage"),
-  preferredCurrency: zod
-    .enum(["BDT", "USD"])
-    .optional()
-    .describe("Filter by preferred currency"),
-  monthlyOrders: zod
-    .enum(["<50", "50-200", "200-1000", "1000+"])
-    .optional()
-    .describe("Filter by monthly orders bucket"),
-  dailyDmVolume: zod
-    .enum(["<20", "20-100", "100-500", "500+"])
-    .optional()
-    .describe("Filter by daily DM volume bucket"),
-  currentToolsSearch: zod.coerce
-    .string()
-    .max(listAuditRequestsQueryCurrentToolsSearchMax)
-    .optional()
-    .describe("Case-insensitive substring search on currentTools"),
-  sortBy: zod
-    .enum(["monthlyOrders", "dailyDmVolume"])
-    .optional()
-    .describe("Sort by qualifying volume field (bucket-ordered)"),
-  sortOrder: zod
-    .enum(["asc", "desc"])
-    .default(listAuditRequestsQuerySortOrderDefault)
-    .describe("Sort direction"),
 });
 
 export const ListAuditRequestsResponse = zod.object({
@@ -327,18 +232,6 @@ export const ListAuditRequestsResponse = zod.object({
       whatsapp: zod.string().nullish(),
       company: zod.string().nullish(),
       biggestChallenge: zod.string(),
-      businessType: zod.string().nullish(),
-      monthlyOrders: zod.string().nullish(),
-      dailyDmVolume: zod.string().nullish(),
-      currentTools: zod.string().nullish(),
-      usesBkashNagad: zod.string().nullish(),
-      preferredCurrency: zod.string().nullish(),
-      utmSource: zod.string().nullish(),
-      utmMedium: zod.string().nullish(),
-      utmCampaign: zod.string().nullish(),
-      utmContent: zod.string().nullish(),
-      utmTerm: zod.string().nullish(),
-      referrer: zod.string().nullish(),
       status: zod.enum(["new", "contacted", "archived"]),
       internalNote: zod.string().nullish(),
       createdAt: zod.coerce.date(),
@@ -366,18 +259,6 @@ export const GetAuditRequestResponse = zod.object({
   whatsapp: zod.string().nullish(),
   company: zod.string().nullish(),
   biggestChallenge: zod.string(),
-  businessType: zod.string().nullish(),
-  monthlyOrders: zod.string().nullish(),
-  dailyDmVolume: zod.string().nullish(),
-  currentTools: zod.string().nullish(),
-  usesBkashNagad: zod.string().nullish(),
-  preferredCurrency: zod.string().nullish(),
-  utmSource: zod.string().nullish(),
-  utmMedium: zod.string().nullish(),
-  utmCampaign: zod.string().nullish(),
-  utmContent: zod.string().nullish(),
-  utmTerm: zod.string().nullish(),
-  referrer: zod.string().nullish(),
   status: zod.enum(["new", "contacted", "archived"]),
   internalNote: zod.string().nullish(),
   createdAt: zod.coerce.date(),
@@ -402,504 +283,9 @@ export const UpdateAuditRequestResponse = zod.object({
   whatsapp: zod.string().nullish(),
   company: zod.string().nullish(),
   biggestChallenge: zod.string(),
-  businessType: zod.string().nullish(),
-  monthlyOrders: zod.string().nullish(),
-  dailyDmVolume: zod.string().nullish(),
-  currentTools: zod.string().nullish(),
-  usesBkashNagad: zod.string().nullish(),
-  preferredCurrency: zod.string().nullish(),
-  utmSource: zod.string().nullish(),
-  utmMedium: zod.string().nullish(),
-  utmCampaign: zod.string().nullish(),
-  utmContent: zod.string().nullish(),
-  utmTerm: zod.string().nullish(),
-  referrer: zod.string().nullish(),
   status: zod.enum(["new", "contacted", "archived"]),
   internalNote: zod.string().nullish(),
   createdAt: zod.coerce.date(),
-});
-
-/**
- * @summary Public Sprint slot availability for F-Commerce pages
- */
-export const getSprintAvailabilityResponseSlotsAvailableMin = 0;
-
-export const GetSprintAvailabilityResponse = zod.object({
-  slotsAvailable: zod
-    .number()
-    .min(getSprintAvailabilityResponseSlotsAvailableMin),
-  monthLabel: zod.string().describe('e.g. \"May 2026\"'),
-  nextStartDate: zod
-    .string()
-    .nullish()
-    .describe('Free-form e.g. \"May 19\" or \"2026-05-19\"'),
-  updatedAt: zod.coerce.date(),
-});
-
-/**
- * @summary Admin view of the Sprint availability config
- */
-export const getAdminSprintAvailabilityResponseSlotsAvailableMin = 0;
-
-export const GetAdminSprintAvailabilityResponse = zod.object({
-  slotsAvailable: zod
-    .number()
-    .min(getAdminSprintAvailabilityResponseSlotsAvailableMin),
-  monthLabel: zod.string().describe('e.g. \"May 2026\"'),
-  nextStartDate: zod
-    .string()
-    .nullish()
-    .describe('Free-form e.g. \"May 19\" or \"2026-05-19\"'),
-  updatedAt: zod.coerce.date(),
-});
-
-/**
- * @summary Update the Sprint availability config
- */
-export const updateSprintAvailabilityBodySlotsAvailableMin = 0;
-export const updateSprintAvailabilityBodySlotsAvailableMax = 99;
-
-export const updateSprintAvailabilityBodyMonthLabelMax = 50;
-
-export const updateSprintAvailabilityBodyNextStartDateMax = 50;
-
-export const UpdateSprintAvailabilityBody = zod.object({
-  slotsAvailable: zod
-    .number()
-    .min(updateSprintAvailabilityBodySlotsAvailableMin)
-    .max(updateSprintAvailabilityBodySlotsAvailableMax)
-    .optional(),
-  monthLabel: zod
-    .string()
-    .min(1)
-    .max(updateSprintAvailabilityBodyMonthLabelMax)
-    .optional(),
-  nextStartDate: zod
-    .string()
-    .max(updateSprintAvailabilityBodyNextStartDateMax)
-    .nullish(),
-});
-
-export const updateSprintAvailabilityResponseSlotsAvailableMin = 0;
-
-export const UpdateSprintAvailabilityResponse = zod.object({
-  slotsAvailable: zod
-    .number()
-    .min(updateSprintAvailabilityResponseSlotsAvailableMin),
-  monthLabel: zod.string().describe('e.g. \"May 2026\"'),
-  nextStartDate: zod
-    .string()
-    .nullish()
-    .describe('Free-form e.g. \"May 19\" or \"2026-05-19\"'),
-  updatedAt: zod.coerce.date(),
-});
-
-/**
- * @summary List scheduled content-pack posts (queue view)
- */
-export const listScheduledPostsQueryPageDefault = 1;
-
-export const listScheduledPostsQueryPageSizeDefault = 25;
-export const listScheduledPostsQueryPageSizeMax = 100;
-
-export const ListScheduledPostsQueryParams = zod.object({
-  page: zod.coerce.number().min(1).default(listScheduledPostsQueryPageDefault),
-  pageSize: zod.coerce
-    .number()
-    .min(1)
-    .max(listScheduledPostsQueryPageSizeMax)
-    .default(listScheduledPostsQueryPageSizeDefault),
-  status: zod.enum(["queued", "posted", "skipped", "failed"]).optional(),
-  platform: zod
-    .enum([
-      "linkedin",
-      "x_standalone",
-      "x_thread",
-      "instagram_feed",
-      "instagram_story",
-      "tiktok_reel",
-      "newsletter",
-    ])
-    .optional(),
-  funnel: zod.enum(["TOF", "MOF", "MOF_BOF", "BOF"]).optional(),
-  from: zod.coerce
-    .string()
-    .min(1)
-    .optional()
-    .describe(
-      "ISO 8601 date-time — only posts scheduled on\/after this instant",
-    ),
-  to: zod.coerce
-    .string()
-    .min(1)
-    .optional()
-    .describe(
-      "ISO 8601 date-time — only posts scheduled on\/before this instant",
-    ),
-  dueBefore: zod.coerce
-    .string()
-    .min(1)
-    .optional()
-    .describe(
-      "ISO 8601 date-time — convenience for n8n; returns queued posts whose scheduledFor is on or before this instant",
-    ),
-});
-
-export const ListScheduledPostsResponse = zod.object({
-  items: zod.array(
-    zod.object({
-      id: zod.number(),
-      sequenceNo: zod.number().describe("1..76 — order in the master calendar"),
-      fileRef: zod
-        .string()
-        .describe('Source ref e.g. \"L1\", \"X1\", \"Thread W1\"'),
-      platform: zod.enum([
-        "linkedin",
-        "x_standalone",
-        "x_thread",
-        "instagram_feed",
-        "instagram_story",
-        "tiktok_reel",
-        "newsletter",
-      ]),
-      pillar: zod.string(),
-      hookPattern: zod.string(),
-      funnel: zod.enum(["TOF", "MOF", "MOF_BOF", "BOF"]),
-      ctaCode: zod.string().describe('\"A\" = free-AI-audit, \"W\" = WhatsApp'),
-      title: zod.string(),
-      hookLine: zod.string().nullish(),
-      content: zod.string(),
-      assetUrl: zod.string().nullish(),
-      scheduledFor: zod.coerce.date(),
-      status: zod.enum(["queued", "posted", "skipped", "failed"]),
-      postedAt: zod.coerce.date().nullish(),
-      postUrl: zod.string().nullish(),
-      impressions: zod.number(),
-      clicks: zod.number(),
-      waitlistSignups: zod.number(),
-      notes: zod.string().nullish(),
-      createdAt: zod.coerce.date(),
-      updatedAt: zod.coerce.date(),
-    }),
-  ),
-  pagination: zod.object({
-    page: zod.number(),
-    pageSize: zod.number(),
-    total: zod.number(),
-    totalPages: zod.number(),
-  }),
-});
-
-/**
- * @summary Counts and next-up view for the publishing dashboard
- */
-export const GetScheduledPostsSummaryResponse = zod.object({
-  totals: zod.object({
-    total: zod.number(),
-    queued: zod.number(),
-    posted: zod.number(),
-    skipped: zod.number(),
-    failed: zod.number(),
-  }),
-  byPlatform: zod.array(
-    zod.object({
-      platform: zod.enum([
-        "linkedin",
-        "x_standalone",
-        "x_thread",
-        "instagram_feed",
-        "instagram_story",
-        "tiktok_reel",
-        "newsletter",
-      ]),
-      queued: zod.number(),
-      posted: zod.number(),
-      skipped: zod.number(),
-      failed: zod.number(),
-      total: zod.number(),
-    }),
-  ),
-  byWeek: zod.array(
-    zod.object({
-      weekStart: zod.coerce.date().describe("BDT week start (Monday)"),
-      queued: zod.number(),
-      posted: zod.number(),
-      total: zod.number(),
-    }),
-  ),
-  upcoming: zod
-    .array(
-      zod.object({
-        id: zod.number(),
-        sequenceNo: zod
-          .number()
-          .describe("1..76 — order in the master calendar"),
-        fileRef: zod
-          .string()
-          .describe('Source ref e.g. \"L1\", \"X1\", \"Thread W1\"'),
-        platform: zod.enum([
-          "linkedin",
-          "x_standalone",
-          "x_thread",
-          "instagram_feed",
-          "instagram_story",
-          "tiktok_reel",
-          "newsletter",
-        ]),
-        pillar: zod.string(),
-        hookPattern: zod.string(),
-        funnel: zod.enum(["TOF", "MOF", "MOF_BOF", "BOF"]),
-        ctaCode: zod
-          .string()
-          .describe('\"A\" = free-AI-audit, \"W\" = WhatsApp'),
-        title: zod.string(),
-        hookLine: zod.string().nullish(),
-        content: zod.string(),
-        assetUrl: zod.string().nullish(),
-        scheduledFor: zod.coerce.date(),
-        status: zod.enum(["queued", "posted", "skipped", "failed"]),
-        postedAt: zod.coerce.date().nullish(),
-        postUrl: zod.string().nullish(),
-        impressions: zod.number(),
-        clicks: zod.number(),
-        waitlistSignups: zod.number(),
-        notes: zod.string().nullish(),
-        createdAt: zod.coerce.date(),
-        updatedAt: zod.coerce.date(),
-      }),
-    )
-    .describe("Next 5 queued posts ordered by scheduledFor ASC"),
-  performance: zod.object({
-    impressions: zod.number(),
-    clicks: zod.number(),
-    waitlistSignups: zod.number(),
-  }),
-});
-
-/**
- * Counts audit_requests + waitlist_signups by their utm_campaign value
-and writes the per-piece total back to scheduled_posts.waitlistSignups
-for every row whose campaign slug matches. Idempotent — running again
-with no new leads produces the same result. Returns a summary of what
-was touched so the operator can sanity-check.
-
- * @summary Recompute waitlist signups per scheduled post from UTM attribution
- */
-export const RollupScheduledPostAttributionResponse = zod.object({
-  scannedAuditRequests: zod.number(),
-  scannedWaitlistSignups: zod.number(),
-  updatedRows: zod
-    .number()
-    .describe("Count of scheduled_posts rows whose waitlistSignups changed."),
-  unmatchedCampaigns: zod
-    .array(
-      zod.object({
-        campaign: zod.string(),
-        count: zod.number(),
-      }),
-    )
-    .describe(
-      "utm_campaign values that did not match any scheduled_posts slug.",
-    ),
-});
-
-/**
- * @summary Top scheduled posts by waitlist signups (drives Week 5+ planning)
- */
-export const getScheduledPostTopPerformersQueryLimitDefault = 20;
-export const getScheduledPostTopPerformersQueryLimitMax = 50;
-
-export const GetScheduledPostTopPerformersQueryParams = zod.object({
-  limit: zod.coerce
-    .number()
-    .min(1)
-    .max(getScheduledPostTopPerformersQueryLimitMax)
-    .default(getScheduledPostTopPerformersQueryLimitDefault),
-});
-
-export const GetScheduledPostTopPerformersResponse = zod.object({
-  items: zod.array(
-    zod.object({
-      id: zod.number(),
-      sequenceNo: zod.number(),
-      fileRef: zod.string(),
-      platform: zod.enum([
-        "linkedin",
-        "x_standalone",
-        "x_thread",
-        "instagram_feed",
-        "instagram_story",
-        "tiktok_reel",
-        "newsletter",
-      ]),
-      pillar: zod.string(),
-      hookPattern: zod.string(),
-      funnel: zod.enum(["TOF", "MOF", "MOF_BOF", "BOF"]),
-      title: zod.string(),
-      waitlistSignups: zod.number(),
-      clicks: zod.number(),
-      impressions: zod.number(),
-      campaignSlug: zod.string(),
-    }),
-  ),
-  byPillar: zod.array(
-    zod.object({
-      pillar: zod.string(),
-      signups: zod.number(),
-      pieces: zod.number(),
-    }),
-  ),
-  byPlatform: zod.array(
-    zod.object({
-      platform: zod.enum([
-        "linkedin",
-        "x_standalone",
-        "x_thread",
-        "instagram_feed",
-        "instagram_story",
-        "tiktok_reel",
-        "newsletter",
-      ]),
-      signups: zod.number(),
-      pieces: zod.number(),
-    }),
-  ),
-  byHookPattern: zod.array(
-    zod.object({
-      hookPattern: zod.string(),
-      signups: zod.number(),
-      pieces: zod.number(),
-    }),
-  ),
-});
-
-/**
- * Reads the bundled content schedule (parsed from content-pack/) and
-upserts rows by sequenceNo. Existing rows have their canonical
-metadata (title, content, scheduledFor, etc.) refreshed but their
-operational fields (status, postedAt, postUrl, metrics, notes) are
-preserved.
-
- * @summary Idempotently import the 76-piece content pack into the queue
- */
-export const SeedScheduledPostsResponse = zod.object({
-  imported: zod.number(),
-  updated: zod.number(),
-  total: zod.number(),
-});
-
-/**
- * @summary Fetch one scheduled post
- */
-export const GetScheduledPostParams = zod.object({
-  id: zod.coerce.number(),
-});
-
-export const GetScheduledPostResponse = zod.object({
-  id: zod.number(),
-  sequenceNo: zod.number().describe("1..76 — order in the master calendar"),
-  fileRef: zod
-    .string()
-    .describe('Source ref e.g. \"L1\", \"X1\", \"Thread W1\"'),
-  platform: zod.enum([
-    "linkedin",
-    "x_standalone",
-    "x_thread",
-    "instagram_feed",
-    "instagram_story",
-    "tiktok_reel",
-    "newsletter",
-  ]),
-  pillar: zod.string(),
-  hookPattern: zod.string(),
-  funnel: zod.enum(["TOF", "MOF", "MOF_BOF", "BOF"]),
-  ctaCode: zod.string().describe('\"A\" = free-AI-audit, \"W\" = WhatsApp'),
-  title: zod.string(),
-  hookLine: zod.string().nullish(),
-  content: zod.string(),
-  assetUrl: zod.string().nullish(),
-  scheduledFor: zod.coerce.date(),
-  status: zod.enum(["queued", "posted", "skipped", "failed"]),
-  postedAt: zod.coerce.date().nullish(),
-  postUrl: zod.string().nullish(),
-  impressions: zod.number(),
-  clicks: zod.number(),
-  waitlistSignups: zod.number(),
-  notes: zod.string().nullish(),
-  createdAt: zod.coerce.date(),
-  updatedAt: zod.coerce.date(),
-});
-
-/**
- * @summary Update a scheduled post — mark posted, log metrics, edit notes
- */
-export const UpdateScheduledPostParams = zod.object({
-  id: zod.coerce.number(),
-});
-
-export const updateScheduledPostBodyPostUrlMax = 500;
-
-export const updateScheduledPostBodyAssetUrlMax = 500;
-
-export const updateScheduledPostBodyImpressionsMin = 0;
-
-export const updateScheduledPostBodyClicksMin = 0;
-
-export const updateScheduledPostBodyWaitlistSignupsMin = 0;
-
-export const updateScheduledPostBodyNotesMax = 5000;
-
-export const UpdateScheduledPostBody = zod.object({
-  status: zod.enum(["queued", "posted", "skipped", "failed"]).optional(),
-  scheduledFor: zod.coerce.date().optional(),
-  postedAt: zod.coerce.date().nullish(),
-  postUrl: zod.string().max(updateScheduledPostBodyPostUrlMax).nullish(),
-  assetUrl: zod.string().max(updateScheduledPostBodyAssetUrlMax).nullish(),
-  impressions: zod
-    .number()
-    .min(updateScheduledPostBodyImpressionsMin)
-    .optional(),
-  clicks: zod.number().min(updateScheduledPostBodyClicksMin).optional(),
-  waitlistSignups: zod
-    .number()
-    .min(updateScheduledPostBodyWaitlistSignupsMin)
-    .optional(),
-  notes: zod.string().max(updateScheduledPostBodyNotesMax).nullish(),
-});
-
-export const UpdateScheduledPostResponse = zod.object({
-  id: zod.number(),
-  sequenceNo: zod.number().describe("1..76 — order in the master calendar"),
-  fileRef: zod
-    .string()
-    .describe('Source ref e.g. \"L1\", \"X1\", \"Thread W1\"'),
-  platform: zod.enum([
-    "linkedin",
-    "x_standalone",
-    "x_thread",
-    "instagram_feed",
-    "instagram_story",
-    "tiktok_reel",
-    "newsletter",
-  ]),
-  pillar: zod.string(),
-  hookPattern: zod.string(),
-  funnel: zod.enum(["TOF", "MOF", "MOF_BOF", "BOF"]),
-  ctaCode: zod.string().describe('\"A\" = free-AI-audit, \"W\" = WhatsApp'),
-  title: zod.string(),
-  hookLine: zod.string().nullish(),
-  content: zod.string(),
-  assetUrl: zod.string().nullish(),
-  scheduledFor: zod.coerce.date(),
-  status: zod.enum(["queued", "posted", "skipped", "failed"]),
-  postedAt: zod.coerce.date().nullish(),
-  postUrl: zod.string().nullish(),
-  impressions: zod.number(),
-  clicks: zod.number(),
-  waitlistSignups: zod.number(),
-  notes: zod.string().nullish(),
-  createdAt: zod.coerce.date(),
-  updatedAt: zod.coerce.date(),
 });
 
 /**
@@ -927,12 +313,6 @@ export const ListWaitlistSignupsResponse = zod.object({
       email: zod.string(),
       name: zod.string().nullish(),
       source: zod.string().nullish(),
-      utmSource: zod.string().nullish(),
-      utmMedium: zod.string().nullish(),
-      utmCampaign: zod.string().nullish(),
-      utmContent: zod.string().nullish(),
-      utmTerm: zod.string().nullish(),
-      referrer: zod.string().nullish(),
       status: zod.enum(["new", "contacted", "archived"]),
       internalNote: zod.string().nullish(),
       createdAt: zod.coerce.date(),
@@ -958,12 +338,6 @@ export const GetWaitlistSignupResponse = zod.object({
   email: zod.string(),
   name: zod.string().nullish(),
   source: zod.string().nullish(),
-  utmSource: zod.string().nullish(),
-  utmMedium: zod.string().nullish(),
-  utmCampaign: zod.string().nullish(),
-  utmContent: zod.string().nullish(),
-  utmTerm: zod.string().nullish(),
-  referrer: zod.string().nullish(),
   status: zod.enum(["new", "contacted", "archived"]),
   internalNote: zod.string().nullish(),
   createdAt: zod.coerce.date(),
@@ -986,12 +360,6 @@ export const UpdateWaitlistSignupResponse = zod.object({
   email: zod.string(),
   name: zod.string().nullish(),
   source: zod.string().nullish(),
-  utmSource: zod.string().nullish(),
-  utmMedium: zod.string().nullish(),
-  utmCampaign: zod.string().nullish(),
-  utmContent: zod.string().nullish(),
-  utmTerm: zod.string().nullish(),
-  referrer: zod.string().nullish(),
   status: zod.enum(["new", "contacted", "archived"]),
   internalNote: zod.string().nullish(),
   createdAt: zod.coerce.date(),

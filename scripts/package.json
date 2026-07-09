@@ -5,18 +5,10 @@
   "type": "module",
   "scripts": {
     "hello": "tsx ./src/hello.ts",
-    "build-sitemap": "tsx ./src/buildSitemap.ts",
-    "build-content-schedule": "tsx ./src/buildContentSchedule.ts",
-    "build-week5-pack": "tsx ./src/buildWeek5Pack.ts",
-    "test-slug-parity": "tsx ./src/testCampaignSlugParity.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
     "@types/node": "catalog:",
     "tsx": "catalog:"
-  },
-  "dependencies": {
-    "@types/pg": "^8.18.0",
-    "pg": "^8.20.0"
   }
 }

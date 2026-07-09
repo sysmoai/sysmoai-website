@@ -97,58 +97,6 @@ export interface ContactSubmissionList {
   pagination: Pagination;
 }
 
-export type AuditRequestInputBusinessType =
-  | (typeof AuditRequestInputBusinessType)[keyof typeof AuditRequestInputBusinessType]
-  | null;
-
-export const AuditRequestInputBusinessType = {
-  f_commerce: "f_commerce",
-  service: "service",
-  agency: "agency",
-  other: "other",
-} as const;
-
-export type AuditRequestInputMonthlyOrders =
-  | (typeof AuditRequestInputMonthlyOrders)[keyof typeof AuditRequestInputMonthlyOrders]
-  | null;
-
-export const AuditRequestInputMonthlyOrders = {
-  "<50": "<50",
-  "50-200": "50-200",
-  "200-1000": "200-1000",
-  "1000+": "1000+",
-} as const;
-
-export type AuditRequestInputDailyDmVolume =
-  | (typeof AuditRequestInputDailyDmVolume)[keyof typeof AuditRequestInputDailyDmVolume]
-  | null;
-
-export const AuditRequestInputDailyDmVolume = {
-  "<20": "<20",
-  "20-100": "20-100",
-  "100-500": "100-500",
-  "500+": "500+",
-} as const;
-
-export type AuditRequestInputUsesBkashNagad =
-  | (typeof AuditRequestInputUsesBkashNagad)[keyof typeof AuditRequestInputUsesBkashNagad]
-  | null;
-
-export const AuditRequestInputUsesBkashNagad = {
-  yes: "yes",
-  no: "no",
-  mix: "mix",
-} as const;
-
-export type AuditRequestInputPreferredCurrency =
-  | (typeof AuditRequestInputPreferredCurrency)[keyof typeof AuditRequestInputPreferredCurrency]
-  | null;
-
-export const AuditRequestInputPreferredCurrency = {
-  BDT: "BDT",
-  USD: "USD",
-} as const;
-
 export interface AuditRequestInput {
   /**
    * @minLength 2
@@ -166,28 +114,6 @@ export interface AuditRequestInput {
    * @maxLength 5000
    */
   biggestChallenge: string;
-  businessType?: AuditRequestInputBusinessType;
-  monthlyOrders?: AuditRequestInputMonthlyOrders;
-  dailyDmVolume?: AuditRequestInputDailyDmVolume;
-  /** @maxLength 500 */
-  currentTools?: string | null;
-  usesBkashNagad?: AuditRequestInputUsesBkashNagad;
-  preferredCurrency?: AuditRequestInputPreferredCurrency;
-  /** @maxLength 200 */
-  utmSource?: string | null;
-  /** @maxLength 200 */
-  utmMedium?: string | null;
-  /**
-   * Slug matching scheduled_posts (e.g. "w1-l1", "w2-thread2").
-   * @maxLength 200
-   */
-  utmCampaign?: string | null;
-  /** @maxLength 200 */
-  utmContent?: string | null;
-  /** @maxLength 200 */
-  utmTerm?: string | null;
-  /** @maxLength 500 */
-  referrer?: string | null;
 }
 
 export interface AuditRequest {
@@ -197,18 +123,6 @@ export interface AuditRequest {
   whatsapp?: string | null;
   company?: string | null;
   biggestChallenge: string;
-  businessType?: string | null;
-  monthlyOrders?: string | null;
-  dailyDmVolume?: string | null;
-  currentTools?: string | null;
-  usesBkashNagad?: string | null;
-  preferredCurrency?: string | null;
-  utmSource?: string | null;
-  utmMedium?: string | null;
-  utmCampaign?: string | null;
-  utmContent?: string | null;
-  utmTerm?: string | null;
-  referrer?: string | null;
   status: SubmissionStatus;
   internalNote?: string | null;
   createdAt: string;
@@ -226,18 +140,6 @@ export interface WaitlistSignupInput {
   name?: string | null;
   /** @maxLength 100 */
   source?: string | null;
-  /** @maxLength 200 */
-  utmSource?: string | null;
-  /** @maxLength 200 */
-  utmMedium?: string | null;
-  /** @maxLength 200 */
-  utmCampaign?: string | null;
-  /** @maxLength 200 */
-  utmContent?: string | null;
-  /** @maxLength 200 */
-  utmTerm?: string | null;
-  /** @maxLength 500 */
-  referrer?: string | null;
 }
 
 export interface WaitlistSignup {
@@ -245,229 +147,14 @@ export interface WaitlistSignup {
   email: string;
   name?: string | null;
   source?: string | null;
-  utmSource?: string | null;
-  utmMedium?: string | null;
-  utmCampaign?: string | null;
-  utmContent?: string | null;
-  utmTerm?: string | null;
-  referrer?: string | null;
   status: SubmissionStatus;
   internalNote?: string | null;
   createdAt: string;
 }
 
-export interface SprintAvailability {
-  /** @minimum 0 */
-  slotsAvailable: number;
-  /** e.g. "May 2026" */
-  monthLabel: string;
-  /** Free-form e.g. "May 19" or "2026-05-19" */
-  nextStartDate?: string | null;
-  updatedAt: string;
-}
-
-export interface SprintAvailabilityUpdate {
-  /**
-   * @minimum 0
-   * @maximum 99
-   */
-  slotsAvailable?: number;
-  /**
-   * @minLength 1
-   * @maxLength 50
-   */
-  monthLabel?: string;
-  /** @maxLength 50 */
-  nextStartDate?: string | null;
-}
-
 export interface WaitlistSignupList {
   items: WaitlistSignup[];
   pagination: Pagination;
-}
-
-export type AttributionRollupResultUnmatchedCampaignsItem = {
-  campaign: string;
-  count: number;
-};
-
-export interface AttributionRollupResult {
-  scannedAuditRequests: number;
-  scannedWaitlistSignups: number;
-  /** Count of scheduled_posts rows whose waitlistSignups changed. */
-  updatedRows: number;
-  /** utm_campaign values that did not match any scheduled_posts slug. */
-  unmatchedCampaigns: AttributionRollupResultUnmatchedCampaignsItem[];
-}
-
-export type ScheduledPostPlatform =
-  (typeof ScheduledPostPlatform)[keyof typeof ScheduledPostPlatform];
-
-export const ScheduledPostPlatform = {
-  linkedin: "linkedin",
-  x_standalone: "x_standalone",
-  x_thread: "x_thread",
-  instagram_feed: "instagram_feed",
-  instagram_story: "instagram_story",
-  tiktok_reel: "tiktok_reel",
-  newsletter: "newsletter",
-} as const;
-
-export type ScheduledPostFunnel =
-  (typeof ScheduledPostFunnel)[keyof typeof ScheduledPostFunnel];
-
-export const ScheduledPostFunnel = {
-  TOF: "TOF",
-  MOF: "MOF",
-  MOF_BOF: "MOF_BOF",
-  BOF: "BOF",
-} as const;
-
-export interface TopPerformerRow {
-  id: number;
-  sequenceNo: number;
-  fileRef: string;
-  platform: ScheduledPostPlatform;
-  pillar: string;
-  hookPattern: string;
-  funnel: ScheduledPostFunnel;
-  title: string;
-  waitlistSignups: number;
-  clicks: number;
-  impressions: number;
-  campaignSlug: string;
-}
-
-export type TopPerformersResponseByPillarItem = {
-  pillar: string;
-  signups: number;
-  pieces: number;
-};
-
-export type TopPerformersResponseByPlatformItem = {
-  platform: ScheduledPostPlatform;
-  signups: number;
-  pieces: number;
-};
-
-export type TopPerformersResponseByHookPatternItem = {
-  hookPattern: string;
-  signups: number;
-  pieces: number;
-};
-
-export interface TopPerformersResponse {
-  items: TopPerformerRow[];
-  byPillar: TopPerformersResponseByPillarItem[];
-  byPlatform: TopPerformersResponseByPlatformItem[];
-  byHookPattern: TopPerformersResponseByHookPatternItem[];
-}
-
-export type ScheduledPostStatus =
-  (typeof ScheduledPostStatus)[keyof typeof ScheduledPostStatus];
-
-export const ScheduledPostStatus = {
-  queued: "queued",
-  posted: "posted",
-  skipped: "skipped",
-  failed: "failed",
-} as const;
-
-export interface ScheduledPost {
-  id: number;
-  /** 1..76 — order in the master calendar */
-  sequenceNo: number;
-  /** Source ref e.g. "L1", "X1", "Thread W1" */
-  fileRef: string;
-  platform: ScheduledPostPlatform;
-  pillar: string;
-  hookPattern: string;
-  funnel: ScheduledPostFunnel;
-  /** "A" = free-AI-audit, "W" = WhatsApp */
-  ctaCode: string;
-  title: string;
-  hookLine?: string | null;
-  content: string;
-  assetUrl?: string | null;
-  scheduledFor: string;
-  status: ScheduledPostStatus;
-  postedAt?: string | null;
-  postUrl?: string | null;
-  impressions: number;
-  clicks: number;
-  waitlistSignups: number;
-  notes?: string | null;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface ScheduledPostList {
-  items: ScheduledPost[];
-  pagination: Pagination;
-}
-
-export interface ScheduledPostUpdate {
-  status?: ScheduledPostStatus;
-  scheduledFor?: string;
-  postedAt?: string | null;
-  /** @maxLength 500 */
-  postUrl?: string | null;
-  /** @maxLength 500 */
-  assetUrl?: string | null;
-  /** @minimum 0 */
-  impressions?: number;
-  /** @minimum 0 */
-  clicks?: number;
-  /** @minimum 0 */
-  waitlistSignups?: number;
-  /** @maxLength 5000 */
-  notes?: string | null;
-}
-
-export interface ScheduledPostsSeedResult {
-  imported: number;
-  updated: number;
-  total: number;
-}
-
-export interface PlatformCount {
-  platform: ScheduledPostPlatform;
-  queued: number;
-  posted: number;
-  skipped: number;
-  failed: number;
-  total: number;
-}
-
-export interface WeekCount {
-  /** BDT week start (Monday) */
-  weekStart: string;
-  queued: number;
-  posted: number;
-  total: number;
-}
-
-export type ScheduledPostsSummaryTotals = {
-  total: number;
-  queued: number;
-  posted: number;
-  skipped: number;
-  failed: number;
-};
-
-export type ScheduledPostsSummaryPerformance = {
-  impressions: number;
-  clicks: number;
-  waitlistSignups: number;
-};
-
-export interface ScheduledPostsSummary {
-  totals: ScheduledPostsSummaryTotals;
-  byPlatform: PlatformCount[];
-  byWeek: WeekCount[];
-  /** Next 5 queued posts ordered by scheduledFor ASC */
-  upcoming: ScheduledPost[];
-  performance: ScheduledPostsSummaryPerformance;
 }
 
 /**
@@ -525,140 +212,6 @@ export type ListAuditRequestsParams = {
    */
   pageSize?: PageSizeParamParameter;
   status?: StatusParamParameter;
-  /**
-   * Filter by business type
-   */
-  businessType?: ListAuditRequestsBusinessType;
-  /**
-   * Filter by bKash/Nagad usage
-   */
-  usesBkashNagad?: ListAuditRequestsUsesBkashNagad;
-  /**
-   * Filter by preferred currency
-   */
-  preferredCurrency?: ListAuditRequestsPreferredCurrency;
-  /**
-   * Filter by monthly orders bucket
-   */
-  monthlyOrders?: ListAuditRequestsMonthlyOrders;
-  /**
-   * Filter by daily DM volume bucket
-   */
-  dailyDmVolume?: ListAuditRequestsDailyDmVolume;
-  /**
-   * Case-insensitive substring search on currentTools
-   * @maxLength 100
-   */
-  currentToolsSearch?: string;
-  /**
-   * Sort by qualifying volume field (bucket-ordered)
-   */
-  sortBy?: ListAuditRequestsSortBy;
-  /**
-   * Sort direction
-   */
-  sortOrder?: ListAuditRequestsSortOrder;
-};
-
-export type ListAuditRequestsBusinessType =
-  (typeof ListAuditRequestsBusinessType)[keyof typeof ListAuditRequestsBusinessType];
-
-export const ListAuditRequestsBusinessType = {
-  f_commerce: "f_commerce",
-  service: "service",
-  agency: "agency",
-  other: "other",
-} as const;
-
-export type ListAuditRequestsUsesBkashNagad =
-  (typeof ListAuditRequestsUsesBkashNagad)[keyof typeof ListAuditRequestsUsesBkashNagad];
-
-export const ListAuditRequestsUsesBkashNagad = {
-  yes: "yes",
-  no: "no",
-  mix: "mix",
-} as const;
-
-export type ListAuditRequestsPreferredCurrency =
-  (typeof ListAuditRequestsPreferredCurrency)[keyof typeof ListAuditRequestsPreferredCurrency];
-
-export const ListAuditRequestsPreferredCurrency = {
-  BDT: "BDT",
-  USD: "USD",
-} as const;
-
-export type ListAuditRequestsMonthlyOrders =
-  (typeof ListAuditRequestsMonthlyOrders)[keyof typeof ListAuditRequestsMonthlyOrders];
-
-export const ListAuditRequestsMonthlyOrders = {
-  "<50": "<50",
-  "50-200": "50-200",
-  "200-1000": "200-1000",
-  "1000+": "1000+",
-} as const;
-
-export type ListAuditRequestsDailyDmVolume =
-  (typeof ListAuditRequestsDailyDmVolume)[keyof typeof ListAuditRequestsDailyDmVolume];
-
-export const ListAuditRequestsDailyDmVolume = {
-  "<20": "<20",
-  "20-100": "20-100",
-  "100-500": "100-500",
-  "500+": "500+",
-} as const;
-
-export type ListAuditRequestsSortBy =
-  (typeof ListAuditRequestsSortBy)[keyof typeof ListAuditRequestsSortBy];
-
-export const ListAuditRequestsSortBy = {
-  monthlyOrders: "monthlyOrders",
-  dailyDmVolume: "dailyDmVolume",
-} as const;
-
-export type ListAuditRequestsSortOrder =
-  (typeof ListAuditRequestsSortOrder)[keyof typeof ListAuditRequestsSortOrder];
-
-export const ListAuditRequestsSortOrder = {
-  asc: "asc",
-  desc: "desc",
-} as const;
-
-export type ListScheduledPostsParams = {
-  /**
-   * @minimum 1
-   */
-  page?: PageParamParameter;
-  /**
-   * @minimum 1
-   * @maximum 100
-   */
-  pageSize?: PageSizeParamParameter;
-  status?: ScheduledPostStatus;
-  platform?: ScheduledPostPlatform;
-  funnel?: ScheduledPostFunnel;
-  /**
-   * ISO 8601 date-time — only posts scheduled on/after this instant
-   * @minLength 1
-   */
-  from?: string;
-  /**
-   * ISO 8601 date-time — only posts scheduled on/before this instant
-   * @minLength 1
-   */
-  to?: string;
-  /**
-   * ISO 8601 date-time — convenience for n8n; returns queued posts whose scheduledFor is on or before this instant
-   * @minLength 1
-   */
-  dueBefore?: string;
-};
-
-export type GetScheduledPostTopPerformersParams = {
-  /**
-   * @minimum 1
-   * @maximum 50
-   */
-  limit?: number;
 };
 
 export type ListWaitlistSignupsParams = {

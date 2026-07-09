@@ -11,7 +11,6 @@ export default function AIQuickWin() {
       bdPrice="৳3,750–7,500"
       usdPrice="$50–$100"
       guarantee="Guaranteed or rebuilt free"
-      directAnswer="The AI Quick Win is SYSmoAI's entry-level service that automates your single most painful workflow in 3 days for ৳3,750–৳7,500 ($50–$100). Perfect for first-time AI clients — guaranteed or rebuilt free. Covers lead capture, DM auto-reply, invoice generation, order tracking, report automation, or any repeatable manual process."
       whatItIs="The AI Quick Win is our entry-level, low-risk service designed to automate your single most painful manual workflow in 3 days or less. It's the fastest way to see real ROI from AI — without any upfront commitment to a larger project. Perfect for first-time AI clients who want proof before investing more."
       deliverables={[
         '1 workflow fully designed and automated',
@@ -45,9 +44,9 @@ export default function AIQuickWin() {
         { q: 'What if I want more workflows after this?', a: 'Many Quick Win clients upgrade to our AI Sprint — a full AI system build. The Quick Win is often the first step in a longer journey.' },
       ]}
       relatedServices={[
-        { href: '/services/ai-sprint', label: 'F-Commerce AI Sprint (14 days)', price: '৳50,000' },
-        { href: '/services/ai-retainer', label: 'AI Retainer (monthly)', price: '৳20,000/mo' },
-        { href: '/services/other-engagements', label: 'Other Engagements', price: 'By inquiry' },
+        { href: '/services/ai-sprint', label: 'AI Sprint (14 days)', price: '৳25,000–50,000' },
+        { href: '/services/notion-os', label: 'Notion OS Build', price: '৳15,000–50,000' },
+        { href: '/services/n8n-automation', label: 'n8n Automation', price: '৳2,000–10,000/workflow' },
       ]}
     />
   );

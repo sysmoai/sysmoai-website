@@ -4,7 +4,6 @@ import { Link } from 'wouter';
 import { MessageCircle, ArrowRight } from 'lucide-react';
 import { WA_LINK } from '@/lib/config';
 import { useTheme } from '@/contexts/ThemeContext';
-import { DirectAnswer } from '@/components/DirectAnswer';
 import {
   Accordion,
   AccordionContent,
@@ -82,59 +81,39 @@ export function AudiencePageTemplate({
     <div className="flex flex-col w-full overflow-hidden" style={{ background: bg1 }}>
 
       {/* Hero */}
-      <section className="relative py-20 md:py-28 min-h-[70vh] flex items-center" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #FFFFFF 0%, #F0F6FF 100%)' }}>
+      <section className="relative bg-[#0A0B0F] py-20 md:py-28 min-h-[70vh] flex items-center">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600 opacity-[0.1] blur-[120px] rounded-full" />
         </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            <span className="inline-block text-sm font-medium px-4 py-2 rounded-full mb-8" style={{ background: isDark ? 'rgba(37,99,235,0.10)' : '#EFF6FF', border: `1px solid ${isDark ? 'rgba(37,99,235,0.20)' : '#BFDBFE'}`, color: isDark ? '#60A5FA' : '#1D4ED8' }}>
+            <span className="inline-block bg-blue-600/10 border border-blue-600/20 text-blue-400 text-sm font-medium px-4 py-2 rounded-full mb-8">
               For {segment}
             </span>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6"
-            style={{ color: heading }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight mb-6"
           >
             {heroHeadline}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.25 }}
-            className="text-lg md:text-xl mb-10 max-w-2xl leading-relaxed"
-            style={{ color: body }}
+            className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl leading-relaxed"
           >
             {heroSub}
           </motion.p>
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="flex flex-wrap gap-4 items-center">
-            <Link
-              href="/free-ai-audit"
-              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] min-h-[52px]"
-            >
-              <ArrowRight size={20} />
-              Book Free F-Commerce Audit
-            </Link>
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }}>
             <a
               href={WA_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-[#25D366]/40 text-[#25D366] hover:bg-[#25D366]/10 px-6 py-4 rounded-xl font-semibold text-base transition-all min-h-[52px]"
+              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-[0_0_20px_rgba(37,211,102,0.3)] min-h-[52px]"
             >
-              <MessageCircle size={18} />
-              WhatsApp
+              <MessageCircle size={20} />
+              Book Free AI Audit on WhatsApp
             </a>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Direct Answer — GEO */}
-      <section className="pt-10 pb-0" style={{ background: bg1 }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <DirectAnswer>
-            {segment === 'F-Commerce Sellers'
-              ? "SYSmoAI automates F-commerce operations in Bangladesh — DM auto-reply, order tracking, bKash payment workflows, and customer re-engagement — so sellers stop missing 400+ leads per day. The F-Commerce AI Sprint deploys the full stack in 14 days for ৳50,000."
-              : `SYSmoAI helps ${segment} in Bangladesh automate repetitive workflows with AI — cutting manual work by 40–70% and letting you scale without adding staff. Starting at ৳3,750 for a single workflow automation.`}
-          </DirectAnswer>
         </div>
       </section>
 
@@ -335,19 +314,17 @@ export function AudiencePageTemplate({
       )}
 
       {/* Final CTA */}
-      <section className="py-20" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #F8FAFF 0%, #EFF6FF 100%)' }}>
+      <section className="py-20 bg-[#0A0B0F]">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <motion.h2
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-3xl md:text-4xl font-bold mb-4 tracking-tight"
-            style={{ color: heading }}
+            className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight"
           >
             {finalCtaHeadline}
           </motion.h2>
           <motion.p
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="mb-8"
-            style={{ color: body }}
+            className="text-slate-400 mb-8"
           >
             Book a free 30-min AI Audit — no commitment required.
           </motion.p>

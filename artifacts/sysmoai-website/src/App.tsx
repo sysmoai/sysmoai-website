@@ -6,13 +6,11 @@ import { lazy, Suspense, useEffect } from "react";
 import { useSeo } from "@/hooks/useSeo";
 
 import { ThemeProvider } from "@/contexts/ThemeContext";
-import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFAB } from "@/components/WhatsAppFAB";
 import { CookieConsent } from "@/components/CookieConsent";
 import StickyCTA from "@/components/StickyCTA";
-import { RedirectTo } from "@/components/RedirectTo";
 
 import Home from "@/pages/Home";
 import NotFound from "@/pages/not-found";
@@ -26,17 +24,27 @@ const Pricing = lazy(() => import("@/pages/Pricing"));
 const Proof = lazy(() => import("@/pages/Proof"));
 const FAQ = lazy(() => import("@/pages/FAQ"));
 
-// Anchor services (kept with full pages)
+const ServiceAIQuickWin = lazy(() => import("@/pages/services/AIQuickWin"));
 const ServiceAISprint = lazy(() => import("@/pages/services/AISprint"));
 const ServiceAIRetainer = lazy(() => import("@/pages/services/AIRetainer"));
-const ServiceAIQuickWin = lazy(() => import("@/pages/services/AIQuickWin"));
-
-// International kept (distinct product/pricing, not redirected)
+const ServiceAICoaching = lazy(() => import("@/pages/services/AICoaching"));
+const ServiceGroupWorkshop = lazy(() => import("@/pages/services/GroupWorkshop"));
+const ServiceNotionOS = lazy(() => import("@/pages/services/NotionOS"));
+const ServiceAIAgentDev = lazy(() => import("@/pages/services/AIAgentDev"));
+const ServiceN8nAutomation = lazy(() => import("@/pages/services/N8nAutomation"));
+const ServiceCorporateTraining = lazy(() => import("@/pages/services/CorporateTraining"));
 const ServiceInternational = lazy(() => import("@/pages/services/International"));
-const ServiceOtherEngagements = lazy(() => import("@/pages/services/OtherEngagements"));
 
-// Primary audience page (wedge)
+const ForStudents = lazy(() => import("@/pages/for/Students"));
+const ForJobSeekers = lazy(() => import("@/pages/for/JobSeekers"));
+const ForFreelancers = lazy(() => import("@/pages/for/Freelancers"));
+const ForResearchers = lazy(() => import("@/pages/for/Researchers"));
+const ForAgencies = lazy(() => import("@/pages/for/Agencies"));
+const ForSMEFounders = lazy(() => import("@/pages/for/SMEFounders"));
 const ForFCommerce = lazy(() => import("@/pages/for/FCommerce"));
+const ForConsultants = lazy(() => import("@/pages/for/Consultants"));
+const ForCreators = lazy(() => import("@/pages/for/Creators"));
+const ForCorporates = lazy(() => import("@/pages/for/Corporates"));
 
 const FreeAudit = lazy(() => import("@/pages/FreeAudit"));
 
@@ -44,11 +52,9 @@ const PrivacyPolicy = lazy(() => import("@/pages/legal/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("@/pages/legal/TermsOfService"));
 const RefundPolicy = lazy(() => import("@/pages/legal/RefundPolicy"));
 
-const AnswersList = lazy(() => import("@/pages/answers/AnswersList"));
-const AnswerPost = lazy(() => import("@/pages/answers/AnswerPost"));
-
 const queryClient = new QueryClient();
 
+// Official SYSmoAI 3-layer hexagonal mark — inline SVG, zero dependency
 const PATHS = {
   l1: 'M25 34 L50 24 L75 34 L75 54 L50 64 L25 54 Z',
   l2: 'M30 49 L50 40 L70 49 L70 64 L50 73 L30 64 Z',
@@ -66,6 +72,7 @@ const Fallback = () => (
       gap: 14,
     }}
   >
+    {/* Breathing logo mark */}
     <svg
       width={48}
       height={48}
@@ -87,6 +94,7 @@ const Fallback = () => (
       <path d={PATHS.l2} fill="#2563EB" fillOpacity={.50} stroke="#3B82F6" strokeOpacity={.80} strokeWidth={2.5} strokeLinejoin="round"/>
       <path d={PATHS.l3} fill="#3B82F6" fillOpacity={1}   stroke="#60A5FA" strokeOpacity={1}   strokeWidth={2.5} strokeLinejoin="round"/>
     </svg>
+    {/* Thin progress bar */}
     <div style={{ width: 56, height: 2, borderRadius: 99, overflow: 'hidden', background: 'rgba(148,163,184,0.12)' }}>
       <div style={{
         height: '100%',
@@ -117,6 +125,7 @@ function ScrollToTop() {
   return null;
 }
 
+// Prefetch all lazy routes during idle time so navigation feels instant
 const lazyModules = [
   () => import("@/pages/Services"),
   () => import("@/pages/About"),
@@ -124,10 +133,17 @@ const lazyModules = [
   () => import("@/pages/Blog"),
   () => import("@/pages/Pricing"),
   () => import("@/pages/FreeAudit"),
-  () => import("@/pages/for/FCommerce"),
+  () => import("@/pages/for/Freelancers"),
+  () => import("@/pages/for/Students"),
+  () => import("@/pages/for/JobSeekers"),
+  () => import("@/pages/for/Agencies"),
+  () => import("@/pages/for/SMEFounders"),
+  () => import("@/pages/services/AIQuickWin"),
   () => import("@/pages/services/AISprint"),
   () => import("@/pages/services/AIRetainer"),
-  () => import("@/pages/services/AIQuickWin"),
+  () => import("@/pages/services/NotionOS"),
+  () => import("@/pages/services/AIAgentDev"),
+  () => import("@/pages/services/N8nAutomation"),
 ];
 
 function IdlePrefetch() {
@@ -162,66 +178,27 @@ function Router() {
         <Suspense fallback={<Fallback />}>
           <Switch>
             <Route path="/" component={Home} />
-
-            {/* Services */}
             <Route path="/services" component={Services} />
+            <Route path="/services/ai-quick-win" component={ServiceAIQuickWin} />
             <Route path="/services/ai-sprint" component={ServiceAISprint} />
             <Route path="/services/ai-retainer" component={ServiceAIRetainer} />
-            <Route path="/services/ai-quick-win" component={ServiceAIQuickWin} />
-            <Route path="/services/ai-coaching">
-              <RedirectTo to="/services/other-engagements" />
-            </Route>
-            <Route path="/services/group-workshop">
-              <RedirectTo to="/services/other-engagements" />
-            </Route>
-            <Route path="/services/notion-os">
-              <RedirectTo to="/services/other-engagements" />
-            </Route>
-            <Route path="/services/ai-agent-dev">
-              <RedirectTo to="/services/other-engagements" />
-            </Route>
-            <Route path="/services/n8n-automation">
-              <RedirectTo to="/services/other-engagements" />
-            </Route>
-            <Route path="/services/corporate-training">
-              <RedirectTo to="/services/other-engagements" />
-            </Route>
+            <Route path="/services/ai-coaching" component={ServiceAICoaching} />
+            <Route path="/services/group-workshop" component={ServiceGroupWorkshop} />
+            <Route path="/services/notion-os" component={ServiceNotionOS} />
+            <Route path="/services/ai-agent-dev" component={ServiceAIAgentDev} />
+            <Route path="/services/n8n-automation" component={ServiceN8nAutomation} />
+            <Route path="/services/corporate-training" component={ServiceCorporateTraining} />
             <Route path="/services/international" component={ServiceInternational} />
-            <Route path="/services/other-engagements" component={ServiceOtherEngagements} />
-
-            {/* Primary audience page (the wedge) */}
+            <Route path="/for/students" component={ForStudents} />
+            <Route path="/for/job-seekers" component={ForJobSeekers} />
+            <Route path="/for/freelancers" component={ForFreelancers} />
+            <Route path="/for/researchers" component={ForResearchers} />
+            <Route path="/for/agencies" component={ForAgencies} />
+            <Route path="/for/sme-founders" component={ForSMEFounders} />
             <Route path="/for/f-commerce" component={ForFCommerce} />
-
-            {/* Demoted audience pages → redirect to blog or wedge */}
-            <Route path="/for/sme-founders">
-              <RedirectTo to="/for/f-commerce" />
-            </Route>
-            <Route path="/for/students">
-              <RedirectTo to="/blog?group=students" />
-            </Route>
-            <Route path="/for/job-seekers">
-              <RedirectTo to="/blog?group=job-seekers" />
-            </Route>
-            <Route path="/for/freelancers">
-              <RedirectTo to="/blog?group=freelancers" />
-            </Route>
-            <Route path="/for/researchers">
-              <RedirectTo to="/blog?group=researchers" />
-            </Route>
-            <Route path="/for/agencies">
-              <RedirectTo to="/blog?group=agencies" />
-            </Route>
-            <Route path="/for/consultants">
-              <RedirectTo to="/blog?group=consultants" />
-            </Route>
-            <Route path="/for/creators">
-              <RedirectTo to="/blog?group=creators" />
-            </Route>
-            <Route path="/for/corporates">
-              <RedirectTo to="/blog?group=corporates" />
-            </Route>
-
-            {/* Core pages */}
+            <Route path="/for/consultants" component={ForConsultants} />
+            <Route path="/for/creators" component={ForCreators} />
+            <Route path="/for/corporates" component={ForCorporates} />
             <Route path="/about" component={About} />
             <Route path="/pricing" component={Pricing} />
             <Route path="/proof" component={Proof} />
@@ -229,8 +206,6 @@ function Router() {
             <Route path="/faq" component={FAQ} />
             <Route path="/blog" component={Blog} />
             <Route path="/blog/:slug" component={BlogPost} />
-            <Route path="/answers" component={AnswersList} />
-            <Route path="/answers/:slug" component={AnswerPost} />
             <Route path="/contact" component={Contact} />
             <Route path="/free-ai-audit" component={FreeAudit} />
             <Route path="/privacy-policy" component={PrivacyPolicy} />
@@ -250,7 +225,6 @@ function Router() {
 
 function App() {
   return (
-    <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <ThemeProvider>
@@ -261,7 +235,6 @@ function App() {
         </ThemeProvider>
       </TooltipProvider>
     </QueryClientProvider>
-    </ErrorBoundary>
   );
 }
 

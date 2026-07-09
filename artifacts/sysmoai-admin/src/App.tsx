@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useRef } from "react";
 import {
   ClerkProvider,
   SignIn,
@@ -8,7 +8,6 @@ import {
 } from "@clerk/react";
 import { publishableKeyFromHost } from "@clerk/react/internal";
 import { dark } from "@clerk/themes";
-import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 import {
   Switch,
   Route,
@@ -28,7 +27,6 @@ import {
 import { queryClient } from "@/lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { DashboardPage } from "@/pages/Dashboard";
 import { ContactsPage } from "@/pages/Contacts";
 import { ContactDetailPage } from "@/pages/ContactDetail";
@@ -36,10 +34,6 @@ import { AuditsPage } from "@/pages/Audits";
 import { AuditDetailPage } from "@/pages/AuditDetail";
 import { WaitlistPage } from "@/pages/Waitlist";
 import { WaitlistDetailPage } from "@/pages/WaitlistDetail";
-import { SprintAvailabilityPage } from "@/pages/SprintAvailability";
-import { ScheduledPostsPage } from "@/pages/ScheduledPosts";
-import { ScheduledPostDetailPage } from "@/pages/ScheduledPostDetail";
-import { PerformancePage } from "@/pages/Performance";
 import { AccessDeniedPage } from "@/pages/AccessDenied";
 import NotFound from "@/pages/not-found";
 
@@ -49,28 +43,6 @@ const clerkPubKey = publishableKeyFromHost(
 );
 
 const clerkProxyUrl = import.meta.env.VITE_CLERK_PROXY_URL;
-
-const APP_NAME = "SYSmoAI Admin";
-
-const clerkLocalization = {
-  signIn: {
-    start: {
-      title: `Sign in to ${APP_NAME}`,
-      titleCombined: `Sign in to ${APP_NAME}`,
-      subtitle: "Welcome back — please sign in to continue",
-      subtitleCombined: "Welcome back — please sign in to continue",
-    },
-    password: { title: `Sign in to ${APP_NAME}` },
-    emailCode: { title: `Sign in to ${APP_NAME}` },
-    emailLink: { title: `Sign in to ${APP_NAME}` },
-  },
-  signUp: {
-    start: {
-      title: `Create your ${APP_NAME} account`,
-      titleCombined: `Create your ${APP_NAME} account`,
-    },
-  },
-};
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -84,66 +56,58 @@ if (!clerkPubKey) {
   throw new Error("Missing VITE_CLERK_PUBLISHABLE_KEY in environment");
 }
 
-function buildClerkAppearance(isDark: boolean) {
-  return {
-    baseTheme: isDark ? dark : undefined,
-    cssLayerName: "clerk",
-    options: {
-      logoPlacement: "inside" as const,
-      logoLinkUrl: basePath || "/",
-      logoImageUrl: `${window.location.origin}${basePath}/logo.svg`,
-    },
-    variables: {
-      colorPrimary: isDark ? "#60A5FA" : "#1D4ED8",
-      colorForeground: isDark ? "#F8FAFF" : "#0F172A",
-      colorMutedForeground: isDark ? "#94A3B8" : "#64748B",
-      colorDanger: isDark ? "#F87171" : "#DC2626",
-      colorBackground: isDark ? "#1A1C28" : "#FFFFFF",
-      colorInput: isDark ? "#11131C" : "#F8FAFF",
-      colorInputForeground: isDark ? "#F8FAFF" : "#0F172A",
-      colorNeutral: isDark ? "#2A2D3D" : "#E2E8F0",
-      fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
-      borderRadius: "0.625rem",
-    },
-    elements: {
-      rootBox: "w-full flex justify-center",
-      cardBox: isDark
-        ? "bg-[#1A1C28] border border-[#2A2D3D] rounded-2xl w-[440px] max-w-full overflow-hidden shadow-xl"
-        : "bg-white border border-slate-200 rounded-2xl w-[440px] max-w-full overflow-hidden shadow-xl",
-      card: "!shadow-none !border-0 !bg-transparent !rounded-none",
-      footer: "!shadow-none !border-0 !bg-transparent !rounded-none",
-      headerTitle: "text-foreground",
-      headerSubtitle: "text-muted-foreground",
-      socialButtonsBlockButtonText: "text-foreground",
-      formFieldLabel: "text-foreground",
-      footerActionLink: "text-accent hover:underline",
-      footerActionText: "text-muted-foreground",
-      dividerText: "text-muted-foreground",
-      identityPreviewEditButton: "text-accent",
-      formFieldSuccessText: isDark ? "text-emerald-300" : "text-emerald-700",
-      alertText: "text-foreground",
-      logoBox: "justify-center",
-      logoImage: "h-8 w-auto",
-      socialButtonsBlockButton: isDark
-        ? "bg-[#11131C] border border-[#2A2D3D] hover:bg-[#1F2230]"
-        : "bg-white border border-slate-200 hover:bg-slate-50",
-      formButtonPrimary: isDark
-        ? "bg-[#1E3A8A] hover:bg-[#1E40AF] text-white border border-[#1E40AF]"
-        : "bg-[#1D4ED8] hover:bg-[#1E40AF] text-white border border-[#1D4ED8]",
-      formFieldInput: isDark
-        ? "bg-[#11131C] border border-[#2A2D3D] text-foreground placeholder:text-muted-foreground focus:border-accent focus:ring-1 focus:ring-accent"
-        : "bg-white border border-slate-300 text-foreground placeholder:text-muted-foreground focus:border-accent focus:ring-1 focus:ring-accent",
-      footerAction: "bg-transparent",
-      dividerLine: "bg-border",
-      alert: "bg-destructive/10 border border-destructive/30",
-      otpCodeFieldInput: isDark
-        ? "bg-[#11131C] border border-[#2A2D3D] text-foreground"
-        : "bg-white border border-slate-300 text-foreground",
-      formFieldRow: "space-y-1",
-      main: "gap-4",
-    },
-  };
-}
+const clerkAppearance = {
+  baseTheme: dark,
+  cssLayerName: "clerk",
+  options: {
+    logoPlacement: "inside" as const,
+    logoLinkUrl: basePath || "/",
+    logoImageUrl: `${window.location.origin}${basePath}/logo.svg`,
+  },
+  variables: {
+    colorPrimary: "#60A5FA",
+    colorForeground: "#F8FAFF",
+    colorMutedForeground: "#94A3B8",
+    colorDanger: "#F87171",
+    colorBackground: "#1A1C28",
+    colorInput: "#11131C",
+    colorInputForeground: "#F8FAFF",
+    colorNeutral: "#2A2D3D",
+    fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+    borderRadius: "0.625rem",
+  },
+  elements: {
+    rootBox: "w-full flex justify-center",
+    cardBox:
+      "bg-[#1A1C28] border border-[#2A2D3D] rounded-2xl w-[440px] max-w-full overflow-hidden shadow-xl",
+    card: "!shadow-none !border-0 !bg-transparent !rounded-none",
+    footer: "!shadow-none !border-0 !bg-transparent !rounded-none",
+    headerTitle: "text-foreground",
+    headerSubtitle: "text-muted-foreground",
+    socialButtonsBlockButtonText: "text-foreground",
+    formFieldLabel: "text-foreground",
+    footerActionLink: "text-accent hover:underline",
+    footerActionText: "text-muted-foreground",
+    dividerText: "text-muted-foreground",
+    identityPreviewEditButton: "text-accent",
+    formFieldSuccessText: "text-emerald-300",
+    alertText: "text-foreground",
+    logoBox: "justify-center",
+    logoImage: "h-8 w-auto",
+    socialButtonsBlockButton:
+      "bg-[#11131C] border border-[#2A2D3D] hover:bg-[#1F2230]",
+    formButtonPrimary:
+      "bg-[#1E3A8A] hover:bg-[#1E40AF] text-white border border-[#1E40AF]",
+    formFieldInput:
+      "bg-[#11131C] border border-[#2A2D3D] text-foreground placeholder:text-muted-foreground focus:border-accent focus:ring-1 focus:ring-accent",
+    footerAction: "bg-transparent",
+    dividerLine: "bg-border",
+    alert: "bg-destructive/10 border border-destructive/30",
+    otpCodeFieldInput: "bg-[#11131C] border border-[#2A2D3D] text-foreground",
+    formFieldRow: "space-y-1",
+    main: "gap-4",
+  },
+};
 
 function SignInPage() {
   return (
@@ -204,7 +168,7 @@ function AdminGate({ children }: { children: React.ReactNode }) {
     }
     return (
       <div className="min-h-[100dvh] w-full flex items-center justify-center px-4">
-        <p className="text-sm text-destructive" data-testid="text-gate-error">
+        <p className="text-sm text-red-400" data-testid="text-gate-error">
           Could not verify access. Please refresh.
         </p>
       </div>
@@ -236,16 +200,6 @@ function ProtectedRoutes() {
             return <AuditDetailPage id={id} />;
           }}
         </Route>
-        <Route path="/sprint-availability" component={SprintAvailabilityPage} />
-        <Route path="/performance" component={PerformancePage} />
-        <Route path="/scheduled-posts" component={ScheduledPostsPage} />
-        <Route path="/scheduled-posts/:id">
-          {(params) => {
-            const id = Number(params.id);
-            if (!Number.isFinite(id)) return <NotFound />;
-            return <ScheduledPostDetailPage id={id} />;
-          }}
-        </Route>
         <Route path="/waitlist" component={WaitlistPage} />
         <Route path="/waitlist/:id">
           {(params) => {
@@ -262,15 +216,12 @@ function ProtectedRoutes() {
 
 function ClerkProviderWithRoutes() {
   const [, setLocation] = useLocation();
-  const { isDark } = useTheme();
-  const appearance = useMemo(() => buildClerkAppearance(isDark), [isDark]);
 
   return (
     <ClerkProvider
       publishableKey={clerkPubKey}
       proxyUrl={clerkProxyUrl}
-      appearance={appearance}
-      localization={clerkLocalization}
+      appearance={clerkAppearance}
       signInUrl={`${basePath}/sign-in`}
       routerPush={(to) => setLocation(stripBase(to))}
       routerReplace={(to) => setLocation(stripBase(to), { replace: true })}
@@ -301,13 +252,9 @@ function ClerkProviderWithRoutes() {
 
 function App() {
   return (
-    <ThemeProvider>
-      <ErrorBoundary>
-        <WouterRouter base={basePath}>
-          <ClerkProviderWithRoutes />
-        </WouterRouter>
-      </ErrorBoundary>
-    </ThemeProvider>
+    <WouterRouter base={basePath}>
+      <ClerkProviderWithRoutes />
+    </WouterRouter>
   );
 }
 

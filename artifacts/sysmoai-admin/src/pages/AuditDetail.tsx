@@ -10,65 +10,12 @@ import {
 import { SubmissionDetailShell } from "@/components/SubmissionDetailShell";
 import { describeApiError } from "@/lib/format";
 
-const BUSINESS_TYPE_LABELS: Record<string, string> = {
-  f_commerce: "F-Commerce (Facebook selling)",
-  service: "Service business",
-  agency: "Agency",
-  other: "Other",
-};
-
 export function AuditDetailPage({ id }: { id: number }) {
   const qc = useQueryClient();
   const detail = useGetAuditRequest(id);
   const update = useUpdateAuditRequest();
   const [saveError, setSaveError] = useState<string | null>(null);
   const [saveSuccess, setSaveSuccess] = useState(false);
-
-  const d = detail.data;
-
-  const qualifyingFields = d
-    ? [
-        {
-          label: "Business type",
-          value: d.businessType
-            ? (BUSINESS_TYPE_LABELS[d.businessType] ?? d.businessType)
-            : "—",
-        },
-        {
-          label: "Monthly orders / মাসিক অর্ডার",
-          value: d.monthlyOrders ?? "—",
-        },
-        {
-          label: "Daily DM volume / দৈনিক মেসেজ",
-          value: d.dailyDmVolume ?? "—",
-        },
-        {
-          label: "Current tools",
-          value: d.currentTools ?? "—",
-        },
-        {
-          label: "Uses bKash / Nagad",
-          value: d.usesBkashNagad ?? "—",
-        },
-        {
-          label: "Preferred currency",
-          value: d.preferredCurrency ?? "—",
-        },
-      ]
-    : [];
-
-  const baseFields = d
-    ? [
-        { label: "Name", value: d.name },
-        { label: "Email", value: d.email },
-        { label: "WhatsApp", value: d.whatsapp ?? "—" },
-        { label: "Company", value: d.company ?? "—" },
-        {
-          label: "Biggest challenge",
-          value: d.biggestChallenge,
-        },
-      ]
-    : [];
 
   return (
     <SubmissionDetailShell
@@ -104,15 +51,20 @@ export function AuditDetailPage({ id }: { id: number }) {
       isSaving={update.isPending}
       saveError={saveError}
       saveSuccess={saveSuccess}
-      fields={[
-        ...baseFields,
-        ...(qualifyingFields.length > 0
+      fields={
+        detail.data
           ? [
-              { label: "─── F-Commerce Qualifying Fields ───", value: "" },
-              ...qualifyingFields,
+              { label: "Name", value: detail.data.name },
+              { label: "Email", value: detail.data.email },
+              { label: "WhatsApp", value: detail.data.whatsapp ?? "—" },
+              { label: "Company", value: detail.data.company ?? "—" },
+              {
+                label: "Biggest challenge",
+                value: detail.data.biggestChallenge,
+              },
             ]
-          : []),
-      ]}
+          : []
+      }
     />
   );
 }

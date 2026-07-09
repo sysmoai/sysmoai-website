@@ -11,7 +11,6 @@ export default function AIRetainer() {
       bdPrice="৳20,000/month"
       usdPrice="$250/month"
       guarantee="Cancel anytime"
-      directAnswer="The AI Retainer is SYSmoAI's monthly managed service at ৳20,000/month ($250/month) — 4–8 hours of hands-on AI work, monthly system improvements, priority WhatsApp support (2-hour response), and a monthly performance report. Cancel anytime, no lock-in."
       whatItIs="The AI Retainer is a monthly managed service where SYSmoAI acts as your ongoing AI operations partner. Each month, we improve your existing systems, add new automations, fix issues, and identify new AI opportunities as your business evolves. Perfect for post-Sprint clients or businesses that want continuous AI improvement without hiring a full-time AI person."
       deliverables={[
         '4–8 hours of hands-on AI work per month',
@@ -46,9 +45,9 @@ export default function AIRetainer() {
         { q: 'What\'s the minimum commitment?', a: '1 month. Most clients stay 6–12+ months because the value compounds over time.' },
       ]}
       relatedServices={[
-        { href: '/services/ai-sprint', label: 'F-Commerce AI Sprint (start here)', price: '৳50,000' },
-        { href: '/services/ai-quick-win', label: 'AI Quick Win (try first)', price: '৳3,750–7,500' },
-        { href: '/services/other-engagements', label: 'Other Engagements', price: 'By inquiry' },
+        { href: '/services/ai-sprint', label: 'AI Sprint (start here)', price: '৳25,000–50,000' },
+        { href: '/services/n8n-automation', label: 'n8n Automation', price: '৳2,000–10,000/workflow' },
+        { href: '/services/notion-os', label: 'Notion OS Build', price: '৳15,000–50,000' },
       ]}
     />
   );

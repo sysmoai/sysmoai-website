@@ -44,7 +44,7 @@ export default function CorporateTraining() {
         { q: 'Can you provide a certification?', a: 'Yes. We issue SYSmoAI AI Practitioner certificates for participants. We can also partner with your institution\'s certification program.' },
       ]}
       relatedServices={[
-        { href: '/services/ai-sprint', label: 'F-Commerce AI Sprint', price: '৳50,000' },
+        { href: '/services/ai-sprint', label: 'AI Sprint (implement after)', price: '৳25,000–50,000' },
         { href: '/services/ai-retainer', label: 'AI Retainer (ongoing)', price: '৳20,000/month' },
         { href: '/services/group-workshop', label: 'Group Workshop (smaller team)', price: '৳500/person' },
       ]}

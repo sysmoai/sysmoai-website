@@ -8,7 +8,6 @@ import { WA_URLS } from '../lib/whatsapp';
 import { EMAIL } from '@/lib/config';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useCreateContactSubmission } from '@workspace/api-client-react';
-import { DirectAnswer } from '@/components/DirectAnswer';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -67,8 +66,6 @@ export default function Contact() {
   }, []);
 
   const onSubmit = async (data: FormData) => {
-    const hp = document.querySelector<HTMLInputElement>('form input[name="website"]');
-    if (hp?.value) return; // Honeypot tripped
     setSubmitError(null);
     try {
       await createSubmission.mutateAsync({
@@ -91,7 +88,7 @@ export default function Contact() {
 
   return (
     <div className="flex flex-col w-full overflow-hidden" style={{ background: bg1 }}>
-      <section className="relative py-20 md:py-24" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #FFFFFF 0%, #F0F6FF 100%)' }}>
+      <section className="relative bg-[#0A0B0F] py-20 md:py-24">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[300px] bg-blue-600 opacity-[0.1] blur-[100px] rounded-full" />
         </div>
@@ -103,22 +100,13 @@ export default function Contact() {
             SYSmoAI · Systems in Motion
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}
-            className="text-4xl md:text-5xl font-bold tracking-tight mb-4" style={{ color: heading }}>
+            className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
             Let's talk about your business.
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="text-lg max-w-2xl mx-auto" style={{ color: body }}>
+            className="text-slate-400 text-lg max-w-2xl mx-auto">
             Book a free AI audit to map your bottlenecks, uncover your highest-ROI opportunity and see a real example of what AI can do for you. No commitment required.
           </motion.p>
-        </div>
-      </section>
-
-      {/* Direct Answer — GEO */}
-      <section className="pt-10 pb-0" style={{ background: bg1 }}>
-        <div className="max-w-4xl mx-auto px-4">
-          <DirectAnswer bangla="SYSmoAI-তে যোগাযোগ করুন: WhatsApp +8801865385348, ইমেইল hello@sysmoai.com, অথবা ফ্রি AI অডিট বুক করুন sysmoai.com/free-ai-audit-এ। ২ ঘণ্টার মধ্যে উত্তর দেওয়া হয়।">
-            To contact SYSmoAI: WhatsApp +880 1865-385348, email hello@sysmoai.com, or book a free 30-minute AI audit at sysmoai.com/free-ai-audit. Response within 2 hours on WhatsApp. Based in Dhaka, Bangladesh — serving clients globally.
-          </DirectAnswer>
         </div>
       </section>
 
@@ -210,12 +198,6 @@ export default function Contact() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-                  {/* Honeypot — real users never see or fill this */}
-                  <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }}>
-                    <label>Website (leave blank)
-                      <input type="text" name="website" tabIndex={-1} autoComplete="off" />
-                    </label>
-                  </div>
                   <div>
                     <label htmlFor="name" className="block text-sm font-semibold mb-1.5" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>Your Name *</label>
                     <input id="name" {...register('name')}

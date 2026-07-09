@@ -66,9 +66,8 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* SYSmoAI Admin — dark theme (default) matching the brand site */
+/* SYSmoAI Admin — single dark theme matching the brand site */
 :root,
-:root.dark,
 .dark {
   --button-outline: rgba(255, 255, 255, 0.10);
   --badge-outline: rgba(255, 255, 255, 0.05);
@@ -163,66 +162,6 @@
   --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
 
-/* SYSmoAI Admin — light theme override */
-:root.light {
-  --button-outline: rgba(15, 23, 42, 0.10);
-  --badge-outline: rgba(15, 23, 42, 0.06);
-
-  --opaque-button-border-intensity: -9;
-
-  --elevate-1: rgba(15, 23, 42, 0.04);
-  --elevate-2: rgba(15, 23, 42, 0.08);
-
-  /* Base canvas */
-  --background: 220 33% 98%;         /* #F8FAFF */
-  --foreground: 224 33% 11%;         /* #0F172A */
-
-  --border: 220 18% 88%;             /* subtle separators */
-  --input: 220 18% 92%;
-  --ring: 217 91% 55%;
-
-  --card: 0 0% 100%;                 /* white surface */
-  --card-foreground: 224 33% 11%;
-  --card-border: 220 18% 88%;
-
-  --popover: 0 0% 100%;
-  --popover-foreground: 224 33% 11%;
-  --popover-border: 220 18% 88%;
-
-  --primary: 224 76% 38%;            /* deep blue */
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 220 25% 94%;
-  --secondary-foreground: 224 33% 11%;
-
-  --muted: 220 25% 94%;
-  --muted-foreground: 220 12% 42%;
-
-  --accent: 217 91% 50%;
-  --accent-foreground: 0 0% 100%;
-
-  --destructive: 0 72% 48%;
-  --destructive-foreground: 0 0% 100%;
-
-  --sidebar: 220 30% 99%;
-  --sidebar-foreground: 220 18% 30%;
-  --sidebar-border: 220 18% 88%;
-  --sidebar-primary: 217 91% 50%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 220 30% 92%;
-  --sidebar-accent-foreground: 224 33% 11%;
-  --sidebar-ring: 217 91% 55%;
-
-  --shadow-2xs: 0 1px 0 0 rgba(15, 23, 42, 0.04);
-  --shadow-xs: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
-  --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
-  --shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 6px 10px -2px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
-  --shadow-lg: 0 10px 18px -4px rgba(15, 23, 42, 0.10), 0 4px 6px -2px rgba(15, 23, 42, 0.05);
-  --shadow-xl: 0 18px 30px -8px rgba(15, 23, 42, 0.12), 0 6px 10px -4px rgba(15, 23, 42, 0.05);
-  --shadow-2xl: 0 24px 50px -12px rgba(15, 23, 42, 0.18);
-}
-
 html,
 body,
 #root {
@@ -238,23 +177,11 @@ body,
     color-scheme: dark;
   }
 
-  html.light {
-    color-scheme: light;
-  }
-
   body {
     @apply font-sans antialiased bg-background text-foreground;
     background:
       radial-gradient(1200px 600px at 80% -10%, rgba(96, 165, 250, 0.08), transparent 60%),
       radial-gradient(900px 500px at -10% 110%, rgba(30, 58, 138, 0.10), transparent 60%),
-      hsl(var(--background));
-    background-attachment: fixed;
-  }
-
-  html.light body {
-    background:
-      radial-gradient(1200px 600px at 80% -10%, rgba(37, 99, 235, 0.06), transparent 60%),
-      radial-gradient(900px 500px at -10% 110%, rgba(96, 165, 250, 0.10), transparent 60%),
       hsl(var(--background));
     background-attachment: fixed;
   }

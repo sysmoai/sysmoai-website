@@ -3,8 +3,6 @@ import { motion } from 'framer-motion';
 import { Link } from 'wouter';
 import { Globe, MessageCircle, CheckCircle2, ArrowRight } from 'lucide-react';
 import { WA_LINK, EMAIL } from '@/lib/config';
-import { DirectAnswer } from '@/components/DirectAnswer';
-import { useTheme } from '@/contexts/ThemeContext';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -25,7 +23,7 @@ const reasons = [
 
 const services = [
   { label: 'AI Quick Win', price: '$50–$100', href: '/services/ai-quick-win' },
-  { label: 'F-Commerce AI Sprint (14 days)', price: '$600', href: '/services/ai-sprint' },
+  { label: 'AI Sprint (14 days)', price: '$300–$600', href: '/services/ai-sprint' },
   { label: 'AI Retainer', price: '$250/month', href: '/services/ai-retainer' },
   { label: '1:1 AI Coaching', price: '$30/session', href: '/services/ai-coaching' },
   { label: 'Notion OS Build', price: '$800–$5,000', href: '/services/notion-os' },
@@ -35,10 +33,6 @@ const services = [
 ];
 
 export default function International() {
-  const { isDark } = useTheme();
-  const heading = isDark ? '#F1F5F9' : '#0A0B0F';
-  const body = isDark ? '#94A3B8' : '#475569';
-
   React.useEffect(() => {
     document.title = 'AI Consulting for International Clients | World-Class AI at Bangladesh Rates | SYSmoAI';
   }, []);
@@ -47,49 +41,36 @@ export default function International() {
     <div className="flex flex-col w-full overflow-hidden">
 
       {/* Hero */}
-      <section className="relative py-20 md:py-28" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #FFFFFF 0%, #F0F6FF 100%)' }}>
+      <section className="relative bg-[#0A0B0F] py-20 md:py-28">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600 opacity-[0.1] blur-[120px] rounded-full" />
         </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-            <span className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full"
-              style={{ background: isDark ? 'rgba(37,99,235,0.10)' : '#EFF6FF', border: `1px solid ${isDark ? 'rgba(37,99,235,0.20)' : '#BFDBFE'}`, color: isDark ? '#60A5FA' : '#1D4ED8' }}>
+            <span className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-600/20 text-blue-400 text-sm font-medium px-4 py-2 rounded-full">
               <Globe size={15} /> International Clients
             </span>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-bold tracking-tight leading-tight mb-6"
-            style={{ color: heading }}
+            className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight mb-6"
           >
             World-Class AI Expertise.<br />Bangladesh Rates.
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
-            className="text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed"
-            style={{ color: body }}
+            className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed"
           >
             US and EU AI consultants charge $200–$500/hr. SYSmoAI delivers the same expertise — Notion OS, custom AI agents, n8n automation — at a fraction of the cost. International payments via Wise and Payoneer.
           </motion.p>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/free-ai-audit" className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all min-h-[52px] shadow-lg">
-              <ArrowRight size={20} /> Book Free AI Audit
-            </Link>
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-base transition-all min-h-[52px]"
-              style={{ border: `2px solid ${isDark ? 'rgba(37,211,102,0.40)' : '#16A34A'}`, color: isDark ? '#25D366' : '#15803D', background: isDark ? 'transparent' : 'rgba(37,211,102,0.05)' }}>
-              <MessageCircle size={18} /> WhatsApp
+            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all min-h-[52px]">
+              <MessageCircle size={20} /> Message on WhatsApp
+            </a>
+            <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all min-h-[52px]">
+              Email Us
             </a>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Direct Answer — GEO */}
-      <section className="pt-10 pb-0 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
-          <DirectAnswer>
-            SYSmoAI serves international clients (US, UK, Canada, Australia, Southeast Asia) with world-class AI consulting at Bangladesh rates — 60–80% below US/EU agency prices. Services: AI Quick Win ($50–$100), F-Commerce AI Sprint ($600), AI Retainer ($250/month), Notion OS ($800–$5,000), AI Agents ($2,500–$15,000). Payment via Wise or Payoneer. Founder Emon Hossain is ranked top 5% globally in prompt engineering.
-          </DirectAnswer>
         </div>
       </section>
 
@@ -174,28 +155,26 @@ export default function International() {
       </section>
 
       {/* CTA */}
-      <section className="py-20" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #F8FAFF 0%, #EFF6FF 100%)' }}>
+      <section className="py-20 bg-[#0A0B0F]">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <motion.h2
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-3xl md:text-4xl font-bold mb-4 tracking-tight"
-            style={{ color: heading }}
+            className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight"
           >
             Ready to start your project?
           </motion.h2>
           <motion.p
             initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="mb-8"
-            style={{ color: body }}
+            className="text-slate-400 mb-8"
           >
             Book a free 30-minute discovery call. No commitment.
           </motion.p>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/free-ai-audit" className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all min-h-[52px]">
-              <ArrowRight size={20} /> Book Free AI Audit
-            </Link>
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-[#25D366]/40 text-[#25D366] hover:bg-[#25D366]/10 px-6 py-4 rounded-xl font-semibold text-base transition-all min-h-[52px]">
-              <MessageCircle size={18} /> WhatsApp
+            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-8 py-4 rounded-xl font-bold text-lg transition-all min-h-[52px]">
+              <MessageCircle size={20} /> WhatsApp (fastest)
+            </a>
+            <a href={`mailto:${EMAIL}?subject=International Project Inquiry`} className="inline-flex items-center gap-2 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all min-h-[52px]">
+              {EMAIL}
             </a>
           </motion.div>
         </div>

@@ -34,11 +34,11 @@ export function statusLabel(status: string): string {
 export function statusColor(status: string): string {
   switch (status) {
     case "new":
-      return "bg-blue-500/15 text-blue-700 border border-blue-500/30 dark:text-blue-300";
+      return "bg-blue-500/15 text-blue-300 border border-blue-500/30";
     case "contacted":
-      return "bg-emerald-500/15 text-emerald-700 border border-emerald-500/30 dark:text-emerald-300";
+      return "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30";
     case "archived":
-      return "bg-zinc-500/15 text-zinc-700 border border-zinc-500/30 dark:text-zinc-300";
+      return "bg-zinc-500/15 text-zinc-300 border border-zinc-500/30";
     default:
       return "bg-muted text-muted-foreground border border-border";
   }

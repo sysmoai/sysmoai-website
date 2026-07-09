@@ -14,11 +14,13 @@ export function rateLimit(opts: Options): RequestHandler {
   const buckets = new Map<string, Bucket>();
 
   return (req: Request, res: Response, next: NextFunction) => {
-    // req.ip already honors `app.set("trust proxy", 1)`, which trusts exactly
-    // one hop (the Replit reverse proxy). We deliberately do NOT read
-    // x-forwarded-for ourselves — that would let any client spoof the header
-    // and rotate IPs to evade limits.
-    const ip = req.ip || req.socket.remoteAddress || "unknown";
+    const ip =
+      (req.headers["x-forwarded-for"] as string | undefined)
+        ?.split(",")[0]
+        ?.trim() ||
+      req.ip ||
+      req.socket.remoteAddress ||
+      "unknown";
 
     const key = `${req.method}:${req.baseUrl}${req.path}:${ip}`;
     const now = Date.now();

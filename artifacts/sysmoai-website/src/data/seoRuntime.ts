@@ -38,24 +38,59 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   },
 
   '/services/ai-sprint': {
-    title: 'F-Commerce AI Sprint — Full System Deployed in 14 Days | SYSmoAI',
+    title: 'AI Sprint — Full AI Stack Deployed in 14 Days | SYSmoAI',
     description:
-      "Get a complete F-Commerce AI system built in 14 days. DM auto-reply agent, order tracker, bKash workflows — fully deployed for ৳50,000. SYSmoAI's anchor offer for Facebook sellers in Dhaka.",
+      "Get a complete AI system built in 14 days. SYSmoAI's AI Implementation Sprint automates 3–5 workflows, includes team training, 3-month support, and delivers measurable ROI. ৳25,000–50,000.",
     canonical: `${SITE_URL}/services/ai-sprint`,
   },
 
   '/services/ai-retainer': {
-    title: 'F-Commerce AI Retainer — Monthly AI Management | SYSmoAI',
+    title: 'AI Retainer — Monthly AI Operations Management | SYSmoAI',
     description:
-      "Keep your F-Commerce AI systems optimized with SYSmoAI's monthly Retainer. Ongoing improvements, priority WhatsApp support, and monthly performance report. ৳20,000/month.",
+      "Keep your AI systems optimized with SYSmoAI's monthly AI Operations Retainer. 4–8 hours of hands-on work, monthly improvements, and priority WhatsApp support. ৳20,000/month.",
     canonical: `${SITE_URL}/services/ai-retainer`,
   },
 
-  '/services/other-engagements': {
-    title: 'Other AI Engagements — By Inquiry | SYSmoAI',
+  '/services/ai-coaching': {
+    title: '1:1 AI Coaching Sessions Bangladesh | SYSmoAI',
     description:
-      "AI coaching, group workshops, Notion OS, AI agent development, n8n automation, and corporate training — all available by inquiry for founders who need something beyond the F-Commerce Sprint.",
-    canonical: `${SITE_URL}/services/other-engagements`,
+      "Get personalized AI coaching from Bangladesh's leading AI consultant. 60-minute live session, session recording, 3-day follow-up Q&A, and personal action plan. ৳2,500/session.",
+    canonical: `${SITE_URL}/services/ai-coaching`,
+  },
+
+  '/services/group-workshop': {
+    title: 'Group AI Workshop Bangladesh | Team AI Training | SYSmoAI',
+    description:
+      "Upskill your entire team in half a day with SYSmoAI's Group AI Workshop. Custom industry curriculum, hands-on exercises, post-workshop resource pack. ৳500/person (min 10 participants).",
+    canonical: `${SITE_URL}/services/group-workshop`,
+  },
+
+  '/services/notion-os': {
+    title: 'Notion OS Build Bangladesh | Custom Notion Workspace | SYSmoAI',
+    description:
+      "Get a custom Notion business operating system built for your company. Clients, projects, finance, HR — all interconnected. ৳15,000–50,000. Built by Bangladesh's top Notion specialist.",
+    canonical: `${SITE_URL}/services/notion-os`,
+  },
+
+  '/services/ai-agent-dev': {
+    title: 'Custom AI Agent Development Bangladesh | NemoClaw | SYSmoAI',
+    description:
+      "Deploy a custom AI agent for your business — trained on your knowledge base, integrated with WhatsApp or your website. 24/7 operation. ৳50,000–2,00,000.",
+    canonical: `${SITE_URL}/services/ai-agent-dev`,
+  },
+
+  '/services/n8n-automation': {
+    title: 'n8n Workflow Automation Bangladesh | SYSmoAI',
+    description:
+      "Automate any business workflow with n8n. SYSmoAI builds, tests, and deploys automation workflows for any app stack. ৳2,000–10,000 per workflow. Built in 1–3 days.",
+    canonical: `${SITE_URL}/services/n8n-automation`,
+  },
+
+  '/services/corporate-training': {
+    title: 'Corporate AI Training Bangladesh | Enterprise AI Implementation | SYSmoAI',
+    description:
+      "Transform your company with structured AI training. SYSmoAI's enterprise program covers audit, training, implementation, and a 90-day AI roadmap. ৳50,000–2,00,000.",
+    canonical: `${SITE_URL}/services/corporate-training`,
   },
 
   '/services/international': {
@@ -65,11 +100,74 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
     canonical: `${SITE_URL}/services/international`,
   },
 
+  '/for/students': {
+    title: 'AI Tools for Students Bangladesh | Study Smarter with SYSmoAI',
+    description:
+      "Students: learn AI skills that get you hired, build a freelance income in 30 days, and finish your thesis 3x faster. SYSmoAI's AI coaching for students in Bangladesh.",
+    canonical: `${SITE_URL}/for/students`,
+  },
+
+  '/for/job-seekers': {
+    title: 'AI Skills for Job Seekers Bangladesh | Get Hired Faster with SYSmoAI',
+    description:
+      'Stand out in the job market with AI skills. SYSmoAI helps job seekers in Bangladesh rewrite CVs to pass ATS, build AI portfolios, and attract recruiter attention.',
+    canonical: `${SITE_URL}/for/job-seekers`,
+  },
+
+  '/for/freelancers': {
+    title: 'AI for Freelancers Bangladesh | 3x Your Income with SYSmoAI',
+    description:
+      "Freelancers: use AI to 3x your output, raise your rates from ৳500 to ৳5,000+ per project, and win international clients. SYSmoAI helps Bangladeshi freelancers on Fiverr and Upwork.",
+    canonical: `${SITE_URL}/for/freelancers`,
+  },
+
+  '/for/researchers': {
+    title: 'AI for Researchers Bangladesh | Research OS for Faster Papers | SYSmoAI',
+    description:
+      "Researchers: AI-powered literature review in 3 days instead of 4 weeks, faster thesis writing, and research OS in Notion. SYSmoAI helps academics in Bangladesh publish more.",
+    canonical: `${SITE_URL}/for/researchers`,
+  },
+
+  '/for/agencies': {
+    title: 'AI for Digital Agencies Bangladesh | Scale Delivery with SYSmoAI',
+    description:
+      "Agencies: cut content production time by 60%, win more pitches with AI proposal builder, and scale output without scaling headcount. SYSmoAI for digital agencies in Bangladesh.",
+    canonical: `${SITE_URL}/for/agencies`,
+  },
+
+  '/for/sme-founders': {
+    title: 'AI for SME Founders Bangladesh | AI Business OS | SYSmoAI',
+    description:
+      "SME founders: automate WhatsApp, manage all clients in Notion, eliminate 3–5 daily manual workflows. SYSmoAI helps small and medium businesses in Bangladesh scale with AI.",
+    canonical: `${SITE_URL}/for/sme-founders`,
+  },
+
   '/for/f-commerce': {
     title: 'AI for F-Commerce Sellers Bangladesh | Automate Orders & DMs | SYSmoAI',
     description:
       "F-commerce sellers: automate Facebook DM replies, track orders without notebooks, and scale from 50 to 200+ orders/month. SYSmoAI for Bangladesh f-commerce businesses.",
     canonical: `${SITE_URL}/for/f-commerce`,
+  },
+
+  '/for/consultants': {
+    title: 'AI for Consultants & Coaches Bangladesh | Productize Your Expertise | SYSmoAI',
+    description:
+      "Consultants: use AI to automate research, proposals, and reporting. Deliver boutique-firm output as a solo consultant. SYSmoAI for management, strategy, and business consultants.",
+    canonical: `${SITE_URL}/for/consultants`,
+  },
+
+  '/for/creators': {
+    title: 'AI for Content Creators Bangladesh | AI Content Engine | SYSmoAI',
+    description:
+      "Content creators: turn 1 video into 25+ pieces across platforms with AI repurposing. Eliminate burnout, post consistently, and grow faster. SYSmoAI for creators in Bangladesh.",
+    canonical: `${SITE_URL}/for/creators`,
+  },
+
+  '/for/corporates': {
+    title: 'Corporate AI Training Bangladesh | Enterprise AI Implementation | SYSmoAI',
+    description:
+      "Corporates: structured AI training that achieves 87% team adoption, saves 15,000+ hours/year, and delivers 44x ROI. SYSmoAI enterprise AI transformation program.",
+    canonical: `${SITE_URL}/for/corporates`,
   },
 
   '/about': {
@@ -82,7 +180,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/pricing': {
     title: 'AI Consulting Pricing Bangladesh | SYSmoAI Services & Costs',
     description:
-      'Transparent F-Commerce AI pricing from SYSmoAI. Quick Win from ৳3,750, F-Commerce AI Sprint ৳50,000, Retainer ৳20,000/month. All packages include video documentation and support.',
+      'Transparent AI consulting pricing from SYSmoAI. Quick Win from ৳3,750, Sprint ৳25,000–50,000, Retainer ৳20,000/month. All packages include video documentation and support.',
     canonical: `${SITE_URL}/pricing`,
   },
 
@@ -149,28 +247,6 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   },
 };
 
-import { answersPosts } from './answersPosts';
-
-const answersRuntimeConfig: Record<string, RuntimeSeo> = {
-  '/answers': {
-    title: 'AI Answers — Bangladesh Business & F-Commerce | SYSmoAI',
-    description:
-      'Direct answers to the most-asked questions about AI consulting, F-commerce automation, and AI implementation in Bangladesh. Written by Emon Hossain, SYSmoAI founder.',
-    canonical: `${SITE_URL}/answers`,
-  },
-  ...Object.fromEntries(
-    answersPosts.map((post) => [
-      `/answers/${post.slug}`,
-      {
-        title: `${post.title} | SYSmoAI`,
-        description: post.metaDescription,
-        canonical: `${SITE_URL}/answers/${post.slug}`,
-        ogType: 'article',
-      } satisfies RuntimeSeo,
-    ]),
-  ),
-};
-
 const blogRuntimeConfig: Record<string, RuntimeSeo> = Object.fromEntries(
   blogPostsMeta.map((post) => [
     `/blog/${post.slug}`,
@@ -192,5 +268,5 @@ const DEFAULT_RUNTIME_SEO: RuntimeSeo = {
 };
 
 export function getRuntimeSeo(location: string): RuntimeSeo {
-  return runtimeSeoConfig[location] ?? blogRuntimeConfig[location] ?? answersRuntimeConfig[location] ?? DEFAULT_RUNTIME_SEO;
+  return runtimeSeoConfig[location] ?? blogRuntimeConfig[location] ?? DEFAULT_RUNTIME_SEO;
 }
