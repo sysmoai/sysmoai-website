@@ -364,3 +364,107 @@ export const UpdateWaitlistSignupResponse = zod.object({
   internalNote: zod.string().nullish(),
   createdAt: zod.coerce.date(),
 });
+
+/**
+ * @summary List target citation queries with latest check status
+ */
+export const ListCitationQueriesResponseItem = zod.object({
+  id: zod.number(),
+  query: zod.string(),
+  engines: zod.string(),
+  priority: zod.enum(["critical", "high", "medium"]),
+  sortOrder: zod.number(),
+  lastCheckedOn: zod.string().nullish(),
+  lastCited: zod.boolean().nullish(),
+  lastEngine: zod
+    .union([
+      zod.enum([
+        "chatgpt",
+        "perplexity",
+        "google_ai_overviews",
+        "bing_copilot",
+        "other",
+      ]),
+      zod.null(),
+    ])
+    .optional(),
+});
+export const ListCitationQueriesResponse = zod.array(
+  ListCitationQueriesResponseItem,
+);
+
+/**
+ * @summary List AI citation check log entries
+ */
+export const listCitationChecksQueryPageDefault = 1;
+
+export const listCitationChecksQueryPageSizeDefault = 25;
+export const listCitationChecksQueryPageSizeMax = 100;
+
+export const ListCitationChecksQueryParams = zod.object({
+  page: zod.coerce.number().min(1).default(listCitationChecksQueryPageDefault),
+  pageSize: zod.coerce
+    .number()
+    .min(1)
+    .max(listCitationChecksQueryPageSizeMax)
+    .default(listCitationChecksQueryPageSizeDefault),
+});
+
+export const ListCitationChecksResponse = zod.object({
+  items: zod.array(
+    zod.object({
+      id: zod.number(),
+      checkedOn: zod.string(),
+      engine: zod.enum([
+        "chatgpt",
+        "perplexity",
+        "google_ai_overviews",
+        "bing_copilot",
+        "other",
+      ]),
+      query: zod.string(),
+      queryId: zod.number().nullish(),
+      cited: zod.boolean(),
+      urlCited: zod.string().nullish(),
+      notes: zod.string().nullish(),
+      createdAt: zod.coerce.date(),
+    }),
+  ),
+  pagination: zod.object({
+    page: zod.number(),
+    pageSize: zod.number(),
+    total: zod.number(),
+    totalPages: zod.number(),
+  }),
+});
+
+/**
+ * @summary Record an AI citation check
+ */
+export const createCitationCheckBodyCheckedOnRegExp = new RegExp(
+  "^\\d{4}-\\d{2}-\\d{2}$",
+);
+export const createCitationCheckBodyQueryMax = 500;
+
+export const CreateCitationCheckBody = zod.object({
+  checkedOn: zod.string().regex(createCitationCheckBodyCheckedOnRegExp),
+  engine: zod.enum([
+    "chatgpt",
+    "perplexity",
+    "google_ai_overviews",
+    "bing_copilot",
+    "other",
+  ]),
+  query: zod.string().min(1).max(createCitationCheckBodyQueryMax),
+  queryId: zod.number().nullish(),
+  cited: zod.boolean(),
+  urlCited: zod.string().nullish(),
+  notes: zod.string().nullish(),
+});
+
+/**
+ * @summary Delete a citation check entry
+ */
+export const DeleteCitationCheckParams = zod.object({
+  id: zod.coerce.number(),
+});

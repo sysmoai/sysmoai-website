@@ -391,6 +391,85 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
 
+  /admin/citation-queries:
+    get:
+      operationId: listCitationQueries
+      tags: [admin]
+      summary: List target citation queries with latest check status
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CitationQuery"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+  /admin/citation-checks:
+    get:
+      operationId: listCitationChecks
+      tags: [admin]
+      summary: List AI citation check log entries
+      parameters:
+        - $ref: "#/components/parameters/PageParam"
+        - $ref: "#/components/parameters/PageSizeParam"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CitationCheckList"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+    post:
+      operationId: createCitationCheck
+      tags: [admin]
+      summary: Record an AI citation check
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CitationCheckInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CitationCheck"
+        "400":
+          $ref: "#/components/responses/ValidationError"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+  /admin/citation-checks/{id}:
+    delete:
+      operationId: deleteCitationCheck
+      tags: [admin]
+      summary: Delete a citation check entry
+      parameters:
+        - $ref: "#/components/parameters/IdParam"
+      responses:
+        "204":
+          description: Deleted
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
 components:
   parameters:
     PageParam:
@@ -715,5 +794,93 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/WaitlistSignup"
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+
+    CitationEngine:
+      type: string
+      enum: [chatgpt, perplexity, google_ai_overviews, bing_copilot, other]
+
+    CitationPriority:
+      type: string
+      enum: [critical, high, medium]
+
+    CitationQuery:
+      type: object
+      required: [id, query, engines, priority, sortOrder]
+      properties:
+        id:
+          type: integer
+        query:
+          type: string
+        engines:
+          type: string
+        priority:
+          $ref: "#/components/schemas/CitationPriority"
+        sortOrder:
+          type: integer
+        lastCheckedOn:
+          type: ["string", "null"]
+        lastCited:
+          type: ["boolean", "null"]
+        lastEngine:
+          anyOf:
+            - $ref: "#/components/schemas/CitationEngine"
+            - type: "null"
+
+    CitationCheck:
+      type: object
+      required: [id, checkedOn, engine, query, cited, createdAt]
+      properties:
+        id:
+          type: integer
+        checkedOn:
+          type: string
+        engine:
+          $ref: "#/components/schemas/CitationEngine"
+        query:
+          type: string
+        queryId:
+          type: ["integer", "null"]
+        cited:
+          type: boolean
+        urlCited:
+          type: ["string", "null"]
+        notes:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+          format: date-time
+
+    CitationCheckInput:
+      type: object
+      required: [checkedOn, engine, query, cited]
+      properties:
+        checkedOn:
+          type: string
+          pattern: "^\\d{4}-\\d{2}-\\d{2}$"
+        engine:
+          $ref: "#/components/schemas/CitationEngine"
+        query:
+          type: string
+          minLength: 1
+          maxLength: 500
+        queryId:
+          type: ["integer", "null"]
+        cited:
+          type: boolean
+        urlCited:
+          type: ["string", "null"]
+        notes:
+          type: ["string", "null"]
+
+    CitationCheckList:
+      type: object
+      required: [items, pagination]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/CitationCheck"
         pagination:
           $ref: "#/components/schemas/Pagination"

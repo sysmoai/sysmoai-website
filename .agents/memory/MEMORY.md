@@ -1,0 +1,1 @@
+- [zod v3/v4 hidden-hoist conflict](zod-hoist-conflict.md) — transitive zod@4 in the lockfile breaks website typecheck via pnpm hidden hoist; guards: root zod catalog dep, scalar override, orval pinned 8.5.3.

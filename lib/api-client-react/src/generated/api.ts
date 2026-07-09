@@ -22,12 +22,17 @@ import type {
   AuditRequest,
   AuditRequestInput,
   AuditRequestList,
+  CitationCheck,
+  CitationCheckInput,
+  CitationCheckList,
+  CitationQuery,
   ContactSubmission,
   ContactSubmissionInput,
   ContactSubmissionList,
   ForbiddenResponse,
   HealthStatus,
   ListAuditRequestsParams,
+  ListCitationChecksParams,
   ListContactSubmissionsParams,
   ListWaitlistSignupsParams,
   NotFoundResponse,
@@ -1668,4 +1673,362 @@ export const useUpdateWaitlistSignup = <
   TContext
 > => {
   return useMutation(getUpdateWaitlistSignupMutationOptions(options));
+};
+
+/**
+ * @summary List target citation queries with latest check status
+ */
+export const getListCitationQueriesUrl = () => {
+  return `/api/admin/citation-queries`;
+};
+
+export const listCitationQueries = async (
+  options?: RequestInit,
+): Promise<CitationQuery[]> => {
+  return customFetch<CitationQuery[]>(getListCitationQueriesUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getListCitationQueriesQueryKey = () => {
+  return [`/api/admin/citation-queries`] as const;
+};
+
+export const getListCitationQueriesQueryOptions = <
+  TData = Awaited<ReturnType<typeof listCitationQueries>>,
+  TError = ErrorType<UnauthorizedResponse | ForbiddenResponse>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof listCitationQueries>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getListCitationQueriesQueryKey();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof listCitationQueries>>
+  > = ({ signal }) => listCitationQueries({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof listCitationQueries>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type ListCitationQueriesQueryResult = NonNullable<
+  Awaited<ReturnType<typeof listCitationQueries>>
+>;
+export type ListCitationQueriesQueryError = ErrorType<
+  UnauthorizedResponse | ForbiddenResponse
+>;
+
+/**
+ * @summary List target citation queries with latest check status
+ */
+
+export function useListCitationQueries<
+  TData = Awaited<ReturnType<typeof listCitationQueries>>,
+  TError = ErrorType<UnauthorizedResponse | ForbiddenResponse>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof listCitationQueries>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getListCitationQueriesQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary List AI citation check log entries
+ */
+export const getListCitationChecksUrl = (params?: ListCitationChecksParams) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/admin/citation-checks?${stringifiedParams}`
+    : `/api/admin/citation-checks`;
+};
+
+export const listCitationChecks = async (
+  params?: ListCitationChecksParams,
+  options?: RequestInit,
+): Promise<CitationCheckList> => {
+  return customFetch<CitationCheckList>(getListCitationChecksUrl(params), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getListCitationChecksQueryKey = (
+  params?: ListCitationChecksParams,
+) => {
+  return [`/api/admin/citation-checks`, ...(params ? [params] : [])] as const;
+};
+
+export const getListCitationChecksQueryOptions = <
+  TData = Awaited<ReturnType<typeof listCitationChecks>>,
+  TError = ErrorType<UnauthorizedResponse | ForbiddenResponse>,
+>(
+  params?: ListCitationChecksParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof listCitationChecks>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getListCitationChecksQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof listCitationChecks>>
+  > = ({ signal }) => listCitationChecks(params, { signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof listCitationChecks>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type ListCitationChecksQueryResult = NonNullable<
+  Awaited<ReturnType<typeof listCitationChecks>>
+>;
+export type ListCitationChecksQueryError = ErrorType<
+  UnauthorizedResponse | ForbiddenResponse
+>;
+
+/**
+ * @summary List AI citation check log entries
+ */
+
+export function useListCitationChecks<
+  TData = Awaited<ReturnType<typeof listCitationChecks>>,
+  TError = ErrorType<UnauthorizedResponse | ForbiddenResponse>,
+>(
+  params?: ListCitationChecksParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof listCitationChecks>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getListCitationChecksQueryOptions(params, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Record an AI citation check
+ */
+export const getCreateCitationCheckUrl = () => {
+  return `/api/admin/citation-checks`;
+};
+
+export const createCitationCheck = async (
+  citationCheckInput: CitationCheckInput,
+  options?: RequestInit,
+): Promise<CitationCheck> => {
+  return customFetch<CitationCheck>(getCreateCitationCheckUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(citationCheckInput),
+  });
+};
+
+export const getCreateCitationCheckMutationOptions = <
+  TError = ErrorType<
+    ValidationErrorResponse | UnauthorizedResponse | ForbiddenResponse
+  >,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createCitationCheck>>,
+    TError,
+    { data: BodyType<CitationCheckInput> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof createCitationCheck>>,
+  TError,
+  { data: BodyType<CitationCheckInput> },
+  TContext
+> => {
+  const mutationKey = ["createCitationCheck"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof createCitationCheck>>,
+    { data: BodyType<CitationCheckInput> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createCitationCheck(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateCitationCheckMutationResult = NonNullable<
+  Awaited<ReturnType<typeof createCitationCheck>>
+>;
+export type CreateCitationCheckMutationBody = BodyType<CitationCheckInput>;
+export type CreateCitationCheckMutationError = ErrorType<
+  ValidationErrorResponse | UnauthorizedResponse | ForbiddenResponse
+>;
+
+/**
+ * @summary Record an AI citation check
+ */
+export const useCreateCitationCheck = <
+  TError = ErrorType<
+    ValidationErrorResponse | UnauthorizedResponse | ForbiddenResponse
+  >,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createCitationCheck>>,
+    TError,
+    { data: BodyType<CitationCheckInput> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof createCitationCheck>>,
+  TError,
+  { data: BodyType<CitationCheckInput> },
+  TContext
+> => {
+  return useMutation(getCreateCitationCheckMutationOptions(options));
+};
+
+/**
+ * @summary Delete a citation check entry
+ */
+export const getDeleteCitationCheckUrl = (id: number) => {
+  return `/api/admin/citation-checks/${id}`;
+};
+
+export const deleteCitationCheck = async (
+  id: number,
+  options?: RequestInit,
+): Promise<void> => {
+  return customFetch<void>(getDeleteCitationCheckUrl(id), {
+    ...options,
+    method: "DELETE",
+  });
+};
+
+export const getDeleteCitationCheckMutationOptions = <
+  TError = ErrorType<
+    UnauthorizedResponse | ForbiddenResponse | NotFoundResponse
+  >,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteCitationCheck>>,
+    TError,
+    { id: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof deleteCitationCheck>>,
+  TError,
+  { id: number },
+  TContext
+> => {
+  const mutationKey = ["deleteCitationCheck"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteCitationCheck>>,
+    { id: number }
+  > = (props) => {
+    const { id } = props ?? {};
+
+    return deleteCitationCheck(id, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type DeleteCitationCheckMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteCitationCheck>>
+>;
+
+export type DeleteCitationCheckMutationError = ErrorType<
+  UnauthorizedResponse | ForbiddenResponse | NotFoundResponse
+>;
+
+/**
+ * @summary Delete a citation check entry
+ */
+export const useDeleteCitationCheck = <
+  TError = ErrorType<
+    UnauthorizedResponse | ForbiddenResponse | NotFoundResponse
+  >,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteCitationCheck>>,
+    TError,
+    { id: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof deleteCitationCheck>>,
+  TError,
+  { id: number },
+  TContext
+> => {
+  return useMutation(getDeleteCitationCheckMutationOptions(options));
 };

@@ -157,6 +157,77 @@ export interface WaitlistSignupList {
   pagination: Pagination;
 }
 
+export type CitationEngine =
+  (typeof CitationEngine)[keyof typeof CitationEngine];
+
+export const CitationEngine = {
+  chatgpt: "chatgpt",
+  perplexity: "perplexity",
+  google_ai_overviews: "google_ai_overviews",
+  bing_copilot: "bing_copilot",
+  other: "other",
+} as const;
+
+export type CitationPriority =
+  (typeof CitationPriority)[keyof typeof CitationPriority];
+
+export const CitationPriority = {
+  critical: "critical",
+  high: "high",
+  medium: "medium",
+} as const;
+
+export interface CitationQuery {
+  id: number;
+  query: string;
+  engines: string;
+  priority: CitationPriority;
+  sortOrder: number;
+  /** @nullable */
+  lastCheckedOn?: string | null;
+  /** @nullable */
+  lastCited?: boolean | null;
+  lastEngine?: CitationEngine | null;
+}
+
+export interface CitationCheck {
+  id: number;
+  checkedOn: string;
+  engine: CitationEngine;
+  query: string;
+  /** @nullable */
+  queryId?: number | null;
+  cited: boolean;
+  /** @nullable */
+  urlCited?: string | null;
+  /** @nullable */
+  notes?: string | null;
+  createdAt: string;
+}
+
+export interface CitationCheckInput {
+  /** @pattern ^\d{4}-\d{2}-\d{2}$ */
+  checkedOn: string;
+  engine: CitationEngine;
+  /**
+   * @minLength 1
+   * @maxLength 500
+   */
+  query: string;
+  /** @nullable */
+  queryId?: number | null;
+  cited: boolean;
+  /** @nullable */
+  urlCited?: string | null;
+  /** @nullable */
+  notes?: string | null;
+}
+
+export interface CitationCheckList {
+  items: CitationCheck[];
+  pagination: Pagination;
+}
+
 /**
  * Invalid input
  */
@@ -225,4 +296,16 @@ export type ListWaitlistSignupsParams = {
    */
   pageSize?: PageSizeParamParameter;
   status?: StatusParamParameter;
+};
+
+export type ListCitationChecksParams = {
+  /**
+   * @minimum 1
+   */
+  page?: PageParamParameter;
+  /**
+   * @minimum 1
+   * @maximum 100
+   */
+  pageSize?: PageSizeParamParameter;
 };

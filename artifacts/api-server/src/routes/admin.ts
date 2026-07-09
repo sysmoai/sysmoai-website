@@ -5,9 +5,12 @@ import {
   contactSubmissionsTable,
   auditRequestsTable,
   waitlistSignupsTable,
+  citationQueriesTable,
+  citationChecksTable,
   type ContactSubmission,
   type AuditRequest,
   type WaitlistSignup,
+  type CitationQuery,
 } from "@workspace/db";
 import {
   GetAdminMeResponse,
@@ -27,6 +30,10 @@ import {
   GetWaitlistSignupResponse,
   UpdateWaitlistSignupBody,
   UpdateWaitlistSignupResponse,
+  ListCitationQueriesResponseItem,
+  ListCitationChecksQueryParams,
+  ListCitationChecksResponse,
+  CreateCitationCheckBody,
 } from "@workspace/api-zod";
 import { requireAdmin } from "../middlewares/requireAdmin";
 import { validateBody, validateListQuery } from "../lib/validation";
@@ -511,5 +518,161 @@ router.patch(
     res.json(UpdateWaitlistSignupResponse.parse(row));
   },
 );
+
+// ─────────── AI citation tracking ───────────
+
+const TARGET_QUERIES: Array<{
+  query: string;
+  engines: string;
+  priority: "critical" | "high" | "medium";
+  sortOrder: number;
+}> = [
+  { query: "AI consulting Bangladesh", engines: "ChatGPT, Perplexity, Google AI Overviews", priority: "critical", sortOrder: 1 },
+  { query: "AI automation for F-commerce Bangladesh", engines: "ChatGPT, Google AI Overviews", priority: "critical", sortOrder: 2 },
+  { query: "How to automate Facebook shop orders", engines: "ChatGPT, Google AI Overviews", priority: "high", sortOrder: 3 },
+  { query: "AI tools for freelancers Bangladesh", engines: "ChatGPT, Perplexity", priority: "high", sortOrder: 4 },
+  { query: "WhatsApp automation for small business Bangladesh", engines: "ChatGPT, Google AI Overviews", priority: "high", sortOrder: 5 },
+  { query: "How to set up AI order tracking for F-commerce", engines: "ChatGPT, Google AI Overviews", priority: "high", sortOrder: 6 },
+  { query: "AI research tools for academics Bangladesh", engines: "ChatGPT, Perplexity", priority: "medium", sortOrder: 7 },
+  { query: "AI content system for creators Bangladesh", engines: "ChatGPT, Google AI Overviews", priority: "medium", sortOrder: 8 },
+  { query: "Notion business operating system Bangladesh", engines: "ChatGPT, Perplexity", priority: "medium", sortOrder: 9 },
+  { query: "Corporate AI training Bangladesh", engines: "ChatGPT, Google AI Overviews", priority: "medium", sortOrder: 10 },
+];
+
+const CitationCheckItem = ListCitationChecksResponse.shape.items.element;
+
+let citationQueriesSeeded = false;
+
+async function ensureCitationQueriesSeeded(): Promise<void> {
+  if (citationQueriesSeeded) return;
+  await db
+    .insert(citationQueriesTable)
+    .values(TARGET_QUERIES)
+    .onConflictDoNothing({ target: citationQueriesTable.query });
+  citationQueriesSeeded = true;
+}
+
+router.get("/citation-queries", async (_req: Request, res: Response) => {
+  await ensureCitationQueriesSeeded();
+  const queries = await db
+    .select()
+    .from(citationQueriesTable)
+    .orderBy(citationQueriesTable.sortOrder);
+
+  const latest = await db
+    .selectDistinctOn([citationChecksTable.queryId], {
+      queryId: citationChecksTable.queryId,
+      checkedOn: citationChecksTable.checkedOn,
+      cited: citationChecksTable.cited,
+      engine: citationChecksTable.engine,
+    })
+    .from(citationChecksTable)
+    .orderBy(
+      citationChecksTable.queryId,
+      desc(citationChecksTable.checkedOn),
+      desc(citationChecksTable.id),
+    );
+
+  const byQueryId = new Map(
+    latest
+      .filter((l) => l.queryId !== null)
+      .map((l) => [l.queryId as number, l]),
+  );
+
+  const items = queries.map((q: CitationQuery) => {
+    const last = byQueryId.get(q.id);
+    return ListCitationQueriesResponseItem.parse({
+      id: q.id,
+      query: q.query,
+      engines: q.engines,
+      priority: q.priority,
+      sortOrder: q.sortOrder,
+      lastCheckedOn: last?.checkedOn ?? null,
+      lastCited: last?.cited ?? null,
+      lastEngine: last?.engine ?? null,
+    });
+  });
+  res.json(items);
+});
+
+router.get("/citation-checks", async (req: Request, res: Response) => {
+  const q = validateListQuery(ListCitationChecksQueryParams, req, res);
+  if (!q) return;
+  const { page, pageSize } = q;
+
+  const [{ count }] = await db
+    .select({ count: sql<number>`count(*)::int` })
+    .from(citationChecksTable);
+
+  const items = await db
+    .select()
+    .from(citationChecksTable)
+    .orderBy(desc(citationChecksTable.checkedOn), desc(citationChecksTable.id))
+    .limit(pageSize)
+    .offset((page - 1) * pageSize);
+
+  res.json(
+    ListCitationChecksResponse.parse({
+      items,
+      pagination: {
+        page,
+        pageSize,
+        total: count,
+        totalPages: Math.max(1, Math.ceil(count / pageSize)),
+      },
+    }),
+  );
+});
+
+router.post(
+  "/citation-checks",
+  validateBody(CreateCitationCheckBody),
+  async (req: Request, res: Response) => {
+    const data = req.body as ReturnType<typeof CreateCitationCheckBody.parse>;
+
+    if (data.queryId != null) {
+      const [target] = await db
+        .select()
+        .from(citationQueriesTable)
+        .where(eq(citationQueriesTable.id, data.queryId))
+        .limit(1);
+      if (!target) {
+        res.status(400).json({ error: "Unknown target query id." });
+        return;
+      }
+    }
+
+    const [row] = await db
+      .insert(citationChecksTable)
+      .values({
+        checkedOn: data.checkedOn,
+        engine: data.engine,
+        query: data.query,
+        queryId: data.queryId ?? null,
+        cited: data.cited,
+        urlCited: data.urlCited ?? null,
+        notes: data.notes ?? null,
+      })
+      .returning();
+    res.status(201).json(CitationCheckItem.parse(row));
+  },
+);
+
+router.delete("/citation-checks/:id", async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  if (!Number.isFinite(id)) {
+    res.status(400).json({ error: "Invalid id." });
+    return;
+  }
+  const deleted = await db
+    .delete(citationChecksTable)
+    .where(eq(citationChecksTable.id, id))
+    .returning({ id: citationChecksTable.id });
+  if (deleted.length === 0) {
+    res.status(404).json({ error: "Not found." });
+    return;
+  }
+  res.status(204).end();
+});
 
 export default router;
