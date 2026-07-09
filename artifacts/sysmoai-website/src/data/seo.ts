@@ -403,46 +403,81 @@ const staticRoutes: Record<string, RouteSeo> = {
 };
 
 const blogRoutes: Record<string, RouteSeo> = Object.fromEntries(
-  blogPosts.map((post) => [
-    `/blog/${post.slug}`,
-    {
-      title: `${post.title} | SYSmoAI`,
-      description: post.metaDescription,
-      canonical: `${SITE_URL}/blog/${post.slug}`,
-      ogType: 'article',
-      schemas: [
-        ORG_SCHEMA,
-        {
-          '@context': 'https://schema.org',
-          '@type': 'BlogPosting',
-          headline: post.title,
-          description: post.metaDescription,
-          keywords: post.metaKeywords.join(', '),
-          author: {
-            '@type': 'Person',
-            name: post.author,
-            url: `${SITE_URL}/about`,
-          },
-          publisher: {
-            '@type': 'Organization',
-            name: 'SYSmoAI',
-            url: SITE_URL,
-            logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
-          },
-          datePublished: post.publishDate,
-          dateModified: post.publishDate,
-          url: `${SITE_URL}/blog/${post.slug}`,
-          image: OG_IMAGE,
-          mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${post.slug}` },
+  blogPosts.map((post) => {
+    const schemas: SeoSchema[] = [
+      ORG_SCHEMA,
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.metaDescription,
+        keywords: post.metaKeywords.join(', '),
+        author: {
+          '@type': 'Person',
+          name: post.author,
+          url: `${SITE_URL}/about`,
         },
-        breadcrumbSchema([
-          home,
-          blog,
-          { name: post.title, url: `${SITE_URL}/blog/${post.slug}` },
-        ]),
-      ],
-    } satisfies RouteSeo,
-  ]),
+        publisher: {
+          '@type': 'Organization',
+          name: 'SYSmoAI',
+          url: SITE_URL,
+          logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
+        },
+        datePublished: post.publishDate,
+        dateModified: post.publishDate,
+        url: `${SITE_URL}/blog/${post.slug}`,
+        image: OG_IMAGE,
+        mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${post.slug}` },
+      },
+      breadcrumbSchema([
+        home,
+        blog,
+        { name: post.title, url: `${SITE_URL}/blog/${post.slug}` },
+      ]),
+    ];
+
+    // Add HowTo schema for tutorial posts (enables AI Overview rich results)
+    if (post.howToSteps && post.howToSteps.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: post.title,
+        description: post.directAnswerSummary ?? post.metaDescription,
+        totalTime: 'PT30M',
+        step: post.howToSteps.map((step, i) => ({
+          '@type': 'HowToStep',
+          position: i + 1,
+          name: step.name,
+          text: step.text,
+          url: step.url ?? `${SITE_URL}/blog/${post.slug}#step-${i + 1}`,
+        })),
+      } as SeoSchema);
+    }
+
+    // Add FAQPage schema if post has FAQ items
+    if (post.faq && post.faq.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: post.faq.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        })),
+      } as SeoSchema);
+    }
+
+    return [
+      `/blog/${post.slug}`,
+      {
+        title: `${post.title} | SYSmoAI`,
+        description: post.metaDescription,
+        canonical: `${SITE_URL}/blog/${post.slug}`,
+        ogType: 'article',
+        schemas,
+      } satisfies RouteSeo,
+    ];
+  }),
 );
 
 export const seoConfig: Record<string, RouteSeo> = {

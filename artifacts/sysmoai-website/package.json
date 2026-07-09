@@ -9,7 +9,8 @@
     "serve": "node server.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "generate-static": "tsx scripts/generate-static.ts",
-    "generate-sitemap": "tsx scripts/generate-static.ts"
+    "generate-sitemap": "tsx scripts/generate-static.ts",
+    "indexnow": "tsx scripts/indexnow.ts"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",

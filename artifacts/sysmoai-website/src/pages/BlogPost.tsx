@@ -11,24 +11,8 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
 
-function injectSchema(type: 'Article' | 'FAQPage', data: object) {
-  const id = `schema-${type.toLowerCase()}`;
-  let el = document.getElementById(id);
-  if (!el) {
-    el = document.createElement('script');
-    el.id = id;
-    (el as HTMLScriptElement).type = 'application/ld+json';
-    document.head.appendChild(el);
-  }
-  el.textContent = JSON.stringify(data);
-}
-
-function removeSchemas() {
-  ['schema-article', 'schema-faqpage'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.remove();
-  });
-}
+// JSON-LD schemas are baked into static HTML by generate-static.ts.
+// No runtime injection needed — crawlers fetch the pre-rendered HTML.
 
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -46,35 +30,8 @@ export default function BlogPostPage() {
     const canonicalEl = document.querySelector('link[rel="canonical"]');
     if (canonicalEl) canonicalEl.setAttribute('href', `https://sysmoai.com/blog/${post.slug}`);
 
-    injectSchema('Article', {
-      '@context': 'https://schema.org',
-      '@type': 'Article',
-      headline: post.headline,
-      description: post.metaDescription,
-      author: { '@type': 'Person', name: post.author, url: 'https://sysmoai.com/about' },
-      publisher: {
-        '@type': 'Organization',
-        name: 'SYSmoAI',
-        url: 'https://sysmoai.com',
-        logo: { '@type': 'ImageObject', url: 'https://sysmoai.com/og-image.png' },
-      },
-      datePublished: post.publishDate,
-      dateModified: post.publishDate,
-      mainEntityOfPage: { '@type': 'WebPage', '@id': `https://sysmoai.com/blog/${post.slug}` },
-      keywords: post.metaKeywords.join(', '),
-    });
-
-    injectSchema('FAQPage', {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: post.faq.map(item => ({
-        '@type': 'Question',
-        name: item.question,
-        acceptedAnswer: { '@type': 'Answer', text: item.answer },
-      })),
-    });
-
-    return () => removeSchemas();
+    // JSON-LD schemas are already in the pre-rendered HTML from generate-static.ts.
+    // Only runtime meta (title, description, canonical) needs SPA updates here.
   }, [post]);
 
   const bg = isDark ? '#0A0B0F' : '#F8FAFF';
@@ -137,6 +94,72 @@ export default function BlogPostPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* DirectAnswer Block (GEO-optimized for AI citation) */}
+      {post.directAnswerSummary && (
+        <section className="max-w-3xl mx-auto px-4 pt-10">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="rounded-2xl border-l-4 p-6"
+            style={{
+              background: isDark ? 'rgba(37,99,235,0.08)' : '#EFF6FF',
+              borderColor: '#2563EB',
+              borderLeftColor: '#2563EB',
+              borderTopColor: isDark ? 'rgba(59,130,246,0.2)' : '#BFDBFE',
+              borderRightColor: isDark ? 'rgba(59,130,246,0.2)' : '#BFDBFE',
+              borderBottomColor: isDark ? 'rgba(59,130,246,0.2)' : '#BFDBFE',
+            }}>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded"
+                style={{ background: '#2563EB', color: '#FFFFFF' }}>
+                Quick Answer
+              </span>
+            </div>
+            <p className="text-sm md:text-base leading-relaxed font-medium"
+              style={{ color: isDark ? '#E2E8F0' : '#1E293B' }}>
+              {post.directAnswerSummary}
+            </p>
+          </motion.div>
+        </section>
+      )}
+
+      {/* HowTo Steps Block (for tutorial posts) */}
+      {post.howToSteps && post.howToSteps.length > 0 && (
+        <section className="max-w-3xl mx-auto px-4 pt-8">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="rounded-2xl border p-6"
+            style={{
+              background: cardBg,
+              borderColor,
+            }}>
+            <h2 className="text-lg font-bold mb-5 flex items-center gap-2"
+              style={{ color: headingColor, fontFamily: "'Space Grotesk', sans-serif" }}>
+              <span className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
+                style={{ background: '#2563EB', color: '#FFFFFF' }}>1</span>
+              How to {post.title.split(':')[0]}
+            </h2>
+            <div className="space-y-4">
+              {post.howToSteps.map((step, i) => (
+                <div key={i} id={`step-${i + 1}`} className="flex gap-3 scroll-mt-24">
+                  <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold mt-0.5"
+                    style={{ background: isDark ? 'rgba(59,130,246,0.2)' : '#DBEAFE', color: '#2563EB' }}>
+                    {i + 1}
+                  </span>
+                  <div>
+                    <h3 className="text-sm font-semibold mb-1" style={{ color: headingColor }}>{step.name}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: textColor }}>{step.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </section>
+      )}
 
       {/* Article body */}
       <div className="max-w-3xl mx-auto px-4 py-12">
