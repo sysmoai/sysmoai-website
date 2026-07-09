@@ -34,8 +34,8 @@ async function notifyIndexNow(urls: string[]): Promise<void> {
 
   const body = await res.text();
   if (!res.ok) {
-    console.error(`❌ IndexNow failed (${res.status}): ${body}`);
-    process.exit(1);
+    console.warn(`⚠️ IndexNow failed (${res.status}): ${body} — continuing (non-fatal)`);
+    return;
   }
   console.log(`✅ IndexNow: ${urls.length} URLs submitted (${res.status})`);
 }
@@ -70,10 +70,10 @@ async function main(): Promise<void> {
     await notifyIndexNow(batch);
   }
 
-  console.log(`✅ Total URLs notified: ${urls.length}`);
+  console.log(`✅ Done. ${urls.length} URLs processed from sitemap.xml`);
 }
 
 main().catch((err) => {
-  console.error(err);
-  process.exit(1);
+  // Never break the build/deploy over a notification failure
+  console.warn('⚠️ IndexNow notification failed (non-fatal):', err);
 });
