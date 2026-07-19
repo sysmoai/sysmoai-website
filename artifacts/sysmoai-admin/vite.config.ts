@@ -59,6 +59,14 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-api": ["@tanstack/react-query", "@workspace/api-client-react"],
+          "vendor-clerk": ["@clerk/react", "@clerk/shared", "@clerk/themes"],
+        },
+      },
+    },
   },
   server: {
     port,

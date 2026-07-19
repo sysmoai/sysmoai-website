@@ -6,6 +6,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { useSeo } from "@/hooks/useSeo";
 
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFAB } from "@/components/WhatsAppFAB";
@@ -127,8 +128,9 @@ function Router() {
       <IdlePrefetch />
       <Header />
       <main className="flex-1">
-        <Suspense fallback={<Fallback />}>
-          <Switch>
+        <ErrorBoundary>
+          <Suspense fallback={<Fallback />}>
+            <Switch>
             {/* Primary routes */}
             <Route path="/" component={Home} />
             <Route path="/lead-rescue" component={LeadRescue} />
@@ -179,6 +181,7 @@ function Router() {
             <Route component={NotFound} />
           </Switch>
         </Suspense>
+        </ErrorBoundary>
       </main>
       <Footer />
       <WhatsAppFAB />

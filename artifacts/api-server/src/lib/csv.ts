@@ -1,3 +1,10 @@
+/**
+ * Prevents CSV injection (a.k.a. formula injection) by prefixing cells that
+ * start with a dangerous character with a single quote. Excel, LibreOffice,
+ * and Google Sheets will treat the cell as text rather than executing a formula.
+ */
+const CSV_DANGEROUS_PREFIX = /^[=+\-@\t\r]/;
+
 function escapeCell(value: unknown): string {
   if (value === null || value === undefined) return "";
   let str: string;
@@ -7,6 +14,10 @@ function escapeCell(value: unknown): string {
     str = JSON.stringify(value);
   } else {
     str = String(value);
+  }
+  // CSV injection guard — prefix dangerous leading characters with a single quote
+  if (CSV_DANGEROUS_PREFIX.test(str)) {
+    str = "'" + str;
   }
   if (/[",\n\r]/.test(str)) {
     return `"${str.replace(/"/g, '""')}"`;

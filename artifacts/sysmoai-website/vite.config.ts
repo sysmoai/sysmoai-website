@@ -64,6 +64,7 @@ export default defineConfig({
           "vendor-react": ["react", "react-dom"],
           "vendor-motion": ["framer-motion"],
           "vendor-gsap": ["gsap", "@gsap/react"],
+          "vendor-api": ["@workspace/api-client-react", "@tanstack/react-query"],
         },
       },
     },

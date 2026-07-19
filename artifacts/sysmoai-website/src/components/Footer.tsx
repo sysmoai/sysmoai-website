@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'wouter';
 import { Mail, MessageCircle, MapPin } from 'lucide-react';
 import { SYSmoAILogo } from './SYSmoAILogo';
 import { WA_LINK, EMAIL } from '@/lib/config';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useCreateWaitlistSignup } from '@workspace/api-client-react';
 
 export function Footer() {
   const { isDark } = useTheme();
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const waitlistMutation = useCreateWaitlistSignup();
 
   const bg = isDark ? '#0A0B0F' : '#F8FAFF';
   const borderC = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(37,99,235,0.08)';
@@ -24,29 +29,53 @@ export function Footer() {
             <p className="text-sm mb-4" style={{ color: textColor }}>
               Weekly insights on AI automation, Notion systems, and growing with AI. Free.
             </p>
-            <form
-              className="flex gap-2"
-              onSubmit={(e) => { e.preventDefault(); }}
-            >
-              <input
-                type="email"
-                placeholder="your@email.com"
-                required
-                className="flex-1 rounded-lg px-4 py-2.5 text-sm focus:outline-none"
-                style={{
-                  background: isDark ? 'rgba(255,255,255,0.06)' : '#F1F5F9',
-                  border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(37,99,235,0.15)'}`,
-                  color: isDark ? '#F1F5F9' : '#0A0B0F',
+            {subscribed ? (
+              <p className="text-sm text-green-500 font-medium">✓ You're subscribed! Check your inbox for the first insight.</p>
+            ) : (
+              <form
+                className="flex gap-2"
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  setError(null);
+                  try {
+                    await waitlistMutation.mutateAsync({
+                      data: { email, source: 'footer-subscribe' },
+                    });
+                    setSubscribed(true);
+                    setEmail('');
+                  } catch (err) {
+                    setError(
+                      err instanceof Error ? err.message : 'Subscription failed. Try again or WhatsApp us.',
+                    );
+                  }
                 }}
-              />
-              <button
-                type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap"
               >
-                Subscribe
-              </button>
-            </form>
-            <p className="text-xs mt-2" style={{ color: isDark ? '#334155' : '#CBD5E1' }}>No spam. Unsubscribe anytime.</p>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  required
+                  className="flex-1 rounded-lg px-4 py-2.5 text-sm focus:outline-none"
+                  style={{
+                    background: isDark ? 'rgba(255,255,255,0.06)' : '#F1F5F9',
+                    border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(37,99,235,0.15)'}`,
+                    color: isDark ? '#F1F5F9' : '#0A0B0F',
+                  }}
+                />
+                <button
+                  type="submit"
+                  disabled={waitlistMutation.isPending}
+                  className="bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap"
+                >
+                  {waitlistMutation.isPending ? 'Subscribing...' : 'Subscribe'}
+                </button>
+              </form>
+            )}
+            {error && <p className="text-xs mt-2 text-red-500">{error}</p>}
+            {!subscribed && !error && (
+              <p className="text-xs mt-2" style={{ color: isDark ? '#334155' : '#CBD5E1' }}>No spam. Unsubscribe anytime.</p>
+            )}
           </div>
         </div>
 
