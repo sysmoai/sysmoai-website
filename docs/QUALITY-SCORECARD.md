@@ -5,7 +5,7 @@
 | Category | Score | Evidence | Remaining |
 |----------|-------|----------|-----------|
 | Information Architecture | 65/100 | Route inventory done, nav overloaded | Simplify navigation, reduce audience page overload |
-| English Content | 50/100 | Central content.ts created, blog metas fixed | Homepage, services, about all need rewrite |
+| English Content | 55/100 | Central content.ts, blog metas fixed, illustrative disclaimers added | Homepage, services, about need rewrite |
 | Bangla Content | 40/100 | /bn hub created, language strategy | Need more pages, typography audit |
 | Brand Consistency | 60/100 | Brand data centralized in content.ts | Inconsistent theme implementation pattern |
 | UI Design | 55/100 | shadcn/ui system, dark/light themes | Inline styles pattern needs cleanup |

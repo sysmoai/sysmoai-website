@@ -2,49 +2,43 @@
 
 **Date:** 2026-07-19  
 **Branch:** commandcode/sysmoai-quality-2026-07-19  
-**HEAD:** 839c430 — feat: unify service pricing via content.ts, fix blogPosts.ts metadata, repair sandbox
+**HEAD:** bfaf185 — fix: add illustrative-scenario disclaimers
 
 ## Checkpoints
 
-| Tag | Commit | Description |
-|-----|--------|-------------|
-| `checkpoint-before-audit` | 77cf399 | Before first quality audit |
-| `checkpoint-before-professional-site-pass` | d26fa36 | Before professional English-first pass |
-| `checkpoint-resume-session` | a7246af | Resume point for this session |
+checkpoint-before-audit, checkpoint-before-professional-site-pass, checkpoint-resume-session
 
 ## Working Tree
 
 Clean.
 
-## Commits This Session
+## Commits
 
 | Commit | Description |
 |--------|-------------|
-| `160cb81` | Fixed 16 truncated blog meta descriptions + 2 duplicate titles + validation scripts |
-| `a7246af` | Central content system, Bangla hub (/bn), testing infra (12 tests), docs |
-| `839c430` | Service pricing unification via content.ts, blogPosts.ts metadata fixes, sandbox repair |
+| `160cb81` | Blog metadata repair — 16 truncations, 2 dup titles |
+| `a7246af` | Content system, Bangla hub, tests (12), docs |
+| `839c430` | Pricing unification, blogPosts.ts fixes, sandbox repair |
+| `bfaf185` | Illustrative-scenario disclaimers on blog posts |
 
-## Batch 3 — Complete
+## Batches Completed
 
-- ServicePageTemplate now falls back to `content.ts` for pricing when `usdPrice` not provided
-- All 9 service page wrappers had hardcoded `usdPrice` removed
-- International page's USD pricing table → "Contact for pricing"
-- Fixed 15 truncated blogPosts.ts metaDescription fields (separate copies from blogMeta.ts)
-- Fixed mockup-sandbox typecheck (bumped tsx catalog to 4.23.0)
-- Root typecheck passes across all 5 workspace projects
-- Tests: 12/12 passing; build: 84 static pages, 82 sitemap URLs
+- B1: Blog metadata repair ✅
+- B2: Content system, Bangla hub, testing infra ✅
+- B3: Service pricing unification ✅
+- B4: Blog illustrative disclaimers ✅
+- B5: Mockup-sandbox typecheck fix ✅
 
-## Quality Score: 55/100 (+3 from last session)
+## Current Quality Score: 58/100 (+3: disclaimers, pricing consistency)
 
-## Next Actions (highest priority)
+## Next (Batch 6): Final verification and testing expansion
 
-1. Add illustrative-scenario disclaimers to blog posts (labelled examples)
-2. Add basic API tests
-3. Homepage rewrite (English-first)
-4. Navigation simplification
+- Add API server endpoint tests
+- Add link-checking audit script
+- Verify all 84 static pages serve correct metadata
+- Update all docs to match current state
 
 ## Blocks
 
-- No Notion access
-- No deployment performed (requires production auth)
-- Unverified blog claims documented in CLAIM-REGISTER
+- No Notion access — integration requirements in `docs/NOTION-BLOCKER.md`
+- No deployment — requires production auth
