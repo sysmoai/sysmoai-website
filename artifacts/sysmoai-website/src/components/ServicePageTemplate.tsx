@@ -4,6 +4,7 @@ import { Link } from 'wouter';
 import { MessageCircle, CheckCircle2, ArrowRight, LucideIcon } from 'lucide-react';
 import { WA_LINK } from '@/lib/config';
 import { useTheme } from '@/contexts/ThemeContext';
+import { SERVICES } from '@/data/content';
 import {
   Accordion,
   AccordionContent,
@@ -26,8 +27,8 @@ interface ServicePageProps {
   icon: LucideIcon;
   title: string;
   headline: string;
-  bdPrice: string;
-  usdPrice: string;
+  bdPrice?: string;
+  usdPrice?: string;
   guarantee?: string;
   whatItIs: string;
   deliverables: string[];
@@ -39,12 +40,22 @@ interface ServicePageProps {
   metaTitle?: string;
 }
 
+function useServicePricing(title: string, bdPrice?: string, usdPrice?: string) {
+  // Use passed-in pricing, or look up from shared content.ts
+  if (bdPrice && usdPrice) return { bdPrice, usdPrice };
+  const service = SERVICES.find((s) => title.includes(s.title) || s.title.includes(title));
+  return {
+    bdPrice: bdPrice || service?.bdPrice || 'Contact for pricing',
+    usdPrice: usdPrice || service?.usdPrice || 'Contact for pricing',
+  };
+}
+
 export function ServicePageTemplate({
   icon: Icon,
   title,
   headline,
-  bdPrice,
-  usdPrice,
+  bdPrice: bdPriceProp,
+  usdPrice: usdPriceProp,
   guarantee,
   whatItIs,
   deliverables,
@@ -56,6 +67,7 @@ export function ServicePageTemplate({
   metaTitle,
 }: ServicePageProps) {
   const { isDark } = useTheme();
+  const { bdPrice, usdPrice } = useServicePricing(title, bdPriceProp, usdPriceProp);
 
   React.useEffect(() => {
     document.title = metaTitle || `${title} | SYSmoAI`;
@@ -93,7 +105,9 @@ export function ServicePageTemplate({
             <div className="flex flex-wrap gap-3 items-center mb-8">
               <span className="text-2xl font-bold text-blue-400">{bdPrice}</span>
               <span className="text-slate-500 text-sm">·</span>
-              <span className="text-lg font-semibold text-slate-400">{usdPrice} international</span>
+              {usdPrice && usdPrice !== bdPrice && (
+                <span className="text-lg font-semibold text-slate-400">{usdPrice}</span>
+              )}
               {guarantee && (
                 <span className="px-3 py-1 bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-medium rounded-full">{guarantee}</span>
               )}

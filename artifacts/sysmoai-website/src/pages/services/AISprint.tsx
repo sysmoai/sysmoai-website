@@ -9,7 +9,6 @@ export default function AISprint() {
       title="AI Implementation Sprint"
       headline="Full AI Stack. Deployed in 14 Days."
       bdPrice="৳25,000–50,000"
-      usdPrice="$300–$600"
       whatItIs="The AI Sprint is our most comprehensive implementation service — a full custom AI operating system designed, built, and deployed for your business in 14 days. We handle everything: process analysis, tool selection, automation build, team training, and 3 months of post-launch support. This is the service for businesses that are serious about AI transformation."
       deliverables={[
         'Complete AI system designed and deployed (3–5 workflows)',

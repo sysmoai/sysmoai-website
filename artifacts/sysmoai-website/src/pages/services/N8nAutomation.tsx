@@ -9,7 +9,6 @@ export default function N8nAutomation() {
       title="n8n Workflow Automation"
       headline="Stop Doing Manually What Machines Can Do Automatically."
       bdPrice="৳2,000–10,000/workflow"
-      usdPrice="$50–$300/workflow"
       whatItIs="n8n is an open-source workflow automation platform — like Zapier but more powerful, more flexible, and significantly cheaper to run. We build custom n8n workflows that connect your apps, automate your data flows, and eliminate repetitive manual tasks. Priced per workflow, so you only pay for what you need."
       deliverables={[
         'Per-workflow automation — fully built and tested',

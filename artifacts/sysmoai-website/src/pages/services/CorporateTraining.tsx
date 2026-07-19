@@ -9,7 +9,6 @@ export default function CorporateTraining() {
       title="Corporate AI Training"
       headline="Turn Your Entire Team Into AI-Capable Operators."
       bdPrice="৳50,000–2,00,000"
-      usdPrice="$1,500–$8,000"
       whatItIs="Enterprise-grade AI training and implementation for companies with 50+ employees. We don't just run a training day — we deliver a comprehensive AI transformation program: audit your operations, design a custom AI curriculum for your industry, run hands-on training sessions, implement the top 3 workflow automations, and give you a 90-day AI roadmap with KPIs."
       deliverables={[
         'Enterprise AI audit — where AI saves the most time in your operation',

@@ -9,7 +9,6 @@ export default function AIQuickWin() {
       title="AI Quick Win"
       headline="Your #1 Workflow Problem. Automated. In 3 Days."
       bdPrice="৳3,750–7,500"
-      usdPrice="$50–$100"
       guarantee="Guaranteed or rebuilt free"
       whatItIs="The AI Quick Win is our entry-level, low-risk service designed to automate your single most painful manual workflow in 3 days or less. It's the fastest way to see real ROI from AI — without any upfront commitment to a larger project. Perfect for first-time AI clients who want proof before investing more."
       deliverables={[

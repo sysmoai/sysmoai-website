@@ -9,7 +9,6 @@ export default function AIRetainer() {
       title="AI Operations Retainer"
       headline="Your AI Systems. Managed. Every Month."
       bdPrice="৳20,000/month"
-      usdPrice="$250/month"
       guarantee="Cancel anytime"
       whatItIs="The AI Retainer is a monthly managed service where SYSmoAI acts as your ongoing AI operations partner. Each month, we improve your existing systems, add new automations, fix issues, and identify new AI opportunities as your business evolves. Perfect for post-Sprint clients or businesses that want continuous AI improvement without hiring a full-time AI person."
       deliverables={[

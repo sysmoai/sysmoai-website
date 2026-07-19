@@ -22,14 +22,14 @@ const reasons = [
 ];
 
 const services = [
-  { label: 'AI Quick Win', price: '$50–$100', href: '/services/ai-quick-win' },
-  { label: 'AI Sprint (14 days)', price: '$300–$600', href: '/services/ai-sprint' },
-  { label: 'AI Retainer', price: '$250/month', href: '/services/ai-retainer' },
-  { label: '1:1 AI Coaching', price: '$30/session', href: '/services/ai-coaching' },
-  { label: 'Notion OS Build', price: '$800–$5,000', href: '/services/notion-os' },
-  { label: 'AI Agent Development', price: '$2,500–$15,000', href: '/services/ai-agent-dev' },
-  { label: 'n8n Automation', price: '$50–$300/workflow', href: '/services/n8n-automation' },
-  { label: 'Corporate Training', price: '$1,500–$8,000', href: '/services/corporate-training' },
+  { label: 'AI Quick Win', price: 'Contact for pricing', href: '/services/ai-quick-win' },
+  { label: 'AI Sprint (14 days)', price: 'Contact for pricing', href: '/services/ai-sprint' },
+  { label: 'AI Retainer', price: 'Contact for pricing', href: '/services/ai-retainer' },
+  { label: '1:1 AI Coaching', price: 'Contact for pricing', href: '/services/ai-coaching' },
+  { label: 'Notion OS Build', price: 'Contact for pricing', href: '/services/notion-os' },
+  { label: 'AI Agent Development', price: 'Contact for pricing', href: '/services/ai-agent-dev' },
+  { label: 'n8n Automation', price: 'Contact for pricing', href: '/services/n8n-automation' },
+  { label: 'Corporate Training', price: 'Contact for pricing', href: '/services/corporate-training' },
 ];
 
 export default function International() {

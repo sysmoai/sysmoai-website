@@ -9,7 +9,6 @@ export default function GroupWorkshop() {
       title="Group AI Workshop"
       headline="Upskill Your Entire Team in Half a Day."
       bdPrice="৳500/person (min 10)"
-      usdPrice="$15/person"
       whatItIs="A hands-on group AI training workshop designed for teams of 10 or more. We build a custom curriculum for your industry and use cases, run practical exercises using AI tools, and leave every participant with a personal action plan. This isn't a lecture — it's a workshop where people actually do things with AI."
       deliverables={[
         'Custom curriculum tailored to your industry',

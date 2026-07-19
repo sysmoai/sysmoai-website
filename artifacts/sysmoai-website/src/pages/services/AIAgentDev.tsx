@@ -9,7 +9,6 @@ export default function AIAgentDev() {
       title="AI Agent Development"
       headline="A Custom AI Agent That Works For Your Business. 24/7."
       bdPrice="৳50,000–2,00,000"
-      usdPrice="$2,500–$15,000"
       whatItIs="Custom AI agent development (our NemoClaw framework) means building a fully trained, branded AI assistant that handles real business tasks autonomously — customer support, lead qualification, order management, FAQ answering, appointment booking, or any high-volume, repetitive interaction. Deployed on WhatsApp, your website, or any platform."
       deliverables={[
         'Custom-trained AI agent (your brand, your knowledge base)',

@@ -9,7 +9,6 @@ export default function AICoaching() {
       title="1:1 AI Coaching"
       headline="60 Minutes With an AI Expert. Built Around Your Exact Situation."
       bdPrice="৳2,500/session"
-      usdPrice="$30/session"
       whatItIs="A 60-minute live, personalized coaching session where we work on your specific AI challenge — not a generic tutorial. Whether you want to learn prompting, automate one thing, set up a tool, or get unstuck on an AI project, we focus 100% on your situation. No fluff. No theory without practice."
       deliverables={[
         '60-minute live session (Zoom or Google Meet)',
