@@ -12,6 +12,8 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import { notifyGoogle } from './google-indexing';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const DIST = path.join(ROOT, 'dist', 'public');
@@ -148,6 +150,10 @@ async function main(): Promise<void> {
   if (urlsToSubmit.length === 0) {
     console.log('✅ Nothing changed — no URLs submitted to IndexNow');
   }
+
+  // Also surface the same changed URLs to Google (Indexing API); Google does
+  // not support IndexNow. Non-fatal on failure or missing credentials.
+  await notifyGoogle(urlsToSubmit);
 
   // Persist the manifest for the next run (only after successful processing)
   try {
