@@ -71,7 +71,7 @@ const methods = ['bKash', 'Nagad', 'Bank transfer', 'Wise', 'Payoneer', 'Credit 
 const pricingFAQ = [
   { q: 'Are there any hidden fees?', a: 'No. The price shown is the price you pay. Payment terms are listed clearly for each package.' },
   { q: 'How do international clients pay?', a: 'USD payments via Wise, Payoneer, or Stripe. No currency conversion fees on our side.' },
-  { q: "What if the system doesn't deliver results?", a: "We offer a results-first guarantee. If we can't improve your workflow within the agreed timeline, you get a full refund." },
+  { q: "What if the system doesn't deliver results?", a: "We work with you until the agreed deliverables are complete and functional. If something doesn't work as scoped, we fix it at no extra cost. Specific business outcome guarantees aren't possible — results depend on your team's implementation and context." },
   { q: 'Can I cancel the retainer anytime?', a: 'Yes. The AI Operations Retainer is month-to-month with no long-term commitment. Cancel anytime.' },
 ];
 
@@ -153,7 +153,7 @@ export default function Pricing() {
           </motion.p>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}>
             <span className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-2 mb-8">
-              <span className="text-green-400 text-sm font-medium">✓ Results-first guarantee — you don't pay until your system delivers</span>
+              <span className="text-green-400 text-sm font-medium">✓ All deliverables handed over with documentation — you own everything</span>
             </span>
           </motion.div>
           <div className="flex items-center justify-center gap-3">
@@ -268,7 +268,7 @@ export default function Pricing() {
               <div>
                 <h4 className="text-white font-semibold mb-3">How It Works</h4>
                 <ul className="text-slate-400 space-y-2">
-                  {['All prices available in USD (use toggle)', 'Communication in English', 'Timezone-flexible scheduling', 'Same deliverables & guarantee'].map(m => (
+                  {['All prices available in USD (use toggle)', 'Communication in English', 'Timezone-flexible scheduling', 'Same deliverables & quality standard'].map(m => (
                     <li key={m} className="flex items-center gap-2"><span className="text-green-400">•</span>{m}</li>
                   ))}
                 </ul>

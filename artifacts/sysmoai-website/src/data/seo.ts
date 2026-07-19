@@ -137,7 +137,7 @@ const staticRoutes: Record<string, RouteSeo> = {
     ...base('/services/ai-quick-win'),
     schemas: [
       ORG_SCHEMA,
-      serviceSchema('AI Quick Win', 'Automate your single most painful workflow in 3 days. Low-risk entry to AI automation guaranteed or rebuilt free.', `${SITE_URL}/services/ai-quick-win`, '3750–7500'),
+      serviceSchema('AI Quick Win', 'Automate your single most painful workflow in 3 days. Low-risk entry to AI automation — 1 workflow automated in 3 days.', `${SITE_URL}/services/ai-quick-win`, '3750–7500'),
       breadcrumbSchema([home, services, { name: 'AI Quick Win', url: `${SITE_URL}/services/ai-quick-win` }]),
     ],
   },
@@ -283,7 +283,7 @@ const staticRoutes: Record<string, RouteSeo> = {
         name: 'Emon Hossain',
         jobTitle: 'AI Systems Architect & Founder',
         description:
-          "Top 5% Prompt Engineer globally. 500+ AI projects delivered. Founder of SYSmoAI — Bangladesh's leading AI consulting company.",
+          "Founder of SYSmoAI. AI systems builder specialising in Notion OS, workflow automation, and lead management for Bangladesh businesses.",
         url: `${SITE_URL}/about`,
         worksFor: { '@type': 'Organization', name: 'SYSmoAI', url: SITE_URL },
         address: { '@type': 'PostalAddress', addressLocality: 'Dhaka', addressCountry: 'BD' },
@@ -473,7 +473,7 @@ export const seoConfig: Record<string, RouteSeo> = {
 const DEFAULT_SEO: RouteSeo = {
   title: 'SYSmoAI — Systems in Motion | AI Consulting Bangladesh',
   description:
-    "SYSmoAI is Bangladesh's premier AI consulting company. AI systems, workflow automation, and custom AI agents for founders, freelancers, agencies, and corporates.",
+    "SYSmoAI builds AI operating systems for founders, agencies, and teams in Bangladesh and internationally — Notion OS, automation workflows, and lead management systems.",
   canonical: SITE_URL,
   schemas: [ORG_SCHEMA],
 };

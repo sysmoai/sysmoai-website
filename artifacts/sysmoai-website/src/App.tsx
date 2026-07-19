@@ -17,6 +17,7 @@ import NotFound from "@/pages/not-found";
 
 const LeadRescue = lazy(() => import("@/pages/LeadRescue"));
 const FitCheck = lazy(() => import("@/pages/FitCheck"));
+const FreeAudit = lazy(() => import("@/pages/FreeAudit"));
 const About = lazy(() => import("@/pages/About"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const Blog = lazy(() => import("@/pages/Blog"));
@@ -77,11 +78,6 @@ const Fallback = () => (
   </div>
 );
 
-function FreeAuditRedirect() {
-  const [, navigate] = useLocation();
-  useEffect(() => { navigate('/fit-check'); }, [navigate]);
-  return <Fallback />;
-}
 
 function SeoHead() {
   useSeo();
@@ -146,8 +142,8 @@ function Router() {
             <Route path="/proof" component={Proof} />
             <Route path="/results" component={Proof} />
 
-            {/* Legacy redirect — free-ai-audit → fit-check */}
-            <Route path="/free-ai-audit" component={FreeAuditRedirect} />
+            {/* Free AI Audit — discovery call page */}
+            <Route path="/free-ai-audit" component={FreeAudit} />
 
             {/* Services & pricing — kept for SEO, inactive banner applied */}
             <Route path="/services" component={Services} />

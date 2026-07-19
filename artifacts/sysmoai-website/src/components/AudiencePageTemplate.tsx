@@ -80,19 +80,6 @@ export function AudiencePageTemplate({
   return (
     <div className="flex flex-col w-full overflow-hidden" style={{ background: bg1 }}>
 
-      {/* Inactive audience banner */}
-      <div style={{ background: '#1C1A09', borderBottom: '1px solid rgba(251,191,36,0.22)', padding: '10px 16px' }}>
-        <div className="max-w-4xl mx-auto text-center">
-          <span className="text-xs" style={{ color: '#FCD34D' }}>
-            ⚠️ এই service এই মুহূর্তে <strong>inactive</strong>। SYSmoAI-এর একমাত্র active offer হলো{' '}
-            <a href="/lead-rescue" style={{ color: '#FCD34D', textDecoration: 'underline', fontWeight: 600 }}>
-              Lead Rescue System — Agency Edition
-            </a>।{' '}
-            এই page টি SEO-র জন্য রাখা হয়েছে।
-          </span>
-        </div>
-      </div>
-
       {/* Hero */}
       <section className="relative bg-[#0A0B0F] py-20 md:py-28 min-h-[70vh] flex items-center">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">

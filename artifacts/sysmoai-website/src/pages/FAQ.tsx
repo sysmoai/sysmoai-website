@@ -14,10 +14,10 @@ const fadeUp = {
 
 const faqs = [
   { q: 'Do I need to know anything about AI to work with you?', a: 'Not at all. We handle everything technical. You just show up for the onboarding call and tell us about your business. We do the rest.' },
-  { q: 'How fast do I see results?', a: 'Most Quick Win clients see measurable results within 72 hours of delivery. Sprint clients typically see major impact in the first 2 weeks.' },
+  { q: 'How fast do I see results?', a: 'Results depend on the service and complexity. Quick Win clients see their first automated workflow running within the agreed project timeline. Sprint clients typically see major impact in the first 2 weeks.' },
   { q: 'Do you only work with businesses in Bangladesh?', a: 'No. We work with clients worldwide. International payments are handled via Wise or Payoneer.' },
   { q: 'What if I don\'t like the output?', a: 'We offer one free revision on all projects. For Quick Win packages: if the stated goal isn\'t met, we rebuild it at no extra charge.' },
-  { q: 'Is this consulting or do you actually build?', a: 'We build. You get a working, deployed system — not a slide deck. We don\'t get paid until it works.' },
+  { q: 'Is this consulting or do you actually build?', a: 'We build. You get a working, deployed system — not a slide deck or strategy document. We build it, hand it over with full documentation, and train you to run it.' },
   { q: 'How do you handle payment?', a: 'Quick Win: 100% advance. Sprint: 50% upfront, 50% on delivery. Retainer: monthly billing. We accept bKash, Nagad, bank transfer, Wise, and Payoneer.' },
   { q: 'What tools will you use?', a: 'Notion, ChatGPT, Claude, n8n, Zapier, WhatsApp automation, and custom AI agents — all chosen based on your specific needs. We work with what you have.' },
   { q: 'Can you train my team as well?', a: 'Yes. Every Sprint includes team training. We also offer standalone Group Workshops for teams of 10+.' },

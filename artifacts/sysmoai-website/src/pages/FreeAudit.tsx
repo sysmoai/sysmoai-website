@@ -1,185 +1,176 @@
-import React from 'react';
-import { Link } from 'wouter';
 import { motion } from 'framer-motion';
-import { WA_URLS } from '../lib/whatsapp';
+import { MessageCircle, CheckCircle2, Clock, ArrowRight } from 'lucide-react';
+import { Link } from 'wouter';
+import { useEffect } from 'react';
+import { useTheme } from '../contexts/ThemeContext';
+import { getWhatsAppUrl } from '../lib/whatsapp';
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55 } }
+  hidden: { opacity: 0, y: 22 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.52, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09 } } };
 
-const WhatsAppIcon = () => (
-  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zm-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884zm8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-  </svg>
-);
+const steps = [
+  { icon: '💬', label: 'You describe your business', desc: 'Tell us what you do, what your team looks like, and where things break down.' },
+  { icon: '🗺️', label: 'We map your biggest bottleneck', desc: 'We identify your single most time-consuming or error-prone manual process.' },
+  { icon: '💡', label: 'We suggest practical options', desc: 'We explain what could be automated, how long it takes, and what it costs.' },
+];
+
+const gets = [
+  'A clear picture of your biggest AI opportunity',
+  'Honest assessment of whether AI can actually help',
+  'An idea of scope, timeline, and cost before any commitment',
+  'No obligation, no sales pressure',
+];
 
 export default function FreeAudit() {
-  React.useEffect(() => {
-    document.title = 'Free AI Audit — 30-Minute Business Review | SYSmoAI';
+  const { isDark } = useTheme();
+
+  useEffect(() => {
+    document.title = 'Free AI Readiness Audit — SYSmoAI';
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', 'Book a free 30-minute discovery call with SYSmoAI. We map your biggest manual bottleneck and suggest practical AI options — no commitment required.');
   }, []);
 
-  const steps = [
-    {
-      time: 'First 10 minutes',
-      icon: '🔍',
-      title: 'We understand your business',
-      desc: 'Emon asks targeted questions about your current workflow — what tools you use, where your time goes, what\'s breaking most often. No generic questions. All specific to your situation.',
-    },
-    {
-      time: 'Next 15 minutes',
-      icon: '🗺️',
-      title: 'We map your #1 automation opportunity',
-      desc: 'Based on your answers, Emon identifies the single workflow that will save the most time and money when automated. He explains exactly what to build, which tools to use, and what the result will look like.',
-    },
-    {
-      time: 'Final 5 minutes',
-      icon: '📋',
-      title: 'You leave with a clear action plan',
-      desc: 'Emon gives you a written action plan: the exact problem, the exact solution, the tools needed, the timeline, and the cost. You can implement this yourself or hire SYSmoAI to build it for you.',
-    },
-  ];
-
-  const forYouItems = [
-    "You're spending too much time on manual, repetitive tasks",
-    "Your team is overwhelmed and you don't know where AI fits",
-    "You've tried AI tools before but they didn't stick",
-    "You want to automate but don't know where to start",
-    "You're a Bangladesh SME, agency, or freelancer",
-    "You're an international client looking for world-class AI at better rates",
-  ];
+  const bg = isDark ? '#0A0B0F' : '#FFFFFF';
+  const altBg = isDark ? '#0D0F14' : '#F8FAFF';
+  const cardBg = isDark ? 'rgba(255,255,255,0.04)' : '#FFFFFF';
+  const border = isDark ? 'rgba(255,255,255,0.08)' : '#E2E8F0';
+  const heading = isDark ? '#F1F5F9' : '#0A0B0F';
+  const body = isDark ? '#94A3B8' : '#475569';
+  const subheading = isDark ? '#CBD5E1' : '#334155';
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="flex flex-col w-full overflow-hidden" style={{ background: bg }}>
 
       {/* Hero */}
-      <section className="py-20 bg-gradient-to-br from-slate-900 to-blue-900">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            <span className="inline-block px-4 py-1.5 bg-blue-500/20 text-blue-300 text-sm font-semibold rounded-full border border-blue-500/30 mb-6">
-              100% Free · No Commitment · No Sales Pitch
-            </span>
+      <section className="relative py-20 md:py-28" style={{ background: bg }}>
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-blue-600 opacity-[0.07] blur-[120px] rounded-full" />
+        </div>
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 border"
+              style={{ background: isDark ? 'rgba(37,99,235,0.08)' : 'rgba(37,99,235,0.05)', borderColor: 'rgba(37,99,235,0.2)' }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+              <span className="text-xs font-bold tracking-wider uppercase" style={{ color: '#3B82F6' }}>Free — No Commitment</span>
+            </div>
           </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight"
-          >
-            Book Your Free 30-Minute AI Audit
+          <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}
+            className="text-4xl md:text-5xl font-bold tracking-tight mb-4" style={{ color: heading }}>
+            Free AI Readiness Audit
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.2 }}
-            className="text-xl text-blue-100 mb-4 leading-relaxed"
-          >
-            Emon Hossain personally reviews your business workflow, identifies your biggest AI automation opportunity, and gives you a clear action plan — free.
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }}
+            className="text-lg mb-8 max-w-xl mx-auto" style={{ color: body }}>
+            A focused 30-minute discovery call. We understand your business, identify your biggest
+            manual bottleneck, and suggest practical AI options — before any commitment.
           </motion.p>
-          <motion.p
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}
-            className="text-blue-300 text-sm"
-          >
-            Available for businesses in Bangladesh and worldwide.
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.24 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href={getWhatsAppUrl('audit')} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-7 py-4 rounded-xl font-bold text-base transition-all duration-200 hover:shadow-[0_0_24px_rgba(37,99,235,0.35)]">
+              <MessageCircle size={18} />
+              Book via WhatsApp
+            </a>
+            <a href="mailto:hello@sysmoai.com"
+              className="inline-flex items-center justify-center gap-2 border px-7 py-4 rounded-xl font-semibold text-base transition-all duration-200"
+              style={{ borderColor: border, color: subheading, background: 'transparent' }}>
+              Email Instead
+            </a>
+          </motion.div>
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}
+            className="mt-4 text-sm flex items-center justify-center gap-1.5" style={{ color: body }}>
+            <Clock size={13} />
+            We respond within 2 hours on working days
           </motion.p>
         </div>
       </section>
 
-      {/* What You Get */}
-      <section className="py-16 bg-white">
-        <div className="max-w-3xl mx-auto px-6">
-          <motion.h2
-            initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-3xl font-bold text-slate-900 text-center mb-12"
-          >
-            What Happens in Your Free AI Audit
-          </motion.h2>
-          <div className="space-y-6">
+      {/* What happens */}
+      <section className="py-16 md:py-20" style={{ background: altBg }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold mb-3" style={{ color: heading }}>What happens in the call</h2>
+            <p className="text-sm" style={{ color: body }}>30 minutes. No slides. Just a real conversation about your business.</p>
+          </motion.div>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {steps.map((step, i) => (
-              <motion.div
-                key={i}
-                initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-                className="flex gap-5 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-blue-100 hover:bg-blue-50/30 transition-all duration-200"
-              >
-                <div className="text-4xl flex-shrink-0">{step.icon}</div>
-                <div>
-                  <div className="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">{step.time}</div>
-                  <h3 className="font-bold text-slate-900 text-lg mb-2">{step.title}</h3>
-                  <p className="text-slate-600 leading-relaxed">{step.desc}</p>
-                </div>
+              <motion.div key={i} variants={fadeUp}
+                className="rounded-2xl p-6"
+                style={{ background: cardBg, border: `1px solid ${border}` }}>
+                <div className="text-3xl mb-3">{step.icon}</div>
+                <h3 className="font-semibold mb-2 text-sm" style={{ color: subheading }}>{i + 1}. {step.label}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: body }}>{step.desc}</p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Who It's For */}
-      <section className="py-16 bg-slate-50">
-        <div className="max-w-3xl mx-auto px-6">
-          <motion.h2
-            initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl font-bold text-slate-900 text-center mb-8"
-          >
-            The Audit Is For You If...
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {forYouItems.map((item, i) => (
-              <motion.div
-                key={i}
-                initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-                className="flex items-start gap-3 p-4 bg-white rounded-xl border border-slate-100"
-              >
-                <span className="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</span>
-                <span className="text-slate-700 text-sm leading-relaxed">{item}</span>
-              </motion.div>
+      {/* What you get */}
+      <section className="py-16 md:py-20" style={{ background: bg }}>
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold mb-3" style={{ color: heading }}>What you walk away with</h2>
+            <p className="text-sm" style={{ color: body }}>You'll have clarity. Whether we work together or not.</p>
+          </motion.div>
+          <motion.ul initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            className="space-y-4">
+            {gets.map((item, i) => (
+              <motion.li key={i} variants={fadeUp}
+                className="flex items-start gap-3 rounded-xl p-4"
+                style={{ background: cardBg, border: `1px solid ${border}` }}>
+                <CheckCircle2 className="text-green-500 flex-shrink-0 mt-0.5" size={18} />
+                <span className="text-sm" style={{ color: subheading }}>{item}</span>
+              </motion.li>
             ))}
-          </div>
+          </motion.ul>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-white">
-        <div className="max-w-xl mx-auto px-6 text-center">
-          <motion.h2
-            initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-3xl font-bold text-slate-900 mb-4"
-          >
-            Ready to Book Your Free Audit?
-          </motion.h2>
-          <motion.p
-            initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-slate-600 mb-8"
-          >
-            Send Emon a WhatsApp message. He'll confirm a time that works for you — usually within 2 hours on working days.
-          </motion.p>
+      <section className="py-16 md:py-20" style={{ background: altBg }}>
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
-            <div className="space-y-4 max-w-md mx-auto">
-              <a
-                href={WA_URLS.audit}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-4 rounded-xl transition-colors"
-              >
-                <WhatsAppIcon />
-                Book on WhatsApp <span className="text-green-200 text-xs font-normal">(Fastest)</span>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4" style={{ color: heading }}>Ready to talk?</h2>
+            <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: body }}>
+              Send a WhatsApp message or email — we'll schedule a time that works for you.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+              <a href={getWhatsAppUrl('audit')} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-7 py-4 rounded-xl font-bold text-base transition-all duration-200 hover:shadow-[0_0_24px_rgba(37,99,235,0.35)]">
+                <MessageCircle size={18} />
+                Book via WhatsApp
               </a>
-              <Link href="/contact"
-                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-4 rounded-xl transition-colors">
-                <span>📝</span> Fill Out Contact Form
+            </div>
+            <p className="text-sm" style={{ color: body }}>
+              Or check out{' '}
+              <Link href="/lead-rescue"
+                className="underline underline-offset-2"
+                style={{ color: '#3B82F6' }}>
+                Lead Rescue System
               </Link>
-              <a
-                href="mailto:hello@sysmoai.com?subject=Free AI Audit Request"
-                className="w-full flex items-center justify-center gap-2 border text-slate-300 hover:bg-slate-800 font-semibold px-6 py-4 rounded-xl transition-colors"
-                style={{ borderColor: 'rgba(100,116,139,0.4)' }}
-              >
-                <span>📧</span> Email Us Directly
-              </a>
-            </div>
-            <div className="flex items-center justify-center gap-2 mt-6">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-green-400 text-sm">Usually responds within 2 hours</span>
-            </div>
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-5 text-sm text-slate-400">
-              <span>✓ 100% free</span>
-              <span>✓ No obligation</span>
-              <span>✓ Bangladesh & worldwide</span>
-            </div>
+              {' '}if you're a micro digital agency in Bangladesh.
+            </p>
+          </motion.div>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/services"
+              className="inline-flex items-center gap-2 text-sm transition-colors"
+              style={{ color: body }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#3B82F6')}
+              onMouseLeave={e => (e.currentTarget.style.color = body)}>
+              Browse all services <ArrowRight size={14} />
+            </Link>
+            <Link href="/pricing"
+              className="inline-flex items-center gap-2 text-sm transition-colors"
+              style={{ color: body }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#3B82F6')}
+              onMouseLeave={e => (e.currentTarget.style.color = body)}>
+              View pricing <ArrowRight size={14} />
+            </Link>
           </motion.div>
         </div>
       </section>

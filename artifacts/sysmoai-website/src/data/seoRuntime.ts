@@ -33,7 +33,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/services/ai-quick-win': {
     title: 'AI Quick Win — 1 Workflow Automated in 3 Days | SYSmoAI',
     description:
-      "Automate your single most painful workflow in 3 days for ৳3,750–7,500. SYSmoAI's AI Quick Win is Bangladesh's lowest-risk AI automation service — guaranteed or rebuilt free.",
+      "Automate your single most painful workflow in 3 days for ৳3,750–7,500. SYSmoAI's AI Quick Win is Bangladesh's most accessible AI automation entry point — built and fully handed over to you.",
     canonical: `${SITE_URL}/services/ai-quick-win`,
   },
 
@@ -68,7 +68,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/services/notion-os': {
     title: 'Notion OS Build Bangladesh | Custom Notion Workspace | SYSmoAI',
     description:
-      "Get a custom Notion business operating system built for your company. Clients, projects, finance, HR — all interconnected. ৳15,000–50,000. Built by Bangladesh's top Notion specialist.",
+      "Get a custom Notion business operating system built for your company. Clients, projects, finance, HR — all interconnected. ৳15,000–50,000. Built by a specialist in Notion OS and workflow design.",
     canonical: `${SITE_URL}/services/notion-os`,
   },
 
@@ -166,7 +166,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/for/corporates': {
     title: 'Corporate AI Training Bangladesh | Enterprise AI Implementation | SYSmoAI',
     description:
-      "Corporates: structured AI training that achieves 87% team adoption, saves 15,000+ hours/year, and delivers 44x ROI. SYSmoAI enterprise AI transformation program.",
+      "Corporates: structured AI training designed for sustainable AI adoption, practical skills, and measurable workflow improvement. SYSmoAI enterprise AI transformation program.",
     canonical: `${SITE_URL}/for/corporates`,
   },
 

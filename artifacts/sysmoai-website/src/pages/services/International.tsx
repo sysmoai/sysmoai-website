@@ -12,13 +12,13 @@ const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { stag
 
 const reasons = [
   { icon: '💰', title: '60–80% cost savings', desc: 'vs US/EU consultants — same quality, fraction of the price' },
-  { icon: '🏆', title: 'Top 5% globally', desc: 'Prompt engineering verified by international benchmarks' },
+  { icon: '🏆', title: 'International standards', desc: 'Prompt engineering and AI systems built to global best practices' },
   { icon: '🗂️', title: 'Notion OS specialist', desc: 'One of the most advanced Notion architects in Asia' },
   { icon: '🤖', title: 'Custom AI agents', desc: 'WhatsApp, web, and custom platform integration' },
   { icon: '⚙️', title: 'n8n automation expert', desc: 'Complex workflow automation for any tool stack' },
   { icon: '💳', title: 'International payments', desc: 'Wise and Payoneer accepted — easy, fast, no friction' },
   { icon: '🌐', title: 'English-first', desc: 'No language barrier, clear communication, async-friendly' },
-  { icon: '✅', title: 'Results guarantee', desc: 'We don\'t get paid until it works — no risk to you' },
+  { icon: '✅', title: 'Transparent delivery', desc: 'You own every deliverable — full handover and documentation included' },
 ];
 
 const services = [
