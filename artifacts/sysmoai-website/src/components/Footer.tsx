@@ -5,6 +5,7 @@ import { SYSmoAILogo } from './SYSmoAILogo';
 import { WA_LINK, EMAIL } from '@/lib/config';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useCreateWaitlistSignup } from '@workspace/api-client-react';
+import { FOOTER_SERVICES, FOOTER_WHO_WE_HELP, FOOTER_RESOURCES, FOOTER_LEGAL } from '@/data/navigation';
 
 export function Footer() {
   const { isDark } = useTheme();
@@ -122,17 +123,7 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-sm font-bold uppercase tracking-[0.12em]" style={{ color: headingColor }}>Services</h3>
             <ul className="space-y-2 text-sm">
-              {[
-                { href: '/services/ai-quick-win',       label: 'AI Quick Win' },
-                { href: '/services/ai-sprint',           label: 'AI Sprint' },
-                { href: '/services/ai-retainer',         label: 'AI Retainer' },
-                { href: '/services/notion-os',           label: 'Notion OS Build' },
-                { href: '/services/ai-agent-dev',        label: 'AI Agent Dev' },
-                { href: '/services/n8n-automation',      label: 'n8n Automation' },
-                { href: '/services/ai-coaching',         label: '1:1 AI Coaching' },
-                { href: '/services/corporate-training',  label: 'Corporate Training' },
-                { href: '/services/international',       label: 'International Clients' },
-              ].map(link => (
+              {FOOTER_SERVICES.map(link => (
                 <li key={link.href}>
                   <Link href={link.href}
                     className="transition-colors"
@@ -150,17 +141,7 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-sm font-bold uppercase tracking-[0.12em]" style={{ color: headingColor }}>Who We Help</h3>
             <ul className="space-y-2 text-sm">
-              {[
-                { href: '/for/students',     label: 'Students' },
-                { href: '/for/job-seekers',  label: 'Job Seekers' },
-                { href: '/for/freelancers',  label: 'Freelancers' },
-                { href: '/for/sme-founders', label: 'SME Founders' },
-                { href: '/for/f-commerce',   label: 'F-Commerce Sellers' },
-                { href: '/for/agencies',     label: 'Digital Agencies' },
-                { href: '/for/consultants',  label: 'Consultants' },
-                { href: '/for/creators',     label: 'Content Creators' },
-                { href: '/for/corporates',   label: 'Corporates' },
-              ].map(link => (
+              {FOOTER_WHO_WE_HELP.map(link => (
                 <li key={link.href}>
                   <Link href={link.href}
                     className="transition-colors"
@@ -174,16 +155,7 @@ export function Footer() {
             </ul>
             <h3 className="text-sm font-bold uppercase tracking-[0.12em] pt-2" style={{ color: headingColor }}>Resources</h3>
             <ul className="space-y-2 text-sm">
-              {[
-                { href: '/lead-rescue',  label: '🔬 Lead Rescue Pilot'  },
-                { href: '/fit-check',    label: 'Fit Check'             },
-                { href: '/free-ai-audit',label: 'Free AI Audit'         },
-                { href: '/results',      label: 'Case Studies'          },
-                { href: '/blog',         label: 'Blog'                  },
-                { href: '/faq',          label: 'FAQ'                   },
-                { href: '/pricing',      label: 'Pricing'               },
-                { href: '/bn',          label: 'বাংলা'                 },
-              ].map(link => (
+              {FOOTER_RESOURCES.map(link => (
                 <li key={link.href}>
                   <Link href={link.href}
                     className="transition-colors"
@@ -238,11 +210,7 @@ export function Footer() {
         <div className="mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm" style={{ borderTop: `1px solid ${borderC}` }}>
           <p style={{ color: isDark ? '#334155' : '#CBD5E1' }}>© 2026 SYSmoAI · Made in Bangladesh 🇧🇩</p>
           <div className="flex items-center gap-4" style={{ color: textColor }}>
-            {[
-              { href: '/privacy-policy',   label: 'Privacy Policy' },
-              { href: '/terms-of-service', label: 'Terms' },
-              { href: '/refund-policy',    label: 'Refund Policy' },
-            ].map(l => (
+            {FOOTER_LEGAL.map(l => (
               <Link key={l.href} href={l.href}
                 className="transition-colors"
                 onMouseEnter={e => (e.currentTarget.style.color = hoverColor)}

@@ -170,6 +170,8 @@ export const FOOTER_WHO_WE_HELP: NavItem[] = [
 export const FOOTER_RESOURCES: NavItem[] = [
   { href: '/bangladesh', label: 'Bangladesh' },
   { href: '/bn', label: 'বাংলা' },
+  { href: '/lead-rescue', label: 'Lead Rescue' },
+  { href: '/fit-check', label: 'Fit Check' },
   { href: '/blog', label: 'Blog' },
   { href: '/faq', label: 'FAQ' },
   { href: '/pricing', label: 'Pricing' },
