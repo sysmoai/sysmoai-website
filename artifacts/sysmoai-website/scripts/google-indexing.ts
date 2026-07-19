@@ -5,13 +5,35 @@
  * Google Search Console Indexing API instead. Uses a service-account JSON
  * credential provided via the GOOGLE_INDEXING_SERVICE_ACCOUNT secret.
  *
- * Setup (one-time, if the secret is not configured):
- *   1. In Google Cloud Console, create (or reuse) a project and enable the
- *      "Web Search Indexing API".
- *   2. Create a service account and download its JSON key.
- *   3. In Google Search Console, add the service account's email
- *      (client_email from the JSON) as an Owner of the sysmoai.com property.
- *   4. Store the full JSON key as the GOOGLE_INDEXING_SERVICE_ACCOUNT secret.
+ * ═══════════════════════════════════════════════════════════════════════
+ * ONE-TIME SETUP (required for instant Google notifications)
+ * ═══════════════════════════════════════════════════════════════════════
+ *
+ * 1. Open Google Cloud Console: https://console.cloud.google.com
+ *    • Create a new project (or select an existing one).
+ *    • Go to "APIs & Services" → "Library".
+ *    • Search for "Web Search Indexing API" and click ENABLE.
+ *
+ * 2. Create a service account + JSON key:
+ *    • Go to "IAM & Admin" → "Service Accounts".
+ *    • Click "Create Service Account" → name it (e.g. "sysmoai-indexing").
+ *    • After creation, click into the account → "Keys" tab.
+ *    • "Add Key" → "Create new key" → choose JSON → download the .json file.
+ *
+ * 3. Grant access in Google Search Console:
+ *    • Open https://search.google.com/search-console
+ *    • Select the sysmoai.com property.
+ *    • Settings → Users and permissions → Add user.
+ *    • Paste the "client_email" from the downloaded JSON.
+ *    • Set permission to **Owner**.
+ *
+ * 4. Store the secret in this Replit workspace:
+ *    • Open the downloaded .json file in a text editor.
+ *    • Copy the ENTIRE content (it starts with {"type":"service_account",...}).
+ *    • Paste it as the GOOGLE_INDEXING_SERVICE_ACCOUNT secret.
+ *
+ * After setup, run `pnpm --filter @workspace/sysmoai-website run build` and
+ * look for: "Google Indexing API: N submitted, M failed (non-fatal)".
  *
  * Fallback when the secret is unavailable: Google discovers changes through
  * normal sitemap crawling (sitemap.xml is referenced in robots.txt). You can
