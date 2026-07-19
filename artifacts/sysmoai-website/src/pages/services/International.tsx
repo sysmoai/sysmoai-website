@@ -61,7 +61,7 @@ export default function International() {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
             className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed"
           >
-            US and EU AI consultants charge $200–$500/hr. SYSmoAI delivers the same expertise — Notion OS, custom AI agents, n8n automation — at a fraction of the cost. International payments via Wise and Payoneer.
+            International AI consultancies typically charge premium hourly rates. SYSmoAI delivers the same expertise — Notion OS, custom AI agents, n8n automation — at a fraction of the cost. International payments via Wise and Payoneer.
           </motion.p>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all min-h-[52px]">

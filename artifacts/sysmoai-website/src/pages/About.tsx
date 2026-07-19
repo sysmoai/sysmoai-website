@@ -221,16 +221,6 @@ export default function About() {
                   ))}
                 </div>
 
-                {/* Video placeholder */}
-                <div className="mb-6 rounded-2xl p-6 text-center"
-                  style={{ background: isDark ? 'rgba(255,255,255,0.05)' : '#0F172A', border: `1px solid ${isDark ? 'rgba(255,255,255,0.08)' : '#1E293B'}` }}>
-                  <div className="w-12 h-12 mx-auto mb-3 bg-blue-600 rounded-full flex items-center justify-center">
-                    <span className="text-white text-xl leading-none">▶</span>
-                  </div>
-                  <h3 className="text-white font-semibold mb-1 text-sm">Watch: Why I Built SYSmoAI</h3>
-                  <p className="text-slate-500 text-xs italic">Video coming soon</p>
-                </div>
-
                 <blockquote className="text-base leading-relaxed italic border-l-4 border-blue-500 pl-5 my-5"
                   style={{ color: isDark ? '#94A3B8' : '#374151' }}>
                   "I built SYSmoAI because I was you — overwhelmed, tool-hopping, and losing income while AI changed everything around me. I spent years mastering every AI tool. Then I realized: most people don't need another tool. They need someone to build the system for them."

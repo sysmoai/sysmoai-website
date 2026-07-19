@@ -435,7 +435,7 @@ export function BrandMarkConstruction() {
 
             {/* CTA */}
             <Link
-              href="/free-audit"
+              href="/free-ai-audit"
               className="inline-flex items-center gap-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm px-7 py-3.5 rounded-xl transition-all duration-200 group shadow-lg hover:shadow-blue-500/25"
             >
               Get your free AI system audit

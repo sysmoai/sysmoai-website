@@ -314,8 +314,8 @@ export interface FAQ {
 <h2>This Could Be Your Company</h2>
 
 <p>🟢 <strong>FREE:</strong> AI Readiness Assessment. <a href="/free-ai-audit">Book here</a></p>
-<p>🟡 <strong>WORKSHOP (৳50,000):</strong> 1-day leadership workshop. <a href="/services/custom-ai-system">Learn more</a></p>
-<p>🔵 <strong>FULL PROGRAM (৳200,000+):</strong> 90-day Enterprise AI Transformation. <a href="/services/custom-ai-system">Contact us</a></p>
+<p>🟡 <strong>WORKSHOP (৳50,000):</strong> 1-day leadership workshop. <a href="/services/corporate-training">Learn more</a></p>
+<p>🔵 <strong>FULL PROGRAM (৳200,000+):</strong> 90-day Enterprise AI Transformation. <a href="/services/corporate-training">Contact us</a></p>
 
 <p>They saved 15,000+ hours/year. <strong>How much time is your company wasting?</strong></p>`,
       faq: [
@@ -429,8 +429,8 @@ export interface FAQ {
 <h2>Your Next Steps</h2>
 
 <p>🟢 <strong>FREE:</strong> AI Audit — Emon assesses your organization's AI readiness. <a href="/free-ai-audit">Book here</a></p>
-<p>🟡 <strong>WORKSHOP (৳50,000):</strong> 1-day AI Workshop for your leadership team. <a href="/services/custom-ai-system">Learn more</a></p>
-<p>🔵 <strong>FULL PROGRAM (৳200,000+):</strong> 90-day Enterprise AI Training — foundations + department-specific + systems. <a href="/services/custom-ai-system">Contact us</a></p>
+<p>🟡 <strong>WORKSHOP (৳50,000):</strong> 1-day AI Workshop for your leadership team. <a href="/services/corporate-training">Learn more</a></p>
+<p>🔵 <strong>FULL PROGRAM (৳200,000+):</strong> 90-day Enterprise AI Training — foundations + department-specific + systems. <a href="/services/corporate-training">Contact us</a></p>
 
 <p>78% of your team is already using AI. <strong>The question is whether they're using it well — or creating risk.</strong></p>`,
       faq: [
@@ -959,11 +959,11 @@ export interface FAQ {
 <p>In WhatsApp Business → Settings → Quick Replies, create these:</p>
 
 <ul>
-<li><strong>/price</strong> — "আপনাকে ধন্যবাদ! 😊 আমাদের পণ্যের দাম: [product list with prices]. অর্ডার করতে চাইলে আপনার নাম, ঠিকানা আর পণ্যের নাম পাঠান।"</li>
-<li><strong>/confirm</strong> — "অর্ডার কনফার্ম! ✅ আপনার অর্ডার প্রসেস হচ্ছে। ডেলিভারি [X দিনে]। bKash/Nagad: [number], Amount: ৳[X]। পেমেন্ট করে স্ক্রিনশট পাঠান।"</li>
-<li><strong>/shipped</strong> — "আপনার অর্ডার শিপ হয়েছে! 🚚 ট্র্যাকিং: [courier name]. ডেলিভারি [X দিনের] মধ্যে। কোনো প্রশ্ন থাকলে মেসেজ করুন।"</li>
-<li><strong>/delivered</strong> — "পণ্য পেয়েছেন? আশা করি ভালো লেগেছে! 🎉 আপনার অভিজ্ঞতা শেয়ার করুন আমাদের পেজে। পরবর্তী অর্ডারে ১০% ছাড়!"</li>
-<li><strong>/cod</strong> — "ক্যাশ অন ডেলিভারি available! ✅ ডেলিভারি চার্জ: ঢাকা ৳60, ঢাকার বাইরে ৳120। অর্ডার করতে আপনার নাম + ঠিকানা + পণ্য পাঠান।"</li>
+<li><strong>/price</strong> — "Thank you for reaching out! 😊 Our product prices: [product list with prices]. To order, send your name, address, and the product name."</li>
+<li><strong>/confirm</strong> — "Order confirmed! ✅ Your order is being processed. Delivery in [X days]. bKash/Nagad: [number], Amount: ৳[X]. Please send a screenshot after payment."</li>
+<li><strong>/shipped</strong> — "Your order has shipped! 🚚 Tracking: [courier name]. Delivery within [X days]. Message us if you have any questions."</li>
+<li><strong>/delivered</strong> — "Did you receive your order? We hope you love it! 🎉 Share your experience on our page. Get 10% off your next order!"</li>
+<li><strong>/cod</strong> — "Cash on delivery available! ✅ Delivery charge: ৳60 inside Dhaka, ৳120 outside. To order, send your name + address + product."</li>
 </ul>
 
 <h2>Step 2: Create Notion Order Tracker (10 Minutes)</h2>
@@ -1001,8 +1001,8 @@ export interface FAQ {
 
 <p>Check Notion daily for follow-up dates:</p>
 <ul>
-<li><strong>Day 3 after delivery:</strong> "পণ্য কেমন লাগলো? আমাদের পেজে রিভিউ দিন! 🙏"</li>
-<li><strong>Day 30:</strong> "নতুন কালেকশন এসেছে! আপনার পছন্দের স্টাইলে। দেখুন 👉 [link]"</li>
+<li><strong>Day 3 after delivery:</strong> "How did you like the product? Leave a review on our page! 🙏"</li>
+<li><strong>Day 30:</strong> "Our new collection is here — in styles you love. Take a look 👉 [link]"</li>
 </ul>
 
 <h2>Before vs After</h2>
@@ -1036,11 +1036,11 @@ export interface FAQ {
 
 <p><strong>Every minute without auto-reply is a customer you might lose. Start now.</strong></p>`,
       faq: [
-      { question: `এটা কি বাংলায় কাজ করবে?`, answer: `হ্যাঁ — সব quick reply বাংলায় লেখা। আপনার customer-দের সাথে বাংলায় communicate করবে।` },
-    { question: `bKash/Nagad payment verify হবে?`, answer: `Free version-এ manual verify। Full SYSmoAI system-এ auto-verify available.` },
-    { question: `একাধিক product থাকলে?`, answer: `Product list দিয়ে /price customize করুন। Notion-এ প্রতিটা product আলাদা entry.` },
-    { question: `Staff-কে দিয়ে করাতে পারবো?`, answer: `হ্যাঁ — Notion share করুন staff-দের সাথে। সবাই same dashboard দেখবে।` },
-    { question: `Facebook Messenger-এও কাজ করবে?`, answer: `Quick replies WhatsApp Business-এ। Messenger-এর জন্য "Saved Replies" feature use করুন — same concept.` }
+      { question: `Can I use these templates in Bangla?`, answer: `Yes — write your quick replies in whichever language your customers use. The templates above translate directly into Bangla for local customers.` },
+    { question: `Does this verify bKash/Nagad payments?`, answer: `In the free version you verify payments manually. The full SYSmoAI system supports automatic payment verification.` },
+    { question: `What if I sell multiple products?`, answer: `Customize the /price quick reply with your product list, and give each product its own entry in Notion.` },
+    { question: `Can my staff run this system?`, answer: `Yes — share the Notion workspace with your staff. Everyone sees the same order dashboard.` },
+    { question: `Does this work on Facebook Messenger too?`, answer: `Quick replies live in WhatsApp Business. For Messenger, use the "Saved Replies" feature — it is the same concept.` }
       ],
       ctaService: `AI Quick Win ৳3,750`,
       ctaPrice: '৳3,750',
@@ -2469,7 +2469,7 @@ You completed 6 hours of value that would've taken 14 without the system. Evenin
 
 <p>🟡 <strong>STARTER ($45 / ৳3,750):</strong> AI Quick Win — automate one system (proposals OR reporting). Working in 3 days. <a href="/services/ai-quick-win">Get started</a></p>
 
-<p>🔵 <strong>FULL STACK ($600 / ৳50,000):</strong> AI Agency OS — all 5 layers connected. 14 days. <a href="/services/custom-ai-system">Learn more</a></p>
+<p>🔵 <strong>FULL STACK ($600 / ৳50,000):</strong> AI Agency OS — all 5 layers connected. 14 days. <a href="/services/ai-sprint">Learn more</a></p>
 
 <p>Your competitor already built their stack. <strong>How long will you wait?</strong></p>
 
@@ -2491,7 +2491,7 @@ You completed 6 hours of value that would've taken 14 without the system. Evenin
       { href: '/for/agencies', text: 'Solutions for Agencies' },
     { href: '/free-ai-audit', text: 'Free AI Audit' },
     { href: '/services/ai-quick-win', text: 'AI Quick Win' },
-    { href: '/services/custom-ai-system', text: 'Custom AI System' },
+    { href: '/services/ai-agent-dev', text: 'AI Agent Development' },
     { href: '/blog/agencies-system-reveal-ai-agency-stack-2026', text: 'Related: System Reveal' }
       ],
       directAnswerSummary: `A 3-person agency in Gulshan handles 50 clients using AI automation while a 10-person agency in Banani handles only 20. The difference is systematic AI integration: automated reporting, AI-assisted content creation, and Notion-based project management that eliminates coordination overhead.`,
@@ -5888,9 +5888,9 @@ Over a 4-year degree: <strong>~2,400 wasted hours = 10 months of your life</stro
 
 <p>🟢 <strong>FREE:</strong> AI Readiness Assessment — I'll evaluate your team's current AI usage, identify security risks, and recommend the highest-impact starting point. 30 minutes. <a href="/free-ai-audit">Book here</a></p>
 
-<p>🟡 <strong>WORKSHOP ($600 / ৳50,000):</strong> 1-day Leadership AI Workshop — executive team + department heads. AI strategy, governance framework, and quick wins. <a href="/services/custom-ai-system">Learn more</a></p>
+<p>🟡 <strong>WORKSHOP ($600 / ৳50,000):</strong> 1-day Leadership AI Workshop — executive team + department heads. AI strategy, governance framework, and quick wins. <a href="/services/corporate-training">Learn more</a></p>
 
-<p>🔵 <strong>FULL PROGRAM ($2,400+ / ৳200,000+):</strong> 90-day Enterprise AI Transformation — full 3-day training + workspace setup + 30/60/90 day support + measurement. <a href="/services/custom-ai-system">Contact us</a></p>
+<p>🔵 <strong>FULL PROGRAM ($2,400+ / ৳200,000+):</strong> 90-day Enterprise AI Transformation — full 3-day training + workspace setup + 30/60/90 day support + measurement. <a href="/services/corporate-training">Contact us</a></p>
 
 <p>78% of your team uses AI. <strong>The question is whether they're using it well — or creating risk.</strong></p>
 
@@ -5906,12 +5906,12 @@ Over a 4-year degree: <strong>~2,400 wasted hours = 10 months of your life</stro
       ],
       ctaService: `Group Workshop From ৳15,000`,
       ctaPrice: '৳15,000',
-      ctaLink: '/services/custom-ai-system',
+      ctaLink: '/services/corporate-training',
       relatedGroups: ['corporates'],
       internalLinks: [
       { href: '/for/corporates', text: 'Solutions for Corporates' },
     { href: '/free-ai-audit', text: 'Free AI Readiness Assessment' },
-    { href: '/services/custom-ai-system', text: 'Enterprise AI Programs' },
+    { href: '/services/corporate-training', text: 'Enterprise AI Programs' },
     { href: '/blog/corporates-system-reveal-enterprise-ai-playbook-2026', text: 'Related: AI Playbook' },
     { href: '/blog/corporates-transformation-15000-hours-saved-2026', text: 'Related: Transformation Story' }
       ],
@@ -6646,7 +6646,7 @@ You are. You review everything. You refine everything. You own everything. AI is
 
 <p>The most resistant participants often become the most enthusiastic once they see AI save them 30 minutes on a task they hate. Build your exercise around their pain point.</p>
 
-<p>Want a professionally facilitated version of this workshop tailored to your company's specific context and tools? Our <strong>Custom AI System</strong> service includes enterprise AI workshops. <a href="/services/custom-ai-system">Talk to us</a>.</p>`,
+<p>Want a professionally facilitated version of this workshop tailored to your company's specific context and tools? Our <strong>Custom AI System</strong> service includes enterprise AI workshops. <a href="/services/corporate-training">Talk to us</a>.</p>`,
       faq: [
       { question: `How many participants can this workshop accommodate?`, answer: `Optimal size is 12-25 participants. Below 12, the group dynamic suffers. Above 25, the hands-on sections become hard to facilitate well. For larger teams, run 2-3 sessions of the same workshop rather than scaling one session up.` },
     { question: `What technical requirements does this workshop need?`, answer: `Every participant needs a laptop or tablet with internet access. You need a projector or large screen for presentations. Participants should create free accounts for Claude.ai and ChatGPT before the workshop (send instructions 2 days before). No other technical setup required.` },
@@ -6656,12 +6656,12 @@ You are. You review everything. You refine everything. You own everything. AI is
       ],
       ctaService: `Group Workshop ৳500/person`,
       ctaPrice: '৳500',
-      ctaLink: '/services/custom-ai-system',
+      ctaLink: '/services/corporate-training',
       relatedGroups: ['consultants', 'agencies', 'sme-founders'],
       internalLinks: [
       { href: '/for/corporates', text: 'AI Solutions for Corporates' },
     { href: '/free-ai-audit', text: 'Free AI Audit' },
-    { href: '/services/custom-ai-system', text: 'Group Workshop ৳500/person' },
+    { href: '/services/group-workshop', text: 'Group Workshop ৳500/person' },
     { href: '/blog', text: 'All Articles' }
       ],
       directAnswerSummary: `You can run your first AI team workshop in 1 day using this facilitator guide: assess current AI usage, identify 3 high-impact automation opportunities, build one workflow together as a team, and create an implementation roadmap for the next 90 days.`,
@@ -6774,7 +6774,7 @@ You are. You review everything. You refine everything. You own everything. AI is
 
 <p>The organizations that struggle are those who implement AI tools without implementing the change management that makes them stick.</p>
 
-<p>Want expert implementation of this playbook for your organization? Our <strong>Custom AI System</strong> service handles the full 90-day implementation — training design, tool selection, governance framework, and change management. <a href="/services/custom-ai-system">Talk to us about your organization</a>.</p>`,
+<p>Want expert implementation of this playbook for your organization? Our <strong>Custom AI System</strong> service handles the full 90-day implementation — training design, tool selection, governance framework, and change management. <a href="/services/corporate-training">Talk to us about your organization</a>.</p>`,
       faq: [
       { question: `How do we handle employees who are worried AI will replace their jobs?`, answer: `Address this proactively in the leadership alignment phase. Frame the initiative clearly: AI handles routine cognitive work so employees can do higher-value work. Back this with data from your own industry. Then prove it in the first 30 days by showing employees AI saving them time on tasks they hate. Experience is more convincing than reassurance.` },
     { question: `What's the minimum company size where this playbook makes sense?`, answer: `The full 90-day enterprise playbook makes sense for organizations with 50+ employees. For smaller organizations (20-50 people), a condensed 30-day version focusing on 2-3 high-impact use cases works better. Below 20 people, direct coaching and small-group workshops are more effective than enterprise-scale implementation.` },
@@ -6784,12 +6784,12 @@ You are. You review everything. You refine everything. You own everything. AI is
       ],
       ctaService: `Corporate Training ৳50,000+`,
       ctaPrice: '৳50,000',
-      ctaLink: '/services/custom-ai-system',
+      ctaLink: '/services/corporate-training',
       relatedGroups: ['consultants', 'agencies', 'sme-founders'],
       internalLinks: [
       { href: '/for/corporates', text: 'AI Solutions for Corporates' },
     { href: '/free-ai-audit', text: 'Free AI Audit' },
-    { href: '/services/custom-ai-system', text: 'Corporate Training ৳50,000+' },
+    { href: '/services/corporate-training', text: 'Corporate Training ৳50,000+' },
     { href: '/blog', text: 'All Articles' }
       ],
       directAnswerSummary: `The Enterprise AI Playbook is a 90-day structured program covering AI training, tool deployment, workflow automation, and governance — designed for Bangladeshi corporates who want 87%+ team adoption and measurable ROI instead of scattered tool usage.`,

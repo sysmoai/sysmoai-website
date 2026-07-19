@@ -298,6 +298,16 @@ const staticRoutes: Record<string, RouteSeo> = {
     schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'Pricing', url: `${SITE_URL}/pricing` }])],
   },
 
+  '/lead-rescue': {
+    ...base('/lead-rescue'),
+    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'Lead Rescue', url: `${SITE_URL}/lead-rescue` }])],
+  },
+
+  '/fit-check': {
+    ...base('/fit-check'),
+    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'Fit Check', url: `${SITE_URL}/fit-check` }])],
+  },
+
   '/proof': {
     ...base('/proof'),
     schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'Client Results', url: `${SITE_URL}/proof` }])],

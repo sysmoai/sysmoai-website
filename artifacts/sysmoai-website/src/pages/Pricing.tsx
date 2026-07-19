@@ -13,47 +13,47 @@ const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { stag
 
 const services = [
   {
-    title: 'AI Quick Win', bd: '৳3,750–7,500', usd: '$50–$100', href: '/services/ai-quick-win',
+    title: 'AI Quick Win', bd: '৳3,750–7,500', usd: 'Contact for a quote', href: '/services/ai-quick-win',
     features: ['1 workflow automated', 'Video walkthrough', '1 free revision', '3-day delivery'],
     tag: 'Start here',
   },
   {
-    title: 'AI Implementation Sprint', bd: '৳25,000–50,000', usd: '$300–$600', href: '/services/ai-sprint',
+    title: 'AI Implementation Sprint', bd: '৳25,000–50,000', usd: 'Contact for a quote', href: '/services/ai-sprint',
     features: ['Complete AI system (3–5 workflows)', 'Team training included', '3-month post-launch support', 'Video documentation'],
     tag: 'Most popular', featured: true,
   },
   {
-    title: 'AI Operations Retainer', bd: '৳20,000/month', usd: '$250/month', href: '/services/ai-retainer',
+    title: 'AI Operations Retainer', bd: '৳20,000/month', usd: 'Contact for a quote', href: '/services/ai-retainer',
     features: ['4–8 hrs/month hands-on work', 'Monthly improvements', 'Priority WhatsApp support', 'Monthly AI performance report'],
     tag: 'Cancel anytime',
   },
   {
-    title: '1:1 AI Coaching', bd: '৳2,500/session', usd: '$30/session', href: '/services/ai-coaching',
+    title: '1:1 AI Coaching', bd: '৳2,500/session', usd: 'Contact for a quote', href: '/services/ai-coaching',
     features: ['60-min live session', 'Session recording', 'Follow-up Q&A (3 days)', 'Personal action plan'],
     tag: 'Individual',
   },
   {
-    title: 'Group AI Workshop', bd: '৳500/person', usd: '$15/person', href: '/services/group-workshop',
+    title: 'Group AI Workshop', bd: '৳500/person', usd: 'Contact for a quote', href: '/services/group-workshop',
     features: ['Custom industry curriculum', 'Hands-on exercises', 'Post-workshop resource pack', 'Min 10 participants'],
     tag: 'Teams',
   },
   {
-    title: 'Notion OS Build', bd: '৳15,000–50,000', usd: '$800–$5,000', href: '/services/notion-os',
+    title: 'Notion OS Build', bd: '৳15,000–50,000', usd: 'Contact for a quote', href: '/services/notion-os',
     features: ['Custom workspace architecture', 'All databases + automations', 'Dashboard views', 'Video tutorial + training'],
     tag: 'One-time',
   },
   {
-    title: 'AI Agent Development', bd: '৳50,000–2,00,000', usd: '$2,500–$15,000', href: '/services/ai-agent-dev',
+    title: 'AI Agent Development', bd: '৳50,000–2,00,000', usd: 'Contact for a quote', href: '/services/ai-agent-dev',
     features: ['Custom-trained AI agent', 'WhatsApp/web integration', 'Full deployment + testing', '30-day support'],
     tag: 'Enterprise',
   },
   {
-    title: 'n8n Automation', bd: '৳2,000–10,000/workflow', usd: '$50–$300/workflow', href: '/services/n8n-automation',
+    title: 'n8n Automation', bd: '৳2,000–10,000/workflow', usd: 'Contact for a quote', href: '/services/n8n-automation',
     features: ['Per-workflow automation', 'Any app integration', 'Error handling built in', 'Video documentation'],
     tag: 'Per workflow',
   },
   {
-    title: 'Corporate Training', bd: '৳50,000–2,00,000', usd: '$1,500–$8,000', href: '/services/corporate-training',
+    title: 'Corporate Training', bd: '৳50,000–2,00,000', usd: 'Contact for a quote', href: '/services/corporate-training',
     features: ['Enterprise AI audit', 'Custom curriculum', 'Top 3 automations implemented', '90-day AI roadmap'],
     tag: 'Enterprise',
   },
@@ -111,7 +111,7 @@ export default function Pricing() {
   useEffect(() => {
     document.title = 'Transparent AI Pricing — SYSmoAI | BDT & USD';
     const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute('content', 'Bangladesh rates meet global standards. AI Quick Win from ৳5,000, AI Sprint from ৳25,000, Monthly Retainer from ৳15,000. Currency toggle for international clients. No hidden fees.');
+    if (meta) meta.setAttribute('content', 'Bangladesh rates meet global standards. AI Quick Win from ৳3,750, AI Sprint from ৳25,000, AI Retainer ৳20,000/month. Currency toggle for international clients. No hidden fees.');
 
     const script = document.createElement('script');
     script.type = 'application/ld+json';

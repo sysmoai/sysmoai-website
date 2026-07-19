@@ -61,9 +61,9 @@ const audiences = [
 ];
 
 const featuredServices = [
-  { icon: Zap,       title: 'AI Quick Win', subtitle: 'Your #1 problem automated in 3 days',  description: '', bdPrice: '৳3,750–7,500',    usdPrice: '$50–$100',    href: '/services/ai-quick-win', featured: false, tag: 'Best entry point'  },
-  { icon: Timer,     title: 'AI Sprint',    subtitle: 'Full AI stack deployed in 14 days',     description: '', bdPrice: '৳25,000–50,000', usdPrice: '$300–$600',   href: '/services/ai-sprint',    featured: true,  tag: 'Most popular'     },
-  { icon: RefreshCw, title: 'AI Retainer',  subtitle: 'Ongoing AI management every month',     description: 'We manage and evolve your AI systems every month. Monthly improvements, priority WhatsApp support, and a full performance report — so your AI keeps working as your business grows.', bdPrice: '৳20,000/mo', usdPrice: '$250/mo', href: '/services/ai-retainer', featured: false, tag: 'Cancel anytime', features: ['Ongoing AI system management', 'Monthly improvements & optimizations', 'Priority WhatsApp support', 'Monthly performance report'] },
+  { icon: Zap,       title: 'AI Quick Win', subtitle: 'Your #1 problem automated in 3 days',  description: '', bdPrice: '৳3,750–7,500',    usdPrice: 'Contact for a quote',    href: '/services/ai-quick-win', featured: false, tag: 'Best entry point'  },
+  { icon: Timer,     title: 'AI Sprint',    subtitle: 'Full AI stack deployed in 14 days',     description: '', bdPrice: '৳25,000–50,000', usdPrice: 'Contact for a quote',   href: '/services/ai-sprint',    featured: true,  tag: 'Most popular'     },
+  { icon: RefreshCw, title: 'AI Retainer',  subtitle: 'Ongoing AI management every month',     description: 'We manage and evolve your AI systems every month. Monthly improvements, priority WhatsApp support, and a full performance report — so your AI keeps working as your business grows.', bdPrice: '৳20,000/mo', usdPrice: 'Contact for a quote', href: '/services/ai-retainer', featured: false, tag: 'Cancel anytime', features: ['Ongoing AI system management', 'Monthly improvements & optimizations', 'Priority WhatsApp support', 'Monthly performance report'] },
 ];
 
 const otherServices = [
@@ -987,7 +987,7 @@ export default function Home() {
                 outcome: '3 days',
                 outcomeLabel: 'to first result',
                 outcomeBg: '#10B981',
-                price: showUSD ? '$50–$100' : '৳3,750–7,500',
+                price: showUSD ? 'Contact for a quote' : '৳3,750–7,500',
                 highlights: [
                   'Map your biggest workflow bottleneck',
                   'Custom automation built & deployed',
@@ -1007,7 +1007,7 @@ export default function Home() {
                 outcome: '14 days',
                 outcomeLabel: 'full stack deployed',
                 outcomeBg: '#3B82F6',
-                price: showUSD ? '$300–$600' : '৳25,000–50,000',
+                price: showUSD ? 'Contact for a quote' : '৳25,000–50,000',
                 highlights: [
                   'Complete AI OS — Notion + n8n + WhatsApp',
                   '20+ hours/week saved from day one',
@@ -1027,7 +1027,7 @@ export default function Home() {
                 outcome: 'Monthly',
                 outcomeLabel: 'ongoing growth',
                 outcomeBg: '#8B5CF6',
-                price: showUSD ? '$250/mo' : '৳20,000/mo',
+                price: showUSD ? 'Contact for a quote' : '৳20,000/mo',
                 highlights: [
                   'Monthly AI system improvements',
                   'Priority WhatsApp support',
@@ -1182,17 +1182,17 @@ export default function Home() {
               </span>
             </h2>
             <p className="text-base max-w-2xl mx-auto leading-relaxed" style={{ color: isDark ? '#64748B' : '#6B7280' }}>
-              SYSmoAI-এর প্রথম commercial pilot — Bangladesh-ভিত্তিক micro digital agency-র জন্য। একটি
-              client-owned lead-to-client workflow যা আপনি নিজেই চালাবেন। SYSmoAI ছাড়াই।
+              SYSmoAI's first commercial pilot — built for Bangladesh-based micro digital agencies. A
+              client-owned lead-to-client workflow you run yourself, with no dependency on SYSmoAI.
             </p>
           </motion.div>
 
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }} variants={stagger}
             className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
             {[
-              { icon: '🎯', title: '১৪-দিনের Build Sprint', desc: 'Notion CRM + n8n automation + WhatsApp follow-up — সম্পূর্ণ সেটআপ ১৪ দিনের মধ্যে।' },
-              { icon: '🔬', title: 'Acceptance Test অন্তর্ভুক্ত', desc: 'আপনি সিস্টেম চালু করে test করবেন। কাজ না করলে pilot শেষ — কোনো বাড়তি চার্জ নেই।' },
-              { icon: '🏠', title: '১০০% Client-Owned', desc: 'সব কিছু আপনার Notion + n8n account-এ। SYSmoAI-এর উপর কোনো dependency নেই।' },
+              { icon: '🎯', title: '14-Day Build Sprint', desc: 'Notion CRM + n8n automation + WhatsApp follow-up — complete setup within 14 days.' },
+              { icon: '🔬', title: 'Acceptance Test Included', desc: 'You run the system and test it yourself. If it does not work, the pilot ends — no extra charge.' },
+              { icon: '🏠', title: '100% Client-Owned', desc: 'Everything lives in your own Notion + n8n accounts. No dependency on SYSmoAI.' },
             ].map((item, i) => (
               <motion.div key={i} variants={fadeUp}
                 className="rounded-2xl p-6 gsap-scale"
@@ -1220,7 +1220,7 @@ export default function Home() {
               <Link href="/fit-check"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all duration-200 hover:opacity-90"
                 style={{ background: '#F59E0B', color: '#000000' }}>
-                ✓ Fit Check নিন
+                ✓ Book a Fit Check
               </Link>
               <Link href="/lead-rescue"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm border transition-all duration-200 hover:opacity-80"
@@ -1687,7 +1687,7 @@ export default function Home() {
                 World-Class AI Expertise.<br />Not World-Class Prices.
               </h2>
               <p className="text-slate-300 text-lg mb-6 leading-relaxed">
-                US and EU AI consultants charge $200–$500/hr. SYSmoAI delivers the same quality — Notion OS, custom AI agents, n8n automation — at a fraction of the cost.
+                International AI consultancies typically charge premium hourly rates. SYSmoAI delivers the same quality — Notion OS, custom AI agents, n8n automation — at a fraction of the cost.
               </p>
               <div className="space-y-3 mb-8">
                 {[
@@ -1712,18 +1712,18 @@ export default function Home() {
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
               className="grid grid-cols-2 gap-4">
               {[
-                { service: 'AI Quick Win',    bd: '৳3,750–৳7,500',    usd: '$50–$100'     },
-                { service: 'AI Sprint',       bd: '৳25,000–৳50,000',  usd: '$300–$600'    },
-                { service: 'AI Retainer',     bd: '৳20,000/mo',        usd: '$250/mo'      },
-                { service: 'Notion OS Build', bd: '৳15,000–৳50,000',  usd: '$800–$5,000'  },
-                { service: 'AI Agent Dev',    bd: '৳50,000+',          usd: '$2,500+'      },
-                { service: '1:1 Coaching',    bd: '৳2,500/session',    usd: '$30/session'  },
+                { service: 'AI Quick Win',    bd: '৳3,750–৳7,500' },
+                { service: 'AI Sprint',       bd: '৳25,000–৳50,000' },
+                { service: 'AI Retainer',     bd: '৳20,000/mo' },
+                { service: 'Notion OS Build', bd: '৳15,000–৳50,000' },
+                { service: 'AI Agent Dev',    bd: '৳50,000+' },
+                { service: '1:1 Coaching',    bd: '৳2,500/session' },
               ].map(item => (
                 <div key={item.service}
                   className="bg-white/5 border border-white/10 rounded-xl p-4 hover:bg-white/10 transition-colors duration-200">
                   <div className="text-slate-400 text-xs font-medium mb-2">{item.service}</div>
-                  <div className="text-white font-semibold text-sm">{item.usd}</div>
-                  <div className="text-slate-500 text-xs mt-0.5">{item.bd} BD</div>
+                  <div className="text-white font-semibold text-sm">{item.bd}</div>
+                  <div className="text-slate-500 text-xs mt-0.5">USD on request</div>
                 </div>
               ))}
             </motion.div>
@@ -1737,7 +1737,7 @@ export default function Home() {
       <section className="py-12" style={{ background: isDark ? '#0A0B0F' : '#F8FAFF' }}>
         <div className="max-w-3xl mx-auto px-4 text-center">
           <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: isDark ? '#475569' : '#94A3B8' }}>
-            Trusted by businesses in
+            Serving Bangladesh and international markets
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm" style={{ color: isDark ? '#64748B' : '#94A3B8' }}>
             <span>🇧🇩 Bangladesh</span>
@@ -1771,12 +1771,8 @@ export default function Home() {
                 Free AI Audit — Limited Availability
               </p>
               <p className="text-sm mt-0.5" style={{ color: isDark ? '#B45309' : '#92400E' }}>
-                Emon personally conducts every discovery call. We keep slots limited to ensure quality. Book yours before this week fills up.
+                Emon personally conducts every discovery call. We keep slots limited to ensure quality, so availability varies week to week.
               </p>
-              <div className="flex items-center gap-2 mt-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse shrink-0" />
-                <span className="text-xs font-medium" style={{ color: isDark ? '#4ADE80' : '#166534' }}>3 audit slots remaining this week</span>
-              </div>
             </div>
           </div>
 

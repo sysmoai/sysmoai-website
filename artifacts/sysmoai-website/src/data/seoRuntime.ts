@@ -223,7 +223,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/lead-rescue': {
     title: 'Lead Rescue System — Agency Edition | SYSmoAI Validation Pilot',
     description:
-      'Lead Rescue System — Agency Edition: ১৪-দিনের validation pilot। Client-owned lead-to-client workflow for Bangladesh micro digital agencies. ৳15,000. Acceptance test included.',
+      'Lead Rescue System — Agency Edition: a 14-day validation pilot. Client-owned lead-to-client workflow for Bangladesh micro digital agencies. ৳15,000. Acceptance test included.',
     canonical: `${SITE_URL}/lead-rescue`,
   },
 
@@ -238,7 +238,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
     title: 'How We Work — Trust & Evidence Policy | SYSmoAI',
     description:
       "SYSmoAI's delivery approach: acceptance test model, client ownership guarantee, and honest evidence policy for our validation stage pilot.",
-    canonical: `${SITE_URL}/how-we-work`,
+    canonical: `${SITE_URL}/proof`,
   },
 
   '/contact': {

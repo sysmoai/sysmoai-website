@@ -27,10 +27,19 @@ checkpoint-before-audit, checkpoint-before-professional-site-pass, checkpoint-re
 - **Navigation**: Services | Who We Help | Bangladesh | Company ▼ | Pricing | Insights | [Book a Fit Check]
 - **Company dropdown**: About SYSmoAI, Our Approach, Contact
 - **HEADER_LINKS**: Pricing, Insights only (About/Contact moved under Company)
-- **Tests**: 27/27 passing (content + navigation + Company coverage)
-- **Build**: 82 sitemap URLs, 85 static pages
+- **Tests**: 27/27 website + 2 API passing
+- **Build**: 84 sitemap URLs, 87 static pages; admin + API server builds green
 
-## Quality Score: 72/100
+## Full Site Review Pass (2026-07-19, checkpoint-before-full-site-review)
+
+- **English-only**: All remaining Bangla translated (Home Lead Rescue section, Contact button, /lead-rescue meta description, f-commerce blog post templates/FAQs). Zero Bangla script chars remain in src (৳ taka sign retained intentionally).
+- **Broken links**: 9× dead `/services/custom-ai-system` links in blog posts remapped to real service pages; `/free-audit` → `/free-ai-audit` fixed in BrandMarkConstruction.
+- **Pricing integrity**: All unverified USD figures removed from Pricing + Home (now "Contact for a quote" / "USD on request"); "$200–$500/hr" comparison claims softened; unverifiable "Trusted by businesses in…" line replaced.
+- **Fabricated claims removed**: "3 audit slots remaining this week" scarcity counter deleted; "Video coming soon" placeholder removed from About.
+- **SEO**: /how-we-work canonical → /proof; /lead-rescue and /fit-check added to seo.ts so the build-time sitemap generator includes them (sitemap now 84 URLs).
+- **Forms/API verified**: /api/healthz OK; /api/contact validates via Zod and persists submissions.
+
+## Quality Score: 80/100
 
 ## Next
 
