@@ -15,19 +15,19 @@ const fadeUp = {
 };
 
 const schema = z.object({
-  name: z.string().min(2, 'নাম কমপক্ষে ২ অক্ষর হতে হবে'),
-  contact: z.string().min(5, 'Email বা WhatsApp number দিন'),
-  message: z.string().min(20, 'আপনার agency সম্পর্কে একটু বিস্তারিত লিখুন (কমপক্ষে ২০ অক্ষর)'),
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  contact: z.string().min(5, 'Please enter your email or WhatsApp number'),
+  message: z.string().min(20, 'Please describe your situation in at least 20 characters'),
 });
 
 type FormData = z.infer<typeof schema>;
 
 const criteria = [
-  'বাংলাদেশ-ভিত্তিক micro digital agency (২–৮ জন team)',
-  '৫–২০ active client বা মাসে ২০+ genuine enquiry',
-  'কোনো shared, dependable lead view নেই',
-  'Client workspace (Notion/Google Sheets) access দিতে পারবেন',
-  '৯০ মিনিট সময় দিতে পারবেন (২টি Google Meet session)',
+  'Bangladesh-based micro digital agency (2-8 person team)',
+  '5-20 active clients or 20+ genuine enquiries per month',
+  'No shared, dependable lead view currently',
+  'Able to provide client workspace access (Notion or Google Sheets)',
+  'Able to commit 90 minutes (2 Google Meet sessions)',
 ];
 
 export default function FitCheck() {
@@ -38,9 +38,9 @@ export default function FitCheck() {
   const createSubmission = useCreateContactSubmission();
 
   React.useEffect(() => {
-    document.title = 'Lead Leakage Fit Check — ১৫ মিনিট | SYSmoAI';
+    document.title = 'Lead Leakage Fit Check — 15 Minutes | SYSmoAI';
     const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute('content', 'Lead Rescue System-এর জন্য ১৫-মিনিটের qualification conversation। এটি consultation নয় — আপনার agency criteria meet করে কিনা সেটা দেখতে।');
+    if (meta) meta.setAttribute('content', 'A 15-minute qualification conversation for the Lead Rescue System. Find out if your agency qualifies for the Lead Rescue pilot. Free, no commitment.');
   }, []);
 
   const bg1 = isDark ? '#0A0B0F' : '#FFFFFF';
@@ -66,7 +66,7 @@ export default function FitCheck() {
       });
       setSubmitted(true);
     } catch (err) {
-      const msg = err instanceof Error ? err.message : 'কিছু একটা ভুল হয়েছে। WhatsApp-এ message করুন।';
+      const msg = err instanceof Error ? err.message : 'Something went wrong. Please try again or message us on WhatsApp.';
       setSubmitError(msg);
     }
   };
@@ -77,175 +77,178 @@ export default function FitCheck() {
       {/* Hero */}
       <section className="relative bg-[#0A0B0F] py-20 md:py-24">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[300px] bg-blue-600 opacity-[0.09] blur-[100px] rounded-full" />
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-blue-600 opacity-[0.08] blur-[120px] rounded-full" />
         </div>
-        <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
-          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-blue-400 mb-6"
-          >
-            <Clock size={13} /> ১৫ মিনিট · Qualification Only
-          </motion.span>
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+          <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+            className="text-xs font-bold uppercase tracking-[0.26em] text-blue-500 mb-5">
+            SYSmoAI · Systems in Motion
+          </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight mb-4 leading-tight"
-          >
+            className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
             Lead Leakage Fit Check
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }}
-            className="text-slate-300 text-lg mb-4 leading-relaxed"
-          >
-            Lead Rescue System-এর জন্য আপনার agency qualify করে কিনা সেটা দেখার জন্য একটি ছোট conversation।
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+            className="text-slate-400 text-lg max-w-2xl mx-auto">
+            A 15-minute qualification conversation to see if the Lead Rescue System is right for your agency.
           </motion.p>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.28 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm"
-            style={{ background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.25)', color: '#FCD34D' }}
-          >
-            <AlertCircle size={14} />
-            এটি consultation বা free advice নয় — শুধু qualification।
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}
+            className="flex items-center justify-center gap-3 mt-6">
+            <span className="flex items-center gap-1.5 text-sm text-slate-500"><Clock size={13} /> 15 minutes</span>
+            <span className="text-slate-600">·</span>
+            <span className="text-sm text-slate-500">Qualification only</span>
+            <span className="text-slate-600">·</span>
+            <span className="text-sm text-green-500">Free</span>
           </motion.div>
         </div>
       </section>
 
-      {/* What this is */}
-      <section className="py-12" style={{ background: bg2 }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="p-6 rounded-2xl" style={{ background: isDark ? 'rgba(34,197,94,0.06)' : '#F0FFF4', border: `1px solid ${isDark ? 'rgba(34,197,94,0.2)' : '#BBF7D0'}` }}>
-                <div className="font-bold mb-3" style={{ color: isDark ? '#86EFAC' : '#14532D' }}>✓ এই call-এ কি হবে</div>
-                <ul className="space-y-2 text-sm" style={{ color: isDark ? '#6EE7B7' : '#166534' }}>
-                  <li>আপনার agency সম্পর্কে ৫-৬টি specific প্রশ্ন</li>
-                  <li>Lead Rescue criteria আপনার situation-এ match হয় কিনা সেটা বলা</li>
-                  <li>Fit হলে — next step কি সেটা explain করা</li>
-                  <li>Fit না হলে — সেটাও সরাসরি বলা</li>
-                </ul>
-              </div>
-              <div className="p-6 rounded-2xl" style={{ background: isDark ? 'rgba(239,68,68,0.06)' : '#FFF5F5', border: `1px solid ${isDark ? 'rgba(239,68,68,0.2)' : '#FED7D7'}` }}>
-                <div className="font-bold mb-3" style={{ color: isDark ? '#FCA5A5' : '#7F1D1D' }}>✗ এই call-এ কি হবে না</div>
-                <ul className="space-y-2 text-sm" style={{ color: isDark ? '#F87171' : '#991B1B' }}>
-                  <li>Free consulting বা advice দেওয়া</li>
-                  <li>আপনার লিড সমস্যা solve করে দেওয়া</li>
-                  <li>Proposal বা quotation পাঠানো</li>
-                  <li>Payment নেওয়া</li>
-                </ul>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Criteria reminder */}
-      <section className="py-12" style={{ background: bg1 }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
-            <h2 className="font-bold mb-5 text-lg" style={{ color: heading }}>
-              Apply করার আগে confirm করুন
-            </h2>
-            <div className="space-y-2.5">
-              {criteria.map((c, i) => (
-                <div key={i} className="flex items-start gap-3 px-4 py-3 rounded-xl" style={{ background: cardBg, border: `1px solid ${cardBorder}` }}>
-                  <CheckCircle2 size={15} className="text-blue-400 mt-0.5 shrink-0" />
-                  <span className="text-sm" style={{ color: body }}>{c}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Contact section */}
+      {/* What is this? */}
       <section className="py-16" style={{ background: bg2 }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <div className="grid md:grid-cols-2 gap-10 lg:gap-14">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="text-2xl font-bold mb-4" style={{ color: heading }}>
+            Is Lead Rescue right for your agency?
+          </motion.h2>
+          <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="mb-6 leading-relaxed" style={{ color: body }}>
+            This is a short qualification conversation to confirm your agency meets the criteria for the Lead Rescue pilot.
+            It is not a consultation or free advice session — just a straightforward fit check.
+          </motion.p>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="flex flex-col sm:flex-row gap-8 justify-center">
+            <div className="text-left">
+              <p className="font-bold mb-2" style={{ color: isDark ? '#86EFAC' : '#14532D' }}>What happens on this call</p>
+              <ul className="space-y-1.5 text-sm" style={{ color: body }}>
+                <li className="flex items-start gap-2"><CheckCircle2 size={14} className="text-green-500 mt-0.5 shrink-0" /> 5-6 specific questions about your agency</li>
+                <li className="flex items-start gap-2"><CheckCircle2 size={14} className="text-green-500 mt-0.5 shrink-0" /> We assess whether Lead Rescue fits your situation</li>
+                <li className="flex items-start gap-2"><CheckCircle2 size={14} className="text-green-500 mt-0.5 shrink-0" /> If it fits, we explain the next steps</li>
+                <li className="flex items-start gap-2"><CheckCircle2 size={14} className="text-green-500 mt-0.5 shrink-0" /> If not, we tell you directly</li>
+              </ul>
+            </div>
+            <div className="text-left">
+              <p className="font-bold mb-2" style={{ color: isDark ? '#FCA5A5' : '#7F1D1D' }}>What does not happen</p>
+              <ul className="space-y-1.5 text-sm" style={{ color: body }}>
+                <li className="flex items-start gap-2"><AlertCircle size={14} className="text-red-500 mt-0.5 shrink-0" /> Free consulting or advice</li>
+                <li className="flex items-start gap-2"><AlertCircle size={14} className="text-red-500 mt-0.5 shrink-0" /> Solving your lead problems on the call</li>
+                <li className="flex items-start gap-2"><AlertCircle size={14} className="text-red-500 mt-0.5 shrink-0" /> Sending a proposal or quotation</li>
+                <li className="flex items-start gap-2"><AlertCircle size={14} className="text-red-500 mt-0.5 shrink-0" /> Requesting payment</li>
+              </ul>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
-            {/* Left: WhatsApp preferred */}
-            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="space-y-6">
+      {/* Criteria */}
+      <section className="py-16" style={{ background: bg1 }}>
+        <div className="max-w-3xl mx-auto px-4">
+          <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="text-xl font-bold mb-4 text-center" style={{ color: heading }}>
+            Confirm you meet the criteria before applying
+          </motion.h2>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="space-y-3">
+            {criteria.map((c, i) => (
+              <div key={i} className="flex items-start gap-3 p-4 rounded-xl"
+                style={{ background: isDark ? 'rgba(37,99,235,0.08)' : '#EFF6FF', border: `1px solid ${isDark ? 'rgba(37,99,235,0.2)' : '#BFDBFE'}` }}>
+                <CheckCircle2 size={18} className="text-blue-500 shrink-0 mt-0.5" />
+                <span className="text-sm" style={{ color: isDark ? '#93C5FD' : '#1E40AF' }}>{c}</span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Fastest way */}
+      <section className="py-16" style={{ background: bg2 }}>
+        <div className="max-w-3xl mx-auto px-4">
+          <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="text-xl font-bold mb-4 text-center" style={{ color: heading }}>
+            Fastest way to apply
+          </motion.h2>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="max-w-lg mx-auto">
+            <a href={WA_URLS.fitcheck} target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-4 bg-[#25D366] hover:bg-[#20b858] text-white px-6 py-5 rounded-xl font-semibold text-lg transition-all">
+              <MessageCircle size={26} className="shrink-0" />
               <div>
-                <h2 className="text-xl font-bold mb-4" style={{ color: heading }}>সবচেয়ে দ্রুত উপায়</h2>
-                <a href={WA_URLS.fitcheck} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-4 bg-[#25D366] hover:bg-[#20b858] text-white px-6 py-5 rounded-xl font-semibold text-base transition-all hover:shadow-lg"
-                >
-                  <MessageCircle size={24} className="shrink-0" />
-                  <div>
-                    <div>WhatsApp-এ Message করুন</div>
-                    <div className="text-green-100 text-sm font-normal">+880 1711-638693 · ২ ঘণ্টার মধ্যে reply</div>
-                  </div>
-                </a>
+                <div>Message us on WhatsApp</div>
+                <div className="text-green-100 text-sm font-normal">+880 1711-638693 · Reply within 2 hours</div>
               </div>
-              <div className="text-sm" style={{ color: body }}>
-                <p className="mb-2 font-semibold" style={{ color: heading }}>WhatsApp message-এ লিখুন:</p>
-                <ul className="space-y-1 text-xs" style={{ color: body }}>
-                  <li>আপনার agency-র নাম</li>
-                  <li>Team size (কতজন)</li>
-                  <li>মাসে কতটি enquiry আসে</li>
-                  <li>"Fit Check চাই" বলুন</li>
-                </ul>
-              </div>
-              <div className="text-sm" style={{ color: body }}>
-                <p>Email: <a href={`mailto:${EMAIL}`} className="text-blue-500 hover:underline">{EMAIL}</a></p>
-                <p className="text-xs mt-1" style={{ color: isDark ? '#475569' : '#94A3B8' }}>Working days: 10 AM – Midnight BST</p>
-              </div>
-            </motion.div>
+            </a>
+            <div className="mt-6 p-5 rounded-2xl" style={{ background: isDark ? 'rgba(255,255,255,0.04)' : '#FFFFFF', border: `1px solid ${cardBorder}` }}>
+              <p className="font-semibold mb-2" style={{ color: heading }}>In your message, include:</p>
+              <ul className="space-y-1.5 text-sm" style={{ color: body }}>
+                <li className="flex items-start gap-2"><CheckCircle2 size={14} className="text-green-500 mt-0.5 shrink-0" /> Your agency name and team size</li>
+                <li className="flex items-start gap-2"><CheckCircle2 size={14} className="text-green-500 mt-0.5 shrink-0" /> Number of enquiries per month</li>
+                <li className="flex items-start gap-2"><CheckCircle2 size={14} className="text-green-500 mt-0.5 shrink-0" /> Say "I want a Fit Check"</li>
+              </ul>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
-            {/* Right: Form */}
-            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
-              {submitted ? (
-                <div className="text-center py-10 px-6 rounded-2xl"
-                  style={{ background: isDark ? 'rgba(34,197,94,0.08)' : 'rgba(240,253,244,1)', border: `1px solid ${isDark ? 'rgba(34,197,94,0.2)' : '#BBF7D0'}` }}>
-                  <div className="text-5xl mb-4">✅</div>
-                  <h3 className="text-xl font-bold mb-2" style={{ color: isDark ? '#86EFAC' : '#14532D' }}>Request পাওয়া গেছে!</h3>
-                  <p className="text-sm mb-6" style={{ color: isDark ? '#6EE7B7' : '#166534' }}>
-                    Emon ২ working day-এর মধ্যে reply করবেন। দ্রুত response-এর জন্য WhatsApp-এ message করুন।
-                  </p>
-                  <a href={WA_URLS.fitcheck} target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl transition-all"
-                  >
-                    <MessageCircle size={16} /> WhatsApp-এ Continue করুন
-                  </a>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                  <h2 className="text-xl font-bold mb-2" style={{ color: heading }}>অথবা form পূরণ করুন</h2>
-                  <div>
-                    <label className="block text-sm font-semibold mb-1.5" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>আপনার নাম *</label>
-                    <input {...register('name')}
-                      className="w-full px-4 py-3 rounded-xl focus:outline-none transition-colors text-sm"
-                      style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
-                      placeholder="আপনার নাম" />
-                    {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold mb-1.5" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>Email বা WhatsApp *</label>
-                    <input {...register('contact')}
-                      className="w-full px-4 py-3 rounded-xl focus:outline-none transition-colors text-sm"
-                      style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
-                      placeholder="email@example.com বা +880..." />
-                    {errors.contact && <p className="text-red-500 text-xs mt-1">{errors.contact.message}</p>}
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold mb-1.5" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>
-                      আপনার agency সম্পর্কে বলুন *
-                    </label>
-                    <textarea {...register('message')} rows={5}
-                      className="w-full px-4 py-3 rounded-xl focus:outline-none transition-colors resize-none text-sm"
-                      style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
-                      placeholder="Agency-র নাম, team size, মাসে কতটি enquiry আসে, লিড tracking-এ কি সমস্যা হচ্ছে..." />
-                    {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
-                  </div>
-                  <p className="text-xs" style={{ color: body }}>
-                    Submit করলে আপনি আমাদের{' '}
-                    <a href="/privacy-policy" className="text-blue-500 hover:underline">Privacy Policy</a>-তে
-                    agree করছেন। আপনার তথ্য শুধু এই request-এর জন্য ব্যবহার হবে।
-                  </p>
-                  {submitError && <p className="text-red-500 text-sm">{submitError}</p>}
-                  <button type="submit" disabled={isSubmitting}
-                    className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2"
-                  >
-                    {isSubmitting ? 'পাঠানো হচ্ছে...' : (<>Fit Check Request পাঠান <ArrowRight size={16} /></>)}
-                  </button>
-                </form>
-              )}
+      {/* Form */}
+      <section className="py-16" style={{ background: bg1 }}>
+        <div className="max-w-xl mx-auto px-4">
+          <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="text-xl font-bold mb-6 text-center" style={{ color: heading }}>
+            Or fill in the form
+          </motion.h2>
+
+          {submitted ? (
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+              className="text-center py-10 px-6 rounded-2xl"
+              style={{ background: isDark ? 'rgba(34,197,94,0.08)' : 'rgba(240,253,244,1)', border: `1px solid ${isDark ? 'rgba(34,197,94,0.2)' : '#BBF7D0'}` }}>
+              <div className="text-5xl mb-4">✅</div>
+              <h3 className="text-2xl font-bold mb-3" style={{ color: isDark ? '#86EFAC' : '#14532D' }}>Request received!</h3>
+              <p className="mb-4" style={{ color: isDark ? '#86EFAC' : '#166534' }}>
+                Emon will review your request and respond within 2 working days. For a faster response, continue on WhatsApp.
+              </p>
+              <a href={WA_URLS.fitcheck} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl transition-all">
+                <MessageCircle size={16} /> Continue on WhatsApp
+              </a>
             </motion.div>
-          </div>
+          ) : (
+            <motion.form initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+              onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+              <div>
+                <label htmlFor="fc-name" className="block text-sm font-semibold mb-1.5" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>Your Name *</label>
+                <input id="fc-name" {...register('name')}
+                  className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 transition-colors"
+                  style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
+                  placeholder="Your name" />
+                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
+              </div>
+              <div>
+                <label htmlFor="fc-contact" className="block text-sm font-semibold mb-1.5" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>Email or WhatsApp Number *</label>
+                <input id="fc-contact" {...register('contact')}
+                  className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 transition-colors"
+                  style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
+                  placeholder="email@example.com or +880..." />
+                {errors.contact && <p className="text-red-500 text-sm mt-1">{errors.contact.message}</p>}
+              </div>
+              <div>
+                <label htmlFor="fc-message" className="block text-sm font-semibold mb-1.5" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>Tell us about your agency *</label>
+                <textarea id="fc-message" {...register('message')} rows={4}
+                  className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 transition-colors resize-none"
+                  style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}
+                  placeholder="Agency name, team size, monthly enquiries, and what lead tracking problem you are facing..." />
+                {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
+              </div>
+              <p className="text-xs" style={{ color: body }}>
+                By submitting, you agree to our{' '}
+                <a href="/privacy-policy" className="text-blue-500 hover:underline">Privacy Policy</a>.
+                We will only use your details to process this Fit Check request.
+              </p>
+              {submitError && <p className="text-red-500 text-sm">{submitError}</p>}
+              <button type="submit" disabled={isSubmitting}
+                className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white py-4 rounded-xl font-bold text-lg transition-all min-h-[52px] flex items-center justify-center gap-2">
+                {isSubmitting ? 'Submitting...' : <><>Submit Fit Check Request</> <ArrowRight size={16} /></>}
+              </button>
+            </motion.form>
+          )}
         </div>
       </section>
     </div>

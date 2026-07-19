@@ -18,17 +18,17 @@ export default function StickyCTA() {
       <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
         <div className="hidden sm:block">
           <p className="text-white text-sm font-semibold">Lead Rescue System — Agency Edition</p>
-          <p className="text-slate-400 text-xs">১৫-মিনিট Fit Check · Qualification only · বিনামূল্যে</p>
+          <p className="text-slate-400 text-xs">15-minute Fit Check · Qualification only · Free</p>
         </div>
         <div className="flex gap-3 w-full sm:w-auto">
           <Link href="/fit-check"
             className="flex-1 sm:flex-none text-center bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
-            Fit Check নিন
+            Take the Fit Check
           </Link>
           <a href={WA_URLS.fitcheck}
             target="_blank" rel="noopener noreferrer"
             className="flex-1 sm:flex-none text-center border border-green-500 text-green-400 hover:bg-green-500 hover:text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
-            💬 WhatsApp
+            Ask on WhatsApp
           </a>
         </div>
       </div>

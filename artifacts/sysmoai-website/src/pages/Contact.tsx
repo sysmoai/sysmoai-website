@@ -134,7 +134,7 @@ export default function Contact() {
                 <p className="text-sm mb-4" style={{ color: body }}>Apply for the 15-minute Fit Check to see if your agency qualifies for the Lead Rescue pilot.</p>
                 <a href="/fit-check"
                   className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-xl text-sm transition-colors">
-                  Fit Check নিন →
+                  Take the Fit Check →
                 </a>
               </div>
 

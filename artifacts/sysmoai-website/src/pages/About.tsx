@@ -161,7 +161,7 @@ export default function About() {
           >
             <Link href="/fit-check"
               className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-              Fit Check নিন
+              Book a Fit Check
             </Link>
             <a href={WA_URLS.general} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 border-2 border-white/30 text-white hover:bg-white/10 font-semibold px-8 py-4 rounded-xl transition-all duration-200">
@@ -318,21 +318,21 @@ export default function About() {
         <div className="max-w-3xl mx-auto px-6 text-center">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Lead Rescue Pilot-এ আগ্রহী?
+            Interested in the Lead Rescue Pilot?
           </motion.h2>
           <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="text-blue-100 text-lg mb-10 max-w-xl mx-auto">
-            ১৫ মিনিটের Fit Check দিয়ে শুরু করুন — আপনার agency কি criteria meet করে সেটা দেখতে। Qualification only, কোনো commitment নয়।
+            Start with a 15-minute Fit Check to see if your agency meets the criteria. Qualification only — no commitment.
           </motion.p>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/fit-check"
               className="inline-flex items-center justify-center gap-2 bg-white text-blue-700 font-bold px-8 py-4 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 hover:bg-blue-50">
-              Fit Check নিন
+              Book a Fit Check
             </Link>
             <a href={WA_URLS.leadrescue} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 border-2 border-white/40 text-white hover:bg-white/10 font-semibold px-8 py-4 rounded-xl transition-all duration-200">
-              💬 WhatsApp করুন
+              Message on WhatsApp
             </a>
           </motion.div>
         </div>

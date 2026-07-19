@@ -46,11 +46,6 @@ describe('BANGLADESH_GROUPS', () => {
     expect(BANGLADESH_GROUPS.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('includes /bn link', () => {
-    const allItems = BANGLADESH_GROUPS.flatMap((g) => g.items);
-    expect(allItems.some((i) => i.href === '/bn')).toBe(true);
-  });
-
   it('includes /bangladesh link', () => {
     const allItems = BANGLADESH_GROUPS.flatMap((g) => g.items);
     expect(allItems.some((i) => i.href === '/bangladesh')).toBe(true);
@@ -72,9 +67,8 @@ describe('FOOTER', () => {
     expect(FOOTER_SERVICES.some((l) => l.href === '/lead-rescue')).toBe(true);
   });
 
-  it('bangladesh and bn in footer resources', () => {
+  it('bangladesh in footer resources', () => {
     expect(FOOTER_RESOURCES.some((l) => l.href === '/bangladesh')).toBe(true);
-    expect(FOOTER_RESOURCES.some((l) => l.href === '/bn')).toBe(true);
   });
 
   it('legal links are complete', () => {

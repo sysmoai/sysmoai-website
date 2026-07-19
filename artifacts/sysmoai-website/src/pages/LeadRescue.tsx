@@ -231,23 +231,6 @@ export default function LeadRescue() {
         </div>
       </section>
 
-      {/* Bangla summary */}
-      <section className="py-12" style={{ background: bg1 }}>
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
-            <h3 className="text-lg font-bold mb-3" lang="bn" style={{ color: heading }}>
-              Lead Rescue সম্পর্কে বাংলায় জানুন
-            </h3>
-            <p className="text-sm mb-4 leading-relaxed" lang="bn" style={{ color: body }}>
-              Lead Rescue একটি লিড ক্যাপচার ও ফলো-আপ সিস্টেম যা আপনার WhatsApp, Facebook, এবং কল থেকে আসা ইনকোয়ারিগুলোকে একটি ট্র্যাকযোগ্য পাইপলাইনে সংযুক্ত করে। ৭-১৪ দিনের মধ্যে বাস্তবায়ন, সম্পূর্ণ হ্যান্ডওভার, এবং ৫-লিড অ্যাকসেপ্টেন্স টেস্ট সহ।
-            </p>
-            <Link href="/bn" className="text-sm text-blue-500 hover:text-blue-400 transition-colors">
-              SYSmoAI বাংলায় → 
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="py-20 bg-[#0A0B0F]">
         <div className="max-w-3xl mx-auto px-4 text-center">

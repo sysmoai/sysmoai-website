@@ -234,16 +234,10 @@ function BangladeshPanel({ onClose, isDark }: { onClose: () => void; isDark: boo
           <span className="text-[11px]" style={{ color: isDark ? '#475569' : '#94A3B8' }}>
             Locally built AI for Bangladesh
           </span>
-          <div className="flex items-center gap-3">
-            <Link href="/bangladesh" onClick={onClose}
-              className="text-[11px] font-semibold text-blue-400 hover:text-blue-300 transition-colors">
-              Overview
-            </Link>
-            <Link href="/bn" onClick={onClose}
-              className="text-[11px] font-semibold text-blue-400 hover:text-blue-300 transition-colors">
-              বাংলা
-            </Link>
-          </div>
+          <Link href="/bangladesh" onClick={onClose}
+            className="text-[11px] font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+            Overview →
+          </Link>
         </div>
       </div>
     </Panel>
@@ -413,7 +407,7 @@ export function Header() {
             <div className="relative"
               onMouseEnter={() => { svc.close_(); aud.close_(); bd.open_(); }}
               onMouseLeave={bd.close_}>
-              <DropdownTrigger label="Bangladesh / বাংলা" isOpen={bd.open}
+              <DropdownTrigger label="Bangladesh" isOpen={bd.open}
                 onMouseEnter={bd.open_} onMouseLeave={bd.close_} />
               {bd.open && <div className="absolute inset-x-0 top-full h-3" onMouseEnter={bd.open_} onMouseLeave={bd.close_} />}
               <AnimatePresence>
@@ -550,7 +544,7 @@ export function Header() {
               <button onClick={() => setMobileSection(mobileSection === 'bd' ? null : 'bd')}
                 className="w-full flex items-center justify-between px-4 py-3.5 text-[15px] font-semibold rounded-xl transition-colors"
                 style={{ color: isDark ? '#E2E8F0' : '#1E293B', background: mobileSection === 'bd' ? (isDark ? 'rgba(255,255,255,0.04)' : 'rgba(37,99,235,0.04)') : 'transparent' }}>
-                Bangladesh / বাংলা
+                Bangladesh
                 <ChevronDown size={15} className={`transition-transform duration-200 ${mobileSection === 'bd' ? 'rotate-180' : ''}`} />
               </button>
               {mobileSection === 'bd' && (

@@ -69,11 +69,7 @@ export default function Bangladesh() {
               <MessageCircle size={18} /> Talk to Us
             </a>
           </motion.div>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-4">
-            <Link href="/bn" className="text-sm text-blue-400 hover:text-blue-300 transition-colors">
-              বাংলায় দেখুন →
-            </Link>
-          </motion.div>
+          {/* Removed Bangla link per English-only requirement */}
         </div>
       </section>
 
@@ -178,11 +174,7 @@ export default function Bangladesh() {
               <MessageCircle size={20} /> WhatsApp Us
             </a>
           </div>
-          <div className="mt-4">
-            <Link href="/bn" className="text-sm text-blue-400 hover:text-blue-300 transition-colors">
-              বাংলায় SYSmoAI সম্পর্কে জানুন →
-            </Link>
-          </div>
+          {/* Removed per English-only requirement */}
         </div>
       </section>
     </div>

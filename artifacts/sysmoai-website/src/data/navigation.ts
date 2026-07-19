@@ -86,26 +86,25 @@ export const WHO_WE_HELP_GROUPS: NavGroup[] = [
 // ─── Bangladesh Menu ──────────────────────────────────────────────
 export const BANGLADESH_GROUPS: NavGroup[] = [
   {
-    title: 'বাংলাদেশ পরিচিতি',
+    title: 'Overview',
     items: [
-      { href: '/bn', label: 'SYSmoAI বাংলায়', desc: 'AI সিস্টেম ও অটোমেশন সম্পর্কে জানুন', icon: 'Globe' },
-      { href: '/bangladesh', label: 'Bangladesh Overview', desc: 'SYSmoAI for Bangladesh businesses (English)', icon: 'Star' },
+      { href: '/bangladesh', label: 'Bangladesh Overview', desc: 'SYSmoAI for Bangladesh businesses', icon: 'Globe' },
     ],
   },
   {
     title: 'Business Solutions',
     items: [
-      { href: '/lead-rescue', label: 'Lead Rescue', desc: 'লিড ম্যানেজমেন্ট সিস্টেম', icon: 'Target' },
-      { href: '/for/f-commerce', label: 'F-Commerce Solutions', desc: 'Facebook ও WhatsApp অটোমেশন', icon: 'ShoppingBag' },
-      { href: '/for/sme-founders', label: 'SME Business Systems', desc: 'ছোট ও মাঝারি ব্যবসার জন্য AI', icon: 'Building2' },
-      { href: '/services/corporate-training', label: 'Corporate AI Training', desc: 'প্রতিষ্ঠানের জন্য AI ট্রেনিং', icon: 'Building' },
+      { href: '/lead-rescue', label: 'Lead Rescue', desc: 'Lead management system', icon: 'Target' },
+      { href: '/for/f-commerce', label: 'F-Commerce Solutions', desc: 'Facebook and WhatsApp workflow automation', icon: 'ShoppingBag' },
+      { href: '/for/sme-founders', label: 'SME Business Systems', desc: 'AI for small and medium businesses', icon: 'Building2' },
+      { href: '/services/corporate-training', label: 'Corporate AI Training', desc: 'Enterprise AI training programs', icon: 'Building' },
     ],
   },
   {
     title: 'Resources',
     items: [
-      { href: '/faq', label: 'সাধারণ প্রশ্ন', desc: 'মূল্য, পেমেন্ট ও সেবা সম্পর্কিত প্রশ্ন', icon: 'BookOpen' },
-      { href: '/contact', label: 'যোগাযোগ', desc: 'WhatsApp ও ইমেইল', icon: 'MessageCircle' },
+      { href: '/faq', label: 'FAQ', desc: 'Pricing, payments, and services', icon: 'BookOpen' },
+      { href: '/contact', label: 'Contact', desc: 'WhatsApp and email', icon: 'MessageCircle' },
     ],
   },
 ];
@@ -129,7 +128,7 @@ export const HEADER_CTA = {
 export const MOBILE_SECTIONS: { key: string; label: string; type: 'accordion' | 'link' }[] = [
   { key: 'services', label: 'Services', type: 'accordion' },
   { key: 'who-we-help', label: 'Who We Help', type: 'accordion' },
-  { key: 'bangladesh', label: 'Bangladesh / বাংলা', type: 'accordion' },
+  { key: 'bangladesh', label: 'Bangladesh', type: 'accordion' },
   { key: 'links', label: '', type: 'link' },
 ];
 
@@ -169,7 +168,6 @@ export const FOOTER_WHO_WE_HELP: NavItem[] = [
 
 export const FOOTER_RESOURCES: NavItem[] = [
   { href: '/bangladesh', label: 'Bangladesh' },
-  { href: '/bn', label: 'বাংলা' },
   { href: '/lead-rescue', label: 'Lead Rescue' },
   { href: '/fit-check', label: 'Fit Check' },
   { href: '/blog', label: 'Blog' },
