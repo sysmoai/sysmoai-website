@@ -92,6 +92,21 @@ export default function BlogPostPage() {
             <span className="flex items-center gap-1"><Clock size={13} /> {post.readTime}</span>
             <span>{new Date(post.publishDate).toLocaleDateString('en-BD', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
           </motion.div>
+
+          {/* Disclosure for articles containing illustrative scenarios */}
+          {(post.articleType === 'transformation' || post.articleType === 'wake-up-call') && (
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+              className="mt-6 p-3 rounded-lg text-xs leading-relaxed"
+              style={{
+                background: isDark ? 'rgba(251,191,36,0.08)' : '#FFFBEB',
+                border: `1px solid ${isDark ? 'rgba(251,191,36,0.2)' : '#FDE68A'}`,
+                color: isDark ? '#FCD34D' : '#92400E',
+              }}>
+              <strong>Note:</strong> This article uses illustrative examples for educational purposes.
+              Names, characters, and specific metrics described are hypothetical scenarios
+              representative of common situations, not actual SYSmoAI clients.
+            </motion.div>
+          )}
         </div>
       </section>
 

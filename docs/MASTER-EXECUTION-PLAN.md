@@ -12,22 +12,20 @@ Fix blog metadata — 16 truncated descriptions, 2 duplicate titles, validation 
 ### Batch 2 (✅ Complete)
 Central content system (`content.ts`), Bangla hub (`/bn`), testing infra (12 tests), docs (4 files).
 
-### Batch 3 (⬅️ Current)
-**Objective:** Unify service page pricing with shared content data, fix remaining hardcoded USD prices.
+### Batch 3 (✅ Complete)
+Unify service page pricing — all 9 service wrappers drop hardcoded USD prices, template falls back to content.ts.
 
-Files: AIQuickWin.tsx, AISprint.tsx, AIRetainer.tsx, AICoaching.tsx, GroupWorkshop.tsx, NotionOS.tsx, AIAgentDev.tsx, N8nAutomation.tsx, CorporateTraining.tsx, International.tsx, ServicePageTemplate.tsx
+### Batch 4 (⬅️ Current)
+Add illustrative-scenario disclaimers to blog posts. Label invented examples clearly.
 
-### Batch 4
-Add illustrative-scenario disclaimers to blog posts. Update `content.ts` with disclaimer flag.
-
-### Batch 5
-Fix mockup-sandbox typecheck. Pin vite versions to resolve version conflict.
+### Batch 5 (✅ Complete)
+Fix mockup-sandbox typecheck — bumped tsx catalog to 4.23.0.
 
 ### Batch 6
-Final verification: typecheck, test, build, commit, state update.
+Add basic API server endpoint tests. Ensure public form endpoints are testable.
 
 ### Batch 7
-Deployment preparation and live verification (requires production auth).
+Final verification: typecheck, test, build, commit, state update.
 
 ## Completion Criteria
 
