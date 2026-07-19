@@ -1826,8 +1826,8 @@ You completed 6 hours of value that would've taken 14 without the system. Evenin
     },
   {
       slug: 'freelancers-system-reveal-ai-freelance-os-2026',
-      title: `All Automated`,
-      headline: `All Automated`,
+      title: `The AI Freelance OS: Lead Gen, Proposals, and Delivery — All Automated`,
+      headline: `The AI Freelance OS: Lead Gen, Proposals, and Delivery — All Automated`,
       targetGroup: 'freelancers',
       articleType: 'system-reveal',
       metaDescription: `You're juggling 5 clients across 3 WhatsApp groups, 2 email threads, and a spreadsheet you haven't updated in weeks. A new client inquiry just came in, but`,
