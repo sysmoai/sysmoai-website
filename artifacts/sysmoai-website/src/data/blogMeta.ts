@@ -227,7 +227,7 @@ export const blogPostsMeta: BlogPostMeta[] = [
   {
     slug: "sme-founders-system-reveal-ai-business-os-2026",
     title: "The AI Business OS: WhatsApp + CRM + Dashboard in One System",
-    metaDescription: "Most SME founders run their business from WhatsApp. Orders come in as messages. Inventory is tracked in their head. Revenue numbers are \"roughly\" known. Cu",
+    metaDescription: "Most SME founders run their business from WhatsApp. Orders come in as messages. Inventory is tracked in their head. Revenue numbers are not visible until you open 5 different apps. A unified system changes everything.",
     publishDate: "2026-04-16",
     author: "Emon Hossain",
   },
@@ -304,14 +304,14 @@ export const blogPostsMeta: BlogPostMeta[] = [
   {
     slug: "agencies-free-value-automated-client-reporting-2026",
     title: "Automate Your Client Reporting in 1 Hour (Google Analytics + AI + Notion)",
-    metaDescription: "Every Monday morning, somewhere in Dhaka, an agency founder spends 4 hours building client reports. Copy-paste from Analytics. Reformat in Excel. Make it l",
+    metaDescription: "Every Monday morning, somewhere in Dhaka, an agency founder spends 4 hours building client reports. Copy-paste from Analytics. Reformat in Excel. Make it look professional. Repeat for every client. Here's how to automate this in 1 hour.",
     publishDate: "2026-04-16",
     author: "Emon Hossain",
   },
   {
     slug: "agencies-future-shock-ai-pitch-advantage-2027",
     title: "By 2027, Agencies Without AI Will Lose Every Pitch. The Data Is Clear.",
-    metaDescription: "In 2027, a client sits across from two agencies. Agency A presents a beautiful deck built over 3 weeks. Agency B presents a deck built in 3 hours — with cu",
+    metaDescription: "In 2027, a client sits across from two agencies. Agency A presents a beautiful deck built over 3 weeks. Agency B presents a deck built in 3 hours — with customized data, mockups, and projections. Who wins?",
     publishDate: "2026-04-16",
     author: "Emon Hossain",
   },

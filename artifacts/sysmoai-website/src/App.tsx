@@ -55,6 +55,8 @@ const PrivacyPolicy = lazy(() => import("@/pages/legal/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("@/pages/legal/TermsOfService"));
 const RefundPolicy = lazy(() => import("@/pages/legal/RefundPolicy"));
 
+const BanglaHub = lazy(() => import("@/pages/BanglaHub"));
+
 const queryClient = new QueryClient();
 
 const PATHS = {
@@ -177,6 +179,9 @@ function Router() {
             <Route path="/privacy-policy" component={PrivacyPolicy} />
             <Route path="/terms-of-service" component={TermsOfService} />
             <Route path="/refund-policy" component={RefundPolicy} />
+
+            {/* Bangla hub */}
+            <Route path="/bn" component={BanglaHub} />
 
             <Route component={NotFound} />
           </Switch>

@@ -182,6 +182,7 @@ export function Footer() {
                 { href: '/blog',         label: 'Blog'                  },
                 { href: '/faq',          label: 'FAQ'                   },
                 { href: '/pricing',      label: 'Pricing'               },
+                { href: '/bn',          label: 'বাংলা'                 },
               ].map(link => (
                 <li key={link.href}>
                   <Link href={link.href}
