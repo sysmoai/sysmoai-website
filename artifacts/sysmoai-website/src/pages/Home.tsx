@@ -461,7 +461,7 @@ export default function Home() {
               <span className="w-2 h-2 bg-emerald-400 rounded-full block absolute inset-0 animate-badge-ping" />
             </div>
             <span className={`text-sm font-medium ${isDark ? 'text-blue-300' : 'text-blue-700'}`}>
-              🇧🇩 Bangladesh's AI Consulting Company — Serving Clients Worldwide
+              🇧🇩 AI Systems for Bangladesh Businesses — Serving Clients Worldwide
             </span>
           </motion.div>
 
@@ -473,8 +473,8 @@ export default function Home() {
             className="text-5xl sm:text-6xl lg:text-[5rem] font-bold tracking-[-0.032em] leading-[1.04] mb-6"
             style={{ fontFamily: "'Space Grotesk', sans-serif", color: isDark ? '#F1F5F9' : '#0A0B0F' }}
           >
-            Build Your AI-Powered<br />
-            <span className="brand-gradient-text">Business with AI Systems</span>
+            Practical AI Systems<br />
+            <span className="brand-gradient-text">for Growing Businesses</span>
           </motion.h1>
 
           {/* Sub */}
@@ -485,9 +485,9 @@ export default function Home() {
             className="text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed"
             style={{ color: isDark ? '#94A3B8' : '#64748B' }}
           >
-            SYSmoAI designs, builds and deploys custom AI operating systems for founders,
-            agencies and freelancers in Bangladesh — and clients worldwide. Automate
-            workflows, free up 20+ hours/week, and unlock new revenue streams.
+            SYSmoAI builds practical AI systems for growing businesses. We help you
+            capture more leads, automate repetitive work, organize your information,
+            and equip your team with real AI capabilities.
           </motion.p>
 
           {/* CTAs */}
@@ -507,7 +507,7 @@ export default function Home() {
               className="inline-flex items-center gap-2.5 bg-[#25D366] hover:bg-[#1ead57] text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 min-w-[220px] justify-center shadow-lg"
             >
               <MessageCircle size={21} />
-              Book Free 30-Min Consultation
+              Book a Free Fit Check
             </motion.a>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Link href="/services"
