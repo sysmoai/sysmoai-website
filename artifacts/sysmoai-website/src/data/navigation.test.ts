@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  SERVICES_GROUPS, WHO_WE_HELP_GROUPS, BANGLADESH_GROUPS,
+  SERVICES_GROUPS, WHO_WE_HELP_GROUPS, BANGLADESH_GROUPS, COMPANY_GROUPS,
   HEADER_LINKS, FOOTER_SERVICES, FOOTER_WHO_WE_HELP, FOOTER_RESOURCES, FOOTER_LEGAL,
 } from './navigation';
 
@@ -53,12 +53,24 @@ describe('BANGLADESH_GROUPS', () => {
 });
 
 describe('HEADER_LINKS', () => {
-  it('has at least 3 links', () => {
-    expect(HEADER_LINKS.length).toBeGreaterThanOrEqual(3);
+  it('has at least 2 links', () => {
+    expect(HEADER_LINKS.length).toBeGreaterThanOrEqual(2);
   });
 
   it('includes /pricing', () => {
     expect(HEADER_LINKS.some((l) => l.href === '/pricing')).toBe(true);
+  });
+});
+
+describe('COMPANY_GROUPS', () => {
+  it('has company items', () => {
+    const items = COMPANY_GROUPS.flatMap((g) => g.items);
+    expect(items.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('includes /contact', () => {
+    const items = COMPANY_GROUPS.flatMap((g) => g.items);
+    expect(items.some((i) => i.href === '/contact')).toBe(true);
   });
 });
 

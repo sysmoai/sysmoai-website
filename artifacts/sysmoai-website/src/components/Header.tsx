@@ -13,7 +13,7 @@ import { WA_URLS } from '@/lib/whatsapp';
 import { useTheme } from '@/contexts/ThemeContext';
 import {
   SERVICES_GROUPS, ALL_SERVICES_LINK, WHO_WE_HELP_GROUPS,
-  BANGLADESH_GROUPS, HEADER_LINKS, HEADER_CTA,
+  BANGLADESH_GROUPS, COMPANY_GROUPS, HEADER_LINKS, HEADER_CTA,
   MOBILE_SECTIONS, MOBILE_LINKS,
 } from '@/data/navigation';
 
@@ -244,6 +244,40 @@ function BangladeshPanel({ onClose, isDark }: { onClose: () => void; isDark: boo
   );
 }
 
+/* ─── Company Panel ─── */
+function CompanyPanel({ onClose, isDark }: { onClose: () => void; isDark: boolean }) {
+  const bg = isDark ? '#0C1018' : '#FFFFFF';
+  const border = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(37,99,235,0.1)';
+
+  return (
+    <Panel>
+      <div style={{ background: bg, border: `1px solid ${border}`, minWidth: 280 }}>
+        <div className="p-4 space-y-0.5">
+          {COMPANY_GROUPS[0].items.map((item) => (
+            <Link key={item.href} href={item.href} onClick={onClose}
+              className="group flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all"
+              onMouseEnter={e => (e.currentTarget.style.background = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(37,99,235,0.05)')}
+              onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+                style={{ background: 'rgba(37,99,235,0.12)' }}>
+                {item.icon && <Icon name={item.icon} />}
+              </div>
+              <div>
+                <div className="text-[13px] font-semibold" style={{ color: isDark ? '#E2E8F0' : '#1E293B' }}>
+                  {item.label}
+                </div>
+                {item.desc && (
+                  <div className="text-[11px]" style={{ color: isDark ? '#475569' : '#94A3B8' }}>{item.desc}</div>
+                )}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </Panel>
+  );
+}
+
 /* ─── Theme Toggle ─── */
 function ThemeToggle() {
   const { isDark, toggle } = useTheme();
@@ -310,7 +344,8 @@ export function Header() {
   const svc = useDropdown();
   const aud = useDropdown();
   const bd = useDropdown();
-  const closeAll = () => { svc.close_(); aud.close_(); bd.close_(); };
+  const company = useDropdown();
+  const closeAll = () => { svc.close_(); aud.close_(); bd.close_(); company.close_(); };
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20);
@@ -416,6 +451,25 @@ export function Header() {
                     className="absolute left-1/2 -translate-x-1/2 top-[calc(100%+10px)] z-50"
                     onMouseEnter={bd.open_} onMouseLeave={bd.close_}>
                     <BangladeshPanel onClose={closeAll} isDark={isDark} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Company */}
+            <div className="relative"
+              onMouseEnter={() => { svc.close_(); aud.close_(); bd.close_(); company.open_(); }}
+              onMouseLeave={company.close_}
+              data-testid="dropdown-company">
+              <DropdownTrigger label="Company" isOpen={company.open}
+                onMouseEnter={company.open_} onMouseLeave={company.close_} />
+              {company.open && <div className="absolute inset-x-0 top-full h-3" onMouseEnter={company.open_} onMouseLeave={company.close_} />}
+              <AnimatePresence>
+                {company.open && (
+                  <motion.div key="company" variants={panelAnim} initial="hidden" animate="visible" exit="exit"
+                    className="absolute left-1/2 -translate-x-1/2 top-[calc(100%+10px)] z-50"
+                    onMouseEnter={company.open_} onMouseLeave={company.close_}>
+                    <CompanyPanel onClose={closeAll} isDark={isDark} />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -565,6 +619,28 @@ export function Header() {
                       </div>
                     </div>
                   ))}
+                </div>
+              )}
+
+              {/* Company accordion */}
+              <button onClick={() => setMobileSection(mobileSection === 'company' ? null : 'company')}
+                className="w-full flex items-center justify-between px-4 py-3.5 text-[15px] font-semibold rounded-xl transition-colors"
+                style={{ color: isDark ? '#E2E8F0' : '#1E293B', background: mobileSection === 'company' ? (isDark ? 'rgba(255,255,255,0.04)' : 'rgba(37,99,235,0.04)') : 'transparent' }}>
+                Company
+                <ChevronDown size={15} className={`transition-transform duration-200 ${mobileSection === 'company' ? 'rotate-180' : ''}`} />
+              </button>
+              {mobileSection === 'company' && (
+                <div className="ml-2 pb-2">
+                  <div className="grid grid-cols-2 gap-1">
+                    {COMPANY_GROUPS[0].items.map((item) => (
+                      <Link key={item.href} href={item.href}
+                        className="flex items-center gap-2.5 px-3 py-2.5 text-sm rounded-xl transition-colors"
+                        style={{ color: isDark ? '#94A3B8' : '#64748B' }}>
+                        {item.icon && <Icon name={item.icon} size={14} />}
+                        <span className="font-medium">{item.label}</span>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               )}
 

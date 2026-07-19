@@ -113,8 +113,18 @@ export const BANGLADESH_GROUPS: NavGroup[] = [
 export const HEADER_LINKS: NavItem[] = [
   { href: '/pricing', label: 'Pricing' },
   { href: '/blog', label: 'Insights' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
+];
+
+// ─── Company Dropdown ─────────────────────────────────────────────
+export const COMPANY_GROUPS: NavGroup[] = [
+  {
+    title: 'Company',
+    items: [
+      { href: '/about', label: 'About SYSmoAI', desc: 'Company and founder story', icon: 'Building' },
+      { href: '/how-we-work', label: 'Our Approach', desc: 'How we deliver systems', icon: 'Settings' },
+      { href: '/contact', label: 'Contact', desc: 'Get in touch', icon: 'MessageCircle' },
+    ],
+  },
 ];
 
 // ─── Primary CTA ──────────────────────────────────────────────────
@@ -129,6 +139,7 @@ export const MOBILE_SECTIONS: { key: string; label: string; type: 'accordion' | 
   { key: 'services', label: 'Services', type: 'accordion' },
   { key: 'who-we-help', label: 'Who We Help', type: 'accordion' },
   { key: 'bangladesh', label: 'Bangladesh', type: 'accordion' },
+  { key: 'company', label: 'Company', type: 'accordion' },
   { key: 'links', label: '', type: 'link' },
 ];
 
@@ -136,6 +147,7 @@ export const MOBILE_LINKS: NavItem[] = [
   { href: '/pricing', label: 'Pricing' },
   { href: '/blog', label: 'Insights' },
   { href: '/about', label: 'About' },
+  { href: '/how-we-work', label: 'Our Approach' },
   { href: '/contact', label: 'Contact' },
 ];
 
