@@ -26,48 +26,33 @@ export const ORG_SCHEMA: SeoSchema = {
   '@context': 'https://schema.org',
   '@type': ['Organization', 'LocalBusiness'],
   name: 'SYSmoAI',
-  alternateName: 'SYSmoAI Private Limited',
   url: SITE_URL,
   logo: `${SITE_URL}/logo.png`,
   description:
-    "Bangladesh's AI consulting company. We build custom AI operating systems, workflow automation, and AI agents for businesses in Bangladesh and worldwide.",
+    'Founder-built AI systems for Bangladesh growing businesses. Currently offering the Lead Rescue System validation pilot for micro digital agencies.',
   email: 'hello@sysmoai.com',
   telephone: '+8801711638693',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Pallabi',
     addressLocality: 'Dhaka',
     addressCountry: 'BD',
   },
   founder: {
     '@type': 'Person',
     name: 'Emon Hossain',
-    jobTitle: 'Founder & CEO',
-    description: 'AI Systems Architect, Top 5% Prompt Engineer globally, 500+ projects delivered',
+    jobTitle: 'Founder',
+    description: 'Founder of SYSmoAI. AI systems builder focused on lead management workflows and automation for Bangladesh founder-led businesses.',
   },
   serviceArea: [
     { '@type': 'Country', name: 'Bangladesh' },
-    { '@type': 'AdministrativeArea', name: 'Worldwide' },
   ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'AI Consulting Services',
+    name: 'Active Offer',
     itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Quick Win', description: 'One workflow automated in 3 days. ৳3,750–৳7,500.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Implementation Sprint', description: 'Full AI stack deployed in 14 days. ৳25,000–৳50,000.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Operations Retainer', description: 'Ongoing monthly AI management. ৳20,000/month.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: '1:1 AI Coaching', description: 'Personalized 60-min AI session. ৳2,500/session.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Notion OS Build', description: 'Custom Notion business operating system. ৳15,000–৳50,000.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Agent Development', description: 'Custom AI agents for business automation. ৳50,000–৳2,00,000.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'n8n Automation', description: 'Workflow automation per-workflow. ৳2,000–৳10,000.' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Corporate AI Training', description: 'Full-day enterprise AI workshop. ৳50,000–৳2,00,000.' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Lead Rescue System — Agency Edition', description: '14-day validation pilot. Client-owned lead-to-client workflow for Bangladesh micro digital agencies. ৳15,000.' } },
     ],
   },
-  sameAs: [
-    'https://www.facebook.com/sysmoai',
-    'https://www.linkedin.com/company/sysmoai',
-    'https://www.youtube.com/@sysmoai',
-  ],
 };
 
 function serviceSchema(

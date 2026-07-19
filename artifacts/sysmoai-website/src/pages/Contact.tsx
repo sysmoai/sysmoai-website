@@ -41,9 +41,9 @@ export default function Contact() {
   const inputText = isDark ? '#F1F5F9' : '#0A0B0F';
 
   useEffect(() => {
-    document.title = 'Contact SYSmoAI — Book Your Free AI Audit';
+    document.title = 'Contact SYSmoAI | Get in Touch';
     const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute('content', 'Book a free 30-minute AI audit. Map your bottlenecks, uncover AI opportunities, get an action plan. WhatsApp, email, or contact form. Reply within 2 hours.');
+    if (meta) meta.setAttribute('content', 'Get in touch with SYSmoAI. Ask about the Lead Rescue System pilot, or apply for a Fit Check. WhatsApp, email, or contact form. Reply within 2 hours.');
 
     const script = document.createElement('script');
     script.type = 'application/ld+json';
@@ -101,11 +101,11 @@ export default function Contact() {
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}
             className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
-            Let's talk about your business.
+            Get in Touch
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
             className="text-slate-400 text-lg max-w-2xl mx-auto">
-            Book a free AI audit to map your bottlenecks, uncover your highest-ROI opportunity and see a real example of what AI can do for you. No commitment required.
+            Ask about the Lead Rescue System pilot, apply for a Fit Check, or just say hello. Emon replies within 2 hours on working days.
           </motion.p>
         </div>
       </section>
@@ -118,7 +118,7 @@ export default function Contact() {
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="space-y-8">
               <div>
                 <h2 className="text-2xl font-bold mb-6" style={{ color: heading }}>Fastest way to reach us</h2>
-                <a href={WA_URLS.consultation} target="_blank" rel="noopener noreferrer"
+                <a href={WA_URLS.fitcheck} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-4 bg-[#25D366] hover:bg-[#20b858] text-white px-6 py-5 rounded-xl font-semibold text-lg transition-all hover:shadow-lg group">
                   <MessageCircle size={26} className="shrink-0" />
                   <div>
@@ -128,13 +128,13 @@ export default function Contact() {
                 </a>
               </div>
 
-              {/* Calendar booking */}
+              {/* Fit Check CTA */}
               <div className="p-5 rounded-2xl" style={{ background: isDark ? 'rgba(37,99,235,0.1)' : '#EFF6FF', border: `1px solid ${isDark ? 'rgba(37,99,235,0.25)' : '#BFDBFE'}` }}>
-                <h3 className="font-bold mb-1" style={{ color: heading }}>Prefer to pick a time?</h3>
-                <p className="text-sm mb-4" style={{ color: body }}>Book a free 30-min consultation on our audit page — pick the slot that works for you.</p>
-                <a href="/free-ai-audit"
+                <h3 className="font-bold mb-1" style={{ color: heading }}>Interested in Lead Rescue?</h3>
+                <p className="text-sm mb-4" style={{ color: body }}>Apply for the 15-minute Fit Check to see if your agency qualifies for the Lead Rescue pilot.</p>
+                <a href="/fit-check"
                   className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-xl text-sm transition-colors">
-                  📅 Book via Free Audit Page
+                  Fit Check নিন →
                 </a>
               </div>
 
@@ -154,16 +154,16 @@ export default function Contact() {
               </div>
 
               <div className="p-6 rounded-2xl" style={{ background: cardBg, border: `1px solid ${cardBorder}` }}>
-                <h3 className="font-bold mb-3" style={{ color: heading }}>What happens in the free audit?</h3>
+                <h3 className="font-bold mb-3" style={{ color: heading }}>What to include in your message</h3>
                 <ul className="space-y-2.5">
                   {[
-                    'We map your single biggest workflow bottleneck',
-                    'We identify the highest-ROI AI opportunity for your situation',
-                    'We show you exactly what a solution would look like',
-                    'Zero commitment — even if you don\'t hire us',
+                    'Your agency\'s name and team size',
+                    'How many enquiries/clients you have monthly',
+                    'What lead tracking problem you\'re facing',
+                    'Whether you\'re asking about Lead Rescue or something else',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-2.5 text-sm" style={{ color: body }}>
-                      <CheckCircle2 size={15} className="text-green-500 mt-0.5 shrink-0" />
+                      <CheckCircle2 size={15} className="text-blue-500 mt-0.5 shrink-0" />
                       {item}
                     </li>
                   ))}
@@ -187,14 +187,11 @@ export default function Contact() {
                       className="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3.5 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg">
                       💬 Continue on WhatsApp
                     </a>
-                    <a href="/free-ai-audit"
+                    <a href="/fit-check"
                       className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3.5 rounded-xl transition-all duration-200">
-                      📅 Book Audit Call
+                      Fit Check নিন
                     </a>
                   </div>
-                  <p className="text-xs mt-5" style={{ color: body }}>
-                    Or <a href="/services" className="text-blue-500 hover:underline">browse our services</a> while you wait.
-                  </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -235,14 +232,8 @@ export default function Contact() {
                       className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 transition-colors"
                       style={{ background: inputBg, border: `1px solid ${inputBorder}`, color: inputText }}>
                       <option value="">Not sure yet</option>
-                      <option value="ai-quick-win">AI Quick Win</option>
-                      <option value="ai-sprint">AI Sprint</option>
-                      <option value="ai-retainer">AI Retainer</option>
-                      <option value="ai-coaching">AI Coaching</option>
-                      <option value="notion-os">Notion OS Build</option>
-                      <option value="ai-agent-dev">AI Agent Dev</option>
-                      <option value="n8n-automation">n8n Automation</option>
-                      <option value="corporate-training">Corporate Training</option>
+                      <option value="lead-rescue">Lead Rescue System — Agency Edition</option>
+                      <option value="other">Other enquiry</option>
                     </select>
                   </div>
                   <p className="text-xs mt-1" style={{ color: body }}>

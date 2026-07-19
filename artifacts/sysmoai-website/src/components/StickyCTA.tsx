@@ -17,15 +17,15 @@ export default function StickyCTA() {
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#0A0B0F]/95 backdrop-blur-sm border-t border-slate-800 py-3 px-4 transition-all duration-300">
       <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
         <div className="hidden sm:block">
-          <p className="text-white text-sm font-semibold">Ready to automate your business?</p>
-          <p className="text-slate-400 text-xs">Free 30-min AI audit · No commitment</p>
+          <p className="text-white text-sm font-semibold">Lead Rescue System — Agency Edition</p>
+          <p className="text-slate-400 text-xs">১৫-মিনিট Fit Check · Qualification only · বিনামূল্যে</p>
         </div>
         <div className="flex gap-3 w-full sm:w-auto">
-          <Link href="/free-ai-audit"
+          <Link href="/fit-check"
             className="flex-1 sm:flex-none text-center bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
-            Book Free Audit
+            Fit Check নিন
           </Link>
-          <a href={WA_URLS.general}
+          <a href={WA_URLS.fitcheck}
             target="_blank" rel="noopener noreferrer"
             className="flex-1 sm:flex-none text-center border border-green-500 text-green-400 hover:bg-green-500 hover:text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
             💬 WhatsApp

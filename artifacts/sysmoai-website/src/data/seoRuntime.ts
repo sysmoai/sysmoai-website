@@ -16,9 +16,9 @@ export interface RuntimeSeo {
 
 export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/': {
-    title: 'SYSmoAI — Systems in Motion | AI Consulting Bangladesh',
+    title: 'SYSmoAI — Lead Rescue System for Bangladesh Agencies | AI Systems',
     description:
-      "SYSmoAI is Bangladesh's premier AI consulting company. We build AI-powered operating systems, automate workflows, and deploy custom AI agents for founders, freelancers, agencies, and corporates worldwide. Founded by Emon Hossain.",
+      "SYSmoAI is a founder-built AI systems initiative in Bangladesh. Currently offering the Lead Rescue System validation pilot — a 14-day client-owned lead workflow for micro digital agencies. ৳15,000.",
     canonical: `${SITE_URL}/`,
     ogType: 'website',
   },
@@ -171,9 +171,9 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   },
 
   '/about': {
-    title: 'About SYSmoAI | Emon Hossain — AI Systems Architect Bangladesh',
+    title: 'About SYSmoAI | Emon Hossain — Founder, AI Systems Builder Bangladesh',
     description:
-      "Meet Emon Hossain, founder of SYSmoAI — Bangladesh's AI Systems Architect with 500+ projects delivered, top 5% globally in prompt engineering, serving clients worldwide.",
+      'Meet Emon Hossain, founder of SYSmoAI — a founder-led AI systems initiative building real workflows for Bangladesh micro agencies. Currently in validation stage with the Lead Rescue System pilot.',
     canonical: `${SITE_URL}/about`,
   },
 
@@ -185,16 +185,16 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   },
 
   '/proof': {
-    title: 'Client Results & Case Studies | SYSmoAI Bangladesh AI Consulting',
+    title: 'How We Work — Trust & Evidence Policy | SYSmoAI',
     description:
-      "Real results from real clients: 15,000 hours saved, 3x revenue growth, 90-day AI transformations. Browse SYSmoAI's verified case studies and client success stories.",
+      "SYSmoAI's delivery approach, acceptance test model, client ownership, and evidence policy. Honest about being in validation stage — case studies published only after real delivery and client permission.",
     canonical: `${SITE_URL}/proof`,
   },
 
   '/results': {
-    title: 'Client Results & Case Studies | SYSmoAI Bangladesh AI Consulting',
+    title: 'How We Work — Trust & Evidence Policy | SYSmoAI',
     description:
-      "Real results from real clients: 15,000 hours saved, 3x revenue growth, 90-day AI transformations. Browse SYSmoAI's verified case studies and client success stories.",
+      "SYSmoAI's delivery approach, acceptance test model, client ownership, and evidence policy. Honest about being in validation stage — case studies published only after real delivery and client permission.",
     canonical: `${SITE_URL}/proof`,
   },
 
@@ -214,16 +214,37 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   },
 
   '/free-ai-audit': {
-    title: 'Free AI Audit — 30-Minute Session with Emon Hossain | SYSmoAI',
+    title: 'Lead Leakage Fit Check | SYSmoAI',
     description:
-      "Book your free 30-minute AI audit with SYSmoAI's founder Emon Hossain. Walk away with a clear automation opportunity, action plan, and cost estimate — no commitment required.",
-    canonical: `${SITE_URL}/free-ai-audit`,
+      '15-minute qualification conversation for the Lead Rescue System pilot. This page redirects to the Fit Check page.',
+    canonical: `${SITE_URL}/fit-check`,
+  },
+
+  '/lead-rescue': {
+    title: 'Lead Rescue System — Agency Edition | SYSmoAI Validation Pilot',
+    description:
+      'Lead Rescue System — Agency Edition: ১৪-দিনের validation pilot। Client-owned lead-to-client workflow for Bangladesh micro digital agencies. ৳15,000. Acceptance test included.',
+    canonical: `${SITE_URL}/lead-rescue`,
+  },
+
+  '/fit-check': {
+    title: 'Lead Leakage Fit Check — 15 Minutes | SYSmoAI',
+    description:
+      '15-minute qualification conversation for the Lead Rescue System pilot. Check if your agency meets the criteria. Not a consultation — qualification only. Free.',
+    canonical: `${SITE_URL}/fit-check`,
+  },
+
+  '/how-we-work': {
+    title: 'How We Work — Trust & Evidence Policy | SYSmoAI',
+    description:
+      "SYSmoAI's delivery approach: acceptance test model, client ownership guarantee, and honest evidence policy for our validation stage pilot.",
+    canonical: `${SITE_URL}/how-we-work`,
   },
 
   '/contact': {
-    title: 'Contact SYSmoAI | AI Consulting Bangladesh — Book a Free Audit',
+    title: 'Contact SYSmoAI | Get in Touch',
     description:
-      'Get in touch with SYSmoAI. Book a free 30-minute AI audit, ask about our services, or start your AI journey today. WhatsApp, email, and contact form available.',
+      'Get in touch with SYSmoAI. Ask about the Lead Rescue System pilot or apply for a Fit Check. WhatsApp, email, and contact form available. Reply within 2 hours.',
     canonical: `${SITE_URL}/contact`,
   },
 
@@ -260,9 +281,9 @@ const blogRuntimeConfig: Record<string, RuntimeSeo> = Object.fromEntries(
 );
 
 const DEFAULT_RUNTIME_SEO: RuntimeSeo = {
-  title: 'SYSmoAI — Systems in Motion | AI Consulting Bangladesh',
+  title: 'SYSmoAI — Systems in Motion | AI Systems Bangladesh',
   description:
-    "SYSmoAI is Bangladesh's premier AI consulting company specializing in AI automation, workflows, and AI agent development.",
+    'SYSmoAI is a founder-built AI systems initiative in Bangladesh. Lead Rescue System validation pilot for micro digital agencies.',
   canonical: `${SITE_URL}/`,
   ogType: 'website',
 };
