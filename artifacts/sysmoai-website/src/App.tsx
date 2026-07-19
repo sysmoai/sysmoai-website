@@ -56,6 +56,7 @@ const TermsOfService = lazy(() => import("@/pages/legal/TermsOfService"));
 const RefundPolicy = lazy(() => import("@/pages/legal/RefundPolicy"));
 
 const BanglaHub = lazy(() => import("@/pages/BanglaHub"));
+const Bangladesh = lazy(() => import("@/pages/Bangladesh"));
 
 const queryClient = new QueryClient();
 
@@ -180,7 +181,8 @@ function Router() {
             <Route path="/terms-of-service" component={TermsOfService} />
             <Route path="/refund-policy" component={RefundPolicy} />
 
-            {/* Bangla hub */}
+            {/* Bangladesh pages */}
+            <Route path="/bangladesh" component={Bangladesh} />
             <Route path="/bn" component={BanglaHub} />
 
             <Route component={NotFound} />

@@ -308,6 +308,11 @@ const staticRoutes: Record<string, RouteSeo> = {
     schemas: [ORG_SCHEMA],
   },
 
+  '/bangladesh': {
+    ...base('/bangladesh'),
+    schemas: [ORG_SCHEMA],
+  },
+
   '/results': {
     ...base('/results'),
     schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'Client Results', url: `${SITE_URL}/proof` }])],

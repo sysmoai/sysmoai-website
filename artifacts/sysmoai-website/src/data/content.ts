@@ -41,6 +41,17 @@ export interface ServiceInfo {
 
 export const SERVICES: ServiceInfo[] = [
   {
+    id: 'lead-rescue',
+    title: 'Lead Rescue',
+    tagline: 'Stop losing leads after they contact you.',
+    description: 'A structured lead-capture and follow-up system designed for Bangladesh businesses. Centralize inquiries from WhatsApp, Facebook, and calls into one trackable pipeline with reminders and follow-up workflows.',
+    bdPrice: '৳15,000',
+    usdPrice: 'Contact for international pricing',
+    href: '/lead-rescue',
+    features: ['Centralized lead capture from multiple channels', 'Pipeline tracking with stages and ownership', 'Follow-up reminders and templates', 'WhatsApp-assisted workflow integration', '5-lead acceptance test included', 'Written SOP and handover documentation'],
+    tag: 'Popular',
+  },
+  {
     id: 'ai-quick-win',
     title: 'AI Quick Win',
     tagline: 'Automate your most painful workflow in 3 days.',

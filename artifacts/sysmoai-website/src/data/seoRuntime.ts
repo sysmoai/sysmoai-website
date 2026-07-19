@@ -267,6 +267,13 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
     canonical: `${SITE_URL}/refund-policy`,
   },
 
+  '/bangladesh': {
+    title: 'SYSmoAI for Bangladesh — AI Systems for Local Businesses',
+    description: 'SYSmoAI builds practical AI systems for Bangladesh businesses — lead management, F-Commerce automation, Notion OS, and corporate AI training. Locally built, globally competitive.',
+    canonical: `${SITE_URL}/bangladesh`,
+    ogType: 'website',
+  },
+
   '/bn': {
     title: 'SYSmoAI \u09AC\u09BE\u0982\u09B2\u09BE \u2014 \u09AC\u09BE\u0982\u09B2\u09BE\u09A6\u09C7\u09B6\u09C7\u09B0 \u099C\u09A8\u09CD\u09AF AI \u09B8\u09BF\u09B8\u09CD\u099F\u09C7\u09AE \u0993 \u0985\u099F\u09CB\u09AE\u09C7\u09B6\u09A8',
     description: 'SYSmoAI \u09AC\u09BE\u0982\u09B2\u09BE\u09A6\u09C7\u09B6\u09C7\u09B0 \u09AC\u09CD\u09AF\u09AC\u09B8\u09BE\u09B0 \u099C\u09A8\u09CD\u09AF AI-\u099A\u09BE\u09B2\u09BF\u09A4 \u0985\u09AA\u09BE\u09B0\u09C7\u099F\u09BF\u0982 \u09B8\u09BF\u09B8\u09CD\u099F\u09C7\u09AE \u09A4\u09C8\u09B0\u09BF \u0995\u09B0\u09C7\u0964 AI \u0985\u099F\u09CB\u09AE\u09C7\u09B6\u09A8, Notion OS, \u098F\u09AC\u0982 \u0995\u09B0\u09CD\u09AA\u09CB\u09B0\u09C7\u099F AI \u099F\u09CD\u09B0\u09C7\u09A8\u09BF\u0982\u0964',

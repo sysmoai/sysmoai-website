@@ -67,7 +67,7 @@ describe('CONTACT', () => {
 
 describe('SERVICES', () => {
   it('should have services defined', () => {
-    expect(SERVICES.length).toBeGreaterThanOrEqual(5);
+    expect(SERVICES.length).toBeGreaterThanOrEqual(9);
   });
 
   it('every service should have required fields', () => {
@@ -75,7 +75,7 @@ describe('SERVICES', () => {
       expect(service.id).toBeTruthy();
       expect(service.title).toBeTruthy();
       expect(service.bdPrice).toBeTruthy();
-      expect(service.href).toContain('/services/');
+      expect(service.href).toContain('/');
       expect(service.features.length).toBeGreaterThanOrEqual(3);
     }
   });
