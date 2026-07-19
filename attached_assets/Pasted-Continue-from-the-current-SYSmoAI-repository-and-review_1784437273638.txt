@@ -1,0 +1,66 @@
+Continue from the current SYSmoAI repository and review all work previously completed by Command Code.
+
+Work only on the current Git branch. Do not restart the project, discard working features, overwrite valuable content, expose secrets, delete production data, or make destructive changes.
+
+First:
+
+1. Read the Git history, current diff, README, AGENTS.md, COMMAND-CODE-STATE.md, and all files under `docs/`.
+2. Understand the complete website, admin app, API server, routes, database, forms, integrations, deployment setup, and current unfinished tasks.
+3. Create a recoverable Git checkpoint before making major changes.
+4. Run the existing typecheck, tests, linting, builds, static generation, and sitemap validation.
+5. Separate pre-existing problems from problems introduced by Command Code.
+
+Then perform a complete professional review and fix every safely actionable issue across:
+
+* Homepage.
+* Header and mobile navigation.
+* Services and Lead Rescue.
+* Who We Help pages.
+* Bangladesh section in professional English.
+* Pricing.
+* Insights and articles.
+* About, Founder, Approach, and Contact.
+* Footer.
+* Forms, APIs, authentication, and admin access.
+* English copy and grammar.
+* Customer pain points, offers, deliverables, and CTAs.
+* SEO, GEO, AIO, metadata, structured data, sitemap, robots, and internal links.
+* Accessibility, mobile responsiveness, security, performance, and conversion flows.
+* Broken links, duplicate routes, unsupported claims, inconsistent pricing, placeholders, and malformed content.
+
+Use existing verified content and connected Notion information when available. Do not invent customers, results, statistics, testimonials, partnerships, credentials, or prices.
+
+The public website must be professional English only. Detect and remove or redirect any remaining Bangla or other uncontrolled non-English public content without breaking SEO.
+
+For every stable batch:
+
+1. Review the actual diff.
+2. Run relevant tests.
+3. Fix regressions.
+4. Create a focused Git commit.
+5. Update COMMAND-CODE-STATE.md.
+6. Continue automatically to the next highest-priority issue.
+
+Before deployment, require:
+
+* Typecheck passes.
+* Tests pass.
+* Production builds pass.
+* Forms and critical routes work.
+* Navigation works on desktop and mobile.
+* SEO and sitemap validation pass.
+* No secrets are exposed.
+* A rollback point exists.
+
+Use the existing approved Replit deployment workflow when production access is available. After deployment, test the real live website, browser console, network requests, forms, mobile layouts, metadata, redirects, sitemap, and critical customer journeys.
+
+Do not stop after giving recommendations. Implement, test, correct, document, deploy safely when authorized, and report honestly:
+
+* What Command Code completed correctly.
+* What you repaired.
+* Files and routes changed.
+* Tests and build results.
+* Deployment status.
+* Live verification results.
+* Remaining external blockers.
+* Exact rollback procedure.
