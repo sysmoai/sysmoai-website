@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'wouter';
-import { Zap, Timer, RefreshCw, Users, BookOpen, Layout, Bot, Settings, Building, Globe, ArrowRight, ChevronDown } from 'lucide-react';
+import { Target, Zap, Timer, RefreshCw, Users, BookOpen, Layout, Bot, Settings, Building, Globe, ArrowRight, ChevronDown } from 'lucide-react';
 import { WA_URLS } from '../lib/whatsapp';
 import { useTheme } from '@/contexts/ThemeContext';
 
@@ -12,9 +12,10 @@ const fadeUp = {
 const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.09 } } };
 
 const featured = [
-  { icon: Zap, title: 'AI Quick Win', subtitle: 'Your #1 problem automated in 3 days', bd: '৳3,750–7,500', usd: '$50–$100', href: '/services/ai-quick-win', tag: 'Best starting point' },
-  { icon: Timer, title: 'AI Implementation Sprint', subtitle: 'Full AI stack deployed in 14 days', bd: '৳25,000–50,000', usd: '$300–$600', href: '/services/ai-sprint', tag: 'Most popular' },
-  { icon: RefreshCw, title: 'AI Operations Retainer', subtitle: 'Ongoing AI management, every month', bd: '৳20,000/mo', usd: '$250/mo', href: '/services/ai-retainer', tag: 'Cancel anytime' },
+  { icon: Target, title: 'Lead Rescue', subtitle: 'Stop losing leads after they contact you', bd: '৳15,000', usd: '', href: '/lead-rescue', tag: 'Popular', isLeadRescue: true },
+  { icon: Zap, title: 'AI Quick Win', subtitle: 'Your #1 problem automated in 3 days', bd: '৳3,750–7,500', usd: '', href: '/services/ai-quick-win', tag: 'Start here' },
+  { icon: Timer, title: 'AI Sprint', subtitle: 'Full AI system deployed in 14 days', bd: '৳25,000–50,000', usd: '', href: '/services/ai-sprint', tag: 'Most popular' },
+  { icon: RefreshCw, title: 'AI Retainer', subtitle: 'Ongoing AI management monthly', bd: '৳20,000/mo', usd: '', href: '/services/ai-retainer', tag: 'Cancel anytime' },
 ];
 
 const other = [
@@ -130,28 +131,38 @@ export default function Services() {
             className="text-2xl font-bold mb-10" style={{ color: heading }}>Core services</motion.h2>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {featured.map((s, i) => (
+            {featured.map((s, i) => {
+              const isLR = s.isLeadRescue;
+              const accent = isLR ? 'amber' : 'blue';
+              const accentColor = isLR ? '#F59E0B' : '#3B82F6';
+              return (
               <motion.div key={i} variants={fadeUp}
                 className="p-8 rounded-2xl transition-all flex flex-col hover:shadow-xl"
-                style={{ background: cardBg, border: `2px solid ${cardBorder}` }}>
+                style={{ background: cardBg, border: `2px solid ${isLR ? 'rgba(245,158,11,0.3)' : cardBorder}` }}>
                 <div className="flex items-start justify-between mb-5">
-                  <div className="w-12 h-12 bg-blue-600/15 rounded-xl flex items-center justify-center">
-                    <s.icon size={22} className="text-blue-500" />
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center`}
+                    style={{ background: `${accentColor}22` }}>
+                    <s.icon size={22} style={{ color: accentColor }} />
                   </div>
-                  <span className="text-xs font-semibold text-blue-500 bg-blue-600/10 px-2.5 py-1 rounded-full border border-blue-500/20">{s.tag}</span>
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full border"
+                    style={{ color: accentColor, background: `${accentColor}15`, borderColor: `${accentColor}30` }}>{s.tag}</span>
                 </div>
                 <h3 className="text-xl font-bold mb-2" style={{ color: heading }}>{s.title}</h3>
                 <p className="text-sm mb-5 flex-1" style={{ color: body }}>{s.subtitle}</p>
                 <div className="mb-5">
-                  <span className="text-2xl font-bold text-blue-500">{s.bd}</span>
-                  <span className="text-sm ml-2" style={{ color: bodyMuted }}>· {s.usd} intl</span>
+                  <span className="text-2xl font-bold" style={{ color: accentColor }}>{s.bd}</span>
+                  {s.usd && <span className="text-sm ml-2" style={{ color: bodyMuted }}>· {s.usd} intl</span>}
                 </div>
                 <Link href={s.href}
-                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold text-sm transition-all min-h-[44px]">
-                  Learn More <ArrowRight size={15} />
+                  className="inline-flex items-center justify-center gap-2 text-white px-5 py-3 rounded-xl font-semibold text-sm transition-all min-h-[44px]"
+                  style={{ background: accentColor }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = '0.9'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = '1'; }}>
+                  {isLR ? 'Explore Lead Rescue' : 'Learn More'} <ArrowRight size={15} />
                 </Link>
               </motion.div>
-            ))}
+              );
+            })}
           </motion.div>
         </div>
       </section>
