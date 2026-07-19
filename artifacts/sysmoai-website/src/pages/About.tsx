@@ -147,13 +147,13 @@ export default function About() {
             initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}
             className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-6"
           >
-            From Overworked Founder<br />to AI Systems Builder
+            Practical AI Systems, Built by<br />a Founder Who Needed Them
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
             className="text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto mb-8"
           >
-            Emon Hossain built SYSmoAI after solving his own business chaos with AI systems. Now he's doing the same for Bangladesh founder-led agencies — starting with the Lead Rescue System pilot.
+            Emon Hossain founded SYSmoAI after building AI systems to solve his own business operations challenges. Today, he helps other businesses in Bangladesh and beyond do the same — starting with the Lead Rescue pilot.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
