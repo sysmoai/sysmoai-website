@@ -35,7 +35,7 @@ function useDropdown() {
   const [open, setOpen] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const open_ = () => { clearTimeout(timer.current); setOpen(true); };
-  const close_ = () => { timer.current = setTimeout(() => setOpen(false), 120); };
+  const close_ = () => { timer.current = setTimeout(() => setOpen(false), 250); };
   useEffect(() => () => clearTimeout(timer.current), []);
   return { open, open_, close_ };
 }
@@ -52,7 +52,9 @@ function Panel({ children, width = 'auto' }: { children: React.ReactNode; width?
     <div
       className="overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
       style={{ width }}
-    />
+    >
+      {children}
+    </div>
   );
 }
 
