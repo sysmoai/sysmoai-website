@@ -1,21 +1,11 @@
-name: Deploy SYSmoAI to GitHub Pages
+name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
   workflow_dispatch:
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-concurrency:
-  group: pages
-  cancel-in-progress: true
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: \${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -28,9 +18,8 @@ jobs:
       - run: pnpm install --no-frozen-lockfile
       - working-directory: artifacts/sysmoai-website
         run: npx vite build
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: peaceiris/actions-gh-pages@v4
         with:
-          path: artifacts/sysmoai-website/dist/public
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: \${{ secrets.GITHUB_TOKEN }}
+          publish_dir: artifacts/sysmoai-website/dist/public
+          cname: sysmoai.com
