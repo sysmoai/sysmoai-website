@@ -1,25 +1,10 @@
-name: Deploy to GitHub Pages
+name: Deploy Test
 on:
   push:
     branches: [main]
   workflow_dispatch:
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 11
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-      - run: pnpm install --no-frozen-lockfile
-      - working-directory: artifacts/sysmoai-website
-        run: npx vite build
-      - uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: artifacts/sysmoai-website/dist/public
-          cname: sysmoai.com
+      - run: echo "hello world"
