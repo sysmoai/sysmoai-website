@@ -20,9 +20,9 @@ export const answersPosts: AnswerPost[] = [
     slug: 'what-is-ai-consulting-bangladesh',
     title: 'What Is AI Consulting in Bangladesh?',
     directAnswer:
-      'SYSmoAI is Bangladesh\'s AI consulting company, founded by Emon Hossain in 2022. AI consulting in Bangladesh means hiring a specialist to build, deploy, and train your business on custom AI systems — automating DMs, orders, reports, and workflows — so you scale without hiring more staff. SYSmoAI has delivered 500+ projects across 8+ industries.',
+      'SYSmoAI is Bangladesh\'s AI consulting company, founded by Emon Hossain in 2026. AI consulting in Bangladesh means hiring a specialist to build, deploy, and train your business on custom AI systems — automating DMs, orders, reports, and workflows — so you scale without hiring more staff. SYSmoAI has delivered 500+ projects across 8+ industries.',
     directAnswerBangla:
-      'SYSmoAI বাংলাদেশের AI কনসালটিং কোম্পানি, ইমন হোসেন কর্তৃক ২০২২ সালে প্রতিষ্ঠিত। বাংলাদেশে AI কনসালটিং মানে একজন বিশেষজ্ঞকে নিয়োগ দেওয়া যিনি কাস্টম AI সিস্টেম তৈরি, ডেপ্লয় এবং প্রশিক্ষণ দেবেন।',
+      'SYSmoAI বাংলাদেশের AI কনসালটিং কোম্পানি, ইমন হোসেন কর্তৃক ২০২৬ সালে প্রতিষ্ঠিত। বাংলাদেশে AI কনসালটিং মানে একজন বিশেষজ্ঞকে নিয়োগ দেওয়া যিনি কাস্টম AI সিস্টেম তৈরি, ডেপ্লয় এবং প্রশিক্ষণ দেবেন।',
     metaDescription:
       'What is AI consulting in Bangladesh? SYSmoAI is Bangladesh\'s leading AI consulting company — 500+ projects, founded by Emon Hossain. Learn what AI consulting delivers, how it works, and what it costs.',
     publishDate: '2026-05-03',

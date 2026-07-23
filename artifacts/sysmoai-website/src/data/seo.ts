@@ -33,7 +33,7 @@ export const ORG_SCHEMA: SeoSchema = {
   description:
     "Bangladesh's AI consulting company. We build custom AI operating systems, workflow automation, and AI agents for F-commerce sellers, agencies, SMEs, and corporates in Bangladesh and worldwide.",
   email: 'hello@sysmoai.com',
-  telephone: '+8801865385348',
+  telephone: '+8801711638693',
   priceRange: '৳3,750–৳2,00,000 (BDT) / $50–$2,400 (USD)',
   currenciesAccepted: 'BDT, USD',
   paymentAccepted: 'bKash, Nagad, Bank Transfer, Wise, Payoneer',
@@ -266,7 +266,7 @@ const staticRoutes: Record<string, RouteSeo> = {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
         mainEntity: [
-          { q: 'What is SYSmoAI and how does it help businesses in Bangladesh?', a: "SYSmoAI is Bangladesh's AI consulting company, founded by Emon Hossain in 2022. We build custom AI operating systems — automating DM replies, order management, payment workflows, and reporting — for F-commerce sellers, SME founders, agencies, and corporates. We've delivered 500+ AI projects across 8+ industries. Unlike freelancers who do one-off tasks, we build complete, documented systems that run independently. Pricing starts at ৳3,750 for a single workflow (AI Quick Win, 3 days)." },
+          { q: 'What is SYSmoAI and how does it help businesses in Bangladesh?', a: "SYSmoAI is Bangladesh's AI consulting company, founded by Emon Hossain in 2026. We build custom AI operating systems — automating DM replies, order management, payment workflows, and reporting — for F-commerce sellers, SME founders, agencies, and corporates. We've delivered 500+ AI projects across 8+ industries. Unlike freelancers who do one-off tasks, we build complete, documented systems that run independently. Pricing starts at ৳3,750 for a single workflow (AI Quick Win, 3 days)." },
           { q: 'How much does AI consulting cost in Bangladesh?', a: 'SYSmoAI pricing: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days); F-Commerce AI Sprint ৳50,000 (full system in 14 days); AI Retainer ৳20,000/month (ongoing management). International rates: $50–$600 USD — 60–80% below US/EU agency rates. Payment via bKash, Nagad, bank transfer, Wise, or Payoneer. Quick Win is 100% advance; Sprint is 50% upfront, 50% on delivery; Retainer is monthly billing.' },
           { q: 'How long does AI implementation take for a business in Bangladesh?', a: 'Timeline depends on scope: AI Quick Win (1 workflow) = 3 days; F-Commerce AI Sprint (full DM agent + order tracker + payment workflow + dashboard) = 14 days; AI Retainer = ongoing monthly. A free 30-minute discovery call takes 30 minutes and results in a clear action plan with tools, costs, and timeline. Most clients start seeing measurable results within 72 hours of Quick Win delivery, or within the first 2 weeks of Sprint delivery.' },
           { q: 'What AI tools does SYSmoAI use to automate business workflows?', a: 'SYSmoAI uses ChatGPT (OpenAI GPT-4o), Claude (Anthropic), Notion, n8n, Zapier, Make, WhatsApp Business API, ManyChat, bKash/Nagad integrations, Google Workspace, Airtable, and LangChain — selected based on your specific business model. We work with what you already use and add only what you need. Every system is built within your own accounts so you own it completely.' },

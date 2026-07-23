@@ -11,7 +11,7 @@ export const BRAND = {
   promise: "We don't get paid until it works.",
   country: "Bangladesh",
   city: "Dhaka",
-  founded: "2022",
+  founded: "2026",
 };
 
 export const STATS = [

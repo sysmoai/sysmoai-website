@@ -16,8 +16,8 @@ const fadeUp = {
 const faqs = [
   {
     q: 'What is SYSmoAI and how does it help businesses in Bangladesh?',
-    a: 'SYSmoAI is Bangladesh\'s AI consulting company, founded by Emon Hossain in 2022. We build custom AI operating systems — automating DM replies, order management, payment workflows, and reporting — for F-commerce sellers, SME founders, agencies, and corporates. We\'ve delivered 500+ AI projects across 8+ industries. Unlike freelancers who do one-off tasks, we build complete, documented systems that run independently. Pricing starts at ৳3,750 for a single workflow (AI Quick Win, 3 days).',
-    bangla: 'SYSmoAI হলো বাংলাদেশের AI কনসালটিং কোম্পানি, ২০২২ সালে ইমন হোসেন প্রতিষ্ঠিত। আমরা কাস্টম AI অপারেটিং সিস্টেম তৈরি করি এবং ৫০০+ AI প্রজেক্ট সম্পন্ন করেছি।',
+    a: 'SYSmoAI is Bangladesh\'s AI consulting company, founded by Emon Hossain in 2026. We build custom AI operating systems — automating DM replies, order management, payment workflows, and reporting — for F-commerce sellers, SME founders, agencies, and corporates. We've delivered 500+ AI projects across 8+ industries. Unlike freelancers who do one-off tasks, we build complete, documented systems that run independently. Pricing starts at ৳3,750 for a single workflow (AI Quick Win, 3 days).',
+    bangla: 'SYSmoAI হলো বাংলাদেশের AI কনসালটিং কোম্পানি, ২০২৬ সালে ইমন হোসেন প্রতিষ্ঠিত। আমরা কাস্টম AI অপারেটিং সিস্টেম তৈরি করি এবং ৫০০+ AI প্রজেক্ট সম্পন্ন করেছি।',
   },
   {
     q: 'How much does AI consulting cost in Bangladesh?',
@@ -97,7 +97,7 @@ export default function FAQ() {
       <section className="py-10" style={{ background: bg1 }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <DirectAnswer bangla="SYSmoAI বাংলাদেশের AI কনসালটিং কোম্পানি। আমরা F-কমার্স বিক্রেতা, SME ফাউন্ডার এবং এজেন্সির জন্য কাস্টম AI সিস্টেম তৈরি করি। AI কুইক উইন ৳৩,৭৫০ থেকে শুরু।">
-            SYSmoAI is Bangladesh's AI consulting company founded by Emon Hossain in 2022. We build custom AI systems — automating DMs, orders, payments, and workflows — for F-commerce sellers, SME founders, and agencies. Pricing starts at ৳3,750 (AI Quick Win, 3 days). Free 30-minute AI audit available with no commitment.
+            SYSmoAI is Bangladesh's AI consulting company founded by Emon Hossain in 2026. We build custom AI systems — automating DMs, orders, payments, and workflows — for F-commerce sellers, SME founders, and agencies. Pricing starts at ৳3,750 (AI Quick Win, 3 days). Free 30-minute AI audit available with no commitment.
           </DirectAnswer>
         </div>
       </section>
@@ -146,3 +146,4 @@ export default function FAQ() {
     </div>
   );
 }
+
