@@ -28,7 +28,7 @@ export const ORG_SCHEMA: SeoSchema = {
   '@type': ['Organization', 'LocalBusiness'],
   name: 'SYSmoAI',
   url: SITE_URL,
-  logo: `${SITE_URL}/logo.png`,
+  logo: `${SITE_URL}/favicon.svg`,
   description:
     "Bangladesh's AI consulting company. We build custom AI operating systems, workflow automation, and AI agents for F-commerce sellers, agencies, SMEs, and corporates in Bangladesh and worldwide.",
   email: 'hello@sysmoai.com',
