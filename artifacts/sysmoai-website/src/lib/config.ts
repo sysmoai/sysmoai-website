@@ -8,15 +8,15 @@ export const BRAND = {
   name: "SYSmoAI",
   tagline: "Systems in Motion.",
   mission: "We build AI-powered operating systems for ambitious businesses.",
-  promise: "We don't get paid until it works.",
+  promise: "Every project is scoped with a written acceptance test.",
   country: "Bangladesh",
   city: "Dhaka",
   founded: "2026",
 };
 
 export const STATS = [
-  { label: "Top 5% Prompt Engineers Globally", value: "Top 5%" },
-  { label: "Projects Delivered", value: "500+" },
-  { label: "Client Categories", value: "8+" },
   { label: "Years Building AI Systems", value: "3+" },
+  { label: "Client Categories", value: "8+" },
+  { label: "Automation Running", value: "24/7" },
+  { label: "Client-Owned Systems", value: "100%" },
 ];

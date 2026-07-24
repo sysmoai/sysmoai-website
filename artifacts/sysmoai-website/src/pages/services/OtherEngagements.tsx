@@ -64,7 +64,7 @@ const engagements = [
   {
     icon: Globe,
     title: 'International Clients',
-    desc: 'World-class AI systems at Dhaka rates — typically 60–80% less than US/EU agencies. USD pricing, Wise/Stripe payments.',
+    desc: 'World-class AI systems at Dhaka rates — typically 60–80% less than US/EU agencies. USD pricing; payment method confirmed at proposal stage.',
     bd: null,
     usd: 'Custom USD',
     tag: 'Worldwide',

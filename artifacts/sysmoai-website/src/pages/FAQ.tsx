@@ -16,12 +16,12 @@ const fadeUp = {
 const faqs = [
   {
     q: 'What is SYSmoAI and how does it help businesses in Bangladesh?',
-a: 'SYSmoAI is Bangladesh\'s AI consulting company, founded by Emon Hossain in 2026. We build custom AI operating systems — automating DM replies, order management, payment workflows, and reporting — for F-commerce sellers, SME founders, agencies, and corporates. We\'ve delivered 500+ AI projects across 8+ industries. Unlike freelancers who do one-off tasks, we build complete, documented systems that run independently. Pricing starts at ৳3,750 for a single workflow (AI Quick Win, 3 days).',
-    bangla: 'SYSmoAI হলো বাংলাদেশের AI কনসালটিং কোম্পানি, ২০২৬ সালে ইমন হোসেন প্রতিষ্ঠিত। আমরা কাস্টম AI অপারেটিং সিস্টেম তৈরি করি এবং ৫০০+ AI প্রজেক্ট সম্পন্ন করেছি।',
+a: 'SYSmoAI is an AI systems studio in Dhaka, Bangladesh, founded by Emon Hossain in 2026. We build custom AI operating systems — automating DM replies, order management, payment workflows, and reporting — for F-commerce sellers, SME founders, agencies, and corporates. We draw on 3+ years of hands-on AI systems building across 8+ client categories. Unlike freelancers who do one-off tasks, we build complete, documented systems that run independently. Pricing starts at ৳3,750 for a single workflow (AI Quick Win, 3 days).',
+    bangla: 'SYSmoAI হলো ঢাকার একটি AI সিস্টেম স্টুডিও, ২০২৬ সালে ইমন হোসেন প্রতিষ্ঠিত। আমরা কাস্টম AI অপারেটিং সিস্টেম তৈরি করি।',
   },
   {
     q: 'How much does AI consulting cost in Bangladesh?',
-    a: 'SYSmoAI pricing: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days); F-Commerce AI Sprint ৳50,000 (full system in 14 days); AI Retainer ৳20,000/month (ongoing management). International rates: $50–$600 USD — 60–80% below US/EU agency rates. Payment via bKash, Nagad, bank transfer, Wise, or Payoneer. Quick Win is 100% advance; Sprint is 50% upfront, 50% on delivery; Retainer is monthly billing.',
+    a: 'SYSmoAI pricing: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days); F-Commerce AI Sprint ৳50,000 (full system in 14 days); AI Retainer ৳20,000/month (ongoing management). International rates: $50–$600 USD — 60–80% below US/EU agency rates. The exact payment method is confirmed at the proposal stage. Quick Win is 100% advance; Sprint is 50% upfront, 50% on delivery; Retainer is monthly billing.',
     bangla: 'AI কনসালটিং খরচ: AI কুইক উইন ৳৩,৭৫০–৳৭,৫০০, F-কমার্স AI স্প্রিন্ট ৳৫০,০০০, AI রিটেইনার ৳২০,০০০/মাস।',
   },
   {
@@ -46,12 +46,12 @@ a: 'SYSmoAI is Bangladesh\'s AI consulting company, founded by Emon Hossain in 2
   },
   {
     q: 'Is there a guarantee on AI consulting results?',
-    a: 'Yes. SYSmoAI\'s results-first guarantee: if the stated goal isn\'t met on an AI Quick Win, we rebuild it at no extra charge (1 free revision guaranteed). For the F-Commerce AI Sprint, if the agreed deliverables aren\'t met within 14 days, you get a full refund. We sign a confidentiality agreement before every project, and every system is built within your own accounts — your data stays under your control at all times.',
-    bangla: 'হ্যাঁ। AI কুইক উইনে: লক্ষ্য পূরণ না হলে বিনামূল্যে পুনর্নির্মাণ। F-কমার্স AI স্প্রিন্টে: সম্মত ডেলিভারেবল না হলে সম্পূর্ণ অর্থ ফেরত।',
+    a: 'Every engagement is scoped with a written acceptance test agreed before work starts. You run the system yourself against that test — if the agreed deliverables are not met, the engagement ends with no additional charge beyond the deposit terms in your written scope. We sign a confidentiality agreement before every project, and every system is built within your own accounts — your data stays under your control at all times.',
+    bangla: 'প্রতিটি প্রজেক্টে কাজ শুরুর আগে লিখিত acceptance test ঠিক করা হয়। সম্মত ডেলিভারেবল পূরণ না হলে লিখিত স্কোপ অনুযায়ী অতিরিক্ত কোনো চার্জ নেই।',
   },
   {
     q: 'What makes SYSmoAI different from freelancers or other AI consultants in Bangladesh?',
-    a: 'Key differences: (1) SYSmoAI builds complete, documented systems — not one-off tasks. (2) Every project includes team training + video documentation so you run it independently. (3) 3-month post-launch support is standard. (4) Founder Emon Hossain is ranked top 5% globally in prompt engineering with 500+ projects delivered. (5) We specialize in Bangladesh market realities: bKash/Nagad automation, Bangla-language AI, F-commerce workflow patterns. (6) We use a results-first guarantee — no payment until it works.',
+    a: 'Key differences: (1) SYSmoAI builds complete, documented systems — not one-off tasks. (2) Every project includes team training + video documentation so you run it independently. (3) 3-month post-launch support is standard. (4) Founder Emon Hossain has spent 3+ years building production AI systems and prompt-engineering workflows. (5) We specialize in Bangladesh market realities: bKash/Nagad automation, Bangla-language AI, F-commerce workflow patterns. (6) Every project is scoped with a written acceptance test — if the agreed deliverables aren\'t met, the engagement ends at no extra charge.',
     bangla: 'পার্থক্য: সম্পূর্ণ সিস্টেম তৈরি করি, টিম ট্রেনিং দিই, ভিডিও ডকুমেন্টেশন দিই, ৩ মাস সাপোর্ট দিই — ফ্রিল্যান্সারের মতো একবারের কাজ নয়।',
   },
   {

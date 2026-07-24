@@ -355,8 +355,8 @@ All numbers and outcomes used across the 76 pieces are traceable to:
 | Revenue tripled | `src/pages/Proof.tsx` | resultCards[3] |
 | WhatsApp chaos eliminated | `src/pages/Proof.tsx` | resultCards[4] |
 | Proposals: 4 hrs → 15 mins | `src/pages/Proof.tsx` | resultCards[5] |
-| Top 5% globally | `src/pages/Proof.tsx` | stats[0] |
-| 500+ projects delivered | `src/pages/Proof.tsx` | stats[1] |
+| global-standard practice | `src/pages/Proof.tsx` | stats[0] |
+| 3+ years building AI systems | `src/pages/Proof.tsx` | stats[1] |
 | 3+ years building AI systems | `src/pages/Proof.tsx` | stats[3] |
 | AI Quick Win ৳3,750–7,500 / 3 days | `src/pages/Services.tsx` | featured[0] |
 | F-Commerce AI Sprint ৳50,000 / 14 days | `src/pages/Services.tsx` | featured[1] |

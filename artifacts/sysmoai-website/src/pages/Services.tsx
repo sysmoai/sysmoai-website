@@ -32,7 +32,7 @@ const servicesFAQ = [
   { q: 'How long does each package take?', a: 'AI Quick Win: 3 days. F-Commerce AI Sprint: 14 days. AI Operations Retainer: ongoing monthly.' },
   { q: 'Can I start with a Quick Win and upgrade later?', a: 'Absolutely. Most clients start with a Quick Win to see results fast, then move to a Sprint for full transformation.' },
   { q: 'What if I need more workflows than included?', a: 'We scope every project individually. If you need more, we adjust the package or recommend the next tier.' },
-  { q: 'Do you work with international clients?', a: 'Yes. We accept USD via Wise, Payoneer, and Stripe. We coordinate across timezones and communicate in English.' },
+  { q: 'Do you work with international clients?', a: 'Yes. USD invoicing is supported; the exact payment method is confirmed at the proposal stage. We coordinate across timezones and communicate in English.' },
   { q: "What's your revision policy?", a: 'Quick Win includes 1 free revision. Sprint includes unlimited revisions during the 14-day build. Retainer includes continuous improvements.' },
 ];
 

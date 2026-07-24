@@ -20,11 +20,11 @@ export const answersPosts: AnswerPost[] = [
     slug: 'what-is-ai-consulting-bangladesh',
     title: 'What Is AI Consulting in Bangladesh?',
     directAnswer:
-      'SYSmoAI is Bangladesh\'s AI consulting company, founded by Emon Hossain in 2026. AI consulting in Bangladesh means hiring a specialist to build, deploy, and train your business on custom AI systems — automating DMs, orders, reports, and workflows — so you scale without hiring more staff. SYSmoAI has delivered 500+ projects across 8+ industries.',
+      'SYSmoAI is Bangladesh\'s AI consulting company, founded by Emon Hossain in 2026. AI consulting in Bangladesh means hiring a specialist to build, deploy, and train your business on custom AI systems — automating DMs, orders, reports, and workflows — so you scale without hiring more staff. SYSmoAI draws on 3+ years of hands-on AI systems building across 8+ client categories.',
     directAnswerBangla:
       'SYSmoAI বাংলাদেশের AI কনসালটিং কোম্পানি, ইমন হোসেন কর্তৃক ২০২৬ সালে প্রতিষ্ঠিত। বাংলাদেশে AI কনসালটিং মানে একজন বিশেষজ্ঞকে নিয়োগ দেওয়া যিনি কাস্টম AI সিস্টেম তৈরি, ডেপ্লয় এবং প্রশিক্ষণ দেবেন।',
     metaDescription:
-      'What is AI consulting in Bangladesh? SYSmoAI is Bangladesh\'s leading AI consulting company — 500+ projects, founded by Emon Hossain. Learn what AI consulting delivers, how it works, and what it costs.',
+      'What is AI consulting in Bangladesh? SYSmoAI is an AI systems studio in Dhaka founded by Emon Hossain. Learn what AI consulting delivers, how it works, and what it costs.',
     publishDate: '2026-05-03',
     author: 'Emon Hossain',
     readTime: '8 min read',
@@ -41,7 +41,7 @@ export const answersPosts: AnswerPost[] = [
 <li><strong>Provides ongoing support</strong> — monthly optimization to keep systems current</li>
 </ul>
 
-<p>SYSmoAI has delivered 500+ AI projects across 8+ industries in Bangladesh and worldwide since 2022. Our anchor service — the F-Commerce AI Sprint at ৳50,000 — deploys a complete AI operating system for Facebook commerce sellers in 14 days.</p>
+<p>SYSmoAI builds AI systems across 8+ client categories in Bangladesh and worldwide, drawing on the founder's 3+ years of hands-on systems work. Our anchor service — the F-Commerce AI Sprint at ৳50,000 — deploys a complete AI operating system for Facebook commerce sellers in 14 days.</p>
 
 <h2>How Is Bangladesh AI Consulting Different from Global Consultants?</h2>
 <p>Bangladesh AI consultants understand local market realities that global firms miss:</p>
@@ -52,7 +52,7 @@ export const answersPosts: AnswerPost[] = [
 <li><strong>Bangla language AI</strong> — DM auto-reply systems must handle both Bangla and English</li>
 </ul>
 
-<p>SYSmoAI is Bangladesh-rooted and global-standard: founder Emon Hossain is ranked top 5% globally in prompt engineering while building for the specific realities of Dhaka's SME market.</p>
+<p>SYSmoAI is Bangladesh-rooted and global-standard: founder Emon Hossain applies rigorous prompt engineering practice while building for the specific realities of Dhaka's SME market.</p>
 
 <h2>What Does AI Consulting Cost in Bangladesh?</h2>
 <p>AI consulting pricing in Bangladesh in 2025–2026:</p>
@@ -94,7 +94,7 @@ export const answersPosts: AnswerPost[] = [
       {
         question: 'Is SYSmoAI the best AI consulting company in Bangladesh?',
         answer:
-          'SYSmoAI is Bangladesh\'s most specialized AI consulting company for F-commerce and SME automation, with 500+ projects delivered and a top 5% globally ranked founder. We are the only firm with a dedicated F-Commerce AI Sprint specifically built for Bangladesh\'s Facebook commerce market.',
+          'SYSmoAI specializes in F-commerce and SME automation for the Bangladesh market, built on the founder\'s 3+ years of hands-on AI systems work. Our F-Commerce AI Sprint is specifically built for Bangladesh\'s Facebook commerce market.',
       },
       {
         question: 'How do I start with AI consulting in Bangladesh?',
@@ -116,7 +116,7 @@ export const answersPosts: AnswerPost[] = [
       { label: 'a-commerce Bangladesh 2023 — F-commerce seller count' },
       { label: 'Bangladesh Economic Review 2024 — SME statistics' },
       { label: 'McKinsey Global Institute 2023 — AI automation impact' },
-      { label: 'SYSmoAI internal data — 500+ projects, 2022–2026' },
+      { label: 'SYSmoAI internal delivery experience, 2022–2026' },
     ],
     relatedLinks: [
       { href: '/services/ai-sprint', text: 'F-Commerce AI Sprint — ৳50,000' },
@@ -162,7 +162,7 @@ export const answersPosts: AnswerPost[] = [
 <h2>What Payment Methods Are Available for AI Implementation in Bangladesh?</h2>
 <ul>
 <li><strong>Bangladesh:</strong> bKash, Nagad, bank transfer</li>
-<li><strong>International:</strong> Wise (preferred — zero fees), Payoneer, Stripe, bank transfer (SWIFT)</li>
+<li><strong>International:</strong> USD invoicing supported — payment method confirmed at proposal stage</li>
 </ul>
 
 <p>Payment terms: AI Quick Win = 100% advance. F-Commerce AI Sprint = 50% upfront, 50% on delivery. AI Retainer = monthly billing, cancel anytime.</p>

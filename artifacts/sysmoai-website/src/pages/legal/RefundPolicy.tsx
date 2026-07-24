@@ -15,7 +15,7 @@ export default function RefundPolicy() {
           <div className="prose prose-slate max-w-none space-y-8 text-slate-700 leading-relaxed">
             <section>
               <h2 className="text-xl font-bold text-slate-900 mb-3">Our guarantee</h2>
-              <p>SYSmoAI is built on a simple promise: we don't get paid until it works. Our refund policy reflects that commitment. We don't hide behind fine print — we make it right.</p>
+              <p>SYSmoAI is built on a simple commitment: every project is scoped with a written acceptance test before work starts, and our refund policy reflects that. We don't hide behind fine print — we make it right.</p>
             </section>
 
             <section>

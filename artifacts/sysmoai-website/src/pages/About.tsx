@@ -34,7 +34,7 @@ const timeline = [
     icon: '⚡', step: '03',
     title: '3 Years Mastering AI',
     desc: 'Deep mastery of ChatGPT, Claude, Notion, n8n, and full automation stacks. Not casual use — building real production systems.',
-    metric: '3 years · 10,000+ hours'
+    metric: '3+ years of daily hands-on building'
   },
   {
     icon: '🏗️', step: '04',
@@ -53,7 +53,7 @@ const timeline = [
     icon: '🌍', step: '06',
     title: 'SYSmoAI Was Born',
     desc: null,
-    metric: '500+ projects · 8+ categories · Bangladesh → World',
+    metric: '3+ years building · 8+ categories · Bangladesh → World',
     descNode: (isDark: boolean) => <>To give every founder, freelancer, and team the same unfair competitive advantage — AI systems that work, built by someone who needed them first. Now serving <InlineLink href="/services/international" isDark={isDark}>clients worldwide</InlineLink>.</>
   },
 ];
@@ -68,7 +68,7 @@ const principles = [
   {
     icon: '✅',
     title: 'Results First',
-    desc: 'We don\'t get paid until your system delivers ROI. If the stated goal isn\'t met on a Quick Win, we rebuild it at no extra charge.',
+    desc: 'Every project is scoped with a written acceptance test before work starts. If the agreed deliverables aren\'t met, the engagement ends at no extra charge.',
     link: '/results'
   },
   {
@@ -89,15 +89,15 @@ const principles = [
     title: 'Global Standards',
     desc: null,
     link: '/pricing',
-    descNode: (isDark: boolean) => <>Top 5% prompt engineering. International AI best practices. Our quality benchmark is global — not the local average. Clients in US, UK, Canada trust our <InlineLink href="/services/international" isDark={isDark}>international services</InlineLink>.</>
+    descNode: (isDark: boolean) => <>Serious prompt engineering. International AI best practices. Our quality benchmark is global — not the local average. Our <InlineLink href="/services/international" isDark={isDark}>international services</InlineLink> serve clients in the US, UK, and Canada.</>
   },
 ];
 
 const stats = [
-  { label: 'Prompt Engineers Globally', value: 'Top 5%' },
-  { label: 'Projects Delivered', value: '500+' },
-  { label: 'Client Categories Served', value: '8+' },
   { label: 'Years Building AI Systems', value: '3+' },
+  { label: 'Client Categories Served', value: '8+' },
+  { label: 'Automation Running', value: '24/7' },
+  { label: 'Client-Owned Systems', value: '100%' },
 ];
 
 const skillTags = [
@@ -106,15 +106,15 @@ const skillTags = [
   { label: 'Notion OS', href: '/services/notion-os' },
   { label: 'n8n Automation', href: '/services/n8n-automation' },
   { label: 'AI Agent Design', href: '/services/ai-agent-dev' },
-  { label: '500+ Projects', href: '/results' },
+  { label: 'Lead Rescue System', href: '/lead-rescue' },
   { label: 'SEO Expert', href: '/services' },
   { label: 'AI Coaching', href: '/services/ai-coaching' },
 ];
 
 const credentials = [
-  { icon: '🏆', number: 'Top 5%', label: 'Prompt Engineers Globally', sub: 'Verified benchmark' },
-  { icon: '📦', number: '500+', label: 'Projects Delivered', sub: 'AI systems & automations' },
   { icon: '🗓️', number: '3+', label: 'Years Building AI', sub: 'Notion, n8n, AI Agents' },
+  { icon: '📦', number: '8+', label: 'Client Categories', sub: 'AI systems & automations' },
+  { icon: '🏠', number: '100%', label: 'Client-Owned', sub: 'Your accounts, your system' },
 ];
 
 export default function About() {
@@ -131,7 +131,7 @@ export default function About() {
   useEffect(() => {
     document.title = 'About SYSmoAI & Founder Emon Hossain | AI Systems Architect Bangladesh';
     const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute('content', 'Meet Emon Hossain — AI Systems Architect, Top 5% Prompt Engineer globally, 500+ projects delivered. SYSmoAI was built from his own 3-year AI journey. Bangladesh-based, globally-rated.');
+    if (meta) meta.setAttribute('content', 'Meet Emon Hossain — AI Systems Architect. SYSmoAI was built from his own 3-year AI journey. Bangladesh-based, serving clients worldwide.');
 
     const script = document.createElement('script');
     script.type = 'application/ld+json';
@@ -140,7 +140,7 @@ export default function About() {
       "@type": "Person",
       "name": "Emon Hossain",
       "jobTitle": "Founder & CEO, AI Systems Architect",
-      "description": "Top 5% Prompt Engineer globally. 500+ AI projects delivered. Founder of SYSmoAI — Bangladesh's AI consulting company. Specializes in Notion OS, n8n automation, and custom AI agent development.",
+      "description": "AI Systems Architect with 3+ years building production AI systems. Founder of SYSmoAI — an AI systems studio in Dhaka, Bangladesh. Specializes in Notion OS, n8n automation, and custom AI agent development.",
       "url": "https://sysmoai.com/about",
       "image": "https://sysmoai.com/founder.jpg",
       "email": "hello@sysmoai.com",
@@ -197,8 +197,8 @@ export default function About() {
             className="text-lg leading-relaxed max-w-2xl mx-auto mb-8"
             style={{ color: body }}
           >
-            After 3 years of building his own AI operating system and delivering{' '}
-            <a href="/results" className="text-blue-400 hover:text-blue-300 underline decoration-blue-600 transition-colors">500+ projects</a>,
+            After 3 years of building his own AI operating system and{' '}
+            <a href="/results" className="text-blue-400 hover:text-blue-300 underline decoration-blue-600 transition-colors">real production systems</a>,
             Emon Hossain created SYSmoAI — so founders, agencies and freelancers in Bangladesh and{' '}
             <a href="/services/international" className="text-blue-400 hover:text-blue-300 underline decoration-blue-600 transition-colors">worldwide</a>{' '}
             can achieve the same freedom.
@@ -223,8 +223,8 @@ export default function About() {
       {/* Direct Answer — GEO */}
       <section className="pt-10 pb-0" style={{ background: bg1 }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <DirectAnswer bangla="ইমন হোসেন হলেন SYSmoAI-এর প্রতিষ্ঠাতা ও CEO — বিশ্বব্যাপী শীর্ষ ৫% প্রম্পট ইঞ্জিনিয়ার এবং ৫০০+ AI প্রজেক্ট সম্পন্নকারী। তিনি ২০২৬ সালে ঢাকায় SYSmoAI প্রতিষ্ঠা করেন।">
-            Emon Hossain is the founder of SYSmoAI — Bangladesh's AI consulting company. Ranked top 5% globally in prompt engineering with 500+ AI projects delivered across 8+ industries. He founded SYSmoAI in 2026 in Dhaka after spending 3+ years mastering ChatGPT, Claude, Notion, n8n, and automation stacks. Now serving clients in Bangladesh and worldwide.
+          <DirectAnswer bangla="ইমন হোসেন হলেন SYSmoAI-এর প্রতিষ্ঠাতা ও CEO — একজন AI সিস্টেম আর্কিটেক্ট। তিনি ২০২৬ সালে ঢাকায় SYSmoAI প্রতিষ্ঠা করেন।">
+            Emon Hossain is the founder of SYSmoAI — an AI systems studio in Dhaka, Bangladesh. He founded SYSmoAI in 2026 after spending 3+ years mastering ChatGPT, Claude, Notion, n8n, and automation stacks and building production AI systems across 8+ client categories. Now serving clients in Bangladesh and worldwide.
           </DirectAnswer>
         </div>
       </section>
@@ -262,7 +262,7 @@ export default function About() {
                   <h2 className="text-2xl font-bold" style={{ color: heading }}>Emon Hossain</h2>
                   <p className="text-blue-500 font-semibold">
                     Founder & CEO · AI Systems Architect ·{' '}
-                    <a href="/results" className="hover:underline decoration-blue-400 transition-colors">Top 5% Prompt Engineer</a>
+                    <a href="/results" className="hover:underline decoration-blue-400 transition-colors">Prompt Engineering Specialist</a>
                   </p>
                 </div>
 

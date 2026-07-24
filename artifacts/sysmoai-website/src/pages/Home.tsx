@@ -715,8 +715,8 @@ export default function Home() {
       {/* Direct Answer — GEO */}
       <section className="pt-10 pb-0" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <DirectAnswer bangla="SYSmoAI হলো বাংলাদেশের AI কনসালটিং কোম্পানি — ইমন হোসেন কর্তৃক প্রতিষ্ঠিত। F-কমার্স অটোমেশন, AI এজেন্ট, n8n ওয়ার্কফ্লো এবং Notion OS তৈরিতে বিশেষজ্ঞ। ৫০০+ প্রজেক্ট সম্পন্ন।">
-            SYSmoAI is Bangladesh's AI consulting company — founded by Emon Hossain (top 5% global prompt engineer). We build AI automation systems for F-commerce sellers, agencies, SMEs, freelancers, and corporate teams: DM agents, order trackers, bKash workflows, Notion OS, n8n automations, and AI agents. Services from ৳3,750 ($50) to ৳2,00,000 ($2,400). 500+ projects delivered. Based in Dhaka, serving globally.
+          <DirectAnswer bangla="SYSmoAI হলো ঢাকার একটি AI সিস্টেম স্টুডিও — ইমন হোসেন কর্তৃক প্রতিষ্ঠিত। F-কমার্স অটোমেশন, AI এজেন্ট, n8n ওয়ার্কফ্লো এবং Notion OS তৈরিতে বিশেষজ্ঞ।">
+            SYSmoAI is an AI systems studio in Dhaka, Bangladesh — founded by Emon Hossain, an AI systems architect with 3+ years of hands-on building. We build AI automation systems for F-commerce sellers, agencies, SMEs, freelancers, and corporate teams: DM agents, order trackers, bKash workflows, Notion OS, n8n automations, and AI agents. Services from ৳3,750 ($50) to ৳2,00,000 ($2,400). Based in Dhaka, serving globally.
           </DirectAnswer>
         </div>
       </section>
@@ -1519,10 +1519,10 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
             {[
-              { value: '500+',    label: 'Projects Delivered'        },
-              { value: '15–20h',  label: 'Saved Per Week (avg)'      },
               { value: '3+ yrs',  label: 'Building AI Systems'       },
-              { value: 'Top 5%',  label: 'Prompt Engineers Globally' },
+              { value: '8+',      label: 'Client Categories'         },
+              { value: '24/7',    label: 'Automation Running'        },
+              { value: '100%',    label: 'Client-Owned Systems'      },
             ].map((s, i) => (
               <motion.div key={i} variants={fadeUp}
                 className="text-center rounded-2xl p-6 border"
@@ -1584,7 +1584,7 @@ export default function Home() {
                 {/* Credential badge */}
                 <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap text-white text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-xl"
                   style={{ background: 'linear-gradient(90deg,#2563EB,#7C3AED)', border: '1px solid rgba(255,255,255,0.15)' }}>
-                  🏆 Top 5% AI Engineer Globally
+                  🇧🇩 AI Systems Architect, Bangladesh
                 </div>
                 {/* Online dot */}
                 <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2 py-1 rounded-full"
@@ -1612,18 +1612,18 @@ export default function Home() {
               >
                 "I built SYSmoAI because I was you 3 years ago — overwhelmed, tool-hopping,
                 and losing income while AI was changing everything. I spent 3 years mastering
-                every AI tool, building real systems, and delivering 500+ projects.
+                every AI tool and building real production systems for my own business.
                 Most people don't need another tool. They need someone to build the system
                 FOR them. That's SYSmoAI."
               </blockquote>
               <div className="flex flex-wrap gap-2">
                 {[
                   { label: 'AI Systems Architecture',    href: '/services/ai-sprint'     },
-                  { label: 'Top 5% Prompt Engineering',  href: '/results'                },
+                  { label: 'Prompt Engineering',         href: '/results'                },
                   { label: 'Notion OS',                  href: '/services/notion-os'     },
                   { label: 'n8n Automation',             href: '/services/n8n-automation'},
                   { label: 'AI Agent Design',            href: '/services/ai-agent-dev'  },
-                  { label: '500+ Projects Delivered',    href: '/results'                },
+                  { label: 'Lead Rescue System',         href: '/lead-rescue'            },
                   { label: 'SEO Expert',                 href: '/services'               },
                   { label: 'AI Coaching',                href: '/services/ai-coaching'   },
                 ].map(tag => (
@@ -1853,10 +1853,10 @@ export default function Home() {
               <div className="space-y-3 mb-8">
                 {[
                   '60–80% cost savings vs US/EU consultants',
-                  'Top 5% prompt engineering globally',
-                  'International payments via Wise & Payoneer',
+                  'Rigorous prompt engineering and AI systems practice',
                   'English-first communication, no language barrier',
-                  'Results guarantee — we don\'t get paid until it works',
+                  'Written acceptance test agreed before every project',
+                  'Transparent process — you own every deliverable',
                 ].map(item => (
                   <div key={item} className="flex items-center gap-3 text-slate-300">
                     <span className="w-5 h-5 rounded-full bg-blue-500/30 text-blue-400 flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>

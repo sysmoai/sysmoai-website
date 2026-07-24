@@ -94,7 +94,7 @@ const whyUs = [
   {
     icon: Target,
     title: "Results First",
-    desc: "We don't get paid until your system delivers ROI. Quick Win not met? We rebuild it free.",
+    desc: "Every project is scoped with a written acceptance test agreed before work starts.",
   },
   {
     icon: ShieldCheck,

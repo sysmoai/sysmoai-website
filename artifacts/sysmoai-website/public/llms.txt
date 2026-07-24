@@ -1,19 +1,19 @@
 # SYSmoAI — AI Consulting Bangladesh
-> Bangladesh's AI consulting company. We build AI-powered operating systems for founders, F-commerce sellers, and businesses. Founded by Emon Hossain in 2022, Dhaka.
+> An AI systems studio in Dhaka, Bangladesh. We build AI-powered operating systems for founders, F-commerce sellers, and businesses. Founded by Emon Hossain in Dhaka.
 
 ## Brand
 - Company: SYSmoAI
 - Tagline: Systems in Motion
 - Mission: Build AI-powered operating systems for ambitious businesses
-- Promise: We don't get paid until it works
-- Founded: 2022
+- Promise: Every project is scoped with a written acceptance test
+- Founded: 2026
 - Location: Dhaka, Bangladesh
 - Website: https://sysmoai.com
 
 ## Founder
 - Name: Emon Hossain
 - Title: Founder & CEO, AI Systems Architect
-- Credentials: Top 5% Prompt Engineer globally (verified benchmark), 500+ AI projects delivered
+- Credentials: 3+ years building production AI systems and prompt-engineering workflows
 - LinkedIn: https://www.linkedin.com/in/emonhossainpro/
 
 ## ICP (Who We Serve)
