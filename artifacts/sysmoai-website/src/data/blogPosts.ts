@@ -1472,7 +1472,7 @@ You completed 6 hours of value that would've taken 14 without the system. Evenin
 
 <p>So I built my first system. Notion templates for client tracking. ChatGPT prompts for research. Automated follow-up reminders. And everything changed. Not because I worked harder — but because the SYSTEM handled 60% of the work.</p>
 
-<p>That's what SYSmoAI does for freelancers now. We've built these systems for 500+ projects. We know what works.</p>
+<p>That's what SYSmoAI does for freelancers now. We've been building these systems hands-on for 3+ years. We know what works.</p>
 
 <h2>The Transformation: Before vs After</h2>
 
@@ -2394,7 +2394,7 @@ You completed 6 hours of value that would've taken 14 without the system. Evenin
 
 <h2>How I'd Build Your Agency's AI Stack</h2>
 
-<p>Based on 500+ projects at SYSmoAI, here's the order I recommend:</p>
+<p>Based on 3+ years of building AI systems at SYSmoAI, here's the order I recommend:</p>
 
 <ol>
 <li><strong>Month 1: Automate reporting first.</strong> It's the biggest time drain with the fastest ROI. Most agencies save 60-80 hours/month immediately.</li>
@@ -2455,7 +2455,7 @@ You completed 6 hours of value that would've taken 14 without the system. Evenin
 
 <p>Her secret? <strong>An AI research system that reads, summarizes, and synthesizes for her.</strong></p>
 
-<p>I know this gap exists because I've written 6 AI research papers myself — on topics ranging from Bangladesh's AI policy landscape to practical applications of agentic AI in developing markets. The first paper took me months. By paper #4, I had a system. The research phase went from weeks to days. Not because I was smarter — because the SYSTEM was smarter.</p>
+<p>I know this gap exists because I've done deep AI research myself — on topics ranging from Bangladesh's AI policy landscape to practical applications of agentic AI in developing markets. My first research project took months. A few projects in, I had a system. The research phase went from weeks to days. Not because I was smarter — because the SYSTEM was smarter.</p>
 
 <h2>The Literature Review Trap</h2>
 
@@ -4683,7 +4683,7 @@ One dashboard showing performance across ALL platforms. Which content type perfo
 
 <p>She went from 42% to 78% in one semester. <strong>What could you do with the right system?</strong></p>`,
       faq: [
-      { question: `Is this a real student's story?`, answer: `This is a composite based on real results from SYSmoAI's 500+ projects. The specific numbers (42% → 78%, 6hrs → 3.5hrs) reflect actual outcomes we've measured across multiple student engagements. Individual results vary based on effort and starting point.` },
+      { question: `Is this a real student's story?`, answer: `This is an illustrative composite scenario, not a documented client case study. The numbers shown (42% → 78%, 6hrs → 3.5hrs) are representative of what a structured AI study system aims for; individual results vary based on effort and starting point.` },
     { question: `Can I get the same results?`, answer: `Results depend on your starting point and consistency. Students who use the system daily for 30+ days consistently see 20-40% improvement in study efficiency. The system only works if you use it — but it makes using it much easier than traditional methods.` },
     { question: `What subjects does this work for?`, answer: `Every subject. The system adapts to any curriculum — engineering, medical, business, arts, law. The AI doesn't care what subject you're studying; it adapts the explanation style and tracking to YOUR specific courses.` },
     { question: `Do I need to buy any expensive software?`, answer: `No. The system uses Notion (free), ChatGPT (free tier works for basics), and optional tools costing ৳500-1,000/month. The SYSmoAI setup fee (৳3,750) is a one-time cost — after that, you maintain it yourself in 15 minutes/day.` },
@@ -4973,7 +4973,7 @@ One dashboard showing performance across ALL platforms. Which content type perfo
 
 <h2>A Note From Emon</h2>
 
-<p>I started SYSmoAI because I believe in one thing: <strong>"If I do it twice, I automate it."</strong> I've built 500+ projects, served 10,000+ customers through AIPS, and completed 6 AI research papers on Bangladesh's AI landscape.</p>
+<p>I started SYSmoAI because I believe in one thing: <strong>"If I do it twice, I automate it."</strong> I've spent 3+ years building production AI systems, run AIPS (my own AI subscription business), and researched Bangladesh's AI landscape in depth.</p>
 
 <p>When I see job seekers sending 200 identical applications and getting zero calls, I don't see a talent problem. I see a systems problem. The talent is there. The method is broken.</p>
 
@@ -5357,7 +5357,7 @@ One dashboard showing performance across ALL platforms. Which content type perfo
 
 <h2>Why I Built This for Bangladesh SMEs</h2>
 
-<p>I'm Emon Hossain. I grew up in Bogura, moved to Dhaka for university, and have been building businesses here since 2019. I run AIPS (AI Premium Shop) with my wife Rumi — we've served 10,000+ customers.</p>
+<p>I'm Emon Hossain. I grew up in Bogura, moved to Dhaka for university, and have been building businesses here since 2019. I run AIPS (AI Premium Shop) with my wife Rumi — serving thousands of customers across Bangladesh.</p>
 
 <p>I know the Bangladesh SME reality:</p>
 <ul>
@@ -5548,7 +5548,7 @@ Over a 4-year degree: <strong>~2,400 wasted hours = 10 months of your life</stro
 
 <p>I didn't have any of that. What I had was an old laptop, Fiverr freelancing on the side, and a determination that I'd figure out a better way.</p>
 
-<p>Years later, after building 500+ projects and completing 6 AI research papers, I can say this with certainty: <strong>the student who has a system will ALWAYS outperform the student who doesn't.</strong> AI makes building that system easy. I wish I'd had these tools in university. You do.</p>
+<p>Years later, after building AI systems day in and day out, I can say this with certainty: <strong>the student who has a system will ALWAYS outperform the student who doesn't.</strong> AI makes building that system easy. I wish I'd had these tools in university. You do.</p>
 
 <h2>"Will This Work for My Subject?"</h2>
 
@@ -5745,7 +5745,7 @@ Over a 4-year degree: <strong>~2,400 wasted hours = 10 months of your life</stro
 
 <h2>Why SYSmoAI for Corporate Training</h2>
 
-<p>I'm Emon Hossain, founder of SYSmoAI. I've completed 6 AI research papers on practical AI applications. I've built AI systems for businesses ranging from solo operations to multi-department companies. And I understand the Bangladesh corporate landscape — the regulatory environment, the talent market, the technology adoption curve.</p>
+<p>I'm Emon Hossain, founder of SYSmoAI. I've done deep research on practical AI applications. I've built AI systems for businesses ranging from solo operations to multi-department companies. And I understand the Bangladesh corporate landscape — the regulatory environment, the talent market, the technology adoption curve.</p>
 
 <p>Our training isn't theoretical. Every exercise uses YOUR company's actual workflows. Employees walk out of Day 1 with tools they use on Day 2. The ROI is immediate and measurable.</p>
 

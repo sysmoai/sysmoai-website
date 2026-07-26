@@ -20,7 +20,7 @@ That's a systems problem.
 
 And it's costing Bangladesh F-commerce sellers real money in missed orders — every day.
 
-We have 500+ projects delivered across Bangladesh.
+We have 3+ years building AI systems across Bangladesh.
 
 Start here: https://sysmoai.com/free-ai-audit
 ```
@@ -239,7 +239,7 @@ Char count: 280 ✅ | CTA: [A] ✅
 ```
 What does a fully automated F-commerce business actually look like?
 
-After 500+ projects in Bangladesh, here's the exact stack — and why it works when generic tools fail:
+After 3+ years of building in Bangladesh, here's the exact stack — and why it works when generic tools fail:
 ```
 Char count: 178 ✅
 
@@ -640,7 +640,7 @@ Char count: 245 ✅
 
 **Tweet 6:**
 ```
-What we've delivered across 500+ projects:
+What we've delivered across 3+ years of AI systems work:
 
 400+ DMs/day automated
 15 hrs/week saved (agency)

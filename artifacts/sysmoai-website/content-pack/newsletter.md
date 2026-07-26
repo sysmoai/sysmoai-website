@@ -12,7 +12,7 @@
 - Revenue tripled (Senior Freelancer)
 - WhatsApp chaos eliminated (SME Founder)
 - Proposals: 4 hrs → 15 mins (Creative Agency)
-- 500+ projects | Top 5% globally | 3+ years
+- 3+ years of AI systems work | 3+ years hands-on
 
 ---
 
@@ -56,7 +56,7 @@ The result for one F-commerce client: WhatsApp chaos eliminated — auto-reply +
 
 When I built my first WhatsApp automation, I had the same skepticism most founders do: "Customers will know it's a bot. It won't feel personal."
 
-After 500+ projects: they don't know. And they don't care. They care about getting a reply 24/7 — not whether a human sent it.
+After 3+ years of building: they don't know. And they don't care. They care about getting a reply 24/7 — not whether a human sent it.
 
 The personal touch lives in the quality of your product and how you handle problems. The auto-reply makes sure they don't walk out the door while waiting.
 

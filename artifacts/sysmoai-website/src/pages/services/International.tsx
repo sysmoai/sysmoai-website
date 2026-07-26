@@ -14,7 +14,7 @@ const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { stag
 
 const reasons = [
   { icon: '💰', title: '60–80% cost savings', desc: 'vs US/EU consultants — same quality, fraction of the price' },
-  { icon: '🏆', title: 'Top 5% globally', desc: 'Prompt engineering verified by international benchmarks' },
+  { icon: '🏆', title: 'Global standards', desc: 'Rigorous prompt engineering and AI systems practice' },
   { icon: '🗂️', title: 'Notion OS specialist', desc: 'One of the most advanced Notion architects in Asia' },
   { icon: '🤖', title: 'Custom AI agents', desc: 'WhatsApp, web, and custom platform integration' },
   { icon: '⚙️', title: 'n8n automation expert', desc: 'Complex workflow automation for any tool stack' },
@@ -88,7 +88,7 @@ export default function International() {
       <section className="pt-10 pb-0 bg-white">
         <div className="max-w-4xl mx-auto px-4">
           <DirectAnswer>
-            SYSmoAI serves international clients (US, UK, Canada, Australia, Southeast Asia) with world-class AI consulting at Bangladesh rates — 60–80% below US/EU agency prices. Services: AI Quick Win ($50–$100), F-Commerce AI Sprint ($600), AI Retainer ($250/month), Notion OS ($800–$5,000), AI Agents ($2,500–$15,000). Payment via Wise or Payoneer. Founder Emon Hossain is ranked top 5% globally in prompt engineering.
+            SYSmoAI serves international clients (US, UK, Canada, Australia, Southeast Asia) with world-class AI consulting at Bangladesh rates — 60–80% below US/EU agency prices. Services: AI Quick Win ($50–$100), F-Commerce AI Sprint ($600), AI Retainer ($250/month), Notion OS ($800–$5,000), AI Agents ($2,500–$15,000). The payment method is confirmed at the proposal stage. Founder Emon Hossain has 3+ years of hands-on experience building production AI systems.
           </DirectAnswer>
         </div>
       </section>

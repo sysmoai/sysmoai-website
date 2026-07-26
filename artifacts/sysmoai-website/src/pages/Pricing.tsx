@@ -79,12 +79,12 @@ const payments = [
   { label: 'All other services', terms: '50% upfront, 50% on delivery' },
 ];
 
-const methods = ['bKash', 'Nagad', 'Bank transfer', 'Wise', 'Payoneer', 'Credit card (via Stripe)'];
+const methods = ['Payment method confirmed at proposal stage — BDT and USD both supported'];
 
 const pricingFAQ = [
   { q: 'Are there any hidden fees?', a: 'No. The price shown is the price you pay. Payment terms are listed clearly for each package.' },
-  { q: 'How do international clients pay?', a: 'USD payments via Wise, Payoneer, or Stripe. No currency conversion fees on our side.' },
-  { q: "What if the system doesn't deliver results?", a: "We offer a results-first guarantee. If we can't improve your workflow within the agreed timeline, you get a full refund." },
+  { q: 'How do international clients pay?', a: 'USD payments are supported; the exact payment method is confirmed at the proposal stage.' },
+  { q: "What if the system doesn't deliver results?", a: "Every project is scoped with a written acceptance test agreed before work starts. If the agreed deliverables aren't met, the engagement ends at no extra charge beyond the deposit terms in your written scope." },
   { q: 'Can I cancel the retainer anytime?', a: 'Yes. The AI Retainer is month-to-month with no long-term commitment. Cancel anytime.' },
   { q: 'Can I start with the Quick Win before committing to the Sprint?', a: "Absolutely. The AI Quick Win (৳3,750–7,500) lets you see how we work and gets one workflow automated in 3 days. Most F-commerce sellers who do the Quick Win proceed to the Sprint within 30 days." },
 ];
@@ -187,7 +187,7 @@ export default function Pricing() {
       <section className="pt-10 pb-0" style={{ background: bg1 }}>
         <div className="max-w-4xl mx-auto px-4">
           <DirectAnswer bangla="SYSmoAI AI কনসালটিং মূল্য: AI কুইক উইন ৳৩,৭৫০–৳৭,৫০০ (৩ দিন), F-কমার্স AI স্প্রিন্ট ৳৫০,০০০ (১৪ দিন), AI রিটেইনার ৳২০,০০০/মাস। আন্তর্জাতিক: $৫০–$৬০০ USD।">
-            SYSmoAI pricing in Bangladesh: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days), F-Commerce AI Sprint ৳50,000 (full system in 14 days), AI Retainer ৳20,000/month. International: $50–$600 USD — 60–80% below US/EU agency rates. All packages include results-first guarantee. Payment via bKash, Nagad, Wise, or Payoneer.
+            SYSmoAI pricing in Bangladesh: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days), F-Commerce AI Sprint ৳50,000 (full system in 14 days), AI Retainer ৳20,000/month. International: $50–$600 USD — 60–80% below US/EU agency rates. Every package is scoped with a written acceptance test; the payment method is confirmed at the proposal stage.
           </DirectAnswer>
         </div>
       </section>
@@ -329,9 +329,9 @@ export default function Pricing() {
             </p>
             <div className="grid md:grid-cols-2 gap-6 text-sm">
               <div>
-                <h4 className="text-white font-semibold mb-3">Payment Methods</h4>
+                <h4 className="text-white font-semibold mb-3">Payments</h4>
                 <ul className="text-slate-400 space-y-2">
-                  {['Wise (preferred — zero fees)', 'Payoneer', 'Stripe', 'Bank transfer (SWIFT)'].map(m => (
+                  {['USD invoicing supported', 'Payment method confirmed at proposal stage', 'Clear written scope before any deposit'].map(m => (
                     <li key={m} className="flex items-center gap-2"><span className="text-green-400">•</span>{m}</li>
                   ))}
                 </ul>
@@ -339,7 +339,7 @@ export default function Pricing() {
               <div>
                 <h4 className="text-white font-semibold mb-3">How It Works</h4>
                 <ul className="text-slate-400 space-y-2">
-                  {['All prices available in USD (use toggle)', 'Communication in English', 'Timezone-flexible scheduling', 'Same deliverables & guarantee'].map(m => (
+                  {['All prices available in USD (use toggle)', 'Communication in English', 'Timezone-flexible scheduling', 'Same deliverables & acceptance test'].map(m => (
                     <li key={m} className="flex items-center gap-2"><span className="text-green-400">•</span>{m}</li>
                   ))}
                 </ul>

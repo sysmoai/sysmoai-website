@@ -32,6 +32,11 @@ const BANNED = [
   'auto-reply in 30 seconds', '30-second auto-reply', '30-sec auto-reply',
   'Day 3 + Day 7', 'Day 3, Day 7', 'Timeline: 3 days (৳5,000)',
   'with24/7onds', 'payment link with24',
+  // Truth Registry guardrails (2026-07-24): unverified claims banned site-wide
+  '500+ projects', '500+ AI projects', 'Top 5% globally', 'top 5% globally',
+  'SYSmoAI Private Limited', "Bangladesh's leading AI consulting",
+  'no payment until it works', "don't get paid until",
+  '10,000+ customers', 'premier AI consulting',
 ];
 const ALL_FILES = [
   'linkedin.md','x.md','instagram-feed.md','instagram-stories.md',

@@ -199,7 +199,7 @@ No invented testimonials. No stock photos. Real operations.
 🏭 SME Founder: WhatsApp chaos eliminated
 🎨 Creative Agency: Proposals 4 hrs → 15 mins
 
-500+ projects. 3+ years. Top 5% globally.
+3+ years building AI systems. Global standards.
 
 Want to know what YOUR result could look like?
 

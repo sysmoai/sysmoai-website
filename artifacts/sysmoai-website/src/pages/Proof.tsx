@@ -14,10 +14,10 @@ const fadeUp = {
 const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.1 } } };
 
 const stats = [
-  { value: 'Top 5%', label: 'Prompt Engineers Globally' },
-  { value: '500+',   label: 'Projects Delivered'        },
-  { value: '8+',     label: 'Client Categories'         },
   { value: '3+',     label: 'Years Building AI Systems' },
+  { value: '8+',     label: 'Client Categories'         },
+  { value: '24/7',   label: 'Automation Always-on'      },
+  { value: '100%',   label: 'Client-Owned Deliverables' },
 ];
 
 // Note: F-Commerce results live in their own dedicated section above
@@ -63,7 +63,7 @@ export default function Proof() {
       <section className="pt-10 pb-0" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
         <div className="max-w-4xl mx-auto px-4">
           <DirectAnswer>
-            SYSmoAI has delivered 500+ AI projects across 8+ client categories in Bangladesh and worldwide. Representative results: 400+ DMs/day automated for F-commerce sellers, 15 hrs/week saved for agencies, revenue tripled for freelancers, WhatsApp chaos eliminated for SME founders. Emon Hossain (founder) is ranked top 5% globally in prompt engineering with 3+ years building AI systems.
+            SYSmoAI builds AI systems across 8+ client categories in Bangladesh and worldwide. We are currently documenting detailed client case studies — real names, real numbers, real proof — and publish representative scenarios until then. Emon Hossain (founder) has 3+ years of hands-on experience building production AI systems and prompt-engineering workflows.
           </DirectAnswer>
         </div>
       </section>

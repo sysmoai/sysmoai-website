@@ -273,8 +273,8 @@ B-roll: Calm founder at desk. Dashboard showing growth. Proposal template loadin
 ---
 
 BEAT 3 (20–26 sec):
-ON-SCREEN TEXT: "500+ projects. 3+ years."
-Sub text: "Top 5% globally. Bangladesh-native."
+ON-SCREEN TEXT: "3+ years building AI systems."
+Sub text: "Global standards. Bangladesh-native."
 Visual: Credentials display
 B-roll: Founder (Emon) at work. SYSmoAI branding visible.
 

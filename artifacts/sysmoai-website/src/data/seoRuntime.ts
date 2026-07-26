@@ -75,7 +75,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/about': {
     title: 'About SYSmoAI | Emon Hossain — AI Systems Architect Bangladesh',
     description:
-      "Meet Emon Hossain, founder of SYSmoAI — Bangladesh's AI Systems Architect with 500+ projects delivered, top 5% globally in prompt engineering, serving clients worldwide.",
+      "Meet Emon Hossain, founder of SYSmoAI — an AI Systems Architect in Dhaka with 3+ years building production AI systems, serving clients worldwide.",
     canonical: `${SITE_URL}/about`,
   },
 

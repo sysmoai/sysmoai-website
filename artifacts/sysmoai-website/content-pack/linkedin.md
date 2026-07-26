@@ -11,7 +11,7 @@
 - Revenue tripled (Senior Freelancer)
 - WhatsApp chaos eliminated (SME Founder)
 - Proposals: 4 hrs → 15 mins (Creative Agency)
-- 500+ projects delivered | Top 5% globally | 3+ years
+- 3+ years building AI systems | 3+ years hands-on
 
 ---
 
@@ -40,7 +40,7 @@ No order tracking.
 No follow-up sequence.
 Just one founder doing everything manually — day after day.
 
-This is fixable. We have 500+ projects delivered across Bangladesh and beyond.
+This is fixable. We build AI systems for Bangladesh businesses every day.
 
 Ready to find out where your operation is losing the most time?
 
@@ -283,7 +283,7 @@ What would you do with 15 extra hours a week?
 
 ### Post L9 — Day 9 (Thursday) | Hook: Curiosity Gap
 ```
-In 500+ projects building AI systems for Bangladesh businesses, here's what the best ones have in common.
+In 3+ years of building AI systems for Bangladesh businesses, here's what the best ones have in common.
 
 ↓
 
@@ -351,7 +351,7 @@ What would your 14-day Sprint look like?
 
 ### Post L11 — Day 11 (Monday) | Hook: Specificity Signal
 ```
-The F-Commerce AI Sprint costs ৳50,000. Here's what 500+ projects of evidence says about the return.
+The F-Commerce AI Sprint costs ৳50,000. Here is what our build experience says about the return.
 
 ↓
 

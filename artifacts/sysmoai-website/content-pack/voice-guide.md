@@ -33,8 +33,8 @@ POV: First-person singular (`I`) for stories and observations. First-person plur
 | `14-hour days` | The overwork symbol |
 | `400+ DMs/day automated` | F-commerce proof point |
 | `Results first` | Guarantee language |
-| `Top 5% globally` | Verified claim — Upwork ranking per Proof.tsx |
-| `500+ projects` | Volume proof |
+| `global-standard practice` | Verified claim — Upwork ranking per Proof.tsx |
+| `3+ years of AI systems work` | Volume proof |
 
 ---
 
