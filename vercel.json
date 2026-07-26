@@ -1,11 +1,6 @@
 {
-  "buildCommand": "cd artifacts/sysmoai-website && pnpm install && pnpm run build",
-  "outputDirectory": "artifacts/sysmoai-website/dist/public",
-  "framework": "vite",
-  "regions": ["bom1"],
-  "env": {
-    "VITE_API_URL": "@VITE_API_URL",
-    "VITE_SUPABASE_URL": "@VITE_SUPABASE_URL",
-    "VITE_SUPABASE_ANON_KEY": "@VITE_SUPABASE_ANON_KEY"
-  }
+  "buildCommand": "pnpm run build",
+  "outputDirectory": "artifacts/sysmoai-website",
+  "framework": null,
+  "installCommand": "pnpm install"
 }
