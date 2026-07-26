@@ -211,7 +211,7 @@ const staticRoutes: Record<string, RouteSeo> = {
     ...base('/services/international'),
     schemas: [
       ORG_SCHEMA,
-      serviceSchema('International AI Consulting', '60-80% cost savings vs Western consultants — same quality, global delivery via Wise/Payoneer.', `${SITE_URL}/services/international`),
+      serviceSchema('International AI Consulting', '60-80% cost savings vs Western consultants — same quality, global delivery. Payment details confirmed at proposal stage.', `${SITE_URL}/services/international`),
       breadcrumbSchema([home, services, { name: 'International Services', url: `${SITE_URL}/services/international` }]),
     ],
   },

@@ -177,9 +177,9 @@ export default function AISprint() {
             </div>
 
             <div className="flex flex-wrap gap-4 text-sm" style={{ color: body }}>
-              <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-500" /> Results-first guarantee</span>
+              <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-500" /> Acceptance-test driven</span>
               <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-500" /> Bangla + English</span>
-              <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-500" /> bKash / Nagad ready</span>
+              <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-500" /> Payment workflow included</span>
               <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-500" /> 90-day support</span>
             </div>
           </motion.div>
@@ -308,7 +308,7 @@ export default function AISprint() {
                 <div className="text-blue-300 text-sm">retainer (cancel anytime)</div>
               </div>
             </div>
-            <p className="text-blue-200 text-sm mb-8">50% upfront · 50% on delivery · bKash / Nagad / bank transfer</p>
+            <p className="text-blue-200 text-sm mb-8">50% upfront · 50% on delivery · payment details confirmed at proposal</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link href="/free-ai-audit"
                 className="inline-flex items-center gap-2 bg-white hover:bg-blue-50 text-blue-700 px-7 py-3.5 rounded-xl font-bold text-sm transition-all">
