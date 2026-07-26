@@ -24,7 +24,7 @@ export default function TermsOfService() {
                 <li><strong>AI Quick Win:</strong> 100% payment required before work begins.</li>
                 <li><strong>AI Sprint & other projects:</strong> 50% upfront, 50% upon delivery and client approval.</li>
                 <li><strong>AI Retainer:</strong> Monthly billing. Due at the start of each month.</li>
-                <li>Accepted methods: bKash, Nagad, bank transfer, Wise, Payoneer.</li>
+                <li>Accepted payment methods are confirmed at the proposal stage. All payments are processed through official channels only.</li>
                 <li>Work will not commence until the initial payment is confirmed.</li>
               </ul>
             </section>

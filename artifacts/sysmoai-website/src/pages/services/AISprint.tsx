@@ -70,7 +70,7 @@ const faqs = [
   { q: 'Does this work with any Facebook page?', a: 'Yes, it integrates with Facebook Business pages via Messenger API. We handle the setup — you just need a Facebook Business account.' },
   { q: 'What if the AI replies wrong?', a: 'The system flags complex queries for your review. You handle exceptions — not the 400 routine DMs. We tune the AI on real conversations in the first 30 days.' },
   { q: 'Does it handle both Bangla and English messages?', a: 'Yes. Bilingual (Bangla + English) systems are standard for all F-commerce clients.' },
-  { q: 'How does payment work?', a: '50% upfront (৳25,000) to start, 50% on delivery (৳25,000). We accept bKash, Nagad, bank transfer, Wise, and Payoneer.' },
+  { q: 'How does payment work?', a: '50% upfront (৳25,000) to start, 50% on delivery (৳25,000). The exact payment method is confirmed at the proposal stage.' },
   { q: 'What tools will you use?', a: "n8n automation, Facebook Messenger API, Notion, and ManyChat or similar — depending on your page's current setup. We work around your existing stack." },
   { q: "What's in the 90-day support period?", a: 'Priority WhatsApp access for questions, bug fixes, optimization tweaks, and one additional workflow each month as your business grows.' },
   { q: "What if I'm a small seller — can I afford this?", a: "The Sprint at ৳50,000 pays for itself within the first month if you're currently missing 100+ orders/week. Need to start smaller? Try the AI Quick Win (৳3,750–7,500) first." },

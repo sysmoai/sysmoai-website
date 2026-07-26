@@ -681,7 +681,7 @@ export default function Home() {
             className="flex flex-wrap justify-center gap-3 mt-6"
           >
             {[
-              { emoji: '✓', color: '#4ade80', label: 'Results Guaranteed' },
+              { emoji: '✓', color: '#4ade80', label: 'Acceptance-Test Delivered' },
               { emoji: '📦', color: '#60a5fa', label: '14 Days to Live' },
               { emoji: '💬', color: '#c084fc', label: 'Bangla DM Agent' },
               { emoji: '🏦', color: '#fbbf24', label: 'bKash / Nagad Ready' },

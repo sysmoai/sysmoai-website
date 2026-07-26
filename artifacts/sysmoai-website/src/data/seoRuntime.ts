@@ -33,7 +33,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/services/ai-quick-win': {
     title: 'AI Quick Win — 1 Workflow Automated in 3 Days | SYSmoAI',
     description:
-      "Automate your single most painful workflow in 3 days for ৳3,750–7,500. SYSmoAI's AI Quick Win is Bangladesh's lowest-risk AI automation service — guaranteed or rebuilt free.",
+      "Automate your single most painful workflow in 3 days for ৳3,750–7,500. SYSmoAI's AI Quick Win is Bangladesh's lowest-risk AI automation service — acceptance-test driven delivery.",
     canonical: `${SITE_URL}/services/ai-quick-win`,
   },
 

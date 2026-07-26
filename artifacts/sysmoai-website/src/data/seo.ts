@@ -175,7 +175,7 @@ const staticRoutes: Record<string, RouteSeo> = {
     ...base('/services/ai-quick-win'),
     schemas: [
       ORG_SCHEMA,
-      serviceSchema('AI Quick Win', 'Automate your single most painful workflow in 3 days. Low-risk entry to AI automation guaranteed or rebuilt free.', `${SITE_URL}/services/ai-quick-win`, '3750–7500'),
+      serviceSchema('AI Quick Win', 'Automate your single most painful workflow in 3 days. Low-risk entry to AI automation with acceptance-test delivery.', `${SITE_URL}/services/ai-quick-win`, '3750–7500'),
       breadcrumbSchema([home, services, { name: 'AI Quick Win', url: `${SITE_URL}/services/ai-quick-win` }]),
     ],
   },

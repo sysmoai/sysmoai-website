@@ -7,11 +7,11 @@ export default function AIQuickWin() {
       metaTitle="AI Quick Win — 1 Workflow Automated in 3 Days | SYSmoAI"
       icon={Zap}
       title="AI Quick Win"
-      headline="Your #1 Workflow Problem. Automated. In 3 Days."
+      headline="Your Most Painful Workflow. Automated. In 3 Days."
       bdPrice="৳3,750–7,500"
       usdPrice="$50–$100"
-      guarantee="Guaranteed or rebuilt free"
-      directAnswer="The AI Quick Win is SYSmoAI's entry-level service that automates your single most painful workflow in 3 days for ৳3,750–৳7,500 ($50–$100). Perfect for first-time AI clients — guaranteed or rebuilt free. Covers lead capture, DM auto-reply, invoice generation, order tracking, report automation, or any repeatable manual process."
+      guarantee="Acceptance-test driven delivery"
+      directAnswer="The AI Quick Win is SYSmoAI's entry-level service that automates your single most painful workflow in 3 days for ৳3,750–৳7,500 ($50–$100). Perfect for first-time AI clients — acceptance-test driven delivery with a free revision if the goal isn't met. Covers lead capture, DM auto-reply, invoice generation, order tracking, report automation, or any repeatable manual process."
       whatItIs="The AI Quick Win is our entry-level, low-risk service designed to automate your single most painful manual workflow in 3 days or less. It's the fastest way to see real ROI from AI — without any upfront commitment to a larger project. Perfect for first-time AI clients who want proof before investing more."
       deliverables={[
         '1 workflow fully designed and automated',
@@ -41,7 +41,7 @@ export default function AIQuickWin() {
         { q: 'What kind of workflows can you automate?', a: 'Lead capture, WhatsApp auto-replies, invoice generation, report automation, data entry, email sequences, content repurposing, order tracking, and more. If it\'s manual and repeatable, we can automate it.' },
         { q: 'What if the automation doesn\'t work as expected?', a: 'We offer 1 free revision. If the stated goal isn\'t fully met after the revision, we rebuild it at no extra charge. Simple.' },
         { q: 'Do I need to provide anything?', a: 'Just your time for a 30-minute discovery call and access to the tools we\'ll automate (e.g., Gmail, Notion, WhatsApp). We handle everything else.' },
-        { q: 'How do I pay?', a: 'AI Quick Win is 100% advance payment. We accept bKash, Nagad, bank transfer, Wise, and Payoneer.' },
+        { q: 'How do I pay?', a: 'AI Quick Win is 100% advance payment. The exact payment method is confirmed at the proposal stage.' },
         { q: 'What if I want more workflows after this?', a: 'Many Quick Win clients upgrade to our AI Sprint — a full AI system build. The Quick Win is often the first step in a longer journey.' },
       ]}
       relatedServices={[
