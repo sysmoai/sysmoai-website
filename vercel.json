@@ -1,6 +1,6 @@
 {
-  "buildCommand": "pnpm run build",
+  "buildCommand": "echo skip-build",
   "outputDirectory": "artifacts/sysmoai-website",
   "framework": null,
-  "installCommand": "pnpm install"
+  "installCommand": "echo skip-install"
 }
