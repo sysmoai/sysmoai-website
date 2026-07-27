@@ -1,6 +1,6 @@
 {
-  "buildCommand": "echo skip-build",
-  "outputDirectory": "artifacts/sysmoai-website",
+  "buildCommand": "BASE_PATH=/ pnpm --filter @workspace/sysmoai-website run build",
+  "outputDirectory": "artifacts/sysmoai-website/dist/public",
   "framework": null,
-  "installCommand": "echo skip-install"
+  "installCommand": "pnpm install --no-frozen-lockfile"
 }
