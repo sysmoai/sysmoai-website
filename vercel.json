@@ -1,5 +1,6 @@
 {
   "buildCommand": "cd artifacts/sysmoai-website && pnpm install --no-frozen-lockfile && pnpm run build",
+  "installCommand": "echo 'Skipping root install'",
   "outputDirectory": "artifacts/sysmoai-website/dist/public",
   "framework": null,
   "regions": ["bom1"],
