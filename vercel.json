@@ -1,6 +1,6 @@
 {
-  "buildCommand": "BASE_PATH=/ pnpm --filter @workspace/sysmoai-website run build",
-  "outputDirectory": "artifacts/sysmoai-website/dist/public",
+  "buildCommand": "pnpm install && cd artifacts/sysmoai-website && pnpm run build",
+  "outputDirectory": "artifacts/sysmoai-website/dist",
   "framework": "vite",
   "regions": ["bom1"],
   "headers": [
