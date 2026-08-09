@@ -1,7 +1,7 @@
 {
-  "buildCommand": "pnpm install && cd artifacts/sysmoai-website && pnpm run build",
-  "outputDirectory": "artifacts/sysmoai-website/dist",
-  "framework": "vite",
+  "buildCommand": "cd artifacts/sysmoai-website && pnpm install --no-frozen-lockfile && pnpm run build",
+  "outputDirectory": "artifacts/sysmoai-website/dist/public",
+  "framework": null,
   "regions": ["bom1"],
   "headers": [
     {
