@@ -48,3 +48,9 @@ Thumbs.db
 .cache/
 .local/
 .vercel
+
+# P0 security (2026-08-14): never track secrets; retain example template only
+.env
+.env.local
+.env.*.local
+!.env.example
