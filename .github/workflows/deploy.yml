@@ -1,4 +1,4 @@
-name: Verify and Deploy SYSmoAI
+name: Verify SYSmoAI Build
 
 on:
   pull_request:
@@ -41,38 +41,6 @@ jobs:
       - name: Verify deploy output
         run: test -f artifacts/sysmoai-website/dist/public/index.html
 
-  deploy:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: verify
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
-          run_install: false
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build
-        run: pnpm run build
-
-      - name: Deploy built site to Cloudflare Pages
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          test -n "$CLOUDFLARE_API_TOKEN"
-          test -n "$CLOUDFLARE_ACCOUNT_ID"
-          pnpm dlx wrangler pages deploy artifacts/sysmoai-website/dist/public --project-name=sysmoai-website --commit-dirty=true
+# Production deployment is intentionally disabled here until the Cloudflare
+# project, account, token, output directory, and rollback procedure are verified.
+# Re-enable deployment as a separate gated job only after those checks pass.
