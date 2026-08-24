@@ -1,5 +1,3 @@
-import { blogPostsMeta } from './blogMeta';
-
 export const SITE_URL = 'https://sysmoai.com';
 export const OG_IMAGE = `${SITE_URL}/opengraph.jpg`;
 export const SITE_NAME = 'SYSmoAI';
@@ -39,8 +37,8 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
     canonical: `${SITE_URL}/contact`,
   },
   '/blog': {
-    title: 'SYSmoAI Blog | Practical AI Systems & Automation',
-    description: 'Notes and practical material on AI systems, automation, workflows, and implementation from SYSmoAI.',
+    title: 'SYSmoAI Insights | Editorial Review',
+    description: 'The SYSmoAI article library is under evidence review. Historical posts are temporarily unavailable while claims, examples, sources, dates, and commercial references are checked.',
     canonical: `${SITE_URL}/blog`,
     ogType: 'website',
   },
@@ -75,18 +73,6 @@ for (const route of historicalRoutes) {
   };
 }
 
-const blogRuntimeConfig: Record<string, RuntimeSeo> = Object.fromEntries(
-  blogPostsMeta.map((post) => [
-    `/blog/${post.slug}`,
-    {
-      title: `${post.title} | SYSmoAI`,
-      description: post.metaDescription,
-      canonical: `${SITE_URL}/blog/${post.slug}`,
-      ogType: 'article',
-    } satisfies RuntimeSeo,
-  ]),
-);
-
 const DEFAULT_RUNTIME_SEO: RuntimeSeo = {
   title: 'SYSmoAI | Practical AI Systems & Automation in Bangladesh',
   description: 'SYSmoAI is a Bangladesh-based AI systems and automation practice focused on practical workflows and scoped implementation.',
@@ -95,12 +81,13 @@ const DEFAULT_RUNTIME_SEO: RuntimeSeo = {
 };
 
 export function getRuntimeSeo(location: string): RuntimeSeo {
-  if (location.startsWith('/answers/')) {
+  if (location.startsWith('/blog/') || location.startsWith('/answers/')) {
     return {
-      title: 'SYSmoAI Blog | Practical AI Systems & Automation',
-      description: 'Historical answer content has been consolidated into the current SYSmoAI content and services architecture.',
+      title: 'SYSmoAI Insights | Editorial Review',
+      description: 'Historical SYSmoAI content is temporarily unavailable while it is reviewed against the current evidence and claim standard.',
       canonical: `${SITE_URL}/blog`,
+      ogType: 'website',
     };
   }
-  return runtimeSeoConfig[location] ?? blogRuntimeConfig[location] ?? DEFAULT_RUNTIME_SEO;
+  return runtimeSeoConfig[location] ?? DEFAULT_RUNTIME_SEO;
 }
