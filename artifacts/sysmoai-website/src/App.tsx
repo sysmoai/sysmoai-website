@@ -18,7 +18,6 @@ const Services = lazy(() => import("@/pages/Services"));
 const About = lazy(() => import("@/pages/About"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const Blog = lazy(() => import("@/pages/Blog"));
-const BlogPost = lazy(() => import("@/pages/BlogPost"));
 const PrivacyPolicy = lazy(() => import("@/pages/legal/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("@/pages/legal/TermsOfService"));
 const RefundPolicy = lazy(() => import("@/pages/legal/RefundPolicy"));
@@ -56,9 +55,9 @@ function Router() {
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
             <Route path="/blog" component={Blog} />
-            <Route path="/blog/:slug" component={BlogPost} />
+            <Route path="/blog/:slug"><RedirectTo to="/blog" /></Route>
 
-            {/* Historical commercial pages are quarantined until each offer and claim is re-verified. */}
+            {/* Historical commercial/content routes are quarantined until each claim is re-verified. */}
             <Route path="/pricing"><RedirectTo to="/services" /></Route>
             <Route path="/proof"><RedirectTo to="/services" /></Route>
             <Route path="/results"><RedirectTo to="/services" /></Route>
