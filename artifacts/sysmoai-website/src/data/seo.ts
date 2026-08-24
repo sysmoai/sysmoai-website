@@ -1,4 +1,3 @@
-import { blogPosts } from './blogPosts';
 import { runtimeSeoConfig, SITE_URL, OG_IMAGE } from './seoRuntime';
 
 export { SITE_URL, OG_IMAGE };
@@ -108,7 +107,7 @@ const staticRoutes: Record<string, RouteSeo> = {
   },
   '/blog': {
     ...base('/blog'),
-    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'Blog', url: `${SITE_URL}/blog` }])],
+    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'Insights', url: `${SITE_URL}/blog` }])],
   },
   '/privacy-policy': { ...base('/privacy-policy'), schemas: [ORG_SCHEMA] },
   '/terms-of-service': { ...base('/terms-of-service'), schemas: [ORG_SCHEMA] },
@@ -116,7 +115,7 @@ const staticRoutes: Record<string, RouteSeo> = {
 };
 
 // Keep historical URLs available to the static generator only so they can carry
-// safe canonical metadata while the SPA redirects visitors to the current pages.
+// safe canonical metadata while the SPA redirects visitors to current pages.
 for (const route of [
   '/pricing', '/proof', '/results', '/faq', '/free-ai-audit', '/for/f-commerce',
   '/services/ai-quick-win', '/services/ai-sprint', '/services/ai-retainer',
@@ -125,35 +124,8 @@ for (const route of [
   staticRoutes[route] = { ...base(route), schemas: [ORG_SCHEMA] };
 }
 
-const blogRoutes: Record<string, RouteSeo> = Object.fromEntries(
-  blogPosts.map((post) => [
-    `/blog/${post.slug}`,
-    {
-      title: `${post.title} | SYSmoAI`,
-      description: post.metaDescription,
-      canonical: `${SITE_URL}/blog/${post.slug}`,
-      ogType: 'article',
-      schemas: [
-        ORG_SCHEMA,
-        {
-          '@context': 'https://schema.org',
-          '@type': 'Article',
-          headline: post.title,
-          description: post.metaDescription,
-          url: `${SITE_URL}/blog/${post.slug}`,
-          author: { '@type': 'Person', name: 'Emon Hossain', url: 'https://emonhossain.pro' },
-          publisher: { '@type': 'Organization', name: 'SYSmoAI', url: SITE_URL },
-          ...(post.publishDate ? { datePublished: post.publishDate } : {}),
-        },
-        breadcrumbSchema([home, { name: 'Blog', url: `${SITE_URL}/blog` }, { name: post.title, url: `${SITE_URL}/blog/${post.slug}` }]),
-      ],
-    } satisfies RouteSeo,
-  ]),
-);
-
 export const seoConfig: Record<string, RouteSeo> = {
   ...staticRoutes,
-  ...blogRoutes,
 };
 
 const DEFAULT_SEO: RouteSeo = {
