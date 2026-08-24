@@ -1,10 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'wouter';
-import { ArrowRight, MessageCircle, Users, BookOpen, Layout, Bot, Settings, Building, Globe } from 'lucide-react';
-import { WA_URLS } from '@/lib/whatsapp';
+import { ArrowRight, Bot, Users, BookOpen, Layout, Settings, Building, Globe } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
-import { DirectAnswer } from '@/components/DirectAnswer';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -15,59 +13,45 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
 const engagements = [
   {
     icon: Bot,
-    title: 'AI Agent Development',
-    desc: 'Custom AI agents trained on your business — WhatsApp, web, or internal. For businesses that need beyond-sprint complexity.',
-    bd: '৳50,000–2,00,000',
-    usd: '$2,500–$15,000',
-    tag: 'Custom build',
+    title: 'AI Systems & Agent Workflows',
+    desc: 'Bounded AI-assisted workflows or agent-style systems designed around an agreed business process, review points and acceptance criteria.',
+    tag: 'By scope',
   },
   {
     icon: Layout,
-    title: 'Notion OS Build',
-    desc: 'Your entire business in one Notion workspace — databases, dashboards, automations, and team SOPs.',
-    bd: '৳15,000–50,000',
-    usd: '$800–$5,000',
-    tag: 'One-time',
+    title: 'Notion & Operating Systems',
+    desc: 'Structured workspaces, databases, dashboards, SOPs and handoffs designed for the actual team and operating workflow.',
+    tag: 'By scope',
   },
   {
     icon: Settings,
-    title: 'n8n Automation',
-    desc: 'Per-workflow automation connecting any apps you use — built and deployed with full error handling.',
-    bd: '৳2,000–10,000/workflow',
-    usd: '$50–$300/workflow',
-    tag: 'Per workflow',
+    title: 'Workflow Automation',
+    desc: 'Low-code automation connecting selected tools and processes, with error handling and ownership requirements defined for the engagement.',
+    tag: 'By scope',
   },
   {
     icon: Users,
-    title: '1:1 AI Coaching',
-    desc: 'Personalised 60-minute session with Emon. Walk away with a specific AI action plan for your situation.',
-    bd: '৳2,500/session',
-    usd: '$30/session',
-    tag: 'Individual',
+    title: 'Advisory & Coaching',
+    desc: 'Focused sessions for founders or operators who need help evaluating an AI workflow, automation decision or implementation plan.',
+    tag: 'By inquiry',
   },
   {
     icon: BookOpen,
-    title: 'Group AI Workshop',
-    desc: 'Half-day hands-on workshop for teams. Custom curriculum for your industry. Min 10 participants.',
-    bd: '৳500/person',
-    usd: '$15/person',
-    tag: 'Teams',
+    title: 'Team Workshops',
+    desc: 'Practical workshops on AI adoption, workflow mapping and responsible automation, customized to the audience and objectives.',
+    tag: 'By inquiry',
   },
   {
     icon: Building,
-    title: 'Corporate AI Training',
-    desc: 'Enterprise-wide AI adoption — audit, training, top 3 automations implemented, 90-day roadmap.',
-    bd: '৳50,000–2,00,000',
-    usd: '$1,500–$8,000',
-    tag: 'Enterprise',
+    title: 'Organizational AI Adoption',
+    desc: 'Discovery and implementation support for teams that need a structured approach to AI use cases, controls, workflow ownership and rollout.',
+    tag: 'By scope',
   },
   {
     icon: Globe,
-    title: 'International Clients',
-    desc: 'World-class AI systems at Dhaka rates — typically 60–80% less than US/EU agencies. USD pricing; payment method confirmed at proposal stage.',
-    bd: null,
-    usd: 'Custom USD',
-    tag: 'Worldwide',
+    title: 'International Engagements',
+    desc: 'Remote projects can be considered when the problem, delivery model, communication requirements and commercial terms are a good fit.',
+    tag: 'Remote',
   },
 ];
 
@@ -87,27 +71,11 @@ export default function OtherEngagements() {
 
   return (
     <div className="flex flex-col w-full" style={{ background: bg1 }}>
-
-      {/* Direct Answer — GEO */}
-      <section className="pt-10 pb-0" style={{ background: bg1 }}>
-        <div className="max-w-4xl mx-auto px-4">
-          <DirectAnswer bangla="SYSmoAI-এর অন্যান্য সেবা (ইনকোয়ারি ভিত্তিক): AI কোচিং ৳২,৫০০/সেশন, গ্রুপ ওয়ার্কশপ ৳৫০০/জন, Notion OS ৳১৫,০০০–৳৫০,০০০, AI এজেন্ট ৳৫০,০০০–৳২,০০,০০০, n8n অটোমেশন, কর্পোরেট ট্রেনিং।">
-            SYSmoAI's additional services (available by inquiry): 1:1 AI Coaching ৳2,500/session ($30), Group AI Workshop ৳500/person ($8), Notion OS Build ৳15,000–৳50,000 ($800–$5,000), AI Agent Development ৳50,000–৳2,00,000 ($2,500–$15,000), n8n Automation per workflow, Corporate Training ৳50,000–৳2,00,000 ($1,500–$8,000). All engagements by inquiry — contact via WhatsApp or book a free audit.
-          </DirectAnswer>
-        </div>
-      </section>
-
-      {/* Hero */}
       <section className="relative py-20 md:py-24" style={{ background: isDark ? '#0A0B0F' : 'linear-gradient(180deg, #FFFFFF 0%, #F0F6FF 100%)' }}>
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-blue-600 opacity-[0.07] blur-[140px] rounded-full" />
-        </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            <Link href="/services" className="inline-flex items-center gap-1.5 text-sm mb-8 transition-colors hover:text-blue-500" style={{ color: body }}>
-              ← All Services
-            </Link>
-          </motion.div>
+          <Link href="/services" className="inline-flex items-center gap-1.5 text-sm mb-8 transition-colors hover:text-blue-500" style={{ color: body }}>
+            ← All Services
+          </Link>
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-5"
               style={{ background: isDark ? 'rgba(37,99,235,0.12)' : '#EFF6FF', border: `1px solid ${isDark ? 'rgba(37,99,235,0.25)' : '#BFDBFE'}`, color: isDark ? '#60A5FA' : '#1D4ED8' }}>
@@ -117,38 +85,29 @@ export default function OtherEngagements() {
               Other Engagements
             </h1>
             <p className="text-lg max-w-2xl mb-8" style={{ color: body }}>
-              Beyond our F-Commerce AI Sprint, we take select engagements for agent development, corporate training, international clients, and specialised automation work. These are by inquiry — reach out on WhatsApp to discuss your situation.
+              Some projects do not fit a standard service page. For those cases, SYSmoAI can review the workflow, expected outcome, delivery constraints and evidence requirements before confirming whether there is a fit.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/free-ai-audit"
+              <Link href="/contact"
                 className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3.5 rounded-xl font-semibold text-sm transition-all">
-                Book Free Audit First
+                Discuss a Project
                 <ArrowRight size={15} />
               </Link>
-              <a href={WA_URLS.general} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[#25D366] hover:text-[#1ead57] border border-[#25D366]/30 hover:border-[#25D366] px-6 py-3.5 rounded-xl font-semibold text-sm transition-all">
-                <MessageCircle size={15} />
-                Enquire on WhatsApp
-              </a>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Anchor reminder */}
-      <section className="py-10 border-b" style={{ background: isDark ? 'rgba(37,99,235,0.06)' : '#EFF6FF', borderColor: isDark ? 'rgba(37,99,235,0.15)' : '#BFDBFE' }}>
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <p className="text-sm font-medium" style={{ color: isDark ? '#93C5FD' : '#1E40AF' }}>
-            💡 Most F-Commerce sellers start with the{' '}
-            <Link href="/services/ai-sprint" className="font-bold underline underline-offset-2 hover:text-blue-500">
-              F-Commerce AI Sprint (৳50,000)
-            </Link>
-            {' '}— 14 days to a fully automated operation. Looking for something else? Read on.
-          </p>
+      <section className="py-12" style={{ background: bg2 }}>
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="rounded-2xl p-5" style={{ background: cardBg, border: `1px solid ${cardBorder}` }}>
+            <p className="text-sm leading-relaxed" style={{ color: body }}>
+              Pricing, delivery timelines, project scope, performance expectations and support terms are confirmed in the actual proposal or agreement. Older public price cards or result guarantees should not be treated as current offers unless they are explicitly re-approved and evidence-backed.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Engagements */}
       <section className="py-20" style={{ background: bg1 }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
@@ -170,35 +129,27 @@ export default function OtherEngagements() {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-base font-bold mb-2" style={{ color: heading }}>{e.title}</h3>
-                  <p className="text-sm leading-relaxed mb-3" style={{ color: body }}>{e.desc}</p>
-                  <div className="flex items-center gap-2 text-sm">
-                    {e.bd && <span className="font-semibold text-blue-400">{e.bd}</span>}
-                    {e.bd && <span style={{ color: isDark ? '#334155' : '#CBD5E1' }}>·</span>}
-                    <span style={{ color: isDark ? '#64748B' : '#94A3B8' }}>{e.usd}</span>
-                  </div>
+                  <p className="text-sm leading-relaxed" style={{ color: body }}>{e.desc}</p>
                 </div>
-                <a href={WA_URLS.general} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#25D366] hover:text-[#1ead57] transition-colors group">
-                  <MessageCircle size={13} />
-                  Enquire on WhatsApp
-                </a>
+                <Link href="/contact" className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-500 hover:text-blue-400 transition-colors group">
+                  Discuss scope <ArrowRight size={13} />
+                </Link>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Final CTA */}
       <section className="py-16" style={{ background: bg2 }}>
         <div className="max-w-3xl mx-auto px-4 text-center">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
-            <h2 className="text-2xl font-bold mb-3" style={{ color: heading }}>Not sure which fits you?</h2>
+            <h2 className="text-2xl font-bold mb-3" style={{ color: heading }}>Have a workflow that needs review?</h2>
             <p className="mb-8" style={{ color: body }}>
-              Book a free 30-minute audit. Emon reviews your situation and recommends the right engagement — no obligation.
+              Send the current process, the intended outcome, the key constraints and any deadline. Fit, scope and commercial terms can then be evaluated without promising a result before the work is understood.
             </p>
-            <Link href="/free-ai-audit"
+            <Link href="/contact"
               className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-base transition-all">
-              Book Free AI Audit
+              Contact SYSmoAI
               <ArrowRight size={16} />
             </Link>
           </motion.div>
