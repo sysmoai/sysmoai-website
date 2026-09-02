@@ -3,10 +3,9 @@ import { MessageCircle, Mail, MapPin } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { WA_URLS } from '../lib/whatsapp';
+import { WA_URLS, WA_NUMBER } from '../lib/whatsapp';
 import { EMAIL } from '@/lib/config';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useCreateContactSubmission } from '@workspace/api-client-react';
 
 const schema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -19,10 +18,8 @@ type FormData = z.infer<typeof schema>;
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
   const { isDark } = useTheme();
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>({ resolver: zodResolver(schema) });
-  const createSubmission = useCreateContactSubmission();
 
   const bg1 = isDark ? '#0A0B0F' : '#FFFFFF';
   const bg2 = isDark ? '#0D0F14' : '#F8FAFC';
@@ -38,20 +35,16 @@ export default function Contact() {
   const onSubmit = async (data: FormData) => {
     const hp = document.querySelector<HTMLInputElement>('form input[name="website"]');
     if (hp?.value) return;
-    setSubmitError(null);
-    try {
-      await createSubmission.mutateAsync({
-        data: {
-          name: data.name,
-          contact: data.contact,
-          message: data.message,
-          service: data.service && data.service.length > 0 ? data.service : null,
-        },
-      });
-      setSubmitted(true);
-    } catch (err) {
-      setSubmitError(err instanceof Error ? err.message : 'Something went wrong. Please try again or use email/WhatsApp.');
-    }
+    const lines = [
+      `Name: ${data.name}`,
+      `Contact: ${data.contact}`,
+      data.service ? `Interest: ${data.service}` : null,
+      '',
+      data.message,
+    ].filter((line): line is string => line !== null);
+    const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
+    setSubmitted(true);
   };
 
   return (
@@ -95,8 +88,8 @@ export default function Contact() {
           <div>
             {submitted ? (
               <div className="rounded-2xl p-8" style={{ background: bg1, border: `1px solid ${border}` }}>
-                <h2 className="text-2xl font-bold mb-3" style={{ color: heading }}>Message received.</h2>
-                <p style={{ color: body }}>Thank you. The inquiry has been recorded for review. Any next step, scope, timeline, or commercial term will be confirmed separately.</p>
+                <h2 className="text-2xl font-bold mb-3" style={{ color: heading }}>Inquiry ready for WhatsApp.</h2>
+                <p style={{ color: body }}>Your message has been prepared in WhatsApp. Review it there, press send, and SYSmoAI will respond on the channel you prefer. If WhatsApp did not open, use the direct WhatsApp link or email address on the left.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 rounded-2xl p-7" style={{ background: bg1, border: `1px solid ${border}` }}>
@@ -119,9 +112,9 @@ export default function Contact() {
                   {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
                 </div>
                 <button type="submit" disabled={isSubmitting} className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-semibold px-5 py-3.5 rounded-xl transition-colors">
-                  {isSubmitting ? 'Sending…' : 'Send inquiry'}
+                  {isSubmitting ? 'Opening WhatsApp…' : 'Send inquiry via WhatsApp'}
                 </button>
-                {submitError && <p className="text-red-500 text-sm">{submitError}</p>}
+                <p className="text-xs" style={{ color: body }}>Submitting opens WhatsApp with your message pre-filled. Nothing is stored on this website.</p>
               </form>
             )}
           </div>

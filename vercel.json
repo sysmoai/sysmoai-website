@@ -4,6 +4,14 @@
   "outputDirectory": "artifacts/sysmoai-website/dist/public",
   "framework": null,
   "regions": ["bom1"],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.sysmoai.com" }],
+      "destination": "https://sysmoai.com/$1",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
