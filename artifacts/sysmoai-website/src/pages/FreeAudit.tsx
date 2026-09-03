@@ -5,9 +5,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { CheckCircle2 } from 'lucide-react';
-import { WA_URLS } from '../lib/whatsapp';
+import { WA_URLS, WA_NUMBER } from '../lib/whatsapp';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useCreateAuditRequest } from '@workspace/api-client-react';
 import { SprintSlots } from '@/components/SprintSlots';
 import { DirectAnswer } from '@/components/DirectAnswer';
 import { captureUtmFromLocation, readUtmSnapshot } from '@/lib/utm';
@@ -106,14 +105,9 @@ export default function FreeAudit() {
   const { isDark } = useTheme();
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const createAudit = useCreateAuditRequest();
 
   React.useEffect(() => {
     document.title = 'Free AI Audit — 30-Minute Business Review | SYSmoAI';
-    // Capture utm_* params from the URL on landing so we can attribute the
-    // signup to the scheduled_posts row that drove the click. Persists to
-    // sessionStorage so the snapshot survives if the visitor scrolls,
-    // re-renders, or briefly navigates away before submitting.
     captureUtmFromLocation();
   }, []);
 
@@ -128,34 +122,26 @@ export default function FreeAudit() {
 
   const onSubmit = async (data: AuditFormData) => {
     setSubmitError(null);
-    try {
-      const utm = readUtmSnapshot();
-      await createAudit.mutateAsync({
-        data: {
-          name: data.name,
-          email: data.email,
-          whatsapp: data.whatsapp || null,
-          biggestChallenge: data.biggestChallenge,
-          businessType: data.businessType,
-          monthlyOrders: data.monthlyOrders,
-          dailyDmVolume: data.dailyDmVolume,
-          currentTools: data.currentTools,
-          usesBkashNagad: data.usesBkashNagad,
-          preferredCurrency: data.preferredCurrency,
-          utmSource: utm.utmSource,
-          utmMedium: utm.utmMedium,
-          utmCampaign: utm.utmCampaign,
-          utmContent: utm.utmContent,
-          utmTerm: utm.utmTerm,
-          referrer: utm.referrer,
-        },
-      });
-      setSubmitted(true);
-    } catch (err) {
-      setSubmitError(
-        err instanceof Error ? err.message : 'Something went wrong. Please try again or message us on WhatsApp.'
-      );
+    const utm = readUtmSnapshot();
+    const lines = [
+      `Name: ${data.name}`,
+      `Email: ${data.email}`,
+      data.whatsapp ? `WhatsApp: ${data.whatsapp}` : null,
+      `Business type: ${data.businessType}`,
+      `Monthly orders: ${data.monthlyOrders}`,
+      `Daily DMs: ${data.dailyDmVolume}`,
+      `Current tools: ${data.currentTools}`,
+      `bKash/Nagad: ${data.usesBkashNagad}`,
+      `Currency: ${data.preferredCurrency}`,
+      '',
+      `Biggest challenge: ${data.biggestChallenge}`,
+    ].filter((line): line is string => line !== null);
+    if (utm.utmSource || utm.utmCampaign) {
+      lines.push('', `Source: ${utm.utmSource || 'direct'}${utm.utmCampaign ? ' · ' + utm.utmCampaign : ''}`);
     }
+    const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
+    setSubmitted(true);
   };
 
   const inputBg = isDark ? 'rgba(255,255,255,0.05)' : '#FFFFFF';
@@ -326,11 +312,11 @@ export default function FreeAudit() {
               style={{ background: isDark ? 'rgba(34,197,94,0.08)' : 'rgba(240,253,244,1)', border: `1px solid ${isDark ? 'rgba(34,197,94,0.2)' : '#BBF7D0'}` }}
             >
               <div className="text-6xl mb-5">✅</div>
-              <h3 className="text-2xl font-bold mb-3" style={{ color: isDark ? '#86EFAC' : '#14532D' }}>Audit Request Received!</h3>
+              <h3 className="text-2xl font-bold mb-3" style={{ color: isDark ? '#86EFAC' : '#14532D' }}>Audit request ready for WhatsApp.</h3>
               <p className="mb-2 max-w-md mx-auto" style={{ color: isDark ? '#86EFAC' : '#166534' }}>
-                Emon will personally review your request and reach out within <strong>2 hours</strong> on working days to schedule your free 30-minute audit.
+                Your request has been prepared in WhatsApp. Review it there, press send, and Emon will reach out to schedule your free 30-minute audit.
               </p>
-              <p className="text-sm mb-6" style={{ color: isDark ? '#6EE7B7' : '#15803D' }}>For the fastest response, continue on WhatsApp:</p>
+              <p className="text-sm mb-6" style={{ color: isDark ? '#6EE7B7' : '#15803D' }}>If WhatsApp did not open, use the button below:</p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <a href={WA_URLS.audit} target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3.5 rounded-xl transition-all">

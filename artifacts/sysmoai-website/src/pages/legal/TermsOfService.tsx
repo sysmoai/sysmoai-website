@@ -1,20 +1,65 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+
+const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
 
 export default function TermsOfService() {
   React.useEffect(() => { document.title = 'Terms of Service | SYSmoAI'; }, []);
   return (
-    <div className="bg-white min-h-screen text-slate-700">
+    <div className="bg-white min-h-screen">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 md:py-24">
-        <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">Terms of Service</h1>
-        <p className="text-slate-500 mb-10">Last updated: August 24, 2026</p>
-        <div className="space-y-8 leading-relaxed">
-          <section><h2 className="text-xl font-bold text-slate-900 mb-3">Website use</h2><p>This website describes SYSmoAI's current capability areas and provides contact channels. Website copy is not itself a project proposal, guarantee, quotation, or commitment to deliver a specific outcome.</p></section>
-          <section><h2 className="text-xl font-bold text-slate-900 mb-3">Project agreement</h2><p>For any paid engagement, the written scope or proposal is the commercial source of truth. It should define deliverables, exclusions, dependencies, access requirements, timeline, payment terms, acceptance criteria, support period, and any cancellation or refund terms that apply to that engagement.</p></section>
-          <section><h2 className="text-xl font-bold text-slate-900 mb-3">Changes and third-party systems</h2><p>Scope changes require written agreement. Third-party tools, APIs, platforms, subscriptions, and infrastructure remain subject to their own availability, pricing, policies, limits, and terms.</p></section>
-          <section><h2 className="text-xl font-bold text-slate-900 mb-3">Business outcomes</h2><p>Automation and AI systems can support operations, but business, revenue, cost, or productivity outcomes depend on factors outside the implementation itself. Any project-specific target or acceptance test must be stated in the written scope.</p></section>
-          <section><h2 className="text-xl font-bold text-slate-900 mb-3">Intellectual property and confidentiality</h2><p>Ownership, licensing, credentials, confidentiality, portfolio use, and data-handling requirements should be stated in the project agreement where relevant. Third-party intellectual property remains governed by the applicable third-party terms.</p></section>
-          <section><h2 className="text-xl font-bold text-slate-900 mb-3">Contact</h2><p>Questions about these website terms: <a href="mailto:hello@sysmoai.com" className="text-blue-600 hover:underline">hello@sysmoai.com</a>.</p></section>
-        </div>
+        <motion.div initial="hidden" animate="show" variants={fadeUp}>
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">Terms of Service</h1>
+          <p className="text-slate-500 mb-10">Last updated: April 14, 2026</p>
+
+          <div className="prose prose-slate max-w-none space-y-8 text-slate-700 leading-relaxed">
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-3">1. Services</h2>
+              <p>SYSmoAI provides AI consulting, automation development, Notion OS builds, AI agent development, training, and related services. The specific scope, deliverables, and timeline for each engagement are agreed upon in writing (WhatsApp, email, or formal proposal) before work begins.</p>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-3">2. Payment terms</h2>
+              <ul className="list-disc pl-5 space-y-2">
+                <li><strong>AI Quick Win:</strong> 100% payment required before work begins.</li>
+                <li><strong>AI Sprint & other projects:</strong> 50% upfront, 50% upon delivery and client approval.</li>
+                <li><strong>AI Retainer:</strong> Monthly billing. Due at the start of each month.</li>
+                <li>Accepted payment methods are confirmed at the proposal stage. All payments are processed through official channels only.</li>
+                <li>Work will not commence until the initial payment is confirmed.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-3">3. Scope & revisions</h2>
+              <p>All projects include one free revision cycle. Additional revisions or scope changes may incur additional charges, which will be communicated and agreed upon before implementation. Changes to agreed scope that require significant additional work will be treated as a new project or add-on.</p>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-3">4. Delivery & timelines</h2>
+              <p>Delivery timelines are estimates based on agreed scope and our current workload. Delays caused by client non-responsiveness (missing approvals, not providing required information) do not affect our delivery obligation timeline. We will communicate any delays proactively.</p>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-3">5. Intellectual property</h2>
+              <p>Upon full payment, clients own the deliverables created for their project. SYSmoAI retains the right to use project work in portfolios and case studies (anonymized where requested). Third-party tools and platforms used (Notion, n8n, etc.) are subject to their own terms of service.</p>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-3">6. Limitation of liability</h2>
+              <p>SYSmoAI is not liable for business outcomes, revenue changes, or consequential damages resulting from the use or non-use of systems we build. Our liability is limited to the amount paid for the specific service in question.</p>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-3">7. Governing law</h2>
+              <p>These terms are governed by the laws of Bangladesh. Any disputes will first be addressed through good-faith negotiation. If unresolved, they will be subject to the jurisdiction of courts in Dhaka, Bangladesh.</p>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-bold text-slate-900 mb-3">8. Contact</h2>
+              <p>Questions about these terms: <a href="mailto:hello@sysmoai.com" className="text-blue-600 hover:underline">hello@sysmoai.com</a></p>
+            </section>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
