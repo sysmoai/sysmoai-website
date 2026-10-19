@@ -190,7 +190,7 @@ export default function FreeAudit() {
       <section className="pt-10 pb-0" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
         <div className="max-w-4xl mx-auto px-4">
           <DirectAnswer bangla="SYSmoAI-এর ফ্রি AI অডিট হলো একটি ৩০ মিনিটের সেশন — আপনার ব্যবসার সবচেয়ে বড় ব্যথার জায়গা চিহ্নিত করা, AI সমাধান প্রস্তাব এবং একটি লিখিত অ্যাকশন প্ল্যান। সম্পূর্ণ বিনামূল্যে।">
-            SYSmoAI's free 30-minute AI audit maps your biggest manual bottleneck, identifies your highest-ROI automation opportunity, and gives you a written action plan — completely free with no commitment. Book at sysmoai.com/free-ai-audit. Emon Hossain (top-5% global prompt engineer) conducts every audit personally. Available for Bangladesh and international clients.
+            SYSmoAI's free 30-minute AI audit maps your biggest manual bottleneck, identifies one automation opportunity worth testing, and gives you a written action plan — free, with no commitment. Request it at sysmoai.com/free-ai-audit. Founder Emon Hossain conducts every audit personally. Available for Bangladesh and international clients.
           </DirectAnswer>
         </div>
       </section>
@@ -233,7 +233,7 @@ export default function FreeAudit() {
             </a>
             <div className="flex items-center justify-center gap-2 mt-4">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-sm" style={{ color: isDark ? '#4ADE80' : '#15803D' }}>Usually responds within 2 hours</span>
+              <span className="text-sm" style={{ color: isDark ? '#4ADE80' : '#15803D' }}>We aim to reply within one business day</span>
             </div>
           </motion.div>
         </div>
@@ -301,7 +301,7 @@ export default function FreeAudit() {
               Request Your Free Audit
             </h2>
             <p style={{ color: bodyColor }}>
-              Fill in the form below and Emon will personally reach out to schedule your 30-minute call.
+              Fill in the form below. It opens WhatsApp with your details pre-filled — nothing is stored on this website. Press send in WhatsApp and Emon will reply to schedule your 30-minute call.
             </p>
           </motion.div>
 

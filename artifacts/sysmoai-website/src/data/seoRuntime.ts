@@ -89,14 +89,14 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/proof': {
     title: 'Client Results & Case Studies | SYSmoAI Bangladesh AI Consulting',
     description:
-      "Real results from real clients: 15,000 hours saved, 3x revenue growth, 90-day AI transformations. Browse SYSmoAI's verified case studies and client success stories.",
+      "SYSmoAI proof standard: verified client results are published only with client consent and measured numbers. Until then this page shows example scopes, not client results.",
     canonical: `${SITE_URL}/proof`,
   },
 
   '/results': {
     title: 'Client Results & Case Studies | SYSmoAI Bangladesh AI Consulting',
     description:
-      "Real results from real clients: 15,000 hours saved, 3x revenue growth, 90-day AI transformations. Browse SYSmoAI's verified case studies and client success stories.",
+      "SYSmoAI proof standard: verified client results are published only with client consent and measured numbers. Until then this page shows example scopes, not client results.",
     canonical: `${SITE_URL}/proof`,
   },
 
