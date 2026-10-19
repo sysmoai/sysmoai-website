@@ -607,7 +607,7 @@ export default function Home() {
           >
             Bangladesh's F-Commerce Operating System. We build Bangla DM auto-reply agents,
             order trackers, and bKash workflows for Facebook sellers in Dhaka —
-            fully deployed in 14 days for ৳50,000.
+            target 14-day build for ৳50,000, scope agreed in writing first.
           </motion.p>
 
           {/* CTAs */}
@@ -651,7 +651,7 @@ export default function Home() {
             className="text-sm mb-10"
             style={{ color: isDark ? '#475569' : '#94A3B8' }}
           >
-            Free 30-min audit · No commitment · Usually responds within 2 hours
+            Free 30-min audit · No commitment · We aim to reply within one business day
           </motion.p>
 
           {/* Trust signals */}
@@ -664,7 +664,7 @@ export default function Home() {
             {[
               { label: 'Bangla + English DM automation', icon: Sparkles },
               { label: 'bKash / Nagad ready workflows', icon: TrendingUp },
-              { label: 'Results-first guarantee', icon: Users },
+              { label: 'Owner approves before anything is sent', icon: Users },
             ].map(({ label, icon: Icon }, i) => (
               <span key={i} className="flex items-center gap-2 text-sm" style={{ color: isDark ? '#64748B' : '#94A3B8' }}>
                 <Icon size={13} className="text-blue-500 shrink-0" />
@@ -751,21 +751,21 @@ export default function Home() {
             className="text-center mb-12"
           >
             <p className="text-blue-500 text-xs font-bold uppercase tracking-[0.2em] mb-3">
-              F-Commerce sellers · Real results
+              F-Commerce · Example scopes
             </p>
             <h2
               className="text-3xl md:text-4xl font-bold tracking-tight mb-4"
               style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}
             >
-              From drowning in DMs to zero missed orders.
+              Built so no DM gets silently missed.
             </h2>
             <p
               className="text-base max-w-xl mx-auto"
               style={{ color: isDark ? '#94A3B8' : '#475569' }}
             >
-              Representative outcomes from F-Commerce sellers we've worked with across
-              Dhaka, Chattogram, and Sylhet. Verified case studies with full names are
-              published as sellers approve them.
+              Example scopes for F-Commerce sellers — not client results. Verified
+              case studies will be published only with seller consent and measured
+              numbers.
             </p>
           </motion.div>
 
@@ -835,7 +835,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 text-sm font-semibold transition-colors"
               style={{ color: isDark ? '#60A5FA' : '#2563EB' }}
             >
-              See all client results
+              See our proof standard
               <span aria-hidden>→</span>
             </Link>
           </motion.div>
@@ -1004,7 +1004,7 @@ export default function Home() {
               {/* Floating success stats */}
               <div className="absolute top-5 right-5 bg-emerald-950/85 border border-emerald-800/50 backdrop-blur-md px-4 py-2.5 rounded-xl">
                 <div className="text-emerald-400 text-xs font-bold tracking-wider mb-0.5">WITH SYSMOAI</div>
-                <div className="text-white text-sm font-bold">4-hour workdays</div>
+                <div className="text-white text-sm font-bold">Owner-approved replies</div>
               </div>
               <motion.div
                 animate={{ y: [0, -6, 0] }}
@@ -1025,7 +1025,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { target: 500,  suffix: '+',  prefix: '',  label: 'Orders Automated per Day'   },
+              { target: 2,    suffix: '',   prefix: '',  label: 'Languages: Bangla + English' },
               { target: 14,   suffix: '',   prefix: '',  label: 'Days to Full Automation'    },
               { target: 3,    suffix: '+',  prefix: '',  label: 'Years Building AI Systems'  },
               { target: 100,  suffix: '%',  prefix: '',  label: 'F-Commerce Focused'         },
@@ -1088,7 +1088,7 @@ export default function Home() {
               style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%)' }}>
               <div>
                 <div className="text-white font-bold text-sm">This is what your business looks like with SYSmoAI</div>
-                <div className="text-white/60 text-xs mt-0.5">Automated. Calm. Growing.</div>
+                <div className="text-white/60 text-xs mt-0.5">Illustrative image, not a client result.</div>
               </div>
               <Link href="/contact"
                 className="shrink-0 px-4 py-2 rounded-xl text-xs font-bold text-white transition-opacity hover:opacity-90"
@@ -1102,7 +1102,7 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }} variants={stagger}
             className="grid grid-cols-3 gap-6 mt-10">
             {[
-              { stat: '< 3 sec', label: 'WhatsApp reply time', color: '#10B981' },
+              { stat: 'Draft', label: 'Reply prepared for owner review', color: '#10B981' },
               { stat: '24/7',    label: 'Always-on automation', color: '#3B82F6' },
               { stat: '৳0',      label: 'Human labor for routine tasks', color: '#8B5CF6' },
             ].map((item, i) => (
@@ -1241,7 +1241,7 @@ export default function Home() {
                 price: showUSD ? '$600' : '৳50,000',
                 highlights: [
                   'Complete AI OS — Notion + n8n + WhatsApp',
-                  '20+ hours/week saved from day one',
+                  'Time-saving goal agreed and measured in writing',
                   'Team training & adoption support',
                   '90-day scaling & optimization',
                 ],
@@ -1507,12 +1507,12 @@ export default function Home() {
       <section className="py-20 md:py-28 relative overflow-hidden" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mb-12">
-            <p className="text-amber-500 text-xs font-bold uppercase tracking-[0.2em] mb-3">Client Results</p>
+            <p className="text-amber-500 text-xs font-bold uppercase tracking-[0.2em] mb-3">Proof Standard</p>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}>
-              Real results. Verified numbers.
+              Verified, or not shown.
             </h2>
             <p className="mt-4 text-base" style={{ color: isDark ? '#64748B' : '#94A3B8' }}>
-              We're documenting detailed case studies from our clients — real names, real numbers, real proof.
+              No client case study is published until the client consents and the numbers are measured.
             </p>
           </motion.div>
 
@@ -1520,8 +1520,8 @@ export default function Home() {
             className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
             {[
               { value: '3+ yrs',  label: 'Building AI Systems'       },
-              { value: '8+',      label: 'Client Categories'         },
-              { value: '24/7',    label: 'Automation Running'        },
+              { value: 'BN+EN',   label: 'Bangla & English'          },
+              { value: 'Human',   label: 'Approval Before Send'      },
               { value: '100%',    label: 'Client-Owned Systems'      },
             ].map((s, i) => (
               <motion.div key={i} variants={fadeUp}
@@ -1734,7 +1734,7 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-center mb-12">
             <span className="inline-block px-4 py-1.5 text-sm font-semibold rounded-full border mb-4"
               style={{ background: isDark ? 'rgba(37,99,235,0.1)' : '#EFF6FF', color: '#3B82F6', borderColor: isDark ? 'rgba(37,99,235,0.25)' : '#DBEAFE' }}>
-              Real Systems. Real Results.
+              What We Build
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}>
               What We Actually Build For You
@@ -1848,11 +1848,11 @@ export default function Home() {
                 World-Class AI Expertise.<br />Not World-Class Prices.
               </h2>
               <p className="text-slate-300 text-lg mb-6 leading-relaxed">
-                US and EU AI consultants charge $200–$500/hr. SYSmoAI delivers the same quality — Notion OS, custom AI agents, n8n automation — at a fraction of the cost.
+                SYSmoAI builds Notion OS, custom AI agents and n8n automation from Bangladesh, at Bangladesh-based rates, with a written acceptance test before every project.
               </p>
               <div className="space-y-3 mb-8">
                 {[
-                  '60–80% cost savings vs US/EU consultants',
+                  'Bangladesh-based rates for international clients',
                   'Rigorous prompt engineering and AI systems practice',
                   'English-first communication, no language barrier',
                   'Written acceptance test agreed before every project',
@@ -1898,7 +1898,7 @@ export default function Home() {
       <section className="py-12" style={{ background: isDark ? '#0A0B0F' : '#F8FAFF' }}>
         <div className="max-w-3xl mx-auto px-4 text-center">
           <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: isDark ? '#475569' : '#94A3B8' }}>
-            Trusted by businesses in
+            Open to businesses in
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm" style={{ color: isDark ? '#64748B' : '#94A3B8' }}>
             <span>🇧🇩 Bangladesh</span>
@@ -1970,7 +1970,7 @@ export default function Home() {
           {/* Trust Micro-copy */}
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-6 text-sm" style={{ color: isDark ? '#475569' : '#94A3B8' }}>
             <span>✓ No commitment required</span>
-            <span>✓ Reply within 2 hours</span>
+            <span>✓ Reply aimed within one business day</span>
             <span>✓ 100% free, no sales pitch</span>
             <span>✓ Serving Bangladesh & worldwide</span>
           </div>
