@@ -15,8 +15,8 @@ const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { stag
 
 const stats = [
   { value: '3+',     label: 'Years Building AI Systems' },
-  { value: '8+',     label: 'Client Categories'         },
-  { value: '24/7',   label: 'Automation Always-on'      },
+  { value: 'BN+EN',  label: 'Bangla & English'          },
+  { value: 'Human',  label: 'Approval Before Send'      },
   { value: '100%',   label: 'Client-Owned Deliverables' },
 ];
 
@@ -24,11 +24,11 @@ const stats = [
 // (sourced from src/data/fCommerceProof.ts). The cards below cover other
 // industries we've shipped for, to keep this list non-duplicative.
 const resultCards = [
-  { icon: '🏢', category: 'Digital Agency',  result: '15 hrs/week saved',              detail: 'AI Quick Win — automated reporting + client updates'       },
-  { icon: '🎓', category: 'Coaching Business', result: '20 hrs/week freed',            detail: 'Notion OS + client onboarding automation'                 },
-  { icon: '💼', category: 'Senior Freelancer', result: 'Revenue tripled',              detail: 'Skill upgrade + premium AI service package launch'        },
-  { icon: '🏭', category: 'SME Founder',     result: 'WhatsApp chaos eliminated',      detail: 'WhatsApp auto-reply + CRM + real-time dashboard'          },
-  { icon: '🎨', category: 'Creative Agency', result: 'Proposals: 4 hrs → 15 mins',    detail: 'AI Sprint — automated proposal builder + client templates' },
+  { icon: '🏢', category: 'Digital Agency',  result: 'Example scope',                  detail: 'AI Quick Win — automated reporting + client updates (not a client result)' },
+  { icon: '🎓', category: 'Coaching Business', result: 'Example scope',                detail: 'Notion OS + client onboarding automation (not a client result)' },
+  { icon: '💼', category: 'Senior Freelancer', result: 'Example scope',                detail: 'Skill upgrade + premium AI service package (not a client result)' },
+  { icon: '🏭', category: 'SME Founder',     result: 'Example scope',                  detail: 'WhatsApp auto-reply + CRM + dashboard (not a client result)' },
+  { icon: '🎨', category: 'Creative Agency', result: 'Example scope',                  detail: 'AI Sprint — proposal builder + templates (not a client result)' },
 ];
 
 export default function Proof() {
@@ -36,7 +36,7 @@ export default function Proof() {
   React.useEffect(() => {
     document.title = 'Client Results & Case Studies — SYSmoAI';
     const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute('content', 'Real results from real clients. See how SYSmoAI has helped businesses in Bangladesh and worldwide save time, grow revenue, and automate operations.');
+    if (meta) meta.setAttribute('content', 'SYSmoAI proof standard: verified client results are published only with client consent and measured numbers. Until then this page shows example scopes, not client results.');
   }, []);
 
   return (
@@ -50,7 +50,7 @@ export default function Proof() {
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
           <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-5xl font-bold tracking-tight mb-4" style={{ color: isDark ? '#F1F5F9' : '#0A0B0F' }}>
-            Real results. Verified numbers.
+            Our proof standard: verified, or not shown.
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
             className="text-lg" style={{ color: isDark ? '#94A3B8' : '#475569' }}>
@@ -63,7 +63,7 @@ export default function Proof() {
       <section className="pt-10 pb-0" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
         <div className="max-w-4xl mx-auto px-4">
           <DirectAnswer>
-            SYSmoAI builds AI systems across 8+ client categories in Bangladesh and worldwide. We are currently documenting detailed client case studies — real names, real numbers, real proof — and publish representative scenarios until then. Emon Hossain (founder) has 3+ years of hands-on experience building production AI systems and prompt-engineering workflows.
+            SYSmoAI is an early-stage AI systems studio founded by Emon Hossain in Bangladesh. It is not yet incorporated, and no verified client case study is published yet. Everything on this page is an example scope of what we build, not a client result. Case studies will appear only with client consent and measured numbers.
           </DirectAnswer>
         </div>
       </section>
@@ -93,7 +93,7 @@ export default function Proof() {
             variants={fadeUp}
             className="text-2xl font-bold text-slate-900 mb-3"
           >
-            F-Commerce sellers — what we've shipped
+            F-Commerce — example scopes we build
           </motion.h2>
           <motion.p
             initial="hidden"
@@ -102,9 +102,9 @@ export default function Proof() {
             variants={fadeUp}
             className="text-slate-500 text-sm mb-10 max-w-2xl"
           >
-            Representative outcomes from F-Commerce sellers we've worked with across
-            Dhaka, Chattogram, and Sylhet. Verified case studies with full names are
-            published as sellers approve them.
+            Example scopes for F-Commerce sellers. These are not client results;
+            verified case studies will be published only with seller consent and
+            measured numbers.
           </motion.p>
           <motion.div
             initial="hidden"
@@ -143,7 +143,7 @@ export default function Proof() {
             className="text-2xl font-bold text-slate-900 mb-3">What we've delivered</motion.h2>
           <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="text-slate-500 text-sm mb-10">
-            Representative results from client engagements across industries. Full verified case studies with client names are coming soon.
+            Example scopes across industries — not client results. Verified case studies will be published only with client consent.
           </motion.p>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -167,7 +167,7 @@ export default function Proof() {
             className="bg-blue-50 border border-blue-100 rounded-2xl p-10 text-center">
             <h2 className="text-2xl font-bold text-slate-900 mb-3">Detailed case studies coming soon</h2>
             <p className="text-slate-600 mb-3 max-w-md mx-auto">
-              We're documenting verified case studies from our clients — real names, real metrics, real screenshots. Check back soon.
+              When a client consents, we will publish a verified case study with measured numbers. Until then, nothing here is a client result.
             </p>
             <p className="text-slate-500 text-sm mb-8">
               Want to be our next success story?
