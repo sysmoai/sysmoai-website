@@ -1,6 +1,6 @@
 import { blogPosts } from './blogPosts';
 import { answersPosts } from './answersPosts';
-import { runtimeSeoConfig, SITE_URL, OG_IMAGE } from './seoRuntime';
+import { runtimeSeoConfig, getRuntimeSeo, REVIEW_DESCRIPTION, SITE_URL, OG_IMAGE } from './seoRuntime';
 
 export { SITE_URL, OG_IMAGE };
 export const SITE_NAME = 'SYSmoAI';
@@ -439,19 +439,42 @@ const answersListRoute: Record<string, RouteSeo> = {
   },
 };
 
-export const seoConfig: Record<string, RouteSeo> = {
+const historicalSeoConfig: Record<string, RouteSeo> = {
   ...staticRoutes,
   ...blogRoutes,
   ...answersRoutes,
   ...answersListRoute,
 };
 
+// Fail-closed publishing surface: do not emit old Offer prices, seller reviews,
+ // guarantees or FAQPage answer claims into generated HTML/JSON-LD.
+const SAFE_ORG_SCHEMA: SeoSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'SYSmoAI',
+  url: SITE_URL,
+  description: REVIEW_DESCRIPTION,
+};
+export const seoConfig: Record<string, RouteSeo> = Object.fromEntries(
+  Object.entries(historicalSeoConfig).map(([route]) => {
+    const safe = getRuntimeSeo(route);
+    return [route, {
+      title: safe.title,
+      description: safe.description,
+      canonical: safe.canonical,
+      ogTitle: safe.title,
+      ogDescription: safe.description,
+      ogType: 'website',
+      schemas: [SAFE_ORG_SCHEMA],
+    } satisfies RouteSeo];
+  }),
+);
+
 const DEFAULT_SEO: RouteSeo = {
-  title: 'SYSmoAI — Stop Losing Orders in Your DMs | F-Commerce AI Bangladesh',
-  description:
-    "Bangladesh's F-Commerce Operating System. Bangla DM auto-reply agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — fully deployed in 14 days for ৳50,000.",
+  title: 'Information Under Review | SYSmoAI',
+  description: REVIEW_DESCRIPTION,
   canonical: SITE_URL,
-  schemas: [ORG_SCHEMA],
+  schemas: [SAFE_ORG_SCHEMA],
 };
 
 export function getRouteSeo(pathname: string): RouteSeo {

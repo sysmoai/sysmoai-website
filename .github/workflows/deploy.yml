@@ -41,6 +41,9 @@ jobs:
       - name: Verify deploy output
         run: test -f artifacts/sysmoai-website/dist/public/index.html
 
+      - name: Verify fail-closed public output
+        run: node artifacts/sysmoai-website/scripts/verify-commercial-hold.mjs
+
 # Production deployment is intentionally disabled here until the Cloudflare
 # project, account, token, output directory, and rollback procedure are verified.
 # Re-enable deployment as a separate gated job only after those checks pass.

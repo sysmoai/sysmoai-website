@@ -89,14 +89,14 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/proof': {
     title: 'Client Results & Case Studies | SYSmoAI Bangladesh AI Consulting',
     description:
-      "Real results from real clients: 15,000 hours saved, 3x revenue growth, 90-day AI transformations. Browse SYSmoAI's verified case studies and client success stories.",
+      "SYSmoAI proof standard: verified client results are published only with client consent and measured numbers. Until then this page shows example scopes, not client results.",
     canonical: `${SITE_URL}/proof`,
   },
 
   '/results': {
     title: 'Client Results & Case Studies | SYSmoAI Bangladesh AI Consulting',
     description:
-      "Real results from real clients: 15,000 hours saved, 3x revenue growth, 90-day AI transformations. Browse SYSmoAI's verified case studies and client success stories.",
+      "SYSmoAI proof standard: verified client results are published only with client consent and measured numbers. Until then this page shows example scopes, not client results.",
     canonical: `${SITE_URL}/proof`,
   },
 
@@ -191,6 +191,35 @@ const DEFAULT_RUNTIME_SEO: RuntimeSeo = {
   ogType: 'website',
 };
 
+// During the evidence-gated review every public route uses neutral metadata.
+const REVIEW_TITLES: Record<string, string> = {
+  '/': 'Practical AI Systems',
+  '/services': 'Service Areas Under Review',
+  '/services/ai-sprint': 'Workflow Implementation Under Review',
+  '/services/ai-quick-win': 'Workflow Assessment Under Review',
+  '/services/ai-retainer': 'Support Scope Under Review',
+  '/services/international': 'International Services Under Review',
+  '/services/other-engagements': 'Other Engagements Under Review',
+  '/for/f-commerce': 'F-Commerce Workflow Research',
+  '/pricing': 'Commercial Terms Under Review',
+  '/proof': 'Evidence Standard',
+  '/results': 'Evidence Standard',
+  '/faq': 'Frequently Asked Questions',
+  '/free-ai-audit': 'Discovery Arrangements Under Review',
+  '/about': 'About SYSmoAI',
+  '/contact': 'Contact Details Under Review',
+  '/privacy-policy': 'Privacy Documentation Under Review',
+  '/terms-of-service': 'Service Terms Under Review',
+  '/refund-policy': 'Refund Terms Under Review',
+};
+export const REVIEW_DESCRIPTION =
+  'SYSmoAI studies practical AI systems, workflows and owner training. Scope, pricing, legal terms, permissions, delivery and performance claims are under independent review; no public commercial package or guarantee is approved here.';
 export function getRuntimeSeo(location: string): RuntimeSeo {
-  return runtimeSeoConfig[location] ?? blogRuntimeConfig[location] ?? answersRuntimeConfig[location] ?? DEFAULT_RUNTIME_SEO;
+  const previous = runtimeSeoConfig[location] ?? blogRuntimeConfig[location] ?? answersRuntimeConfig[location] ?? DEFAULT_RUNTIME_SEO;
+  return {
+    title: (REVIEW_TITLES[location] ?? 'Information Under Review') + ' | SYSmoAI',
+    description: REVIEW_DESCRIPTION,
+    canonical: previous.canonical,
+    ogType: 'website',
+  };
 }
