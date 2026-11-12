@@ -17,5 +17,4 @@
 /services/n8n-automation      /services/other-engagements     301
 /services/corporate-training  /services/other-engagements     301
 
-# SPA fallback (must be last)
-/*    /index.html   200
+# No wildcard rewrite: generated per-route HTML must retain its own canonical and schema.
