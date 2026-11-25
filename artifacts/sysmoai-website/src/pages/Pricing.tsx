@@ -29,7 +29,7 @@ const anchorServices = [
     ],
     tag: '⭐ Anchor Offer',
     featured: true,
-    tagline: 'Full F-commerce automation in 14 days',
+    tagline: 'Full F-commerce automation, target 14-day build',
   },
   {
     title: 'AI Retainer',
@@ -163,7 +163,7 @@ export default function Pricing() {
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
             className="text-lg mb-6 max-w-2xl mx-auto" style={{ color: body }}>
-            The F-Commerce AI Sprint at ৳50,000 — full DM automation, order tracking, and bKash workflow deployed in 14 days. Followed by a ৳20,000/mo retainer to keep growing.
+            The F-Commerce AI Sprint at ৳50,000 — full DM automation, order tracking, and bKash workflow, target 14-day build. Followed by a ৳20,000/mo retainer to keep growing.
           </motion.p>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}>
             <span className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-8"
@@ -187,7 +187,7 @@ export default function Pricing() {
       <section className="pt-10 pb-0" style={{ background: bg1 }}>
         <div className="max-w-4xl mx-auto px-4">
           <DirectAnswer bangla="SYSmoAI AI কনসালটিং মূল্য: AI কুইক উইন ৳৩,৭৫০–৳৭,৫০০ (৩ দিন), F-কমার্স AI স্প্রিন্ট ৳৫০,০০০ (১৪ দিন), AI রিটেইনার ৳২০,০০০/মাস। আন্তর্জাতিক: $৫০–$৬০০ USD।">
-            SYSmoAI pricing in Bangladesh: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days), F-Commerce AI Sprint ৳50,000 (full system in 14 days), AI Retainer ৳20,000/month. International: $50–$600 USD. Every package is scoped with a written acceptance test; the payment method is confirmed at the proposal stage.
+            SYSmoAI pricing in Bangladesh: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days), F-Commerce AI Sprint ৳50,000 (target 14-day build), AI Retainer ৳20,000/month. International: $50–$600 USD. Every package is scoped with a written acceptance test; the payment method is confirmed at the proposal stage.
           </DirectAnswer>
         </div>
       </section>

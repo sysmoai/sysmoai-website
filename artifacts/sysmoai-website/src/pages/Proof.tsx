@@ -54,7 +54,7 @@ export default function Proof() {
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
             className="text-lg" style={{ color: isDark ? '#94A3B8' : '#475569' }}>
-            We measure success by your results — not our hours.
+            Every project starts with a written acceptance test.
           </motion.p>
         </div>
       </section>
@@ -140,7 +140,7 @@ export default function Proof() {
       <section className="py-20 bg-slate-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-2xl font-bold text-slate-900 mb-3">What we've delivered</motion.h2>
+            className="text-2xl font-bold text-slate-900 mb-3">Example scopes</motion.h2>
           <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="text-slate-500 text-sm mb-10">
             Example scopes across industries — not client results. Verified case studies will be published only with client consent.

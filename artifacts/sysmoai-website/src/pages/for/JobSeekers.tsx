@@ -33,7 +33,7 @@ export default function JobSeekers() {
       ]}
       finalCtaHeadline="Ready to get hired with AI skills?"
       faqs={[
-        { q: 'Will this actually help me get hired faster?', a: 'Yes. Our clients who complete CV + LinkedIn work see interview invitations within 2–4 weeks. AI skills are the single biggest differentiator in today\'s market.' },
+        { q: 'Will this actually help me get hired faster?', a: 'It can make your application clearer and stronger, but we cannot promise interviews or a timeline.' },
         { q: 'What if I\'m switching industries entirely?', a: 'Career switchers are our specialty. We build portfolio projects in the new field so you have proof before you have experience.' },
         { q: 'Which AI skills are most in demand right now?', a: 'Prompt engineering, AI-assisted content production, workflow automation (n8n/Zapier), and AI research tools. We\'ll map the exact skills for your target role.' },
         { q: 'How long does the CV + LinkedIn work take?', a: '5–7 business days for a complete overhaul. We send drafts for your review before finalizing.' },

@@ -18,7 +18,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/': {
     title: 'SYSmoAI — Stop Losing Orders in Your DMs | F-Commerce AI Bangladesh',
     description:
-      "Bangladesh's F-Commerce Operating System. We build Bangla DM auto-reply agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — fully deployed in 14 days for ৳50,000. Book a free F-Commerce audit.",
+      "Bangladesh's F-Commerce Operating System. We build Bangla DM auto-reply agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — target 14-day build for ৳50,000. Book a free F-Commerce audit.",
     canonical: `${SITE_URL}/`,
     ogType: 'website',
   },
@@ -38,9 +38,9 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   },
 
   '/services/ai-sprint': {
-    title: 'F-Commerce AI Sprint — Full System Deployed in 14 Days | SYSmoAI',
+    title: 'F-Commerce AI Sprint — Full System, Target 14-Day Build | SYSmoAI',
     description:
-      "Get a complete F-Commerce AI system built in 14 days. DM auto-reply agent, order tracker, bKash workflows — fully deployed for ৳50,000. SYSmoAI's anchor offer for Facebook sellers in Dhaka.",
+      "Get a complete F-Commerce AI system with a target 14-day build. DM auto-reply agent, order tracker, bKash workflows for ৳50,000. SYSmoAI's anchor offer for Facebook sellers in Dhaka.",
     canonical: `${SITE_URL}/services/ai-sprint`,
   },
 
@@ -186,7 +186,7 @@ const blogRuntimeConfig: Record<string, RuntimeSeo> = Object.fromEntries(
 const DEFAULT_RUNTIME_SEO: RuntimeSeo = {
   title: 'SYSmoAI — Stop Losing Orders in Your DMs | F-Commerce AI Bangladesh',
   description:
-    "Bangladesh's F-Commerce Operating System. Bangla DM auto-reply agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — fully deployed in 14 days for ৳50,000.",
+    "Bangladesh's F-Commerce Operating System. Bangla DM auto-reply agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — target 14-day build for ৳50,000.",
   canonical: `${SITE_URL}/`,
   ogType: 'website',
 };

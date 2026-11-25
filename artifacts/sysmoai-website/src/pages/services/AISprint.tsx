@@ -83,7 +83,7 @@ export default function AISprint() {
   React.useEffect(() => {
     document.title = 'F-Commerce AI Sprint — 14-Day Full Automation | SYSmoAI';
     const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute('content', 'SYSmoAI F-Commerce AI Sprint: Bangla DM agent, order tracker, bKash workflow, and customer follow-up — fully built in 14 days for Bangladesh F-commerce sellers.');
+    if (desc) desc.setAttribute('content', 'SYSmoAI F-Commerce AI Sprint: Bangla DM agent, order tracker, bKash workflow, and customer follow-up — target 14-day build for Bangladesh F-commerce sellers.');
   }, []);
 
   const bg1 = isDark ? '#0A0B0F' : '#FFFFFF';
@@ -133,7 +133,7 @@ export default function AISprint() {
               F-Commerce AI Sprint
             </h1>
             <p className="text-xl mb-3 max-w-2xl" style={{ color: body }}>
-              Stop losing orders in your DMs. Get a Bangla auto-reply agent, order tracker, bKash workflow, and customer follow-up system — fully built and deployed in 14 days.
+              Stop losing orders in your DMs. Get a Bangla auto-reply agent, order tracker, bKash workflow, and customer follow-up system — with a target 14-day build.
             </p>
 
             {/* Price toggle */}
@@ -191,7 +191,7 @@ export default function AISprint() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { icon: Clock, value: '14 days', label: 'Full system live', color: '#3B82F6' },
+              { icon: Clock, value: '14 days', label: 'Target build time', color: '#3B82F6' },
               { icon: Zap, value: '400 DMs', label: 'Handled per day (was 0)', color: '#10B981' },
               { icon: TrendingUp, value: '5 min', label: 'bKash confirmation (was 30)', color: '#8B5CF6' },
               { icon: CheckCircle2, value: '90 days', label: 'Post-launch support', color: '#F59E0B' },
@@ -296,7 +296,7 @@ export default function AISprint() {
             className="rounded-2xl p-8 text-center"
             style={{ background: 'linear-gradient(135deg, #1E3A8A 0%, #1E40AF 55%, #2563EB 100%)', border: '1px solid rgba(96,165,250,0.3)' }}>
             <h2 className="text-2xl font-bold text-white mb-2">F-Commerce AI Sprint</h2>
-            <p className="text-blue-200 mb-6">One price. Full system. 14 days.</p>
+            <p className="text-blue-200 mb-6">One price. Full system. Target 14-day build.</p>
             <div className="flex items-center justify-center gap-6 mb-6">
               <div>
                 <div className="text-4xl font-black text-white">৳50,000</div>

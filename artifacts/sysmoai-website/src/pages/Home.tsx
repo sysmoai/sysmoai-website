@@ -53,7 +53,7 @@ const slideRight = {
 
 const featuredServices = [
   { icon: Zap,       title: 'AI Quick Win', subtitle: 'Your #1 problem automated in 3 days',  description: '', bdPrice: '৳3,750–7,500',    usdPrice: '$50–$100',    href: '/services/ai-quick-win', featured: false, tag: 'Best entry point'  },
-  { icon: Timer,     title: 'F-Commerce AI Sprint', subtitle: 'Full F-Commerce AI stack deployed in 14 days', description: '', bdPrice: '৳50,000', usdPrice: '$600', href: '/services/ai-sprint', featured: true, tag: 'Most popular' },
+  { icon: Timer,     title: 'F-Commerce AI Sprint', subtitle: 'Full F-Commerce AI stack, target 14-day build', description: '', bdPrice: '৳50,000', usdPrice: '$600', href: '/services/ai-sprint', featured: true, tag: 'Most popular' },
   { icon: RefreshCw, title: 'AI Retainer',  subtitle: 'Ongoing AI management every month',     description: 'We manage and evolve your AI systems every month. Monthly improvements, priority WhatsApp support, and a full performance report — so your AI keeps working as your business grows.', bdPrice: '৳20,000/mo', usdPrice: '$250/mo', href: '/services/ai-retainer', featured: false, tag: 'Cancel anytime', features: ['Ongoing AI system management', 'Monthly improvements & optimizations', 'Priority WhatsApp support', 'Monthly performance report'] },
 ];
 
@@ -682,7 +682,7 @@ export default function Home() {
           >
             {[
               { emoji: '✓', color: '#4ade80', label: 'Acceptance-Test Delivered' },
-              { emoji: '📦', color: '#60a5fa', label: '14 Days to Live' },
+              { emoji: '📦', color: '#60a5fa', label: 'Target 14-Day Build' },
               { emoji: '💬', color: '#c084fc', label: 'Bangla DM Agent' },
               { emoji: '🏦', color: '#fbbf24', label: 'bKash / Nagad Ready' },
             ].map(({ emoji, color, label }) => (
@@ -1026,7 +1026,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
               { target: 2,    suffix: '',   prefix: '',  label: 'Languages: Bangla + English' },
-              { target: 14,   suffix: '',   prefix: '',  label: 'Days to Full Automation'    },
+              { target: 14,   suffix: '',   prefix: '',  label: 'Day Target Build'    },
               { target: 3,    suffix: '+',  prefix: '',  label: 'Years Building AI Systems'  },
               { target: 100,  suffix: '%',  prefix: '',  label: 'F-Commerce Focused'         },
             ].map((stat, i) => (
@@ -1040,7 +1040,7 @@ export default function Home() {
           </div>
         </div>
         <noscript>
-          <div className="text-center text-sm text-slate-500 mt-4">500+ Orders Automated Daily · 14 Days to Full Automation · 3+ Years Building AI Systems · 100% F-Commerce Focused</div>
+          <div className="text-center text-sm text-slate-500 mt-4">Target 14-Day Build · 3+ Years Building AI Systems · 100% F-Commerce Focused</div>
         </noscript>
       </div>
 
@@ -1234,9 +1234,9 @@ export default function Home() {
                 tag: '⭐ Most Popular',
                 tagColor: '#F59E0B',
                 title: 'AI Sprint',
-                subtitle: 'Full AI operating system deployed in 14 days',
+                subtitle: 'Full AI operating system, target 14-day build',
                 outcome: '14 days',
-                outcomeLabel: 'full stack deployed',
+                outcomeLabel: 'target build',
                 outcomeBg: '#3B82F6',
                 price: showUSD ? '$600' : '৳50,000',
                 highlights: [

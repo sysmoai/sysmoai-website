@@ -254,7 +254,7 @@ export function Footer() {
             </ul>
             <p className="text-xs leading-relaxed pt-2" style={{ color: isDark ? '#334155' : '#CBD5E1' }}>
               Service hours: 10 AM – Midnight (BST)<br />
-              Reply within 2 hours on working days.
+              We aim to reply within one business day.
             </p>
           </div>
         </div>

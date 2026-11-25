@@ -21,12 +21,12 @@ a: 'SYSmoAI is an AI systems studio in Dhaka, Bangladesh, founded by Emon Hossai
   },
   {
     q: 'How much does AI consulting cost in Bangladesh?',
-    a: 'SYSmoAI pricing: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days); F-Commerce AI Sprint ৳50,000 (full system in 14 days); AI Retainer ৳20,000/month (ongoing management). International rates: $50–$600 USD. The exact payment method is confirmed at the proposal stage. Quick Win is 100% advance; Sprint is 50% upfront, 50% on delivery; Retainer is monthly billing.',
+    a: 'SYSmoAI pricing: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days); F-Commerce AI Sprint ৳50,000 (target 14-day build); AI Retainer ৳20,000/month (ongoing management). International rates: $50–$600 USD. The exact payment method is confirmed at the proposal stage. Quick Win is 100% advance; Sprint is 50% upfront, 50% on delivery; Retainer is monthly billing.',
     bangla: 'AI কনসালটিং খরচ: AI কুইক উইন ৳৩,৭৫০–৳৭,৫০০, F-কমার্স AI স্প্রিন্ট ৳৫০,০০০, AI রিটেইনার ৳২০,০০০/মাস।',
   },
   {
     q: 'How long does AI implementation take for a business in Bangladesh?',
-    a: 'Timeline depends on scope: AI Quick Win (1 workflow) = 3 days; F-Commerce AI Sprint (full DM agent + order tracker + payment workflow + dashboard) = 14 days; AI Retainer = ongoing monthly. A free 30-minute discovery call takes 30 minutes and results in a clear action plan with tools, costs, and timeline.',
+    a: 'Timeline depends on scope: AI Quick Win (1 workflow) = 3 days; F-Commerce AI Sprint (full DM agent + order tracker + payment workflow + dashboard) = target 14 days; AI Retainer = ongoing monthly. A free 30-minute discovery call takes 30 minutes and results in a clear action plan with tools, costs, and timeline.',
     bangla: 'সময়সীমা: AI কুইক উইন ৩ দিন, F-কমার্স AI স্প্রিন্ট ১৪ দিন, AI রিটেইনার মাসিক।',
   },
   {
@@ -36,7 +36,7 @@ a: 'SYSmoAI is an AI systems studio in Dhaka, Bangladesh, founded by Emon Hossai
   },
   {
     q: 'How does F-commerce automation work in Bangladesh?',
-    a: 'F-commerce automation connects your Facebook Business Page Messenger to an AI agent that auto-replies DMs in Bangla and English, captures orders, confirms bKash/Nagad payments, and sends follow-up messages — all without manual intervention. SYSmoAI\'s F-Commerce AI Sprint deploys this full stack in 14 days for ৳50,000 — replacing 14-hour manual workdays for sellers managing 100–500+ DMs/day. Bangladesh has 700,000+ active F-commerce sellers (a-commerce Bangladesh 2023); manual management at scale is no longer viable.',
+    a: 'F-commerce automation connects your Facebook Business Page Messenger to an AI agent that auto-replies DMs in Bangla and English, captures orders, confirms bKash/Nagad payments, and sends follow-up messages — all without manual intervention. SYSmoAI\'s F-Commerce AI Sprint builds this full stack for ৳50,000 (target 14-day build) — replacing 14-hour manual workdays for sellers managing 100–500+ DMs/day. Bangladesh has 700,000+ active F-commerce sellers (a-commerce Bangladesh 2023); manual management at scale is no longer viable.',
     bangla: 'F-কমার্স অটোমেশন ফেসবুক মেসেঞ্জারকে AI এজেন্টের সাথে সংযুক্ত করে — DM অটো-রিপ্লাই, অর্ডার ট্র্যাকিং, bKash কনফার্মেশন।',
   },
   {
@@ -61,7 +61,7 @@ a: 'SYSmoAI is an AI systems studio in Dhaka, Bangladesh, founded by Emon Hossai
   },
   {
     q: 'How do I start working with SYSmoAI?',
-    a: 'Three ways to start: (1) Book a free 30-minute AI audit at sysmoai.com/free-ai-audit — Emon Hossain reviews your workflow and gives you a specific action plan (no commitment required). (2) Message on WhatsApp — we respond within 2 hours on working days. (3) Start directly with an AI Quick Win (৳3,750) — tell us your #1 workflow problem and we automate it in 3 days.',
+    a: 'Three ways to start: (1) Book a free 30-minute AI audit at sysmoai.com/free-ai-audit — Emon Hossain reviews your workflow and gives you a specific action plan (no commitment required). (2) Message on WhatsApp — we aim to reply within one business day. (3) Start directly with an AI Quick Win (৳3,750) — tell us your #1 workflow problem and we automate it in 3 days.',
     bangla: 'শুরু করুন: (১) বিনামূল্যে AI অডিট বুক করুন, (২) WhatsApp-এ মেসেজ করুন, বা (৩) সরাসরি AI কুইক উইন (৳৩,৭৫০) দিয়ে শুরু করুন।',
   },
 ];
@@ -134,7 +134,7 @@ export default function FAQ() {
           <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="text-2xl font-bold mb-4" style={{ color: heading }}>Still have questions?</motion.h2>
           <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="mb-6" style={{ color: body }}>We respond within 2 hours on working days.</motion.p>
+            className="mb-6" style={{ color: body }}>We aim to reply within one business day.</motion.p>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
             <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-8 py-4 rounded-xl font-bold transition-all min-h-[52px]">

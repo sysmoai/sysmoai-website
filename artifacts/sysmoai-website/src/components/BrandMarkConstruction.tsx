@@ -442,7 +442,7 @@ export function BrandMarkConstruction() {
               <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <p className="text-xs mt-3" style={{ color: isDark ? '#334155' : '#94A3B8' }}>
-              No commitment · 30-min strategy call · Reply within 2 hours
+              No commitment · 30-min strategy call · Reply aimed within one business day
             </p>
           </motion.div>
         </div>

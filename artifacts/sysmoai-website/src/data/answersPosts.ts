@@ -41,7 +41,7 @@ export const answersPosts: AnswerPost[] = [
 <li><strong>Provides ongoing support</strong> — monthly optimization to keep systems current</li>
 </ul>
 
-<p>SYSmoAI builds AI systems for clients in Bangladesh and worldwide, drawing on the founder's 3+ years of hands-on systems work. Our anchor service — the F-Commerce AI Sprint at ৳50,000 — deploys a complete AI operating system for Facebook commerce sellers in 14 days.</p>
+<p>SYSmoAI builds AI systems for clients in Bangladesh and worldwide, drawing on the founder's 3+ years of hands-on systems work. Our anchor service — the F-Commerce AI Sprint at ৳50,000 — deploys a complete AI operating system for Facebook commerce sellers, with a target 14-day build.</p>
 
 <h2>How Is Bangladesh AI Consulting Different from Global Consultants?</h2>
 <p>Bangladesh AI consultants understand local market realities that global firms miss:</p>
@@ -58,7 +58,7 @@ export const answersPosts: AnswerPost[] = [
 <p>AI consulting pricing in Bangladesh in 2025–2026:</p>
 <ul>
 <li><strong>AI Quick Win:</strong> ৳3,750–৳7,500 — one workflow automated in 3 days</li>
-<li><strong>F-Commerce AI Sprint:</strong> ৳50,000 — full system in 14 days (most popular)</li>
+<li><strong>F-Commerce AI Sprint:</strong> ৳50,000 — full system, target 14-day build (most popular)</li>
 <li><strong>AI Retainer:</strong> ৳20,000/month — ongoing AI management</li>
 <li><strong>International clients:</strong> $50–$600 USD</li>
 </ul>
@@ -109,7 +109,7 @@ export const answersPosts: AnswerPost[] = [
       {
         question: 'How long does AI consulting take in Bangladesh?',
         answer:
-          'Timeline depends on scope: AI Quick Win (1 workflow) = 3 days; F-Commerce AI Sprint (full system) = 14 days; AI Retainer (ongoing management) = monthly. The free audit call takes 30 minutes.',
+          'Timeline depends on scope: AI Quick Win (1 workflow) = 3 days; F-Commerce AI Sprint (full system) = target 14 days; AI Retainer (ongoing management) = monthly. The free audit call takes 30 minutes.',
       },
     ],
     sources: [
@@ -130,11 +130,11 @@ export const answersPosts: AnswerPost[] = [
     slug: 'ai-implementation-cost-bangladesh',
     title: 'How Much Does AI Implementation Cost in Bangladesh?',
     directAnswer:
-      'AI implementation in Bangladesh costs ৳3,750–৳7,500 for a single workflow (AI Quick Win, 3 days), ৳50,000 for a full F-Commerce AI system (AI Sprint, 14 days), or ৳20,000/month for ongoing AI management (AI Retainer). International rates are $50–$600 USD.',
+      'AI implementation in Bangladesh costs ৳3,750–৳7,500 for a single workflow (AI Quick Win, 3 days), ৳50,000 for a full F-Commerce AI system (AI Sprint, target 14-day build), or ৳20,000/month for ongoing AI management (AI Retainer). International rates are $50–$600 USD.',
     directAnswerBangla:
       'বাংলাদেশে AI বাস্তবায়নের খরচ: একটি ওয়ার্কফ্লো ৳৩,৭৫০–৳৭,৫০০ (AI কুইক উইন, ৩ দিন), সম্পূর্ণ F-কমার্স AI সিস্টেম ৳৫০,০০০ (AI স্প্রিন্ট, ১৪ দিন), বা চলমান AI ব্যবস্থাপনা ৳২০,০০০/মাস (AI রিটেইনার)।',
     metaDescription:
-      'How much does AI implementation cost in Bangladesh? SYSmoAI pricing: Quick Win ৳3,750–৳7,500 (3 days), F-Commerce AI Sprint ৳50,000 (14 days), Retainer ৳20,000/mo. Written acceptance test before work starts.',
+      'How much does AI implementation cost in Bangladesh? SYSmoAI pricing: Quick Win ৳3,750–৳7,500 (3 days), F-Commerce AI Sprint ৳50,000 (target 14 days), Retainer ৳20,000/mo. Written acceptance test before work starts.',
     publishDate: '2026-05-03',
     author: 'Emon Hossain',
     readTime: '7 min read',
@@ -146,7 +146,7 @@ export const answersPosts: AnswerPost[] = [
 <table>
 <tr><th>Service</th><th>BDT Price</th><th>USD Price</th><th>Duration</th><th>Best For</th></tr>
 <tr><td>AI Quick Win</td><td>৳3,750–৳7,500</td><td>$50–$100</td><td>3 days</td><td>1 specific workflow problem</td></tr>
-<tr><td>F-Commerce AI Sprint</td><td>৳50,000</td><td>$600</td><td>14 days</td><td>Full F-commerce automation</td></tr>
+<tr><td>F-Commerce AI Sprint</td><td>৳50,000</td><td>$600</td><td>Target 14 days</td><td>Full F-commerce automation</td></tr>
 <tr><td>AI Retainer</td><td>৳20,000/month</td><td>$250/month</td><td>Monthly</td><td>Ongoing AI management</td></tr>
 <tr><td>1:1 AI Coaching</td><td>৳2,500/session</td><td>$30</td><td>60 min</td><td>Personal skill building</td></tr>
 <tr><td>Notion OS Build</td><td>৳15,000–৳50,000</td><td>$800–$5,000</td><td>By inquiry</td><td>Business operating system</td></tr>
@@ -155,7 +155,7 @@ export const answersPosts: AnswerPost[] = [
 </table>
 
 <h2>How Does AI Implementation Cost Compare to Hiring?</h2>
-<p>Hiring a full-time AI engineer in Dhaka costs ৳60,000–৳1,50,000/month (junior to mid-level). SYSmoAI's F-Commerce AI Sprint at ৳50,000 one-time delivers equivalent output in 14 days — with 90-day post-launch support included.</p>
+<p>Hiring a full-time AI engineer in Dhaka costs ৳60,000–৳1,50,000/month (junior to mid-level). SYSmoAI's F-Commerce AI Sprint at ৳50,000 one-time covers this scope with a target 14-day build — with 90-day post-launch support included.</p>
 
 <h2>What Payment Methods Are Available for AI Implementation in Bangladesh?</h2>
 <ul>
@@ -180,7 +180,7 @@ export const answersPosts: AnswerPost[] = [
       {
         question: 'How much does AI automation cost in Bangladesh?',
         answer:
-          'AI automation costs in Bangladesh: ৳3,750–৳7,500 for a single workflow (AI Quick Win, 3 days), ৳50,000 for a full F-Commerce AI system (14 days), or ৳20,000/month for ongoing AI management. Your written proposal confirms the final price.',
+          'AI automation costs in Bangladesh: ৳3,750–৳7,500 for a single workflow (AI Quick Win, 3 days), ৳50,000 for a full F-Commerce AI system (target 14-day build), or ৳20,000/month for ongoing AI management. Your written proposal confirms the final price.',
       },
       {
         question: 'Are there hidden fees in AI implementation?',
@@ -220,7 +220,7 @@ export const answersPosts: AnswerPost[] = [
     slug: 'ai-for-f-commerce-bangladesh',
     title: 'How to Automate Your F-Commerce Business with AI in Bangladesh',
     directAnswer:
-      'The best way to automate your F-commerce business in Bangladesh is to connect Facebook Messenger to an AI auto-reply agent, a Notion order tracker, and a bKash payment workflow — so your store runs 24/7 without manual DM replies. SYSmoAI deploys this full stack in 14 days for ৳50,000.',
+      'The best way to automate your F-commerce business in Bangladesh is to connect Facebook Messenger to an AI auto-reply agent, a Notion order tracker, and a bKash payment workflow — so your store runs 24/7 without manual DM replies. SYSmoAI builds this full stack for ৳50,000 (target 14-day build).',
     directAnswerBangla:
       'বাংলাদেশে আপনার F-কমার্স ব্যবসা অটোমেট করার সবচেয়ে ভালো উপায় হলো ফেসবুক মেসেঞ্জারকে AI অটো-রিপ্লাই এজেন্ট, Notion অর্ডার ট্র্যাকার এবং bKash পেমেন্ট ওয়ার্কফ্লোর সাথে সংযুক্ত করা।',
     metaDescription:
@@ -252,7 +252,7 @@ export const answersPosts: AnswerPost[] = [
 </ul>
 
 <h2>How Does the F-Commerce AI Sprint Work?</h2>
-<p>SYSmoAI's F-Commerce AI Sprint is a 14-day engagement at ৳50,000:</p>
+<p>SYSmoAI's F-Commerce AI Sprint is a target 14-day engagement at ৳50,000:</p>
 <ol>
 <li><strong>Day 1–2 (Diagnose):</strong> 30-minute discovery call. We map your DM volume, order flow, and biggest bottleneck.</li>
 <li><strong>Day 3–4 (Design):</strong> We design your custom AI stack — DM agent trained on your products, Notion OS structure, payment workflow.</li>
@@ -275,7 +275,7 @@ export const answersPosts: AnswerPost[] = [
 <p>Yes. The automation tools used (n8n, ManyChat, WhatsApp Business API) are fully compliant with Facebook's Messenger policies and Bangladesh's business regulations. SYSmoAI signs a confidentiality agreement before every project — your business data, customer data, and product information stay under your control.</p>
 
 <h2>What Is the Difference Between AI Quick Win and F-Commerce AI Sprint?</h2>
-<p>The <strong>AI Quick Win (৳3,750–৳7,500)</strong> automates 1 specific workflow in 3 days — perfect for testing before committing. The <strong>F-Commerce AI Sprint (৳50,000)</strong> deploys the complete system — DM agent, order tracker, payment workflow, customer re-engagement, and dashboard — in 14 days.</p>`,
+<p>The <strong>AI Quick Win (৳3,750–৳7,500)</strong> automates 1 specific workflow in 3 days — perfect for testing before committing. The <strong>F-Commerce AI Sprint (৳50,000)</strong> deploys the complete system — DM agent, order tracker, payment workflow, customer re-engagement, and dashboard — target 14-day build.</p>`,
     faq: [
       {
         question: 'How does Facebook DM automation work for F-commerce in Bangladesh?',

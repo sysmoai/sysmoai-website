@@ -23,7 +23,7 @@
 
 ## Services & Pricing
 - AI Quick Win: ৳3,750–৳7,500 ($50–$100) — 1 workflow automated in 3 days
-- F-Commerce AI Sprint: ৳50,000 ($600) — Full AI system in 14 days (anchor offer)
+- F-Commerce AI Sprint: ৳50,000 ($600) — Full AI system, target 14-day build (anchor offer)
 - AI Retainer: ৳20,000/month ($250/month) — Ongoing AI management, cancel anytime
 - 1:1 AI Coaching: ৳2,500/session — By inquiry
 - Group AI Workshop: ৳500/person — By inquiry
@@ -34,7 +34,7 @@
 - International clients: USD pricing
 
 ## F-Commerce AI Sprint (Anchor — ৳50,000)
-What you get in 14 days:
+What you get (target 14-day build):
 - Trained Bangla DM auto-reply agent (FAQ + order intake + lead capture)
 - Complete order management system (DM → delivery tracking)
 - bKash / Nagad payment workflow (<5 min confirmation)
