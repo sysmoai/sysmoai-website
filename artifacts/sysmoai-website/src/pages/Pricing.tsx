@@ -186,7 +186,7 @@ export default function Pricing() {
       {/* Direct Answer — GEO */}
       <section className="pt-10 pb-0" style={{ background: bg1 }}>
         <div className="max-w-4xl mx-auto px-4">
-          <DirectAnswer bangla="SYSmoAI AI কনসালটিং মূল্য: AI কুইক উইন ৳৩,৭৫০–৳৭,৫০০ (৩ দিন), F-কমার্স AI স্প্রিন্ট ৳৫০,০০০ (১৪ দিন), AI রিটেইনার ৳২০,০০০/মাস। আন্তর্জাতিক: $৫০–$৬০০ USD।">
+          <DirectAnswer bangla="SYSmoAI AI কনসালটিং মূল্য: AI কুইক উইন ৳৩,৭৫০–৳৭,৫০০ (৩ দিন), F-কমার্স AI স্প্রিন্ট ৳৫০,০০০ (লক্ষ্যমাত্রা ১৪ দিন), AI রিটেইনার ৳২০,০০০/মাস। আন্তর্জাতিক: $৫০–$৬০০ USD।">
             SYSmoAI pricing in Bangladesh: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days), F-Commerce AI Sprint ৳50,000 (target 14-day build), AI Retainer ৳20,000/month. International: $50–$600 USD. Every package is scoped with a written acceptance test; the payment method is confirmed at the proposal stage.
           </DirectAnswer>
         </div>

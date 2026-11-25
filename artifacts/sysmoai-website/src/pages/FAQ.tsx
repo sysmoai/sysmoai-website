@@ -27,7 +27,7 @@ a: 'SYSmoAI is an AI systems studio in Dhaka, Bangladesh, founded by Emon Hossai
   {
     q: 'How long does AI implementation take for a business in Bangladesh?',
     a: 'Timeline depends on scope: AI Quick Win (1 workflow) = 3 days; F-Commerce AI Sprint (full DM agent + order tracker + payment workflow + dashboard) = target 14 days; AI Retainer = ongoing monthly. A free 30-minute discovery call takes 30 minutes and results in a clear action plan with tools, costs, and timeline.',
-    bangla: 'সময়সীমা: AI কুইক উইন ৩ দিন, F-কমার্স AI স্প্রিন্ট ১৪ দিন, AI রিটেইনার মাসিক।',
+    bangla: 'সময়সীমা: AI কুইক উইন ৩ দিন, F-কমার্স AI স্প্রিন্ট লক্ষ্যমাত্রা ১৪ দিন, AI রিটেইনার মাসিক।',
   },
   {
     q: 'What AI tools does SYSmoAI use to automate business workflows?',

@@ -127,7 +127,7 @@ export default function Services() {
       {/* Direct Answer — GEO */}
       <section className="pt-10 pb-0" style={{ background: bg1 }}>
         <div className="max-w-4xl mx-auto px-4">
-          <DirectAnswer bangla="SYSmoAI-এর প্রধান সেবাগুলো: AI কুইক উইন (৳৩,৭৫০–৳৭,৫০০, ৩ দিন), F-কমার্স AI স্প্রিন্ট (৳৫০,০০০, ১৪ দিন), AI রিটেইনার (৳২০,০০০/মাস)।">
+          <DirectAnswer bangla="SYSmoAI-এর প্রধান সেবাগুলো: AI কুইক উইন (৳৩,৭৫০–৳৭,৫০০, ৩ দিন), F-কমার্স AI স্প্রিন্ট (৳৫০,০০০, লক্ষ্যমাত্রা ১৪ দিন), AI রিটেইনার (৳২০,০০০/মাস)।">
             SYSmoAI's AI services in Bangladesh: AI Quick Win (৳3,750–৳7,500, 3 days, 1 workflow), F-Commerce AI Sprint (৳50,000, target 14-day build, full system), AI Retainer (৳20,000/month, ongoing management). Also available: Notion OS builds, AI agent development, n8n automation, corporate training, and 1:1 AI coaching — all by inquiry. Free 30-minute AI audit with every engagement.
           </DirectAnswer>
         </div>

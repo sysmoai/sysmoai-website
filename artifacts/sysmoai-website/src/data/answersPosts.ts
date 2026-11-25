@@ -132,7 +132,7 @@ export const answersPosts: AnswerPost[] = [
     directAnswer:
       'AI implementation in Bangladesh costs ৳3,750–৳7,500 for a single workflow (AI Quick Win, 3 days), ৳50,000 for a full F-Commerce AI system (AI Sprint, target 14-day build), or ৳20,000/month for ongoing AI management (AI Retainer). International rates are $50–$600 USD.',
     directAnswerBangla:
-      'বাংলাদেশে AI বাস্তবায়নের খরচ: একটি ওয়ার্কফ্লো ৳৩,৭৫০–৳৭,৫০০ (AI কুইক উইন, ৩ দিন), সম্পূর্ণ F-কমার্স AI সিস্টেম ৳৫০,০০০ (AI স্প্রিন্ট, ১৪ দিন), বা চলমান AI ব্যবস্থাপনা ৳২০,০০০/মাস (AI রিটেইনার)।',
+      'বাংলাদেশে AI বাস্তবায়নের খরচ: একটি ওয়ার্কফ্লো ৳৩,৭৫০–৳৭,৫০০ (AI কুইক উইন, ৩ দিন), সম্পূর্ণ F-কমার্স AI সিস্টেম ৳৫০,০০০ (AI স্প্রিন্ট, লক্ষ্যমাত্রা ১৪ দিন), বা চলমান AI ব্যবস্থাপনা ৳২০,০০০/মাস (AI রিটেইনার)।',
     metaDescription:
       'How much does AI implementation cost in Bangladesh? SYSmoAI pricing: Quick Win ৳3,750–৳7,500 (3 days), F-Commerce AI Sprint ৳50,000 (target 14 days), Retainer ৳20,000/mo. Written acceptance test before work starts.',
     publishDate: '2026-05-03',

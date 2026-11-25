@@ -100,8 +100,8 @@ export default function AISprint() {
       {/* Direct Answer — GEO */}
       <div style={{ background: bg1 }} className="pt-10 pb-0">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <DirectAnswer bangla="F-কমার্স AI স্প্রিন্ট হলো SYSmoAI-এর ১৪ দিনের সম্পূর্ণ অটোমেশন প্যাকেজ। বাংলা DM এজেন্ট, অর্ডার ট্র্যাকার, bKash পেমেন্ট ওয়ার্কফ্লো এবং কাস্টমার ফলো-আপ — একসাথে ৳৫০,০০০-এ।">
-            The F-Commerce AI Sprint is SYSmoAI's flagship 14-day package for Bangladeshi Facebook sellers: Bangla-aware DM agent, order tracker, bKash payment workflow, and customer re-engagement — all deployed, trained, and live for ৳50,000 ($600 USD). 50% upfront, 50% on delivery. Includes 90-day support.
+          <DirectAnswer bangla="F-কমার্স AI স্প্রিন্ট হলো SYSmoAI-এর সম্পূর্ণ অটোমেশন প্যাকেজ, তৈরির লক্ষ্যমাত্রা ১৪ দিন। বাংলা DM এজেন্ট, অর্ডার ট্র্যাকার, bKash পেমেন্ট ওয়ার্কফ্লো এবং কাস্টমার ফলো-আপ — একসাথে ৳৫০,০০০-এ।">
+            The F-Commerce AI Sprint is SYSmoAI's flagship package, with a target 14-day build, for Bangladeshi Facebook sellers: Bangla-aware DM agent, order tracker, bKash payment workflow, and customer re-engagement — all deployed, trained, and live for ৳50,000 ($600 USD). 50% upfront, 50% on delivery. Includes 90-day support.
           </DirectAnswer>
         </div>
       </div>
