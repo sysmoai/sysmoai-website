@@ -43,7 +43,7 @@ export default function AIRetainer() {
         { q: 'Can I cancel anytime?', a: 'Yes. Monthly billing, cancel before the next billing cycle. No lock-in, no cancellation fee.' },
         { q: 'What if I need more than 4–8 hours this month?', a: 'We\'ll let you know in advance and offer an add-on block at a discounted hourly rate for Retainer clients.' },
         { q: 'How does communication work?', a: 'Priority WhatsApp channel — we respond within 2 hours during working hours. Monthly video call for planning.' },
-        { q: 'What\'s the minimum commitment?', a: '1 month. Most clients stay 6–12+ months because the value compounds over time.' },
+        { q: 'What\'s the minimum commitment?', a: '1 month.' },
       ]}
       relatedServices={[
         { href: '/services/ai-sprint', label: 'F-Commerce AI Sprint (start here)', price: '৳50,000' },

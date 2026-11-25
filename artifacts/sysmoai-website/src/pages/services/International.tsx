@@ -13,14 +13,14 @@ const fadeUp = {
 const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.1 } } };
 
 const reasons = [
-  { icon: '💰', title: '60–80% cost savings', desc: 'vs US/EU consultants — same quality, fraction of the price' },
+  { icon: '💰', title: 'Bangladesh-based rates', desc: 'Clear USD pricing, confirmed in your written proposal' },
   { icon: '🏆', title: 'Global standards', desc: 'Rigorous prompt engineering and AI systems practice' },
-  { icon: '🗂️', title: 'Notion OS specialist', desc: 'One of the most advanced Notion architects in Asia' },
+  { icon: '🗂️', title: 'Notion OS specialist', desc: 'Connected databases, dashboards and SOPs' },
   { icon: '🤖', title: 'Custom AI agents', desc: 'WhatsApp, web, and custom platform integration' },
   { icon: '⚙️', title: 'n8n automation expert', desc: 'Complex workflow automation for any tool stack' },
-  { icon: '💳', title: 'International payments', desc: 'Wise and Payoneer accepted — easy, fast, no friction' },
+  { icon: '💳', title: 'International payments', desc: 'USD invoicing; payment method confirmed at proposal stage' },
   { icon: '🌐', title: 'English-first', desc: 'No language barrier, clear communication, async-friendly' },
-  { icon: '✅', title: 'Results guarantee', desc: 'We don\'t get paid until it works — no risk to you' },
+  { icon: '✅', title: 'Written acceptance test', desc: 'Agreed before work starts; refunds follow our Refund Policy' },
 ];
 
 const services = [
@@ -40,7 +40,7 @@ export default function International() {
   const body = isDark ? '#94A3B8' : '#475569';
 
   React.useEffect(() => {
-    document.title = 'AI Consulting for International Clients | World-Class AI at Bangladesh Rates | SYSmoAI';
+    document.title = 'AI Consulting for International Clients | AI Systems at Bangladesh Rates | SYSmoAI';
   }, []);
 
   return (
@@ -63,14 +63,14 @@ export default function International() {
             className="text-4xl md:text-6xl font-bold tracking-tight leading-tight mb-6"
             style={{ color: heading }}
           >
-            World-Class AI Expertise.<br />Bangladesh Rates.
+            AI Systems, Built in Bangladesh.<br />Bangladesh Rates.
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
             className="text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed"
             style={{ color: body }}
           >
-            US and EU AI consultants charge $200–$500/hr. SYSmoAI delivers the same expertise — Notion OS, custom AI agents, n8n automation — at a fraction of the cost. International payments via Wise and Payoneer.
+            SYSmoAI builds Notion OS, custom AI agents and n8n automation from Bangladesh, with a written acceptance test before every project. Payment method is confirmed at the proposal stage.
           </motion.p>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/free-ai-audit" className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all min-h-[52px] shadow-lg">
@@ -88,7 +88,7 @@ export default function International() {
       <section className="pt-10 pb-0 bg-white">
         <div className="max-w-4xl mx-auto px-4">
           <DirectAnswer>
-            SYSmoAI serves international clients (US, UK, Canada, Australia, Southeast Asia) with world-class AI consulting at Bangladesh rates — 60–80% below US/EU agency prices. Services: AI Quick Win ($50–$100), F-Commerce AI Sprint ($600), AI Retainer ($250/month), Notion OS ($800–$5,000), AI Agents ($2,500–$15,000). The payment method is confirmed at the proposal stage. Founder Emon Hossain has 3+ years of hands-on experience building production AI systems.
+            SYSmoAI is open to international clients (US, UK, Canada, Australia, Southeast Asia) with AI consulting at Bangladesh-based rates. Services: AI Quick Win ($50–$100), F-Commerce AI Sprint ($600), AI Retainer ($250/month), Notion OS ($800–$5,000), AI Agents ($2,500–$15,000). The payment method is confirmed at the proposal stage. Founder Emon Hossain has 3+ years of hands-on experience building production AI systems.
           </DirectAnswer>
         </div>
       </section>
@@ -160,7 +160,7 @@ export default function International() {
           >
             {[
               { num: '01', title: 'Discovery call', desc: 'Free 30-min Zoom call to understand your project. No commitment.' },
-              { num: '02', title: 'Proposal + payment', desc: 'We send a detailed scope. Payment via Wise or Payoneer. 50% to start, 50% on delivery.' },
+              { num: '02', title: 'Proposal + payment', desc: 'We send a detailed scope. Payment method confirmed in the proposal. 50% to start, 50% on delivery.' },
               { num: '03', title: 'Build + deliver', desc: 'Async updates via email/Slack. You review at milestones. Full documentation on delivery.' },
             ].map((step, i) => (
               <motion.div key={i} variants={fadeUp} className="bg-slate-800 border border-slate-700 p-6 rounded-xl text-center">

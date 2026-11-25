@@ -1845,7 +1845,7 @@ export default function Home() {
                 🌍 International Clients
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                World-Class AI Expertise.<br />Not World-Class Prices.
+                AI Systems, Built in Bangladesh.<br />Bangladesh-Based Prices.
               </h2>
               <p className="text-slate-300 text-lg mb-6 leading-relaxed">
                 SYSmoAI builds Notion OS, custom AI agents and n8n automation from Bangladesh, at Bangladesh-based rates, with a written acceptance test before every project.

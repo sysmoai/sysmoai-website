@@ -82,11 +82,11 @@ const payments = [
 const methods = ['Payment method confirmed at proposal stage — BDT and USD both supported'];
 
 const pricingFAQ = [
-  { q: 'Are there any hidden fees?', a: 'No. The price shown is the price you pay. Payment terms are listed clearly for each package.' },
+  { q: 'Are there any hidden fees?', a: 'Your written proposal lists the full price and payment terms before you pay. Third-party tools may have their own monthly costs, which we disclose upfront.' },
   { q: 'How do international clients pay?', a: 'USD payments are supported; the exact payment method is confirmed at the proposal stage.' },
   { q: "What if the system doesn't deliver results?", a: "Every project is scoped with a written acceptance test agreed before work starts. If the agreed deliverables aren't met, the engagement ends at no extra charge beyond the deposit terms in your written scope." },
   { q: 'Can I cancel the retainer anytime?', a: 'Yes. The AI Retainer is month-to-month with no long-term commitment. Cancel anytime.' },
-  { q: 'Can I start with the Quick Win before committing to the Sprint?', a: "Absolutely. The AI Quick Win (৳3,750–7,500) lets you see how we work and gets one workflow automated in 3 days. Most F-commerce sellers who do the Quick Win proceed to the Sprint within 30 days." },
+  { q: 'Can I start with the Quick Win before committing to the Sprint?', a: "Absolutely. The AI Quick Win (৳3,750–7,500) lets you see how we work and gets one workflow automated in 3 days." },
 ];
 
 function FAQItem({ q, a, isDark }: { q: string; a: string; isDark: boolean }) {
@@ -125,7 +125,7 @@ export default function Pricing() {
   useEffect(() => {
     document.title = 'F-Commerce AI Sprint Pricing — SYSmoAI | BDT & USD';
     const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute('content', 'F-Commerce AI Sprint: ৳50,000 one-time + ৳20,000/mo retainer. Cancel anytime. Results-first guarantee. BDT and USD pricing for Bangladesh and international clients.');
+    if (meta) meta.setAttribute('content', 'F-Commerce AI Sprint: ৳50,000 one-time + ৳20,000/mo retainer. Cancel anytime. Written acceptance test before work starts. BDT and USD pricing for Bangladesh and international clients.');
 
     const script = document.createElement('script');
     script.type = 'application/ld+json';
@@ -168,7 +168,7 @@ export default function Pricing() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}>
             <span className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-8"
               style={{ background: isDark ? 'rgba(34,197,94,0.10)' : '#DCFCE7', border: `1px solid ${isDark ? 'rgba(34,197,94,0.30)' : '#86EFAC'}` }}>
-              <span className="text-sm font-medium" style={{ color: isDark ? '#4ADE80' : '#15803D' }}>✓ Results-first guarantee — refund if your system doesn't deliver</span>
+              <span className="text-sm font-medium" style={{ color: isDark ? '#4ADE80' : '#15803D' }}>✓ Written acceptance test before work starts</span>
             </span>
           </motion.div>
           <div className="flex items-center justify-center gap-3">
@@ -187,7 +187,7 @@ export default function Pricing() {
       <section className="pt-10 pb-0" style={{ background: bg1 }}>
         <div className="max-w-4xl mx-auto px-4">
           <DirectAnswer bangla="SYSmoAI AI কনসালটিং মূল্য: AI কুইক উইন ৳৩,৭৫০–৳৭,৫০০ (৩ দিন), F-কমার্স AI স্প্রিন্ট ৳৫০,০০০ (১৪ দিন), AI রিটেইনার ৳২০,০০০/মাস। আন্তর্জাতিক: $৫০–$৬০০ USD।">
-            SYSmoAI pricing in Bangladesh: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days), F-Commerce AI Sprint ৳50,000 (full system in 14 days), AI Retainer ৳20,000/month. International: $50–$600 USD — 60–80% below US/EU agency rates. Every package is scoped with a written acceptance test; the payment method is confirmed at the proposal stage.
+            SYSmoAI pricing in Bangladesh: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days), F-Commerce AI Sprint ৳50,000 (full system in 14 days), AI Retainer ৳20,000/month. International: $50–$600 USD. Every package is scoped with a written acceptance test; the payment method is confirmed at the proposal stage.
           </DirectAnswer>
         </div>
       </section>
@@ -325,7 +325,7 @@ export default function Pricing() {
             style={{ background: isDark ? 'rgba(255,255,255,0.04)' : '#0F172A', border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : '#1E293B'}` }}>
             <h2 className="text-xl font-bold text-white mb-4">🌍 International Clients</h2>
             <p className="text-slate-400 mb-6">
-              We serve clients worldwide at competitive USD rates — typically 60–80% less than US/EU agencies for the same quality.
+              We are open to clients worldwide, with USD pricing from Bangladesh.
             </p>
             <div className="grid md:grid-cols-2 gap-6 text-sm">
               <div>
@@ -364,9 +364,9 @@ export default function Pricing() {
               background: isDark ? 'rgba(34,197,94,0.06)' : 'rgba(34,197,94,0.06)',
               border: `1px solid ${isDark ? 'rgba(34,197,94,0.25)' : 'rgba(34,197,94,0.3)'}`,
             }}>
-            <h3 className="text-xl font-bold mb-3" style={{ color: heading }}>🛡️ Our Results-First Guarantee</h3>
+            <h3 className="text-xl font-bold mb-3" style={{ color: heading }}>🛡️ Acceptance Test and Refunds</h3>
             <p style={{ color: body }}>
-              We don't charge until your system delivers measurable results. If we can't improve your workflow within the agreed timeline, you get a full refund. Zero risk.
+              Every project is scoped with a written acceptance test before work starts. Payment follows the terms listed above, and refunds follow our <Link href="/refund-policy" className="text-blue-500 underline">Refund Policy</Link>. Price, scope, timeline and support terms are confirmed in your written proposal or agreement.
             </p>
           </motion.div>
         </div>

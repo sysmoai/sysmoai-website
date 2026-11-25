@@ -131,7 +131,7 @@ export function Footer() {
             <p className="text-sm italic" style={{ color: isDark ? '#334155' : '#CBD5E1', fontFamily: "'Space Grotesk', sans-serif" }}>
               Systems in Motion.
             </p>
-            <p className="text-sm" style={{ color: textColor }}>🇧🇩 Dhaka, Bangladesh · Serving clients worldwide</p>
+            <p className="text-sm" style={{ color: textColor }}>🇧🇩 Dhaka, Bangladesh · Open to clients worldwide</p>
 
             {/* Social Media Links */}
             <div className="flex gap-3 pt-1">

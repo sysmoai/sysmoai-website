@@ -211,7 +211,7 @@ const staticRoutes: Record<string, RouteSeo> = {
     ...base('/services/international'),
     schemas: [
       ORG_SCHEMA,
-      serviceSchema('International AI Consulting', '60-80% cost savings vs Western consultants — same quality, global delivery. Payment details confirmed at proposal stage.', `${SITE_URL}/services/international`),
+      serviceSchema('International AI Consulting', 'Remote AI consulting from Bangladesh. Payment details confirmed at proposal stage.', `${SITE_URL}/services/international`),
       breadcrumbSchema([home, services, { name: 'International Services', url: `${SITE_URL}/services/international` }]),
     ],
   },
@@ -248,12 +248,12 @@ const staticRoutes: Record<string, RouteSeo> = {
 
   '/proof': {
     ...base('/proof'),
-    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'Client Results', url: `${SITE_URL}/proof` }])],
+    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'Proof Standard', url: `${SITE_URL}/proof` }])],
   },
 
   '/results': {
     ...base('/results'),
-    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'Client Results', url: `${SITE_URL}/proof` }])],
+    schemas: [ORG_SCHEMA, breadcrumbSchema([home, { name: 'Proof Standard', url: `${SITE_URL}/proof` }])],
   },
 
   '/faq': {
@@ -264,16 +264,16 @@ const staticRoutes: Record<string, RouteSeo> = {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
         mainEntity: [
-          { q: 'What is SYSmoAI and how does it help businesses in Bangladesh?', a: "SYSmoAI is an AI systems studio in Dhaka, Bangladesh, founded by Emon Hossain in 2026. We build custom AI operating systems — automating DM replies, order management, payment workflows, and reporting — for F-commerce sellers, SME founders, agencies, and corporates. We draw on 3+ years of hands-on AI systems building across 8+ client categories. Unlike freelancers who do one-off tasks, we build complete, documented systems that run independently. Pricing starts at ৳3,750 for a single workflow (AI Quick Win, 3 days)." },
-          { q: 'How much does AI consulting cost in Bangladesh?', a: 'SYSmoAI pricing: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days); F-Commerce AI Sprint ৳50,000 (full system in 14 days); AI Retainer ৳20,000/month (ongoing management). International rates: $50–$600 USD — 60–80% below US/EU agency rates. The exact payment method is confirmed at the proposal stage. Quick Win is 100% advance; Sprint is 50% upfront, 50% on delivery; Retainer is monthly billing.' },
-          { q: 'How long does AI implementation take for a business in Bangladesh?', a: 'Timeline depends on scope: AI Quick Win (1 workflow) = 3 days; F-Commerce AI Sprint (full DM agent + order tracker + payment workflow + dashboard) = 14 days; AI Retainer = ongoing monthly. A free 30-minute discovery call takes 30 minutes and results in a clear action plan with tools, costs, and timeline. Most clients start seeing measurable results within 72 hours of Quick Win delivery, or within the first 2 weeks of Sprint delivery.' },
+          { q: 'What is SYSmoAI and how does it help businesses in Bangladesh?', a: "SYSmoAI is an AI systems studio in Dhaka, Bangladesh, founded by Emon Hossain in 2026. We build custom AI operating systems — automating DM replies, order management, payment workflows, and reporting — for F-commerce sellers, SME founders, agencies, and corporates. We draw on 3+ years of hands-on AI systems building. Unlike freelancers who do one-off tasks, we build complete, documented systems that run independently. Pricing starts at ৳3,750 for a single workflow (AI Quick Win, 3 days)." },
+          { q: 'How much does AI consulting cost in Bangladesh?', a: 'SYSmoAI pricing: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days); F-Commerce AI Sprint ৳50,000 (full system in 14 days); AI Retainer ৳20,000/month (ongoing management). International rates: $50–$600 USD. The exact payment method is confirmed at the proposal stage. Quick Win is 100% advance; Sprint is 50% upfront, 50% on delivery; Retainer is monthly billing.' },
+          { q: 'How long does AI implementation take for a business in Bangladesh?', a: 'Timeline depends on scope: AI Quick Win (1 workflow) = 3 days; F-Commerce AI Sprint (full DM agent + order tracker + payment workflow + dashboard) = 14 days; AI Retainer = ongoing monthly. A free 30-minute discovery call takes 30 minutes and results in a clear action plan with tools, costs, and timeline.' },
           { q: 'What AI tools does SYSmoAI use to automate business workflows?', a: 'SYSmoAI uses ChatGPT (OpenAI GPT-4o), Claude (Anthropic), Notion, n8n, Zapier, Make, WhatsApp Business API, ManyChat, bKash/Nagad integrations, Google Workspace, Airtable, and LangChain — selected based on your specific business model. We work with what you already use and add only what you need. Every system is built within your own accounts so you own it completely.' },
           { q: 'How does F-commerce automation work in Bangladesh?', a: "F-commerce automation connects your Facebook Business Page Messenger to an AI agent that auto-replies DMs in Bangla and English, captures orders, confirms bKash/Nagad payments, and sends follow-up messages — all without manual intervention. SYSmoAI's F-Commerce AI Sprint deploys this full stack in 14 days for ৳50,000 — replacing 14-hour manual workdays for sellers managing 100–500+ DMs/day. Bangladesh has 700,000+ active F-commerce sellers; manual management at scale is no longer viable." },
           { q: 'What is an AI Operating System (AI OS) for business?', a: "An AI Operating System (AI OS) is a connected suite of AI tools, automations, and dashboards that runs your business operations — handling DMs, orders, payments, reports, and follow-ups — with minimal human input. Unlike using individual tools like ChatGPT or Notion alone, an AI OS integrates everything so actions in one system trigger actions in others. SYSmoAI specializes in building AI OS for Bangladesh businesses, with the F-Commerce AI Sprint as the standard deployment for F-commerce sellers." },
           { q: 'Is there a guarantee on AI consulting results?', a: "Every engagement is scoped with a written acceptance test agreed before work starts. You run the system yourself against that test — if the agreed deliverables are not met, the engagement ends with no additional charge beyond the deposit terms in your written scope. We sign a confidentiality agreement before every project, and every system is built within your own accounts — your data stays under your control at all times." },
           { q: 'What makes SYSmoAI different from freelancers or other AI consultants in Bangladesh?', a: 'Key differences: (1) SYSmoAI builds complete, documented systems — not one-off tasks. (2) Every project includes team training + video documentation so you run it independently. (3) 3-month post-launch support is standard. (4) Founder Emon Hossain has spent 3+ years building production AI systems and prompt-engineering workflows. (5) We specialize in Bangladesh market realities: bKash/Nagad automation, Bangla-language AI, F-commerce workflow patterns. (6) Every project is scoped with a written acceptance test — if the agreed deliverables aren\'t met, the engagement ends at no extra charge.' },
           { q: 'Do I need technical knowledge to use AI systems built by SYSmoAI?', a: 'Not after setup. SYSmoAI handles all technical implementation. You attend a 30-minute onboarding call, review and approve the system, and receive complete video documentation so you (and your team) can manage it using simple dashboards — no coding, no technical background required. If something breaks after delivery, we fix it within the support period. For Retainer clients, we handle ongoing maintenance entirely.' },
-          { q: 'How do I start working with SYSmoAI?', a: 'Three ways to start: (1) Book a free 30-minute AI audit at sysmoai.com/free-ai-audit — Emon Hossain reviews your workflow and gives you a specific action plan (no commitment required). (2) Message on WhatsApp — we respond within 2 hours on working days. (3) Start directly with an AI Quick Win (৳3,750) — tell us your #1 workflow problem and we automate it in 3 days. Most clients book the free audit first, then choose a package.' },
+          { q: 'How do I start working with SYSmoAI?', a: 'Three ways to start: (1) Book a free 30-minute AI audit at sysmoai.com/free-ai-audit — Emon Hossain reviews your workflow and gives you a specific action plan (no commitment required). (2) Message on WhatsApp — we respond within 2 hours on working days. (3) Start directly with an AI Quick Win (৳3,750) — tell us your #1 workflow problem and we automate it in 3 days.' },
         ].map((faq) => ({
           '@type': 'Question',
           name: faq.q,

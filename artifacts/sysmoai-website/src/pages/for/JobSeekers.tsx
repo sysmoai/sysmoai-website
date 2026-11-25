@@ -37,7 +37,7 @@ export default function JobSeekers() {
         { q: 'What if I\'m switching industries entirely?', a: 'Career switchers are our specialty. We build portfolio projects in the new field so you have proof before you have experience.' },
         { q: 'Which AI skills are most in demand right now?', a: 'Prompt engineering, AI-assisted content production, workflow automation (n8n/Zapier), and AI research tools. We\'ll map the exact skills for your target role.' },
         { q: 'How long does the CV + LinkedIn work take?', a: '5–7 business days for a complete overhaul. We send drafts for your review before finalizing.' },
-        { q: 'Do you offer any guarantees?', a: 'We guarantee that your CV will be significantly improved. We cannot guarantee job placement — but our clients\' results speak for themselves.' },
+        { q: 'Do you offer any guarantees?', a: 'We cannot guarantee job placement. The deliverables are agreed in writing before work starts, and refunds follow our Refund Policy.' },
       ]}
     />
   );

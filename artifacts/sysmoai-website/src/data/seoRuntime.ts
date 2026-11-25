@@ -61,7 +61,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/services/international': {
     title: 'International AI Consulting Services | SYSmoAI Bangladesh',
     description:
-      'World-class AI consulting from Bangladesh at 60–80% savings vs US/EU consultants. SYSmoAI serves clients in the US, UK, Canada, Australia, and worldwide via Wise and Payoneer.',
+      'AI consulting from Bangladesh at Bangladesh-based rates. SYSmoAI is open to international clients; the payment method is confirmed at the proposal stage.',
     canonical: `${SITE_URL}/services/international`,
   },
 
@@ -75,7 +75,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/about': {
     title: 'About SYSmoAI | Emon Hossain — AI Systems Architect Bangladesh',
     description:
-      "Meet Emon Hossain, founder of SYSmoAI — an AI Systems Architect in Dhaka with 3+ years building production AI systems, serving clients worldwide.",
+      "Meet Emon Hossain, founder of SYSmoAI — an AI Systems Architect in Dhaka with 3+ years building production AI systems, open to clients worldwide.",
     canonical: `${SITE_URL}/about`,
   },
 
@@ -87,14 +87,14 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   },
 
   '/proof': {
-    title: 'Client Results & Case Studies | SYSmoAI Bangladesh AI Consulting',
+    title: 'Proof Standard | SYSmoAI Bangladesh AI Consulting',
     description:
       "SYSmoAI proof standard: verified client results are published only with client consent and measured numbers. Until then this page shows example scopes, not client results.",
     canonical: `${SITE_URL}/proof`,
   },
 
   '/results': {
-    title: 'Client Results & Case Studies | SYSmoAI Bangladesh AI Consulting',
+    title: 'Proof Standard | SYSmoAI Bangladesh AI Consulting',
     description:
       "SYSmoAI proof standard: verified client results are published only with client consent and measured numbers. Until then this page shows example scopes, not client results.",
     canonical: `${SITE_URL}/proof`,
@@ -144,7 +144,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
 
   '/refund-policy': {
     title: 'Refund Policy | SYSmoAI',
-    description: "SYSmoAI's refund policy — our guarantee and refund terms for all AI consulting services.",
+    description: "SYSmoAI's refund policy — refund and cancellation terms for all AI consulting services.",
     canonical: `${SITE_URL}/refund-policy`,
   },
 };

@@ -16,17 +16,17 @@ const fadeUp = {
 const faqs = [
   {
     q: 'What is SYSmoAI and how does it help businesses in Bangladesh?',
-a: 'SYSmoAI is an AI systems studio in Dhaka, Bangladesh, founded by Emon Hossain in 2026. We build custom AI operating systems — automating DM replies, order management, payment workflows, and reporting — for F-commerce sellers, SME founders, agencies, and corporates. We draw on 3+ years of hands-on AI systems building across 8+ client categories. Unlike freelancers who do one-off tasks, we build complete, documented systems that run independently. Pricing starts at ৳3,750 for a single workflow (AI Quick Win, 3 days).',
+a: 'SYSmoAI is an AI systems studio in Dhaka, Bangladesh, founded by Emon Hossain in 2026. We build custom AI operating systems — automating DM replies, order management, payment workflows, and reporting — for F-commerce sellers, SME founders, agencies, and corporates. We draw on 3+ years of hands-on AI systems building. Unlike freelancers who do one-off tasks, we build complete, documented systems that run independently. Pricing starts at ৳3,750 for a single workflow (AI Quick Win, 3 days).',
     bangla: 'SYSmoAI হলো ঢাকার একটি AI সিস্টেম স্টুডিও, ২০২৬ সালে ইমন হোসেন প্রতিষ্ঠিত। আমরা কাস্টম AI অপারেটিং সিস্টেম তৈরি করি।',
   },
   {
     q: 'How much does AI consulting cost in Bangladesh?',
-    a: 'SYSmoAI pricing: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days); F-Commerce AI Sprint ৳50,000 (full system in 14 days); AI Retainer ৳20,000/month (ongoing management). International rates: $50–$600 USD — 60–80% below US/EU agency rates. The exact payment method is confirmed at the proposal stage. Quick Win is 100% advance; Sprint is 50% upfront, 50% on delivery; Retainer is monthly billing.',
+    a: 'SYSmoAI pricing: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days); F-Commerce AI Sprint ৳50,000 (full system in 14 days); AI Retainer ৳20,000/month (ongoing management). International rates: $50–$600 USD. The exact payment method is confirmed at the proposal stage. Quick Win is 100% advance; Sprint is 50% upfront, 50% on delivery; Retainer is monthly billing.',
     bangla: 'AI কনসালটিং খরচ: AI কুইক উইন ৳৩,৭৫০–৳৭,৫০০, F-কমার্স AI স্প্রিন্ট ৳৫০,০০০, AI রিটেইনার ৳২০,০০০/মাস।',
   },
   {
     q: 'How long does AI implementation take for a business in Bangladesh?',
-    a: 'Timeline depends on scope: AI Quick Win (1 workflow) = 3 days; F-Commerce AI Sprint (full DM agent + order tracker + payment workflow + dashboard) = 14 days; AI Retainer = ongoing monthly. A free 30-minute discovery call takes 30 minutes and results in a clear action plan with tools, costs, and timeline. Most clients start seeing measurable results within 72 hours of Quick Win delivery, or within the first 2 weeks of Sprint delivery.',
+    a: 'Timeline depends on scope: AI Quick Win (1 workflow) = 3 days; F-Commerce AI Sprint (full DM agent + order tracker + payment workflow + dashboard) = 14 days; AI Retainer = ongoing monthly. A free 30-minute discovery call takes 30 minutes and results in a clear action plan with tools, costs, and timeline.',
     bangla: 'সময়সীমা: AI কুইক উইন ৩ দিন, F-কমার্স AI স্প্রিন্ট ১৪ দিন, AI রিটেইনার মাসিক।',
   },
   {
@@ -61,7 +61,7 @@ a: 'SYSmoAI is an AI systems studio in Dhaka, Bangladesh, founded by Emon Hossai
   },
   {
     q: 'How do I start working with SYSmoAI?',
-    a: 'Three ways to start: (1) Book a free 30-minute AI audit at sysmoai.com/free-ai-audit — Emon Hossain reviews your workflow and gives you a specific action plan (no commitment required). (2) Message on WhatsApp — we respond within 2 hours on working days. (3) Start directly with an AI Quick Win (৳3,750) — tell us your #1 workflow problem and we automate it in 3 days. Most clients book the free audit first, then choose a package.',
+    a: 'Three ways to start: (1) Book a free 30-minute AI audit at sysmoai.com/free-ai-audit — Emon Hossain reviews your workflow and gives you a specific action plan (no commitment required). (2) Message on WhatsApp — we respond within 2 hours on working days. (3) Start directly with an AI Quick Win (৳3,750) — tell us your #1 workflow problem and we automate it in 3 days.',
     bangla: 'শুরু করুন: (১) বিনামূল্যে AI অডিট বুক করুন, (২) WhatsApp-এ মেসেজ করুন, বা (৩) সরাসরি AI কুইক উইন (৳৩,৭৫০) দিয়ে শুরু করুন।',
   },
 ];

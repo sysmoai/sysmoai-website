@@ -34,7 +34,7 @@ const resultCards = [
 export default function Proof() {
   const { isDark } = useTheme();
   React.useEffect(() => {
-    document.title = 'Client Results & Case Studies — SYSmoAI';
+    document.title = 'Proof Standard — SYSmoAI';
     const meta = document.querySelector('meta[name="description"]');
     if (meta) meta.setAttribute('content', 'SYSmoAI proof standard: verified client results are published only with client consent and measured numbers. Until then this page shows example scopes, not client results.');
   }, []);
@@ -165,12 +165,12 @@ export default function Proof() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="bg-blue-50 border border-blue-100 rounded-2xl p-10 text-center">
-            <h2 className="text-2xl font-bold text-slate-900 mb-3">Detailed case studies coming soon</h2>
+            <h2 className="text-2xl font-bold text-slate-900 mb-3">No client case study published yet</h2>
             <p className="text-slate-600 mb-3 max-w-md mx-auto">
               When a client consents, we will publish a verified case study with measured numbers. Until then, nothing here is a client result.
             </p>
             <p className="text-slate-500 text-sm mb-8">
-              Want to be our next success story?
+              Want to be the first documented case study?
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/free-ai-audit"

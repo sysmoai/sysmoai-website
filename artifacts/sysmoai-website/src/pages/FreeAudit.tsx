@@ -180,7 +180,7 @@ export default function FreeAudit() {
     "You've tried AI tools before but they didn't stick",
     "You want to automate but don't know where to start",
     "You're a Bangladesh SME, agency, or F-Commerce seller",
-    "You're an international client looking for world-class AI at better rates",
+    "You're an international client looking for AI systems at Bangladesh-based rates",
   ];
 
   return (

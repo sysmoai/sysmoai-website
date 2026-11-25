@@ -39,7 +39,7 @@ export default function AIAgentDev() {
       faqs={[
         { q: 'What platforms can the agent be deployed on?', a: 'WhatsApp Business API, website chat widget, Facebook Messenger, Telegram, and custom integrations. Most common: WhatsApp.' },
         { q: 'Can the agent handle Bangla language queries?', a: 'Yes. We train agents for Bangla, English, or bilingual conversations — standard for Bangladesh clients.' },
-        { q: 'Will the agent sound like a robot?', a: 'No. We design the agent with your brand voice, your phrasing, your personality. Most clients\' customers don\'t realize it\'s an AI.' },
+        { q: 'Will the agent sound like a robot?', a: 'No. We design the agent with your brand voice, your phrasing, your personality.' },
         { q: 'What happens when the agent can\'t answer something?', a: 'It escalates to a human with a full context summary — so your team knows exactly where the conversation stands.' },
         { q: 'What\'s included in the price range?', a: 'Lower end: single-channel agent with limited knowledge base. Higher end: multi-channel, complex workflows, full CRM integration. We quote after discovery.' },
       ]}
