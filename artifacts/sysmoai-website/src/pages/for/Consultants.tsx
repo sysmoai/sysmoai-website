@@ -16,7 +16,7 @@ export default function Consultants() {
         { emoji: '💰', label: 'Selling time has a ceiling', desc: 'I\'m selling 1:1 time. I can\'t scale because there\'s only so many hours in a day.' },
       ]}
       beforeAfter={[
-        { before: '2-3 day manual onboarding — 15 emails sent individually, contracts sent one by one', after: 'Automated onboarding in 15 minutes — intake, contract, payment link, welcome email sent automatically' },
+        { before: '2-3 day manual onboarding — 15 emails sent individually, contracts sent one by one', after: 'Automated onboarding in 15 minutes — intake, contract, payment link, welcome email drafted for your approval' },
         { before: 'Rebuilding proposals for 3 hours each — inconsistent quality, slow turnaround', after: 'AI proposal system generates a professional draft in 20 minutes — you refine, client approves' },
         { before: 'Knowledge locked in head — business stops if you\'re sick or traveling', after: 'SOP library + knowledge base in Notion — any team member can run the process without you' },
       ]}

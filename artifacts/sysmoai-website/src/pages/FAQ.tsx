@@ -21,7 +21,7 @@ a: 'SYSmoAI is an AI systems studio in Dhaka, Bangladesh, founded by Emon Hossai
   },
   {
     q: 'How much does AI consulting cost in Bangladesh?',
-    a: 'SYSmoAI pricing: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days); F-Commerce AI Sprint ৳50,000 (target 14-day build); AI Retainer ৳20,000/month (ongoing management). International rates: $50–$600 USD. The exact payment method is confirmed at the proposal stage. Quick Win is 100% advance; Sprint is 50% upfront, 50% on delivery; Retainer is monthly billing.',
+    a: 'SYSmoAI pricing: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days); F-Commerce AI Sprint ৳50,000 (target 14-day build); AI Retainer ৳20,000/month (ongoing management). International (USD): $50–$600 for Quick Win, Sprint and Retainer; other services up to $15,000. The exact payment method is confirmed at the proposal stage. Quick Win is 100% advance; Sprint is 50% upfront, 50% on delivery; Retainer is monthly billing.',
     bangla: 'AI কনসালটিং খরচ: AI কুইক উইন ৳৩,৭৫০–৳৭,৫০০, F-কমার্স AI স্প্রিন্ট ৳৫০,০০০, AI রিটেইনার ৳২০,০০০/মাস।',
   },
   {
@@ -36,8 +36,8 @@ a: 'SYSmoAI is an AI systems studio in Dhaka, Bangladesh, founded by Emon Hossai
   },
   {
     q: 'How does F-commerce automation work in Bangladesh?',
-    a: 'F-commerce automation connects your Facebook Business Page Messenger to an AI agent that auto-replies DMs in Bangla and English, captures orders, confirms bKash/Nagad payments, and sends follow-up messages — all without manual intervention. SYSmoAI\'s F-Commerce AI Sprint builds this full stack for ৳50,000 (target 14-day build) — replacing 14-hour manual workdays for sellers managing 100–500+ DMs/day. Bangladesh has 700,000+ active F-commerce sellers (a-commerce Bangladesh 2023); manual management at scale is no longer viable.',
-    bangla: 'F-কমার্স অটোমেশন ফেসবুক মেসেঞ্জারকে AI এজেন্টের সাথে সংযুক্ত করে — DM অটো-রিপ্লাই, অর্ডার ট্র্যাকিং, bKash কনফার্মেশন।',
+    a: 'F-commerce automation connects your Facebook Business Page Messenger to an AI agent that drafts DM replies in Bangla and English, captures orders, prepares bKash/Nagad confirmations, and drafts follow-up messages — you approve every message before it is sent. SYSmoAI\'s F-Commerce AI Sprint builds this full stack for ৳50,000 (target 14-day build) — replacing 14-hour manual workdays for sellers managing 100–500+ DMs/day. Bangladesh has 700,000+ active F-commerce sellers (a-commerce Bangladesh 2023); manual management at scale is no longer viable.',
+    bangla: 'F-কমার্স অটোমেশন ফেসবুক মেসেঞ্জারকে AI এজেন্টের সাথে সংযুক্ত করে — DM উত্তরের খসড়া (আপনি অনুমোদন করে পাঠান), অর্ডার ট্র্যাকিং, bKash কনফার্মেশন।',
   },
   {
     q: 'What is an AI Operating System (AI OS) for business?',
@@ -96,8 +96,8 @@ export default function FAQ() {
 
       <section className="py-10" style={{ background: bg1 }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <DirectAnswer bangla="SYSmoAI বাংলাদেশের AI কনসালটিং কোম্পানি। আমরা F-কমার্স বিক্রেতা, SME ফাউন্ডার এবং এজেন্সির জন্য কাস্টম AI সিস্টেম তৈরি করি। AI কুইক উইন ৳৩,৭৫০ থেকে শুরু।">
-            SYSmoAI is Bangladesh's AI consulting company founded by Emon Hossain in 2026. We build custom AI systems — automating DMs, orders, payments, and workflows — for F-commerce sellers, SME founders, and agencies. Pricing starts at ৳3,750 (AI Quick Win, 3 days). Free 30-minute AI audit available with no commitment.
+          <DirectAnswer bangla="SYSmoAI বাংলাদেশের AI কনসালটিং স্টুডিও। আমরা F-কমার্স বিক্রেতা, SME ফাউন্ডার এবং এজেন্সির জন্য কাস্টম AI সিস্টেম তৈরি করি। AI কুইক উইন ৳৩,৭৫০ থেকে শুরু।">
+            SYSmoAI is Bangladesh's AI consulting studio founded by Emon Hossain in 2026. We build custom AI systems — automating DMs, orders, payments, and workflows — for F-commerce sellers, SME founders, and agencies. Pricing starts at ৳3,750 (AI Quick Win, 3 days). Free 30-minute AI audit available with no commitment.
           </DirectAnswer>
         </div>
       </section>

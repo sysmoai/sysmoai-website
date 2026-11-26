@@ -54,7 +54,7 @@ const slideRight = {
 const featuredServices = [
   { icon: Zap,       title: 'AI Quick Win', subtitle: 'Your #1 problem automated in 3 days',  description: '', bdPrice: '৳3,750–7,500',    usdPrice: '$50–$100',    href: '/services/ai-quick-win', featured: false, tag: 'Best entry point'  },
   { icon: Timer,     title: 'F-Commerce AI Sprint', subtitle: 'Full F-Commerce AI stack, target 14-day build', description: '', bdPrice: '৳50,000', usdPrice: '$600', href: '/services/ai-sprint', featured: true, tag: 'Most popular' },
-  { icon: RefreshCw, title: 'AI Retainer',  subtitle: 'Ongoing AI management every month',     description: 'We manage and evolve your AI systems every month. Monthly improvements, priority WhatsApp support, and a full performance report — so your AI keeps working as your business grows.', bdPrice: '৳20,000/mo', usdPrice: '$250/mo', href: '/services/ai-retainer', featured: false, tag: 'Cancel anytime', features: ['Ongoing AI system management', 'Monthly improvements & optimizations', 'Priority WhatsApp support', 'Monthly performance report'] },
+  { icon: RefreshCw, title: 'AI Retainer',  subtitle: 'Ongoing AI management every month',     description: 'We manage and evolve your AI systems every month. Monthly improvements, WhatsApp support, and a full performance report — so your AI keeps working as your business grows.', bdPrice: '৳20,000/mo', usdPrice: '$250/mo', href: '/services/ai-retainer', featured: false, tag: 'Cancel anytime', features: ['Ongoing AI system management', 'Monthly improvements & optimizations', 'WhatsApp support', 'Monthly performance report'] },
 ];
 
 const otherServices = [
@@ -174,7 +174,7 @@ function AIStatusCard() {
         <span className="text-xs text-emerald-400 font-semibold">AI Running</span>
       </div>
       <div className="space-y-1">
-        {['Replying to DMs...', 'Filing reports...', 'Following up leads...'].map((t, i) => (
+        {['Drafting DM replies...', 'Filing reports...', 'Drafting follow-ups...'].map((t, i) => (
           <div key={i} className="flex items-center gap-2">
             <CheckCircle2 size={11} className="text-blue-400 shrink-0" />
             <span className="text-[11px] text-slate-400">{t}</span>
@@ -286,7 +286,7 @@ function ChaosVisual() {
         style={{ background: 'rgba(127,29,29,0.92)', border: '1px solid rgba(239,68,68,0.3)', backdropFilter: 'blur(8px)' }}>
         <div className="text-[10px] font-black tracking-wider" style={{ color: '#FCA5A5' }}>LOST THIS MONTH</div>
         <div className="text-lg font-black text-white">৳2,40,000</div>
-        <div className="text-[10px]" style={{ color: '#DC2626' }}>untracked leads</div>
+        <div className="text-[10px]" style={{ color: '#DC2626' }}>example: untracked leads</div>
       </motion.div>
       {/* Overdue tasks overlay */}
       <div className="absolute bottom-3 left-3 right-3 rounded-xl p-3"
@@ -605,7 +605,7 @@ export default function Home() {
             className="text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed"
             style={{ color: isDark ? '#94A3B8' : '#64748B' }}
           >
-            Bangladesh's F-Commerce Operating System. We build Bangla DM auto-reply agents,
+            Bangladesh's F-Commerce Operating System. We build Bangla DM reply-draft agents,
             order trackers, and bKash workflows for Facebook sellers in Dhaka —
             target 14-day build for ৳50,000, scope agreed in writing first.
           </motion.p>
@@ -716,7 +716,7 @@ export default function Home() {
       <section className="pt-10 pb-0" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <DirectAnswer bangla="SYSmoAI হলো ঢাকার একটি AI সিস্টেম স্টুডিও — ইমন হোসেন কর্তৃক প্রতিষ্ঠিত। F-কমার্স অটোমেশন, AI এজেন্ট, n8n ওয়ার্কফ্লো এবং Notion OS তৈরিতে বিশেষজ্ঞ।">
-            SYSmoAI is an AI systems studio in Dhaka, Bangladesh — founded by Emon Hossain, an AI systems architect with 3+ years of hands-on building. We build AI automation systems for F-commerce sellers, agencies, SMEs, freelancers, and corporate teams: DM agents, order trackers, bKash workflows, Notion OS, n8n automations, and AI agents. Services from ৳3,750 ($50) to ৳2,00,000 ($2,400). Based in Dhaka, serving globally.
+            SYSmoAI is an AI systems studio in Dhaka, Bangladesh — founded by Emon Hossain, an AI systems architect with 3+ years of hands-on building. We build AI automation systems for F-commerce sellers, agencies, SMEs, freelancers, and corporate teams: DM agents, order trackers, bKash workflows, Notion OS, n8n automations, and AI agents. Packages from ৳3,750 ($50); other services up to ৳2,00,000 (international: up to $15,000). Based in Dhaka, serving globally.
           </DirectAnswer>
         </div>
       </section>
@@ -962,7 +962,7 @@ export default function Home() {
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }} variants={stagger}
               className="space-y-4 order-2 lg:order-1">
               {[
-                { icon: Clock,    color: '#10B981', title: 'Save 15–20 hours every week',    desc: 'AI handles DMs, reports, and follow-ups automatically.', result: '15 hrs/week back' },
+                { icon: Clock,    color: '#10B981', title: 'Save 15–20 hours every week',    desc: 'AI drafts DM replies, reports, and follow-ups for your approval.', result: '15 hrs/week back' },
                 { icon: TrendingUp, color: '#3B82F6', title: 'Revenue grows 3× or more',     desc: 'More time for high-value work, better client experience.', result: 'Revenue 3×' },
                 { icon: BarChart3,  color: '#8B5CF6', title: 'Full visibility, zero chaos',  desc: 'Real-time dashboard — see everything without asking anyone.', result: 'Always in control' },
               ].map((item, i) => (
@@ -1058,7 +1058,7 @@ export default function Home() {
               Watch your AI system run.
             </h2>
             <p className="text-base max-w-lg mx-auto" style={{ color: isDark ? '#64748B' : '#94A3B8' }}>
-              Automations completing in real time. WhatsApp replies. Revenue tracking. Reports — all without lifting a finger.
+              Illustration: WhatsApp reply drafts, revenue tracking, and reports. You approve messages before they are sent.
             </p>
           </motion.div>
 
@@ -1081,7 +1081,7 @@ export default function Home() {
             <div className="absolute top-4 left-4 flex items-center gap-2 backdrop-blur-sm px-3 py-1.5 rounded-xl"
               style={{ background: isDark ? 'rgba(10,11,15,0.8)' : 'rgba(255,255,255,0.85)', border: `1px solid ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(37,99,235,0.15)'}` }}>
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-xs font-semibold" style={{ color: isDark ? '#94A3B8' : '#475569' }}>Live automation running</span>
+              <span className="text-xs font-semibold" style={{ color: isDark ? '#94A3B8' : '#475569' }}>Illustration</span>
             </div>
             {/* Overlay: bottom CTA */}
             <div className="absolute bottom-0 left-0 right-0 p-5 flex items-center justify-between"
@@ -1103,8 +1103,8 @@ export default function Home() {
             className="grid grid-cols-3 gap-6 mt-10">
             {[
               { stat: 'Draft', label: 'Reply prepared for owner review', color: '#10B981' },
-              { stat: '24/7',    label: 'Always-on automation', color: '#3B82F6' },
-              { stat: '৳0',      label: 'Human labor for routine tasks', color: '#8B5CF6' },
+              { stat: 'AI',      label: 'Drafts replies for you', color: '#3B82F6' },
+              { stat: 'Human',   label: 'Approval before sending', color: '#8B5CF6' },
             ].map((item, i) => (
               <motion.div key={i} variants={fadeUp} className="text-center">
                 <div className="text-2xl md:text-3xl font-black mb-1" style={{ color: item.color }}>{item.stat}</div>
@@ -1154,9 +1154,9 @@ export default function Home() {
               <p className="text-emerald-500 text-xs font-bold uppercase tracking-[0.15em] mb-4">After the F-Commerce AI Sprint</p>
               <ul className="space-y-3 mb-5">
                 {[
-                  'DMs answered automatically, 24/7 — zero missed orders',
+                  'Draft replies for every DM — you approve before sending',
                   'Order management system built inside your existing tools',
-                  'Automated follow-up sequences that bring buyers back',
+                  'Follow-up drafts for past buyers — you approve before sending',
                   'Real-time dashboard — know your numbers without asking anyone',
                   'You run the business. The system runs the ops.',
                 ].map((p, i) => (
@@ -1261,7 +1261,7 @@ export default function Home() {
                 price: showUSD ? '$250/mo' : '৳20,000/mo',
                 highlights: [
                   'Monthly AI system improvements',
-                  'Priority WhatsApp support',
+                  'WhatsApp support',
                   'Performance report each month',
                   'New automations as you grow',
                 ],
@@ -1763,8 +1763,8 @@ export default function Home() {
                 tag: 'n8n Automation',
                 tagSub: 'Workflows That Never Sleep',
                 title: 'End-to-End Workflow Automation',
-                desc: 'WhatsApp → CRM → Invoice → Follow-up sequence. Fully automated pipelines connecting all your tools — zero manual steps.',
-                features: ['WhatsApp auto-replies 24/7', 'Lead capture & qualification', 'Auto invoice generation', 'Customer follow-up sequences'],
+                desc: 'WhatsApp → CRM → Invoice → Follow-up sequence. Pipelines connecting your tools — you approve customer messages before they are sent.',
+                features: ['WhatsApp reply drafts you approve', 'Lead capture & qualification', 'Auto invoice generation', 'Customer follow-up sequences'],
                 href: '/services/n8n-automation',
                 gradient: 'linear-gradient(135deg, rgba(5,150,105,0.85) 0%, rgba(13,148,136,0.9) 100%)',
               },
@@ -1772,9 +1772,9 @@ export default function Home() {
                 img: '/images/ai-agents-network.webp',
                 accentColor: '#8B5CF6',
                 tag: 'Custom AI Agents',
-                tagSub: 'Working 24/7 For You',
-                title: 'AI Agents That Work While You Sleep',
-                desc: 'Custom-trained AI agents for WhatsApp, web, and your platforms. Handle queries, qualify leads, and generate reports autonomously.',
+                tagSub: 'You Approve Every Message',
+                title: 'AI Agents That Draft, You Approve',
+                desc: 'Custom-trained AI agents for WhatsApp, web, and your platforms. They draft replies, qualify leads, and generate reports; you approve messages before they are sent.',
                 features: ['Customer support automation', 'Lead qualification & scoring', 'Automated report generation', 'Multi-platform deployment'],
                 href: '/services/ai-agent-dev',
                 gradient: 'linear-gradient(135deg, rgba(124,58,237,0.85) 0%, rgba(67,56,202,0.9) 100%)',

@@ -18,7 +18,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/': {
     title: 'SYSmoAI — Stop Losing Orders in Your DMs | F-Commerce AI Bangladesh',
     description:
-      "Bangladesh's F-Commerce Operating System. We build Bangla DM auto-reply agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — target 14-day build for ৳50,000. Book a free F-Commerce audit.",
+      "Bangladesh's F-Commerce Operating System. We build Bangla DM reply-draft agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — target 14-day build for ৳50,000. Book a free F-Commerce audit.",
     canonical: `${SITE_URL}/`,
     ogType: 'website',
   },
@@ -40,14 +40,14 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/services/ai-sprint': {
     title: 'F-Commerce AI Sprint — Full System, Target 14-Day Build | SYSmoAI',
     description:
-      "Get a complete F-Commerce AI system with a target 14-day build. DM auto-reply agent, order tracker, bKash workflows for ৳50,000. SYSmoAI's anchor offer for Facebook sellers in Dhaka.",
+      "Get a complete F-Commerce AI system with a target 14-day build. DM reply-draft agent, order tracker, bKash workflows for ৳50,000. SYSmoAI's anchor offer for Facebook sellers in Dhaka.",
     canonical: `${SITE_URL}/services/ai-sprint`,
   },
 
   '/services/ai-retainer': {
     title: 'F-Commerce AI Retainer — Monthly AI Management | SYSmoAI',
     description:
-      "Keep your F-Commerce AI systems optimized with SYSmoAI's monthly Retainer. Ongoing improvements, priority WhatsApp support, and monthly performance report. ৳20,000/month.",
+      "Keep your F-Commerce AI systems optimized with SYSmoAI's monthly Retainer. Ongoing improvements, WhatsApp support, and monthly performance report. ৳20,000/month.",
     canonical: `${SITE_URL}/services/ai-retainer`,
   },
 
@@ -186,7 +186,7 @@ const blogRuntimeConfig: Record<string, RuntimeSeo> = Object.fromEntries(
 const DEFAULT_RUNTIME_SEO: RuntimeSeo = {
   title: 'SYSmoAI — Stop Losing Orders in Your DMs | F-Commerce AI Bangladesh',
   description:
-    "Bangladesh's F-Commerce Operating System. Bangla DM auto-reply agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — target 14-day build for ৳50,000.",
+    "Bangladesh's F-Commerce Operating System. Bangla DM reply-draft agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — target 14-day build for ৳50,000.",
   canonical: `${SITE_URL}/`,
   ogType: 'website',
 };

@@ -19,7 +19,7 @@ const anchorServices = [
     usd: '$600',
     href: '/services/ai-sprint',
     features: [
-      'Bangla DM auto-reply agent (24/7)',
+      'Bangla DM reply-draft agent (you approve before sending)',
       'Order management system (DM → delivery)',
       'bKash / Nagad payment workflow',
       'Customer re-engagement sequences',
@@ -38,7 +38,7 @@ const anchorServices = [
     href: '/services/ai-retainer',
     features: [
       'Monthly AI system improvements',
-      'Priority WhatsApp support',
+      'WhatsApp support (reply within one business day, as a target)',
       'New automations as you grow',
       'Monthly performance report',
     ],
@@ -186,8 +186,8 @@ export default function Pricing() {
       {/* Direct Answer — GEO */}
       <section className="pt-10 pb-0" style={{ background: bg1 }}>
         <div className="max-w-4xl mx-auto px-4">
-          <DirectAnswer bangla="SYSmoAI AI কনসালটিং মূল্য: AI কুইক উইন ৳৩,৭৫০–৳৭,৫০০ (৩ দিন), F-কমার্স AI স্প্রিন্ট ৳৫০,০০০ (লক্ষ্যমাত্রা ১৪ দিন), AI রিটেইনার ৳২০,০০০/মাস। আন্তর্জাতিক: $৫০–$৬০০ USD।">
-            SYSmoAI pricing in Bangladesh: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days), F-Commerce AI Sprint ৳50,000 (target 14-day build), AI Retainer ৳20,000/month. International: $50–$600 USD. Every package is scoped with a written acceptance test; the payment method is confirmed at the proposal stage.
+          <DirectAnswer bangla="SYSmoAI AI কনসালটিং মূল্য: AI কুইক উইন ৳৩,৭৫০–৳৭,৫০০ (৩ দিন), F-কমার্স AI স্প্রিন্ট ৳৫০,০০০ (লক্ষ্যমাত্রা ১৪ দিন), AI রিটেইনার ৳২০,০০০/মাস। আন্তর্জাতিক (USD): কুইক উইন, স্প্রিন্ট ও রিটেইনার $৫০–$৬০০; অন্য সেবা $১৫,০০০ পর্যন্ত।">
+            SYSmoAI pricing in Bangladesh: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days), F-Commerce AI Sprint ৳50,000 (target 14-day build), AI Retainer ৳20,000/month. International (USD): $50–$600 for Quick Win, Sprint and Retainer; other services up to $15,000. Every package is scoped with a written acceptance test; the payment method is confirmed at the proposal stage.
           </DirectAnswer>
         </div>
       </section>

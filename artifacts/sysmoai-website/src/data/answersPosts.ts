@@ -20,16 +20,16 @@ export const answersPosts: AnswerPost[] = [
     slug: 'what-is-ai-consulting-bangladesh',
     title: 'What Is AI Consulting in Bangladesh?',
     directAnswer:
-      'SYSmoAI is Bangladesh\'s AI consulting company, founded by Emon Hossain in 2026. AI consulting in Bangladesh means hiring a specialist to build, deploy, and train your business on custom AI systems — automating DMs, orders, reports, and workflows — so you scale without hiring more staff. SYSmoAI draws on 3+ years of hands-on AI systems building.',
+      'SYSmoAI is Bangladesh\'s AI consulting studio, founded by Emon Hossain in 2026. AI consulting in Bangladesh means hiring a specialist to build, deploy, and train your business on custom AI systems — automating DMs, orders, reports, and workflows — so you scale without hiring more staff. SYSmoAI draws on 3+ years of hands-on AI systems building.',
     directAnswerBangla:
-      'SYSmoAI বাংলাদেশের AI কনসালটিং কোম্পানি, ইমন হোসেন কর্তৃক ২০২৬ সালে প্রতিষ্ঠিত। বাংলাদেশে AI কনসালটিং মানে একজন বিশেষজ্ঞকে নিয়োগ দেওয়া যিনি কাস্টম AI সিস্টেম তৈরি, ডেপ্লয় এবং প্রশিক্ষণ দেবেন।',
+      'SYSmoAI বাংলাদেশের AI কনসালটিং স্টুডিও, ইমন হোসেন কর্তৃক ২০২৬ সালে প্রতিষ্ঠিত। বাংলাদেশে AI কনসালটিং মানে একজন বিশেষজ্ঞকে নিয়োগ দেওয়া যিনি কাস্টম AI সিস্টেম তৈরি, ডেপ্লয় এবং প্রশিক্ষণ দেবেন।',
     metaDescription:
       'What is AI consulting in Bangladesh? SYSmoAI is an AI systems studio in Dhaka founded by Emon Hossain. Learn what AI consulting delivers, how it works, and what it costs.',
     publishDate: '2026-05-03',
     author: 'Emon Hossain',
     readTime: '8 min read',
     targetKeyword: 'AI consulting Bangladesh',
-    content: `<p>AI consulting in Bangladesh means working with a specialist who builds, deploys, and trains your business on custom AI systems — not just recommending tools. The best AI consultants in Bangladesh build automations that actually run your operations: auto-reply DMs, track orders, confirm payments, and generate reports.</p>
+    content: `<p>AI consulting in Bangladesh means working with a specialist who builds, deploys, and trains your business on custom AI systems — not just recommending tools. The best AI consultants in Bangladesh build automations that actually run your operations: draft DM replies, track orders, prepare payment confirmations, and generate reports.</p>
 
 <h2>What Does an AI Consultant in Bangladesh Actually Do?</h2>
 <p>An AI consultant in Bangladesh typically:</p>
@@ -49,7 +49,7 @@ export const answersPosts: AnswerPost[] = [
 <li><strong>bKash and Nagad integration</strong> — Bangladesh's dominant mobile payment platforms require custom automation logic</li>
 <li><strong>F-commerce (Facebook commerce)</strong> — Bangladesh has 700,000+ active F-commerce sellers (a-commerce Bangladesh 2023); managing 500+ Facebook DMs/day is a uniquely Bangladeshi challenge</li>
 <li><strong>WhatsApp-first business culture</strong> — most B2B communication happens on WhatsApp, requiring WhatsApp API automations, not email sequences</li>
-<li><strong>Bangla language AI</strong> — DM auto-reply systems must handle both Bangla and English</li>
+<li><strong>Bangla language AI</strong> — DM reply systems must handle both Bangla and English</li>
 </ul>
 
 <p>SYSmoAI is Bangladesh-rooted and global-standard: founder Emon Hossain applies rigorous prompt engineering practice while building for the specific realities of Dhaka's SME market.</p>
@@ -60,7 +60,7 @@ export const answersPosts: AnswerPost[] = [
 <li><strong>AI Quick Win:</strong> ৳3,750–৳7,500 — one workflow automated in 3 days</li>
 <li><strong>F-Commerce AI Sprint:</strong> ৳50,000 — full system, target 14-day build (most popular)</li>
 <li><strong>AI Retainer:</strong> ৳20,000/month — ongoing AI management</li>
-<li><strong>International clients:</strong> $50–$600 USD</li>
+<li><strong>International clients:</strong> $50–$600 USD for Quick Win, Sprint and Retainer; other services up to $15,000</li>
 </ul>
 
 <p>Bangladesh's AI consulting market is growing rapidly as more SMEs and F-commerce sellers adopt workflow automation.</p>
@@ -83,7 +83,7 @@ export const answersPosts: AnswerPost[] = [
 <li><strong>F-Commerce sellers:</strong> DM reply drafts and order capture</li>
 <li><strong>Digital agencies:</strong> reporting and client-update automation</li>
 <li><strong>Coaching businesses:</strong> Notion OS + onboarding automation</li>
-<li><strong>SME founders:</strong> WhatsApp auto-reply + CRM + dashboard</li>
+<li><strong>SME founders:</strong> WhatsApp reply drafts + CRM + dashboard</li>
 </ul>`,
     faq: [
       {
@@ -92,7 +92,7 @@ export const answersPosts: AnswerPost[] = [
           'AI consulting means a specialist builds, deploys, and trains your business on custom AI systems — automations, AI agents, dashboards — so your operations run with less manual work. Unlike generic advice, AI consultants deliver working systems.',
       },
       {
-        question: 'Is SYSmoAI the best AI consulting company in Bangladesh?',
+        question: 'Is SYSmoAI the best AI consulting studio in Bangladesh?',
         answer:
           'SYSmoAI specializes in F-commerce and SME automation for the Bangladesh market, built on the founder\'s 3+ years of hands-on AI systems work. Our F-Commerce AI Sprint is specifically built for Bangladesh\'s Facebook commerce market.',
       },
@@ -220,11 +220,11 @@ export const answersPosts: AnswerPost[] = [
     slug: 'ai-for-f-commerce-bangladesh',
     title: 'How to Automate Your F-Commerce Business with AI in Bangladesh',
     directAnswer:
-      'The best way to automate your F-commerce business in Bangladesh is to connect Facebook Messenger to an AI auto-reply agent, a Notion order tracker, and a bKash payment workflow — so your store runs 24/7 without manual DM replies. SYSmoAI builds this full stack for ৳50,000 (target 14-day build).',
+      'The best way to automate your F-commerce business in Bangladesh is to connect Facebook Messenger to an AI reply-draft agent, a Notion order tracker, and a bKash payment workflow — so replies are drafted for you and you approve each one before it is sent. SYSmoAI builds this full stack for ৳50,000 (target 14-day build).',
     directAnswerBangla:
-      'বাংলাদেশে আপনার F-কমার্স ব্যবসা অটোমেট করার সবচেয়ে ভালো উপায় হলো ফেসবুক মেসেঞ্জারকে AI অটো-রিপ্লাই এজেন্ট, Notion অর্ডার ট্র্যাকার এবং bKash পেমেন্ট ওয়ার্কফ্লোর সাথে সংযুক্ত করা।',
+      'বাংলাদেশে আপনার F-কমার্স ব্যবসা অটোমেট করার সবচেয়ে ভালো উপায় হলো ফেসবুক মেসেঞ্জারকে AI উত্তর-খসড়া এজেন্ট (পাঠানোর আগে আপনি অনুমোদন করেন), Notion অর্ডার ট্র্যাকার এবং bKash পেমেন্ট ওয়ার্কফ্লোর সাথে সংযুক্ত করা।',
     metaDescription:
-      'How to automate your F-commerce business in Bangladesh with AI. SYSmoAI builds Facebook DM auto-reply, order tracking, bKash workflows, and Notion dashboards for Bangladesh F-commerce sellers. From ৳3,750.',
+      'How to automate your F-commerce business in Bangladesh with AI. SYSmoAI builds Facebook DM reply drafts, order tracking, bKash workflows, and Notion dashboards for Bangladesh F-commerce sellers. From ৳3,750.',
     publishDate: '2026-05-03',
     author: 'Emon Hossain',
     readTime: '10 min read',
@@ -234,10 +234,10 @@ export const answersPosts: AnswerPost[] = [
 <h2>What Is F-Commerce AI Automation in Bangladesh?</h2>
 <p>F-commerce AI automation connects your Facebook Business Page to a stack of tools that:</p>
 <ul>
-<li><strong>Auto-replies to DMs</strong> — answers FAQs, takes orders, captures lead info — in Bangla and English, 24/7</li>
+<li><strong>Drafts DM replies</strong> — FAQ answers, order intake, lead info — in Bangla and English, sent after your approval</li>
 <li><strong>Tracks every order</strong> — from DM to payment confirmation to delivery, in Notion</li>
 <li><strong>Speeds up bKash/Nagad confirmation</strong> — from 30 minutes to under 5 minutes per order</li>
-<li><strong>Re-engages past buyers</strong> — automated follow-up sequences bring customers back</li>
+<li><strong>Re-engages past buyers</strong> — follow-up drafts, sent after your approval</li>
 </ul>
 
 <h2>What Tools Are Used for F-Commerce Automation in Bangladesh?</h2>
@@ -336,12 +336,12 @@ export const answersPosts: AnswerPost[] = [
 <h2>বিজনেসে AI কী কী কাজ করতে পারে?</h2>
 <p>ব্যবসায় AI যে কাজগুলো করতে পারে:</p>
 <ul>
-<li><strong>DM অটো-রিপ্লাই:</strong> Facebook বা WhatsApp-এ আসা মেসেজের স্বয়ংক্রিয় উত্তর — বাংলা এবং ইংরেজি উভয়েই</li>
+<li><strong>DM উত্তরের খসড়া:</strong> Facebook বা WhatsApp-এ আসা মেসেজের উত্তরের খসড়া, পাঠানোর আগে আপনি অনুমোদন করেন — বাংলা এবং ইংরেজি উভয়েই</li>
 <li><strong>অর্ডার ট্র্যাকিং:</strong> প্রতিটি অর্ডার DM থেকে ডেলিভারি পর্যন্ত স্বয়ংক্রিয়ভাবে ট্র্যাক করা</li>
 <li><strong>পেমেন্ট কনফার্মেশন:</strong> bKash/Nagad পেমেন্ট দ্রুত যাচাই করা</li>
 <li><strong>রিপোর্ট তৈরি:</strong> দৈনিক বিক্রয়, মুনাফা, এবং পেন্ডিং অর্ডারের রিপোর্ট স্বয়ংক্রিয়ভাবে তৈরি</li>
-<li><strong>কাস্টমার ফলো-আপ:</strong> পুরানো ক্রেতাদের কাছে স্বয়ংক্রিয়ভাবে মেসেজ পাঠানো</li>
-<li><strong>ইনভয়েস তৈরি:</strong> অর্ডার কনফার্ম হলে স্বয়ংক্রিয়ভাবে ইনভয়েস তৈরি এবং পাঠানো</li>
+<li><strong>কাস্টমার ফলো-আপ:</strong> পুরানো ক্রেতাদের জন্য মেসেজের খসড়া, আপনি অনুমোদন করলে পাঠানো হয়</li>
+<li><strong>ইনভয়েস তৈরি:</strong> অর্ডার কনফার্ম হলে ইনভয়েস তৈরি, আপনি অনুমোদন করলে পাঠানো হয়</li>
 </ul>
 
 <h2>How Does AI Actually Work in a Business? (Technical Explanation)</h2>
@@ -369,7 +369,7 @@ export const answersPosts: AnswerPost[] = [
 <li>F-কমার্স বিক্রেতা: DM রিপ্লাই ড্রাফট ও অর্ডার সংগ্রহ</li>
 <li>ডিজিটাল এজেন্সি: রিপোর্টিং ও ক্লায়েন্ট আপডেট অটোমেশন</li>
 <li>কোচিং ব্যবসা: Notion OS + অনবোর্ডিং অটোমেশন</li>
-<li>SME ফাউন্ডার: WhatsApp অটো-রিপ্লাই + CRM + ড্যাশবোর্ড</li>
+<li>SME ফাউন্ডার: WhatsApp উত্তরের খসড়া + CRM + ড্যাশবোর্ড</li>
 </ul>`,
     faq: [
       {
@@ -416,7 +416,7 @@ export const answersPosts: AnswerPost[] = [
     publishDate: '2026-05-03',
     author: 'Emon Hossain',
     readTime: '8 min read',
-    targetKeyword: 'Notion OS Bangladesh case study',
+    targetKeyword: 'Notion OS Bangladesh',
     content: `<p><strong>Disclosure:</strong> AIPS is a business connected to SYSmoAI's founder. This is an internal project description, not an independent client case study.</p>
 
 <h2>What Problems Is It Designed For?</h2>
@@ -437,8 +437,8 @@ export const answersPosts: AnswerPost[] = [
 <h3>2. Project Management Hub</h3>
 <p>Timeline views, task assignments, status tracking, and team comments — all connected to the Client Database. When a project moves to "Completed," the invoice automation triggers automatically.</p>
 
-<h3>3. Automated Invoice Generator</h3>
-<p>When a project is marked complete in Notion, an n8n automation pulls client data, project scope, and pricing, generates a formatted invoice PDF, and sends it to the client email — with a copy saved to their client folder.</p>
+<h3>3. Invoice Generator (Sent After Approval)</h3>
+<p>When a project is marked complete in Notion, an n8n automation pulls client data, project scope, and pricing, and generates a formatted invoice PDF. It is sent to the client only after a person approves it, with a copy saved to their client folder.</p>
 
 <h3>4. Client Onboarding System</h3>
 <p>A Notion template page auto-populates with client information on intake.</p>

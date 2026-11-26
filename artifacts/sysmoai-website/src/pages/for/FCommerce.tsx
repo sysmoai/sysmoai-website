@@ -16,15 +16,15 @@ export default function FCommerce() {
         { emoji: '😤', label: '16-hour days at peak season', desc: 'I\'m working 16 hours a day at peak season and still can\'t keep up. I\'m about to quit.' },
       ]}
       beforeAfter={[
-        { before: '500 DMs, 100 replies, 400 lost sales — revenue leaking through every crack', after: 'AI auto-replies handle all FAQs and common questions, capturing leads 24/7' },
+        { before: '500 DMs, 100 replies, 400 lost sales — revenue leaking through every crack', after: 'AI drafts replies to FAQs and common questions for your approval, and captures leads' },
         { before: 'Notebook + memory + screenshots for order tracking — errors every day', after: 'Automated order management system — every order tracked from payment to delivery' },
-        { before: '0 repeat customer follow-ups — every customer is a one-time sale', after: 'Automated post-purchase follow-up sequences — repeat buyers increase within 30 days' },
+        { before: '0 repeat customer follow-ups — every customer is a one-time sale', after: 'Post-purchase follow-up drafts you approve — repeat buyers increase within 30 days' },
       ]}
       solutions={[
-        { icon: '💬', title: 'Facebook DM Auto-Response System', desc: 'Automatically answers common questions (price, availability, delivery), captures orders, and routes complex queries to you.' },
+        { icon: '💬', title: 'Facebook DM Reply-Draft System', desc: 'Drafts answers to common questions (price, availability, delivery) for your approval, captures orders, and routes complex queries to you.' },
         { icon: '📦', title: 'Order Tracking OS', desc: 'Every order tracked from payment confirmation to delivery — no more notebooks, no more errors.' },
         { icon: '💳', title: 'bKash Payment Workflow', desc: 'Semi-automated payment verification that cuts confirmation time from 30 minutes to under 5 minutes.' },
-        { icon: '🔁', title: 'Customer Re-engagement System', desc: 'Automated post-purchase follow-up sequences that bring past buyers back for a second, third, fourth purchase.' },
+        { icon: '🔁', title: 'Customer Re-engagement System', desc: 'Post-purchase follow-up drafts, approved by you, to bring past buyers back for a second, third, fourth purchase.' },
       ]}
       relevantServices={[
         { href: '/services/ai-quick-win', label: 'AI Quick Win', price: '৳3,750–7,500' },

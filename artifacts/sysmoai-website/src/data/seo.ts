@@ -30,10 +30,10 @@ export const ORG_SCHEMA: SeoSchema = {
   url: SITE_URL,
   logo: `${SITE_URL}/favicon.svg`,
   description:
-    "Bangladesh's AI consulting company. We build custom AI operating systems, workflow automation, and AI agents for F-commerce sellers, agencies, SMEs, and corporates in Bangladesh and worldwide.",
+    "Bangladesh's AI consulting studio. We build custom AI operating systems, workflow automation, and AI agents for F-commerce sellers, agencies, SMEs, and corporates in Bangladesh and worldwide.",
   email: 'hello@sysmoai.com',
   telephone: '+8801711638693',
-  priceRange: '৳3,750–৳2,00,000 (BDT) / $50–$2,400 (USD)',
+  priceRange: '৳500–৳2,00,000 (BDT) / $15–$15,000 (USD)',
   currenciesAccepted: 'BDT, USD',
   address: {
     '@type': 'PostalAddress',
@@ -89,7 +89,7 @@ export const WEBSITE_SCHEMA: SeoSchema = {
   '@type': 'WebSite',
   name: 'SYSmoAI',
   url: SITE_URL,
-  description: "Bangladesh's AI consulting company — custom AI systems, F-commerce automation, and workflow automation for businesses in Bangladesh and worldwide.",
+  description: "Bangladesh's AI consulting studio — custom AI systems, F-commerce automation, and workflow automation for businesses in Bangladesh and worldwide.",
   publisher: { '@type': 'Organization', name: 'SYSmoAI', url: SITE_URL },
   potentialAction: {
     '@type': 'SearchAction',
@@ -184,7 +184,7 @@ const staticRoutes: Record<string, RouteSeo> = {
     ...base('/services/ai-sprint'),
     schemas: [
       ORG_SCHEMA,
-      serviceSchema('F-Commerce AI Sprint', 'Full F-Commerce AI system, target 14-day build — DM auto-reply agent, order tracker, bKash workflows, team training.', `${SITE_URL}/services/ai-sprint`, '50000'),
+      serviceSchema('F-Commerce AI Sprint', 'Full F-Commerce AI system, target 14-day build — DM reply-draft agent, order tracker, bKash workflows, team training.', `${SITE_URL}/services/ai-sprint`, '50000'),
       breadcrumbSchema([home, services, { name: 'F-Commerce AI Sprint', url: `${SITE_URL}/services/ai-sprint` }]),
     ],
   },
@@ -193,7 +193,7 @@ const staticRoutes: Record<string, RouteSeo> = {
     ...base('/services/ai-retainer'),
     schemas: [
       ORG_SCHEMA,
-      serviceSchema('AI Operations Retainer', 'Monthly AI management — 4-8 hours hands-on work, continuous improvements, priority support. Cancel anytime.', `${SITE_URL}/services/ai-retainer`, '20000'),
+      serviceSchema('AI Operations Retainer', 'Monthly AI management — 4-8 hours hands-on work, continuous improvements, WhatsApp support. Cancel anytime.', `${SITE_URL}/services/ai-retainer`, '20000'),
       breadcrumbSchema([home, services, { name: 'AI Operations Retainer', url: `${SITE_URL}/services/ai-retainer` }]),
     ],
   },
@@ -265,10 +265,10 @@ const staticRoutes: Record<string, RouteSeo> = {
         '@type': 'FAQPage',
         mainEntity: [
           { q: 'What is SYSmoAI and how does it help businesses in Bangladesh?', a: "SYSmoAI is an AI systems studio in Dhaka, Bangladesh, founded by Emon Hossain in 2026. We build custom AI operating systems — automating DM replies, order management, payment workflows, and reporting — for F-commerce sellers, SME founders, agencies, and corporates. We draw on 3+ years of hands-on AI systems building. Unlike freelancers who do one-off tasks, we build complete, documented systems that run independently. Pricing starts at ৳3,750 for a single workflow (AI Quick Win, 3 days)." },
-          { q: 'How much does AI consulting cost in Bangladesh?', a: 'SYSmoAI pricing: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days); F-Commerce AI Sprint ৳50,000 (target 14-day build); AI Retainer ৳20,000/month (ongoing management). International rates: $50–$600 USD. The exact payment method is confirmed at the proposal stage. Quick Win is 100% advance; Sprint is 50% upfront, 50% on delivery; Retainer is monthly billing.' },
+          { q: 'How much does AI consulting cost in Bangladesh?', a: 'SYSmoAI pricing: AI Quick Win ৳3,750–৳7,500 (1 workflow in 3 days); F-Commerce AI Sprint ৳50,000 (target 14-day build); AI Retainer ৳20,000/month (ongoing management). International (USD): $50–$600 for Quick Win, Sprint and Retainer; other services up to $15,000. The exact payment method is confirmed at the proposal stage. Quick Win is 100% advance; Sprint is 50% upfront, 50% on delivery; Retainer is monthly billing.' },
           { q: 'How long does AI implementation take for a business in Bangladesh?', a: 'Timeline depends on scope: AI Quick Win (1 workflow) = 3 days; F-Commerce AI Sprint (full DM agent + order tracker + payment workflow + dashboard) = target 14 days; AI Retainer = ongoing monthly. A free 30-minute discovery call takes 30 minutes and results in a clear action plan with tools, costs, and timeline.' },
           { q: 'What AI tools does SYSmoAI use to automate business workflows?', a: 'SYSmoAI uses ChatGPT (OpenAI GPT-4o), Claude (Anthropic), Notion, n8n, Zapier, Make, WhatsApp Business API, ManyChat, bKash/Nagad integrations, Google Workspace, Airtable, and LangChain — selected based on your specific business model. We work with what you already use and add only what you need. Every system is built within your own accounts so you own it completely.' },
-          { q: 'How does F-commerce automation work in Bangladesh?', a: "F-commerce automation connects your Facebook Business Page Messenger to an AI agent that auto-replies DMs in Bangla and English, captures orders, confirms bKash/Nagad payments, and sends follow-up messages — all without manual intervention. SYSmoAI's F-Commerce AI Sprint builds this full stack for ৳50,000 (target 14-day build) — replacing 14-hour manual workdays for sellers managing 100–500+ DMs/day. Bangladesh has 700,000+ active F-commerce sellers; manual management at scale is no longer viable." },
+          { q: 'How does F-commerce automation work in Bangladesh?', a: "F-commerce automation connects your Facebook Business Page Messenger to an AI agent that drafts DM replies in Bangla and English, captures orders, prepares bKash/Nagad confirmations, and drafts follow-up messages — you approve every message before it is sent. SYSmoAI's F-Commerce AI Sprint builds this full stack for ৳50,000 (target 14-day build) — replacing 14-hour manual workdays for sellers managing 100–500+ DMs/day. Bangladesh has 700,000+ active F-commerce sellers; manual management at scale is no longer viable." },
           { q: 'What is an AI Operating System (AI OS) for business?', a: "An AI Operating System (AI OS) is a connected suite of AI tools, automations, and dashboards that runs your business operations — handling DMs, orders, payments, reports, and follow-ups — with minimal human input. Unlike using individual tools like ChatGPT or Notion alone, an AI OS integrates everything so actions in one system trigger actions in others. SYSmoAI specializes in building AI OS for Bangladesh businesses, with the F-Commerce AI Sprint as the standard deployment for F-commerce sellers." },
           { q: 'Is there a guarantee on AI consulting results?', a: "Every engagement is scoped with a written acceptance test agreed before work starts. You run the system yourself against that test — if the agreed deliverables are not met, the engagement ends with no additional charge beyond the deposit terms in your written scope. We sign a confidentiality agreement before every project, and every system is built within your own accounts — your data stays under your control at all times." },
           { q: 'What makes SYSmoAI different from freelancers or other AI consultants in Bangladesh?', a: 'Key differences: (1) SYSmoAI builds complete, documented systems — not one-off tasks. (2) Every project includes team training + video documentation so you run it independently. (3) 3-month post-launch support is standard. (4) Founder Emon Hossain has spent 3+ years building production AI systems and prompt-engineering workflows. (5) We specialize in Bangladesh market realities: bKash/Nagad automation, Bangla-language AI, F-commerce workflow patterns. (6) Every project is scoped with a written acceptance test — if the agreed deliverables aren\'t met, the engagement ends at no extra charge.' },
@@ -449,7 +449,7 @@ export const seoConfig: Record<string, RouteSeo> = {
 const DEFAULT_SEO: RouteSeo = {
   title: 'SYSmoAI — Stop Losing Orders in Your DMs | F-Commerce AI Bangladesh',
   description:
-    "Bangladesh's F-Commerce Operating System. Bangla DM auto-reply agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — target 14-day build for ৳50,000.",
+    "Bangladesh's F-Commerce Operating System. Bangla DM reply-draft agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — target 14-day build for ৳50,000.",
   canonical: SITE_URL,
   schemas: [ORG_SCHEMA],
 };

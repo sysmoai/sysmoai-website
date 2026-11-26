@@ -20,10 +20,10 @@ const fadeUp = {
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09 } } };
 
 const deliverables = [
-  'Trained Bangla DM auto-reply agent (FAQ + order intake + lead capture)',
+  'Trained Bangla DM reply-draft agent (FAQ + order intake + lead capture)',
   'Order management system — every order tracked from DM to delivery',
   'bKash / Nagad payment workflow — confirmation time cut from 30 min to <5 min',
-  'Customer re-engagement sequences — automated follow-ups to past buyers',
+  'Customer re-engagement — follow-up drafts to past buyers, sent after your approval',
   'Daily revenue dashboard in Notion (orders, revenue, pending, disputes)',
   'Owner training session + full video documentation',
   '90-day support and optimization period after launch',
@@ -32,7 +32,7 @@ const deliverables = [
 const beforeAfter = [
   {
     before: '500 DMs/day, replying to 100 — 400 orders permanently lost',
-    after: 'AI handles all FAQ & order DMs 24/7, you only see exceptions',
+    after: 'AI drafts replies to FAQ & order DMs, you approve before sending',
   },
   {
     before: 'Orders tracked in a notebook — errors and disputes every day',
@@ -44,7 +44,7 @@ const beforeAfter = [
   },
   {
     before: "Zero repeat customers — you've never followed up with a past buyer",
-    after: 'Automated follow-up sequences bring buyers back in 30 days',
+    after: 'Follow-up drafts for past buyers, sent after your approval',
   },
 ];
 
@@ -133,7 +133,7 @@ export default function AISprint() {
               F-Commerce AI Sprint
             </h1>
             <p className="text-xl mb-3 max-w-2xl" style={{ color: body }}>
-              Stop losing orders in your DMs. Get a Bangla auto-reply agent, order tracker, bKash workflow, and customer follow-up system — with a target 14-day build.
+              Stop losing orders in your DMs. Get a Bangla reply-draft agent, order tracker, bKash workflow, and customer follow-up system — with a target 14-day build.
             </p>
 
             {/* Price toggle */}

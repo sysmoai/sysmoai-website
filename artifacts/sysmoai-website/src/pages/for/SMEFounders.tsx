@@ -16,12 +16,12 @@ export default function SMEFounders() {
         { emoji: '🤷', label: 'ChatGPT doesn\'t actually help MY business', desc: 'I\'ve tried ChatGPT. I watched YouTube tutorials. I still don\'t know how to make AI work for my specific business.' },
       ]}
       beforeAfter={[
-        { before: '847 unread WhatsApp messages — lost leads, missed follow-ups, revenue leaking daily', after: 'Auto-replies handle FAQs, leads are captured, follow-up sequences run automatically' },
+        { before: '847 unread WhatsApp messages — lost leads, missed follow-ups, revenue leaking daily', after: 'FAQ replies and follow-ups are drafted for your approval, and leads are captured' },
         { before: '7 disconnected tools — manual copy-paste between them every morning', after: '1 central AI Business OS — everything connected, automated, and visible' },
         { before: 'No dashboard — you need to ask 5 people to understand your own business', after: 'Real-time business visibility in 60 seconds — revenue, leads, tasks, team status' },
       ]}
       solutions={[
-        { icon: '📱', title: 'WhatsApp AI System', desc: 'Auto-replies, lead capture, FAQ handling, and follow-up sequences — your WhatsApp works even when you\'re asleep.' },
+        { icon: '📱', title: 'WhatsApp AI System', desc: 'Reply drafts, lead capture, FAQ handling, and follow-up drafts — you approve before anything is sent.' },
         { icon: '🗂️', title: 'Business OS in Notion', desc: 'Clients, tasks, finance, team, and dashboards — everything in one place, interconnected and searchable.' },
         { icon: '🔄', title: 'Workflow Automation', desc: 'We eliminate your 3–5 most painful daily manual tasks with n8n or Zapier automations.' },
         { icon: '📊', title: 'Business Dashboard', desc: 'See revenue, leads, tasks, and team status in 60 seconds — so you\'re always in control without micromanaging.' },
@@ -33,7 +33,7 @@ export default function SMEFounders() {
       ]}
       finalCtaHeadline="Ready to run your business — not be run by it?"
       faqs={[
-        { q: 'My business is small — am I too early for this?', a: 'No. The earlier you build systems, the faster you grow. We\'ve built AI OSes for businesses doing ৳50,000/month and ৳5 million/month. Scale doesn\'t determine readiness — chaos does.' },
+        { q: 'My business is small — am I too early for this?', a: 'No. The earlier you build systems, the faster you grow. Scale doesn\'t determine readiness — chaos does.' },
         { q: 'I tried ChatGPT but didn\'t see results. How is this different?', a: 'ChatGPT is a tool. We build systems. One session with ChatGPT doesn\'t change your business — a custom AI operating system does. It\'s the difference between buying a hammer and having a house built.' },
         { q: 'What if I have staff who aren\'t tech-savvy?', a: 'We design for the least technical member of your team. If they can use WhatsApp, they can use the systems we build. Training is included.' },
         { q: 'How long before I see ROI?', a: 'Most SME Sprint clients report time savings within the first week. Revenue impact (from better follow-up and lead capture) typically shows in weeks 2–4.' },

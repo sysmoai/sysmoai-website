@@ -27,7 +27,7 @@ const resultCards = [
   { icon: '🏢', category: 'Digital Agency',  result: 'Example scope',                  detail: 'AI Quick Win — automated reporting + client updates (not a client result)' },
   { icon: '🎓', category: 'Coaching Business', result: 'Example scope',                detail: 'Notion OS + client onboarding automation (not a client result)' },
   { icon: '💼', category: 'Senior Freelancer', result: 'Example scope',                detail: 'Skill upgrade + premium AI service package (not a client result)' },
-  { icon: '🏭', category: 'SME Founder',     result: 'Example scope',                  detail: 'WhatsApp auto-reply + CRM + dashboard (not a client result)' },
+  { icon: '🏭', category: 'SME Founder',     result: 'Example scope',                  detail: 'WhatsApp reply drafts + CRM + dashboard (not a client result)' },
   { icon: '🎨', category: 'Creative Agency', result: 'Example scope',                  detail: 'AI Sprint — proposal builder + templates (not a client result)' },
 ];
 
@@ -63,7 +63,7 @@ export default function Proof() {
       <section className="pt-10 pb-0" style={{ background: isDark ? '#0A0B0F' : '#FFFFFF' }}>
         <div className="max-w-4xl mx-auto px-4">
           <DirectAnswer>
-            SYSmoAI is an early-stage AI systems studio founded by Emon Hossain in Bangladesh. It is not yet incorporated, and no verified client case study is published yet. Everything on this page is an example scope of what we build, not a client result. Case studies will appear only with client consent and measured numbers.
+            SYSmoAI is an early-stage AI systems studio founded by Emon Hossain in Bangladesh. No verified client case study is published yet. Everything on this page is an example scope of what we build, not a client result. Case studies will appear only with client consent and measured numbers.
           </DirectAnswer>
         </div>
       </section>

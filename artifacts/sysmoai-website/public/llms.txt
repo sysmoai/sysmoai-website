@@ -2,7 +2,7 @@
 > An AI systems studio in Dhaka, Bangladesh. We build AI-powered operating systems for founders, F-commerce sellers, and businesses. Founded by Emon Hossain in Dhaka.
 
 ## Brand
-- Company: SYSmoAI
+- Studio: SYSmoAI
 - Tagline: Systems in Motion
 - Mission: Build AI-powered operating systems for ambitious businesses
 - Promise: Every project is scoped with a written acceptance test
@@ -35,7 +35,7 @@
 
 ## F-Commerce AI Sprint (Anchor — ৳50,000)
 What you get (target 14-day build):
-- Trained Bangla DM auto-reply agent (FAQ + order intake + lead capture)
+- Trained Bangla DM reply-draft agent (FAQ + order intake + lead capture)
 - Complete order management system (DM → delivery tracking)
 - bKash / Nagad payment workflow (<5 min confirmation)
 - Automated customer re-engagement sequences

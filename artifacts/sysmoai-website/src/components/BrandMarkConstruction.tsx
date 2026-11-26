@@ -40,8 +40,8 @@ const LAYERS = [
     color: '#60A5FA',
     dimColor: '#2563EB',
     tagColor: '#EFF6FF',
-    headline: 'AI that works while you sleep.',
-    body: 'Custom AI agents that answer leads, follow up on deals, generate reports, and make decisions — trained on your business, running 24/7, and built to compound over time.',
+    headline: 'AI that drafts. You approve.',
+    body: 'Custom AI agents that draft replies to leads, prepare follow-ups, and generate reports — trained on your business, approved by you, and built to compound over time.',
     service: 'AI Agent Dev · AI Retainer',
   },
 ];

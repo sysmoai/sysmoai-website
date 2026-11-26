@@ -11,12 +11,12 @@ export default function AIRetainer() {
       bdPrice="৳20,000/month"
       usdPrice="$250/month"
       guarantee="Cancel anytime"
-      directAnswer="The AI Retainer is SYSmoAI's monthly managed service at ৳20,000/month ($250/month) — 4–8 hours of hands-on AI work, monthly system improvements, priority WhatsApp support (reply aimed within one business day), and a monthly performance report. Cancel anytime, no lock-in."
+      directAnswer="The AI Retainer is SYSmoAI's monthly managed service at ৳20,000/month ($250/month) — 4–8 hours of hands-on AI work, monthly system improvements, WhatsApp support (reply aimed within one business day), and a monthly performance report. Cancel anytime, no lock-in."
       whatItIs="The AI Retainer is a monthly managed service where SYSmoAI acts as your ongoing AI operations partner. Each month, we improve your existing systems, add new automations, fix issues, and identify new AI opportunities as your business evolves. Perfect for post-Sprint clients or businesses that want continuous AI improvement without hiring a full-time AI person."
       deliverables={[
         '4–8 hours of hands-on AI work per month',
         'Monthly improvements to existing automations',
-        'Priority WhatsApp support (reply aimed within one business day)',
+        'WhatsApp support (reply aimed within one business day)',
         'Monthly AI performance report',
         'Up to 2 new workflow automations per month',
         'Proactive AI opportunity identification',
@@ -42,7 +42,7 @@ export default function AIRetainer() {
         { q: 'Do I need to have done a Sprint first?', a: 'Not required, but recommended. We can start a Retainer from scratch — we\'ll just spend the first month auditing and building a foundation.' },
         { q: 'Can I cancel anytime?', a: 'Yes. Monthly billing, cancel before the next billing cycle. No lock-in, no cancellation fee.' },
         { q: 'What if I need more than 4–8 hours this month?', a: 'We\'ll let you know in advance and offer an add-on block at a discounted hourly rate for Retainer clients.' },
-        { q: 'How does communication work?', a: 'Priority WhatsApp channel — we aim to reply within one business day. Monthly video call for planning.' },
+        { q: 'How does communication work?', a: 'A WhatsApp channel — we aim to reply within one business day. Monthly video call for planning.' },
         { q: 'What\'s the minimum commitment?', a: '1 month.' },
       ]}
       relatedServices={[
