@@ -28,8 +28,8 @@ export default function N8nAutomation() {
       ]}
       beforeAfter={[
         { before: 'Copying data manually between 3 apps every morning — 45 minutes wasted daily', after: 'n8n workflow runs automatically at 9 AM — zero manual work required' },
-        { before: 'Lead comes in via form, manually copied to CRM, manually emailed — 30 mins per lead', after: 'Lead triggers instant CRM entry, welcome email, and Slack notification — zero human touch' },
-        { before: 'Monthly report takes team 3 days to compile from 5 different sources', after: 'n8n pulls data automatically, generates report, sends to stakeholders — done in 10 minutes' },
+        { before: 'Lead comes in via form, manually copied to CRM, manually emailed — 30 mins per lead', after: 'Lead triggers CRM entry, a welcome email draft for approval, and a Slack notification' },
+        { before: 'Monthly report takes team 3 days to compile from 5 different sources', after: 'n8n pulls data automatically, generates the report, and you approve it before sending — done in 10 minutes' },
       ]}
       steps={[
         { title: 'Workflow Scoping', desc: 'You describe the task. We map the exact automation logic, tools involved, and edge cases. We confirm the scope before building.' },

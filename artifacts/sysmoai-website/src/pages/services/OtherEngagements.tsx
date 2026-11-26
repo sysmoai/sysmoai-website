@@ -102,7 +102,7 @@ export default function OtherEngagements() {
         <div className="max-w-4xl mx-auto px-4">
           <div className="rounded-2xl p-5" style={{ background: cardBg, border: `1px solid ${cardBorder}` }}>
             <p className="text-sm leading-relaxed" style={{ color: body }}>
-              Pricing, delivery timelines, project scope, performance expectations and support terms are confirmed in the actual proposal or agreement. Older public price cards or result guarantees should not be treated as current offers unless they are explicitly re-approved and evidence-backed.
+              Pricing, delivery timelines, project scope, performance expectations and support terms are confirmed in the actual proposal or agreement. Public prices are a guide until they are confirmed in writing.
             </p>
           </div>
         </div>

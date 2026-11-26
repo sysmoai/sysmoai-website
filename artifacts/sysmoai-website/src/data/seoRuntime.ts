@@ -18,7 +18,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/': {
     title: 'SYSmoAI — Stop Losing Orders in Your DMs | F-Commerce AI Bangladesh',
     description:
-      "Bangladesh's F-Commerce Operating System. We build Bangla DM auto-reply agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — fully deployed in 14 days for ৳50,000. Book a free F-Commerce audit.",
+      "Bangladesh's F-Commerce Operating System. We build Bangla DM reply-draft agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — target 14-day build for ৳50,000. Book a free F-Commerce audit.",
     canonical: `${SITE_URL}/`,
     ogType: 'website',
   },
@@ -38,16 +38,16 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   },
 
   '/services/ai-sprint': {
-    title: 'F-Commerce AI Sprint — Full System Deployed in 14 Days | SYSmoAI',
+    title: 'F-Commerce AI Sprint — Full System, Target 14-Day Build | SYSmoAI',
     description:
-      "Get a complete F-Commerce AI system built in 14 days. DM auto-reply agent, order tracker, bKash workflows — fully deployed for ৳50,000. SYSmoAI's anchor offer for Facebook sellers in Dhaka.",
+      "Get a complete F-Commerce AI system with a target 14-day build. DM reply-draft agent, order tracker, bKash workflows for ৳50,000. SYSmoAI's anchor offer for Facebook sellers in Dhaka.",
     canonical: `${SITE_URL}/services/ai-sprint`,
   },
 
   '/services/ai-retainer': {
     title: 'F-Commerce AI Retainer — Monthly AI Management | SYSmoAI',
     description:
-      "Keep your F-Commerce AI systems optimized with SYSmoAI's monthly Retainer. Ongoing improvements, priority WhatsApp support, and monthly performance report. ৳20,000/month.",
+      "Keep your F-Commerce AI systems optimized with SYSmoAI's monthly Retainer. Ongoing improvements, WhatsApp support, and monthly performance report. ৳20,000/month.",
     canonical: `${SITE_URL}/services/ai-retainer`,
   },
 
@@ -61,7 +61,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/services/international': {
     title: 'International AI Consulting Services | SYSmoAI Bangladesh',
     description:
-      'World-class AI consulting from Bangladesh at 60–80% savings vs US/EU consultants. SYSmoAI serves clients in the US, UK, Canada, Australia, and worldwide via Wise and Payoneer.',
+      'AI consulting from Bangladesh at Bangladesh-based rates. SYSmoAI is open to international clients; the payment method is confirmed at the proposal stage.',
     canonical: `${SITE_URL}/services/international`,
   },
 
@@ -75,7 +75,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   '/about': {
     title: 'About SYSmoAI | Emon Hossain — AI Systems Architect Bangladesh',
     description:
-      "Meet Emon Hossain, founder of SYSmoAI — an AI Systems Architect in Dhaka with 3+ years building production AI systems, serving clients worldwide.",
+      "Meet Emon Hossain, founder of SYSmoAI — an AI Systems Architect in Dhaka with 3+ years building production AI systems, open to clients worldwide.",
     canonical: `${SITE_URL}/about`,
   },
 
@@ -87,16 +87,16 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
   },
 
   '/proof': {
-    title: 'Client Results & Case Studies | SYSmoAI Bangladesh AI Consulting',
+    title: 'Proof Standard | SYSmoAI Bangladesh AI Consulting',
     description:
-      "Real results from real clients: 15,000 hours saved, 3x revenue growth, 90-day AI transformations. Browse SYSmoAI's verified case studies and client success stories.",
+      "SYSmoAI proof standard: verified client results are published only with client consent and measured numbers. Until then this page shows example scopes, not client results.",
     canonical: `${SITE_URL}/proof`,
   },
 
   '/results': {
-    title: 'Client Results & Case Studies | SYSmoAI Bangladesh AI Consulting',
+    title: 'Proof Standard | SYSmoAI Bangladesh AI Consulting',
     description:
-      "Real results from real clients: 15,000 hours saved, 3x revenue growth, 90-day AI transformations. Browse SYSmoAI's verified case studies and client success stories.",
+      "SYSmoAI proof standard: verified client results are published only with client consent and measured numbers. Until then this page shows example scopes, not client results.",
     canonical: `${SITE_URL}/proof`,
   },
 
@@ -144,7 +144,7 @@ export const runtimeSeoConfig: Record<string, RuntimeSeo> = {
 
   '/refund-policy': {
     title: 'Refund Policy | SYSmoAI',
-    description: "SYSmoAI's refund policy — our guarantee and refund terms for all AI consulting services.",
+    description: "SYSmoAI's refund policy — refund and cancellation terms for all AI consulting services.",
     canonical: `${SITE_URL}/refund-policy`,
   },
 };
@@ -186,7 +186,7 @@ const blogRuntimeConfig: Record<string, RuntimeSeo> = Object.fromEntries(
 const DEFAULT_RUNTIME_SEO: RuntimeSeo = {
   title: 'SYSmoAI — Stop Losing Orders in Your DMs | F-Commerce AI Bangladesh',
   description:
-    "Bangladesh's F-Commerce Operating System. Bangla DM auto-reply agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — fully deployed in 14 days for ৳50,000.",
+    "Bangladesh's F-Commerce Operating System. Bangla DM reply-draft agents, order trackers, and bKash workflows for Facebook sellers in Dhaka — target 14-day build for ৳50,000.",
   canonical: `${SITE_URL}/`,
   ogType: 'website',
 };

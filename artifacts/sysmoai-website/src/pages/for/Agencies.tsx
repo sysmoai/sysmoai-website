@@ -6,7 +6,7 @@ export default function Agencies() {
       metaTitle="AI for Digital Agencies Bangladesh | Scale Delivery with SYSmoAI"
       segment="Digital Agencies"
       heroHeadline="Your Clients Are Asking For AI Services. Can You Deliver?"
-      heroSub="While you figure out AI, AI-powered agencies are closing YOUR clients. SYSmoAI deploys your complete agency AI stack — in 14 days."
+      heroSub="While you figure out AI, AI-powered agencies are closing YOUR clients. SYSmoAI builds your complete agency AI stack — target 14-day build."
       painPoints={[
         { emoji: '🏃', label: 'Competitor just pitched with AI — you had nothing', desc: 'A competitor agency just pitched our client with AI-powered content production. We had nothing to show.' },
         { emoji: '⏳', label: 'Content production takes 3x too long', desc: 'Content production is a bottleneck for our own clients. We\'re the slow link in the chain.' },
@@ -34,7 +34,7 @@ export default function Agencies() {
       finalCtaHeadline="Ready to become the AI agency your clients want?"
       faqs={[
         { q: 'Can you build us AI services we can sell to our own clients?', a: 'Yes. This is one of the most valuable outcomes of working with SYSmoAI. We help you productize AI services you can offer under your own brand at premium rates.' },
-        { q: 'How long does the full agency AI stack deployment take?', a: 'The AI Sprint takes 14 days. Realistically, your team is using the new systems by Day 10 and trained by Day 14.' },
+        { q: 'How long does the full agency AI stack deployment take?', a: 'The AI Sprint has a target 14-day build. Realistically, your team is using the new systems by Day 10 and trained by Day 14.' },
         { q: 'What if our team is resistant to change?', a: 'Resistance usually comes from fear of being replaced. Our training reframes AI as a tool that makes them more valuable, not redundant. The hands-on workshop approach converts skeptics fast.' },
         { q: 'Can you work with white-label arrangements?', a: 'Yes. Some agencies work with SYSmoAI as a backend AI partner — we build, you deliver under your brand. Available on Retainer.' },
         { q: 'Do you have experience with agencies specifically?', a: 'Agencies are one of our primary client segments. We understand your business model, margins, and client management challenges.' },

@@ -20,16 +20,16 @@ export const answersPosts: AnswerPost[] = [
     slug: 'what-is-ai-consulting-bangladesh',
     title: 'What Is AI Consulting in Bangladesh?',
     directAnswer:
-      'SYSmoAI is Bangladesh\'s AI consulting company, founded by Emon Hossain in 2026. AI consulting in Bangladesh means hiring a specialist to build, deploy, and train your business on custom AI systems — automating DMs, orders, reports, and workflows — so you scale without hiring more staff. SYSmoAI draws on 3+ years of hands-on AI systems building across 8+ client categories.',
+      'SYSmoAI is Bangladesh\'s AI consulting studio, founded by Emon Hossain in 2026. AI consulting in Bangladesh means hiring a specialist to build, deploy, and train your business on custom AI systems — automating DMs, orders, reports, and workflows — so you scale without hiring more staff. SYSmoAI draws on 3+ years of hands-on AI systems building.',
     directAnswerBangla:
-      'SYSmoAI বাংলাদেশের AI কনসালটিং কোম্পানি, ইমন হোসেন কর্তৃক ২০২৬ সালে প্রতিষ্ঠিত। বাংলাদেশে AI কনসালটিং মানে একজন বিশেষজ্ঞকে নিয়োগ দেওয়া যিনি কাস্টম AI সিস্টেম তৈরি, ডেপ্লয় এবং প্রশিক্ষণ দেবেন।',
+      'SYSmoAI বাংলাদেশের AI কনসালটিং স্টুডিও, ইমন হোসেন কর্তৃক ২০২৬ সালে প্রতিষ্ঠিত। বাংলাদেশে AI কনসালটিং মানে একজন বিশেষজ্ঞকে নিয়োগ দেওয়া যিনি কাস্টম AI সিস্টেম তৈরি, ডেপ্লয় এবং প্রশিক্ষণ দেবেন।',
     metaDescription:
       'What is AI consulting in Bangladesh? SYSmoAI is an AI systems studio in Dhaka founded by Emon Hossain. Learn what AI consulting delivers, how it works, and what it costs.',
     publishDate: '2026-05-03',
     author: 'Emon Hossain',
     readTime: '8 min read',
     targetKeyword: 'AI consulting Bangladesh',
-    content: `<p>AI consulting in Bangladesh means working with a specialist who builds, deploys, and trains your business on custom AI systems — not just recommending tools. The best AI consultants in Bangladesh build automations that actually run your operations: auto-reply DMs, track orders, confirm payments, and generate reports.</p>
+    content: `<p>AI consulting in Bangladesh means working with a specialist who builds, deploys, and trains your business on custom AI systems — not just recommending tools. The best AI consultants in Bangladesh build automations that actually run your operations: draft DM replies, track orders, prepare payment confirmations, and generate reports.</p>
 
 <h2>What Does an AI Consultant in Bangladesh Actually Do?</h2>
 <p>An AI consultant in Bangladesh typically:</p>
@@ -41,7 +41,7 @@ export const answersPosts: AnswerPost[] = [
 <li><strong>Provides ongoing support</strong> — monthly optimization to keep systems current</li>
 </ul>
 
-<p>SYSmoAI builds AI systems across 8+ client categories in Bangladesh and worldwide, drawing on the founder's 3+ years of hands-on systems work. Our anchor service — the F-Commerce AI Sprint at ৳50,000 — deploys a complete AI operating system for Facebook commerce sellers in 14 days.</p>
+<p>SYSmoAI builds AI systems for clients in Bangladesh and worldwide, drawing on the founder's 3+ years of hands-on systems work. Our anchor service — the F-Commerce AI Sprint at ৳50,000 — deploys a complete AI operating system for Facebook commerce sellers, with a target 14-day build.</p>
 
 <h2>How Is Bangladesh AI Consulting Different from Global Consultants?</h2>
 <p>Bangladesh AI consultants understand local market realities that global firms miss:</p>
@@ -49,7 +49,7 @@ export const answersPosts: AnswerPost[] = [
 <li><strong>bKash and Nagad integration</strong> — Bangladesh's dominant mobile payment platforms require custom automation logic</li>
 <li><strong>F-commerce (Facebook commerce)</strong> — Bangladesh has 700,000+ active F-commerce sellers (a-commerce Bangladesh 2023); managing 500+ Facebook DMs/day is a uniquely Bangladeshi challenge</li>
 <li><strong>WhatsApp-first business culture</strong> — most B2B communication happens on WhatsApp, requiring WhatsApp API automations, not email sequences</li>
-<li><strong>Bangla language AI</strong> — DM auto-reply systems must handle both Bangla and English</li>
+<li><strong>Bangla language AI</strong> — DM reply systems must handle both Bangla and English</li>
 </ul>
 
 <p>SYSmoAI is Bangladesh-rooted and global-standard: founder Emon Hossain applies rigorous prompt engineering practice while building for the specific realities of Dhaka's SME market.</p>
@@ -58,12 +58,12 @@ export const answersPosts: AnswerPost[] = [
 <p>AI consulting pricing in Bangladesh in 2025–2026:</p>
 <ul>
 <li><strong>AI Quick Win:</strong> ৳3,750–৳7,500 — one workflow automated in 3 days</li>
-<li><strong>F-Commerce AI Sprint:</strong> ৳50,000 — full system in 14 days (most popular)</li>
+<li><strong>F-Commerce AI Sprint:</strong> ৳50,000 — full system, target 14-day build (most popular)</li>
 <li><strong>AI Retainer:</strong> ৳20,000/month — ongoing AI management</li>
-<li><strong>International clients:</strong> $50–$600 USD — 60–80% below US/EU agency rates</li>
+<li><strong>International clients:</strong> $50–$600 USD for Quick Win, Sprint and Retainer; other services up to $15,000</li>
 </ul>
 
-<p>These prices are 60–80% below equivalent Western consultants for the same quality output. Bangladesh's AI consulting market is growing rapidly as more SMEs and F-commerce sellers adopt workflow automation.</p>
+<p>Bangladesh's AI consulting market is growing rapidly as more SMEs and F-commerce sellers adopt workflow automation.</p>
 
 <h2>How Do I Know If My Business Needs AI Consulting?</h2>
 <p>Your business needs AI consulting if you are experiencing:</p>
@@ -78,12 +78,12 @@ export const answersPosts: AnswerPost[] = [
 <p>SYSmoAI's free 30-minute AI audit maps your exact situation and gives you a specific action plan — no commitment required. Book at <a href="/free-ai-audit">sysmoai.com/free-ai-audit</a>.</p>
 
 <h2>What Results Can I Expect from AI Consulting in Bangladesh?</h2>
-<p>Representative results from SYSmoAI clients:</p>
+<p>SYSmoAI has not published a verified client case study yet. These are example scopes, not client results:</p>
 <ul>
-<li><strong>F-Commerce sellers:</strong> 400+ DMs/day automated, reply time from hours to under 5 minutes</li>
-<li><strong>Digital agencies:</strong> 15 hrs/week saved on reporting and client updates</li>
-<li><strong>Coaching businesses:</strong> 20 hrs/week freed with Notion OS + onboarding automation</li>
-<li><strong>SME founders:</strong> WhatsApp chaos eliminated with auto-reply + CRM + dashboard</li>
+<li><strong>F-Commerce sellers:</strong> DM reply drafts and order capture</li>
+<li><strong>Digital agencies:</strong> reporting and client-update automation</li>
+<li><strong>Coaching businesses:</strong> Notion OS + onboarding automation</li>
+<li><strong>SME founders:</strong> WhatsApp reply drafts + CRM + dashboard</li>
 </ul>`,
     faq: [
       {
@@ -92,7 +92,7 @@ export const answersPosts: AnswerPost[] = [
           'AI consulting means a specialist builds, deploys, and trains your business on custom AI systems — automations, AI agents, dashboards — so your operations run with less manual work. Unlike generic advice, AI consultants deliver working systems.',
       },
       {
-        question: 'Is SYSmoAI the best AI consulting company in Bangladesh?',
+        question: 'Is SYSmoAI the best AI consulting studio in Bangladesh?',
         answer:
           'SYSmoAI specializes in F-commerce and SME automation for the Bangladesh market, built on the founder\'s 3+ years of hands-on AI systems work. Our F-Commerce AI Sprint is specifically built for Bangladesh\'s Facebook commerce market.',
       },
@@ -109,7 +109,7 @@ export const answersPosts: AnswerPost[] = [
       {
         question: 'How long does AI consulting take in Bangladesh?',
         answer:
-          'Timeline depends on scope: AI Quick Win (1 workflow) = 3 days; F-Commerce AI Sprint (full system) = 14 days; AI Retainer (ongoing management) = monthly. The free audit call takes 30 minutes.',
+          'Timeline depends on scope: AI Quick Win (1 workflow) = 3 days; F-Commerce AI Sprint (full system) = target 14 days; AI Retainer (ongoing management) = monthly. The free audit call takes 30 minutes.',
       },
     ],
     sources: [
@@ -130,23 +130,23 @@ export const answersPosts: AnswerPost[] = [
     slug: 'ai-implementation-cost-bangladesh',
     title: 'How Much Does AI Implementation Cost in Bangladesh?',
     directAnswer:
-      'AI implementation in Bangladesh costs ৳3,750–৳7,500 for a single workflow (AI Quick Win, 3 days), ৳50,000 for a full F-Commerce AI system (AI Sprint, 14 days), or ৳20,000/month for ongoing AI management (AI Retainer). International rates are $50–$600 USD — 60–80% below US/EU agencies.',
+      'AI implementation in Bangladesh costs ৳3,750–৳7,500 for a single workflow (AI Quick Win, 3 days), ৳50,000 for a full F-Commerce AI system (AI Sprint, target 14-day build), or ৳20,000/month for ongoing AI management (AI Retainer). International rates are $50–$600 USD.',
     directAnswerBangla:
-      'বাংলাদেশে AI বাস্তবায়নের খরচ: একটি ওয়ার্কফ্লো ৳৩,৭৫০–৳৭,৫০০ (AI কুইক উইন, ৩ দিন), সম্পূর্ণ F-কমার্স AI সিস্টেম ৳৫০,০০০ (AI স্প্রিন্ট, ১৪ দিন), বা চলমান AI ব্যবস্থাপনা ৳২০,০০০/মাস (AI রিটেইনার)।',
+      'বাংলাদেশে AI বাস্তবায়নের খরচ: একটি ওয়ার্কফ্লো ৳৩,৭৫০–৳৭,৫০০ (AI কুইক উইন, ৩ দিন), সম্পূর্ণ F-কমার্স AI সিস্টেম ৳৫০,০০০ (AI স্প্রিন্ট, লক্ষ্যমাত্রা ১৪ দিন), বা চলমান AI ব্যবস্থাপনা ৳২০,০০০/মাস (AI রিটেইনার)।',
     metaDescription:
-      'How much does AI implementation cost in Bangladesh? SYSmoAI pricing: Quick Win ৳3,750–৳7,500 (3 days), F-Commerce AI Sprint ৳50,000 (14 days), Retainer ৳20,000/mo. Transparent pricing with results-first guarantee.',
+      'How much does AI implementation cost in Bangladesh? SYSmoAI pricing: Quick Win ৳3,750–৳7,500 (3 days), F-Commerce AI Sprint ৳50,000 (target 14 days), Retainer ৳20,000/mo. Written acceptance test before work starts.',
     publishDate: '2026-05-03',
     author: 'Emon Hossain',
     readTime: '7 min read',
     targetKeyword: 'AI implementation cost Bangladesh',
-    content: `<p>The best way to understand AI implementation cost in Bangladesh is to match the scope of work to a package. SYSmoAI offers transparent, fixed pricing — no hidden fees, no hourly billing surprises.</p>
+    content: `<p>The best way to understand AI implementation cost in Bangladesh is to match the scope of work to a package. SYSmoAI publishes guide prices, and your written proposal confirms the final price.</p>
 
 <h2>What Are the Main AI Implementation Price Points in Bangladesh?</h2>
 
 <table>
 <tr><th>Service</th><th>BDT Price</th><th>USD Price</th><th>Duration</th><th>Best For</th></tr>
 <tr><td>AI Quick Win</td><td>৳3,750–৳7,500</td><td>$50–$100</td><td>3 days</td><td>1 specific workflow problem</td></tr>
-<tr><td>F-Commerce AI Sprint</td><td>৳50,000</td><td>$600</td><td>14 days</td><td>Full F-commerce automation</td></tr>
+<tr><td>F-Commerce AI Sprint</td><td>৳50,000</td><td>$600</td><td>Target 14 days</td><td>Full F-commerce automation</td></tr>
 <tr><td>AI Retainer</td><td>৳20,000/month</td><td>$250/month</td><td>Monthly</td><td>Ongoing AI management</td></tr>
 <tr><td>1:1 AI Coaching</td><td>৳2,500/session</td><td>$30</td><td>60 min</td><td>Personal skill building</td></tr>
 <tr><td>Notion OS Build</td><td>৳15,000–৳50,000</td><td>$800–$5,000</td><td>By inquiry</td><td>Business operating system</td></tr>
@@ -155,9 +155,7 @@ export const answersPosts: AnswerPost[] = [
 </table>
 
 <h2>How Does AI Implementation Cost Compare to Hiring?</h2>
-<p>Hiring a full-time AI engineer in Dhaka costs ৳60,000–৳1,50,000/month (junior to mid-level). SYSmoAI's F-Commerce AI Sprint at ৳50,000 one-time delivers equivalent output in 14 days — with 90-day post-launch support included. Most clients recover the cost within 30–90 days through reduced manual labour and captured missed leads.</p>
-
-<p>For context: a Dhaka F-commerce seller missing 400 DMs/day at ৳300 average order value loses ৳1,20,000/day in potential revenue. The Sprint pays for itself in hours, not months — if even 1–2% of those missed DMs convert after automation.</p>
+<p>Hiring a full-time AI engineer in Dhaka costs ৳60,000–৳1,50,000/month (junior to mid-level). SYSmoAI's F-Commerce AI Sprint at ৳50,000 one-time covers this scope with a target 14-day build — with 90-day post-launch support included.</p>
 
 <h2>What Payment Methods Are Available for AI Implementation in Bangladesh?</h2>
 <ul>
@@ -168,7 +166,7 @@ export const answersPosts: AnswerPost[] = [
 <p>Payment terms: AI Quick Win = 100% advance. F-Commerce AI Sprint = 50% upfront, 50% on delivery. AI Retainer = monthly billing, cancel anytime.</p>
 
 <h2>Is There a Guarantee?</h2>
-<p>Yes. SYSmoAI's results-first guarantee: if the stated goal isn't met on an AI Quick Win, we rebuild it at no extra charge. If the F-Commerce AI Sprint doesn't deliver measurable improvement within the agreed timeline, you get a full refund. Confidentiality agreement signed before every project begins.</p>
+<p>Business results are not guaranteed. Every project is scoped with a written acceptance test before work starts, and refunds follow our <a href="/refund-policy">Refund Policy</a>. Confidentiality agreement signed before every project begins.</p>
 
 <h2>How to Calculate ROI Before Investing in AI</h2>
 <p>Calculate AI ROI by estimating:</p>
@@ -177,17 +175,17 @@ export const answersPosts: AnswerPost[] = [
 <li><strong>Revenue recovered:</strong> missed leads/day × conversion rate × average order value × 365</li>
 <li><strong>Error reduction:</strong> cost of manual errors per month × 12</li>
 </ol>
-<p>Then compare the total against the implementation cost. For most F-commerce sellers, the F-Commerce AI Sprint (৳50,000) breaks even within 30–60 days.</p>`,
+<p>Then compare the total against the implementation cost.</p>`,
     faq: [
       {
         question: 'How much does AI automation cost in Bangladesh?',
         answer:
-          'AI automation costs in Bangladesh: ৳3,750–৳7,500 for a single workflow (AI Quick Win, 3 days), ৳50,000 for a full F-Commerce AI system (14 days), or ৳20,000/month for ongoing AI management. These are fixed prices with no hidden fees.',
+          'AI automation costs in Bangladesh: ৳3,750–৳7,500 for a single workflow (AI Quick Win, 3 days), ৳50,000 for a full F-Commerce AI system (target 14-day build), or ৳20,000/month for ongoing AI management. Your written proposal confirms the final price.',
       },
       {
         question: 'Are there hidden fees in AI implementation?',
         answer:
-          'No. SYSmoAI pricing is fully transparent. The price shown is the price you pay. Payment terms are listed clearly for each package. Tools required for your system (n8n, WhatsApp API, etc.) may have separate monthly costs which we disclose upfront before you commit.',
+          'Your written proposal lists the full price and payment terms before you pay. Tools required for your system (n8n, WhatsApp API, etc.) may have separate monthly costs which we disclose upfront before you commit.',
       },
       {
         question: 'Can I pay for AI implementation in installments in Bangladesh?',
@@ -197,12 +195,12 @@ export const answersPosts: AnswerPost[] = [
       {
         question: 'How much cheaper is Bangladesh AI consulting vs US/UK?',
         answer:
-          'SYSmoAI\'s rates are 60–80% below equivalent US/EU agency rates for the same quality output. The F-Commerce AI Sprint at $600 USD would cost $3,000–$8,000 at a typical Western digital agency.',
+          'Agency rates vary widely, so compare written scopes. The F-Commerce AI Sprint is $600 USD.',
       },
       {
         question: 'What if I cannot afford the full Sprint?',
         answer:
-          'Start with the AI Quick Win (৳3,750–৳7,500). It delivers 1 automated workflow in 3 days and lets you validate ROI before committing to the full Sprint. Most F-commerce sellers who do the Quick Win proceed to the Sprint within 30 days.',
+          'Start with the AI Quick Win (৳3,750–৳7,500). It delivers 1 automated workflow in 3 days and lets you validate ROI before committing to the full Sprint.',
       },
     ],
     sources: [
@@ -222,11 +220,11 @@ export const answersPosts: AnswerPost[] = [
     slug: 'ai-for-f-commerce-bangladesh',
     title: 'How to Automate Your F-Commerce Business with AI in Bangladesh',
     directAnswer:
-      'The best way to automate your F-commerce business in Bangladesh is to connect Facebook Messenger to an AI auto-reply agent, a Notion order tracker, and a bKash payment workflow — so your store runs 24/7 without manual DM replies. SYSmoAI deploys this full stack in 14 days for ৳50,000.',
+      'The best way to automate your F-commerce business in Bangladesh is to connect Facebook Messenger to an AI reply-draft agent, a Notion order tracker, and a bKash payment workflow — so replies are drafted for you and you approve each one before it is sent. SYSmoAI builds this full stack for ৳50,000 (target 14-day build).',
     directAnswerBangla:
-      'বাংলাদেশে আপনার F-কমার্স ব্যবসা অটোমেট করার সবচেয়ে ভালো উপায় হলো ফেসবুক মেসেঞ্জারকে AI অটো-রিপ্লাই এজেন্ট, Notion অর্ডার ট্র্যাকার এবং bKash পেমেন্ট ওয়ার্কফ্লোর সাথে সংযুক্ত করা।',
+      'বাংলাদেশে আপনার F-কমার্স ব্যবসা অটোমেট করার সবচেয়ে ভালো উপায় হলো ফেসবুক মেসেঞ্জারকে AI উত্তর-খসড়া এজেন্ট (পাঠানোর আগে আপনি অনুমোদন করেন), Notion অর্ডার ট্র্যাকার এবং bKash পেমেন্ট ওয়ার্কফ্লোর সাথে সংযুক্ত করা।',
     metaDescription:
-      'How to automate your F-commerce business in Bangladesh with AI. SYSmoAI builds Facebook DM auto-reply, order tracking, bKash workflows, and Notion dashboards for Bangladesh F-commerce sellers. From ৳3,750.',
+      'How to automate your F-commerce business in Bangladesh with AI. SYSmoAI builds Facebook DM reply drafts, order tracking, bKash workflows, and Notion dashboards for Bangladesh F-commerce sellers. From ৳3,750.',
     publishDate: '2026-05-03',
     author: 'Emon Hossain',
     readTime: '10 min read',
@@ -236,10 +234,10 @@ export const answersPosts: AnswerPost[] = [
 <h2>What Is F-Commerce AI Automation in Bangladesh?</h2>
 <p>F-commerce AI automation connects your Facebook Business Page to a stack of tools that:</p>
 <ul>
-<li><strong>Auto-replies to DMs</strong> — answers FAQs, takes orders, captures lead info — in Bangla and English, 24/7</li>
+<li><strong>Drafts DM replies</strong> — FAQ answers, order intake, lead info — in Bangla and English, sent after your approval</li>
 <li><strong>Tracks every order</strong> — from DM to payment confirmation to delivery, in Notion</li>
 <li><strong>Speeds up bKash/Nagad confirmation</strong> — from 30 minutes to under 5 minutes per order</li>
-<li><strong>Re-engages past buyers</strong> — automated follow-up sequences bring customers back</li>
+<li><strong>Re-engages past buyers</strong> — follow-up drafts, sent after your approval</li>
 </ul>
 
 <h2>What Tools Are Used for F-Commerce Automation in Bangladesh?</h2>
@@ -254,7 +252,7 @@ export const answersPosts: AnswerPost[] = [
 </ul>
 
 <h2>How Does the F-Commerce AI Sprint Work?</h2>
-<p>SYSmoAI's F-Commerce AI Sprint is a 14-day engagement at ৳50,000:</p>
+<p>SYSmoAI's F-Commerce AI Sprint is a target 14-day engagement at ৳50,000:</p>
 <ol>
 <li><strong>Day 1–2 (Diagnose):</strong> 30-minute discovery call. We map your DM volume, order flow, and biggest bottleneck.</li>
 <li><strong>Day 3–4 (Design):</strong> We design your custom AI stack — DM agent trained on your products, Notion OS structure, payment workflow.</li>
@@ -264,20 +262,20 @@ export const answersPosts: AnswerPost[] = [
 </ol>
 
 <h2>What Results Can F-Commerce Sellers Expect from AI Automation?</h2>
-<p>Representative results from SYSmoAI F-commerce clients:</p>
+<p>No verified F-commerce client result is published yet. These are goals that can be agreed and measured in writing, not client results:</p>
 <ul>
-<li>400+ DMs/day handled automatically — only exceptions require manual reply</li>
-<li>Order confirmation time: from 30–60 minutes to under 5 minutes</li>
-<li>Zero missed bKash payments — all confirmed and logged automatically</li>
-<li>Repeat customer rate: increased within 30 days of automated follow-up launch</li>
-<li>Owner working hours: reduced from 14–16 hours/day to 6–8 hours/day during peak season</li>
+<li>Fewer repeat DMs that need a manual reply</li>
+<li>Faster order confirmation</li>
+<li>bKash/Nagad payments logged and checked by the owner</li>
+<li>Follow-up messages to past customers</li>
+<li>Fewer owner hours spent on repeat work</li>
 </ul>
 
 <h2>Is F-Commerce AI Automation Legal in Bangladesh?</h2>
 <p>Yes. The automation tools used (n8n, ManyChat, WhatsApp Business API) are fully compliant with Facebook's Messenger policies and Bangladesh's business regulations. SYSmoAI signs a confidentiality agreement before every project — your business data, customer data, and product information stay under your control.</p>
 
 <h2>What Is the Difference Between AI Quick Win and F-Commerce AI Sprint?</h2>
-<p>The <strong>AI Quick Win (৳3,750–৳7,500)</strong> automates 1 specific workflow in 3 days — perfect for testing before committing. The <strong>F-Commerce AI Sprint (৳50,000)</strong> deploys the complete system — DM agent, order tracker, payment workflow, customer re-engagement, and dashboard — in 14 days. Most sellers start with a Quick Win and upgrade to the Sprint within 30 days.</p>`,
+<p>The <strong>AI Quick Win (৳3,750–৳7,500)</strong> automates 1 specific workflow in 3 days — perfect for testing before committing. The <strong>F-Commerce AI Sprint (৳50,000)</strong> deploys the complete system — DM agent, order tracker, payment workflow, customer re-engagement, and dashboard — target 14-day build.</p>`,
     faq: [
       {
         question: 'How does Facebook DM automation work for F-commerce in Bangladesh?',
@@ -307,7 +305,7 @@ export const answersPosts: AnswerPost[] = [
     ],
     sources: [
       { label: 'a-commerce Bangladesh 2023 — F-commerce seller count (700,000+)' },
-      { label: 'SYSmoAI internal data — F-commerce client results, 2022–2026' },
+      { label: 'SYSmoAI example scopes (not client results)' },
       { label: 'Facebook Business — Messenger API policies' },
       { label: 'BASIS Bangladesh 2024 — e-commerce market report' },
     ],
@@ -338,12 +336,12 @@ export const answersPosts: AnswerPost[] = [
 <h2>বিজনেসে AI কী কী কাজ করতে পারে?</h2>
 <p>ব্যবসায় AI যে কাজগুলো করতে পারে:</p>
 <ul>
-<li><strong>DM অটো-রিপ্লাই:</strong> Facebook বা WhatsApp-এ আসা মেসেজের স্বয়ংক্রিয় উত্তর — বাংলা এবং ইংরেজি উভয়েই</li>
+<li><strong>DM উত্তরের খসড়া:</strong> Facebook বা WhatsApp-এ আসা মেসেজের উত্তরের খসড়া, পাঠানোর আগে আপনি অনুমোদন করেন — বাংলা এবং ইংরেজি উভয়েই</li>
 <li><strong>অর্ডার ট্র্যাকিং:</strong> প্রতিটি অর্ডার DM থেকে ডেলিভারি পর্যন্ত স্বয়ংক্রিয়ভাবে ট্র্যাক করা</li>
 <li><strong>পেমেন্ট কনফার্মেশন:</strong> bKash/Nagad পেমেন্ট দ্রুত যাচাই করা</li>
 <li><strong>রিপোর্ট তৈরি:</strong> দৈনিক বিক্রয়, মুনাফা, এবং পেন্ডিং অর্ডারের রিপোর্ট স্বয়ংক্রিয়ভাবে তৈরি</li>
-<li><strong>কাস্টমার ফলো-আপ:</strong> পুরানো ক্রেতাদের কাছে স্বয়ংক্রিয়ভাবে মেসেজ পাঠানো</li>
-<li><strong>ইনভয়েস তৈরি:</strong> অর্ডার কনফার্ম হলে স্বয়ংক্রিয়ভাবে ইনভয়েস তৈরি এবং পাঠানো</li>
+<li><strong>কাস্টমার ফলো-আপ:</strong> পুরানো ক্রেতাদের জন্য মেসেজের খসড়া, আপনি অনুমোদন করলে পাঠানো হয়</li>
+<li><strong>ইনভয়েস তৈরি:</strong> অর্ডার কনফার্ম হলে ইনভয়েস তৈরি, আপনি অনুমোদন করলে পাঠানো হয়</li>
 </ul>
 
 <h2>How Does AI Actually Work in a Business? (Technical Explanation)</h2>
@@ -366,12 +364,12 @@ export const answersPosts: AnswerPost[] = [
 </ol>
 
 <h2>বাংলাদেশে AI ব্যবহার করে কতটুকু সাশ্রয় করা যায়?</h2>
-<p>SYSmoAI-এর ক্লায়েন্টদের ফলাফল:</p>
+<p>এখনো কোনো যাচাইকৃত ক্লায়েন্ট ফলাফল প্রকাশ করা হয়নি। নিচেরগুলো কাজের উদাহরণ, ক্লায়েন্টের ফলাফল নয়:</p>
 <ul>
-<li>F-কমার্স বিক্রেতা: দিনে ৪০০+ DM স্বয়ংক্রিয়ভাবে হ্যান্ডেল, সাপ্তাহিক ১৫+ ঘণ্টা বাঁচানো</li>
-<li>ডিজিটাল এজেন্সি: রিপোর্টিং ও ক্লায়েন্ট আপডেটে সাপ্তাহিক ১৫ ঘণ্টা সাশ্রয়</li>
-<li>কোচিং ব্যবসা: Notion OS + অনবোর্ডিং অটোমেশনে সাপ্তাহিক ২০ ঘণ্টা মুক্তি</li>
-<li>SME ফাউন্ডার: WhatsApp বিশৃঙ্খলা সম্পূর্ণ দূর, রিয়েল-টাইম ড্যাশবোর্ড চালু</li>
+<li>F-কমার্স বিক্রেতা: DM রিপ্লাই ড্রাফট ও অর্ডার সংগ্রহ</li>
+<li>ডিজিটাল এজেন্সি: রিপোর্টিং ও ক্লায়েন্ট আপডেট অটোমেশন</li>
+<li>কোচিং ব্যবসা: Notion OS + অনবোর্ডিং অটোমেশন</li>
+<li>SME ফাউন্ডার: WhatsApp উত্তরের খসড়া + CRM + ড্যাশবোর্ড</li>
 </ul>`,
     faq: [
       {
@@ -387,7 +385,7 @@ export const answersPosts: AnswerPost[] = [
       {
         question: 'AI ব্যবসায় লাগানো কি ঝুঁকিপূর্ণ?',
         answer:
-          'SYSmoAI-এর রিজাল্ট-ফার্স্ট গ্যারান্টি সহ, না। যদি AI কুইক উইন আপনার লক্ষ্য পূরণ না করে, আমরা বিনামূল্যে পুনরায় তৈরি করি। F-Commerce AI Sprint-এ সম্মত সময়সীমার মধ্যে উন্নতি না হলে সম্পূর্ণ অর্থ ফেরত।',
+          'যেকোনো নতুন সিস্টেমে কিছু ঝুঁকি থাকে, আর ব্যবসায়িক ফলাফলের গ্যারান্টি দেওয়া হয় না। কাজ শুরুর আগে লিখিত acceptance test ঠিক করা হয়, আর রিফান্ড আমাদের রিফান্ড পলিসি অনুযায়ী হয়।',
       },
       {
         question: 'কতটুকু প্রযুক্তিগত জ্ঞান দরকার AI ব্যবহার করতে?',
@@ -397,7 +395,7 @@ export const answersPosts: AnswerPost[] = [
     ],
     sources: [
       { label: 'McKinsey Global Institute 2023 — AI in business automation impact' },
-      { label: 'SYSmoAI internal data — client results, 2022–2026' },
+      { label: 'SYSmoAI example scopes (not client results)' },
       { label: 'BASIS Bangladesh 2024 — e-commerce market statistics' },
     ],
     relatedLinks: [
@@ -410,29 +408,28 @@ export const answersPosts: AnswerPost[] = [
   },
   {
     slug: 'aips-notion-os-case-study',
-    title: 'Case Study: How AIPS Built Their Complete Business OS on Notion with SYSmoAI',
+    title: 'Internal Project: A Notion Business OS for AIPS',
     directAnswer:
-      'SYSmoAI built a complete Notion Operating System for AIPS — connecting their client database, project tracker, invoicing, and team workflows into a single hub — eliminating 15+ hours/week of manual coordination. The system went live in 14 days and replaced 4 separate disconnected tools.',
+      'This page describes a Notion Operating System design for AIPS, a business connected to SYSmoAI\'s founder. It is not an independent client case study, and no measured results are published.',
     metaDescription:
-      'Case study: SYSmoAI built a complete Notion OS for AIPS — connecting client database, project tracker, invoicing, and team workflows. 15+ hours/week saved. System live in 14 days.',
+      'A Notion OS design for AIPS, a business connected to SYSmoAI\'s founder. Not an independent client case study; no measured results are published.',
     publishDate: '2026-05-03',
     author: 'Emon Hossain',
     readTime: '8 min read',
-    targetKeyword: 'Notion OS Bangladesh case study',
-    content: `<p>AIPS was running their consulting business across 4 separate tools: a WhatsApp group for team communication, a spreadsheet for project tracking, a manual invoice process, and a client folder in Google Drive. Nothing talked to anything else. Every handoff required manual copying and reformatting.</p>
+    targetKeyword: 'Notion OS Bangladesh',
+    content: `<p><strong>Disclosure:</strong> AIPS is a business connected to SYSmoAI's founder. This is an internal project description, not an independent client case study.</p>
 
-<h2>What Problem Was AIPS Solving?</h2>
-<p>Before SYSmoAI built their Notion OS, AIPS faced:</p>
+<h2>What Problems Is It Designed For?</h2>
 <ul>
-<li><strong>15+ hours/week</strong> spent on manual coordination and status updates between team members</li>
-<li><strong>3–5 mistakes per week</strong> in client billing due to manual invoice creation from spreadsheet data</li>
-<li><strong>No single source of truth</strong> — team members were using different versions of project files</li>
-<li><strong>Client onboarding took 3–4 days</strong> because there was no standard process</li>
-<li><strong>Proposals took 4 hours each</strong> — no templates, no AI assistance</li>
+<li>Manual coordination and status updates between team members</li>
+<li>Manual invoice creation from spreadsheet data</li>
+<li>No single source of truth for project files</li>
+<li>No standard client onboarding process</li>
+<li>No proposal templates</li>
 </ul>
 
-<h2>What SYSmoAI Built</h2>
-<p>SYSmoAI designed and deployed a complete Notion Operating System over 14 days:</p>
+<h2>What the Design Covers</h2>
+<p>The design has five parts:</p>
 
 <h3>1. Client Database (Master CRM)</h3>
 <p>A single Notion database linking every client to their projects, invoices, communications, and deliverables. Filterable by status, value, industry, and owner. Replaces the spreadsheet entirely.</p>
@@ -440,23 +437,17 @@ export const answersPosts: AnswerPost[] = [
 <h3>2. Project Management Hub</h3>
 <p>Timeline views, task assignments, status tracking, and team comments — all connected to the Client Database. When a project moves to "Completed," the invoice automation triggers automatically.</p>
 
-<h3>3. Automated Invoice Generator</h3>
-<p>When a project is marked complete in Notion, an n8n automation pulls client data, project scope, and pricing, generates a formatted invoice PDF, and sends it to the client email — with a copy saved to their client folder. Manual invoice creation time: from 45 minutes to zero.</p>
+<h3>3. Invoice Generator (Sent After Approval)</h3>
+<p>When a project is marked complete in Notion, an n8n automation pulls client data, project scope, and pricing, and generates a formatted invoice PDF. It is sent to the client only after a person approves it, with a copy saved to their client folder.</p>
 
 <h3>4. Client Onboarding System</h3>
-<p>A Notion template page auto-populates with client information on intake. Onboarding time reduced from 3–4 days to 4 hours.</p>
+<p>A Notion template page auto-populates with client information on intake.</p>
 
 <h3>5. AI Proposal Generator</h3>
-<p>A ChatGPT-integrated Notion template generates first-draft proposals from a brief — cutting proposal time from 4 hours to 45 minutes.</p>
+<p>A ChatGPT-integrated Notion template generates first-draft proposals from a brief.</p>
 
-<h2>Results After 90 Days</h2>
-<ul>
-<li><strong>15+ hours/week recovered</strong> from manual coordination</li>
-<li><strong>Invoice errors reduced to zero</strong> — automated generation with validation</li>
-<li><strong>Client onboarding: 3–4 days → 4 hours</strong></li>
-<li><strong>Proposal time: 4 hours → 45 minutes</strong></li>
-<li><strong>Team satisfaction increased</strong> — one source of truth, no more version conflicts</li>
-</ul>
+<h2>Results</h2>
+<p>No measured before-and-after results are published for this project.</p>
 
 <h2>What Is a Notion OS and Why Does It Work?</h2>
 <p>A Notion Operating System (Notion OS) is a connected suite of databases, views, templates, and automations in Notion that runs your business operations from a single hub. Unlike generic Notion setups, a proper Notion OS is:</p>
@@ -482,7 +473,7 @@ export const answersPosts: AnswerPost[] = [
       {
         question: 'How long does it take to build a Notion OS in Bangladesh?',
         answer:
-          'A standard Notion OS build takes 7–21 days depending on scope. The AIPS OS (including n8n automation for invoicing and AI proposal generation) was completed in 14 days.',
+          'A standard Notion OS build takes 7–21 days depending on scope.',
       },
       {
         question: 'Can Notion connect to bKash or other Bangladesh payment systems?',
@@ -496,14 +487,14 @@ export const answersPosts: AnswerPost[] = [
       },
     ],
     sources: [
-      { label: 'SYSmoAI client project data — AIPS Notion OS build, 2025' },
+      { label: 'SYSmoAI internal project description — AIPS Notion OS' },
       { label: 'Notion API documentation — notions.so/developers' },
     ],
     relatedLinks: [
       { href: '/services/other-engagements', text: 'Notion OS Build — By Inquiry' },
       { href: '/services/ai-sprint', text: 'F-Commerce AI Sprint (includes Notion dashboard)' },
       { href: '/answers/what-is-ai-consulting-bangladesh', text: 'What Is AI Consulting in Bangladesh?' },
-      { href: '/proof', text: 'More Client Results' },
+      { href: '/proof', text: 'Our Proof Standard' },
       { href: '/free-ai-audit', text: 'Book Free AI Audit to Discuss Your Notion OS' },
     ],
   },

@@ -14,7 +14,7 @@ const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { stag
 
 const featured = [
   { icon: Zap, title: 'AI Quick Win', subtitle: 'Your #1 problem automated in 3 days', bd: '৳3,750–7,500', usd: '$50–$100', href: '/services/ai-quick-win', tag: 'Best starting point' },
-  { icon: Timer, title: 'F-Commerce AI Sprint', subtitle: 'Full F-Commerce AI stack deployed in 14 days', bd: '৳50,000', usd: '$600', href: '/services/ai-sprint', tag: 'Most popular' },
+  { icon: Timer, title: 'F-Commerce AI Sprint', subtitle: 'Full F-Commerce AI stack, target 14-day build', bd: '৳50,000', usd: '$600', href: '/services/ai-sprint', tag: 'Most popular' },
   { icon: RefreshCw, title: 'AI Operations Retainer', subtitle: 'Ongoing AI management, every month', bd: '৳20,000/mo', usd: '$250/mo', href: '/services/ai-retainer', tag: 'Cancel anytime' },
 ];
 
@@ -22,15 +22,15 @@ const other = [
   { icon: Users, title: '1:1 AI Coaching', desc: '60-min personalized session', bd: '৳2,500/session', href: '/services/other-engagements' },
   { icon: BookOpen, title: 'Group AI Workshop', desc: 'Team upskilling, half-day', bd: '৳500/person', href: '/services/other-engagements' },
   { icon: Layout, title: 'Notion OS Build', desc: 'Your business in one place', bd: '৳15,000–50,000', href: '/services/other-engagements' },
-  { icon: Bot, title: 'AI Agent Development', desc: 'Custom AI agents, 24/7', bd: '৳50,000–2,00,000', href: '/services/other-engagements' },
+  { icon: Bot, title: 'AI Agent Development', desc: 'Custom AI agents, you approve messages', bd: '৳50,000–2,00,000', href: '/services/other-engagements' },
   { icon: Settings, title: 'n8n Automation', desc: 'Per-workflow automation', bd: '৳2,000–10,000', href: '/services/other-engagements' },
   { icon: Building, title: 'Corporate Training', desc: 'Enterprise AI adoption', bd: '৳50,000–2,00,000', href: '/services/other-engagements' },
   { icon: Globe, title: 'International Clients', desc: 'USD pricing, global delivery', bd: 'View USD Pricing', href: '/services/international' },
 ];
 
 const servicesFAQ = [
-  { q: 'How long does each package take?', a: 'AI Quick Win: 3 days. F-Commerce AI Sprint: 14 days. AI Operations Retainer: ongoing monthly.' },
-  { q: 'Can I start with a Quick Win and upgrade later?', a: 'Absolutely. Most clients start with a Quick Win to see results fast, then move to a Sprint for full transformation.' },
+  { q: 'How long does each package take?', a: 'AI Quick Win: 3 days. F-Commerce AI Sprint: target 14 days. AI Operations Retainer: ongoing monthly.' },
+  { q: 'Can I start with a Quick Win and upgrade later?', a: 'Absolutely. You can start with a Quick Win and move to a Sprint later.' },
   { q: 'What if I need more workflows than included?', a: 'We scope every project individually. If you need more, we adjust the package or recommend the next tier.' },
   { q: 'Do you work with international clients?', a: 'Yes. USD invoicing is supported; the exact payment method is confirmed at the proposal stage. We coordinate across timezones and communicate in English.' },
   { q: "What's your revision policy?", a: 'Quick Win includes 1 free revision. Sprint includes unlimited revisions during the 14-day build. Retainer includes continuous improvements.' },
@@ -38,7 +38,7 @@ const servicesFAQ = [
 
 const comparison = [
   { feature: 'Workflows automated', qw: '1', sprint: '5–10', retainer: 'Ongoing' },
-  { feature: 'Timeline', qw: '3 days', sprint: '14 days', retainer: 'Monthly' },
+  { feature: 'Timeline', qw: '3 days', sprint: 'Target 14 days', retainer: 'Monthly' },
   { feature: 'Team training', qw: 'Video walkthrough', sprint: 'Full training + docs', retainer: 'Continuous' },
   { feature: 'Revisions', qw: '1 free', sprint: 'Unlimited during build', retainer: 'Continuous' },
   { feature: 'Support', qw: 'WhatsApp (1 week)', sprint: '30 days post-launch', retainer: 'Priority (ongoing)' },
@@ -127,8 +127,8 @@ export default function Services() {
       {/* Direct Answer — GEO */}
       <section className="pt-10 pb-0" style={{ background: bg1 }}>
         <div className="max-w-4xl mx-auto px-4">
-          <DirectAnswer bangla="SYSmoAI-এর প্রধান সেবাগুলো: AI কুইক উইন (৳৩,৭৫০–৳৭,৫০০, ৩ দিন), F-কমার্স AI স্প্রিন্ট (৳৫০,০০০, ১৪ দিন), AI রিটেইনার (৳২০,০০০/মাস)।">
-            SYSmoAI's AI services in Bangladesh: AI Quick Win (৳3,750–৳7,500, 3 days, 1 workflow), F-Commerce AI Sprint (৳50,000, 14 days, full system), AI Retainer (৳20,000/month, ongoing management). Also available: Notion OS builds, AI agent development, n8n automation, corporate training, and 1:1 AI coaching — all by inquiry. Free 30-minute AI audit with every engagement.
+          <DirectAnswer bangla="SYSmoAI-এর প্রধান সেবাগুলো: AI কুইক উইন (৳৩,৭৫০–৳৭,৫০০, ৩ দিন), F-কমার্স AI স্প্রিন্ট (৳৫০,০০০, লক্ষ্যমাত্রা ১৪ দিন), AI রিটেইনার (৳২০,০০০/মাস)।">
+            SYSmoAI's AI services in Bangladesh: AI Quick Win (৳3,750–৳7,500, 3 days, 1 workflow), F-Commerce AI Sprint (৳50,000, target 14-day build, full system), AI Retainer (৳20,000/month, ongoing management). Also available: Notion OS builds, AI agent development, n8n automation, corporate training, and 1:1 AI coaching — all by inquiry. Free 30-minute AI audit with every engagement.
           </DirectAnswer>
         </div>
       </section>

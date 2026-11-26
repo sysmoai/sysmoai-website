@@ -4687,7 +4687,7 @@ One dashboard showing performance across ALL platforms. Which content type perfo
     { question: `Can I get the same results?`, answer: `Results depend on your starting point and consistency. Students who use the system daily for 30+ days consistently see 20-40% improvement in study efficiency. The system only works if you use it — but it makes using it much easier than traditional methods.` },
     { question: `What subjects does this work for?`, answer: `Every subject. The system adapts to any curriculum — engineering, medical, business, arts, law. The AI doesn't care what subject you're studying; it adapts the explanation style and tracking to YOUR specific courses.` },
     { question: `Do I need to buy any expensive software?`, answer: `No. The system uses Notion (free), ChatGPT (free tier works for basics), and optional tools costing ৳500-1,000/month. The SYSmoAI setup fee (৳3,750) is a one-time cost — after that, you maintain it yourself in 15 minutes/day.` },
-    { question: `What if I'm not getting results after 30 days?`, answer: `SYSmoAI has a results-first guarantee. If the AI Quick Win doesn't meet the stated goal, we rebuild it at no extra charge. For the AI Sprint, we include 3 months of post-launch support to optimize until it works.` }
+    { question: `What if I'm not getting results after 30 days?`, answer: `Results are not guaranteed. If the AI Quick Win doesn't meet the stated goal, we rebuild it at no extra charge, and refunds follow our Refund Policy. The AI Sprint includes 3 months of post-launch support.` }
       ],
       ctaService: `AI Quick Win ৳3,750`,
       ctaPrice: '৳3,750',

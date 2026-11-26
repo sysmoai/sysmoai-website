@@ -3,10 +3,10 @@ import { AudiencePageTemplate } from '@/components/AudiencePageTemplate';
 export default function Freelancers() {
   return (
     <AudiencePageTemplate
-      metaTitle="AI for Freelancers Bangladesh | 3x Your Income with SYSmoAI"
+      metaTitle="AI Systems for Freelancers in Bangladesh | SYSmoAI"
       segment="Freelancers"
       heroHeadline="AI Is Taking Low-Ticket Freelance Work. Here's How You Stay Ahead."
-      heroSub="The freelancers who thrive in 2025 don't fear AI — they USE it to deliver 3x faster and charge 3x more. SYSmoAI upgrades your entire freelance operation."
+      heroSub="The freelancers who thrive in 2025 don't fear AI — they use it to deliver faster and offer more. SYSmoAI upgrades your entire freelance operation."
       painPoints={[
         { emoji: '📉', label: 'Income dropped 30% this year', desc: 'Clients say "we can just use ChatGPT for that now." They\'re right — about the old version of your service.' },
         { emoji: '😤', label: 'Stuck at low-ticket projects', desc: 'Stuck at ৳500 logo designs, ৳1,000 articles. I know I\'m worth more but I don\'t know how to charge it.' },
@@ -31,10 +31,10 @@ export default function Freelancers() {
         { href: '/services/notion-os', label: 'Notion OS Build', price: '৳15,000–50,000' },
         { href: '/services/ai-coaching', label: '1:1 AI Coaching', price: '৳2,500/session' },
       ]}
-      finalCtaHeadline="Ready to 3x your freelance income with AI?"
+      finalCtaHeadline="Ready to upgrade your freelance work with AI?"
       faqs={[
         { q: 'What types of freelancers do you work with?', a: 'Graphic designers, content writers, video editors, web developers, social media managers, virtual assistants, data analysts — any freelance service that can be enhanced with AI.' },
-        { q: 'How quickly can I raise my rates after working with you?', a: 'Most clients are able to reposition their services within 2–4 weeks. Rate increases depend on your niche and platform, but we\'ve seen 2–5x increases within 3 months.' },
+        { q: 'How quickly can I raise my rates after working with you?', a: 'It depends on your niche, platform and existing work. We do not promise a rate increase.' },
         { q: 'What if I\'m not technical at all?', a: 'The AI tools we use are no-code or low-code. We build the systems and train you to use them. No coding knowledge required.' },
         { q: 'Do you help with Fiverr and Upwork profile optimization?', a: 'Yes. Profile writing, gig optimization, and positioning for AI-enhanced services is part of our freelancer program.' },
         { q: 'I\'m already earning well — is this still for me?', a: 'Especially for you. The freelancers who invest in AI systems now will dominate their niches in 2–3 years. The gap between AI-powered and non-AI freelancers is growing fast.' },

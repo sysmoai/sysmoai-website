@@ -20,10 +20,10 @@ const fadeUp = {
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09 } } };
 
 const deliverables = [
-  'Trained Bangla DM auto-reply agent (FAQ + order intake + lead capture)',
+  'Trained Bangla DM reply-draft agent (FAQ + order intake + lead capture)',
   'Order management system — every order tracked from DM to delivery',
   'bKash / Nagad payment workflow — confirmation time cut from 30 min to <5 min',
-  'Customer re-engagement sequences — automated follow-ups to past buyers',
+  'Customer re-engagement — follow-up drafts to past buyers, sent after your approval',
   'Daily revenue dashboard in Notion (orders, revenue, pending, disputes)',
   'Owner training session + full video documentation',
   '90-day support and optimization period after launch',
@@ -32,7 +32,7 @@ const deliverables = [
 const beforeAfter = [
   {
     before: '500 DMs/day, replying to 100 — 400 orders permanently lost',
-    after: 'AI handles all FAQ & order DMs 24/7, you only see exceptions',
+    after: 'AI drafts replies to FAQ & order DMs, you approve before sending',
   },
   {
     before: 'Orders tracked in a notebook — errors and disputes every day',
@@ -44,7 +44,7 @@ const beforeAfter = [
   },
   {
     before: "Zero repeat customers — you've never followed up with a past buyer",
-    after: 'Automated follow-up sequences bring buyers back in 30 days',
+    after: 'Follow-up drafts for past buyers, sent after your approval',
   },
 ];
 
@@ -83,7 +83,7 @@ export default function AISprint() {
   React.useEffect(() => {
     document.title = 'F-Commerce AI Sprint — 14-Day Full Automation | SYSmoAI';
     const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute('content', 'SYSmoAI F-Commerce AI Sprint: Bangla DM agent, order tracker, bKash workflow, and customer follow-up — fully built in 14 days for Bangladesh F-commerce sellers.');
+    if (desc) desc.setAttribute('content', 'SYSmoAI F-Commerce AI Sprint: Bangla DM agent, order tracker, bKash workflow, and customer follow-up — target 14-day build for Bangladesh F-commerce sellers.');
   }, []);
 
   const bg1 = isDark ? '#0A0B0F' : '#FFFFFF';
@@ -100,8 +100,8 @@ export default function AISprint() {
       {/* Direct Answer — GEO */}
       <div style={{ background: bg1 }} className="pt-10 pb-0">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <DirectAnswer bangla="F-কমার্স AI স্প্রিন্ট হলো SYSmoAI-এর ১৪ দিনের সম্পূর্ণ অটোমেশন প্যাকেজ। বাংলা DM এজেন্ট, অর্ডার ট্র্যাকার, bKash পেমেন্ট ওয়ার্কফ্লো এবং কাস্টমার ফলো-আপ — একসাথে ৳৫০,০০০-এ।">
-            The F-Commerce AI Sprint is SYSmoAI's flagship 14-day package for Bangladeshi Facebook sellers: Bangla-aware DM agent, order tracker, bKash payment workflow, and customer re-engagement — all deployed, trained, and live for ৳50,000 ($600 USD). 50% upfront, 50% on delivery. Includes 90-day support.
+          <DirectAnswer bangla="F-কমার্স AI স্প্রিন্ট হলো SYSmoAI-এর সম্পূর্ণ অটোমেশন প্যাকেজ, তৈরির লক্ষ্যমাত্রা ১৪ দিন। বাংলা DM এজেন্ট, অর্ডার ট্র্যাকার, bKash পেমেন্ট ওয়ার্কফ্লো এবং কাস্টমার ফলো-আপ — একসাথে ৳৫০,০০০-এ।">
+            The F-Commerce AI Sprint is SYSmoAI's flagship package, with a target 14-day build, for Bangladeshi Facebook sellers: Bangla-aware DM agent, order tracker, bKash payment workflow, and customer re-engagement — all deployed, trained, and live for ৳50,000 ($600 USD). 50% upfront, 50% on delivery. Includes 90-day support.
           </DirectAnswer>
         </div>
       </div>
@@ -133,7 +133,7 @@ export default function AISprint() {
               F-Commerce AI Sprint
             </h1>
             <p className="text-xl mb-3 max-w-2xl" style={{ color: body }}>
-              Stop losing orders in your DMs. Get a Bangla auto-reply agent, order tracker, bKash workflow, and customer follow-up system — fully built and deployed in 14 days.
+              Stop losing orders in your DMs. Get a Bangla reply-draft agent, order tracker, bKash workflow, and customer follow-up system — with a target 14-day build.
             </p>
 
             {/* Price toggle */}
@@ -191,7 +191,7 @@ export default function AISprint() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { icon: Clock, value: '14 days', label: 'Full system live', color: '#3B82F6' },
+              { icon: Clock, value: '14 days', label: 'Target build time', color: '#3B82F6' },
               { icon: Zap, value: '400 DMs', label: 'Handled per day (was 0)', color: '#10B981' },
               { icon: TrendingUp, value: '5 min', label: 'bKash confirmation (was 30)', color: '#8B5CF6' },
               { icon: CheckCircle2, value: '90 days', label: 'Post-launch support', color: '#F59E0B' },
@@ -296,7 +296,7 @@ export default function AISprint() {
             className="rounded-2xl p-8 text-center"
             style={{ background: 'linear-gradient(135deg, #1E3A8A 0%, #1E40AF 55%, #2563EB 100%)', border: '1px solid rgba(96,165,250,0.3)' }}>
             <h2 className="text-2xl font-bold text-white mb-2">F-Commerce AI Sprint</h2>
-            <p className="text-blue-200 mb-6">One price. Full system. 14 days.</p>
+            <p className="text-blue-200 mb-6">One price. Full system. Target 14-day build.</p>
             <div className="flex items-center justify-center gap-6 mb-6">
               <div>
                 <div className="text-4xl font-black text-white">৳50,000</div>

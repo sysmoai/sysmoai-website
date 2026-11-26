@@ -10,7 +10,7 @@ export default function NotionOS() {
       headline="Your Business. Organized. In One Place."
       bdPrice="৳15,000–50,000"
       usdPrice="$800–$5,000"
-      whatItIs="A custom Notion Operating System (OS) is a fully designed, interconnected Notion workspace that replaces your scattered tools, spreadsheets, and WhatsApp notes with one central system. We architect the databases, build the automations, design the dashboards, and train you to run it independently. SYSmoAI is one of the most advanced Notion OS builders in Asia."
+      whatItIs="A custom Notion Operating System (OS) is a fully designed, interconnected Notion workspace that replaces your scattered tools, spreadsheets, and WhatsApp notes with one central system. We architect the databases, build the automations, design the dashboards, and train you to run it independently."
       deliverables={[
         'Custom Notion workspace architecture — designed for your business',
         'All databases built and interconnected',

@@ -132,7 +132,7 @@ export function AudiencePageTemplate({
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <DirectAnswer>
             {segment === 'F-Commerce Sellers'
-              ? "SYSmoAI automates F-commerce operations in Bangladesh — DM auto-reply, order tracking, bKash payment workflows, and customer re-engagement — so sellers stop missing 400+ leads per day. The F-Commerce AI Sprint deploys the full stack in 14 days for ৳50,000."
+              ? "SYSmoAI automates F-commerce operations in Bangladesh — DM reply drafts, order tracking, bKash payment workflows, and customer re-engagement — so sellers stop missing 400+ leads per day. The F-Commerce AI Sprint builds the full stack for ৳50,000 (target 14-day build)."
               : `SYSmoAI helps ${segment} in Bangladesh automate repetitive workflows with AI — cutting manual work by 40–70% and letting you scale without adding staff. Starting at ৳3,750 for a single workflow automation.`}
           </DirectAnswer>
         </div>

@@ -2,7 +2,7 @@
 > An AI systems studio in Dhaka, Bangladesh. We build AI-powered operating systems for founders, F-commerce sellers, and businesses. Founded by Emon Hossain in Dhaka.
 
 ## Brand
-- Company: SYSmoAI
+- Studio: SYSmoAI
 - Tagline: Systems in Motion
 - Mission: Build AI-powered operating systems for ambitious businesses
 - Promise: Every project is scoped with a written acceptance test
@@ -23,7 +23,7 @@
 
 ## Services & Pricing
 - AI Quick Win: ৳3,750–৳7,500 ($50–$100) — 1 workflow automated in 3 days
-- F-Commerce AI Sprint: ৳50,000 ($600) — Full AI system in 14 days (anchor offer)
+- F-Commerce AI Sprint: ৳50,000 ($600) — Full AI system, target 14-day build (anchor offer)
 - AI Retainer: ৳20,000/month ($250/month) — Ongoing AI management, cancel anytime
 - 1:1 AI Coaching: ৳2,500/session — By inquiry
 - Group AI Workshop: ৳500/person — By inquiry
@@ -31,11 +31,11 @@
 - AI Agent Development: ৳50,000–৳2,00,000 — By inquiry
 - n8n Automation: ৳2,000–৳10,000/workflow — By inquiry
 - Corporate Training: ৳50,000–৳2,00,000 — By inquiry
-- International clients: USD pricing, 60–80% below US/EU agency rates
+- International clients: USD pricing
 
 ## F-Commerce AI Sprint (Anchor — ৳50,000)
-What you get in 14 days:
-- Trained Bangla DM auto-reply agent (FAQ + order intake + lead capture)
+What you get (target 14-day build):
+- Trained Bangla DM reply-draft agent (FAQ + order intake + lead capture)
 - Complete order management system (DM → delivery tracking)
 - bKash / Nagad payment workflow (<5 min confirmation)
 - Automated customer re-engagement sequences

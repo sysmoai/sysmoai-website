@@ -109,7 +109,7 @@ export default function Blog() {
       <section className="pt-10 pb-0" style={{ background: bg }}>
         <div className="max-w-4xl mx-auto px-4">
           <DirectAnswer>
-            SYSmoAI's blog covers practical AI guides for Bangladesh — covering F-commerce automation, freelancing with AI, AI tools for students, SME digital transformation, and step-by-step tutorials for ChatGPT, n8n, Notion, and automation. All content is written by Emon Hossain, founder and top-5% global prompt engineer. New posts published weekly at sysmoai.com/blog.
+            SYSmoAI's blog covers practical AI guides for Bangladesh — covering F-commerce automation, freelancing with AI, AI tools for students, SME digital transformation, and step-by-step tutorials for ChatGPT, n8n, Notion, and automation. All content is written by Emon Hossain, founder of SYSmoAI. New posts published weekly at sysmoai.com/blog.
           </DirectAnswer>
         </div>
       </section>
